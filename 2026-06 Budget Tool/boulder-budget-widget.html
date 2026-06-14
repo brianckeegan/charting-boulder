@@ -121,6 +121,16 @@ import { Lock, Building2, Vote, RotateCcw, Check, AlertTriangle, Github, Chevron
 
    This is a teaching model, not the city's budgeting system. Visual identity
    matches BRL's Newspack theme (Public Sans; #CDDE00 / #3A8DDE).
+
+   DESIGN — FRAMING LIVES IN THE COLUMN
+     This widget is built to sit inside the column's prose, which carries the
+     hook, the peg (the Nov. 2026 ballot / 2027 budget cycle), and the
+     diagnostic close. So the widget's own copy is deliberately lean: a short
+     title, one-line instructions, the legal tags, point-of-use caveats, and a
+     "Sources & method" block with the verify-me link. If you ever embed this
+     standalone (no surrounding article), restore a sentence or two of framing
+     at the top and a closing thought at the bottom — otherwise it will read as
+     an interaction with no argument around it.
    ========================================================================== */
 
 const ENDPOINT = ""; // set to the production API base to enable the real backend
@@ -393,9 +403,9 @@ function BoulderBudgetWidget() {
 
         <header className="pt-6 pb-5" style={{ borderBottom: `3px solid ${C.lime}` }}>
           <div className="tnum" style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: C.blueDk, fontWeight: 800 }}>Charting Boulder · Interactive</div>
-          <h1 style={{ fontSize: "clamp(25px,6.4vw,38px)", fontWeight: 800, lineHeight: 1.06, marginTop: 8, letterSpacing: "-0.02em" }}>Most of Boulder’s $521&nbsp;million is already spoken for.</h1>
-          <p style={{ fontSize: 16, lineHeight: 1.5, color: C.inkSoft, marginTop: 12 }}>
-            The city must pass a balanced budget every year. In 2026 it had a <strong style={{ color: C.ink }}>{fmt(SCENARIOS.y2026.gap)} General Fund shortfall</strong> to close as sales-tax revenue flattened. Move money, raise revenue, close the gap. The catch is what you’re allowed to touch — and what Colorado law won’t let you.
+          <h1 style={{ fontSize: "clamp(23px,5.6vw,32px)", fontWeight: 800, lineHeight: 1.08, marginTop: 8, letterSpacing: "-0.02em" }}>Balance Boulder’s 2026 budget</h1>
+          <p style={{ fontSize: 15.5, lineHeight: 1.5, color: C.inkSoft, marginTop: 10 }}>
+            Close the <strong style={{ color: C.ink }}>{fmt(SCENARIOS.y2026.gap)} General Fund gap</strong> by cutting spending or raising revenue. The catch is what you’re allowed to touch — and what Colorado law won’t let you.
           </p>
         </header>
 
@@ -501,7 +511,7 @@ function BoulderBudgetWidget() {
         {/* Locked-by-voters revenue */}
         <section className="mt-7">
           <SectionHead icon={<Lock size={18} style={{ color: C.lock }} />} title="Rates the voters froze" />
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}><strong style={{ color: C.ink }}>56%</strong> of the city’s 3.86% sales tax is already pledged to specific purposes. The four largest of those dedications are shown below; together with smaller ones they make up that 56%. These rates were set at the ballot box — the council can’t slide them, can’t cut them to plug the General Fund, and can’t move them to a new priority. The yearly revenue shown for each is approximate.</p>
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>These rates were set at the ballot box. The council can’t slide them, cut them to plug the General Fund, or move them to a new priority. Annual revenue shown is approximate.</p>
           <div className="mt-3 grid gap-2">
             {DEDICATED_RATES.map((d) => (
               <div key={d.id} className="rounded-md p-3" style={{ background: C.lockBg, border: `1px solid ${C.lock}` }}>
@@ -530,7 +540,7 @@ function BoulderBudgetWidget() {
             <SectionHead icon={<Lock size={18} style={{ color: C.lock }} />} title={`The locked ${fmt(lockedTotal)} in spending — cut it, but it can’t leave`} />
             {showLocked ? <ChevronUp size={18} color={C.inkSoft} /> : <ChevronDown size={18} color={C.inkSoft} />}
           </button>
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>This includes the {fmt(113.3)} capital budget and every dedicated or fee-funded operating fund — down to small outlays like arts and eviction prevention. Adjust them all you like: the money stays inside each fund’s purpose and can’t fill the General Fund gap. That ring-fence is the whole point.</p>
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>Includes the {fmt(113.3)} capital budget and every dedicated or fee-funded operating fund, down to small outlays like arts. Move them all you like: the savings stay locked inside each fund and can’t reach the General Fund gap.</p>
           {showLocked && (
             <div className="mt-3 grid gap-2">
               {LOCKED_FUNDS.map((f) => {
@@ -574,7 +584,7 @@ function BoulderBudgetWidget() {
               <div className="flex items-start justify-between gap-3">
                 <div style={{ minWidth: 0 }}>
                   <div className="flex items-center gap-1.5"><Users size={15} style={{ color: C.ink }} /><span style={{ fontSize: 14.5, fontWeight: 800 }}>One step before you add your budget</span></div>
-                  <div style={{ fontSize: 13, color: C.inkSoft, marginTop: 3 }}>Answer at least one question — even <em>“Prefer not to say.”</em> Everything else is optional, and it lets us compare how different parts of Boulder balanced it. Your answers and your budget stay on Boulder Reporting Lab’s own servers — never a third party’s.</div>
+                  <div style={{ fontSize: 13, color: C.inkSoft, marginTop: 3 }}>Answer at least one — even <em>“Prefer not to say.”</em> Optional and confidential, and stored only on Boulder Reporting Lab’s own servers.</div>
                 </div>
                 <span className="tnum flex items-center gap-1" style={{ fontSize: 12, fontWeight: 800, flexShrink: 0, color: demoCount > 0 ? C.green : C.inkSoft }}>{demoCount > 0 && <Check size={13} />}{demoCount} answered</span>
               </div>
@@ -602,12 +612,13 @@ function BoulderBudgetWidget() {
           </div>
         </section>
 
-        {/* Diagnostic close */}
+        {/* Provenance & trust contract. The column's prose carries the hook, the
+            peg, and the diagnostic close; the widget keeps only what speaks to
+            its own numbers — what's official vs. modeled, and the verify link. */}
         <section className="mt-8" style={{ borderTop: `3px solid ${C.ink}`, paddingTop: 18 }}>
-          <Eyebrow>What this can’t tell you</Eyebrow>
-          <p style={{ fontSize: 15.5, lineHeight: 1.55, marginTop: 10 }}>A balanced ledger is not the same as a fair one. This tool counts dollars; it can’t weigh whether a fire inspector matters more than a rec-center subsidy, or who bears a sales tax that falls hardest on the people with the least. It also can’t move the walls between funds, or rewrite the rules that built them. Boulder’s budget isn’t hard to balance because the city overspends. It’s hard because the city long ago promised most of its money to specific purposes, one ballot measure at a time — and because TABOR leaves the council a narrow set of tools to begin with.</p>
-          <p style={{ fontSize: 15.5, lineHeight: 1.55, marginTop: 12 }}>That is what the November 2026 <em>Fund Our Future</em> question is about. It asks less <em>how much</em> Boulder should raise than <em>how much of it the council should be free to move</em>. Whether that flexibility is worth giving up the certainty of dedicated taxes is not a number. It’s a judgment, and it’s yours.</p>
-          <a href="https://github.com/brianckeegan/charting-boulder" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-5" style={{ fontSize: 13.5, fontWeight: 800, color: C.ink, textDecoration: "none", border: `2px solid ${C.ink}`, borderRadius: 7, padding: "9px 14px" }}><Github size={15} /> Verify me: data, assumptions and code on GitHub</a>
+          <Eyebrow>Sources &amp; method</Eyebrow>
+          <p style={{ fontSize: 14, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}>The budget totals and the legal limits are verified against the city’s 2026 adopted budget and Colorado law. The per-department and per-fund splits are modeled placeholders pending line-item data. The panel below says which is which.</p>
+          <a href="https://github.com/brianckeegan/charting-boulder" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4" style={{ fontSize: 13.5, fontWeight: 800, color: C.ink, textDecoration: "none", border: `2px solid ${C.ink}`, borderRadius: 7, padding: "9px 14px" }}><Github size={15} /> Verify me: data, assumptions and code on GitHub</a>
           <div className="mt-5">
             <button onClick={() => setShowData(!showData)} style={{ background: "transparent", border: "none", cursor: "pointer", padding: 0 }} className="flex items-center gap-1.5"><span style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>DATA STATUS & SOURCES</span>{showData ? <ChevronUp size={14} color={C.inkSoft} /> : <ChevronDown size={14} color={C.inkSoft} />}</button>
             {showData && (
