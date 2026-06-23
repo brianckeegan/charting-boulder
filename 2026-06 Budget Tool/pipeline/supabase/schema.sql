@@ -3,7 +3,7 @@
 -- ============================================================================
 -- Destination for reader "contributions" from the budget widget
 -- (boulder-budget-widget.jsx). Run this once against the project at
--- https://dlnalnozxwrxiekhilqo.supabase.co using the SQL Editor
+-- https://iplcjxbazezpjdzdpjxx.supabase.co using the SQL Editor
 -- (Dashboard → SQL → New query → paste → Run), or via the Supabase CLI:
 --
 --     supabase db execute --file pipeline/supabase/schema.sql

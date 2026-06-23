@@ -5,7 +5,7 @@
 
 import { createHash } from "node:crypto";
 
-const URL = process.env.SUPABASE_URL || "https://dlnalnozxwrxiekhilqo.supabase.co";
+const URL = process.env.SUPABASE_URL || "https://iplcjxbazezpjdzdpjxx.supabase.co";
 // The server-side SECRET key (sb_secret_… or the legacy service_role JWT). It
 // bypasses Row Level Security, so it lives ONLY in Vercel env vars — never in
 // the browser or in committed code.

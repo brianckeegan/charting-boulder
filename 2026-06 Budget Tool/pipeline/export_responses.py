@@ -11,7 +11,7 @@ insert-only under Row Level Security), so run this from a trusted machine — ne
 ship the secret key to a browser.
 
 Usage:
-    export SUPABASE_URL=https://dlnalnozxwrxiekhilqo.supabase.co
+    export SUPABASE_URL=https://iplcjxbazezpjdzdpjxx.supabase.co
     export SUPABASE_SECRET_KEY=sb_secret_...        # or SUPABASE_SERVICE_ROLE_KEY
     python3 export_responses.py [outfile.csv]
 
@@ -45,7 +45,7 @@ PAGE = 1000
 
 
 def main() -> int:
-    base = os.environ.get("SUPABASE_URL", "https://dlnalnozxwrxiekhilqo.supabase.co").rstrip("/")
+    base = os.environ.get("SUPABASE_URL", "https://iplcjxbazezpjdzdpjxx.supabase.co").rstrip("/")
     key = (os.environ.get("SUPABASE_SECRET_KEY")
            or os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
            or os.environ.get("SUPABASE_SERVICE_KEY"))
