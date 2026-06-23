@@ -141,8 +141,8 @@ const ENDPOINT = resolveEndpoint();
 // Supabase direct-write fallback. The PUBLISHABLE key is browser-safe by design
 // (RLS is the real guard), so committing it is expected. The SECRET key is
 // never used here — only server-side, in the Vercel pipeline.
-const SUPABASE_URL = "https://dlnalnozxwrxiekhilqo.supabase.co";
-const SUPABASE_KEY = "sb_publishable_7lOfHLmjE78_2_o-u2G1vw_25YHpPs5";
+const SUPABASE_URL = "https://iplcjxbazezpjdzdpjxx.supabase.co";
+const SUPABASE_KEY = "sb_publishable_2jy9CF17cyHSMAnVYSpFcA_tRecRIoi";
 const SB_ENABLED = !PREVIEW && !!SUPABASE_URL && !!SUPABASE_KEY;
 
 const AGG_KEY = "boulder_budget_agg_v4";

@@ -230,7 +230,7 @@ sample:
 
 ```bash
 cd "2026-06 Budget Tool/pipeline"
-export SUPABASE_URL=https://dlnalnozxwrxiekhilqo.supabase.co
+export SUPABASE_URL=https://iplcjxbazezpjdzdpjxx.supabase.co
 export SUPABASE_SECRET_KEY=sb_secret_…      # trusted machine only
 python3 export_responses.py ../responses.csv
 ```
