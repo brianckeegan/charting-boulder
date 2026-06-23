@@ -237,8 +237,8 @@ const DEDICATED_RATES = [
 ];
 
 const SCENARIOS = {
-  y2026: { id: "y2026", label: "2026 adopted", gap: 7.5, blurb: "The shortfall the city actually closed for 2026, as sales-tax revenue flattened." },
-  downturn: { id: "downturn", label: "2027 downturn (modeled)", gap: 18.0, blurb: "A deeper, modeled gap if sales-tax receipts keep sliding into 2027." },
+  y2026: { id: "y2026", label: "2026 (adopted)", gap: 7.5, blurb: "The shortfall the city actually closed for 2026, as sales-tax revenue flattened." },
+  y2027: { id: "y2027", label: "2027 (projected)", gap: 18.0, blurb: "A deeper, modeled gap if sales-tax receipts keep sliding into 2027 — the structural test." },
 };
 
 /* ---- DEMO: optional reader survey. Adapted from the 2025 BVCP survey; some
@@ -276,7 +276,6 @@ const DEMO = [
 ];
 
 export default function BoulderBudgetWidget() {
-  const [scenarioId, setScenarioId] = useState("y2026");
   const [deptPct, setDeptPct] = useState({});      // id -> -25..25
   const [lockedPct, setLockedPct] = useState({});  // id -> -25..25
   const [rev, setRev] = useState({ fees: 0, property: 0, sales: 0 });
@@ -289,8 +288,6 @@ export default function BoulderBudgetWidget() {
   const [aggState, setAggState] = useState("loading");
   const [submitted, setSubmitted] = useState(false);
   const rootRef = useRef(null);
-
-  const scenario = SCENARIOS[scenarioId];
 
   useEffect(() => {
     const send = () => { try { window.parent?.postMessage({ type: "boulder-budget:height", height: document.documentElement.scrollHeight }, "*"); } catch {} };
@@ -306,8 +303,17 @@ export default function BoulderBudgetWidget() {
   const totalRevenue = revenueOnly + reserves; // both help close the gap, but only revenueOnly is structural
   const trappedChange = useMemo(() => LOCKED_FUNDS.reduce((s, f) => s + f.amount * ((lockedPct[f.id] || 0) / 100), 0), [lockedPct]);
 
-  const remainingGap = scenario.gap + netSpendChange - totalRevenue;
-  const balanced = remainingGap <= 0.05;
+  // Two tests. Both years are scored from the SAME slider choices. One-time
+  // reserves close the 2026 gap but cannot carry into the 2027 projection, so
+  // 2027 is the structural test: it counts cuts and recurring revenue only.
+  const fix2026 = netCuts + totalRevenue;            // cuts + recurring revenue + one-time reserves
+  const fix2027 = netCuts + revenueOnly;             // reserves excluded — structural only
+  const remaining2026 = SCENARIOS.y2026.gap + netSpendChange - totalRevenue;
+  const remaining2027 = SCENARIOS.y2027.gap + netSpendChange - revenueOnly;
+  const balanced2026 = remaining2026 <= 0.05;
+  const balanced2027 = remaining2027 <= 0.05;
+  const balanced = balanced2026 && balanced2027;     // must pass BOTH to submit
+  const remainingGap = Math.max(remaining2026, remaining2027); // the binding test
   const surplus = -remainingGap;
   const lockedTotal = TOTAL - GENERAL_FUND;
   const pctMovable = (GENERAL_FUND / TOTAL) * 100;
@@ -329,7 +335,7 @@ export default function BoulderBudgetWidget() {
          fund_<id>  locked-fund slider, −25..25 (% change; includes capital)
          rev_*      revenue sliders in their native units; reserves in $M
          demo_<id>  one column per survey item (multi-selects joined by "; ") */
-    const payload = { v: 4, ts: new Date().toISOString(), scenario: scenarioId };
+    const payload = { v: 4, ts: new Date().toISOString(), scenario: "dual" };
     GF_DEPTS.forEach((d) => { payload[`gf_${d.id}`] = deptPct[d.id] || 0; });
     LOCKED_FUNDS.forEach((f) => { payload[`fund_${f.id}`] = lockedPct[f.id] || 0; });
     payload.rev_fees = rev.fees || 0;          // $M
@@ -348,9 +354,9 @@ export default function BoulderBudgetWidget() {
     const next = await writeAgg({ revShare, usedRevenue, usedVote, usedReserves: reserves > 0, topCut, payload });
     if (next) setAgg(next);
     setSubmitted(true);
-  }, [balanced, submitted, deptPct, lockedPct, rev, reserves, netSpendChange, totalRevenue, revenueOnly, usedRevenue, usedVote, totalFix, scenarioId, demo]);
+  }, [balanced, submitted, deptPct, lockedPct, rev, reserves, netSpendChange, totalRevenue, revenueOnly, usedRevenue, usedVote, totalFix, demo]);
 
-  const reset = () => { setScenarioId("y2026"); setDeptPct({}); setLockedPct({}); setRev({ fees: 0, property: 0, sales: 0 }); setReserves(0); setDemo({}); setSubmitted(false); };
+  const reset = () => { setDeptPct({}); setLockedPct({}); setRev({ fees: 0, property: 0, sales: 0 }); setReserves(0); setDemo({}); setSubmitted(false); };
   const demoCount = Object.values(demo).filter((v) => (Array.isArray(v) ? v.length : v)).length;
 
   return (
@@ -394,24 +400,19 @@ export default function BoulderBudgetWidget() {
 
         {/* Scenario + live balance */}
         <section className="mt-6 rounded-lg p-4" style={{ background: C.limeTint, border: `1px solid ${C.hair}` }}>
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div style={{ minWidth: 200, flex: "1 1 200px" }}>
-              <Eyebrow>The gap to close</Eyebrow>
-              <div className="flex gap-2 mt-2 flex-wrap">
-                {Object.values(SCENARIOS).map((s) => (
-                  <button key={s.id} onClick={() => { setScenarioId(s.id); setSubmitted(false); }} style={{ fontSize: 12.5, fontWeight: 700, padding: "6px 12px", borderRadius: 6, cursor: "pointer", border: `1.5px solid ${scenarioId === s.id ? C.ink : C.hair}`, background: scenarioId === s.id ? C.ink : C.paper, color: scenarioId === s.id ? C.paper : C.inkSoft }}>{s.label}</button>
-                ))}
-              </div>
-              <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 8 }}>{scenario.blurb}</p>
+          <div className="flex items-start justify-between gap-3 flex-wrap">
+            <div style={{ minWidth: 0 }}>
+              <Eyebrow>Two tests — your budget must pass both</Eyebrow>
+              <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6, maxWidth: 380 }}>Balance the gap the city closed for 2026 <em>and</em> the deeper gap projected for 2027. One-time reserves count toward 2026 but can’t carry into 2027 — that bar is the structural test.</p>
             </div>
             <div className="text-right" style={{ flex: "0 0 auto" }}>
-              <Eyebrow>{balanced ? "Result" : "Still short"}</Eyebrow>
-              <div className="tnum" style={{ fontSize: 38, fontWeight: 800, lineHeight: 1, marginTop: 4, color: balanced ? C.green : C.red }}>{balanced ? (surplus > 0.05 ? `+${fmt(surplus)}` : "Balanced") : fmt(-remainingGap)}</div>
-              <div style={{ fontSize: 12, color: C.inkSoft, marginTop: 2 }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {fmt(revenueOnly)} revenue{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
+              <div className="tnum" style={{ fontSize: 26, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{balanced ? "Both passed" : `${[balanced2026, balanced2027].filter(Boolean).length} of 2`}</div>
+              <div style={{ fontSize: 12, color: C.inkSoft, marginTop: 3 }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {fmt(revenueOnly)} revenue{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
             </div>
           </div>
-          <div className="mt-3 rounded-full overflow-hidden" style={{ height: 9, background: C.paper, border: `1px solid ${C.hair}` }}>
-            <div style={{ height: "100%", borderRadius: 99, width: `${Math.min(100, Math.max(0, (totalFix / scenario.gap) * 100))}%`, background: balanced ? C.green : C.lime, transition: "width .2s ease" }} />
+          <div className="mt-3">
+            <GapBar label="2026 (adopted)" sub="reserves allowed" gap={SCENARIOS.y2026.gap} remaining={remaining2026} balanced={balanced2026} />
+            <GapBar label="2027 (projected)" sub="structural · reserves don’t carry" gap={SCENARIOS.y2027.gap} remaining={remaining2027} balanced={balanced2027} />
           </div>
         </section>
 
@@ -544,11 +545,13 @@ export default function BoulderBudgetWidget() {
         {/* Submit + aggregate */}
         <section className="mt-7 rounded-lg p-4" style={{ background: C.wash, border: `1px solid ${C.hair}` }}>
           <div style={{ maxWidth: 540 }}>
-            <Eyebrow>{balanced ? "You closed the gap" : "Keep going"}</Eyebrow>
+            <Eyebrow>{balanced ? "You passed both tests" : "Keep going"}</Eyebrow>
             <p style={{ fontSize: 14, color: C.inkSoft, marginTop: 6 }}>
               {balanced
-                ? <>Balanced with {netCuts > 0.01 ? <><strong style={{ color: C.ink }}>{fmt(netCuts)} in net cuts</strong>, </> : null}<strong style={{ color: C.ink }}>{fmt(revenueOnly)} in new revenue</strong>{reserves > 0 ? <> and <strong style={{ color: C.ink }}>{fmt(reserves)} from one-time reserves</strong></> : null}{usedVote ? <>, including measures that would need a public vote.</> : <>, without asking voters for anything.</>}</>
-                : <>You’re still {fmt(-remainingGap)} short. Cut deeper, raise a fee, or send a tax to the ballot.</>}
+                ? <>Balanced for 2026 <em>and</em> the 2027 projection, with {netCuts > 0.01 ? <><strong style={{ color: C.ink }}>{fmt(netCuts)} in net cuts</strong>, </> : null}<strong style={{ color: C.ink }}>{fmt(revenueOnly)} in recurring revenue</strong>{reserves > 0 ? <> and <strong style={{ color: C.ink }}>{fmt(reserves)} from one-time reserves</strong></> : null}{usedVote ? <>, including measures that would need a public vote.</> : <>, without asking voters for anything.</>}</>
+                : balanced2026
+                  ? <>2026 balances, but the <strong style={{ color: C.ink }}>2027 projection is still {fmt(-remaining2027)} short</strong>. One-time reserves won’t carry over — close it with cuts or recurring revenue.</>
+                  : <>You’re still {fmt(-remaining2026)} short for 2026{remaining2027 > remaining2026 ? <> and {fmt(-remaining2027)} short for 2027</> : null}. Cut deeper, raise a fee, or send a tax to the ballot.</>}
             </p>
           </div>
 
@@ -597,7 +600,7 @@ export default function BoulderBudgetWidget() {
             {showData && (
               <div style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 8, lineHeight: 1.6 }}>
                 <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025); the {fmt(7.5)} gap; city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes. Sources: City of Boulder 2026 Approved Budget (OpenGov) and budget message (Aug. 29, 2025); BRL election reporting (Nov. 2025); Colorado Legislative Council Staff.</p>
-                <p className="mt-2"><strong style={{ color: C.ink }}>Modeled (placeholder):</strong> the per-department General Fund split, every locked operating-fund amount, the Open Space rate (~0.33%), and the revenue yields (per-mill, per-0.1% sales). They sum to the official totals but are estimates pending line-item ingestion. The “2027 downturn” gap is illustrative, not a forecast. Treat any single modeled figure as approximate.</p>
+                <p className="mt-2"><strong style={{ color: C.ink }}>Modeled (placeholder):</strong> the per-department General Fund split, every locked operating-fund amount, the Open Space rate (~0.33%), and the revenue yields (per-mill, per-0.1% sales). They sum to the official totals but are estimates pending line-item ingestion. The “2027 projection” gap is illustrative, not a forecast. Treat any single modeled figure as approximate.</p>
                 <p className="mt-2" style={{ fontSize: 11.5 }}>As of June 2026. Built for Boulder Reporting Lab. Figures in millions. A teaching model, not the city’s budgeting system.</p>
               </div>
             )}
@@ -643,6 +646,43 @@ async function writeAgg({ revShare, usedRevenue, usedVote, usedReserves, topCut,
 }
 
 /* ---------------------------------------------------------------- UI bits */
+function GapBar({ label, sub, gap, remaining, balanced }) {
+  // Diverging bar: center (50%) = balanced. Left of center = deficit (red),
+  // right = surplus (green). pos in [-1, 1] maps remaining in [gap, -gap].
+  const pos = Math.max(-1, Math.min(1, -remaining / gap));
+  const half = 50;                          // each side is 50% of the track
+  const fillLeft = pos >= 0 ? half : half + pos * half;   // start of fill (%)
+  const fillWidth = Math.abs(pos) * half;                 // width of fill (%)
+  const surplus = -remaining;
+  return (
+    <div style={{ marginTop: 10 }}>
+      <div className="flex items-center justify-between gap-2">
+        <div style={{ minWidth: 0 }}>
+          <span style={{ fontSize: 13.5, fontWeight: 800 }}>{label}</span>
+          <span style={{ fontSize: 11.5, color: C.inkSoft, marginLeft: 6 }}>{sub}</span>
+        </div>
+        <div className="flex items-center gap-1.5" style={{ flexShrink: 0 }}>
+          <span className="tnum" style={{ fontSize: 13.5, fontWeight: 800, color: balanced ? C.green : C.red }}>
+            {balanced ? (surplus > 0.05 ? `+${fmt(surplus)}` : "Balanced") : `${fmt(-remaining)} short`}
+          </span>
+          <span aria-hidden="true" style={{ fontSize: 15, lineHeight: 1 }}>{balanced ? "\u2705" : "\u2B1C"}</span>
+        </div>
+      </div>
+      <div className="relative" style={{ height: 12, marginTop: 5, background: C.paper, border: `1px solid ${C.hair}`, borderRadius: 99, overflow: "hidden" }}>
+        {/* deficit (left) / surplus (right) faint zones */}
+        <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "50%", background: "rgba(207,46,46,0.06)" }} />
+        <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, right: 0, background: "rgba(31,122,77,0.06)" }} />
+        {/* fill */}
+        <div style={{ position: "absolute", top: 0, bottom: 0, left: `${fillLeft}%`, width: `${fillWidth}%`, background: balanced ? C.green : C.red, transition: "left .2s ease, width .2s ease" }} />
+        {/* center "balanced" tick */}
+        <div style={{ position: "absolute", left: "50%", top: -1, bottom: -1, width: 2, background: C.ink, transform: "translateX(-1px)" }} />
+      </div>
+      <div className="flex justify-between" style={{ fontSize: 10, color: C.inkSoft, marginTop: 2 }} aria-hidden="true">
+        <span>deficit</span><span>balanced</span><span>surplus</span>
+      </div>
+    </div>
+  );
+}
 function Cites({ sources }) {
   if (!sources || !sources.length) return null;
   return (
