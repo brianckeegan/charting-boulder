@@ -32,18 +32,27 @@ npm install --no-audit --no-fund --save-exact \
 
 cp "$JSX" ./widget.jsx
 
-# Entry: bare imports (no CDNs) + in-memory storage shim + mount.
-cat > entry.jsx << 'EOF'
+# Preview builds keep submissions in this browser session and never touch the
+# live database — safe for a double-click review copy. Build a PRODUCTION HTML
+# that writes to the configured backend with:  BBW_PREVIEW=0 ./build-standalone.sh
+BBW_PREVIEW="${BBW_PREVIEW:-1}"
+PREVIEW_JS=true; [ "$BBW_PREVIEW" = "0" ] && PREVIEW_JS=false
+
+# Entry: bare imports (no CDNs) + preview flag + in-memory storage shim + mount.
+cat > entry.jsx << EOF
 import React from "react";
 import { createRoot } from "react-dom/client";
 import BoulderBudgetWidget from "./widget.jsx";
 (function () {
-  if (typeof window !== "undefined" && !window.storage) {
-    var mem = {};
-    window.storage = {
-      get: function (k) { return Promise.resolve(k in mem ? { key: k, value: mem[k], shared: true } : null); },
-      set: function (k, v) { mem[k] = v; return Promise.resolve({ key: k, value: v, shared: true }); },
-    };
+  if (typeof window !== "undefined") {
+    window.__BBW_PREVIEW__ = ${PREVIEW_JS};
+    if (!window.storage) {
+      var mem = {};
+      window.storage = {
+        get: function (k) { return Promise.resolve(k in mem ? { key: k, value: mem[k], shared: true } : null); },
+        set: function (k, v) { mem[k] = v; return Promise.resolve({ key: k, value: v, shared: true }); },
+      };
+    }
   }
 })();
 createRoot(document.getElementById("root")).render(<BoulderBudgetWidget />);
@@ -98,10 +107,14 @@ HEAD
   </style>
 </head>
 <body>
-  <div id="note">Local copy, for review. The interaction is fully live; the "Add my budget" tally works during this session but is not saved. The published version stores responses on Boulder Reporting Lab's own server.</div>
+HEAD2
+  if [ "$BBW_PREVIEW" != "0" ]; then
+    echo '  <div id="note">Local copy, for review. The interaction is fully live; the &ldquo;Add my budget&rdquo; tally works during this session but is not saved to the database. The published embed stores responses in Boulder Reporting Lab&rsquo;s database.</div>'
+  fi
+  cat << 'HEAD3'
   <div id="root"></div>
   <script>
-HEAD2
+HEAD3
   cat bundle.js
   cat << 'TAIL'
   </script>
