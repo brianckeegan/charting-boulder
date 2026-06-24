@@ -732,13 +732,15 @@ async function writeAgg({ revShare, usedRevenue, usedVote, usedReserves, topCut,
 
 /* ---------------------------------------------------------------- UI bits */
 function GapBar({ label, sub, gap, remaining, balanced }) {
-  // Diverging bar: center (50%) = balanced. Left of center = deficit (red),
-  // right = surplus (green). pos in [-1, 1] maps remaining in [gap, -gap].
-  const pos = Math.max(-1, Math.min(1, -remaining / gap));
-  const half = 50;                          // each side is 50% of the track
-  const fillLeft = pos >= 0 ? half : half + pos * half;   // start of fill (%)
-  const fillWidth = Math.abs(pos) * half;                 // width of fill (%)
-  const surplus = -remaining;
+  // Diverging bar with a FIXED symmetric range: −$20M (deficit) on the left to
+  // +$20M (surplus) on the right, for both bars. Balanced (0) sits at the
+  // center; values past the range clamp to an edge.
+  const MIN = -20, MAX = 20, span = MAX - MIN;            // $M
+  const surplus = -remaining;                             // + surplus, − deficit
+  const zeroPct = ((0 - MIN) / span) * 100;               // balanced line (center)
+  const valPct = ((Math.max(MIN, Math.min(MAX, surplus)) - MIN) / span) * 100;
+  const fillLeft = Math.min(valPct, zeroPct);             // fill spans balanced ↔ value
+  const fillWidth = Math.abs(valPct - zeroPct);
   return (
     <div style={{ marginTop: 10 }}>
       <div className="flex items-center justify-between gap-2">
@@ -754,16 +756,18 @@ function GapBar({ label, sub, gap, remaining, balanced }) {
         </div>
       </div>
       <div className="relative" style={{ height: 12, marginTop: 5, background: C.paper, border: `1px solid ${C.hair}`, borderRadius: 99, overflow: "hidden" }}>
-        {/* deficit (left) / surplus (right) faint zones */}
-        <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "50%", background: "rgba(207,46,46,0.06)" }} />
-        <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, right: 0, background: "rgba(31,122,77,0.06)" }} />
+        {/* deficit (left) / surplus (right) faint zones, split at the balanced line */}
+        <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${zeroPct}%`, background: "rgba(207,46,46,0.06)" }} />
+        <div style={{ position: "absolute", left: `${zeroPct}%`, top: 0, bottom: 0, right: 0, background: "rgba(31,122,77,0.06)" }} />
         {/* fill */}
         <div style={{ position: "absolute", top: 0, bottom: 0, left: `${fillLeft}%`, width: `${fillWidth}%`, background: balanced ? C.green : C.red, transition: "left .2s ease, width .2s ease" }} />
-        {/* center "balanced" tick */}
-        <div style={{ position: "absolute", left: "50%", top: -1, bottom: -1, width: 2, background: C.ink, transform: "translateX(-1px)" }} />
+        {/* balanced (0) tick */}
+        <div style={{ position: "absolute", left: `${zeroPct}%`, top: -1, bottom: -1, width: 2, background: C.ink, transform: "translateX(-1px)" }} />
       </div>
-      <div className="flex justify-between" style={{ fontSize: 10, color: C.inkSoft, marginTop: 2 }} aria-hidden="true">
-        <span>deficit</span><span>balanced</span><span>surplus</span>
+      <div className="relative" style={{ fontSize: 10, color: C.inkSoft, marginTop: 2, height: 13 }} aria-hidden="true">
+        <span style={{ position: "absolute", left: 0 }}>−$20M</span>
+        <span style={{ position: "absolute", left: `${zeroPct}%`, transform: "translateX(-50%)", fontWeight: 700 }}>balanced</span>
+        <span style={{ position: "absolute", right: 0 }}>+$20M</span>
       </div>
     </div>
   );
