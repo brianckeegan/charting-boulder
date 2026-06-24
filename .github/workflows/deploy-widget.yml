@@ -1,0 +1,50 @@
+name: Deploy widget to GitHub Pages
+
+# Publishes the Balance Boulder's Budget widget to GitHub Pages. The widget is a
+# self-contained production build that talks directly to Supabase, so no backend
+# is needed — Pages just serves the static HTML. Runs on every push to main that
+# touches the widget, and can be run by hand from the Actions tab.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "2026-06-budget-tool/boulder-budget-widget.html"
+      - ".github/workflows/deploy-widget.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble the Pages site (widget as the home page)
+        run: |
+          mkdir -p _site
+          cp "2026-06-budget-tool/boulder-budget-widget.html" _site/index.html
+          cp "2026-06-budget-tool/boulder-budget-widget.html" _site/boulder-budget-widget.html
+
+      # enablement: true turns Pages on automatically on the first run.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
