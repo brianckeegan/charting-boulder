@@ -72,12 +72,10 @@ that up:
 
 - **No identifiers are stored.** No name, account, email, IP address, or browser
   fingerprint is written to a row. The only survey data is what the reader picks.
-- **Duplicate flagging without retention.** When the Vercel path is used, the
-  function computes `dedupe_hash = sha256(DEDUPE_SALT + IP + UTC-day)` and stores
-  *only* that hash. It is salted and one-way, so it cannot be reversed to an IP,
-  but repeat submissions from one address on one day collide — enough to screen
-  duplicates, nothing more. The direct path stores no hash at all (a browser
-  can't see its own public IP); it relies on the widget's `localStorage` flag.
+- **No IP-derived value is persisted.** Rate-limiting and duplicate suppression
+  happen in ephemeral edge storage (Upstash Redis, keyed by IP with a TTL) inside
+  the Vercel function — the IP is used transiently and never written to the
+  dataset. There is no per-submission hash in the table.
 - **Row Level Security is on.** The publishable key (role `anon`) may **insert**
   a row — and only one that carries at least one survey answer — and nothing
   else: it cannot read, update, or delete any row, and inserts use
@@ -127,7 +125,6 @@ notebook's `GF_SLIDERS / FUND_SLIDERS / REV_COLS / DEMO_COLS` one-to-one.
 | `used_reserves` | bool | reserves were spent down |
 | `top_cut` | text | name of the reader's single deepest GF cut, or null |
 | `demo_years` … `demo_disability` | text | 13 survey items; multi-selects joined by `"; "` |
-| `dedupe_hash` | text | salted one-way hash; no PII (Vercel path only) |
 | `repeat_client` | bool | this browser had submitted before |
 | `raw` | jsonb | the full original payload, as a safety net |
 
@@ -197,8 +194,9 @@ Deploy [`pipeline/`](./pipeline/) as its own Vercel project (set the project's
 
 - `SUPABASE_URL`
 - `SUPABASE_SECRET_KEY` — the `sb_secret_…` key (**never** committed)
-- `DEDUPE_SALT` — any stable random string
-- `ALLOWED_ORIGIN` — optional; e.g. `https://boulderreportinglab.org`
+- `ALLOWED_ORIGIN` — origin allowlist, e.g. `https://boulderreportinglab.org`
+- `TURNSTILE_SECRET` — Cloudflare Turnstile secret (bot defense); optional
+- `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` — rate-limit store; optional
 
 Then point the widget at it with `?api=https://your-pipeline.vercel.app/api` on
 the embed URL.
@@ -217,6 +215,8 @@ using the `boulder-budget:height` message the widget already posts:
         src="https://YOUR-HOST/boulder-budget-widget.html"
         title="Balance Boulder's Budget"
         loading="lazy" scrolling="no"
+        sandbox="allow-scripts allow-same-origin allow-popups"
+        referrerpolicy="no-referrer"
         style="width:100%;border:0;display:block"></iframe>
 <script>
   addEventListener("message", function (e) {
@@ -230,6 +230,52 @@ using the `boulder-budget:height` message the widget already posts:
 
 To route writes through the Vercel pipeline instead of writing to Supabase
 directly, add `?api=https://your-pipeline.vercel.app/api` to the iframe `src`.
+
+---
+
+## Hardening & going to production
+
+Already enforced on `iplcjxbazezpjdzdpjxx` (DB + project):
+
+- **RLS, insert-only** — the publishable key can insert a row (only with ≥1
+  survey answer) and read only the aggregate; never read/update/delete a row.
+- **Server-owned columns** — a trigger forces `id` and `created_at`, so a public
+  client can't choose an id or backdate a row.
+- **Value bounds** — `contributions_sane_values` rejects absurd/oversized data.
+- **No IP-derived value stored** — the old `dedupe_hash` column is gone.
+- **Aggregate via a precomputed row**, read by a `SECURITY INVOKER` function;
+  the Security Advisor shows **0** warnings.
+- **Reduced surface** — Auth sign-ups disabled, GraphQL API unexposed, Realtime
+  publication empty, no storage buckets, `max_rows` = 1000.
+
+Recommended next layer — **route writes through the Vercel pipeline** for bot
+defense + rate-limiting (PostgREST itself can't be rate-limited):
+
+1. **Deploy** `pipeline/` to Vercel; set `SUPABASE_SECRET_KEY`, `ALLOWED_ORIGIN`,
+   and (recommended) `TURNSTILE_SECRET` + `UPSTASH_REDIS_REST_URL/TOKEN`. Each
+   defense no-ops until its vars are set.
+2. **Create** a Cloudflare Turnstile widget and an Upstash Redis DB (both free).
+3. **Rebuild** the embed wired to them (or pass `?api=…&turnstile=…` on the src):
+   ```bash
+   BBW_PREVIEW=0 BBW_ENDPOINT=https://your-pipeline.vercel.app/api \
+     BBW_TURNSTILE=<turnstile-site-key> ./build-standalone.sh
+   ```
+   The widget then posts to `/api/submit` with a Turnstile token; the function
+   verifies it, rate-limits per IP in ephemeral storage, and writes with the
+   secret key.
+4. **Cut over** last — once the Vercel path works, close the direct write path so
+   every write goes through that one chokepoint:
+   ```sql
+   drop policy if exists "anon may insert a contribution" on public.contributions;
+   revoke insert on public.contributions from anon, authenticated;
+   ```
+   Reads (the public `contribution_stats`) stay open; only writes lock to the
+   secret key. Running this *before* the Vercel path is live would break the
+   widget, so it's the final step — until then the direct path keeps working.
+
+A note on logs: even with no IP stored, Supabase and Vercel keep request IPs in
+their own platform logs transiently. Minimize log retention and reflect that in
+the reader-facing privacy note if you promise "we never keep your IP."
 
 ---
 

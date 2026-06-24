@@ -45,8 +45,14 @@ Variables), and set the project's **Root Directory** to
 | --- | --- | --- |
 | `SUPABASE_URL` | Vercel + export | the project URL |
 | `SUPABASE_SECRET_KEY` | Vercel + export | `sb_secret_…`; bypasses RLS; **never commit** |
-| `DEDUPE_SALT` | Vercel | any stable random string; salts the dedupe hash |
-| `ALLOWED_ORIGIN` | Vercel (optional) | lock CORS to your site, e.g. `https://boulderreportinglab.org` |
+| `ALLOWED_ORIGIN` | Vercel | origin allowlist, e.g. `https://boulderreportinglab.org` |
+| `TURNSTILE_SECRET` | Vercel (optional) | Cloudflare Turnstile secret — bot defense |
+| `UPSTASH_REDIS_REST_URL` / `…_TOKEN` | Vercel (optional) | per-IP rate-limit store (ephemeral) |
+| `RATE_LIMIT_MAX` / `RATE_LIMIT_WINDOW` | Vercel (optional) | cap + window seconds (default 5 / 3600) |
+
+Each defense activates only when its vars are set; the function runs fine
+without them. See [`../ARCHITECTURE.md`](../ARCHITECTURE.md) → *Hardening* for the
+production cutover.
 
 ## Quick checks
 

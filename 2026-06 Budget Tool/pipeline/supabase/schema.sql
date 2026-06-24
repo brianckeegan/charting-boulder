@@ -16,11 +16,11 @@
 -- ../../ARCHITECTURE.md for the full data dictionary and the data flow.
 --
 -- PRIVACY — no name, account, email, IP address, or browser fingerprint is
--- stored. `dedupe_hash` is a salted one-way SHA-256 (salt + IP + UTC day),
--- computed in the serverless function and never reversible to an IP; it only
--- lets us flag likely duplicate submissions. Row Level Security is ON: the
--- publishable key may INSERT a contribution but can never read, update, or
--- delete a row. Readers see only the precomputed public tally in
+-- stored, and NO IP-derived value is persisted at all: rate-limiting and
+-- duplicate suppression happen in ephemeral edge storage (see the Vercel
+-- function), so nothing here can be tied back to a person. Row Level Security
+-- is ON: the publishable key may INSERT a contribution but can never read,
+-- update, or delete a row. Readers see only the precomputed public tally in
 -- `contribution_stats` (via budget_aggregate()); individual rows are reachable
 -- only with the service-role key, server-side.
 -- ============================================================================
@@ -96,8 +96,8 @@ create table if not exists public.contributions (
   demo_lgbtq      text,
   demo_disability text,
 
-  -- Operational, not analytical.
-  dedupe_hash     text,                       -- salted one-way hash (no PII)
+  -- Operational, not analytical. (No IP-derived value is stored — dedup and
+  -- rate-limiting live in ephemeral edge storage, not here.)
   repeat_client   boolean not null default false,
   raw             jsonb,                      -- full original payload, as a safety net
 
@@ -125,7 +125,24 @@ comment on table public.contributions is
   'One flat row per reader submission from the Balance Boulder''s Budget widget. No PII. Columns match the analysis notebook one-to-one. See ARCHITECTURE.md.';
 
 create index if not exists contributions_created_at_idx on public.contributions (created_at);
-create index if not exists contributions_dedupe_hash_idx on public.contributions (dedupe_hash);
+
+-- Hardening, idempotent (applies whether the table is fresh or already exists):
+--   • drop the old persisted IP hash entirely (no IP-derived value is kept);
+--   • bound values so a scripted insert can't store absurd or oversized data.
+alter table public.contributions drop column if exists dedupe_hash;
+drop index if exists public.contributions_dedupe_hash_idx;
+
+alter table public.contributions drop constraint if exists contributions_sane_values;
+alter table public.contributions add constraint contributions_sane_values check (
+  coalesce(rev_fees, 0)     <= 100  and
+  coalesce(rev_property, 0) <= 100  and
+  coalesce(rev_sales, 0)    <= 10   and
+  coalesce(reserves, 0)     <= 1000 and
+  (client_version is null or client_version between 0 and 1000) and
+  char_length(coalesce(scenario, '')) <= 64  and
+  char_length(coalesce(top_cut, ''))  <= 200 and
+  char_length(coalesce(raw::text, '')) <= 8000
+);
 
 -- ---------------------------------------------------------------------------
 -- Row Level Security. Two write paths are supported and both are safe:
@@ -169,7 +186,10 @@ security invoker
 set search_path = ''               -- pin search_path (security advisor 0011)
 as $$
 begin
-  new.created_at := now();         -- now() resolves from pg_catalog
+  -- Server owns the operational columns: ignore whatever a public client sent,
+  -- so an insert can't choose its own id or backdate a row.
+  new.id := gen_random_uuid();     -- core since PG13, resolves from pg_catalog
+  new.created_at := now();
   return new;
 end;
 $$;
