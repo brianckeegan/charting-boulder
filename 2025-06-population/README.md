@@ -1,4 +1,4 @@
-# 2025-06 Population
+# 2025-06-population
 
 ## Question
 Is Boulder "full"? How does the city's recent population trajectory compare to its own past, to peer Colorado municipalities, and to similar cities in other states?

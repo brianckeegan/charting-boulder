@@ -1,4 +1,4 @@
-# 2025-09 Enrollments
+# 2025-09-enrollments
 
 ## Question
 What does the long-run trajectory of Boulder Valley School District enrollment tell us about Boulder's demographics — and how does the K-12-versus-65+ ratio reshape the political center of the city as it shifts?

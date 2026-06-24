@@ -1,4 +1,4 @@
-# 2025-11 Elections
+# 2025-11-elections
 
 ## Question
 What do the unfolding vote-share dynamics across update timestamps during the 2025 Boulder municipal election tell us about how progressives and conservatives are distributed across mail-in versus in-person ballots — and how predictable are final shares from early returns?

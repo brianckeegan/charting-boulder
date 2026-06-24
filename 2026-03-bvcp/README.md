@@ -1,4 +1,4 @@
-# 2026-03 BVCP
+# 2026-03-bvcp
 
 ## Question
 How has the Boulder Valley Comprehensive Plan changed across nearly half a century — what does its vocabulary, structure, and semantic content tell us about which problems Boulder learned to care about, and which it has effectively rewritten?
