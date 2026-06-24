@@ -98,6 +98,7 @@ echo "Assembling self-contained HTML…"
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Balance Boulder's Budget</title>
   <meta name="description" content="An interactive budget-balancing tool for the City of Boulder, from Boulder Reporting Lab." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>" />
   <style>
     html,body{margin:0;background:#fff;font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;color:#1A1A1A}
     #note{font:600 12px/1.45 system-ui,sans-serif;color:#5A5A5A;text-align:center;padding:9px 14px;background:#FAFAE1;border-bottom:1px solid #E1E1E1}

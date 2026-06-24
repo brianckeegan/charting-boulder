@@ -276,7 +276,7 @@ const DEMO = [
     o: ["North Boulder", "Central Boulder", "University Hill", "South Boulder", "University of Colorado", "Southeast Boulder", "East Boulder", "Crossroads", "Palo Park", "Gunbarrel", "Other", "Outside the city", "Prefer not to say"] },
   { id: "employment", t: "single", q: "What is your employment status?",
     o: ["Working full time for pay", "Working part time for pay", "Unemployed, looking for paid work", "Not retired, not looking for paid work", "Fully retired", "Prefer not to say"] },
-  { id: "work_area", t: "single", q: "How do you usually get around Boulder?",
+  { id: "commute", t: "single", q: "How do you usually get around Boulder?",
     o: ["Drive (alone)", "Carpool or rideshare", "Bus or other transit", "Bike", "Walk or roll", "Mostly work or stay at home", "Prefer not to say"] },
   { id: "student", t: "single", q: "Are you a student at CU Boulder or any other college or university?",
     o: ["Yes, an undergraduate student", "Yes, a graduate student", "No", "Prefer not to say"] },
@@ -663,6 +663,16 @@ export default function BoulderBudgetWidget() {
               <div style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 8, lineHeight: 1.6 }}>
                 <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025); the {fmt(7.5)} gap; city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes. Sources: City of Boulder 2026 Approved Budget (OpenGov) and budget message (Aug. 29, 2025); BRL election reporting (Nov. 2025); Colorado Legislative Council Staff.</p>
                 <p className="mt-2"><strong style={{ color: C.ink }}>Modeled (placeholder):</strong> the per-department General Fund split, every locked operating-fund amount, the Open Space rate (~0.33%), and the revenue yields (per-mill, per-0.1% sales). They sum to the official totals but are estimates pending line-item ingestion. The “2027 projection” gap is illustrative, not a forecast. Treat any single modeled figure as approximate.</p>
+                <div className="mt-2">
+                  <strong style={{ color: C.ink }}>Related reporting:</strong>
+                  <ul style={{ margin: "4px 0 0", paddingLeft: 18 }}>
+                    {Object.values(SRC).map((s, i) => (
+                      <li key={i} style={{ marginTop: 3 }}>
+                        <a href={s.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>{s.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <p className="mt-2" style={{ fontSize: 11.5 }}>As of June 2026. Built for Boulder Reporting Lab. Figures in millions. A teaching model, not the city’s budgeting system.</p>
               </div>
             )}
