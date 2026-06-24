@@ -11,7 +11,7 @@ pipeline/
 │   ├── submit.js           POST /api/submit   → store one contribution
 │   ├── aggregate.js        GET  /api/aggregate → anonymous tally
 │   ├── _schema.js          canonical columns + payload validation
-│   └── _supabase.js        PostgREST + CORS + dedupe-hash helpers
+│   └── _supabase.js        PostgREST + CORS helpers
 ├── export_responses.py     Supabase → responses.csv for the notebook
 ├── vercel.json             function config
 ├── package.json            no runtime dependencies
@@ -29,7 +29,7 @@ privacy-preserving de-duplication, and keeps the secret key off the page.
 
 ```bash
 # from this directory
-cp .env.example .env.local        # fill in SUPABASE_SECRET_KEY + DEDUPE_SALT
+cp .env.example .env.local        # fill in SUPABASE_SECRET_KEY
 npx vercel dev                    # local dev at http://localhost:3000
 npx vercel deploy --prod          # ship it
 ```
@@ -46,13 +46,8 @@ Variables), and set the project's **Root Directory** to
 | `SUPABASE_URL` | Vercel + export | the project URL |
 | `SUPABASE_SECRET_KEY` | Vercel + export | `sb_secret_…`; bypasses RLS; **never commit** |
 | `ALLOWED_ORIGIN` | Vercel | origin allowlist, e.g. `https://boulderreportinglab.org` |
-| `TURNSTILE_SECRET` | Vercel (optional) | Cloudflare Turnstile secret — bot defense |
-| `UPSTASH_REDIS_REST_URL` / `…_TOKEN` | Vercel (optional) | per-IP rate-limit store (ephemeral) |
-| `RATE_LIMIT_MAX` / `RATE_LIMIT_WINDOW` | Vercel (optional) | cap + window seconds (default 5 / 3600) |
 
-Each defense activates only when its vars are set; the function runs fine
-without them. See [`../ARCHITECTURE.md`](../ARCHITECTURE.md) → *Hardening* for the
-production cutover.
+See [`../ARCHITECTURE.md`](../ARCHITECTURE.md) → *Hardening* for the production cutover.
 
 ## Quick checks
 

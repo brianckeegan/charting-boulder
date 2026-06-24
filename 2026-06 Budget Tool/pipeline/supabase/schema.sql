@@ -151,7 +151,7 @@ alter table public.contributions add constraint contributions_sane_values check 
 --     to INSERT a contribution, but NOT to read, update, or delete any row.
 --     Reads with `Prefer: return=minimal` so nothing is echoed back.
 --   • Through the Vercel function with the SECRET key (role `service_role`):
---     bypasses RLS entirely; used for server-side dedupe hashing and validation.
+--     bypasses RLS entirely; used for server-side validation.
 --
 -- Either way, the only way to READ the data is the aggregate function below
 -- (or the secret key, server-side). A leaked publishable key can add rows but
