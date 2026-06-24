@@ -1,0 +1,210 @@
+[
+  {
+    "city": "Boulder",
+    "state": "Colorado",
+    "place_fips": "0807850",
+    "county": "Boulder County",
+    "county_fips":"08013",
+    "msa": "Boulder, CO MSA"
+  },
+  {
+    "city": "Ann Arbor",
+    "state": "Michigan",
+    "place_fips": "2603000",
+    "county": "Washtenaw County",
+    "county_fips": "26161",
+    "msa": "Ann Arbor, MI MSA"
+  },
+  {
+    "city": "Cambridge",
+    "state": "Massachusetts",
+    "place_fips": "2511000",
+    "county": "Middlesex County",
+    "county_fips": "25017",
+    "msa": "Boston–Cambridge–Newton, MA–NH MSA"
+  },
+  {
+    "city": "Berkeley",
+    "state": "California",
+    "place_fips": "0606000",
+    "county": "Alameda County",
+    "county_fips": "06001",
+    "msa": "San Francisco–Oakland–Berkeley, CA MSA"
+  },
+  {
+    "city": "Madison",
+    "state": "Wisconsin",
+    "place_fips": "5548000",
+    "county": "Dane County",
+    "county_fips": "55025",
+    "msa": "Madison, WI MSA"
+  },
+  {
+    "city": "Durham",
+    "state": "North Carolina",
+    "place_fips": "3719000",
+    "county": "Durham County",
+    "county_fips": "37063",
+    "msa": "Durham–Chapel Hill, NC MSA"
+  },
+  {
+    "city": "Pasadena",
+    "state": "California",
+    "place_fips": "0656000",
+    "county": "Los Angeles County",
+    "county_fips": "06037",
+    "msa": "Los Angeles–Long Beach–Anaheim, CA MSA"
+  },
+  {
+    "city": "Santa Barbara",
+    "state": "California",
+    "place_fips": "0669070",
+    "county": "Santa Barbara County",
+    "county_fips": "06083",
+    "msa": "Santa Maria–Santa Barbara, CA MSA"
+  },
+  {
+    "city": "Mountain View",
+    "state": "California",
+    "place_fips": "0649670",
+    "county": "Santa Clara County",
+    "county_fips": "06085",
+    "msa": "San Jose–Sunnyvale–Santa Clara, CA MSA"
+  },
+  {
+    "city": "Bloomington",
+    "state": "Indiana",
+    "place_fips": "1805860",
+    "county": "Monroe County",
+    "county_fips": "18105",
+    "msa": "Bloomington, IN MSA"
+  },
+  {
+    "city": "Fort Collins",
+    "state": "Colorado",
+    "place_fips": "0827425",
+    "county": "Larimer County",
+    "county_fips": "08069",
+    "msa": "Fort Collins, CO MSA"
+  },
+  {
+    "city": "Tempe",
+    "state": "Arizona",
+    "place_fips": "0473000",
+    "county": "Maricopa County",
+    "county_fips": "04013",
+    "msa": "Phoenix–Mesa–Chandler, AZ MSA"
+  },
+  {
+    "city": "Evanston",
+    "state": "Illinois",
+    "place_fips": "1724582",
+    "county": "Cook County",
+    "county_fips": "17031",
+    "msa": "Chicago–Naperville–Elgin, IL–IN–WI MSA"
+  },
+  {
+    "city": "Provo",
+    "state": "Utah",
+    "place_fips": "4962470",
+    "county": "Utah County",
+    "county_fips": "49049",
+    "msa": "Provo–Orem, UT MSA"
+  },
+  {
+    "city": "College Station",
+    "state": "Texas",
+    "place_fips": "4815976",
+    "county": "Brazos County",
+    "county_fips": "48041",
+    "msa": "Bryan–College Station, TX MSA"
+  },
+  {
+    "city": "Huntsville",
+    "state": "Alabama",
+    "place_fips": "0137000",
+    "county": "Madison County",
+    "county_fips": "01089",
+    "msa": "Huntsville, AL MSA"
+  },
+  {
+    "city": "Gainesville",
+    "state": "Florida",
+    "place_fips": "1225175",
+    "county": "Alachua County",
+    "county_fips": "12001",
+    "msa": "Gainesville, FL MSA"
+  },
+  {
+    "city": "Eugene",
+    "state": "Oregon",
+    "place_fips": "4123850",
+    "county": "Lane County",
+    "county_fips": "41039",
+    "msa": "Eugene, OR MSA"
+  },
+  {
+    "city": "Rochester",
+    "state": "Minnesota",
+    "place_fips": "2754880",
+    "county": "Olmsted County",
+    "county_fips": "27109",
+    "msa": "Rochester, MN MSA"
+  },
+  {
+    "city": "Irvine",
+    "state": "California",
+    "place_fips": "0636770",
+    "county": "Orange County",
+    "county_fips": "06059",
+    "msa": "Los Angeles–Long Beach–Anaheim, CA MSA"
+  },
+  {
+    "city": "Iowa City",
+    "state": "Iowa",
+    "place_fips": "1938595",
+    "county": "Johnson County",
+    "county_fips": "19087",
+    "msa": "Iowa City, IA MSA"
+  },
+  {
+    "city": "Syracuse",
+    "state": "New York",
+    "place_fips": "3673000",
+    "county": "Onondaga County",
+    "county_fips": "36067",
+    "msa": "Syracuse, NY MSA"
+  },
+  {
+    "city": "Pittsburgh",
+    "state": "Pennsylvania",
+    "place_fips": "4261000",
+    "county": "Allegheny County",
+    "county_fips": "42003",
+    "msa": "Pittsburgh, PA MSA"
+  },
+  {
+    "city": "Chapel Hill",
+    "state": "North Carolina",
+    "place_fips": "3711800",
+    "county": "Orange County",
+    "county_fips": "37135",
+    "msa": "Durham–Chapel Hill, NC MSA"
+  },
+  {
+    "city": "New Haven",
+    "state": "Connecticut",
+    "place_fips": "0952000",
+    "county": "New Haven County",
+    "county_fips": "09009",
+    "msa": "New Haven–Milford, CT MSA"
+  },
+  {
+    "city": "Baton Rouge",
+    "state": "Louisiana",
+    "place_fips": "2205000",
+    "county": "East Baton Rouge Parish",
+    "county_fips": "22033",
+    "msa": "Baton Rouge, LA MSA"
+  }
+]
