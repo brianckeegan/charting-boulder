@@ -85,7 +85,7 @@ create table if not exists public.contributions (
   demo_years      text,
   demo_area       text,   -- which area of Boulder the reader lives in
   demo_employment text,
-  demo_work_area  text,   -- "how do you get around Boulder" (was demo_workArea)
+  demo_commute    text,   -- "how do you get around Boulder" (was demo_workArea)
   demo_student    text,
   demo_education  text,
   demo_building   text,
@@ -136,17 +136,22 @@ drop index if exists public.contributions_dedupe_hash_idx;
 -- Evolve the optional-survey columns on an existing table (no-ops on a fresh
 -- install, which the CREATE TABLE above already gave the new shape):
 --   • add the new "area" (Boulder neighborhood) question;
---   • rename the lone camelCase column demo_workArea → demo_work_area, which now
---     holds the "how do you get around Boulder" question.
+--   • the "how do you get around Boulder" question lives in demo_commute; rename
+--     it from whichever older name an existing table has — demo_workArea (the
+--     original camelCase column) or the interim demo_work_area.
 do $$ begin
   if exists (select 1 from information_schema.columns
              where table_schema = 'public' and table_name = 'contributions'
                and column_name = 'demo_workArea') then
-    alter table public.contributions rename column "demo_workArea" to demo_work_area;
+    alter table public.contributions rename column "demo_workArea" to demo_commute;
+  elsif exists (select 1 from information_schema.columns
+                where table_schema = 'public' and table_name = 'contributions'
+                  and column_name = 'demo_work_area') then
+    alter table public.contributions rename column demo_work_area to demo_commute;
   end if;
 end $$;
-alter table public.contributions add column if not exists demo_area      text;
-alter table public.contributions add column if not exists demo_work_area text;
+alter table public.contributions add column if not exists demo_area     text;
+alter table public.contributions add column if not exists demo_commute  text;
 
 alter table public.contributions drop constraint if exists contributions_sane_values;
 alter table public.contributions add constraint contributions_sane_values check (
@@ -184,7 +189,7 @@ create policy "anon may insert a contribution"
   to anon, authenticated
   with check (
     num_nonnulls(
-      demo_years, demo_area, demo_employment, demo_work_area, demo_student,
+      demo_years, demo_area, demo_employment, demo_commute, demo_student,
       demo_education, demo_building, demo_tenure, demo_income,
       demo_age, demo_race, demo_gender, demo_lgbtq, demo_disability
     ) >= 1
