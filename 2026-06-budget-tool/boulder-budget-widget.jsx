@@ -481,13 +481,18 @@ export default function BoulderBudgetWidget() {
                   </div>
                   <div className="flex items-center gap-3 mt-2">
                     <input type="range" min={-25} max={25} step={1} value={pct} onChange={(e) => { setDeptPct({ ...deptPct, [d.id]: +e.target.value }); setSubmitted(false); }} aria-label={`Adjust ${d.name}`} aria-valuetext={pct === 0 ? "no change" : `${pct > 0 ? "increase" : "cut"} ${Math.abs(pct)} percent, ${signed(delta)}`} />
-                    <span className="tnum" style={{ fontSize: 12, color: C.inkSoft, width: 46, textAlign: "right", fontWeight: 700 }}>{pct > 0 ? "+" : ""}{pct}%</span>
+                    <span className="tnum" style={{ fontSize: 12, color: C.inkSoft, width: 46, flexShrink: 0, textAlign: "right", fontWeight: 700 }}>{pct > 0 ? "+" : ""}{pct}%</span>
                   </div>
-                  {/* Mirror the slider row's flex structure (track + 46px value column + gap-3)
-                      so the scale's flexible half computes to the exact track width on any
-                      device — no magic-number margin to keep in sync. */}
+                  {/* Align the scale under the slider: mirror the slider row (flexible track +
+                      12px gap + fixed 46px column) so the scale's flexible half equals the
+                      track width, then pin "0" to the track's true center (50%) — independent
+                      of the side labels' differing widths — so it sits under the thumb. */}
                   <div className="flex gap-3 mt-1" aria-hidden="true">
-                    <div className="scale" style={{ flex: 1, minWidth: 0, marginTop: 0 }}><span>−25% cut</span><span>0</span><span>+25% more</span></div>
+                    <div className="scale" style={{ flex: 1, minWidth: 0, marginTop: 0, position: "relative", height: 16 }}>
+                      <span style={{ position: "absolute", left: 0 }}>−25% cut</span>
+                      <span style={{ position: "absolute", left: "50%", transform: "translateX(-50%)" }}>0</span>
+                      <span style={{ position: "absolute", right: 0 }}>+25% more</span>
+                    </div>
                     <span style={{ width: 46, flexShrink: 0 }} />
                   </div>
                 </div>
@@ -583,7 +588,7 @@ export default function BoulderBudgetWidget() {
                     </div>
                     <div className="flex items-center gap-3 mt-2">
                       <input className="lk" type="range" min={-25} max={25} step={1} value={pct} onChange={(e) => { setLockedPct({ ...lockedPct, [f.id]: +e.target.value }); setSubmitted(false); }} aria-label={`Adjust ${f.name}`} aria-valuetext={pct === 0 ? "no change" : `${pct > 0 ? "increase" : "cut"} ${Math.abs(pct)} percent; ${signed(delta)} stays in fund`} />
-                      <span className="tnum" style={{ fontSize: 12, color: C.inkSoft, width: 46, textAlign: "right", fontWeight: 700 }}>{pct > 0 ? "+" : ""}{pct}%</span>
+                      <span className="tnum" style={{ fontSize: 12, color: C.inkSoft, width: 46, flexShrink: 0, textAlign: "right", fontWeight: 700 }}>{pct > 0 ? "+" : ""}{pct}%</span>
                     </div>
                   </div>
                 );
