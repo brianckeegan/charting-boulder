@@ -17,12 +17,11 @@
 --
 -- PRIVACY — no name, account, email, IP address, or browser fingerprint is
 -- stored, and NO IP-derived value is persisted at all, so nothing here can be
--- tied back to a person; there is no rate-limiting or dedupe layer that would
--- keep such a value either. Row Level Security
--- is ON: the publishable key may INSERT a contribution but can never read,
--- update, or delete a row. Readers see only the precomputed public tally in
--- `contribution_stats` (via budget_aggregate()); individual rows are reachable
--- only with the service-role key, server-side.
+-- tied back to a person. Row Level Security is ON: the publishable key may
+-- INSERT a contribution but can never read, update, or delete a row. Readers
+-- see only the precomputed public tally in `contribution_stats` (via
+-- budget_aggregate()); individual rows are reachable only with the
+-- service-role key, server-side.
 -- ============================================================================
 
 -- gen_random_uuid() lives in pgcrypto; present by default on Supabase.
@@ -85,7 +84,7 @@ create table if not exists public.contributions (
   demo_years      text,
   demo_area       text,   -- which area of Boulder the reader lives in
   demo_employment text,
-  demo_commute    text,   -- "how do you get around Boulder" (was demo_workArea)
+  demo_commute    text,   -- "how do you get around Boulder"
   demo_student    text,
   demo_education  text,
   demo_building   text,
@@ -97,8 +96,7 @@ create table if not exists public.contributions (
   demo_lgbtq      text,
   demo_disability text,
 
-  -- Operational, not analytical. (No IP-derived value is stored — dedup and
-  -- rate-limiting live in ephemeral edge storage, not here.)
+  -- Operational, not analytical.
   repeat_client   boolean not null default false,
   raw             jsonb,                      -- full original payload, as a safety net
 
@@ -119,6 +117,18 @@ create table if not exists public.contributions (
     coalesce(rev_property,0)>= 0 and
     coalesce(rev_sales,0)   >= 0 and
     coalesce(reserves,0)    >= 0
+  ),
+
+  -- Reject absurd or oversized values from a scripted insert.
+  constraint contributions_sane_values check (
+    coalesce(rev_fees, 0)     <= 100  and
+    coalesce(rev_property, 0) <= 100  and
+    coalesce(rev_sales, 0)    <= 10   and
+    coalesce(reserves, 0)     <= 1000 and
+    (client_version is null or client_version between 0 and 1000) and
+    char_length(coalesce(scenario, '')) <= 64  and
+    char_length(coalesce(top_cut, ''))  <= 200 and
+    char_length(coalesce(raw::text, '')) <= 8000
   )
 );
 
@@ -126,44 +136,6 @@ comment on table public.contributions is
   'One flat row per reader submission from the Balance Boulder''s Budget widget. No PII. Columns match the analysis notebook one-to-one. See ARCHITECTURE.md.';
 
 create index if not exists contributions_created_at_idx on public.contributions (created_at);
-
--- Hardening, idempotent (applies whether the table is fresh or already exists):
---   • drop the old persisted IP hash entirely (no IP-derived value is kept);
---   • bound values so a scripted insert can't store absurd or oversized data.
-alter table public.contributions drop column if exists dedupe_hash;
-drop index if exists public.contributions_dedupe_hash_idx;
-
--- Evolve the optional-survey columns on an existing table (no-ops on a fresh
--- install, which the CREATE TABLE above already gave the new shape):
---   • add the new "area" (Boulder neighborhood) question;
---   • the "how do you get around Boulder" question lives in demo_commute; rename
---     it from whichever older name an existing table has — demo_workArea (the
---     original camelCase column) or the interim demo_work_area.
-do $$ begin
-  if exists (select 1 from information_schema.columns
-             where table_schema = 'public' and table_name = 'contributions'
-               and column_name = 'demo_workArea') then
-    alter table public.contributions rename column "demo_workArea" to demo_commute;
-  elsif exists (select 1 from information_schema.columns
-                where table_schema = 'public' and table_name = 'contributions'
-                  and column_name = 'demo_work_area') then
-    alter table public.contributions rename column demo_work_area to demo_commute;
-  end if;
-end $$;
-alter table public.contributions add column if not exists demo_area     text;
-alter table public.contributions add column if not exists demo_commute  text;
-
-alter table public.contributions drop constraint if exists contributions_sane_values;
-alter table public.contributions add constraint contributions_sane_values check (
-  coalesce(rev_fees, 0)     <= 100  and
-  coalesce(rev_property, 0) <= 100  and
-  coalesce(rev_sales, 0)    <= 10   and
-  coalesce(reserves, 0)     <= 1000 and
-  (client_version is null or client_version between 0 and 1000) and
-  char_length(coalesce(scenario, '')) <= 64  and
-  char_length(coalesce(top_cut, ''))  <= 200 and
-  char_length(coalesce(raw::text, '')) <= 8000
-);
 
 -- ---------------------------------------------------------------------------
 -- Row Level Security. The browser writes directly with the PUBLISHABLE key
