@@ -42,9 +42,9 @@ import {
      reserves settings, a few derived totals, and one column per survey answer.
      Field names match the database columns in ARCHITECTURE.md one-to-one.
      ALL of it — the budget AND the survey answers — is stored in Boulder
-     Reporting Lab's own Supabase database (Postgres), written either directly
-     with a browser-safe publishable key or through a small Vercel function. No
-     advertising or analytics third party ever receives a response. No name,
+     Reporting Lab's own Supabase database (Postgres), written directly with a
+     browser-safe publishable key. No advertising or analytics third party ever
+     receives a response. No name,
      account, email, IP address, or browser fingerprint is stored with a record
      (a salted one-way hash may be kept to flag duplicate submissions; see
      ARCHITECTURE.md).
@@ -90,11 +90,8 @@ import {
         file for each) when the underlying numbers change.
 
    DEPLOYMENT KNOBS (just below)
-     ENDPOINT      — optional Vercel pipeline base (…/api). Set it via ?api= on
-                     the embed URL or window.__BBW_ENDPOINT__ to route writes
-                     through the server (keeps the secret key server-side).
      SUPABASE_URL  — the project and its browser-safe PUBLISHABLE key, used to
-       /_KEY         write straight to Supabase when no ENDPOINT is set.
+       /_KEY         write each submission straight to Supabase.
      SRC           — the citation-link table.
      See ARCHITECTURE.md for setup, the data dictionary, and Newspack embedding.
 
@@ -113,52 +110,24 @@ import {
    ========================================================================== */
 
 /* ---- BACKEND CONFIG ------------------------------------------------------
-   Where reader submissions go, resolved in priority order at runtime:
-     1. ENDPOINT — a Vercel pipeline base (…/api). Most private: the secret key
-        stays server-side and submissions are de-duplicated there. Set it with
-        ?api= on the embed URL, window.__BBW_ENDPOINT__, or by editing below.
-     2. SUPABASE_URL + SUPABASE_KEY — write straight to Supabase from the browser
+   Where reader submissions go, resolved at runtime:
+     1. SUPABASE_URL + SUPABASE_KEY — write straight to Supabase from the browser
         with the PUBLISHABLE key (safe to publish; Row Level Security lets a
-        reader add a row but never read one back). Works with no server at all.
-     3. Neither — preview mode: the tally lives only in this browser session.
+        reader add a row but never read one back). No server to host.
+     2. Preview mode (window.__BBW_PREVIEW__) — the tally lives only in this
+        browser session; nothing leaves the page.
    See ARCHITECTURE.md for the full data flow, schema, and privacy model. ----- */
 // Offline/preview builds (build-standalone.sh) set window.__BBW_PREVIEW__ to
 // keep submissions in the browser session only, so a local review copy never
 // writes to the live database. Production embeds leave it unset.
 const PREVIEW = typeof window !== "undefined" && window.__BBW_PREVIEW__ === true;
 
-function resolveEndpoint() {
-  if (PREVIEW || typeof window === "undefined") return "";
-  try {
-    if (window.__BBW_ENDPOINT__) return String(window.__BBW_ENDPOINT__);
-    const q = new URLSearchParams(window.location.search).get("api");
-    if (q) return q;
-  } catch {}
-  return "";
-}
-const ENDPOINT = resolveEndpoint();
-
-// Supabase direct-write fallback. The PUBLISHABLE key is browser-safe by design
-// (RLS is the real guard), so committing it is expected. The SECRET key is
-// never used here — only server-side, in the Vercel pipeline.
+// Supabase direct write. The PUBLISHABLE key is browser-safe by design (RLS is
+// the real guard), so committing it is expected. The SECRET key is never used
+// in the browser — only server-side, for offline analysis (export-responses.py).
 const SUPABASE_URL = "https://iplcjxbazezpjdzdpjxx.supabase.co";
 const SUPABASE_KEY = "sb_publishable_2jy9CF17cyHSMAnVYSpFcA_tRecRIoi";
 const SB_ENABLED = !PREVIEW && !!SUPABASE_URL && !!SUPABASE_KEY;
-
-// Optional cached aggregate-read URL (the edge-cached Vercel /api/aggregate
-// route). When set, the on-load tally READ goes through a CDN while writes stay
-// direct to Supabase — so a traffic spike can't dogpile the database. Set via
-// window.__BBW_AGG__ or ?agg= on the embed URL.
-function resolveAggEndpoint() {
-  if (PREVIEW || typeof window === "undefined") return "";
-  try {
-    if (window.__BBW_AGG__) return String(window.__BBW_AGG__);
-    const q = new URLSearchParams(window.location.search).get("agg");
-    if (q) return q;
-  } catch {}
-  return "";
-}
-const AGG_ENDPOINT = resolveAggEndpoint();
 
 const AGG_KEY = "boulder_budget_agg_v4";
 
@@ -349,6 +318,20 @@ export default function BoulderBudgetWidget() {
     return () => { ro.disconnect(); window.removeEventListener("load", send); };
   }, []);
 
+  // Load Public Sans (Boulder Reporting Lab's typeface) so the widget renders in
+  // the BRL face even as a standalone embed, instead of a system fallback.
+  useEffect(() => {
+    if (typeof document === "undefined" || document.getElementById("bbw-fonts")) return;
+    const mk = (rel, href, cross) => { const l = document.createElement("link"); l.rel = rel; l.href = href; if (cross) l.crossOrigin = "anonymous"; return l; };
+    const css = mk("stylesheet", "https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+    css.id = "bbw-fonts";
+    document.head.append(
+      mk("preconnect", "https://fonts.googleapis.com"),
+      mk("preconnect", "https://fonts.gstatic.com", true),
+      css,
+    );
+  }, []);
+
   /* derived math — spending change is signed (+ = more spending = worse gap) */
   const netSpendChange = useMemo(() => GF_DEPTS.reduce((s, d) => s + d.amount * ((deptPct[d.id] || 0) / 100), 0), [deptPct]);
   const netCuts = Math.max(0, -netSpendChange);
@@ -417,7 +400,9 @@ export default function BoulderBudgetWidget() {
     <div ref={rootRef} style={{ background: C.paper, color: C.ink, fontFamily: FONT }} className="w-full">
       <style>{`
         @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
-        .bbw{ font-family:${FONT}; }
+        .bbw, .bbw *{ box-sizing:border-box; }
+        .bbw{ font-family:${FONT}; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+        .bbw button, .bbw a, .bbw input[type=range]{ touch-action:manipulation; }
         .bbw input[type=range]{ -webkit-appearance:none; appearance:none; height:5px; border-radius:99px; background:${C.hair}; outline:none; width:100%; }
         .bbw input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:20px;height:20px;border-radius:50%;background:${C.lime};cursor:pointer;border:2px solid ${C.ink}; }
         .bbw input[type=range]::-moz-range-thumb{ width:20px;height:20px;border-radius:50%;background:${C.lime};cursor:pointer;border:2px solid ${C.ink}; }
@@ -430,6 +415,13 @@ export default function BoulderBudgetWidget() {
         .bbw button:focus-visible, .bbw a:focus-visible{ outline:2px solid ${C.blueDk}; outline-offset:2px; }
         .bbw .tnum{ font-variant-numeric: tabular-nums; }
         .bbw .scale{ display:flex; justify-content:space-between; font-size:11.5px; color:${C.inkSoft}; margin-top:4px; }
+        /* Bigger touch targets on phones/tablets (coarse pointers) — WCAG 2.5.8 */
+        @media (pointer: coarse){
+          .bbw input[type=range]{ height:8px; }
+          .bbw input[type=range]::-webkit-slider-thumb{ width:28px; height:28px; }
+          .bbw input[type=range]::-moz-range-thumb{ width:28px; height:28px; }
+          .bbw button{ min-height:44px; }
+        }
       `}</style>
 
       <div className="bbw mx-auto" style={{ maxWidth: 680, padding: "8px 16px 56px" }}>
@@ -452,19 +444,23 @@ export default function BoulderBudgetWidget() {
           <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 8 }}>About <strong style={{ color: C.ink }}>{pctMovable.toFixed(0)}¢ of every budget dollar</strong> sits in the General Fund ({fmt(GENERAL_FUND)}), the only large pot the council can freely redirect. The other {fmt(lockedTotal)} is dedicated by voters or restricted by law.</p>
         </section>
 
-        {/* Scenario + live balance */}
-        <section className="mt-6 rounded-lg p-4" style={{ background: C.limeTint, border: `1px solid ${C.hair}` }}>
-          <div className="flex items-start justify-between gap-3 flex-wrap">
-            <div style={{ minWidth: 0 }}>
-              <Eyebrow>Two tests — your budget must pass both</Eyebrow>
-              <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6, maxWidth: 380 }}>Balance the gap the city closed for 2026 <em>and</em> the deeper gap projected for 2027. One-time reserves count toward 2026 but can’t carry into 2027 — that bar is the structural test.</p>
+        {/* The two-tests explainer scrolls away; the live tally below sticks. */}
+        <section className="mt-6">
+          <Eyebrow>Two tests — your budget must pass both</Eyebrow>
+          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6, maxWidth: 460 }}>Balance the gap the city closed for 2026 <em>and</em> the deeper gap projected for 2027. One-time reserves count toward 2026 but can’t carry into 2027 — that bar is the structural test.</p>
+        </section>
+
+        {/* Live balance — sticks to the top of the screen so the surplus/deficit
+            stays in view while you scroll down and tweak the sliders. */}
+        <section className="mt-3 rounded-lg" style={{ background: C.limeTint, border: `1px solid ${C.hair}`, position: "sticky", top: 0, zIndex: 30, padding: 12, boxShadow: "0 6px 16px rgba(26,26,26,0.10)" }}>
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <div className="flex items-baseline gap-2" style={{ minWidth: 0 }}>
+              <span className="tnum" style={{ fontSize: 22, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{balanced ? "Both passed" : `${[balanced2026, balanced2027].filter(Boolean).length} of 2`}</span>
+              <span style={{ fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 800, color: C.inkSoft }}>tests passed</span>
             </div>
-            <div className="text-right" style={{ flex: "0 0 auto" }}>
-              <div className="tnum" style={{ fontSize: 26, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{balanced ? "Both passed" : `${[balanced2026, balanced2027].filter(Boolean).length} of 2`}</div>
-              <div style={{ fontSize: 12, color: C.inkSoft, marginTop: 3 }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {fmt(revenueOnly)} revenue{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
-            </div>
+            <div style={{ fontSize: 12, color: C.inkSoft }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {fmt(revenueOnly)} revenue{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
           </div>
-          <div className="mt-3">
+          <div className="mt-2">
             <GapBar label="2026 (adopted)" sub="reserves allowed" gap={SCENARIOS.y2026.gap} remaining={remaining2026} balanced={balanced2026} />
             <GapBar label="2027 (projected)" sub="structural · reserves don’t carry" gap={SCENARIOS.y2027.gap} remaining={remaining2027} balanced={balanced2027} />
           </div>
@@ -487,7 +483,13 @@ export default function BoulderBudgetWidget() {
                     <input type="range" min={-25} max={25} step={1} value={pct} onChange={(e) => { setDeptPct({ ...deptPct, [d.id]: +e.target.value }); setSubmitted(false); }} aria-label={`Adjust ${d.name}`} aria-valuetext={pct === 0 ? "no change" : `${pct > 0 ? "increase" : "cut"} ${Math.abs(pct)} percent, ${signed(delta)}`} />
                     <span className="tnum" style={{ fontSize: 12, color: C.inkSoft, width: 46, textAlign: "right", fontWeight: 700 }}>{pct > 0 ? "+" : ""}{pct}%</span>
                   </div>
-                  <div className="scale" aria-hidden="true"><span>−25% cut</span><span>0</span><span>+25% more</span></div>
+                  {/* Mirror the slider row's flex structure (track + 46px value column + gap-3)
+                      so the scale's flexible half computes to the exact track width on any
+                      device — no magic-number margin to keep in sync. */}
+                  <div className="flex gap-3 mt-1" aria-hidden="true">
+                    <div className="scale" style={{ flex: 1, minWidth: 0, marginTop: 0 }}><span>−25% cut</span><span>0</span><span>+25% more</span></div>
+                    <span style={{ width: 46, flexShrink: 0 }} />
+                  </div>
                 </div>
               );
             })}
@@ -669,8 +671,8 @@ export default function BoulderBudgetWidget() {
 function emptyAgg() { return { n: 0, usedRevenue: 0, usedVote: 0, usedReserves: 0, revShareSum: 0, cutTally: {} }; }
 function round(x) { return Math.round(x * 100) / 100; }
 
-/* Supabase direct-write helpers (used when no ENDPOINT proxy is set). PostgREST
-   wants the publishable key in both the apikey and Authorization headers. */
+/* Supabase direct-write helpers. PostgREST wants the publishable key in both
+   the apikey and Authorization headers. */
 function sbHeaders() {
   return { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" };
 }
@@ -690,14 +692,7 @@ function sbRow(p) {
   return row;
 }
 
-async function readAgg(fresh) {
-  // Cached read path: the edge-cached Vercel aggregate route, used for the
-  // on-load tally while writes go direct. Skipped when `fresh` (right after a
-  // submit) so the reader immediately sees their own contribution counted.
-  if (!fresh && AGG_ENDPOINT && !ENDPOINT) {
-    try { const r = await fetch(AGG_ENDPOINT); return r.ok ? await r.json() : emptyAgg(); } catch { return emptyAgg(); }
-  }
-  if (ENDPOINT) { try { const r = await fetch(`${ENDPOINT}/aggregate`); return r.ok ? await r.json() : emptyAgg(); } catch { return emptyAgg(); } }
+async function readAgg() {
   if (SB_ENABLED) {
     try {
       const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/budget_aggregate`, { method: "POST", headers: sbHeaders(), body: "{}" });
@@ -712,17 +707,11 @@ async function writeAgg({ revShare, usedRevenue, usedVote, usedReserves, topCut,
   // Flag a likely repeat from this browser (best-effort, localStorage only).
   try { if (typeof window !== "undefined" && window.localStorage?.getItem("bb_submitted_v4")) payload.repeatClient = true; window.localStorage?.setItem("bb_submitted_v4", "1"); } catch {}
 
-  if (ENDPOINT) {
-    try {
-      const r = await fetch(`${ENDPOINT}/submit`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-      return r.ok ? await r.json() : null;
-    } catch { return null; }
-  }
   if (SB_ENABLED) {
     try {
       const ins = await fetch(`${SUPABASE_URL}/rest/v1/contributions`, { method: "POST", headers: { ...sbHeaders(), Prefer: "return=minimal" }, body: JSON.stringify(sbRow(payload)) });
       if (!ins.ok) return null;
-      return await readAgg(true);   // fresh re-read (bypass cache) so the tally includes this submission
+      return await readAgg();   // re-read so the tally includes this submission
     } catch { return null; }
   }
   if (typeof window !== "undefined" && window.storage) {

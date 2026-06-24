@@ -4,8 +4,8 @@ How a reader's budget gets from the widget to a database, how it stays
 anonymous, and how it comes back out for analysis. This is the document the
 widget's comments point to.
 
-The whole pipeline lives in [`pipeline/`](../pipeline/): the Supabase schema, a
-small Vercel API, and a one-file export script. The widget is
+The whole pipeline lives in [`pipeline/`](./pipeline/): the Supabase schema and a
+one-file export script. The widget is
 [`boulder-budget-widget.jsx`](./boulder-budget-widget.jsx); the analysis is
 [`budget-survey-analysis.ipynb`](./budget-survey-analysis.ipynb).
 
@@ -19,17 +19,9 @@ small Vercel API, and a one-file export script. The widget is
    article (iframe)       │  iframe; auto-resizes via postMessage)   │
                           └───────────────┬──────────────────────────┘
                                           │  one flat JSON record per submission
-                  ┌───────────────────────┴───────────────────────┐
-                  │                                                │
-        (A) ENDPOINT set                                 (B) no ENDPOINT
-        POST /api/submit                                 POST /rest/v1/contributions
-        GET  /api/aggregate                              POST /rest/v1/rpc/budget_aggregate
-                  │                                                │
-        ┌─────────▼──────────┐  secret key (server-side)           │ publishable key
-        │  Vercel functions  │  bypasses RLS, validates each write │ (browser-safe, RLS:
-        │  pipeline/api/*    │                                     │  insert-only)
-        └─────────┬──────────┘                                     │
-                  └───────────────────────┬───────────────────────┘
+                                          │  publishable key — browser-safe, RLS: insert-only
+                                          │  POST /rest/v1/contributions          (write)
+                                          │  POST /rest/v1/rpc/budget_aggregate    (anonymous tally)
                                           ▼
                           ┌───────────────────────────────┐
                           │  Supabase Postgres            │
@@ -43,29 +35,26 @@ small Vercel API, and a one-file export script. The widget is
                                                        (STUB_MODE = False)
 ```
 
-Both write paths land in the same table with the same column names, so analysis
-doesn't care which one a reader used.
+The browser writes straight to Supabase with the browser-safe publishable key;
+Row Level Security is the boundary that keeps that key from reading anything
+back. The static HTML is served by GitHub Pages — there is no backend to host.
 
 ---
 
-## Three runtime modes
+## Two runtime modes
 
-The widget picks a backend at load time (see `resolveEndpoint()` and the
-`BACKEND CONFIG` block in the JSX):
+The widget picks a backend at load time (see the `BACKEND CONFIG` block in the
+JSX):
 
 | Mode | When | Reads / writes |
 | --- | --- | --- |
-| **Vercel proxy** (A) | `?api=…` on the embed URL, or `window.__BBW_ENDPOINT__` | `GET …/api/aggregate`, `POST …/api/submit` |
-| **Supabase direct** (B) | default — `SUPABASE_URL` + publishable `SUPABASE_KEY` are baked in | PostgREST insert + `budget_aggregate` RPC |
-| **Cached read** (B+) | `?agg=…` or `window.__BBW_AGG__`, alongside B | tally **read** via the edge-cached `…/api/aggregate`; writes stay direct |
+| **Supabase direct** | default — `SUPABASE_URL` + publishable `SUPABASE_KEY` are baked in | PostgREST insert + `budget_aggregate` RPC |
 | **Preview** | offline/standalone build sets `window.__BBW_PREVIEW__` | in-memory only; nothing leaves the browser |
 
-Precedence: a full `ENDPOINT` (A) wins; otherwise, on **load**, a cached `AGG`
-read is used if set while writes go direct (B+); otherwise B; otherwise preview.
-**A** keeps the secret key off the page and gives one server chokepoint; **B**
-needs no server; **B+** absorbs traffic spikes by serving the tally from a CDN
-while writes stay direct. After a submit the tally is re-read *fresh* (cache
-bypassed), so the reader still sees their own contribution counted.
+In direct mode the on-load tally is read with `budget_aggregate()`, and each
+submission is an insert; right after a submit the tally is re-read so the reader
+immediately sees their own contribution counted. Preview mode is what the
+double-click review build uses, so a local copy never touches the live database.
 
 ---
 
@@ -89,8 +78,8 @@ that up:
   returning counts and sums only — never an individual row. (It reads the
   precomputed row rather than the table, so it needs no elevated privilege —
   which clears Supabase advisor lints 0028/0029.)
-- **The secret key never reaches the browser.** It lives in Vercel env vars and
-  on trusted machines running the export, and is never committed.
+- **The secret key never reaches the browser.** It lives only on trusted machines
+  running the export, and is never committed.
 
 Publishable vs. secret, at a glance:
 
@@ -133,28 +122,18 @@ notebook's `GF_SLIDERS / FUND_SLIDERS / REV_COLS / DEMO_COLS` one-to-one.
 `"demo_workArea"` is stored with quotes to preserve its camelCase — every other
 column is lowercase.
 
-The full slider list lives in three places that must stay in lockstep: the
-widget's `GF_DEPTS` / `LOCKED_FUNDS` / `DEMO` tables, `pipeline/api/_schema.js`,
-and the notebook's canonical column lists. If you add or rename a department,
-update all three (and add the column in `pipeline/supabase/schema.sql`).
+The full slider list lives in two places that must stay in lockstep: the
+widget's `GF_DEPTS` / `LOCKED_FUNDS` / `DEMO` tables and the notebook's canonical
+column lists. If you add or rename a department, update both (and add the column
+in `pipeline/supabase/schema.sql`).
 
 A second one-row table, `contribution_stats`, holds the precomputed public tally
 (the `{ n, usedRevenue, … }` object). A trigger on `contributions` refreshes it
 on every insert/update/delete, and `budget_aggregate()` simply reads it — so the
 public aggregate never needs a privileged function over the raw rows.
 
----
-
-## API contract (Vercel path)
-
-### `POST /api/submit`
-Body: the flat payload the widget builds (`v`, `ts`, `scenario`, every `gf_*` /
-`fund_*` / `rev_*` / `reserves`, the derived totals, and every `demo_*`).
-Returns `200` with the refreshed aggregate (below). At least one `demo_*` answer
-is required (`422` otherwise). Unknown keys are ignored but preserved in `raw`.
-
-### `GET /api/aggregate`
-Returns the anonymous tally, exactly the shape the widget renders:
+`budget_aggregate()` returns the anonymous tally, exactly the shape the widget
+renders:
 
 ```json
 {
@@ -169,8 +148,7 @@ Returns the anonymous tally, exactly the shape the widget renders:
 
 `revShareSum` is the sum over rows of `revenue_total / (revenue_total + net
 cuts)`, where net cuts = `max(0, -spend_change)`; the widget divides by `n` to
-show the average revenue share. CORS is open by default — set `ALLOWED_ORIGIN`
-to lock it to your site.
+show the average revenue share.
 
 ---
 
@@ -178,35 +156,35 @@ to lock it to your site.
 
 ### 1. Supabase (once)
 Open the project's **SQL Editor → New query**, paste
-[`pipeline/supabase/schema.sql`](../pipeline/supabase/schema.sql), and **Run**.
+[`pipeline/supabase/schema.sql`](./pipeline/supabase/schema.sql), and **Run**.
 This creates the table, RLS policies, the insert trigger, and
 `budget_aggregate()`. Re-running is safe. Find the keys under **Project Settings
 → API keys** (publishable = browser; secret = server).
 
-### 2. Widget (direct mode — no server)
+### 2. Build the widget
 The project URL and the **publishable** key are baked into the JSX
 (`SUPABASE_URL` / `SUPABASE_KEY`). Once the schema is live, the widget stores
-submissions directly. To rotate the key later, edit those two constants and
-rebuild.
+submissions directly. Build the self-contained production HTML with:
 
-### 3. Vercel (optional — proxy mode)
-Deploy [`pipeline/`](../pipeline/) as its own Vercel project (set the project's
-**Root Directory** to `pipeline`). Add env vars from
-[`pipeline/.env.example`](../pipeline/.env.example):
+```bash
+BBW_PREVIEW=0 ./build-standalone.sh
+```
 
-- `SUPABASE_URL`
-- `SUPABASE_SECRET_KEY` — the `sb_secret_…` key (**never** committed)
-- `ALLOWED_ORIGIN` — origin allowlist, e.g. `https://boulderreportinglab.org`
+To rotate the key later, edit those two constants and rebuild.
 
-Then point the widget at it with `?api=https://your-pipeline.vercel.app/api` on
-the embed URL.
+### 3. Deploy to GitHub Pages
+[`.github/workflows/deploy-widget.yml`](../.github/workflows/deploy-widget.yml)
+publishes the built `boulder-budget-widget.html` to GitHub Pages on every push
+that touches it (serving the widget at `/boulder-budget-2026/`, with the repo
+root redirecting there). One-time setup: in the repo's **Settings → Pages**, set
+**Source** to **GitHub Actions**, then re-run the workflow.
 
 ---
 
 ## Newspack embedding
 
 Host `boulder-budget-widget.html` (build it with
-[`pipeline`’s sibling](./build-standalone.sh)), then paste this into a Newspack
+[`build-standalone.sh`](./build-standalone.sh)), then paste this into a Newspack
 **Custom HTML** block. The script makes the iframe grow to the widget's height
 using the `boulder-budget:height` message the widget already posts:
 
@@ -228,9 +206,6 @@ using the `boulder-budget:height` message the widget already posts:
 </script>
 ```
 
-To route writes through the Vercel pipeline instead of writing to Supabase
-directly, add `?api=https://your-pipeline.vercel.app/api` to the iframe `src`.
-
 ---
 
 ## Hardening & going to production
@@ -248,32 +223,14 @@ Already enforced on `iplcjxbazezpjdzdpjxx` (DB + project):
 - **Reduced surface** — Auth sign-ups disabled, GraphQL API unexposed, Realtime
   publication empty, no storage buckets, `max_rows` = 1000.
 
-Recommended next layer — **route writes through the Vercel pipeline** so the
-secret key stays off the page and every write goes through one server chokepoint
-(CORS allowlist + validation):
+The security boundary is Row Level Security: the publishable key is insert-only
+and can never read a row back, so baking it into the page is safe by design. If
+scripted spam ever appears, put a WAF/rate-limit rule in front of the Pages site
+(e.g. Cloudflare) or tighten the insert policy — without changing the widget.
 
-1. **Deploy** `pipeline/` to Vercel; set `SUPABASE_SECRET_KEY` and `ALLOWED_ORIGIN`.
-2. **Rebuild** the embed pointed at it (or pass `?api=…` on the iframe src):
-   ```bash
-   BBW_PREVIEW=0 BBW_ENDPOINT=https://your-pipeline.vercel.app/api ./build-standalone.sh
-   ```
-   The widget then posts to `/api/submit`, which writes with the secret key.
-3. **Cut over** last — once the Vercel path works, close the direct write path so
-   every write goes through that chokepoint:
-   ```sql
-   drop policy if exists "anon may insert a contribution" on public.contributions;
-   revoke insert on public.contributions from anon, authenticated;
-   ```
-   Reads (the public `contribution_stats`) stay open; only writes lock to the
-   secret key. Running this *before* the Vercel path is live would break the
-   widget, so it's the final step — until then the direct path keeps working.
-
-If scripted spam ever appears, add rate-limiting at the edge (e.g. Vercel's
-firewall) without touching the function.
-
-A note on logs: even with no IP stored, Supabase and Vercel keep request IPs in
-their own platform logs transiently. Minimize log retention and reflect that in
-the reader-facing privacy note if you promise "we never keep your IP."
+A note on logs: even with no IP stored, Supabase keeps request IPs in its own
+platform logs transiently. Minimize log retention and reflect that in the
+reader-facing privacy note if you promise "we never keep your IP."
 
 ---
 
@@ -283,7 +240,7 @@ When you're ready to analyze real responses instead of the notebook's synthetic
 sample:
 
 ```bash
-cd "pipeline"
+cd pipeline
 export SUPABASE_URL=https://iplcjxbazezpjdzdpjxx.supabase.co
 export SUPABASE_SECRET_KEY=sb_secret_…      # trusted machine only
 python3 export-responses.py ../responses.csv

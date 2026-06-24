@@ -10,6 +10,7 @@ on:
     branches: [main]
     paths:
       - "2026-06-budget-tool/boulder-budget-widget.html"
+      - "2026-06-budget-tool/pages-redirect.html"
       - ".github/workflows/deploy-widget.yml"
   workflow_dispatch:
 
@@ -31,11 +32,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Assemble the Pages site (widget as the home page)
+      - name: Assemble the Pages site (widget at /boulder-budget-2026/)
         run: |
-          mkdir -p _site
-          cp "2026-06-budget-tool/boulder-budget-widget.html" _site/index.html
-          cp "2026-06-budget-tool/boulder-budget-widget.html" _site/boulder-budget-widget.html
+          mkdir -p _site/boulder-budget-2026
+          cp "2026-06-budget-tool/boulder-budget-widget.html" _site/boulder-budget-2026/index.html
+          # Repo-root URL was shared earlier — redirect it to the widget.
+          cp "2026-06-budget-tool/pages-redirect.html" _site/index.html
 
       # enablement: true turns Pages on automatically on the first run.
       - uses: actions/configure-pages@v5

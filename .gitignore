@@ -177,12 +177,11 @@ cython_debug/
 .DS_Store
 /.claude
 
-# Node / Vercel (pipeline)
+# Node build deps + local env (widget build / pipeline)
 node_modules/
-.vercel
 .env.local
 .env.*.local
 
 # Pipeline data exports (regenerate from Supabase; not source)
 responses.csv
-pipeline/responses.csv
+2026-06-budget-tool/pipeline/responses.csv

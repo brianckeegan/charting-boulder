@@ -37,12 +37,6 @@ cp "$JSX" ./widget.jsx
 # that writes to the configured backend with:  BBW_PREVIEW=0 ./build-standalone.sh
 BBW_PREVIEW="${BBW_PREVIEW:-1}"
 PREVIEW_JS=true; [ "$BBW_PREVIEW" = "0" ] && PREVIEW_JS=false
-# Optional production wiring. Route writes through a Vercel pipeline (BBW_ENDPOINT),
-# and/or read the tally through the edge-cached aggregate route while writes stay
-# direct (BBW_AGG). Example:
-#   BBW_PREVIEW=0 BBW_AGG=https://your-pipeline.vercel.app/api/aggregate ./build-standalone.sh
-ENDPOINT_JS=""; [ -n "${BBW_ENDPOINT:-}" ] && ENDPOINT_JS="window.__BBW_ENDPOINT__ = \"${BBW_ENDPOINT}\";"
-AGG_JS=""; [ -n "${BBW_AGG:-}" ] && AGG_JS="window.__BBW_AGG__ = \"${BBW_AGG}\";"
 
 # Entry: bare imports (no CDNs) + config flags + in-memory storage shim + mount.
 cat > entry.jsx << EOF
@@ -52,8 +46,6 @@ import BoulderBudgetWidget from "./widget.jsx";
 (function () {
   if (typeof window !== "undefined") {
     window.__BBW_PREVIEW__ = ${PREVIEW_JS};
-    ${ENDPOINT_JS}
-    ${AGG_JS}
     if (!window.storage) {
       var mem = {};
       window.storage = {
