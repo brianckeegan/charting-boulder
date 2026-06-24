@@ -1,4 +1,4 @@
-# Budget Tool pipeline
+# pipeline
 
 Writes reader "contributions" from the Balance Boulder's Budget widget to
 Supabase, and serves the anonymous aggregate the widget shows. Full design,

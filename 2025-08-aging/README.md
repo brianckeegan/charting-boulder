@@ -1,4 +1,4 @@
-# 2025-08 Aging
+# 2025-08-aging
 
 ## Question
 How is Boulder's age composition changing, where are older residents concentrated, and what does the shift mean for civic participation, public revenue, and the housing stock?

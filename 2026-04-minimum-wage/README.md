@@ -1,4 +1,4 @@
-# 2026-04 Minimum Wage
+# 2026-04-minimum-wage
 
 ## Question
 What do tipped restaurant workers in Boulder County actually earn — and how does that compare to the $40/hour total-compensation claim Councilmember Benjamin cited as a basis for slowing tipped-wage growth, against Boulder County's rent trajectory?
