@@ -455,8 +455,8 @@ export default function BoulderBudgetWidget() {
         <section className="mt-3 rounded-lg" style={{ background: C.limeTint, border: `1px solid ${C.hair}`, position: "sticky", top: 0, zIndex: 30, padding: 12, boxShadow: "0 6px 16px rgba(26,26,26,0.10)" }}>
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-baseline gap-2" style={{ minWidth: 0 }}>
-              <span className="tnum" style={{ fontSize: 22, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{balanced ? "Both passed" : `${[balanced2026, balanced2027].filter(Boolean).length} of 2`}</span>
-              <span style={{ fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 800, color: C.inkSoft }}>tests passed</span>
+              <span className="tnum" style={{ fontSize: 22, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{[balanced2026, balanced2027].filter(Boolean).length}/2</span>
+              <span style={{ fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 800, color: C.inkSoft }}>budgets balanced</span>
             </div>
             <div style={{ fontSize: 12, color: C.inkSoft }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {fmt(revenueOnly)} revenue{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
           </div>
