@@ -83,8 +83,9 @@ create table if not exists public.contributions (
 
   -- Optional reader survey (one column per item; multi-selects joined by "; ").
   demo_years      text,
+  demo_area       text,   -- which area of Boulder the reader lives in
   demo_employment text,
-  "demo_workArea" text,   -- quoted to preserve camelCase (matches the widget + notebook)
+  demo_work_area  text,   -- "how do you get around Boulder" (was demo_workArea)
   demo_student    text,
   demo_education  text,
   demo_building   text,
@@ -132,6 +133,21 @@ create index if not exists contributions_created_at_idx on public.contributions 
 alter table public.contributions drop column if exists dedupe_hash;
 drop index if exists public.contributions_dedupe_hash_idx;
 
+-- Evolve the optional-survey columns on an existing table (no-ops on a fresh
+-- install, which the CREATE TABLE above already gave the new shape):
+--   • add the new "area" (Boulder neighborhood) question;
+--   • rename the lone camelCase column demo_workArea → demo_work_area, which now
+--     holds the "how do you get around Boulder" question.
+do $$ begin
+  if exists (select 1 from information_schema.columns
+             where table_schema = 'public' and table_name = 'contributions'
+               and column_name = 'demo_workArea') then
+    alter table public.contributions rename column "demo_workArea" to demo_work_area;
+  end if;
+end $$;
+alter table public.contributions add column if not exists demo_area      text;
+alter table public.contributions add column if not exists demo_work_area text;
+
 alter table public.contributions drop constraint if exists contributions_sane_values;
 alter table public.contributions add constraint contributions_sane_values check (
   coalesce(rev_fees, 0)     <= 100  and
@@ -168,7 +184,7 @@ create policy "anon may insert a contribution"
   to anon, authenticated
   with check (
     num_nonnulls(
-      demo_years, demo_employment, "demo_workArea", demo_student,
+      demo_years, demo_area, demo_employment, demo_work_area, demo_student,
       demo_education, demo_building, demo_tenure, demo_income,
       demo_age, demo_race, demo_gender, demo_lgbtq, demo_disability
     ) >= 1
