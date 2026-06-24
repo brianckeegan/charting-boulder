@@ -557,10 +557,7 @@ export default function BoulderBudgetWidget() {
                     {d.revM != null && <div style={{ fontSize: 12, fontWeight: 700, color: C.lockText }}>≈ {fmt(d.revM)}/yr</div>}
                   </div>
                 </div>
-                <input className="lk" type="range" min={0} max={0.5} step={0.01} value={d.rate} readOnly onChange={() => {}}
-                  onKeyDown={(e) => e.preventDefault()} aria-readonly="true" aria-disabled="true"
-                  aria-label={`${d.label}`} aria-valuetext={`${d.rate.toFixed(2)} percent, set by voters and not adjustable${d.revM != null ? `, about ${fmt(d.revM)} a year` : ""}`} style={{ marginTop: 10 }} />
-                <div style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 6 }}>{d.note}</div>
+                <div style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 8 }}>{d.note}</div>
               </div>
             ))}
           </div>
