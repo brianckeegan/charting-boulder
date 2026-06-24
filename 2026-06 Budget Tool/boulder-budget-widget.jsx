@@ -145,22 +145,6 @@ const SUPABASE_URL = "https://iplcjxbazezpjdzdpjxx.supabase.co";
 const SUPABASE_KEY = "sb_publishable_2jy9CF17cyHSMAnVYSpFcA_tRecRIoi";
 const SB_ENABLED = !PREVIEW && !!SUPABASE_URL && !!SUPABASE_KEY;
 
-// Cloudflare Turnstile site key (public). Set via window.__BBW_TURNSTILE__ or
-// ?turnstile= on the embed URL. It only adds protection on the server (Vercel)
-// path — the direct Supabase path can't verify a token — so we require it only
-// when posting to ENDPOINT.
-function resolveTurnstile() {
-  if (PREVIEW || typeof window === "undefined") return "";
-  try {
-    if (window.__BBW_TURNSTILE__) return String(window.__BBW_TURNSTILE__);
-    const q = new URLSearchParams(window.location.search).get("turnstile");
-    if (q) return q;
-  } catch {}
-  return "";
-}
-const TURNSTILE_SITEKEY = resolveTurnstile();
-const USE_TURNSTILE = !!TURNSTILE_SITEKEY && !!ENDPOINT;
-
 const AGG_KEY = "boulder_budget_agg_v4";
 
 /* ---- SRC: news-citation links. Define each link once (label + url), then
@@ -341,10 +325,7 @@ export default function BoulderBudgetWidget() {
   const [agg, setAgg] = useState(null);
   const [aggState, setAggState] = useState("loading");
   const [submitted, setSubmitted] = useState(false);
-  const [tsToken, setTsToken] = useState("");   // Cloudflare Turnstile token (server path only)
   const rootRef = useRef(null);
-  const tsRef = useRef(null);
-  const tsWidgetId = useRef(null);
 
   useEffect(() => {
     const send = () => { try { window.parent?.postMessage({ type: "boulder-budget:height", height: document.documentElement.scrollHeight }, "*"); } catch {} };
@@ -380,39 +361,9 @@ export default function BoulderBudgetWidget() {
 
   useEffect(() => { let alive = true; (async () => { const a = await readAgg(); if (alive) { setAgg(a || emptyAgg()); setAggState("ready"); } })(); return () => { alive = false; }; }, []);
 
-  // Cloudflare Turnstile (server path only): load the script and render the
-  // widget once the submit section is reachable; keep the token on solve.
-  useEffect(() => {
-    if (!USE_TURNSTILE || !balanced) return;
-    let cancelled = false;
-    const render = () => {
-      if (cancelled || !window.turnstile || !tsRef.current || tsWidgetId.current !== null) return;
-      try {
-        tsWidgetId.current = window.turnstile.render(tsRef.current, {
-          sitekey: TURNSTILE_SITEKEY,
-          callback: (t) => setTsToken(t),
-          "expired-callback": () => setTsToken(""),
-          "error-callback": () => setTsToken(""),
-        });
-      } catch {}
-    };
-    if (window.turnstile) { render(); return () => { cancelled = true; }; }
-    if (!document.getElementById("cf-turnstile-script")) {
-      const s = document.createElement("script");
-      s.id = "cf-turnstile-script";
-      s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-      s.async = true; s.defer = true; s.onload = render;
-      document.head.appendChild(s);
-      return () => { cancelled = true; };
-    }
-    const iv = setInterval(() => { if (window.turnstile) { clearInterval(iv); render(); } }, 200);
-    return () => { cancelled = true; clearInterval(iv); };
-  }, [balanced]);
-
   const submit = useCallback(async () => {
     const answered = Object.values(demo).filter((v) => (Array.isArray(v) ? v.length : v)).length;
     if (!balanced || submitted || answered === 0) return;
-    if (USE_TURNSTILE && !tsToken) return;   // need a verification token first
     const topCut = GF_DEPTS.map((d) => ({ name: d.name, amt: -d.amount * ((deptPct[d.id] || 0) / 100) })).sort((a, b) => b.amt - a.amt)[0];
     const revShare = totalFix > 0 ? totalRevenue / totalFix : 0;
     /* FLAT PAYLOAD — one field per slider, zeros included, so the database
@@ -437,22 +388,15 @@ export default function BoulderBudgetWidget() {
     payload.used_reserves = reserves > 0;
     payload.top_cut = topCut && topCut.amt > 0.01 ? topCut.name : null;
     DEMO.forEach((q) => { const v = demo[q.id]; payload[`demo_${q.id}`] = Array.isArray(v) ? v.join("; ") : (v ?? null); });
-    if (USE_TURNSTILE && tsToken) payload.turnstileToken = tsToken;   // verified server-side, then discarded
 
     const next = await writeAgg({ revShare, usedRevenue, usedVote, usedReserves: reserves > 0, topCut, payload });
     if (next) setAgg(next);
-    // Turnstile tokens are single-use — reset for any subsequent submission.
-    if (USE_TURNSTILE && typeof window !== "undefined" && window.turnstile && tsWidgetId.current !== null) {
-      try { window.turnstile.reset(tsWidgetId.current); } catch {}
-      setTsToken("");
-    }
     setSubmitted(true);
-  }, [balanced, submitted, deptPct, lockedPct, rev, reserves, netSpendChange, totalRevenue, revenueOnly, usedRevenue, usedVote, totalFix, demo, tsToken]);
+  }, [balanced, submitted, deptPct, lockedPct, rev, reserves, netSpendChange, totalRevenue, revenueOnly, usedRevenue, usedVote, totalFix, demo]);
 
   const reset = () => { setDeptPct({}); setLockedPct({}); setRev({ fees: 0, property: 0, sales: 0 }); setReserves(0); setDemo({}); setSubmitted(false); };
   const demoCount = Object.values(demo).filter((v) => (Array.isArray(v) ? v.length : v)).length;
-  const needsTurnstile = USE_TURNSTILE && !tsToken;
-  const canSubmit = balanced && !submitted && demoCount > 0 && !needsTurnstile;
+  const canSubmit = balanced && !submitted && demoCount > 0;
 
   return (
     <div ref={rootRef} style={{ background: C.paper, color: C.ink, fontFamily: FONT }} className="w-full">
@@ -669,12 +613,6 @@ export default function BoulderBudgetWidget() {
             </div>
           )}
 
-          {USE_TURNSTILE && balanced && !submitted && (
-            <div className="mt-4">
-              <div ref={tsRef} />
-              {needsTurnstile && <span style={{ fontSize: 12, color: C.inkSoft }}>Complete the quick verification above to add your budget.</span>}
-            </div>
-          )}
           <div className="flex flex-wrap items-center gap-2 mt-4">
             <button onClick={submit} disabled={!canSubmit} className="flex items-center gap-1.5" style={{ fontSize: 13, fontWeight: 800, padding: "10px 18px", borderRadius: 7, cursor: canSubmit ? "pointer" : "not-allowed", border: `2px solid ${canSubmit ? C.ink : C.hair}`, background: canSubmit ? C.lime : C.hair, color: canSubmit ? C.ink : C.inkSoft }}><ArrowDownToLine size={14} /> {submitted ? "Added to the tally" : "Add my budget"}</button>
             <button onClick={reset} className="flex items-center gap-1.5" style={{ fontSize: 13, fontWeight: 700, padding: "10px 14px", borderRadius: 7, cursor: "pointer", border: `1.5px solid ${C.hair}`, background: C.paper, color: C.inkSoft }}><RotateCcw size={14} /> Reset</button>
@@ -750,8 +688,7 @@ async function readAgg() {
 }
 
 async function writeAgg({ revShare, usedRevenue, usedVote, usedReserves, topCut, payload }) {
-  // Flag a likely repeat from this browser (best-effort; the server-side hash is
-  // the authoritative dedupe signal when the Vercel pipeline is in use).
+  // Flag a likely repeat from this browser (best-effort, localStorage only).
   try { if (typeof window !== "undefined" && window.localStorage?.getItem("bb_submitted_v4")) payload.repeatClient = true; window.localStorage?.setItem("bb_submitted_v4", "1"); } catch {}
 
   if (ENDPOINT) {

@@ -1,21 +1,10 @@
-// POST /api/submit — receive one reader budget, defend the write (origin,
-// Turnstile, rate-limit), store it in Supabase with the secret key, and return
-// the refreshed anonymous aggregate. This is the endpoint the widget's
-// writeAgg() posts to when ENDPOINT is set. Mirrors ../../ARCHITECTURE.md.
-//
-// Turnstile and rate-limiting activate only when their env vars are set, so the
-// function works whether or not those services are configured yet.
+// POST /api/submit — receive one reader budget, store it in Supabase with the
+// secret key (server-side, bypasses RLS), and return the refreshed anonymous
+// aggregate. This is the endpoint the widget's writeAgg() posts to when ENDPOINT
+// is set. CORS is locked to ALLOWED_ORIGIN. Mirrors ../../ARCHITECTURE.md.
 
 import { rowFromPayload, hasOneDemo } from "./_schema.js";
-import {
-  handlePreflight,
-  missingConfig,
-  insertContribution,
-  fetchAggregate,
-  clientIp,
-  verifyTurnstile,
-  rateLimit,
-} from "./_supabase.js";
+import { handlePreflight, missingConfig, insertContribution, fetchAggregate } from "./_supabase.js";
 
 export default async function handler(req, res) {
   if (handlePreflight(req, res, "POST")) return;
@@ -45,26 +34,6 @@ export default async function handler(req, res) {
     res.status(422).json({ error: "At least one survey answer is required" });
     return;
   }
-
-  const ip = clientIp(req);
-
-  // Bot defense (no-op unless TURNSTILE_SECRET is set).
-  const ts = await verifyTurnstile(payload.turnstileToken || payload["cf-turnstile-response"], ip);
-  if (!ts.ok) {
-    res.status(403).json({ error: "Verification failed", detail: ts.error });
-    return;
-  }
-
-  // Rate limit (no-op unless Upstash is configured; fails open on KV error).
-  const rl = await rateLimit(ip);
-  if (!rl.ok) {
-    res.status(429).json({ error: "Too many submissions, please try again later." });
-    return;
-  }
-
-  // Don't persist the one-time Turnstile token (it would otherwise land in raw).
-  delete payload.turnstileToken;
-  delete payload["cf-turnstile-response"];
 
   try {
     await insertContribution(rowFromPayload(payload));
