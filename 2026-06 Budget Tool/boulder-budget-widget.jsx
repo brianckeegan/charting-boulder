@@ -145,6 +145,21 @@ const SUPABASE_URL = "https://iplcjxbazezpjdzdpjxx.supabase.co";
 const SUPABASE_KEY = "sb_publishable_2jy9CF17cyHSMAnVYSpFcA_tRecRIoi";
 const SB_ENABLED = !PREVIEW && !!SUPABASE_URL && !!SUPABASE_KEY;
 
+// Optional cached aggregate-read URL (the edge-cached Vercel /api/aggregate
+// route). When set, the on-load tally READ goes through a CDN while writes stay
+// direct to Supabase — so a traffic spike can't dogpile the database. Set via
+// window.__BBW_AGG__ or ?agg= on the embed URL.
+function resolveAggEndpoint() {
+  if (PREVIEW || typeof window === "undefined") return "";
+  try {
+    if (window.__BBW_AGG__) return String(window.__BBW_AGG__);
+    const q = new URLSearchParams(window.location.search).get("agg");
+    if (q) return q;
+  } catch {}
+  return "";
+}
+const AGG_ENDPOINT = resolveAggEndpoint();
+
 const AGG_KEY = "boulder_budget_agg_v4";
 
 /* ---- SRC: news-citation links. Define each link once (label + url), then
@@ -675,7 +690,13 @@ function sbRow(p) {
   return row;
 }
 
-async function readAgg() {
+async function readAgg(fresh) {
+  // Cached read path: the edge-cached Vercel aggregate route, used for the
+  // on-load tally while writes go direct. Skipped when `fresh` (right after a
+  // submit) so the reader immediately sees their own contribution counted.
+  if (!fresh && AGG_ENDPOINT && !ENDPOINT) {
+    try { const r = await fetch(AGG_ENDPOINT); return r.ok ? await r.json() : emptyAgg(); } catch { return emptyAgg(); }
+  }
   if (ENDPOINT) { try { const r = await fetch(`${ENDPOINT}/aggregate`); return r.ok ? await r.json() : emptyAgg(); } catch { return emptyAgg(); } }
   if (SB_ENABLED) {
     try {
@@ -701,7 +722,7 @@ async function writeAgg({ revShare, usedRevenue, usedVote, usedReserves, topCut,
     try {
       const ins = await fetch(`${SUPABASE_URL}/rest/v1/contributions`, { method: "POST", headers: { ...sbHeaders(), Prefer: "return=minimal" }, body: JSON.stringify(sbRow(payload)) });
       if (!ins.ok) return null;
-      return await readAgg();   // re-read so the shared tally includes this submission
+      return await readAgg(true);   // fresh re-read (bypass cache) so the tally includes this submission
     } catch { return null; }
   }
   if (typeof window !== "undefined" && window.storage) {

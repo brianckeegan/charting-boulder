@@ -11,6 +11,11 @@ const SERVICE_KEY =
   process.env.SUPABASE_SERVICE_ROLE_KEY ||
   process.env.SUPABASE_SERVICE_KEY ||
   "";
+// Read-only key for the cached aggregate route: the secret if present, else the
+// browser-safe PUBLISHABLE key — so you can deploy a read-only /api/aggregate
+// cache without the secret (writes stay direct to Supabase).
+const PUBLISHABLE_KEY = process.env.SUPABASE_PUBLISHABLE_KEY || "";
+const READ_KEY = SERVICE_KEY || PUBLISHABLE_KEY;
 
 // Comma-separated origin allowlist, or "*". Lock this to your site once known.
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGIN || "*")
@@ -20,6 +25,15 @@ export function missingConfig() {
   const missing = [];
   if (!URL) missing.push("SUPABASE_URL");
   if (!SERVICE_KEY) missing.push("SUPABASE_SECRET_KEY");
+  return missing;
+}
+
+// The cached aggregate route reads only public data, so the publishable key is
+// enough when no secret is configured.
+export function missingReadConfig() {
+  const missing = [];
+  if (!URL) missing.push("SUPABASE_URL");
+  if (!READ_KEY) missing.push("SUPABASE_SECRET_KEY or SUPABASE_PUBLISHABLE_KEY");
   return missing;
 }
 
@@ -70,7 +84,9 @@ export async function insertContribution(row) {
 // empty aggregate so a read failure never blanks the widget.
 export async function fetchAggregate() {
   const r = await fetch(`${URL}/rest/v1/rpc/budget_aggregate`, {
-    method: "POST", headers: headers(), body: "{}",
+    method: "POST",
+    headers: { apikey: READ_KEY, Authorization: `Bearer ${READ_KEY}`, "Content-Type": "application/json" },
+    body: "{}",
   });
   if (!r.ok) {
     const detail = await r.text().catch(() => "");

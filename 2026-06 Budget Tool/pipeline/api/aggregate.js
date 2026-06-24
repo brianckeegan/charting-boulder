@@ -3,7 +3,7 @@
 // widget's readAgg() fetches on load when ENDPOINT is set. Never returns an
 // individual response. See ../../ARCHITECTURE.md.
 
-import { handlePreflight, missingConfig, fetchAggregate } from "./_supabase.js";
+import { handlePreflight, missingReadConfig, fetchAggregate } from "./_supabase.js";
 
 const EMPTY = { n: 0, usedRevenue: 0, usedVote: 0, usedReserves: 0, revShareSum: 0, cutTally: {} };
 
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  if (missingConfig().length) {
+  if (missingReadConfig().length) {
     // Degrade gracefully: an unconfigured backend shows an empty tally rather
     // than an error, so the widget still renders.
     res.status(200).json(EMPTY);

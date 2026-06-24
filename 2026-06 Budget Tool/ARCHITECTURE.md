@@ -57,11 +57,15 @@ The widget picks a backend at load time (see `resolveEndpoint()` and the
 | --- | --- | --- |
 | **Vercel proxy** (A) | `?api=…` on the embed URL, or `window.__BBW_ENDPOINT__` | `GET …/api/aggregate`, `POST …/api/submit` |
 | **Supabase direct** (B) | default — `SUPABASE_URL` + publishable `SUPABASE_KEY` are baked in | PostgREST insert + `budget_aggregate` RPC |
+| **Cached read** (B+) | `?agg=…` or `window.__BBW_AGG__`, alongside B | tally **read** via the edge-cached `…/api/aggregate`; writes stay direct |
 | **Preview** | offline/standalone build sets `window.__BBW_PREVIEW__` | in-memory only; nothing leaves the browser |
 
-Mode A wins if an endpoint is present; otherwise B; otherwise preview. Use **A**
-when you want server-side de-duplication and the publishable key kept off the
-page; **B** needs no server at all.
+Precedence: a full `ENDPOINT` (A) wins; otherwise, on **load**, a cached `AGG`
+read is used if set while writes go direct (B+); otherwise B; otherwise preview.
+**A** keeps the secret key off the page and gives one server chokepoint; **B**
+needs no server; **B+** absorbs traffic spikes by serving the tally from a CDN
+while writes stay direct. After a submit the tally is re-read *fresh* (cache
+bypassed), so the reader still sees their own contribution counted.
 
 ---
 
