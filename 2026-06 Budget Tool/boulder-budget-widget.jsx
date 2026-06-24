@@ -41,11 +41,13 @@ import {
      ones left at zero — so each row is a complete budget), the revenue and
      reserves settings, a few derived totals, and one column per survey answer.
      Field names match the database columns in ARCHITECTURE.md one-to-one.
-     ALL of it — the budget AND the survey answers — is stored only on Boulder
-     Reporting Lab's own WordPress server. No third-party service ever receives
-     reader responses. No name, account, IP address, or browser identifier is
-     stored with a record (a salted one-way hash is kept briefly to flag
-     duplicate submissions; see ARCHITECTURE.md).
+     ALL of it — the budget AND the survey answers — is stored in Boulder
+     Reporting Lab's own Supabase database (Postgres), written either directly
+     with a browser-safe publishable key or through a small Vercel function. No
+     advertising or analytics third party ever receives a response. No name,
+     account, email, IP address, or browser fingerprint is stored with a record
+     (a salted one-way hash may be kept to flag duplicate submissions; see
+     ARCHITECTURE.md).
 
    ADDING A NEWS CITATION (the [1], [2] links next to a row)
      Add a `sources` field to any row, e.g.:
@@ -88,9 +90,13 @@ import {
         file for each) when the underlying numbers change.
 
    DEPLOYMENT KNOBS (just below)
-     ENDPOINT — leave "" for preview/testing; set it to BRL's WordPress REST
-                base to store responses (see ARCHITECTURE.md).
-     SRC      — the citation-link table.
+     ENDPOINT      — optional Vercel pipeline base (…/api). Set it via ?api= on
+                     the embed URL or window.__BBW_ENDPOINT__ to route writes
+                     through the server (keeps the secret key server-side).
+     SUPABASE_URL  — the project and its browser-safe PUBLISHABLE key, used to
+       /_KEY         write straight to Supabase when no ENDPOINT is set.
+     SRC           — the citation-link table.
+     See ARCHITECTURE.md for setup, the data dictionary, and Newspack embedding.
 
    This is a teaching model, not the city's budgeting system. Visual identity
    matches BRL's Newspack theme (Public Sans; #CDDE00 / #3A8DDE).
@@ -106,7 +112,39 @@ import {
      an interaction with no argument around it.
    ========================================================================== */
 
-const ENDPOINT = ""; // set to the production API base to enable the real backend
+/* ---- BACKEND CONFIG ------------------------------------------------------
+   Where reader submissions go, resolved in priority order at runtime:
+     1. ENDPOINT — a Vercel pipeline base (…/api). Most private: the secret key
+        stays server-side and submissions are de-duplicated there. Set it with
+        ?api= on the embed URL, window.__BBW_ENDPOINT__, or by editing below.
+     2. SUPABASE_URL + SUPABASE_KEY — write straight to Supabase from the browser
+        with the PUBLISHABLE key (safe to publish; Row Level Security lets a
+        reader add a row but never read one back). Works with no server at all.
+     3. Neither — preview mode: the tally lives only in this browser session.
+   See ARCHITECTURE.md for the full data flow, schema, and privacy model. ----- */
+// Offline/preview builds (build-standalone.sh) set window.__BBW_PREVIEW__ to
+// keep submissions in the browser session only, so a local review copy never
+// writes to the live database. Production embeds leave it unset.
+const PREVIEW = typeof window !== "undefined" && window.__BBW_PREVIEW__ === true;
+
+function resolveEndpoint() {
+  if (PREVIEW || typeof window === "undefined") return "";
+  try {
+    if (window.__BBW_ENDPOINT__) return String(window.__BBW_ENDPOINT__);
+    const q = new URLSearchParams(window.location.search).get("api");
+    if (q) return q;
+  } catch {}
+  return "";
+}
+const ENDPOINT = resolveEndpoint();
+
+// Supabase direct-write fallback. The PUBLISHABLE key is browser-safe by design
+// (RLS is the real guard), so committing it is expected. The SECRET key is
+// never used here — only server-side, in the Vercel pipeline.
+const SUPABASE_URL = "https://iplcjxbazezpjdzdpjxx.supabase.co";
+const SUPABASE_KEY = "sb_publishable_2jy9CF17cyHSMAnVYSpFcA_tRecRIoi";
+const SB_ENABLED = !PREVIEW && !!SUPABASE_URL && !!SUPABASE_KEY;
+
 const AGG_KEY = "boulder_budget_agg_v4";
 
 /* ---- SRC: news-citation links. Define each link once (label + url), then
@@ -615,18 +653,55 @@ export default function BoulderBudgetWidget() {
 function emptyAgg() { return { n: 0, usedRevenue: 0, usedVote: 0, usedReserves: 0, revShareSum: 0, cutTally: {} }; }
 function round(x) { return Math.round(x * 100) / 100; }
 
+/* Supabase direct-write helpers (used when no ENDPOINT proxy is set). PostgREST
+   wants the publishable key in both the apikey and Authorization headers. */
+function sbHeaders() {
+  return { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" };
+}
+/* Map the flat payload onto the exact DB columns, reusing the widget's own data
+   tables so the stored column set can never drift from the sliders above. */
+function sbRow(p) {
+  const row = {
+    client_ts: p.ts ?? null, client_version: p.v ?? null, scenario: p.scenario ?? null,
+    rev_fees: p.rev_fees ?? 0, rev_property: p.rev_property ?? 0, rev_sales: p.rev_sales ?? 0, reserves: p.reserves ?? 0,
+    spend_change: p.spend_change ?? 0, revenue_total: p.revenue_total ?? 0, revenue_only: p.revenue_only ?? 0,
+    used_vote: !!p.used_vote, used_revenue: !!p.used_revenue, used_reserves: !!p.used_reserves,
+    top_cut: p.top_cut ?? null, repeat_client: !!p.repeatClient, raw: p,
+  };
+  GF_DEPTS.forEach((d) => { row[`gf_${d.id}`] = p[`gf_${d.id}`] ?? 0; });
+  LOCKED_FUNDS.forEach((f) => { row[`fund_${f.id}`] = p[`fund_${f.id}`] ?? 0; });
+  DEMO.forEach((q) => { row[`demo_${q.id}`] = p[`demo_${q.id}`] ?? null; });
+  return row;
+}
+
 async function readAgg() {
   if (ENDPOINT) { try { const r = await fetch(`${ENDPOINT}/aggregate`); return r.ok ? await r.json() : emptyAgg(); } catch { return emptyAgg(); } }
+  if (SB_ENABLED) {
+    try {
+      const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/budget_aggregate`, { method: "POST", headers: sbHeaders(), body: "{}" });
+      return r.ok ? ((await r.json()) || emptyAgg()) : emptyAgg();
+    } catch { return emptyAgg(); }
+  }
   if (typeof window !== "undefined" && window.storage) { try { const r = await window.storage.get(AGG_KEY, true); return r ? JSON.parse(r.value) : emptyAgg(); } catch { return emptyAgg(); } }
   return emptyAgg();
 }
 
 async function writeAgg({ revShare, usedRevenue, usedVote, usedReserves, topCut, payload }) {
+  // Flag a likely repeat from this browser (best-effort; the server-side hash is
+  // the authoritative dedupe signal when the Vercel pipeline is in use).
+  try { if (typeof window !== "undefined" && window.localStorage?.getItem("bb_submitted_v4")) payload.repeatClient = true; window.localStorage?.setItem("bb_submitted_v4", "1"); } catch {}
+
   if (ENDPOINT) {
     try {
-      try { if (window.localStorage?.getItem("bb_submitted_v4")) payload.repeatClient = true; window.localStorage?.setItem("bb_submitted_v4", "1"); } catch {}
       const r = await fetch(`${ENDPOINT}/submit`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       return r.ok ? await r.json() : null;
+    } catch { return null; }
+  }
+  if (SB_ENABLED) {
+    try {
+      const ins = await fetch(`${SUPABASE_URL}/rest/v1/contributions`, { method: "POST", headers: { ...sbHeaders(), Prefer: "return=minimal" }, body: JSON.stringify(sbRow(payload)) });
+      if (!ins.ok) return null;
+      return await readAgg();   // re-read so the shared tally includes this submission
     } catch { return null; }
   }
   if (typeof window !== "undefined" && window.storage) {
