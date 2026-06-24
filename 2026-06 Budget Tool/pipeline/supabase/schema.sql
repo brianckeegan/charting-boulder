@@ -18,10 +18,11 @@
 -- PRIVACY — no name, account, email, IP address, or browser fingerprint is
 -- stored. `dedupe_hash` is a salted one-way SHA-256 (salt + IP + UTC day),
 -- computed in the serverless function and never reversible to an IP; it only
--- lets us flag likely duplicate submissions. Row Level Security is ON and no
--- policy is granted to the anon/authenticated roles, so the only way to read
--- or write rows is the service-role key (held server-side, in Vercel env vars)
--- or the aggregate function below, which never exposes an individual row.
+-- lets us flag likely duplicate submissions. Row Level Security is ON: the
+-- publishable key may INSERT a contribution but can never read, update, or
+-- delete a row. Readers see only the precomputed public tally in
+-- `contribution_stats` (via budget_aggregate()); individual rows are reachable
+-- only with the service-role key, server-side.
 -- ============================================================================
 
 -- gen_random_uuid() lives in pgcrypto; present by default on Supabase.
@@ -145,20 +146,30 @@ grant usage on schema public to anon, authenticated;
 revoke all on public.contributions from anon, authenticated;
 grant insert on public.contributions to anon, authenticated;
 
+-- A real predicate (not WITH CHECK (true)): mirror the widget's own rule that a
+-- submission must answer at least one survey item (security advisor 0024).
 drop policy if exists "anon may insert a contribution" on public.contributions;
 create policy "anon may insert a contribution"
   on public.contributions for insert
   to anon, authenticated
-  with check (true);
+  with check (
+    num_nonnulls(
+      demo_years, demo_employment, "demo_workArea", demo_student,
+      demo_education, demo_building, demo_tenure, demo_income,
+      demo_age, demo_race, demo_gender, demo_lgbtq, demo_disability
+    ) >= 1
+  );
 
 -- Force a trustworthy server timestamp regardless of what a client sends, so
 -- the response timeline can't be spoofed through the public insert path.
 create or replace function public.contributions_stamp()
 returns trigger
 language plpgsql
+security invoker
+set search_path = ''               -- pin search_path (security advisor 0011)
 as $$
 begin
-  new.created_at := now();
+  new.created_at := now();         -- now() resolves from pg_catalog
   return new;
 end;
 $$;
@@ -169,21 +180,109 @@ create trigger contributions_stamp
   for each row execute function public.contributions_stamp();
 
 -- ---------------------------------------------------------------------------
--- Aggregate function — the ONLY public window into the data. Returns exactly
--- the shape the widget's AggregateView expects, and never an individual row:
---   { n, usedRevenue, usedVote, usedReserves, revShareSum, cutTally }
--- revShare per submission = revenue_total / (revenue_total + net cuts), where
--- net cuts = greatest(0, -spend_change). Summed here; the widget divides by n.
--- SECURITY DEFINER so it can read the table even though the caller's role
--- cannot; it only ever emits aggregates.
+-- Public tally — readers see only an aggregate, never an individual row.
+--
+-- A SECURITY DEFINER function callable by anon/authenticated trips the security
+-- advisor (lints 0028/0029), so instead we keep ONE precomputed row in
+-- `contribution_stats` that the publishable key may read, and recompute it with
+-- a trigger whenever a contribution lands. budget_aggregate() is then a plain
+-- SECURITY INVOKER reader, so the widget's existing RPC call is unchanged.
 -- ---------------------------------------------------------------------------
+create table if not exists public.contribution_stats (
+  id          integer primary key default 1,
+  agg         jsonb not null default
+              '{"n":0,"usedRevenue":0,"usedVote":0,"usedReserves":0,"revShareSum":0,"cutTally":{}}'::jsonb,
+  updated_at  timestamptz not null default now(),
+  constraint contribution_stats_single_row check (id = 1)
+);
+
+-- The aggregate is public; individual rows are not. A SELECT policy of USING
+-- (true) here is intentional public read and is NOT what advisor lint 0024
+-- flags (that targets permissive INSERT/UPDATE/DELETE, not SELECT).
+alter table public.contribution_stats enable row level security;
+grant select on public.contribution_stats to anon, authenticated;
+drop policy if exists "anyone may read the aggregate" on public.contribution_stats;
+create policy "anyone may read the aggregate"
+  on public.contribution_stats for select
+  to anon, authenticated
+  using (true);
+
+-- Recompute the single stats row from the table. SECURITY DEFINER so it can
+-- read contributions and write stats regardless of which role inserted; it
+-- returns `trigger`, so it is never callable through the REST API. search_path
+-- is pinned (advisor lint 0011), and EXECUTE is revoked from callers (the
+-- trigger fires without needing it).
+create or replace function public.refresh_contribution_stats()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  insert into public.contribution_stats (id, agg, updated_at)
+  values (1, (
+    select jsonb_build_object(
+      'n',            count(*),
+      'usedRevenue',  count(*) filter (where used_revenue),
+      'usedVote',     count(*) filter (where used_vote),
+      'usedReserves', count(*) filter (where used_reserves),
+      'revShareSum',  coalesce(sum(
+        case
+          when (coalesce(revenue_total,0) + greatest(0, -coalesce(spend_change,0))) > 0
+          then coalesce(revenue_total,0)
+               / (coalesce(revenue_total,0) + greatest(0, -coalesce(spend_change,0)))
+          else 0
+        end), 0),
+      'cutTally', coalesce((
+        select jsonb_object_agg(top_cut, c)
+        from (
+          select top_cut, count(*) as c
+          from public.contributions
+          where top_cut is not null
+          group by top_cut
+        ) t
+      ), '{}'::jsonb)
+    )
+    from public.contributions
+  ), now())
+  on conflict (id) do update
+    set agg = excluded.agg, updated_at = excluded.updated_at;
+  return null;
+end;
+$$;
+revoke execute on function public.refresh_contribution_stats() from public, anon, authenticated;
+
+drop trigger if exists contributions_stats_refresh on public.contributions;
+create trigger contributions_stats_refresh
+  after insert or update or delete on public.contributions
+  for each statement execute function public.refresh_contribution_stats();
+
+-- The widget's read endpoint, unchanged in shape. SECURITY INVOKER reading the
+-- public stats row (so it is not flagged by advisor 0028/0029); search_path
+-- pinned (0011). Returns exactly { n, usedRevenue, usedVote, usedReserves,
+-- revShareSum, cutTally }.
 create or replace function public.budget_aggregate()
 returns jsonb
 language sql
 stable
-security definer
-set search_path = public
+security invoker
+set search_path = ''
 as $$
+  select coalesce(
+    (select agg from public.contribution_stats where id = 1),
+    '{"n":0,"usedRevenue":0,"usedVote":0,"usedReserves":0,"revShareSum":0,"cutTally":{}}'::jsonb
+  );
+$$;
+
+comment on function public.budget_aggregate() is
+  'Public anonymous tally in the shape the widget renders, read from contribution_stats. Never returns an individual row.';
+
+grant execute on function public.budget_aggregate() to anon, authenticated;
+
+-- Seed / refresh the stats row from whatever is already in the table, so the
+-- tally is correct immediately after this script runs (covers existing data).
+insert into public.contribution_stats (id, agg, updated_at)
+values (1, (
   select jsonb_build_object(
     'n',            count(*),
     'usedRevenue',  count(*) filter (where used_revenue),
@@ -206,13 +305,7 @@ as $$
       ) t
     ), '{}'::jsonb)
   )
-  from public.contributions;
-$$;
-
-comment on function public.budget_aggregate() is
-  'Anonymous aggregate of all contributions in the shape the widget renders. Never returns an individual row.';
-
--- The aggregate is safe to expose: it leaks no individual response. Granting
--- execute to anon also enables an optional no-server embed (the widget calling
--- Supabase directly); the Vercel path does not rely on this grant.
-grant execute on function public.budget_aggregate() to anon, authenticated;
+  from public.contributions
+), now())
+on conflict (id) do update
+  set agg = excluded.agg, updated_at = excluded.updated_at;

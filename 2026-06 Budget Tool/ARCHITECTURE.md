@@ -79,11 +79,16 @@ that up:
   duplicates, nothing more. The direct path stores no hash at all (a browser
   can't see its own public IP); it relies on the widget's `localStorage` flag.
 - **Row Level Security is on.** The publishable key (role `anon`) may **insert**
-  a row and nothing else — it cannot read, update, or delete any row, and inserts
-  use `Prefer: return=minimal` so nothing is echoed back. A leaked publishable
-  key can add data; it can never read data.
-- **The only public window is the aggregate.** `budget_aggregate()` is
-  `SECURITY DEFINER` and returns counts and sums only — never an individual row.
+  a row — and only one that carries at least one survey answer — and nothing
+  else: it cannot read, update, or delete any row, and inserts use
+  `Prefer: return=minimal` so nothing is echoed back. A leaked publishable key
+  can add data; it can never read data.
+- **The only public window is the aggregate.** The tally lives in a single
+  precomputed `contribution_stats` row, refreshed by a trigger on every write.
+  Readers reach it through `budget_aggregate()`, a `SECURITY INVOKER` function
+  returning counts and sums only — never an individual row. (It reads the
+  precomputed row rather than the table, so it needs no elevated privilege —
+  which clears Supabase advisor lints 0028/0029.)
 - **The secret key never reaches the browser.** It lives in Vercel env vars and
   on trusted machines running the export, and is never committed.
 
@@ -133,6 +138,11 @@ The full slider list lives in three places that must stay in lockstep: the
 widget's `GF_DEPTS` / `LOCKED_FUNDS` / `DEMO` tables, `pipeline/api/_schema.js`,
 and the notebook's canonical column lists. If you add or rename a department,
 update all three (and add the column in `pipeline/supabase/schema.sql`).
+
+A second one-row table, `contribution_stats`, holds the precomputed public tally
+(the `{ n, usedRevenue, … }` object). A trigger on `contributions` refreshes it
+on every insert/update/delete, and `budget_aggregate()` simply reads it — so the
+public aggregate never needs a privileged function over the raw rows.
 
 ---
 
