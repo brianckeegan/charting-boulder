@@ -6,19 +6,19 @@
 -- https://iplcjxbazezpjdzdpjxx.supabase.co using the SQL Editor
 -- (Dashboard → SQL → New query → paste → Run), or via the Supabase CLI:
 --
---     supabase db execute --file pipeline/supabase/schema.sql
+--     supabase db execute --file 2026-06-budget-tool/pipeline/supabase/schema.sql
 --
 -- Re-running is safe: every statement is idempotent (IF NOT EXISTS / OR REPLACE).
 --
 -- WHAT THIS STORES — one flat row per submission. Column names match the
 -- widget payload and the analysis notebook (budget-survey-analysis.ipynb)
 -- ONE-TO-ONE, so a CSV export drops straight into the notebook. See
--- ../../2026-06-budget-tool/ARCHITECTURE.md for the full data dictionary and the data flow.
+-- ../../ARCHITECTURE.md for the full data dictionary and the data flow.
 --
 -- PRIVACY — no name, account, email, IP address, or browser fingerprint is
--- stored, and NO IP-derived value is persisted at all: rate-limiting and
--- duplicate suppression happen in ephemeral edge storage (see the Vercel
--- function), so nothing here can be tied back to a person. Row Level Security
+-- stored, and NO IP-derived value is persisted at all, so nothing here can be
+-- tied back to a person; there is no rate-limiting or dedupe layer that would
+-- keep such a value either. Row Level Security
 -- is ON: the publishable key may INSERT a contribution but can never read,
 -- update, or delete a row. Readers see only the precomputed public tally in
 -- `contribution_stats` (via budget_aggregate()); individual rows are reachable
@@ -145,17 +145,14 @@ alter table public.contributions add constraint contributions_sane_values check 
 );
 
 -- ---------------------------------------------------------------------------
--- Row Level Security. Two write paths are supported and both are safe:
+-- Row Level Security. The browser writes directly with the PUBLISHABLE key
+-- (role `anon`): allowed to INSERT a contribution, but NOT to read, update, or
+-- delete any row. Inserts use `Prefer: return=minimal` so nothing is echoed
+-- back.
 --
---   • Direct from the browser with the PUBLISHABLE key (role `anon`): allowed
---     to INSERT a contribution, but NOT to read, update, or delete any row.
---     Reads with `Prefer: return=minimal` so nothing is echoed back.
---   • Through the Vercel function with the SECRET key (role `service_role`):
---     bypasses RLS entirely; used for server-side validation.
---
--- Either way, the only way to READ the data is the aggregate function below
--- (or the secret key, server-side). A leaked publishable key can add rows but
--- can never read one back.
+-- The only way to READ the data is the aggregate function below (or the secret
+-- key, server-side, for offline analysis). A leaked publishable key can add
+-- rows but can never read one back.
 -- ---------------------------------------------------------------------------
 alter table public.contributions enable row level security;
 
