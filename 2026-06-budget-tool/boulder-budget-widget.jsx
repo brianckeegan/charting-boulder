@@ -233,7 +233,7 @@ const REVENUE = [
   { id: "income", label: "Local income tax", status: "barred", locked: true,
     note: "Colorado’s TABOR (Const. Art. X, §20) prohibits local income taxes outright. There is no rate to set." },
   { id: "wealth", label: "Wealth tax", status: "none", locked: true,
-    note: "No Colorado city has authority to levy a wealth tax, and any new tax would still require a public vote. Shown to mark the edge of the toolbox." },
+    note: "No Colorado city has authority to levy a wealth tax, and any new tax would still require a public vote." },
 ];
 
 const STATUS = {
@@ -254,7 +254,7 @@ const STATUS = {
 const DEDICATED_RATES = [
   { id: "cc", label: "CCRS capital tax", rate: 0.30, revM: 14, note: "Made permanent by voters, Nov. 2025.", sources: [SRC.salesTax2025] },
   { id: "os", label: "Open Space tax", rate: 0.33, revM: 15, note: "Voter-dedicated; a portion shifts to the General Fund in 2035.", sources: [SRC.salesTax2025] },
-  { id: "pr", label: ".25-cent Parks & Rec tax", rate: 0.25, revM: 12, note: "Voter-dedicated; expires 2036 unless renewed.", sources: [SRC.ballot2026] },
+  { id: "pr", label: "Parks & Rec tax", rate: 0.25, revM: 12, note: "Voter-dedicated; expires 2036 unless renewed.", sources: [SRC.ballot2026] },
   { id: "tr", label: "Transportation tax", rate: 0.15, revM: 7, note: "Approved 2014, renewed 2019; shifts to the General Fund in 2030." },
 ];
 
@@ -264,17 +264,20 @@ const SCENARIOS = {
 };
 
 /* ---- DEMO: optional reader survey. Adapted from the 2025 BVCP survey; some
-   brackets are expanded and two questions were added, so not every item maps
-   1:1 to the city's survey (years, employment, building, tenure, race, gender,
-   LGBTQ still match). Every row keeps "Prefer not to say"; one answer (any of
-   them) is required to submit. t: "single" = pick one, "multi" = select all. - */
+   brackets are expanded and several questions were added or swapped, so not
+   every item maps 1:1 to the city's survey (years, employment, building, tenure,
+   race, gender, LGBTQ still match). Every row keeps "Prefer not to say"; one
+   answer (any of them) is required to submit. t: "single" = pick one,
+   "multi" = select all. - */
 const DEMO = [
   { id: "years", t: "single", q: "How many years have you lived in the Boulder Valley?",
     o: ["5 years or less", "6-10 years", "11-20 years", "More than 20 years", "Prefer not to say"] },
+  { id: "area", t: "single", q: "Which area of Boulder do you currently live in?",
+    o: ["North Boulder", "Central Boulder", "University Hill", "South Boulder", "University of Colorado", "Southeast Boulder", "East Boulder", "Crossroads", "Palo Park", "Gunbarrel", "Other", "Outside the city", "Prefer not to say"] },
   { id: "employment", t: "single", q: "What is your employment status?",
     o: ["Working full time for pay", "Working part time for pay", "Unemployed, looking for paid work", "Not retired, not looking for paid work", "Fully retired", "Prefer not to say"] },
-  { id: "workArea", t: "single", q: "Do you work in the Boulder Valley area?",
-    o: ["Yes, outside the home", "Yes, from home", "No, I work outside the Boulder Valley", "No, I stay at home or am retired", "No, I'm unemployed", "Prefer not to say"] },
+  { id: "work_area", t: "single", q: "How do you usually get around Boulder?",
+    o: ["Drive (alone)", "Carpool or rideshare", "Bus or other transit", "Bike", "Walk or roll", "Mostly work or stay at home", "Prefer not to say"] },
   { id: "student", t: "single", q: "Are you a student at CU Boulder or any other college or university?",
     o: ["Yes, an undergraduate student", "Yes, a graduate student", "No", "Prefer not to say"] },
   { id: "education", t: "single", q: "What is the highest level of education you have finished?",
@@ -284,7 +287,7 @@ const DEMO = [
   { id: "tenure", t: "single", q: "Do you own or rent your home?",
     o: ["Own", "Rent", "Other", "Prefer not to say"] },
   { id: "income", t: "single", q: "How would you describe your annual household income?",
-    o: ["Less than $25,000 per year", "$25,000 to $49,999 per year", "$50,000 to $99,999 a year", "$100,000 to $149,999 a year", "$150,000 to $299,999 a year", "$300,000 a year or more", "Prefer not to say"] },
+    o: ["Less than $25,000 per year", "$25,000 to $49,999 per year", "$50,000 to $99,999 per year", "$100,000 to $149,999 per year", "$150,000 to $299,999 per year", "$300,000 per year or more", "Prefer not to say"] },
   { id: "age", t: "single", q: "What is your age range?",
     o: ["18-24", "25-34", "35-44", "45-54", "55-64", "65 and over", "Prefer not to say"] },
   { id: "race", t: "multi", q: "Which race(s) and/or ethnic group(s) do you most identify with? Select all that apply.",
@@ -294,7 +297,7 @@ const DEMO = [
   { id: "lgbtq", t: "single", q: "Are you a member of the LGBTQ+ community?",
     o: ["Yes", "No", "Prefer not to say"] },
   { id: "disability", t: "single", q: "Do you have a disability?",
-    o: ["Yes — visible", "Yes — invisible", "Yes — visible and invisible", "No", "Prefer not to say"] },
+    o: ["Yes, visible", "Yes, invisible", "Yes, visible and invisible", "No", "Prefer not to say"] },
 ];
 
 export default function BoulderBudgetWidget() {
@@ -430,24 +433,24 @@ export default function BoulderBudgetWidget() {
           <div className="tnum" style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: C.blueDk, fontWeight: 800 }}>Charting Boulder · Interactive</div>
           <h1 style={{ fontSize: "clamp(23px,5.6vw,32px)", fontWeight: 800, lineHeight: 1.08, marginTop: 8, letterSpacing: "-0.02em" }}>Balance Boulder’s 2026 budget</h1>
           <p style={{ fontSize: 15.5, lineHeight: 1.5, color: C.inkSoft, marginTop: 10 }}>
-            Close the <strong style={{ color: C.ink }}>{fmt(SCENARIOS.y2026.gap)} General Fund gap</strong> by cutting spending or raising revenue. The catch is what you’re allowed to touch — and what Colorado law won’t let you.
+            Close the City of Boulder’s <strong style={{ color: C.ink }}>2026 and 2027 budget deficits</strong> by cutting spending or raising revenue. State law and voter initiatives limit what revenue you can raise and move.
           </p>
         </header>
 
         {/* Reveal bar */}
         <section className="mt-6">
           <Eyebrow>Where the $521 million sits</Eyebrow>
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 8 }}>About <strong style={{ color: C.ink }}>{pctMovable.toFixed(0)}¢ of every budget dollar</strong> sits in the General Fund ({fmt(GENERAL_FUND)}), the only large pot the council can freely redirect. The other {fmt(lockedTotal)} is dedicated by voters or restricted by law.</p>
           <div className="mt-2 rounded-md overflow-hidden flex" style={{ height: 44, border: `1px solid ${C.ink}` }}>
             <div style={{ width: `${pctMovable}%`, background: C.lime, color: C.ink }} className="flex items-center justify-center"><span style={{ fontSize: 12, fontWeight: 800 }}>{pctMovable.toFixed(0)}¢ movable</span></div>
             <div style={{ width: `${100 - pctMovable}%`, background: C.lockBg, color: C.inkSoft }} className="flex items-center justify-center gap-1"><Lock size={12} /><span style={{ fontSize: 11.5, fontWeight: 700 }}>{(100 - pctMovable).toFixed(0)}¢ locked</span></div>
           </div>
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 8 }}>About <strong style={{ color: C.ink }}>{pctMovable.toFixed(0)}¢ of every budget dollar</strong> sits in the General Fund ({fmt(GENERAL_FUND)}), the only large pot the council can freely redirect. The other {fmt(lockedTotal)} is dedicated by voters or restricted by law.</p>
         </section>
 
         {/* The two-tests explainer scrolls away; the live tally below sticks. */}
         <section className="mt-6">
           <Eyebrow>Two tests — your budget must pass both</Eyebrow>
-          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6, maxWidth: 460 }}>Balance the gap the city closed for 2026 <em>and</em> the deeper gap projected for 2027. One-time reserves count toward 2026 but can’t carry into 2027 — that bar is the structural test.</p>
+          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}>Balance the gap the city closed for 2026 <em>and</em> the deeper gap projected for 2027. One-time reserves count toward 2026 but can’t carry into 2027 — that bar is the structural test.</p>
         </section>
 
         {/* Live balance — sticks to the top of the screen so the surplus/deficit
@@ -461,8 +464,8 @@ export default function BoulderBudgetWidget() {
             <div style={{ fontSize: 12, color: C.inkSoft }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {fmt(revenueOnly)} revenue{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
           </div>
           <div className="mt-2">
-            <GapBar label="2026 (adopted)" sub="reserves allowed" gap={SCENARIOS.y2026.gap} remaining={remaining2026} balanced={balanced2026} />
-            <GapBar label="2027 (projected)" sub="structural · reserves don’t carry" gap={SCENARIOS.y2027.gap} remaining={remaining2027} balanced={balanced2027} />
+            <GapBar label="2026 (adopted)" gap={SCENARIOS.y2026.gap} remaining={remaining2026} balanced={balanced2026} />
+            <GapBar label="2027 (projected)" gap={SCENARIOS.y2027.gap} remaining={remaining2027} balanced={balanced2027} />
           </div>
         </section>
 
@@ -513,7 +516,7 @@ export default function BoulderBudgetWidget() {
                   <div className="flex items-center justify-between gap-2">
                     <div style={{ minWidth: 0 }}>
                       <div className="flex items-center gap-1.5 flex-wrap"><span style={{ fontSize: 14.5, fontWeight: 700, color: r.locked ? C.inkSoft : C.ink }}>{r.label}</span>{r.locked && <Lock size={12} style={{ color: C.lock }} />}</div>
-                      <div className="mt-1 flex flex-wrap gap-1"><Tag color={st.color} bg={st.bg}>{st.tag}</Tag>{r.modeled && <Tag color={C.lockText}>modeled yield</Tag>}</div>
+                      <div className="mt-1 flex flex-wrap gap-1"><Tag color={st.color} bg={st.bg}>{st.tag}</Tag></div>
                     </div>
                     <span className="tnum" style={{ fontSize: 14, fontWeight: 800, color: r.locked ? C.lockText : (yield_ > 0 ? C.green : C.inkSoft), flexShrink: 0 }}>{r.locked ? "—" : `+${fmt(yield_)}`}</span>
                   </div>
@@ -535,7 +538,7 @@ export default function BoulderBudgetWidget() {
             })}
             <div className="rounded-md p-3" style={{ background: C.paper, border: `1px solid ${C.hair}` }}>
               <div className="flex items-center justify-between gap-2">
-                <div><div style={{ fontSize: 14.5, fontWeight: 700 }}>Spend down one-time reserves</div><Tag color={C.red}>one-time — not a structural fix</Tag></div>
+                <div><div style={{ fontSize: 14.5, fontWeight: 700 }}>Spend down one-time reserves</div><Tag color={C.red}>one-time</Tag></div>
                 <span className="tnum" style={{ fontSize: 14, fontWeight: 800, color: reserves ? C.green : C.inkSoft }}>+{fmt(reserves)}</span>
               </div>
               <input type="range" min={0} max={10} step={0.5} value={reserves} onChange={(e) => { setReserves(+e.target.value); setSubmitted(false); }} style={{ marginTop: 10 }} aria-label="Use reserves" />
@@ -551,17 +554,16 @@ export default function BoulderBudgetWidget() {
             {DEDICATED_RATES.map((d) => (
               <div key={d.id} className="rounded-md p-3" style={{ background: C.lockBg, border: `1px solid ${C.lock}` }}>
                 <div className="flex items-start justify-between gap-2">
-                  <div className="flex items-center gap-1.5 flex-wrap" style={{ minWidth: 0 }}><Lock size={12} style={{ color: C.lock }} /><span style={{ fontSize: 14, fontWeight: 700, color: C.inkSoft }}>{d.label}</span><Cites sources={d.sources} /><Tag color={C.blueDk}>voter-set</Tag></div>
+                  <div className="flex items-center gap-1.5 flex-wrap" style={{ minWidth: 0 }}><Lock size={12} style={{ color: C.lock }} /><span style={{ fontSize: 14, fontWeight: 700, color: C.inkSoft }}>{d.label}</span></div>
                   <div className="tnum text-right" style={{ flexShrink: 0 }}>
-                    <div style={{ fontSize: 13.5, fontWeight: 800, color: C.inkSoft }}>{d.rate.toFixed(2)}%</div>
-                    {d.revM != null && <div style={{ fontSize: 12, fontWeight: 700, color: C.lockText }}>≈ {fmt(d.revM)}/yr</div>}
+                    {d.revM != null && <span style={{ fontSize: 14, fontWeight: 800, color: C.inkSoft }}>{fmt(d.revM)}/yr</span>}
                   </div>
                 </div>
                 <div style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 8 }}>{d.note}</div>
               </div>
             ))}
           </div>
-          <div className="mt-2 rounded-md p-3" style={{ background: C.limeTint, border: `1px dashed ${C.lock}` }}>
+          <div className="mt-2 rounded-md p-3" style={{ background: C.lockBg, border: `1px solid ${C.lock}` }}>
             <span style={{ fontSize: 12.5, color: C.inkSoft }}>New 2026 revenue that’s also born locked: transportation maintenance fee <strong style={{ color: C.ink }}>+$2.25M</strong> → transportation only · single-family expansion fee <strong style={{ color: C.ink }}>+$0.4M</strong> → affordable housing only.</span>
           </div>
         </section>
@@ -580,7 +582,7 @@ export default function BoulderBudgetWidget() {
                 return (
                   <div key={f.id} className="rounded-md p-3" style={{ background: C.wash, border: `1px solid ${C.hair}` }}>
                     <div className="flex items-center justify-between gap-2">
-                      <div style={{ minWidth: 0 }}><div className="flex items-center gap-1.5 flex-wrap"><span style={{ fontSize: 14, fontWeight: 700, color: C.inkSoft }}>{f.name}</span><Cites sources={f.sources} /><Tag color={f.kind === "capital" ? C.ink : f.kind === "enterprise" ? C.lock : C.blueDk}>{f.kind}</Tag></div><div style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 1 }}>{f.why}</div></div>
+                      <div style={{ minWidth: 0 }}><div className="flex items-center gap-1.5 flex-wrap"><span style={{ fontSize: 14, fontWeight: 700, color: C.inkSoft }}>{f.name}</span></div><div style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 1 }}>{f.why}</div></div>
                       <div className="tnum text-right" style={{ flexShrink: 0 }}><span style={{ fontSize: 14, fontWeight: 800, color: C.inkSoft }}>{fmt(f.amount)}</span>{pct !== 0 && <div style={{ fontSize: 11, color: C.lockText, fontWeight: 700 }}>{signed(delta)} stays in fund</div>}</div>
                     </div>
                     <div className="flex items-center gap-3 mt-2">
@@ -638,12 +640,14 @@ export default function BoulderBudgetWidget() {
             {balanced && !submitted && demoCount === 0 && <span style={{ fontSize: 12.5, color: C.blueDk, fontWeight: 700 }}>Pick at least one answer above to add your budget.</span>}
             {submitted && <span className="flex items-center gap-1" style={{ fontSize: 12.5, color: C.green, fontWeight: 700 }}><Check size={14} /> Saved with your budget. Thank you.</span>}
           </div>
-          <div className="mt-4 pt-3" style={{ borderTop: `1px solid ${C.hair}` }}>
-            <div className="flex items-center gap-1.5"><Users size={14} style={{ color: C.inkSoft }} /><Eyebrow>How other readers closed the gap</Eyebrow></div>
-            {aggState === "loading" && <p style={{ fontSize: 13, color: C.inkSoft, marginTop: 8 }}>Loading the shared tally…</p>}
-            {aggState === "ready" && agg && (agg.n === 0 ? <p style={{ fontSize: 13, color: C.inkSoft, marginTop: 8 }}>No budgets submitted yet — yours can be first. Submissions are anonymous and shown to every reader in aggregate.</p> : <AggregateView agg={agg} />)}
-            <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 10, fontStyle: "italic" }}>These are readers who chose to take part — a self-selected sample, not a representative or statistically valid survey of Boulder. Responses are stored on Boulder Reporting Lab’s own servers and reported only in aggregate.</p>
-          </div>
+          {submitted && (
+            <div className="mt-4 pt-3" style={{ borderTop: `1px solid ${C.hair}` }}>
+              <div className="flex items-center gap-1.5"><Users size={14} style={{ color: C.inkSoft }} /><Eyebrow>How other readers closed the gap</Eyebrow></div>
+              {aggState === "loading" && <p style={{ fontSize: 13, color: C.inkSoft, marginTop: 8 }}>Loading the shared tally…</p>}
+              {aggState === "ready" && agg && (agg.n === 0 ? <p style={{ fontSize: 13, color: C.inkSoft, marginTop: 8 }}>No budgets submitted yet — yours can be first. Submissions are anonymous and shown to every reader in aggregate.</p> : <AggregateView agg={agg} />)}
+              <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 10, fontStyle: "italic" }}>These are readers who chose to take part — a self-selected sample, not a representative or statistically valid survey of Boulder.</p>
+            </div>
+          )}
         </section>
 
         {/* Provenance & trust contract. The column's prose carries the hook, the
@@ -748,7 +752,7 @@ function GapBar({ label, sub, gap, remaining, balanced }) {
       <div className="flex items-center justify-between gap-2">
         <div style={{ minWidth: 0 }}>
           <span style={{ fontSize: 13.5, fontWeight: 800 }}>{label}</span>
-          <span style={{ fontSize: 11.5, color: C.inkSoft, marginLeft: 6 }}>{sub}</span>
+          {sub && <span style={{ fontSize: 11.5, color: C.inkSoft, marginLeft: 6 }}>{sub}</span>}
         </div>
         <div className="flex items-center gap-1.5" style={{ flexShrink: 0 }}>
           <span className="tnum" style={{ fontSize: 13.5, fontWeight: 800, color: balanced ? C.green : C.red }}>
@@ -775,6 +779,9 @@ function GapBar({ label, sub, gap, remaining, balanced }) {
   );
 }
 function Cites({ sources }) {
+  // Earlier-coverage reference links ([1], [2] …) are disabled per request; each
+  // row keeps its `sources` data. Delete the next line to restore the links.
+  return null;
   if (!sources || !sources.length) return null;
   return (
     <sup style={{ marginLeft: 3, whiteSpace: "nowrap" }}>
