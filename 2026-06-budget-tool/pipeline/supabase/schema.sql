@@ -36,14 +36,16 @@ create table if not exists public.contributions (
 
   -- General Fund sliders (% change, −25..25). See GF_DEPTS in the widget.
   gf_police       integer,
+  gf_genadmin     integer,   -- General Government (transfers, debt, citywide)
   gf_fire         integer,
-  gf_genadmin     integer,
-  gf_transfers    integer,
-  gf_parksrec     integer,
   gf_hhs          integer,
-  gf_library      integer,
+  gf_it           integer,
+  gf_manager      integer,
   gf_facilities   integer,
-  gf_planning     integer,
+  gf_finance      integer,
+  gf_parksrec     integer,
+  gf_attorney     integer,
+  gf_other        integer,   -- the rest of the GF departments, bundled
 
   -- Locked / dedicated fund sliders (% change, −25..25). See LOCKED_FUNDS.
   fund_capital    integer,
@@ -103,14 +105,16 @@ create table if not exists public.contributions (
   -- Guards mirroring the widget's own input bounds.
   constraint gf_in_range check (
     coalesce(gf_police,0)     between -25 and 25 and
-    coalesce(gf_fire,0)       between -25 and 25 and
     coalesce(gf_genadmin,0)   between -25 and 25 and
-    coalesce(gf_transfers,0)  between -25 and 25 and
-    coalesce(gf_parksrec,0)   between -25 and 25 and
+    coalesce(gf_fire,0)       between -25 and 25 and
     coalesce(gf_hhs,0)        between -25 and 25 and
-    coalesce(gf_library,0)    between -25 and 25 and
+    coalesce(gf_it,0)         between -25 and 25 and
+    coalesce(gf_manager,0)    between -25 and 25 and
     coalesce(gf_facilities,0) between -25 and 25 and
-    coalesce(gf_planning,0)   between -25 and 25
+    coalesce(gf_finance,0)    between -25 and 25 and
+    coalesce(gf_parksrec,0)   between -25 and 25 and
+    coalesce(gf_attorney,0)   between -25 and 25 and
+    coalesce(gf_other,0)      between -25 and 25
   ),
   constraint rev_nonneg check (
     coalesce(rev_fees,0)    >= 0 and

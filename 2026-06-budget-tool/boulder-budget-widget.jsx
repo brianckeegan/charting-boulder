@@ -170,23 +170,25 @@ const signed = (m) => `${m < 0 ? "−" : "+"}$${Math.abs(m) >= 100 ? Math.abs(m)
 /* ---- OFFICIAL control totals ($M) ---------------------------------------- */
 const TOTAL = 521.0, OPERATING = 407.68, CAPITAL = 113.3, GENERAL_FUND = 194.5;
 
-/* ---- GF_DEPTS: General Fund departments, shown as sliders.
-   id      machine name (don't translate; used as a data key)
+/* ---- GF_DEPTS: the General Fund's largest departments, shown as sliders.
+   id      machine name (data key; stored as gf_<id>)
    name    label the reader sees
-   amount  2026 budget in $millions   [MODELED — replace from the Budget Book,
-           fact-check #2; the column should sum to GENERAL_FUND = 194.5]
-   note    optional gray sub-label
-   sources optional [n] citation links (see SRC). A few are filled in to demo. */
+   amount  2026 General Fund budget, $millions — OFFICIAL, from the city's 2026
+           General Fund Fund Financial (1100). The top 10 departments by GF
+           spend, plus an "Other" line; the column sums to GENERAL_FUND (194.5).
+   note    sub-label listing the main programs inside the department. */
 const GF_DEPTS = [
-  { id: "police", name: "Police", amount: 48.0, sources: [SRC.budget2026, SRC.policing2023] },
-  { id: "fire", name: "Fire-Rescue", amount: 30.0, sources: [SRC.budget2026] },
-  { id: "genadmin", name: "General government & admin", amount: 30.0, note: "Council, Manager, Attorney, Finance, HR, Comms, Municipal Court, IT" },
-  { id: "transfers", name: "Transfers, debt & non-departmental", amount: 24.5 },
-  { id: "parksrec", name: "Parks & Recreation (GF share)", amount: 18.0, sources: [SRC.ballot2026, SRC.budget2026] },
-  { id: "hhs", name: "Housing & Human Services (GF)", amount: 14.0, sources: [SRC.housing2025, SRC.policing2023] },
-  { id: "library", name: "Library & Arts", amount: 12.0 },
-  { id: "facilities", name: "Facilities, Fleet & Public Works (GF)", amount: 10.0 },
-  { id: "planning", name: "Planning & Development (GF share)", amount: 8.0 },
+  { id: "police", name: "Police", amount: 50.2, note: "Operations · Investigations · Administration · Alternative response · Dispatch · Support services" },
+  { id: "genadmin", name: "General Government", amount: 38.4, note: "Citywide costs · Contingency · Debt service · Interfund transfers" },
+  { id: "fire", name: "Fire-Rescue", amount: 29.1, note: "Emergency operations · EMS · Support services · Community risk reduction · Wildland" },
+  { id: "hhs", name: "Housing & Human Services (GF share)", amount: 13.0, note: "Housing grants · Human services · Homelessness · Behavioral health · Family services" },
+  { id: "it", name: "Innovation & Technology", amount: 10.4, note: "Infrastructure · Data & analytics · Application support · Cybersecurity · Project management" },
+  { id: "manager", name: "City Manager's Office", amount: 9.7, note: "Economic vitality · Business services · City Clerk · Equity · Independent police monitor" },
+  { id: "facilities", name: "Facilities & Fleet (GF share)", amount: 6.9, note: "Facility operations · Maintenance · Energy management · Fleet" },
+  { id: "finance", name: "Finance", amount: 6.9, note: "Taxpayer services · Budget · Accounting · Licensing · Purchasing · Payroll" },
+  { id: "parksrec", name: "Parks & Recreation (GF share)", amount: 6.5, note: "Recreation · Park operations · Natural resources · Planning" },
+  { id: "attorney", name: "City Attorney's Office", amount: 5.1, note: "Administration · Advisory · Prosecution & civil litigation" },
+  { id: "other", name: "Other General Fund departments", amount: 18.3, note: "HR · Comms · Planning · Municipal Court · Climate · Community Vitality · Council · Utilities · Transportation" },
 ];
 
 /* ---- LOCKED_FUNDS: dedicated (voter) or restricted (law) funds, plus the
@@ -661,8 +663,16 @@ export default function BoulderBudgetWidget() {
             <button onClick={() => setShowData(!showData)} style={{ background: "transparent", border: "none", cursor: "pointer", padding: 0 }} className="flex items-center gap-1.5"><span style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>DATA STATUS & SOURCES</span>{showData ? <ChevronUp size={14} color={C.inkSoft} /> : <ChevronDown size={14} color={C.inkSoft} />}</button>
             {showData && (
               <div style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 8, lineHeight: 1.6 }}>
-                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025); the {fmt(7.5)} gap; city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes. Sources: City of Boulder 2026 Approved Budget (OpenGov) and budget message (Aug. 29, 2025); BRL election reporting (Nov. 2025); Colorado Legislative Council Staff.</p>
-                <p className="mt-2"><strong style={{ color: C.ink }}>Modeled (placeholder):</strong> the per-department General Fund split, every locked operating-fund amount, the Open Space rate (~0.33%), and the revenue yields (per-mill, per-0.1% sales). They sum to the official totals but are estimates pending line-item ingestion. The “2027 projection” gap is illustrative, not a forecast. Treat any single modeled figure as approximate.</p>
+                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025) and its per-department breakdown, from the city’s 2026 General Fund Fund Financial (1100); the {fmt(7.5)} gap; city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes.</p>
+                <p className="mt-2"><strong style={{ color: C.ink }}>Modeled (placeholder):</strong> the locked operating-fund amounts, the Open Space rate (~0.33%), and the revenue yields (per-mill, per-0.1% sales). They sum to the official totals but are estimates pending fund-level data. The “2027 projection” gap is illustrative, not a forecast. Treat any single modeled figure as approximate.</p>
+                <div className="mt-2">
+                  <strong style={{ color: C.ink }}>Official budget data:</strong>
+                  <ul style={{ margin: "4px 0 0", paddingLeft: 18 }}>
+                    <li style={{ marginTop: 3 }}><a href="https://cityofboulderco.opengov.com/transparency/" target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>City of Boulder budget transparency portal (OpenGov)</a></li>
+                    <li style={{ marginTop: 3 }}><a href="https://bouldercolorado.gov/services/budget" target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>City of Boulder — Budget (bouldercolorado.gov)</a></li>
+                    <li style={{ marginTop: 3 }}><a href="https://bouldercolorado.gov/media/18307/download?inline" target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>2026 General Fund Fund Financial (1100), PDF</a></li>
+                  </ul>
+                </div>
                 <div className="mt-2">
                   <strong style={{ color: C.ink }}>Related reporting:</strong>
                   <ul style={{ margin: "4px 0 0", paddingLeft: 18 }}>
