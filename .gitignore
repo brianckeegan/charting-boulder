@@ -189,5 +189,7 @@ responses.csv
 # Notebook-generated analysis frame (regenerate by running the notebook; not source)
 2026-06-budget-tool/budget-survey-analysis-frame.csv
 
-# Omit original OEWS data
-/2026-04-minimum-wage/oews_boulder_raw/
+# Omit original BLS source data (re-downloadable; regenerated into processed CSVs).
+# Non-anchored so the rule survives the raw dirs being moved between subfolders.
+oews_boulder_raw/
+qcew_boulder_raw/
