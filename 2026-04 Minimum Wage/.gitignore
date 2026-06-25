@@ -1,0 +1,6 @@
+# Raw BLS OEWS downloads — large (~740 MB) and re-downloadable via download_oews.sh.
+# The reproducible pipeline regenerates the processed CSVs from these; don't commit them.
+oews_boulder_raw/
+
+# macOS
+.DS_Store
