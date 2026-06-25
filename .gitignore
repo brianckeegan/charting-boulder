@@ -188,3 +188,6 @@ responses.csv
 
 # Notebook-generated analysis frame (regenerate by running the notebook; not source)
 2026-06-budget-tool/budget-survey-analysis-frame.csv
+
+# Omit original OEWS data
+/2026-04-minimum-wage/oews_boulder_raw/
