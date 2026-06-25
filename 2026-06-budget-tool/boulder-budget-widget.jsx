@@ -622,14 +622,14 @@ export default function BoulderBudgetWidget() {
               <div className="flex items-start justify-between gap-3">
                 <div style={{ minWidth: 0 }}>
                   <div className="flex items-center gap-1.5"><Users size={15} style={{ color: C.ink }} /><span style={{ fontSize: 14.5, fontWeight: 800 }}>One step before you add your budget</span></div>
-                  <div style={{ fontSize: 13, color: C.inkSoft, marginTop: 3 }}>Answer at least one — even <em>“Prefer not to say.”</em> Optional and confidential, and stored only on Boulder Reporting Lab’s own servers.</div>
+                  <div style={{ fontSize: 13, color: C.inkSoft, marginTop: 3 }}>Answer at least one — even <em>“Prefer not to say.”</em> Optional and confidential.</div>
                 </div>
                 <span className="tnum flex items-center gap-1" style={{ fontSize: 12, fontWeight: 800, flexShrink: 0, color: demoCount > 0 ? C.green : C.inkSoft }}>{demoCount > 0 && <Check size={13} />}{demoCount} answered</span>
               </div>
               <button onClick={() => setShowDemo(!showDemo)} className="flex items-center gap-1" style={{ background: "transparent", border: "none", cursor: "pointer", padding: 0, marginTop: 8, fontSize: 12, fontWeight: 800, color: C.blueDk }}>{showDemo ? <>Hide questions <ChevronUp size={13} /></> : <>Show questions <ChevronDown size={13} /></>}</button>
               {showDemo && (
                 <div className="mt-3 grid gap-3">
-                  <p style={{ fontSize: 11.5, color: C.inkSoft }}>These are adapted from the city’s 2025 Boulder Valley Comprehensive Plan survey. All optional and confidential, and stored only on Boulder Reporting Lab’s own servers.</p>
+                  <p style={{ fontSize: 11.5, color: C.inkSoft }}>These are adapted from the city’s 2025 Boulder Valley Comprehensive Plan survey.</p>
                   {DEMO.map((d) => <DemoQuestion key={d.id} d={d} value={demo[d.id]} onChange={(val) => setDemo({ ...demo, [d.id]: val })} />)}
                 </div>
               )}
