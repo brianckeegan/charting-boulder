@@ -1,16 +1,25 @@
 """
-Boulder MSA — OEWS Metropolitan Area Data Extractor (local files)
-=================================================================
-Reads BLS OEWS metropolitan-area zip files from `oews_boulder_raw/`
-and extracts every Boulder MSA row into a clean long-format panel CSV
-spanning the full published history (1997-2025).
+OEWS Extractor — Boulder MSA, Colorado statewide, US national (local files)
+============================================================================
+Reads BLS OEWS zip files from three local folders and writes three separate
+long-format panel CSVs, one per geography:
 
-The only filter is geographic — the Boulder MSA. EVERY occupation BLS
-publishes for Boulder is kept (all-occupations totals, major groups, and
-detailed occupations alike); no occupation subsetting happens here. Slicing
-to specific occupations is left to downstream analysis.
+    oews_metro_raw/     oesm??ma.zip   ->  oews_boulder_combined.csv
+    oews_state_raw/     oes??st.zip    ->  oews_colorado_combined.csv
+    oews_national_raw/  oesm??nat.zip  ->  oews_national_combined.csv
 
-Why this is non-trivial — the BLS metro files change shape across vintages:
+Drop whichever zips you have into the matching folder; scopes with no zips are
+skipped. Download them from https://www.bls.gov/oes/tables.htm (the
+"Metropolitan" / "State" / "National" bulk files for each year). BLS pattern:
+    https://www.bls.gov/oes/special.requests/oesm{YY}ma.zip   (metro)
+    https://www.bls.gov/oes/special.requests/oes{YY}st.zip     (state, older)
+    https://www.bls.gov/oes/special.requests/oesm{YY}nat.zip  (national)
+
+For each scope EVERY occupation BLS publishes is kept; no occupation
+subsetting happens here.  Slicing to specific occupations is left to
+downstream analysis.
+
+Why this is non-trivial — the BLS files change shape across vintages:
 
   * Headers move.    1997-2000 bury the column header under a metadata block
                      (rows 32-43, and the two 2000 splits even differ: 34 vs 42);
@@ -45,40 +54,73 @@ import pandas as pd
 from tqdm import tqdm
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-# Pin paths to wherever THIS script lives, so it works no matter which
-# directory you launch it from.
-HERE        = Path(__file__).parent
-ZIP_DIR     = HERE / "oews_boulder_raw"
-OUTPUT_CSV  = HERE / "oews_boulder_combined.csv"
-PROV_CSV    = HERE / "oews_boulder_provenance.csv"
-DICT_MD     = HERE / "oews_boulder_data_dictionary.md"
-LOG_LEVEL   = logging.INFO
+HERE = Path(__file__).parent
+LOG_LEVEL = logging.INFO
 
-# Match BLS metro zips by either modern (oesm24ma) or old (oes97ma) naming.
-ZIP_GLOB = "oes*ma.zip"
+# ── Scope definitions ─────────────────────────────────────────────────────────
+# Each scope maps a zip folder + glob to a geographic filter and output files.
+# National has no filter — the entire file IS the national estimate.
+SCOPES = {
+    "boulder": {
+        "label":      "Boulder MSA",
+        "zip_dir":    HERE / "oews_metro_raw",
+        "zip_glob":   "oes*ma.zip",
+        "output_csv": HERE / "oews_boulder_combined.csv",
+        "prov_csv":   HERE / "oews_boulder_provenance.csv",
+        "dict_md":    HERE / "oews_boulder_data_dictionary.md",
+    },
+    "colorado": {
+        "label":      "Colorado statewide",
+        "zip_dir":    HERE / "oews_state_raw",
+        "zip_glob":   "oes*st.zip",
+        "output_csv": HERE / "oews_colorado_combined.csv",
+        "prov_csv":   HERE / "oews_colorado_provenance.csv",
+        "dict_md":    HERE / "oews_colorado_data_dictionary.md",
+    },
+    "national": {
+        "label":      "US national",
+        "geo_name":   "United States",   # national files pre-2019 carry no area col
+        "zip_dir":    HERE / "oews_national_raw",
+        "zip_glob":   "oes*nat.zip",
+        "output_csv": HERE / "oews_national_combined.csv",
+        "prov_csv":   HERE / "oews_national_provenance.csv",
+        "dict_md":    HERE / "oews_national_data_dictionary.md",
+    },
+}
 
-# Boulder has been published under two definitions.  Match on NAME first
-# (robust across every vintage); the area-code set is a secondary check.
-#   1125  = Boulder-Longmont, CO PMSA   (1997-2004)
-#   14500 = Boulder, CO  CBSA           (2005-2025)
-# NB: 0880 is **Billings, MT** — it was wrongly treated as Boulder in an
-# earlier version of this script; do not add it back.
+# ── Geographic filter parameters ──────────────────────────────────────────────
+# Boulder: match on name first (robust across all vintages), fall back to code.
+# NB: 0880 is Billings MT — do NOT add it to BOULDER_AREA_CODES.
 BOULDER_NAME_RE    = re.compile(r"boulder", re.IGNORECASE)
 BOULDER_AREA_CODES = {"1125", "14500"}
 
-# Inner files that are NOT metro occupation tables — skip them.
-#   ~$...            Excel lock/temp files (broke the 2022 extract)
-#   aMSA / BOS       'all-MSA' rollups and Balance-of-State (nonmetro) tables
-#   *_descriptions   field/file layout documentation
+# Colorado state: name match, then prim_state abbreviation, then FIPS.
+# State files use "Colorado" as the area_name; prim_state is "CO".
+CO_NAME_RE    = re.compile(r"^colorado$", re.IGNORECASE)
+CO_PRIM_STATE = {"CO"}
+CO_FIPS       = {"08", "8"}
+
+# US national: the national row(s). Match a clean U.S./United States label, or
+# the national area code, so we never grab a stray "U.S." substring from a
+# title column.
+US_NAME_RE    = re.compile(r"^\s*(u\.?\s?s\.?|united states|u\.?s\.? total"
+                           r"|national|all u\.?s\.?)\s*$", re.IGNORECASE)
+US_AREA_CODES = {"99", "0000000", "00000", "N0000000", "099", "1"}
+
+# Inner files that are NOT occupation tables — skip them in every scope.
 SKIP_FILE_RE = re.compile(r"(^~\$)|(\baMSA)|(\bBOS)|(field_desc)|(file_desc)"
                           r"|(readme)|(layout)|(glossary)", re.IGNORECASE)
-DATA_EXT     = re.compile(r"\.(xlsx?|csv|txt)$", re.IGNORECASE)
+DATA_EXT = re.compile(r"\.(xlsx?|csv|txt)$", re.IGNORECASE)
 
 
 # ── Year inference from filename ──────────────────────────────────────────────
 def year_from_filename(path: Path):
-    """oesm24ma.zip -> 2024 | oesm01ma.zip -> 2001 | oesm97ma.zip -> 1997."""
-    m = re.search(r"oesm?(\d{2})ma", path.stem, re.IGNORECASE)
+    """
+    oesm24ma.zip -> 2024 | oes97st.zip -> 1997 | oesn04st.zip -> 2004.
+    BLS prefixes the year with nothing (oes97), 'm' (oesm24), or 'n' (oesn04),
+    so accept an optional single letter before the two-digit year.
+    """
+    m = re.search(r"oes[mn]?(\d{2})(ma|st|nat)", path.stem, re.IGNORECASE)
     if not m:
         return None
     yy = int(m.group(1))
@@ -86,13 +128,15 @@ def year_from_filename(path: Path):
 
 
 # ── Column normalisation ──────────────────────────────────────────────────────
-# canonical -> source header synonyms (compared case-insensitively, stripped).
 COL_MAP = {
-    "area_code":    ["area", "area_code", "msa_code", "pmsa_code", "cbsa_code"],
-    "area_name":    ["area_name", "area_title", "area_titl", "msa", "pmsa", "cbsa"],
+    "area_code":    ["area", "area_code", "msa_code", "pmsa_code", "cbsa_code",
+                     "state_code", "naics_code"],
+    "area_name":    ["area_name", "area_title", "area_titl", "msa", "pmsa",
+                     "cbsa", "state", "state_name"],
     "prim_state":   ["prim_state", "state", "st"],
     "occ_code":     ["occ_code", "soc", "oes_code", "occ"],
-    "occ_title":    ["occ_title", "occ_titl", "occupation", "occupation_title", "oes_title"],
+    "occ_title":    ["occ_title", "occ_titl", "occupation", "occupation_title",
+                     "oes_title"],
     "occ_group":    ["occ_group", "o_group", "group"],
     "tot_emp":      ["tot_emp", "emp", "employment"],
     "emp_prse":     ["emp_prse"],
@@ -114,11 +158,9 @@ COL_MAP = {
     "annual":       ["annual"],
     "hourly":       ["hourly"],
 }
-# Reverse lookup: normalised source token -> canonical name.
 _SYNONYM = {syn.upper().strip(): canon
             for canon, syns in COL_MAP.items() for syn in syns}
 
-# Final column order for the combined panel.
 CANONICAL_ORDER = [
     "year", "area_code", "area_name", "prim_state",
     "occ_code", "occ_title", "occ_group",
@@ -130,12 +172,8 @@ CANONICAL_ORDER = [
     "jobs_1000", "loc_quotient", "annual", "hourly",
 ]
 
-# Tokens that mark a row as the column header (need an area col AND an occ col).
-# occ_code/occ_title are the strong anchor — they only ever appear in the real
-# header row, never in the metadata preamble — so broadening the area side is
-# safe and keeps detection working wherever the header sits (row 0, 8-12, 32-43…).
 _AREA_TOK = {"area", "area_name", "area_title", "area_titl",
-             "area_code", "cbsa", "msa", "pmsa"}
+             "area_code", "cbsa", "msa", "pmsa", "state", "state_name"}
 _OCC_TOK  = {"occ_code", "occ_title", "occ_titl"}
 
 
@@ -150,13 +188,15 @@ def normalise_columns(df):
 
 # ── Header detection + reader ─────────────────────────────────────────────────
 def _read_raw(zf, name):
-    """Read an inner spreadsheet/text file with no header, everything as str."""
+    """Read an inner file with no header applied, everything as str."""
     data = zf.read(name)
     ext = Path(name).suffix.lower()
     if ext == ".xlsx":
-        return pd.read_excel(io.BytesIO(data), dtype=str, header=None, engine="openpyxl")
+        return pd.read_excel(io.BytesIO(data), dtype=str, header=None,
+                             engine="openpyxl")
     if ext == ".xls":
-        return pd.read_excel(io.BytesIO(data), dtype=str, header=None, engine="xlrd")
+        return pd.read_excel(io.BytesIO(data), dtype=str, header=None,
+                             engine="xlrd")
     if ext in (".csv", ".txt"):
         for sep in ("\t", ","):
             try:
@@ -170,10 +210,15 @@ def _read_raw(zf, name):
 
 
 def _find_header_row(raw, scan=80):
-    """Index of the first row that names both an area column and an occ column."""
+    """
+    Index of the first row that names an occ column. occ_code/occ_title only
+    ever appear in the real header (never in the metadata preamble or data),
+    so they are a sufficient anchor. We do NOT also require an area column:
+    national files (national_M????_dl) carry occupations with no area column.
+    """
     for i in range(min(scan, len(raw))):
         toks = {str(v).strip().lower() for v in raw.iloc[i].tolist()}
-        if (toks & _AREA_TOK) and (toks & _OCC_TOK):
+        if toks & _OCC_TOK:
             return i
     return None
 
@@ -188,18 +233,15 @@ def read_table(zf, name):
         return None
     df = raw.iloc[hdr + 1:].copy()
     df.columns = [str(v).strip() for v in raw.iloc[hdr].tolist()]
-    # Strip stray whitespace from every text cell (1999-2000 space-pad codes
-    # and counts, e.g. '       13050'). Guard on is_string_dtype, not
-    # `== object`: pandas reads dtype=str as StringDtype, so an object check
-    # silently skips the strip.
     for c in df.columns:
         if pd.api.types.is_string_dtype(df[c]):
             df[c] = df[c].str.strip()
     return df.reset_index(drop=True)
 
 
-# ── Boulder filter ────────────────────────────────────────────────────────────
+# ── Geographic filter functions ───────────────────────────────────────────────
 def filter_boulder(df):
+    """Keep only Boulder MSA rows (name match then area-code fallback)."""
     if "area_name" in df.columns:
         m = df["area_name"].astype(str).str.contains(BOULDER_NAME_RE, na=False)
         if m.any():
@@ -211,20 +253,67 @@ def filter_boulder(df):
     return df.iloc[0:0]
 
 
+def filter_colorado(df):
+    """Keep only Colorado statewide rows from a state-level file."""
+    # 1. area_name exact match
+    if "area_name" in df.columns:
+        m = df["area_name"].astype(str).str.strip().str.match(CO_NAME_RE)
+        if m.any():
+            return df[m]
+    # 2. prim_state abbreviation (state files often carry this column)
+    if "prim_state" in df.columns:
+        m = df["prim_state"].astype(str).str.strip().str.upper().isin(CO_PRIM_STATE)
+        if m.any():
+            return df[m]
+    # 3. area_code FIPS (08)
+    if "area_code" in df.columns:
+        m = df["area_code"].astype(str).str.strip().isin(CO_FIPS)
+        if m.any():
+            return df[m]
+    return df.iloc[0:0]
+
+
+def filter_national(df):
+    """
+    Keep the US-national row(s). National files contain only the US estimate,
+    but guard against a file that also carries lower-level rows: match a clean
+    U.S. area label or the national area code; otherwise fall back to the whole
+    file (it IS national).
+    """
+    if "area_name" in df.columns:
+        m = df["area_name"].astype(str).str.strip().str.match(US_NAME_RE)
+        if m.any():
+            return df[m]
+    if "area_code" in df.columns:
+        m = df["area_code"].astype(str).str.strip().isin(US_AREA_CODES)
+        if m.any():
+            return df[m]
+    return df
+
+
+# Map scope key -> filter function
+FILTER_FN = {
+    "boulder":  filter_boulder,
+    "colorado": filter_colorado,
+    "national": filter_national,
+}
+
+
 # ── Per-zip processor ─────────────────────────────────────────────────────────
 def data_files(zf):
-    """Inner metro data files, skipping docs / lock files / non-metro tables."""
-    out = []
-    for n in zf.namelist():
-        base = Path(n).name
-        if not DATA_EXT.search(base) or SKIP_FILE_RE.search(base):
-            continue
-        out.append(n)
-    return out
+    """Inner data files, skipping docs, lock files, and non-occupation tables."""
+    return [
+        n for n in zf.namelist()
+        if DATA_EXT.search(Path(n).name)
+        and not SKIP_FILE_RE.search(Path(n).name)
+    ]
 
 
-def process_zip(zip_path):
-    """Extract all Boulder rows from one yearly zip. Returns (df, provenance)."""
+def process_zip(zip_path, filter_fn, label=""):
+    """
+    Extract rows matching filter_fn from one yearly zip.
+    Returns (df, provenance_dict) or (None, None) on failure.
+    """
     year = year_from_filename(zip_path)
     if year is None:
         logging.warning(f"  {zip_path.name}: cannot infer year -- skipping.")
@@ -244,132 +333,108 @@ def process_zip(zip_path):
             continue
         if df is None or df.empty:
             continue
-        bdf = filter_boulder(normalise_columns(df))
-        if not bdf.empty:
-            parts.append(bdf)
+        gdf = filter_fn(normalise_columns(df))
+        if not gdf.empty:
+            parts.append(gdf)
             src_files.append(Path(name).name)
 
     if not parts:
-        logging.warning(f"  {year}: Boulder not found in {zip_path.name}.")
+        logging.warning(f"  {year} [{label}]: not found in {zip_path.name}.")
         return None, None
 
-    bdf = pd.concat(parts, ignore_index=True, sort=False)
-    bdf = bdf.drop_duplicates()
-    # Old files (1997-2000) carry a literal `year` column — drop it so our
-    # filename-derived year is authoritative and doesn't collide on insert.
-    bdf = bdf.drop(columns=[c for c in bdf.columns
+    out = pd.concat(parts, ignore_index=True, sort=False)
+    out = out.drop_duplicates()
+    out = out.drop(columns=[c for c in out.columns
                             if str(c).strip().lower() == "year"], errors="ignore")
-    bdf.insert(0, "year", year)
-    area = bdf["area_name"].dropna().iloc[0] if "area_name" in bdf.columns else "?"
-    logging.info(f"  {year}: {len(bdf):,} rows  (area: '{area}', "
-                 f"from {', '.join(src_files)})")
+    out.insert(0, "year", year)
+
+    area = out["area_name"].dropna().iloc[0] if "area_name" in out.columns else label
+    logging.info(f"  {year} [{label}]: {len(out):,} rows  "
+                 f"(area: '{area}', from {', '.join(src_files)})")
 
     prov = {
-        "year": year,
-        "zip_file": zip_path.name,
+        "year":       year,
+        "zip_file":   zip_path.name,
         "inner_file": "; ".join(src_files),
-        "area_name": area,
-        "n_rows": len(bdf),
-        "sha256": hashlib.sha256(zip_path.read_bytes()).hexdigest(),
+        "area_name":  area,
+        "n_rows":     len(out),
+        "sha256":     hashlib.sha256(zip_path.read_bytes()).hexdigest(),
     }
-    return bdf, prov
+    return out, prov
 
 
-# ── Output assembly ───────────────────────────────────────────────────────────
+# ── Output helpers ────────────────────────────────────────────────────────────
 def order_columns(combined):
-    # Keep only the canonical schema, in order. Unmapped per-vintage extras
-    # (mean_aster, rep_units, naics, release, ...) are dropped so the panel is
-    # a clean, consistent rectangle across all years.
     return combined[[c for c in CANONICAL_ORDER if c in combined.columns]]
 
 
-def write_data_dictionary(combined, prov_df):
+def write_data_dictionary(combined, prov_df, scope_cfg):
     yrs = sorted(combined["year"].unique())
+    label = scope_cfg["label"]
+    path  = scope_cfg["dict_md"]
     lines = [
-        "# Boulder MSA — OEWS extract: data dictionary & caveats",
+        f"# {label} — OEWS extract: data dictionary & caveats",
         "",
-        f"Generated by `oews_boulder.py` from BLS OEWS metro files in "
-        f"`oews_boulder_raw/`. Coverage: **{yrs[0]}-{yrs[-1]}** "
+        f"Generated by `oews_boulder.py` from BLS OEWS files in "
+        f"`{scope_cfg['zip_dir'].name}/`. "
+        f"Coverage: **{yrs[0]}-{yrs[-1]}** "
         f"({len(yrs)} years, {len(combined):,} occupation-rows).",
         "",
-        "## Area definition (changes mid-series)",
+        "## Area definition",
         "",
         "| Years | area_name | area_code |",
         "|---|---|---|",
     ]
     for name, sub in combined.groupby("area_name"):
         ys = sorted(sub["year"].unique())
-        codes = ", ".join(sorted(sub["area_code"].dropna().unique()))
+        codes = ", ".join(sorted(sub["area_code"].dropna().astype(str).unique()))
         lines.append(f"| {ys[0]}-{ys[-1]} | {name} | {codes} |")
     lines += [
         "",
-        "## Occupation coding (changes mid-series)",
+        "## Occupation coding",
         "",
-        "- **1997-1998** use the legacy 5-digit OES occupation codes "
-        "(e.g. `13002` = Financial Managers).",
-        "- **1999-present** use SOC codes (e.g. `11-1011`). Any SOC-based "
-        "occupation lookup therefore only resolves from 1999 onward; for "
-        "1997-1998 you must use the legacy OES codes instead.",
-        "- All occupations are retained (totals, major/minor/broad groups, and "
-        "detailed occupations); `occ_code` is preserved verbatim and the two "
-        "code systems are **not** crosswalked here.",
+        "- **1997-1998** use the legacy 5-digit OES codes.",
+        "- **1999-present** use SOC codes.",
+        "- All occupations retained (totals, major/minor/broad/detailed).",
         "",
-        "## Wage/percentile columns",
+        "## Wage columns",
         "",
-        "- `1997` publishes only `h_mean`, `h_median`, `a_mean` — no percentiles.",
-        "- Percentile fields were named `h_wpct10` etc. in 1998-2002 and "
-        "`h_pct10` from 2003; both are normalised to `h_pct10`/`a_pct10`/…",
-        "- Values are kept as published **strings**. BLS suppression markers "
-        "survive verbatim: `*` = estimate not released, `#` = wage at or above "
-        "$100/hr (≈ $208k/yr), blank = not available.",
-        "",
-        "## Columns",
-        "",
-        "| column | meaning |",
-        "|---|---|",
-        "| year | survey/reference year |",
-        "| area_code | BLS MSA/PMSA (pre-2005) or CBSA (2005+) code |",
-        "| area_name | published area title |",
-        "| prim_state | primary state (CO) |",
-        "| occ_code | OES (1997-98) or SOC (1999+) occupation code |",
-        "| occ_title | occupation title |",
-        "| occ_group | aggregation level (total/major/minor/broad/detailed) |",
-        "| tot_emp | total employment |",
-        "| emp_prse | employment relative standard error (%) |",
-        "| h_mean / a_mean | mean hourly / annual wage |",
-        "| mean_prse | mean-wage relative standard error (%) |",
-        "| h_median / a_median | median hourly / annual wage |",
-        "| h_pct10..h_pct90 | hourly wage percentiles |",
-        "| a_pct10..a_pct90 | annual wage percentiles |",
-        "| jobs_1000 | jobs per 1,000 (2009+) |",
-        "| loc_quotient | location quotient (2013+) |",
-        "| annual / hourly | flags: wage published only annually / hourly |",
+        "- Values kept as published strings. Suppression: `*` = not released, "
+        "`#` = ≥ $100/hr.",
+        "- Percentiles named `h_wpct10` in 1998-2002; normalised to `h_pct10`.",
         "",
         "## Provenance",
         "",
-        "Per-year source files and zip SHA-256 hashes are recorded in "
-        "`oews_boulder_provenance.csv`.",
+        f"Per-year source files and zip SHA-256 hashes in "
+        f"`{scope_cfg['prov_csv'].name}`.",
     ]
-    DICT_MD.write_text("\n".join(lines))
+    path.write_text("\n".join(lines))
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
-def main():
-    logging.basicConfig(level=LOG_LEVEL, format="%(asctime)s  %(levelname)-8s  %(message)s",
-                        datefmt="%H:%M:%S", force=True)
-    if not ZIP_DIR.exists():
-        raise FileNotFoundError(f"Zip directory not found: {ZIP_DIR}")
-    zip_files = sorted(ZIP_DIR.glob(ZIP_GLOB), key=lambda p: year_from_filename(p) or 0)
+# ── Scope runner ──────────────────────────────────────────────────────────────
+def run_scope(scope_key, scope_cfg):
+    """Process all zips for one geographic scope. Returns summary dict."""
+    label   = scope_cfg["label"]
+    zip_dir = scope_cfg["zip_dir"]
+    glob    = scope_cfg["zip_glob"]
+    filter_fn = FILTER_FN[scope_key]
+
+    if not zip_dir.exists():
+        print(f"\n  [{label}] SKIP — folder not found: {zip_dir}")
+        print(f"            Create it and place your {glob} files inside.")
+        return None
+
+    zip_files = sorted(zip_dir.glob(glob), key=lambda p: year_from_filename(p) or 0)
     if not zip_files:
-        raise FileNotFoundError(f"No {ZIP_GLOB} files found in {ZIP_DIR}")
+        print(f"\n  [{label}] SKIP — no {glob} files in {zip_dir}")
+        return None
 
-    print("\nBLS OEWS Metro -- Boulder extraction")
-    print(f"Folder: {ZIP_DIR}")
-    print(f"Found {len(zip_files)} zip(s): {[p.name for p in zip_files]}\n")
+    print(f"\n{'─'*56}")
+    print(f"  {label}  ({len(zip_files)} zips)")
 
     frames, provs, failed = [], [], []
-    for zp in tqdm(zip_files, desc="Processing"):
-        df, prov = process_zip(zp)
+    for zp in tqdm(zip_files, desc=f"  {scope_key}"):
+        df, prov = process_zip(zp, filter_fn, label)
         if df is not None and not df.empty:
             frames.append(df)
             provs.append(prov)
@@ -377,47 +442,69 @@ def main():
             failed.append(zp.name)
 
     if not frames:
-        print("\nNo Boulder data extracted. Re-run with LOG_LEVEL = logging.DEBUG.")
-        return
+        print(f"  [{label}] No data extracted.")
+        return None
 
-    combined = order_columns(pd.concat(frames, ignore_index=True, sort=False))
-    combined = combined.sort_values(["year", "occ_code"], kind="stable").reset_index(drop=True)
-    combined.to_csv(OUTPUT_CSV, index=False)
+    combined = pd.concat(frames, ignore_index=True, sort=False).drop_duplicates()
+    # Give every row a consistent area_name. National files pre-2019 carry no
+    # area column, so force the scope's geo_name; otherwise only backfill when
+    # the column is entirely absent/blank.
+    geo_name = scope_cfg.get("geo_name")
+    if geo_name:
+        combined["area_name"] = geo_name
+    elif "area_name" not in combined.columns or combined["area_name"].isna().all():
+        combined["area_name"] = label
+    # Some years ship two near-identical releases (e.g. 2003 state oesm03st +
+    # oesn03st). One row per (year, occ_code) per scope is the panel we want.
+    if "occ_code" in combined.columns:
+        combined = combined.drop_duplicates(subset=["year", "occ_code"], keep="first")
+    sort_keys = [c for c in ("year", "occ_code") if c in combined.columns]
+    combined = order_columns(
+        combined.sort_values(sort_keys, kind="stable").reset_index(drop=True)
+    )
+    combined.to_csv(scope_cfg["output_csv"], index=False)
 
     prov_df = pd.DataFrame(provs)
-    prov_df.to_csv(PROV_CSV, index=False)
-    write_data_dictionary(combined, prov_df)
+    prov_df.to_csv(scope_cfg["prov_csv"], index=False)
+    write_data_dictionary(combined, prov_df, scope_cfg)
 
     yrs = sorted(combined["year"].unique())
-    missing = [y for y in range(yrs[0], yrs[-1] + 1) if y not in yrs]
-    print(f"\n{'='*56}\nDONE")
-    print(f"  Years with Boulder data: {len(yrs)} ({yrs[0]}-{yrs[-1]})")
-    if missing:
-        print(f"  Missing years in range: {missing}")
-    if failed:
-        print(f"  Zips with no Boulder match: {failed}")
-    print(f"  Total rows: {len(combined):,}")
-    print(f"  Output:     {OUTPUT_CSV.name}")
-    print(f"  Provenance: {PROV_CSV.name}")
-    print(f"  Dictionary: {DICT_MD.name}")
+    return {
+        "label":   label,
+        "years":   yrs,
+        "rows":    len(combined),
+        "failed":  failed,
+        "output":  scope_cfg["output_csv"].name,
+    }
 
-    print("\n  Rows per year:")
-    for y, c in combined.groupby("year").size().items():
-        print(f"    {y}: {c:,}")
 
-    print("\n  Area-name variants matched:")
-    for n, c in combined.groupby("area_name").size().items():
-        print(f"    '{n}': {c:,}")
+# ── Main ──────────────────────────────────────────────────────────────────────
+def main():
+    logging.basicConfig(
+        level=LOG_LEVEL,
+        format="%(asctime)s  %(levelname)-8s  %(message)s",
+        datefmt="%H:%M:%S",
+        force=True,
+    )
 
-    # The extract keeps EVERY occupation published for Boulder — no occupation
-    # filtering. Report the breadth so that's visible.
-    if "occ_code" in combined.columns:
-        print(f"\n  Occupations kept (all SOC/OES codes): "
-              f"{combined['occ_code'].nunique():,} distinct codes")
-        if "occ_group" in combined.columns:
-            print("  Rows by occupation level (occ_group):")
-            for g, c in combined["occ_group"].fillna("(blank)").value_counts().items():
-                print(f"    {g}: {c:,}")
+    print("\nBLS OEWS Extractor — Boulder / Colorado / National")
+
+    results = {}
+    for key, cfg in SCOPES.items():
+        results[key] = run_scope(key, cfg)
+
+    print(f"\n{'='*56}")
+    print("DONE\n")
+    for key, r in results.items():
+        if r is None:
+            print(f"  {SCOPES[key]['label']:<24}  SKIPPED (no zip folder or no files)")
+        else:
+            yrs = r["years"]
+            print(f"  {r['label']:<24}  {len(yrs)} years "
+                  f"({yrs[0]}-{yrs[-1]})  "
+                  f"{r['rows']:,} rows  ->  {r['output']}")
+            if r["failed"]:
+                print(f"    no match: {r['failed']}")
 
 
 if __name__ == "__main__":
