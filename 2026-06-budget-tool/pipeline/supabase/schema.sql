@@ -66,10 +66,12 @@ create table if not exists public.contributions (
   fund_evict      integer,
   fund_airport    integer,
 
-  -- Revenue settings, in native units.
-  rev_fees        numeric,   -- $M of fees/fines
-  rev_property    numeric,   -- mill-levy increase
-  rev_sales       numeric,   -- percentage points of sales tax
+  -- Revenue settings. The three tax/fee sources are percentage-change sliders
+  -- (−25..25) over each source's current General Fund revenue, like gf_*; a
+  -- negative value is a revenue cut. Reserves stay a one-time dollar draw.
+  rev_fees        integer,   -- % change of GF fees & charges, −25..25
+  rev_property    integer,   -- % change of GF property tax, −25..25
+  rev_sales       integer,   -- % change of GF sales & use tax, −25..25
   reserves        numeric,   -- $M of one-time reserves
 
   -- Derived totals the widget computes (kept so the aggregate is recomputable
@@ -116,18 +118,15 @@ create table if not exists public.contributions (
     coalesce(gf_attorney,0)   between -25 and 25 and
     coalesce(gf_other,0)      between -25 and 25
   ),
-  constraint rev_nonneg check (
-    coalesce(rev_fees,0)    >= 0 and
-    coalesce(rev_property,0)>= 0 and
-    coalesce(rev_sales,0)   >= 0 and
-    coalesce(reserves,0)    >= 0
+  constraint rev_pct_in_range check (
+    coalesce(rev_fees,0)     between -25 and 25 and
+    coalesce(rev_property,0) between -25 and 25 and
+    coalesce(rev_sales,0)    between -25 and 25
   ),
+  constraint reserves_nonneg check ( coalesce(reserves,0) >= 0 ),
 
   -- Reject absurd or oversized values from a scripted insert.
   constraint contributions_sane_values check (
-    coalesce(rev_fees, 0)     <= 100  and
-    coalesce(rev_property, 0) <= 100  and
-    coalesce(rev_sales, 0)    <= 10   and
     coalesce(reserves, 0)     <= 1000 and
     (client_version is null or client_version between 0 and 1000) and
     char_length(coalesce(scenario, '')) <= 64  and

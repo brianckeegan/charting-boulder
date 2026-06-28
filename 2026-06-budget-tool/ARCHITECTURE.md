@@ -102,11 +102,11 @@ notebook's `GF_SLIDERS / FUND_SLIDERS / REV_COLS / DEMO_COLS` one-to-one.
 | `client_ts` | timestamptz | widget payload `ts` (untrusted) |
 | `client_version` | int | widget payload `v` (currently `4`) |
 | `scenario` | text | `"dual"` (both 2026 + 2027 tests) |
-| `gf_police` … `gf_planning` | int | 9 General Fund sliders, % change, −25..25 |
+| `gf_police` … `gf_other` | int | 11 General Fund sliders, % change, −25..25 |
 | `fund_capital` … `fund_airport` | int | 17 locked-fund sliders, % change, −25..25 |
-| `rev_fees` | numeric | fees/fines, $M, ≥ 0 |
-| `rev_property` | numeric | mill-levy increase, ≥ 0 |
-| `rev_sales` | numeric | sales-tax increase, percentage points, ≥ 0 |
+| `rev_fees` | int | fees & charges, % change of GF revenue, −25..25 |
+| `rev_property` | int | property tax, % change of GF revenue, −25..25 |
+| `rev_sales` | int | sales & use tax, % change of GF revenue, −25..25 |
 | `reserves` | numeric | one-time reserves, $M, ≥ 0 |
 | `spend_change` | numeric | signed $M; + = more spending = wider gap |
 | `revenue_total` | numeric | recurring revenue + reserves, $M |
