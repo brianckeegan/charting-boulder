@@ -282,7 +282,7 @@ const DEMO = [
   { id: "employment", t: "single", q: "What is your employment status?",
     o: ["Working full time for pay", "Working part time for pay", "Unemployed, looking for paid work", "Not retired, not looking for paid work", "Fully retired", "Prefer not to say"] },
   { id: "commute", t: "single", q: "How do you usually get around Boulder?",
-    o: ["Drive (alone)", "Carpool or rideshare", "Bus or other transit", "Bike or scooter", "Walk or roll", "Mostly work or stay at home", "Prefer not to say"] },
+    o: ["Drive (alone)", "Carpool or rideshare", "Bus or other transit", "Bike", "Scooter", "Walk or roll", "Mostly work or stay at home", "Prefer not to say"] },
   { id: "student", t: "single", q: "Are you a student at CU Boulder or any other college or university?",
     o: ["Yes, an undergraduate student", "Yes, a graduate student", "No", "Prefer not to say"] },
   { id: "education", t: "single", q: "What is the highest level of education you have finished?",
