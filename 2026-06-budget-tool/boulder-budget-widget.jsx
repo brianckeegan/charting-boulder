@@ -438,14 +438,14 @@ export default function BoulderBudgetWidget() {
           <div className="tnum" style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: C.blueDk, fontWeight: 800 }}>Charting Boulder · Interactive</div>
           <h1 style={{ fontSize: "clamp(23px,5.6vw,32px)", fontWeight: 800, lineHeight: 1.08, marginTop: 8, letterSpacing: "-0.02em" }}>Balance Boulder’s 2026 budget</h1>
           <p style={{ fontSize: 15.5, lineHeight: 1.5, color: C.inkSoft, marginTop: 10 }}>
-            Close the City of Boulder’s <strong style={{ color: C.ink }}>2026 and 2027 budget deficits</strong> by cutting spending or raising revenue. State law and voter initiatives limit what revenue you can raise and move.
+            Close the City of Boulder’s <strong style={{ color: C.ink }}>2026 and 2027 budget shortfalls</strong> — the gap between the cost of current services and the revenue coming in — by cutting spending or raising revenue. State law and voter initiatives limit what revenue you can raise and move.
           </p>
         </header>
 
         {/* Reveal bar */}
         <section className="mt-6">
           <Eyebrow>Where the $521 million sits</Eyebrow>
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 8 }}>About <strong style={{ color: C.ink }}>{pctMovable.toFixed(0)}¢ of every budget dollar</strong> sits in the General Fund ({fmt(GENERAL_FUND)}), the only large pot the council can freely redirect. The other {fmt(lockedTotal)} is dedicated by voters or restricted by law.</p>
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 8 }}>Of Boulder’s {fmt(TOTAL)} budget, <strong style={{ color: C.ink }}>{fmt(OPERATING)} is operating and {fmt(CAPITAL)} one-time capital</strong>. The shortfall is in the General Fund — {fmt(GENERAL_FUND)} of operating money, the only large pot the council can freely redirect (about {pctMovable.toFixed(0)}¢ of every dollar). The rest is dedicated by voters, restricted by law, or tied up in capital projects.</p>
           <div className="mt-2 rounded-md overflow-hidden flex" style={{ height: 44, border: `1px solid ${C.ink}` }}>
             <div style={{ width: `${pctMovable}%`, background: C.lime, color: C.ink }} className="flex items-center justify-center"><span style={{ fontSize: 12, fontWeight: 800 }}>{pctMovable.toFixed(0)}¢ movable</span></div>
             <div style={{ width: `${100 - pctMovable}%`, background: C.lockBg, color: C.inkSoft }} className="flex items-center justify-center gap-1"><Lock size={12} /><span style={{ fontSize: 11.5, fontWeight: 700 }}>{(100 - pctMovable).toFixed(0)}¢ locked</span></div>
@@ -455,7 +455,7 @@ export default function BoulderBudgetWidget() {
         {/* The two-tests explainer scrolls away; the live tally below sticks. */}
         <section className="mt-6">
           <Eyebrow>Two tests — your budget must pass both</Eyebrow>
-          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}>Balance the gap the city closed for 2026 <em>and</em> the deeper gap projected for 2027. One-time reserves count toward 2026 but can’t carry into 2027 — that bar is the structural test.</p>
+          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}>Close the gap the city faced for 2026 <em>and</em> the deeper gap projected for 2027. One-time reserves count toward 2026 but can’t carry into 2027 — that bar is the structural test.</p>
         </section>
 
         {/* Live balance — sticks to the top of the screen so the surplus/deficit
@@ -464,7 +464,7 @@ export default function BoulderBudgetWidget() {
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-baseline gap-2" style={{ minWidth: 0 }}>
               <span className="tnum" style={{ fontSize: 22, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{[balanced2026, balanced2027].filter(Boolean).length}/2</span>
-              <span style={{ fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 800, color: C.inkSoft }}>budgets balanced</span>
+              <span style={{ fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 800, color: C.inkSoft }}>gaps closed</span>
             </div>
             <div style={{ fontSize: 12, color: C.inkSoft }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {revenueOnly === 0 ? "no revenue change" : `${signed(revenueOnly)} revenue`}{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
           </div>
@@ -622,9 +622,9 @@ export default function BoulderBudgetWidget() {
             <Eyebrow>{balanced ? "You passed both tests" : "Keep going"}</Eyebrow>
             <p style={{ fontSize: 14, color: C.inkSoft, marginTop: 6 }}>
               {balanced
-                ? <>Balanced for 2026 <em>and</em> the 2027 projection, with {netCuts > 0.01 ? <><strong style={{ color: C.ink }}>{fmt(netCuts)} in net cuts</strong>, </> : null}<strong style={{ color: C.ink }}>{fmt(revenueOnly)} in recurring revenue</strong>{reserves > 0 ? <> and <strong style={{ color: C.ink }}>{fmt(reserves)} from one-time reserves</strong></> : null}{usedVote ? <>, including measures that would need a public vote.</> : <>, without asking voters for anything.</>}</>
+                ? <>Gap closed for 2026 <em>and</em> the 2027 projection, with {netCuts > 0.01 ? <><strong style={{ color: C.ink }}>{fmt(netCuts)} in net cuts</strong>, </> : null}<strong style={{ color: C.ink }}>{fmt(revenueOnly)} in recurring revenue</strong>{reserves > 0 ? <> and <strong style={{ color: C.ink }}>{fmt(reserves)} from one-time reserves</strong></> : null}{usedVote ? <>, including measures that would need a public vote.</> : <>, without asking voters for anything.</>}</>
                 : balanced2026
-                  ? <>2026 balances, but the <strong style={{ color: C.ink }}>2027 projection is still {fmt(-remaining2027)} short</strong>. One-time reserves won’t carry over — close it with cuts or recurring revenue.</>
+                  ? <>2026 is covered, but the <strong style={{ color: C.ink }}>2027 projection is still {fmt(-remaining2027)} short</strong>. One-time reserves won’t carry over — close it with cuts or recurring revenue.</>
                   : <>You’re still {fmt(-remaining2026)} short for 2026{remaining2027 > remaining2026 ? <> and {fmt(-remaining2027)} short for 2027</> : null}. Cut deeper, raise a fee, or send a tax to the ballot.</>}
             </p>
           </div>
@@ -675,7 +675,7 @@ export default function BoulderBudgetWidget() {
             <button onClick={() => setShowData(!showData)} style={{ background: "transparent", border: "none", cursor: "pointer", padding: 0 }} className="flex items-center gap-1.5"><span style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>DATA STATUS & SOURCES</span>{showData ? <ChevronUp size={14} color={C.inkSoft} /> : <ChevronDown size={14} color={C.inkSoft} />}</button>
             {showData && (
               <div style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 8, lineHeight: 1.6 }}>
-                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025) and its per-department breakdown, from the city’s 2026 General Fund Fund Financial (1100); the {fmt(7.5)} gap; city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes.</p>
+                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025) and its per-department breakdown, from the city’s 2026 General Fund Fund Financial (1100); the {fmt(7.5)} gap; city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures. All figures are nominal dollars as adopted; year-over-year changes (like the −7.8% General Fund) are not inflation-adjusted. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes.</p>
                 <p className="mt-2"><strong style={{ color: C.ink }}>Modeled (placeholder):</strong> the locked operating-fund amounts, the Open Space rate (~0.33%), and the revenue yields (per-mill, per-0.1% sales). They sum to the official totals but are estimates pending fund-level data. The “2027 projection” gap is illustrative, not a forecast. Treat any single modeled figure as approximate.</p>
                 <div className="mt-2">
                   <strong style={{ color: C.ink }}>Official budget data:</strong>
@@ -788,7 +788,7 @@ function GapBar({ label, sub, gap, remaining, balanced }) {
         </div>
         <div className="flex items-center gap-1.5" style={{ flexShrink: 0 }}>
           <span className="tnum" style={{ fontSize: 13.5, fontWeight: 800, color: balanced ? C.green : C.red }}>
-            {balanced ? (surplus > 0.05 ? `+${fmt(surplus)}` : "Balanced") : `${fmt(-remaining)} short`}
+            {balanced ? (surplus > 0.05 ? `+${fmt(surplus)}` : "Gap closed") : `${fmt(-remaining)} short`}
           </span>
           <span aria-hidden="true" style={{ fontSize: 15, lineHeight: 1 }}>{balanced ? "\u2705" : "\u2B1C"}</span>
         </div>
@@ -804,7 +804,7 @@ function GapBar({ label, sub, gap, remaining, balanced }) {
       </div>
       <div className="relative" style={{ fontSize: 10, color: C.inkSoft, marginTop: 2, height: 13 }} aria-hidden="true">
         <span style={{ position: "absolute", left: 0 }}>−$20M</span>
-        <span style={{ position: "absolute", left: `${zeroPct}%`, transform: "translateX(-50%)", fontWeight: 700 }}>balanced</span>
+        <span style={{ position: "absolute", left: `${zeroPct}%`, transform: "translateX(-50%)", fontWeight: 700 }}>closed</span>
         <span style={{ position: "absolute", right: 0 }}>+$20M</span>
       </div>
     </div>
@@ -841,7 +841,7 @@ function AggregateView({ agg }) {
   ];
   return (
     <div className="mt-3">
-      <div style={{ fontSize: 13, color: C.inkSoft }}><strong style={{ color: C.ink }} className="tnum">{agg.n}</strong> reader{agg.n === 1 ? "" : "s"} have balanced it. On average they closed <strong style={{ color: C.ink }} className="tnum">{avgRev}%</strong> of the gap with revenue and the rest with cuts{topCut ? <>; the most common deep cut was <strong style={{ color: C.ink }}>{topCut[0]}</strong>.</> : "."}</div>
+      <div style={{ fontSize: 13, color: C.inkSoft }}><strong style={{ color: C.ink }} className="tnum">{agg.n}</strong> reader{agg.n === 1 ? "" : "s"} have closed it. On average they covered <strong style={{ color: C.ink }} className="tnum">{avgRev}%</strong> of the gap with revenue and the rest with cuts{topCut ? <>; the most common deep cut was <strong style={{ color: C.ink }}>{topCut[0]}</strong>.</> : "."}</div>
       <div className="mt-3 grid gap-2">
         {rows.map((r) => (
           <div key={r.label}><div className="flex justify-between" style={{ fontSize: 12.5, color: C.inkSoft }}><span>{r.label}</span><span className="tnum" style={{ fontWeight: 800, color: C.ink }}>{r.v}%</span></div><div className="rounded-full mt-1" style={{ height: 7, background: C.lockBg }}><div style={{ height: "100%", width: `${r.v}%`, background: C.lime, borderRadius: 99 }} /></div></div>
