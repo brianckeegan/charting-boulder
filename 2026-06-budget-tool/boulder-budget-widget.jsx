@@ -225,13 +225,16 @@ const LOCKED_FUNDS = [
            vote  = requires voter approval under TABOR
            barred= prohibited by the Colorado Constitution (TABOR)
            none  = no legal mechanism exists                                  */
+/* base = the source's 2026 General Fund revenue ($M), from the 1100 Fund
+   Financial. Each unlocked source is a −25..25 % slider over its base, exactly
+   like a GF department; yield = base × pct/100, negative = a revenue cut. */
 const REVENUE = [
-  { id: "fees", label: "Fees & fines", status: "city", unit: "$M", min: 0, max: 8, step: 0.5, per: 1, modeled: true,
-    note: "Courts treat fees as non-taxes, so the city can raise many without a vote — but many are capped to the cost of the service. Real 2026 examples: +50¢ parking ≈ $0.8M, speed-on-green cameras ≈ $2.6M." },
-  { id: "property", label: "Property tax (mill levy)", status: "vote", unit: "mills", min: 0, max: 4, step: 0.25, per: 1.5, modeled: true,
-    note: "A mill-levy increase needs voter approval under TABOR. The legislature sets assessment rates, and recent state law caps annual growth. (≈ $1.5M per mill, modeled.)" },
-  { id: "sales", label: "General sales tax", status: "vote", unit: "%", min: 0, max: 0.5, step: 0.05, per: 46, modeled: true,
-    note: "Any increase needs voter approval under TABOR. Boulder’s city rate is already 3.86%, among Colorado’s highest. (≈ $4.6M per 0.1%, modeled.)" },
+  { id: "fees", label: "Fees & charges", status: "city", base: 12.3, modeled: true,
+    note: "Parking, fines, licenses and service charges — courts treat fees as non-taxes, so the city can move many without a vote, though most are capped to the cost of the service. About $12.3M in the General Fund today." },
+  { id: "property", label: "Property tax", status: "vote", base: 50.5, kind: "progressive", modeled: true,
+    note: "A progressive-leaning source — it tracks property wealth. About $50.5M in the General Fund. Changing the mill levy needs voter approval under TABOR." },
+  { id: "sales", label: "Sales & use tax", status: "vote", base: 80.4, kind: "regressive", modeled: true,
+    note: "The General Fund’s largest revenue (~$80.4M) and its most regressive: Boulder’s 3.86% rate is among Colorado’s highest and falls hardest on lower incomes. Changing it needs a public vote under TABOR." },
   { id: "income", label: "Local income tax", status: "barred", locked: true,
     note: "Colorado’s TABOR (Const. Art. X, §20) prohibits local income taxes outright. There is no rate to set." },
   { id: "wealth", label: "Wealth tax", status: "none", locked: true,
@@ -279,7 +282,7 @@ const DEMO = [
   { id: "employment", t: "single", q: "What is your employment status?",
     o: ["Working full time for pay", "Working part time for pay", "Unemployed, looking for paid work", "Not retired, not looking for paid work", "Fully retired", "Prefer not to say"] },
   { id: "commute", t: "single", q: "How do you usually get around Boulder?",
-    o: ["Drive (alone)", "Carpool or rideshare", "Bus or other transit", "Bike", "Walk or roll", "Mostly work or stay at home", "Prefer not to say"] },
+    o: ["Drive (alone)", "Carpool or rideshare", "Bus or other transit", "Bike or scooter", "Walk or roll", "Mostly work or stay at home", "Prefer not to say"] },
   { id: "student", t: "single", q: "Are you a student at CU Boulder or any other college or university?",
     o: ["Yes, an undergraduate student", "Yes, a graduate student", "No", "Prefer not to say"] },
   { id: "education", t: "single", q: "What is the highest level of education you have finished?",
@@ -340,7 +343,7 @@ export default function BoulderBudgetWidget() {
   /* derived math — spending change is signed (+ = more spending = worse gap) */
   const netSpendChange = useMemo(() => GF_DEPTS.reduce((s, d) => s + d.amount * ((deptPct[d.id] || 0) / 100), 0), [deptPct]);
   const netCuts = Math.max(0, -netSpendChange);
-  const revenueOnly = useMemo(() => REVENUE.reduce((s, r) => s + (r.locked ? 0 : (rev[r.id] || 0) * r.per), 0), [rev]); // new taxes/fees, not reserves
+  const revenueOnly = useMemo(() => REVENUE.reduce((s, r) => s + (r.locked ? 0 : r.base * ((rev[r.id] || 0) / 100)), 0), [rev]); // signed change in taxes/fees (− = cut), not reserves
   const totalRevenue = revenueOnly + reserves; // both help close the gap, but only revenueOnly is structural
   const trappedChange = useMemo(() => LOCKED_FUNDS.reduce((s, f) => s + f.amount * ((lockedPct[f.id] || 0) / 100), 0), [lockedPct]);
 
@@ -374,14 +377,14 @@ export default function BoulderBudgetWidget() {
        Field names match the columns in ARCHITECTURE.md one-to-one:
          gf_<id>    General Fund slider, −25..25 (% change)
          fund_<id>  locked-fund slider, −25..25 (% change; includes capital)
-         rev_*      revenue sliders in their native units; reserves in $M
+         rev_*      revenue sliders, −25..25 (% change of the source's GF revenue); reserves in $M
          demo_<id>  one column per survey item (multi-selects joined by "; ") */
     const payload = { v: 4, ts: new Date().toISOString(), scenario: "dual" };
     GF_DEPTS.forEach((d) => { payload[`gf_${d.id}`] = deptPct[d.id] || 0; });
     LOCKED_FUNDS.forEach((f) => { payload[`fund_${f.id}`] = lockedPct[f.id] || 0; });
-    payload.rev_fees = rev.fees || 0;          // $M
-    payload.rev_property = rev.property || 0;  // mills
-    payload.rev_sales = rev.sales || 0;        // percentage points
+    payload.rev_fees = rev.fees || 0;          // % change of GF fees & charges
+    payload.rev_property = rev.property || 0;  // % change of GF property tax
+    payload.rev_sales = rev.sales || 0;        // % change of GF sales & use tax
     payload.reserves = reserves;               // $M, one-time
     payload.spend_change = round(netSpendChange);
     payload.revenue_total = round(totalRevenue);
@@ -463,7 +466,7 @@ export default function BoulderBudgetWidget() {
               <span className="tnum" style={{ fontSize: 22, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{[balanced2026, balanced2027].filter(Boolean).length}/2</span>
               <span style={{ fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 800, color: C.inkSoft }}>budgets balanced</span>
             </div>
-            <div style={{ fontSize: 12, color: C.inkSoft }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {fmt(revenueOnly)} revenue{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
+            <div style={{ fontSize: 12, color: C.inkSoft }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {revenueOnly === 0 ? "no revenue change" : `${signed(revenueOnly)} revenue`}{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
           </div>
           <div className="mt-2">
             <GapBar label="2026 (adopted)" gap={SCENARIOS.y2026.gap} remaining={remaining2026} balanced={balanced2026} />
@@ -508,19 +511,19 @@ export default function BoulderBudgetWidget() {
 
         {/* Revenue — sliders by legal status */}
         <section className="mt-7">
-          <SectionHead icon={<Vote size={18} style={{ color: C.blueDk }} />} title="Raise revenue — within Colorado law" />
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>The city can set some fees on its own. Tax increases need a public vote under <strong style={{ color: C.blueDk }}>TABOR</strong>. And two tools are off the table entirely: Colorado bars a local income tax, and there’s no mechanism for a wealth tax.</p>
+          <SectionHead icon={<Vote size={18} style={{ color: C.blueDk }} />} title="Revenue — raise, cut, or shift it, within Colorado law" />
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>These sliders center on zero, like the spending ones: revenue can come down as well as up. The city sets fees on its own; changing a tax needs a public vote under <strong style={{ color: C.blueDk }}>TABOR</strong> — and that cuts both ways. Boulder leans hard on sales tax (3.86%, among Colorado’s highest), which falls hardest on lower incomes, and lightly on property tax, which tracks wealth. Voters could shift the mix — trim the regressive sales tax, lean more on progressive property tax — and keep a balanced budget balanced while changing who pays. Two tools stay off the table entirely: Colorado bars a local income tax, and there’s no mechanism for a wealth tax.</p>
           <div className="mt-3 grid gap-2.5">
             {REVENUE.map((r) => {
-              const st = STATUS[r.status]; const val = rev[r.id] || 0; const yield_ = r.locked ? 0 : val * r.per;
+              const st = STATUS[r.status]; const pct = rev[r.id] || 0; const yield_ = r.locked ? 0 : r.base * (pct / 100);
               return (
                 <div key={r.id} className="rounded-md p-3" style={{ background: r.locked ? C.lockBg : C.paper, border: `1px solid ${r.locked ? C.lock : C.hair}` }}>
                   <div className="flex items-center justify-between gap-2">
                     <div style={{ minWidth: 0 }}>
                       <div className="flex items-center gap-1.5 flex-wrap"><span style={{ fontSize: 14.5, fontWeight: 700, color: r.locked ? C.inkSoft : C.ink }}>{r.label}</span>{r.locked && <Lock size={12} style={{ color: C.lock }} />}</div>
-                      <div className="mt-1 flex flex-wrap gap-1"><Tag color={st.color} bg={st.bg}>{st.tag}</Tag></div>
+                      <div className="mt-1 flex flex-wrap gap-1"><Tag color={st.color} bg={st.bg}>{st.tag}</Tag>{r.kind && <Tag color={C.inkSoft}>{r.kind}</Tag>}</div>
                     </div>
-                    <span className="tnum" style={{ fontSize: 14, fontWeight: 800, color: r.locked ? C.lockText : (yield_ > 0 ? C.green : C.inkSoft), flexShrink: 0 }}>{r.locked ? "—" : `+${fmt(yield_)}`}</span>
+                    <div className="tnum text-right" style={{ flexShrink: 0 }}>{r.locked ? <span style={{ fontSize: 14, fontWeight: 800, color: C.lockText }}>—</span> : <><span style={{ fontSize: 14, fontWeight: 800 }}>{fmt(r.base)}</span><span style={{ fontSize: 12, color: pct === 0 ? C.inkSoft : (pct > 0 ? C.green : C.red), marginLeft: 8, fontWeight: 700 }}>{pct === 0 ? "unchanged" : signed(yield_)}</span></>}</div>
                   </div>
                   {r.locked ? (
                     <input className="lk" type="range" min={0} max={1} step={1} value={0} readOnly onChange={() => {}}
@@ -529,8 +532,17 @@ export default function BoulderBudgetWidget() {
                   ) : (
                     <>
                       <div className="flex items-center gap-3 mt-2">
-                        <input type="range" min={r.min} max={r.max} step={r.step} value={val} onChange={(e) => { setRev({ ...rev, [r.id]: +e.target.value }); setSubmitted(false); }} aria-label={`Adjust ${r.label}`} aria-valuetext={`${val === 0 ? "none" : (r.unit === "$M" ? fmt(val) : `${val}${r.unit === "%" ? " percent" : " mills"}`)}, raises ${fmt(yield_)}`} />
-                        <span className="tnum" style={{ fontSize: 12, color: C.inkSoft, width: 64, textAlign: "right", fontWeight: 700 }}>{r.unit === "$M" ? fmt(val) : `${val}${r.unit === "%" ? "%" : " mills"}`}</span>
+                        <input type="range" min={-25} max={25} step={1} value={pct} onChange={(e) => { setRev({ ...rev, [r.id]: +e.target.value }); setSubmitted(false); }} aria-label={`Adjust ${r.label}`} aria-valuetext={pct === 0 ? "no change" : `${pct > 0 ? "raise" : "cut"} ${Math.abs(pct)} percent, ${signed(yield_)}`} />
+                        <span className="tnum" style={{ fontSize: 12, color: C.inkSoft, width: 46, flexShrink: 0, textAlign: "right", fontWeight: 700 }}>{pct > 0 ? "+" : ""}{pct}%</span>
+                      </div>
+                      {/* Centered-0 scale, mirroring the GF department sliders. */}
+                      <div className="flex gap-3 mt-1" aria-hidden="true">
+                        <div className="scale" style={{ flex: 1, minWidth: 0, marginTop: 0, position: "relative", height: 16 }}>
+                          <span style={{ position: "absolute", left: 0 }}>−25% cut</span>
+                          <span style={{ position: "absolute", left: "50%", transform: "translateX(-50%)" }}>0</span>
+                          <span style={{ position: "absolute", right: 0 }}>+25% more</span>
+                        </div>
+                        <span style={{ width: 46, flexShrink: 0 }} />
                       </div>
                     </>
                   )}
