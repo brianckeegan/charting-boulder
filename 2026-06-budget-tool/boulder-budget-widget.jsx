@@ -231,10 +231,10 @@ const LOCKED_FUNDS = [
 const REVENUE = [
   { id: "fees", label: "Fees & charges", status: "city", base: 12.3, modeled: true,
     note: "Parking, fines, licenses and service charges — courts treat fees as non-taxes, so the city can move many without a vote, though most are capped to the cost of the service. About $12.3M in the General Fund today." },
-  { id: "property", label: "Property tax", status: "vote", base: 50.5, kind: "progressive", modeled: true,
-    note: "A progressive-leaning source — it tracks property wealth. About $50.5M in the General Fund. Changing the mill levy needs voter approval under TABOR." },
-  { id: "sales", label: "Sales & use tax", status: "vote", base: 80.4, kind: "regressive", modeled: true,
-    note: "The General Fund’s largest revenue (~$80.4M) and its most regressive: Boulder’s 3.86% rate is among Colorado’s highest and falls hardest on lower incomes. Changing it needs a public vote under TABOR." },
+  { id: "property", label: "Property tax", status: "vote", base: 50.5, modeled: true,
+    note: "About $50.5M in the General Fund. Changing the mill levy needs voter approval under TABOR." },
+  { id: "sales", label: "Sales & use tax", status: "vote", base: 80.4, modeled: true,
+    note: "The General Fund’s largest revenue (~$80.4M); Boulder’s 3.86% rate is among Colorado’s highest. Changing it needs a public vote under TABOR." },
   { id: "income", label: "Local income tax", status: "barred", locked: true,
     note: "Colorado’s TABOR (Const. Art. X, §20) prohibits local income taxes outright. There is no rate to set." },
   { id: "wealth", label: "Wealth tax", status: "none", locked: true,
@@ -512,7 +512,7 @@ export default function BoulderBudgetWidget() {
         {/* Revenue — sliders by legal status */}
         <section className="mt-7">
           <SectionHead icon={<Vote size={18} style={{ color: C.blueDk }} />} title="Revenue — raise, cut, or shift it, within Colorado law" />
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>These sliders center on zero, like the spending ones: revenue can come down as well as up. The city sets fees on its own; changing a tax needs a public vote under <strong style={{ color: C.blueDk }}>TABOR</strong> — and that cuts both ways. Boulder leans hard on sales tax (3.86%, among Colorado’s highest), which falls hardest on lower incomes, and lightly on property tax, which tracks wealth. Voters could shift the mix — trim the regressive sales tax, lean more on progressive property tax — and keep a balanced budget balanced while changing who pays. Two tools stay off the table entirely: Colorado bars a local income tax, and there’s no mechanism for a wealth tax.</p>
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>These sliders center on zero — revenue can come down as well as up, and you can shift the mix between sales tax and property tax. The city can set fees on its own, but changing a tax needs a public vote under <strong style={{ color: C.blueDk }}>TABOR</strong>, and a local income tax and a wealth tax are both off the table.</p>
           <div className="mt-3 grid gap-2.5">
             {REVENUE.map((r) => {
               const st = STATUS[r.status]; const pct = rev[r.id] || 0; const yield_ = r.locked ? 0 : r.base * (pct / 100);
