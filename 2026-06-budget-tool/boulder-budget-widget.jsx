@@ -181,12 +181,12 @@ const GF_DEPTS = [
   { id: "police", name: "Police", amount: 50.2, note: "Operations · Investigations · Administration · Alternative response · Dispatch · Support services" },
   { id: "genadmin", name: "General Government", amount: 38.4, note: "Citywide costs · Contingency · Debt service · Interfund transfers" },
   { id: "fire", name: "Fire-Rescue", amount: 29.1, note: "Emergency operations · EMS · Support services · Community risk reduction · Wildland" },
-  { id: "hhs", name: "Housing & Human Services (GF share)", amount: 13.0, note: "Housing grants · Human services · Homelessness · Behavioral health · Family services" },
+  { id: "hhs", name: "Housing & Human Services (GF share)", amount: 13.0, note: "Human services · Homelessness · Behavioral health · Family services" },
   { id: "it", name: "Innovation & Technology", amount: 10.4, note: "Infrastructure · Data & analytics · Application support · Cybersecurity · Project management" },
   { id: "manager", name: "City Manager's Office", amount: 9.7, note: "Economic vitality · Business services · City Clerk · Equity · Independent police monitor" },
   { id: "facilities", name: "Facilities & Fleet (GF share)", amount: 6.9, note: "Facility operations · Maintenance · Energy management · Fleet" },
   { id: "finance", name: "Finance", amount: 6.9, note: "Taxpayer services · Budget · Accounting · Licensing · Purchasing · Payroll" },
-  { id: "parksrec", name: "Parks & Recreation (GF share)", amount: 6.5, note: "Recreation · Park operations · Natural resources · Planning" },
+  { id: "parksrec", name: "Parks & Recreation (GF share)", amount: 6.5, note: "Park operations · Natural resources · Planning · Administration" },
   { id: "attorney", name: "City Attorney's Office", amount: 5.1, note: "Administration · Advisory · Prosecution & civil litigation" },
   { id: "other", name: "Other General Fund departments", amount: 18.3, note: "HR · Comms · Planning · Municipal Court · Climate · Community Vitality · Council · Utilities · Transportation" },
 ];
@@ -231,8 +231,8 @@ const LOCKED_FUNDS = [
 const REVENUE = [
   { id: "fees", label: "Fees & charges", status: "city", base: 12.3, modeled: true,
     note: "Parking, fines, licenses and service charges — courts treat fees as non-taxes, so the city can move many without a vote, though most are capped to the cost of the service. About $12.3M in the General Fund today." },
-  { id: "property", label: "Property tax", status: "vote", base: 50.5, modeled: true,
-    note: "About $50.5M in the General Fund. Changing the mill levy needs voter approval under TABOR." },
+  { id: "property", label: "Property tax", status: "vote", base: 39, modeled: true,
+    note: "About $39M of freely redirectable general-operations property tax. Of the city’s 11.648-mill levy, roughly 2 mills fund public safety, 0.9 parks, and 0.9 community housing — voter-dedicated, not adjustable here. Changing the mill levy needs voter approval under TABOR." },
   { id: "sales", label: "Sales & use tax", status: "vote", base: 80.4, modeled: true,
     note: "The General Fund’s largest revenue (~$80.4M); Boulder’s 3.86% rate is among Colorado’s highest. Changing it needs a public vote under TABOR." },
   { id: "income", label: "Local income tax", status: "barred", locked: true,
@@ -264,8 +264,8 @@ const DEDICATED_RATES = [
 ];
 
 const SCENARIOS = {
-  y2026: { id: "y2026", label: "2026 (adopted)", gap: 7.5, blurb: "The shortfall the city actually closed for 2026, as sales-tax revenue flattened." },
-  y2027: { id: "y2027", label: "2027 (projected)", gap: 18.0, blurb: "A deeper, modeled gap if sales-tax receipts keep sliding into 2027 — the structural test." },
+  y2026: { id: "y2026", label: "2026 (balanced last fall)", gap: 7.5, blurb: "The $7.5M General Fund shortfall the council closed for 2026, adopted in fall 2025." },
+  y2027: { id: "y2027", label: "2027 (forecast)", gap: 6.5, blurb: "The $6.5M shortfall forecast for 2027, which the council balances in fall 2026 — the live decision." },
 };
 
 /* ---- DEMO: optional reader survey. Adapted from the 2025 BVCP survey; some
@@ -438,14 +438,14 @@ export default function BoulderBudgetWidget() {
           <div className="tnum" style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: C.blueDk, fontWeight: 800 }}>Charting Boulder · Interactive</div>
           <h1 style={{ fontSize: "clamp(23px,5.6vw,32px)", fontWeight: 800, lineHeight: 1.08, marginTop: 8, letterSpacing: "-0.02em" }}>Balance Boulder’s 2026 budget</h1>
           <p style={{ fontSize: 15.5, lineHeight: 1.5, color: C.inkSoft, marginTop: 10 }}>
-            Close the City of Boulder’s <strong style={{ color: C.ink }}>2026 and 2027 budget shortfalls</strong> — the gap between the cost of current services and the revenue coming in — by cutting spending or raising revenue. State law and voter initiatives limit what revenue you can raise and move.
+            Close the City of Boulder’s <strong style={{ color: C.ink }}>2026 and 2027 budget shortfalls</strong> — the gap between the cost of continuing today’s services and the revenue coming in. The council balanced 2026 last fall; the <strong style={{ color: C.ink }}>$6.5M gap forecast for 2027</strong> is still open. Close it by cutting spending or raising revenue — within the limits state law and voters impose.
           </p>
         </header>
 
         {/* Reveal bar */}
         <section className="mt-6">
           <Eyebrow>Where the $521 million sits</Eyebrow>
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 8 }}>Of Boulder’s {fmt(TOTAL)} budget, <strong style={{ color: C.ink }}>{fmt(OPERATING)} is operating and {fmt(CAPITAL)} one-time capital</strong>. The shortfall is in the General Fund — {fmt(GENERAL_FUND)} of operating money, the only large pot the council can freely redirect (about {pctMovable.toFixed(0)}¢ of every dollar). The rest is dedicated by voters, restricted by law, or tied up in capital projects.</p>
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 8 }}>Of Boulder’s {fmt(TOTAL)} budget, <strong style={{ color: C.ink }}>{fmt(OPERATING)} is operating and {fmt(CAPITAL)} one-time capital</strong>. The shortfall is in the General Fund — {fmt(GENERAL_FUND)} of operating money, the only large pot the council can freely redirect (about {pctMovable.toFixed(0)}¢ of every dollar). The rest is dedicated by voters, restricted by law, or tied up in capital projects. Separately, the city keeps about 16.7% of its operating budget in emergency reserves — held for a downturn, not available for ongoing costs.</p>
           <div className="mt-2 rounded-md overflow-hidden flex" style={{ height: 44, border: `1px solid ${C.ink}` }}>
             <div style={{ width: `${pctMovable}%`, background: C.lime, color: C.ink }} className="flex items-center justify-center"><span style={{ fontSize: 12, fontWeight: 800 }}>{pctMovable.toFixed(0)}¢ movable</span></div>
             <div style={{ width: `${100 - pctMovable}%`, background: C.lockBg, color: C.inkSoft }} className="flex items-center justify-center gap-1"><Lock size={12} /><span style={{ fontSize: 11.5, fontWeight: 700 }}>{(100 - pctMovable).toFixed(0)}¢ locked</span></div>
@@ -454,8 +454,8 @@ export default function BoulderBudgetWidget() {
 
         {/* The two-tests explainer scrolls away; the live tally below sticks. */}
         <section className="mt-6">
-          <Eyebrow>Two tests — your budget must pass both</Eyebrow>
-          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}>Close the gap the city faced for 2026 <em>and</em> the deeper gap projected for 2027. One-time reserves count toward 2026 but can’t carry into 2027 — that bar is the structural test.</p>
+          <Eyebrow>Two years: 2026 balanced, 2027 still open</Eyebrow>
+          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}>The council closed the <strong style={{ color: C.ink }}>$7.5M</strong> gap for 2026 last fall — roughly $6.6M in new fees (mostly the $6.2M Transportation Maintenance Fee for roads) plus department cuts and 19 eliminated positions, no reserves. Your task is the <strong style={{ color: C.ink }}>$6.5M</strong> gap forecast for 2027. Cuts and recurring revenue close both bars below; one-time reserves can patch 2026 but not the recurring 2027 gap.</p>
         </section>
 
         {/* Live balance — sticks to the top of the screen so the surplus/deficit
@@ -469,8 +469,8 @@ export default function BoulderBudgetWidget() {
             <div style={{ fontSize: 12, color: C.inkSoft }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {revenueOnly === 0 ? "no revenue change" : `${signed(revenueOnly)} revenue`}{reserves > 0 ? ` · ${fmt(reserves)} reserves` : ""}</div>
           </div>
           <div className="mt-2">
-            <GapBar label="2026 (adopted)" gap={SCENARIOS.y2026.gap} remaining={remaining2026} balanced={balanced2026} />
-            <GapBar label="2027 (projected)" gap={SCENARIOS.y2027.gap} remaining={remaining2027} balanced={balanced2027} />
+            <GapBar label="2026 (closed last fall)" gap={SCENARIOS.y2026.gap} remaining={remaining2026} balanced={balanced2026} />
+            <GapBar label="2027 (forecast)" gap={SCENARIOS.y2027.gap} remaining={remaining2027} balanced={balanced2027} />
           </div>
         </section>
 
@@ -675,7 +675,7 @@ export default function BoulderBudgetWidget() {
             <button onClick={() => setShowData(!showData)} style={{ background: "transparent", border: "none", cursor: "pointer", padding: 0 }} className="flex items-center gap-1.5"><span style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>DATA STATUS & SOURCES</span>{showData ? <ChevronUp size={14} color={C.inkSoft} /> : <ChevronDown size={14} color={C.inkSoft} />}</button>
             {showData && (
               <div style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 8, lineHeight: 1.6 }}>
-                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025) and its per-department breakdown, from the city’s 2026 General Fund Fund Financial (1100); the {fmt(7.5)} gap; city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures. All figures are nominal dollars as adopted; year-over-year changes (like the −7.8% General Fund) are not inflation-adjusted. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes.</p>
+                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025) and its per-department breakdown, from the city’s 2026 General Fund Fund Financial (1100); the {fmt(7.5)} gap the council closed for 2026 and the {fmt(6.5)} gap forecast for 2027 (May 2026 Financial Forecast); city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures. All figures are nominal dollars as adopted; year-over-year changes (like the −7.8% General Fund) are not inflation-adjusted. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes.</p>
                 <p className="mt-2"><strong style={{ color: C.ink }}>Modeled (placeholder):</strong> the locked operating-fund amounts, the Open Space rate (~0.33%), and the revenue yields (per-mill, per-0.1% sales). They sum to the official totals but are estimates pending fund-level data. The “2027 projection” gap is illustrative, not a forecast. Treat any single modeled figure as approximate.</p>
                 <div className="mt-2">
                   <strong style={{ color: C.ink }}>Official budget data:</strong>
