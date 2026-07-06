@@ -16,6 +16,14 @@
 ( function () {
 	'use strict';
 
+	// Upper bound so a misbehaving (or cross-origin, attacker-controlled `src`)
+	// document cannot drive an absurd iframe height.
+	var MAX_H = 20000;
+
+	function clamp( h, min ) {
+		return Math.min( Math.max( h, min ), MAX_H );
+	}
+
 	function fit( frame ) {
 		if ( frame.getAttribute( 'data-bbw-auto' ) !== '1' ) {
 			return;
@@ -30,7 +38,7 @@
 				doc.documentElement.scrollHeight,
 				doc.body ? doc.body.scrollHeight : 0
 			);
-			frame.style.height = Math.max( h, min ) + 'px';
+			frame.style.height = clamp( h, min ) + 'px';
 		} catch ( e ) {
 			// Cross-origin: measurement is blocked. Keep a sensible min height.
 			if ( ! frame.style.height ) {
@@ -78,8 +86,10 @@
 		}
 		var frames = document.querySelectorAll( 'iframe.bbw-frame' );
 		for ( var i = 0; i < frames.length; i++ ) {
+			// Only the framed document itself (ev.source === its contentWindow) may
+			// set its own height, and only within a sane clamp.
 			if ( frames[ i ].contentWindow === ev.source ) {
-				frames[ i ].style.height = Math.max( d.height, 300 ) + 'px';
+				frames[ i ].style.height = clamp( d.height, 300 ) + 'px';
 			}
 		}
 	}, false );
