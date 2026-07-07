@@ -180,7 +180,7 @@ const TOTAL = 521.0, OPERATING = 407.68, CAPITAL = 113.3, GENERAL_FUND = 194.5;
 const GF_DEPTS = [
   { id: "police", name: "Police", amount: 50.2, note: "Operations · Investigations · Administration · Alternative response · Dispatch · Support services" },
   { id: "genadmin", name: "General Government", amount: 38.4, note: "Citywide costs · Contingency · Debt service · Interfund transfers" },
-  { id: "fire", name: "Fire-Rescue", amount: 29.1, note: "Emergency operations · EMS · Support services · Community risk reduction · Wildland" },
+  { id: "fire", name: "Fire-Rescue", amount: 29.1, note: "Emergency operations · EMS · Support services · Community risk reduction" },
   { id: "hhs", name: "Housing & Human Services (GF share)", amount: 13.0, note: "Human services · Homelessness · Behavioral health · Family services" },
   { id: "it", name: "Innovation & Technology", amount: 10.4, note: "Infrastructure · Data & analytics · Application support · Cybersecurity · Project management" },
   { id: "manager", name: "City Manager's Office", amount: 9.7, note: "Economic vitality · Business services · City Clerk · Equity · Independent police monitor" },
@@ -232,9 +232,9 @@ const REVENUE = [
   { id: "fees", label: "Fees & charges", status: "city", base: 12.3, modeled: true,
     note: "Parking, fines, licenses and service charges — courts treat fees as non-taxes, so the city can move many without a vote, though most are capped to the cost of the service. About $12.3M in the General Fund today." },
   { id: "property", label: "Property tax", status: "vote", base: 39, modeled: true,
-    note: "About $39M of freely redirectable general-operations property tax. Of the city’s 11.648-mill levy, roughly 2 mills fund public safety, 0.9 parks, and 0.9 community housing — voter-dedicated, not adjustable here. Changing the mill levy needs voter approval under TABOR." },
+    note: "About $39M of freely redirectable general-operations property tax — the city keeps roughly 13¢ of every property-tax dollar paid in Boulder, about $73 a year per $100,000 of home value. Of the 11.648-mill levy, roughly 2 mills fund public safety, 0.9 parks, and 0.9 community housing — voter-dedicated, not adjustable here. Changing the mill levy needs voter approval under TABOR." },
   { id: "sales", label: "Sales & use tax", status: "vote", base: 80.4, modeled: true,
-    note: "The General Fund’s largest revenue (~$80.4M); Boulder’s 3.86% rate is among Colorado’s highest. Changing it needs a public vote under TABOR." },
+    note: "The General Fund’s largest revenue (~$80.4M); Boulder’s 3.86% rate is among Colorado’s highest, and citywide it lands in six funds — five of them voter-dedicated. Changing it needs a public vote under TABOR." },
   { id: "income", label: "Local income tax", status: "barred", locked: true,
     note: "Colorado’s TABOR (Const. Art. X, §20) prohibits local income taxes outright. There is no rate to set." },
   { id: "wealth", label: "Wealth tax", status: "none", locked: true,
@@ -455,7 +455,7 @@ export default function BoulderBudgetWidget() {
         {/* The two-tests explainer scrolls away; the live tally below sticks. */}
         <section className="mt-6">
           <Eyebrow>Two years: 2026 balanced, 2027 still open</Eyebrow>
-          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}>The council closed the <strong style={{ color: C.ink }}>$7.5M</strong> gap for 2026 last fall — roughly $6.6M in new fees (mostly the $6.2M Transportation Maintenance Fee for roads) plus department cuts and 19 eliminated positions, no reserves. Your task is the <strong style={{ color: C.ink }}>$6.5M</strong> gap forecast for 2027. Cuts and recurring revenue close both bars below; one-time reserves can patch 2026 but not the recurring 2027 gap.</p>
+          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}>The squeeze is a running story: a mid-2025 gap of $8–10M forced a hiring freeze and 5% department savings, and the council closed the <strong style={{ color: C.ink }}>$7.5M</strong> gap for 2026 last fall — mostly department reductions and realignments, with 19 positions eliminated, plus about $6M in new citywide fees (transportation maintenance, speed-on-green cameras, parking, a single-family expansion fee) — while holding reserves at target. Your task is the <strong style={{ color: C.ink }}>$6.5M</strong> gap forecast for 2027. Cuts and recurring revenue close both bars below; one-time reserves can patch 2026 but not the recurring 2027 gap.</p>
         </section>
 
         {/* Live balance — sticks to the top of the screen so the surplus/deficit
@@ -477,7 +477,7 @@ export default function BoulderBudgetWidget() {
         {/* General Fund — bidirectional */}
         <section className="mt-7">
           <SectionHead icon={<Building2 size={18} style={{ color: C.ink }} />} title="The General Fund — what you can actually move" />
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>{fmt(GENERAL_FUND)} of discretionary money. Slide left to cut a department, right to spend more. Cuts close the gap; new spending widens it.</p>
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>{fmt(GENERAL_FUND)} of discretionary money. Slide left to cut a department, right to spend more. Cuts close the gap; new spending widens it. For a benchmark: heading into 2027, the city manager asked every department to prepare roughly <strong style={{ color: C.ink }}>4% ongoing reductions</strong>.</p>
           <div className="mt-3 grid gap-2.5">
             {GF_DEPTS.map((d) => {
               const pct = deptPct[d.id] || 0, delta = d.amount * (pct / 100);
@@ -580,6 +580,7 @@ export default function BoulderBudgetWidget() {
           <div className="mt-2 rounded-md p-3" style={{ background: C.lockBg, border: `1px solid ${C.lock}` }}>
             <span style={{ fontSize: 12.5, color: C.inkSoft }}>New 2026 revenue that’s also born locked: transportation maintenance fee <strong style={{ color: C.ink }}>+$2.25M</strong> → transportation only · single-family expansion fee <strong style={{ color: C.ink }}>+$0.4M</strong> → affordable housing only.</span>
           </div>
+          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 10 }}><strong style={{ color: C.ink }}>Frozen, but not forever — as of July 2026</strong>, the council is weighing November ballot measures: expanding the 0.9-mill parks tax to 2.252 mills (≈$7M/yr), a $200–400M recreation-and-safety bond, General Fund debt authority, and a tax on homes left vacant half the year — the only option polling above 50% (64%), and the one whose revenue would be general-purpose. Council has even studied the move these sliders let you test: raising property tax while cutting sales tax. The ballot list is final in August.</p>
         </section>
 
         {/* Locked spending funds */}
@@ -660,6 +661,7 @@ export default function BoulderBudgetWidget() {
               {aggState === "loading" && <p style={{ fontSize: 13, color: C.inkSoft, marginTop: 8 }}>Loading the shared tally…</p>}
               {aggState === "ready" && agg && (agg.n === 0 ? <p style={{ fontSize: 13, color: C.inkSoft, marginTop: 8 }}>No budgets submitted yet — yours can be first. Submissions are anonymous and shown to every reader in aggregate.</p> : <AggregateView agg={agg} />)}
               <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 10, fontStyle: "italic" }}>These are readers who chose to take part — a self-selected sample, not a representative or statistically valid survey of Boulder.</p>
+              <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 4, fontStyle: "italic" }}>For comparison: the city ran its own trade-off exercise this spring — Fund Our Future, 599 participants — which put facility maintenance and wildfire response at the top of the list.</p>
             </div>
           )}
         </section>
@@ -675,7 +677,7 @@ export default function BoulderBudgetWidget() {
             <button onClick={() => setShowData(!showData)} style={{ background: "transparent", border: "none", cursor: "pointer", padding: 0 }} className="flex items-center gap-1.5"><span style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>DATA STATUS & SOURCES</span>{showData ? <ChevronUp size={14} color={C.inkSoft} /> : <ChevronDown size={14} color={C.inkSoft} />}</button>
             {showData && (
               <div style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 8, lineHeight: 1.6 }}>
-                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025) and its per-department breakdown, from the city’s 2026 General Fund Fund Financial (1100); the {fmt(7.5)} gap the council closed for 2026 and the {fmt(6.5)} gap forecast for 2027 (May 2026 Financial Forecast); city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures. All figures are nominal dollars as adopted; year-over-year changes (like the −7.8% General Fund) are not inflation-adjusted. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes.</p>
+                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt(TOTAL)}; operating {fmt(OPERATING)}; capital {fmt(CAPITAL)} (shown as a locked row); General Fund {fmt(GENERAL_FUND)} (−7.8% vs 2025) and its per-department breakdown, from the city’s 2026 General Fund Fund Financial (1100); the {fmt(7.5)} gap the council closed for 2026 and the {fmt(6.5)} gap forecast for 2027 (May 2026 Financial Forecast); city sales/use tax 3.86%, of which 56% is dedicated; CCRS 0.3% (permanent, Nov. 2025); .25-cent Parks/Rec 0.25%; Transportation 0.15% increment; the four 2026 fee figures ($2.25M transportation maintenance, $2.6M speed-on-green, $0.8M parking, $0.4M single-family expansion) and the 2027 direction of ~4% department reductions, from the city’s 2026 Recommended Budget presentation and May 2026 Financial Forecast. All figures are nominal dollars as adopted; year-over-year changes (like the −7.8% General Fund) are not inflation-adjusted. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes.</p>
                 <p className="mt-2"><strong style={{ color: C.ink }}>Modeled (placeholder):</strong> the locked operating-fund amounts, the Open Space rate (~0.33%), and the revenue yields (per-mill, per-0.1% sales). They sum to the official totals but are estimates pending fund-level data. The “2027 projection” gap is illustrative, not a forecast. Treat any single modeled figure as approximate.</p>
                 <div className="mt-2">
                   <strong style={{ color: C.ink }}>Official budget data:</strong>

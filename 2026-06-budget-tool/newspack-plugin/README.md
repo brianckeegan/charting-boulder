@@ -21,12 +21,19 @@ standalone app into a themed site:
 
 ## Install
 
-1. Copy this folder into `wp-content/plugins/` (rename it to `boulder-budget-widget`
-   if you like), **or** zip it and use **Plugins → Add New → Upload Plugin**.
+1. Run `./package.sh` (in this folder) to produce `boulder-budget-widget-plugin.zip`,
+   then use **Plugins → Add New → Upload Plugin**. Or copy this folder into
+   `wp-content/plugins/boulder-budget-widget/` by hand.
 2. Activate **Boulder Budget Widget** on the Plugins screen.
 
-The current production build is already bundled in `assets/`, so it works
-immediately after activation.
+**Note on the bundled widget:** `assets/boulder-budget-widget.html` is
+**generated, not committed** — the repo tracks exactly one built widget (the
+canonical `../boulder-budget-widget.html`, the same file the public site
+deploys) so the two copies can never drift apart. On a fresh clone, run
+`BBW_PREVIEW=0 ../build-standalone.sh` once (it drops the plugin copy in
+automatically) or just use `./package.sh`, which does the copy for you. If the
+file is missing, the plugin shows editors a friendly build reminder instead of
+the widget.
 
 ## Use it
 
@@ -62,14 +69,15 @@ new version:
 
 ```bash
 # in 2026-06-budget-tool/
-BBW_PREVIEW=0 ./build-standalone.sh                     # must be the production build
-cp boulder-budget-widget.html newspack-plugin/assets/   # drop it into the plugin
+BBW_PREVIEW=0 ./build-standalone.sh   # production build; ALSO syncs the plugin copy
 ```
 
-That's it — the plugin cache-busts automatically (it versions the iframe URL by
-the file's modification time), so readers get the new build on next load. Always
-use the `BBW_PREVIEW=0` (production) build; the preview build adds a "local copy"
-banner and does not write to the live database.
+The build script copies the fresh widget into `newspack-plugin/assets/`
+automatically, and `./package.sh` re-zips the plugin for upload. The plugin
+cache-busts by the file's modification time, so readers get the new build on
+next load. Always use the `BBW_PREVIEW=0` (production) build; the preview build
+adds a "local copy" banner and does not write to the live database (`package.sh`
+refuses to ship a preview build).
 
 ## Backend (Supabase)
 
@@ -101,9 +109,10 @@ plugin change is needed.
 boulder-budget-widget.php   Main plugin: shortcode + block registration + renderer
 block.json                  Block metadata & attributes
 block.js                    Editor UI (plain JS, no build step)
+package.sh                  Builds the installable plugin zip (refreshes the widget copy)
 assets/embed.js             Front-end auto-resize helper
 assets/embed.css            Wrapper styling (minimal)
-assets/boulder-budget-widget.html   The compiled production build (replace to update)
+assets/boulder-budget-widget.html   GENERATED from ../boulder-budget-widget.html — not committed
 ```
 
 No build tooling, package manager, or npm install is required to run the plugin.
