@@ -127,11 +127,11 @@ TAIL
 SIZE=$(wc -c < "$OUT")
 echo "Wrote $OUT ($((SIZE/1024)) KB, self-contained — no network needed to view)."
 
-# Keep the Newspack plugin's bundled copy in sync. The repo tracks only ONE
+# Keep the WordPress plugin's bundled copy in sync. The repo tracks only ONE
 # built widget ($OUT, which the Pages deploy also uses); the plugin's copy is
 # generated here and gitignored, so the two can never drift apart.
-PLUGIN_ASSETS="$HERE/newspack-plugin/assets"
+PLUGIN_ASSETS="$HERE/boulder-budget-widget/assets"
 if [ -d "$PLUGIN_ASSETS" ]; then
   cp "$OUT" "$PLUGIN_ASSETS/boulder-budget-widget.html"
-  echo "Synced the Newspack plugin copy: $PLUGIN_ASSETS/boulder-budget-widget.html"
+  echo "Synced the WordPress plugin copy: $PLUGIN_ASSETS/boulder-budget-widget.html"
 fi
