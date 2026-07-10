@@ -16,6 +16,20 @@ OUT="$HERE/boulder-budget-widget-plugin.zip"
 
 command -v zip >/dev/null || { echo "zip is required" >&2; exit 1; }
 
+# Guard against the one mistake that matters: this plugin must NEVER install as
+# wp-content/plugins/newspack-plugin/ — that slug belongs to the real Newspack
+# platform plugin (Automattic), and WordPress will offer to overwrite it.
+# (This script always stages under boulder-budget-widget/ below regardless of
+# $HERE's name, so it's already safe — this just catches a renamed source dir
+# early with a clear message instead of silently producing a differently-named
+# zip than expected.)
+if [ "$(basename "$HERE")" = "newspack-plugin" ]; then
+  echo "This source folder is named 'newspack-plugin' — that collides with the" >&2
+  echo "real Newspack platform plugin's slug. Rename this directory (e.g. to" >&2
+  echo "boulder-budget-widget/) before packaging." >&2
+  exit 1
+fi
+
 if [ "${REBUILD:-0}" = "1" ]; then
   BBW_PREVIEW=0 bash "$HERE/../build-standalone.sh"
 fi

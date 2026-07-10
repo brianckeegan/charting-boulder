@@ -3,6 +3,16 @@
 Embeds the **Balance Boulder's Budget** interactive in any WordPress (Newspack)
 article via a `[boulder_budget]` shortcode **and** a native Gutenberg block.
 
+> **⚠️ Folder name matters.** This folder must install as `boulder-budget-widget/`
+> under `wp-content/plugins/`, NOT as `newspack-plugin/` — that slug belongs to
+> the real [Newspack platform plugin](https://wordpress.org/plugins/newspack-plugin/)
+> (Automattic), which most Newspack sites already have installed and active. If
+> you zip this folder yourself, zip it as `boulder-budget-widget/`, never as
+> `newspack-plugin/`. WordPress will otherwise offer to **replace** the real
+> Newspack plugin with this one on upload — do not accept that prompt if you
+> ever see it; click "Cancel and go back" instead. Using `./package.sh` (below)
+> always produces the correct folder name, so it's the safest install path.
+
 The widget is a self-contained React app (`boulder-budget-widget.html`, ~200 KB,
 React/icons all inlined) that writes reader submissions directly to Supabase with
 a browser-safe, RLS-protected publishable key. This plugin renders it inside an
@@ -72,7 +82,7 @@ new version:
 BBW_PREVIEW=0 ./build-standalone.sh   # production build; ALSO syncs the plugin copy
 ```
 
-The build script copies the fresh widget into `newspack-plugin/assets/`
+The build script copies the fresh widget into `boulder-budget-widget/assets/`
 automatically, and `./package.sh` re-zips the plugin for upload. The plugin
 cache-busts by the file's modification time, so readers get the new build on
 next load. Always use the `BBW_PREVIEW=0` (production) build; the preview build
