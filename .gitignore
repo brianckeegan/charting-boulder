@@ -73,24 +73,6 @@ node_modules/
 .env.local
 .env.*.local
 
-# Pipeline data exports (regenerate from Supabase; not source)
-responses.csv
-2026-06-budget-tool/pipeline/responses.csv
-
-# Notebook-generated analysis frame (regenerate by running the notebook; not source)
-2026-06-budget-tool/budget-survey-analysis-frame.csv
-
-# The WordPress/Newspack plugin's bundled widget is GENERATED from the
-# canonical build (build-standalone.sh copies it in) so only one built widget
-# is ever tracked. NOTE: this plugin folder is deliberately NOT named
-# "newspack-plugin" — that slug collides with the real Newspack platform
-# plugin (wordpress.org/plugins/newspack-plugin/) and will make WordPress
-# offer to overwrite it on upload. Keep it named boulder-budget-widget/.
-2026-06-budget-tool/boulder-budget-widget/assets/boulder-budget-widget.html
-2026-06-budget-tool/boulder-budget-widget/boulder-budget-widget-plugin.zip
-2026-06-budget-tool/newspack-plugin.zip
-2026-06-budget-tool/newspack-plugin/
-
 # Omit original BLS source data (re-downloadable; regenerated into processed CSVs).
 # Non-anchored so the rule survives the raw dirs being moved between subfolders.
 # oews_*_raw/ covers the metro/state/national (and legacy boulder) zip folders.
