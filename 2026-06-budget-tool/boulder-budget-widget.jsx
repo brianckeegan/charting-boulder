@@ -328,7 +328,10 @@ export default function BoulderBudgetWidget() {
 
   // Load Public Sans (Boulder Reporting Lab's typeface) so the widget renders in
   // the BRL face even as a standalone embed, instead of a system fallback.
+  // Skipped in the inline (web component) build, where the widget deliberately
+  // inherits the host page's typography and makes no third-party font request.
   useEffect(() => {
+    if (typeof window !== "undefined" && window.__BBW_INHERIT_FONTS__) return;
     if (typeof document === "undefined" || document.getElementById("bbw-fonts")) return;
     const mk = (rel, href, cross) => { const l = document.createElement("link"); l.rel = rel; l.href = href; if (cross) l.crossOrigin = "anonymous"; return l; };
     const css = mk("stylesheet", "https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
@@ -460,7 +463,11 @@ export default function BoulderBudgetWidget() {
 
         {/* Live balance — sticks to the top of the screen so the surplus/deficit
             stays in view while you scroll down and tweak the sliders. */}
-        <section className="mt-3 rounded-lg" style={{ background: C.limeTint, border: `1px solid ${C.hair}`, position: "sticky", top: 0, zIndex: 30, padding: 12, boxShadow: "0 6px 16px rgba(26,26,26,0.10)" }}>
+        {/* Sticks to the top of whatever is scrolling: the iframe viewport in the
+            standalone build, the article page in the inline build. --bbw-sticky-top
+            is set by the web component to clear the host site's own sticky header;
+            it falls back to 0 everywhere else. */}
+        <section className="mt-3 rounded-lg" style={{ background: C.limeTint, border: `1px solid ${C.hair}`, position: "sticky", top: "var(--bbw-sticky-top, 0px)", zIndex: 30, padding: 12, boxShadow: "0 6px 16px rgba(26,26,26,0.10)" }}>
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-baseline gap-2" style={{ minWidth: 0 }}>
               <span className="tnum" style={{ fontSize: 22, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{[balanced2026, balanced2027].filter(Boolean).length}/2</span>
