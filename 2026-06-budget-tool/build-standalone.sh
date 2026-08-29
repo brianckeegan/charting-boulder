@@ -42,10 +42,23 @@ ESBUILD_V=0.21.5
 
 echo "Build dir: $BUILD_DIR"
 cd "$BUILD_DIR"
-[ -f package.json ] || npm init -y >/dev/null 2>&1
-echo "Installing pinned build-time deps…"
-npm install --no-audit --no-fund --save-exact \
-  "react@$REACT_V" "react-dom@$REACTDOM_V" "lucide-react@$LUCIDE_V" "esbuild@$ESBUILD_V" >/dev/null 2>&1
+# Reproducible install. `npm ci` installs exactly the tree recorded in the
+# committed lockfile — transitive dependencies included, each with an integrity
+# hash — and fails if the manifest and lockfile disagree. This matters more than
+# usual here: the result is inlined into a single bundle served to readers, so
+# Subresource Integrity cannot protect it after the fact. Without the lockfile,
+# transitive deps would silently re-resolve on every build.
+if [ -f "$HERE/build-deps/package-lock.json" ]; then
+  cp "$HERE/build-deps/package.json" "$HERE/build-deps/package-lock.json" ./
+  echo "Installing pinned build-time deps (npm ci, locked tree)…"
+  npm ci --no-audit --no-fund >/dev/null 2>&1
+else
+  echo "WARNING: build-deps/package-lock.json missing — falling back to an" >&2
+  echo "unpinned npm install. The build will work but is not reproducible." >&2
+  [ -f package.json ] || npm init -y >/dev/null 2>&1
+  npm install --no-audit --no-fund --save-exact \
+    "react@$REACT_V" "react-dom@$REACTDOM_V" "lucide-react@$LUCIDE_V" "esbuild@$ESBUILD_V" >/dev/null 2>&1
+fi
 
 cp "$JSX" ./widget.jsx
 
