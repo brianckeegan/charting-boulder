@@ -11,12 +11,29 @@
 # (a normal local disk does; some network/cloud mounts do not — if npm errors with
 # ENOSYS/symlink, set BUILD_DIR to a local path).
 #
-# Usage:  ./build-standalone.sh
+# Two build targets:
+#   BBW_TARGET=html   (default) -> boulder-budget-widget.html, the standalone page
+#                                  used by GitHub Pages and the Newspack Iframe ZIP.
+#   BBW_TARGET=embed            -> boulder-budget-embed.js, a Web Component
+#                                  (<boulder-budget>) that renders INLINE in an
+#                                  article with its styles sealed in a Shadow DOM.
+#                                  No iframe, so no fixed height to guess.
+#
+# Usage:  ./build-standalone.sh                    # standalone HTML (preview)
+#         BBW_PREVIEW=0 ./build-standalone.sh      # standalone HTML (production)
+#         BBW_PREVIEW=0 BBW_TARGET=embed ./build-standalone.sh   # embed bundle
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 JSX="$HERE/boulder-budget-widget.jsx"
 OUT="$HERE/boulder-budget-widget.html"
+OUT_EMBED="$HERE/boulder-budget-embed.js"
+BBW_TARGET="${BBW_TARGET:-html}"
 BUILD_DIR="${BUILD_DIR:-$(mktemp -d)}"
+
+case "$BBW_TARGET" in
+  html|embed) ;;
+  *) echo "BBW_TARGET must be 'html' or 'embed' (got '$BBW_TARGET')" >&2; exit 1 ;;
+esac
 
 REACT_V=18.2.0
 REACTDOM_V=18.2.0
@@ -32,43 +49,9 @@ npm install --no-audit --no-fund --save-exact \
 
 cp "$JSX" ./widget.jsx
 
-# Preview builds keep submissions in this browser session and never touch the
-# live database — safe for a double-click review copy. Build a PRODUCTION HTML
-# that writes to the configured backend with:  BBW_PREVIEW=0 ./build-standalone.sh
-BBW_PREVIEW="${BBW_PREVIEW:-1}"
-PREVIEW_JS=true; [ "$BBW_PREVIEW" = "0" ] && PREVIEW_JS=false
-
-# Entry: bare imports (no CDNs) + config flags + in-memory storage shim + mount.
-cat > entry.jsx << EOF
-import React from "react";
-import { createRoot } from "react-dom/client";
-import BoulderBudgetWidget from "./widget.jsx";
-(function () {
-  if (typeof window !== "undefined") {
-    window.__BBW_PREVIEW__ = ${PREVIEW_JS};
-    if (!window.storage) {
-      var mem = {};
-      window.storage = {
-        get: function (k) { return Promise.resolve(k in mem ? { key: k, value: mem[k], shared: true } : null); },
-        set: function (k, v) { mem[k] = v; return Promise.resolve({ key: k, value: v, shared: true }); },
-      };
-    }
-  }
-})();
-createRoot(document.getElementById("root")).render(<BoulderBudgetWidget />);
-EOF
-
-echo "Bundling (JSX compiled; React/ReactDOM/icons inlined; production; minified)…"
-node_modules/.bin/esbuild entry.jsx \
-  --bundle --minify --format=iife \
-  --jsx=automatic \
-  --define:process.env.NODE_ENV='"production"' \
-  --loader:.jsx=jsx \
-  --target=es2018 \
-  --outfile=bundle.js
-
 # Static CSS for the exact Tailwind utility classes the widget uses (the rest of
 # the styling is inline styles and the component's own scoped <style> block).
+# Generated before bundling so the embed target can inline it into the Shadow DOM.
 cat > static.css << 'EOF'
 *,*::before,*::after{box-sizing:border-box}
 .flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}
@@ -87,6 +70,176 @@ cat > static.css << 'EOF'
 .pt-3{padding-top:12px}.pt-6{padding-top:24px}.pb-5{padding-bottom:20px}
 .p-3{padding:12px}.p-4{padding:16px}
 EOF
+
+# Shadow-DOM stylesheet for the embed target: the same utilities, plus a :host
+# block that normalises spacing WITHOUT importing a typeface — inline builds
+# inherit the host page's font so the interactive reads as native article text.
+if [ "$BBW_TARGET" = "embed" ]; then
+  {
+    cat << 'EOF'
+:host{display:block;font-family:inherit;font-size:16px;line-height:1.45;color:#1A1A1A;--bbw-sticky-top:0px}
+:host([hidden]){display:none}
+EOF
+    cat static.css
+  } > shadow.css
+fi
+
+# Preview builds keep submissions in this browser session and never touch the
+# live database — safe for a double-click review copy. Build a PRODUCTION HTML
+# that writes to the configured backend with:  BBW_PREVIEW=0 ./build-standalone.sh
+BBW_PREVIEW="${BBW_PREVIEW:-1}"
+PREVIEW_JS=true; [ "$BBW_PREVIEW" = "0" ] && PREVIEW_JS=false
+
+# Entry: bare imports (no CDNs) + config flags + in-memory storage shim + mount.
+if [ "$BBW_TARGET" = "html" ]; then
+cat > entry.jsx << EOF
+import React from "react";
+import { createRoot } from "react-dom/client";
+import BoulderBudgetWidget from "./widget.jsx";
+(function () {
+  if (typeof window !== "undefined") {
+    window.__BBW_PREVIEW__ = ${PREVIEW_JS};
+    if (!window.storage) {
+      var mem = {};
+      window.storage = {
+        get: function (k) { return Promise.resolve(k in mem ? { key: k, value: mem[k], shared: true } : null); },
+        set: function (k, v) { mem[k] = v; return Promise.resolve({ key: k, value: v, shared: true }); },
+      };
+    }
+  }
+})();
+createRoot(document.getElementById("root")).render(<BoulderBudgetWidget />);
+EOF
+else
+# Embed entry: define <boulder-budget> as a Web Component. Styles live in a
+# Shadow DOM so the article's CSS and the widget's CSS cannot reach each other,
+# and there is no iframe — the interactive is ordinary article content, so its
+# full height just flows down the page.
+cat > entry.jsx << EOF
+import React from "react";
+import { createRoot } from "react-dom/client";
+import BoulderBudgetWidget from "./widget.jsx";
+import shadowCss from "./shadow.css";
+
+(function () {
+  if (typeof window === "undefined" || !window.customElements) return;
+  window.__BBW_PREVIEW__ = ${PREVIEW_JS};
+  window.__BBW_INHERIT_FONTS__ = true;   // use the host page's typeface
+  if (!window.storage) {
+    var mem = {};
+    window.storage = {
+      get: function (k) { return Promise.resolve(k in mem ? { key: k, value: mem[k], shared: true } : null); },
+      set: function (k, v) { mem[k] = v; return Promise.resolve({ key: k, value: v, shared: true }); },
+    };
+  }
+
+  var TAG = "boulder-budget";
+  if (customElements.get(TAG)) return;   // never define twice
+
+  // Measure the host site's own sticky/fixed header so our score bar parks just
+  // below it instead of underneath it. querySelectorAll does not pierce shadow
+  // roots, so the widget's own sticky bar is never counted. Re-measured on
+  // resize and after layout settles, and overridable per-embed with the
+  // sticky-offset attribute.
+  function detectStickyOffset() {
+    if (!document.body) return 0;
+    var bottom = 0;
+    var vw = window.innerWidth || 0;
+    var els = document.body.querySelectorAll("*");
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i], cs;
+      try { cs = getComputedStyle(el); } catch (e) { continue; }
+      if (cs.position !== "fixed" && cs.position !== "sticky") continue;
+      if (cs.visibility === "hidden" || cs.display === "none") continue;
+      var r = el.getBoundingClientRect();
+      if (r.width < vw * 0.5) continue;             // a full-width bar, not a badge
+      if (r.height < 8 || r.height > 200) continue; // plausible header height
+      if (r.top > 4 || r.bottom <= 0) continue;     // actually pinned at the top
+      if (r.bottom > bottom) bottom = r.bottom;
+    }
+    return Math.round(bottom);
+  }
+
+  class BoulderBudgetElement extends HTMLElement {
+    constructor() {
+      super();
+      var self = this, t = null;
+      this._onResize = function () {
+        clearTimeout(t);
+        t = setTimeout(function () { self._sync(); }, 150);
+      };
+      this._onFirstScroll = function () {
+        window.removeEventListener("scroll", self._onFirstScroll);
+        self._sync();                                // catch reveal-on-scroll headers
+      };
+    }
+    connectedCallback() {
+      if (!this.shadowRoot) {
+        var shadow = this.attachShadow({ mode: "open" });
+        var style = document.createElement("style");
+        style.textContent = shadowCss;
+        var mount = document.createElement("div");
+        shadow.appendChild(style);
+        shadow.appendChild(mount);
+        this._root = createRoot(mount);
+        this._root.render(<BoulderBudgetWidget />);
+      }
+      this._sync();
+      var self = this;
+      setTimeout(function () { self._sync(); }, 300);   // after layout settles
+      setTimeout(function () { self._sync(); }, 1500);  // after webfonts/images
+      window.addEventListener("resize", this._onResize);
+      window.addEventListener("scroll", this._onFirstScroll, { passive: true });
+    }
+    disconnectedCallback() {
+      window.removeEventListener("resize", this._onResize);
+      window.removeEventListener("scroll", this._onFirstScroll);
+    }
+    _sync() {
+      var attr = this.getAttribute("sticky-offset");
+      var manual = attr !== null && attr !== "" && !isNaN(parseInt(attr, 10));
+      var px = manual ? parseInt(attr, 10) : detectStickyOffset();
+      this.style.setProperty("--bbw-sticky-top", Math.max(0, px) + "px");
+    }
+  }
+  customElements.define(TAG, BoulderBudgetElement);
+})();
+EOF
+fi
+
+echo "Bundling (JSX compiled; React/ReactDOM/icons inlined; production; minified)…"
+node_modules/.bin/esbuild entry.jsx \
+  --bundle --minify --format=iife \
+  --jsx=automatic \
+  --define:process.env.NODE_ENV='"production"' \
+  --loader:.jsx=jsx \
+  --loader:.css=text \
+  --target=es2018 \
+  --outfile=bundle.js
+
+# The embed target emits JavaScript, not a page: stop here.
+if [ "$BBW_TARGET" = "embed" ]; then
+  {
+    cat << 'BANNER'
+/*! Balance Boulder's Budget — inline embed (Web Component <boulder-budget>).
+ *  Self-contained: React, icons and styles are bundled, with styles sealed in a
+ *  Shadow DOM so the article's CSS and the widget's CSS cannot collide. There is
+ *  no iframe, so the interactive flows at its natural height.
+ *
+ *  Usage:  <script src="/path/to/boulder-budget-embed.js" defer></script>
+ *          <boulder-budget></boulder-budget>
+ *
+ *  The running score bar auto-detects a fixed site header and parks just below
+ *  it; override with <boulder-budget sticky-offset="72"></boulder-budget>.
+ *  Source: https://github.com/brianckeegan/charting-boulder
+ */
+BANNER
+    cat bundle.js
+  } > "$OUT_EMBED"
+  SIZE=$(wc -c < "$OUT_EMBED")
+  echo "Wrote $OUT_EMBED ($((SIZE/1024)) KB) — inline Web Component build."
+  exit 0
+fi
 
 echo "Assembling self-contained HTML…"
 {
@@ -126,12 +279,3 @@ TAIL
 
 SIZE=$(wc -c < "$OUT")
 echo "Wrote $OUT ($((SIZE/1024)) KB, self-contained — no network needed to view)."
-
-# Keep the WordPress plugin's bundled copy in sync. The repo tracks only ONE
-# built widget ($OUT, which the Pages deploy also uses); the plugin's copy is
-# generated here and gitignored, so the two can never drift apart.
-PLUGIN_ASSETS="$HERE/boulder-budget-widget/assets"
-if [ -d "$PLUGIN_ASSETS" ]; then
-  cp "$OUT" "$PLUGIN_ASSETS/boulder-budget-widget.html"
-  echo "Synced the WordPress plugin copy: $PLUGIN_ASSETS/boulder-budget-widget.html"
-fi
