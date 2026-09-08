@@ -1,0 +1,13 @@
+{
+  "name": "boulder-budget-build-deps",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pinned build-time dependencies for build-standalone.sh. The lockfile beside this file is what makes the widget bundle reproducible: without it, transitive dependencies resolve fresh on every build and land inlined in a file served to readers, where Subresource Integrity cannot protect them.",
+  "license": "MIT",
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "lucide-react": "0.383.0",
+    "esbuild": "0.21.5"
+  }
+}

@@ -141,6 +141,34 @@ comment on table public.contributions is
 create index if not exists contributions_created_at_idx on public.contributions (created_at);
 
 -- ---------------------------------------------------------------------------
+-- Allowlist of General Fund department names the widget may report as a
+-- reader's deepest cut. top_cut is echoed back to every reader in the public
+-- tally, so it must never be free text. Keep in lockstep with GF_DEPTS in
+-- boulder-budget-widget.jsx; update this function BEFORE shipping a rename.
+-- ---------------------------------------------------------------------------
+create or replace function public.bbw_gf_departments()
+returns text[]
+language sql
+immutable
+parallel safe
+set search_path = ''
+as $$
+  select array[
+    'Police',
+    'General Government',
+    'Fire-Rescue',
+    'Housing & Human Services (GF share)',
+    'Innovation & Technology',
+    'City Manager''s Office',
+    'Facilities & Fleet (GF share)',
+    'Finance',
+    'Parks & Recreation (GF share)',
+    'City Attorney''s Office',
+    'Other General Fund departments'
+  ]::text[];
+$$;
+
+-- ---------------------------------------------------------------------------
 -- Row Level Security. The browser writes directly with the PUBLISHABLE key
 -- (role `anon`): allowed to INSERT a contribution, but NOT to read, update, or
 -- delete any row. Inserts use `Prefer: return=minimal` so nothing is echoed
@@ -252,6 +280,7 @@ begin
           select top_cut, count(*) as c
           from public.contributions
           where top_cut is not null
+            and top_cut = any (public.bbw_gf_departments())   -- read-time filter
           group by top_cut
         ) t
       ), '{}'::jsonb)
@@ -314,6 +343,7 @@ values (1, (
         select top_cut, count(*) as c
         from public.contributions
         where top_cut is not null
+          and top_cut = any (public.bbw_gf_departments())
         group by top_cut
       ) t
     ), '{}'::jsonb)
@@ -322,3 +352,137 @@ values (1, (
 ), now())
 on conflict (id) do update
   set agg = excluded.agg, updated_at = excluded.updated_at;
+
+-- ---------------------------------------------------------------------------
+-- Input hardening (see migrations/2026-08-29-security-hardening.sql).
+-- Constraints are NOT VALID so they enforce on every new row without failing
+-- on legacy data; validate them explicitly once the table is known clean.
+-- ---------------------------------------------------------------------------
+alter table public.contributions drop constraint if exists top_cut_known_department;
+alter table public.contributions
+  add constraint top_cut_known_department
+  check (top_cut is null or top_cut = any (public.bbw_gf_departments()))
+  not valid;
+
+-- ---------------------------------------------------------------------------
+-- 2. Length bounds for the survey columns.
+--
+--    120 is comfortably above every single-select option (the longest is the
+--    76-character housing-type answer). demo_race is a MULTI-select joined with
+--    "; ", so selecting all nine options legitimately stores 194 characters —
+--    it gets 400. Picking 120 for demo_race would silently reject genuine
+--    submissions from readers who identify with several groups.
+-- ---------------------------------------------------------------------------
+alter table public.contributions drop constraint if exists demo_len_bounded;
+alter table public.contributions
+  add constraint demo_len_bounded check (
+    char_length(coalesce(demo_years,      '')) <= 120 and
+    char_length(coalesce(demo_area,       '')) <= 120 and
+    char_length(coalesce(demo_employment, '')) <= 120 and
+    char_length(coalesce(demo_commute,    '')) <= 120 and
+    char_length(coalesce(demo_student,    '')) <= 120 and
+    char_length(coalesce(demo_education,  '')) <= 120 and
+    char_length(coalesce(demo_building,   '')) <= 120 and
+    char_length(coalesce(demo_tenure,     '')) <= 120 and
+    char_length(coalesce(demo_income,     '')) <= 120 and
+    char_length(coalesce(demo_age,        '')) <= 120 and
+    char_length(coalesce(demo_gender,     '')) <= 120 and
+    char_length(coalesce(demo_lgbtq,      '')) <= 120 and
+    char_length(coalesce(demo_disability, '')) <= 120 and
+    char_length(coalesce(demo_race,       '')) <= 400   -- multi-select, joined
+  ) not valid;
+
+-- ---------------------------------------------------------------------------
+-- 3. Per-IP rate limiting.
+--
+--    The client IP is NEVER stored. It is hashed with a random per-project salt
+--    that lives in a table the publishable key cannot read, so the audit table
+--    holds opaque hashes that cannot be reversed to an address.
+--
+--    Defaults: 20 inserts per IP per 10 minutes. Deliberately generous — Boulder
+--    readers may share an address behind campus or carrier NAT, and the goal is
+--    to stop scripted flooding, not to enforce one submission per person. Tune
+--    with the UPDATE at the bottom of this file.
+-- ---------------------------------------------------------------------------
+create table if not exists public.rate_limit_config (
+  id             integer primary key default 1 check (id = 1),
+  salt           text    not null default gen_random_uuid()::text,
+  max_per_window integer not null default 20,
+  window_minutes integer not null default 10
+);
+insert into public.rate_limit_config (id) values (1) on conflict (id) do nothing;
+
+create table if not exists public.insert_audit (
+  ip_hash    text        not null,
+  created_at timestamptz not null default now()
+);
+create index if not exists insert_audit_lookup
+  on public.insert_audit (ip_hash, created_at desc);
+
+-- Neither table is reachable with the publishable key: privileges revoked and
+-- RLS on with no policies at all.
+alter table public.rate_limit_config enable row level security;
+alter table public.insert_audit      enable row level security;
+revoke all on public.rate_limit_config from anon, authenticated;
+revoke all on public.insert_audit      from anon, authenticated;
+
+create or replace function public.contributions_rate_limit()
+returns trigger
+language plpgsql
+security definer                   -- must read the salt and write the audit row
+set search_path = ''
+as $$
+declare
+  hdrs json;
+  ip   text;
+  cfg  public.rate_limit_config%rowtype;
+  h    text;
+  used integer;
+begin
+  select * into cfg from public.rate_limit_config where id = 1;
+  if not found then
+    return new;                    -- unconfigured: fail open rather than block readers
+  end if;
+
+  -- PostgREST exposes the request headers as a GUC. Absent for direct SQL
+  -- inserts and psql, so treat "no header" as "not a public request".
+  begin
+    hdrs := current_setting('request.headers', true)::json;
+  exception when others then
+    hdrs := null;
+  end;
+
+  ip := nullif(btrim(split_part(coalesce(hdrs ->> 'x-forwarded-for', ''), ',', 1)), '');
+  if ip is null then
+    return new;
+  end if;
+
+  h := encode(sha256(convert_to(ip || cfg.salt, 'UTF8')), 'hex');
+
+  select count(*) into used
+  from public.insert_audit
+  where ip_hash = h
+    and created_at > now() - make_interval(mins => cfg.window_minutes);
+
+  if used >= cfg.max_per_window then
+    raise exception
+      'Too many submissions from this network. Please try again in a few minutes.';
+  end if;
+
+  insert into public.insert_audit (ip_hash) values (h);
+
+  -- Opportunistic pruning (~1% of inserts) so the audit table stays small.
+  if random() < 0.01 then
+    delete from public.insert_audit where created_at < now() - interval '2 days';
+  end if;
+
+  return new;
+end;
+$$;
+
+revoke execute on function public.contributions_rate_limit() from public, anon, authenticated;
+
+drop trigger if exists contributions_rate_limit on public.contributions;
+create trigger contributions_rate_limit
+  before insert on public.contributions
+  for each row execute function public.contributions_rate_limit();
