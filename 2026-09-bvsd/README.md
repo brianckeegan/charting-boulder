@@ -47,10 +47,10 @@ Processed tables:
 | `data/processed/place-age-single.csv` | `scripts/build_age_tables.py` | 31 places, single years 0–19, 2000 / 2010 / 2020 |
 | `data/processed/open-enrollment/` | `scripts/extract_open_enrollment.py` | Tidy edgelist (attendance area → school), school, area and district summaries, name crosswalk, provenance, audit report |
 
-The open-enrollment tables are parsed and audited but not yet used by a notebook.
+The open-enrollment tables feed §5 of `enrollment-forecast.ipynb`.
 
 ## Notebooks
-- `enrollment-forecast.ipynb` — resident children in Boulder + Broomfield counties 1990–2060 from the SDO forecast; births, deaths and migration; households with children; a capture-ratio conversion to BVSD enrollment under four scenarios; utilization of the post-consolidation K-5 system against the district's two-classes-per-grade rule; and the City of Boulder's 2020 age pyramid against Madison and Cambridge.
+- `enrollment-forecast.ipynb` — resident children in Boulder + Broomfield counties 1990–2060 from the SDO forecast; births, deaths and migration; households with children; ten years of BVSD's enrollment pattern matrices (neighborhood attendance vs open enrollment, district-wide and school by school); a capture-ratio conversion to BVSD enrollment under four scenarios; utilization of the post-consolidation K-5 system against the district's two-classes-per-grade rule; and the City of Boulder's 2020 age pyramid against Madison and Cambridge.
 - `peer-projection.ipynb` — observed school-age (5–17) and under-5 counts, shares and changes for Boulder, the county ring and 25 peer cities, 1990–2020; a Hamilton–Perry cohort projection to 2050 on five-year age groups with a 2010→2020 backtest; a check of the engine against the SDO forecast for Boulder County; and two city-grain decompositions of fewer births versus fewer families.
 
 ## Key findings
@@ -61,6 +61,13 @@ Enrollment forecast (SDO Vintage 2024, Boulder + Broomfield):
 - With capture held at 2025-26 levels, K-5 enrollment reaches 9,349 in 2030 and 2030 utilization on current capacity is 64%, matching the district's 65%. The SDO-based five-year K-12 loss (about 1,990) is steeper than the district's 1,670.
 - After the four closures, K-5 utilization bottoms at 72% in 2029 and passes the plan's 75% target again by 2036 under constant capture; it never does if capture erodes, if the birth rebound is removed, or if the city's under-5 trend continues (48% by 2050 in that case).
 - In 2020 the City of Boulder had 72 children aged 0–4 per 100 aged 10–14 (99 in 2000, 111 in 2010). Madison had 116 and Cambridge 142.
+
+Open enrollment (BVSD enrollment pattern matrices, 2016-17 to 2025-26):
+- Elementary enrollment in the matrices fell 20% (13,003 → 10,427). Neighborhood attendance fell 30% (8,569 → 6,035) while open enrollment from inside the district stayed flat (3,502 → 3,330) and from outside grew (688 → 765). The decline is almost entirely in neighborhood attendance.
+- BVSD elementary students living in the attendance areas fell 22%, and the share of them attending their neighborhood school fell from 70% to 63%. Fewer residents explain 73% of the lost neighborhood attendance and lower retention 27%.
+- Of 25 neighborhood elementary schools open across the decade, 12 shrank faster than the child population of their own area; four areas now send fewer than half of their BVSD pupils to the neighborhood school (two in 2016-17). Eight neighborhood schools are below the district's 264-pupil two-classes-per-grade line.
+- The open-enrollment map is stable: net flows by school correlate +0.86 across the decade, and five focus and charter schools take two thirds of the net inflow.
+- Out-of-district students are 7% of elementary and 14% of high-school enrollment and rising, which inflates the capture ratio; without them the 2025-26 K-5 ratio would be about 8% lower.
 
 Peer comparison (decennial census, City of Boulder vs 25 peer cities):
 - Boulder's 5–17 count rose 17.4% between 2010 and 2020 (9,572 → 11,242), above the peer median of +10.8%: the 2000s birth echo moving through the schools.
@@ -75,6 +82,7 @@ Peer comparison (decennial census, City of Boulder vs 25 peer cities):
 - County ≠ district. Boulder County includes St. Vrain Valley SD territory and Broomfield is split; the capture ratio absorbs the overlap as a share, anchored on one K-12 and one K-5 count.
 - SDO's 2040s rebound is an assumption about births and migration, not an observation; the city's under-5 series is the reason to doubt it for Boulder specifically.
 - Post-plan capacity is back-derived from the deck's 68→75% and 9,732 K-5 pupils; the district has not published a school-by-school capacity table.
+- The enrollment matrices count BVSD students only. Families who left for charters outside the count, private school, or homeschool are invisible, so the retention effect is a lower bound. Two of the thirty files fail the row or column reconciliation by one pupil (see the audit report).
 - Hamilton–Perry is validated to about 15 years; 2050 is 30 years out and the backtest band is a floor on uncertainty, not a confidence interval. The April 2020 enumeration sent college students home, which distorts the 18–24 counts that feed the 2010→2020 ratios for exactly this peer type.
 - Annexation is inside the cohort ratios: ring towns and Sunbelt peers that grew by annexing family subdivisions show cohort gains that are not migration into a fixed area.
 - Sexes are pooled in the child ratios (the 1990 table has no sex split), and 5–17 is prorated from 15–19 using each place's 2020 share.
