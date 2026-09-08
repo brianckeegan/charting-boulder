@@ -1,0 +1,32 @@
+name,state,place_fips,county_fips,tier,note
+Boulder,CO,0807850,08013,1,subject city
+Longmont,CO,0845970,08013,1,Boulder County ring; St. Vrain Valley SD
+Lafayette,CO,0841835,08013,1,Boulder County ring
+Louisville,CO,0846355,08013,1,Boulder County ring
+Superior,CO,0875640,08013,1,Boulder County ring
+Erie,CO,0824950,08013,1,Boulder County ring; straddles Boulder and Weld (08123) counties
+Ann Arbor,MI,2603000,26161,2,similar-boulder basket
+Cambridge,MA,2511000,25017,2,similar-boulder basket
+Berkeley,CA,0606000,06001,2,similar-boulder basket
+Madison,WI,5548000,55025,2,similar-boulder basket
+Durham,NC,3719000,37063,2,similar-boulder basket
+Pasadena,CA,0656000,06037,2,similar-boulder basket
+Santa Barbara,CA,0669070,06083,2,similar-boulder basket
+Mountain View,CA,0649670,06085,2,similar-boulder basket
+Bloomington,IN,1805860,18105,2,similar-boulder basket
+Fort Collins,CO,0827425,08069,2,similar-boulder basket
+Tempe,AZ,0473000,04013,2,similar-boulder basket
+Evanston,IL,1724582,17031,2,similar-boulder basket
+Provo,UT,4962470,49049,2,similar-boulder basket
+College Station,TX,4815976,48041,2,similar-boulder basket
+Huntsville,AL,0137000,01089,2,similar-boulder basket
+Gainesville,FL,1225175,12001,2,similar-boulder basket
+Eugene,OR,4123850,41039,2,similar-boulder basket
+Rochester,MN,2754880,27109,2,similar-boulder basket
+Irvine,CA,0636770,06059,2,similar-boulder basket
+Iowa City,IA,1938595,19087,2,similar-boulder basket
+Syracuse,NY,3673000,36067,2,similar-boulder basket
+Pittsburgh,PA,4261000,42003,2,similar-boulder basket
+Chapel Hill,NC,3711800,37135,2,similar-boulder basket
+New Haven,CT,0952000,09009,2,similar-boulder basket
+Baton Rouge,LA,2205000,22033,2,similar-boulder basket
