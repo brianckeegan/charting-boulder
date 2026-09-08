@@ -1,0 +1,636 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0004_ds173_2010_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             2010
+Geographic level: County (by State)
+Extent:           Alabama
+                  Arizona
+                  California
+                  Colorado
+                  Connecticut
+                  Florida
+                  Illinois
+                  Indiana
+                  Iowa
+                  Louisiana
+                  Massachusetts
+                  Michigan
+                  Minnesota
+                  New York
+                  North Carolina
+                  Oregon
+                  Pennsylvania
+                  Texas
+                  Utah
+                  Wisconsin
+Dataset:          2010 Census: SF 1b - PCT & HCT Tables [Tracts & Larger Areas]
+   NHGIS code:    2010_SF1b
+   NHGIS ID:      ds173
+Breakdown(s):     Geographic Component:
+                     Total area (00)
+ 
+Tables:
+ 
+1. Sex by Age
+   Universe:    Total population
+   Source code: PCT12
+   NHGIS code:  IC3
+ 
+2. Sex by Age for the Population in Households
+   Universe:    Population in households
+   Source code: PCT13
+   NHGIS code:  IC4
+ 
+3. Group Quarters Population by Sex by Age by Group Quarters Type
+   Universe:    Population in group quarters
+   Source code: PCT21
+   NHGIS code:  IDC
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      State/US-Abbreviation (USPS)
+        REGIONA:     Region Code
+        DIVISIONA:   Division Code
+        STATE:       State Name
+        STATEA:      State Code
+        COUNTY:      County Name
+        COUNTYA:     County Code
+        COUSUBA:     County Subdivision Code
+        COUSUBCC:    FIPS County Subdivision Class Code
+        PLACEA:      Place Code
+        PLACECC:     FIPS Place Class Code
+        TRACTA:      Census Tract Code
+        CONCITA:     Consolidated City Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land Code
+        RES_ONLYA:   American Indian Area/Alaska Native Area (Reservation or Statistical Entity Only) Code
+        TRUSTA:      American Indian Area (Off-Reservation Trust Land Only)/Hawaiian Home Land Code
+        AIANHHCC:    FIPS American Indian Area/Alaska Native Area/Hawaiian Home Land Class Code
+        AITSCEA:     Tribal Subdivision/Remainder Code
+        AITS:        American Indian Tribal Subdivision (FIPS)
+        TTRACTA:     Tribal Census Tract Code
+        ANRCA:       Alaska Native Regional Corporation Code
+        CBSAA:       Metropolitan Statistical Area/Micropolitan Statistical Area Code
+        METDIVA:     Metropolitan Division Code
+        CSAA:        Combined Statistical Area Code
+        NECTAA:      New England City and Town Area Code
+        NECTADIVA:   New England City and Town Area Division Code
+        CNECTAA:     Combined New England City and Town Area Code
+        CBSAPCI:     Metropolitan Statistical Area/Micropolitan Statistical Area Principal City Indicator
+        NECTAPCI:    New England City and Town Area Principal City Indicator
+        UAA:         Urban Area Code
+        UATYPE:      Urban Area Type
+        URA:         Urban/Rural Code
+        CDA:         Congressional District (111th Congress) Code
+        SLDUA:       State Legislative District (Upper Chamber) Code
+        SLDLA:       State Legislative District (Lower Chamber) Code
+        ZCTA5A:      5-Digit ZIP Code Tabulation Area Code
+        SUBMCDA:     Subminor Civil Division Code
+        SDELMA:      School District (Elementary)/Remainder Code
+        SDSECA:      School District (Secondary)/Remainder Code
+        SDUNIA:      School District (Unified)/Remainder Code
+        AREALAND:    Area (Land)
+        AREAWATR:    Area (Water)
+        NAME:        Area Name-Legal/Statistical Area Description (LSAD) Term-Part Indicator
+        FUNCSTAT:    Functional Status Code
+        INTPTLAT:    Internal Point (Latitude)
+        INTPTLON:    Internal Point (Longitude)
+        LSADC:       Legal/Statistical Area Description Code
+        MEMI:        Metropolitan Micropolitan Indicator
+        NMEMI:       NECTA Metropolitan Micropolitan Indicator
+ 
+Breakdown:
+    Geographic Component: Total area (00)
+ 
+    Table 1:     Sex by Age
+    Universe:    Total population
+    Source code: PCT12
+    NHGIS code:  IC3
+        IC3001:      Total
+        IC3002:      Male
+        IC3003:      Male: Under 1 year
+        IC3004:      Male: 1 year
+        IC3005:      Male: 2 years
+        IC3006:      Male: 3 years
+        IC3007:      Male: 4 years
+        IC3008:      Male: 5 years
+        IC3009:      Male: 6 years
+        IC3010:      Male: 7 years
+        IC3011:      Male: 8 years
+        IC3012:      Male: 9 years
+        IC3013:      Male: 10 years
+        IC3014:      Male: 11 years
+        IC3015:      Male: 12 years
+        IC3016:      Male: 13 years
+        IC3017:      Male: 14 years
+        IC3018:      Male: 15 years
+        IC3019:      Male: 16 years
+        IC3020:      Male: 17 years
+        IC3021:      Male: 18 years
+        IC3022:      Male: 19 years
+        IC3023:      Male: 20 years
+        IC3024:      Male: 21 years
+        IC3025:      Male: 22 years
+        IC3026:      Male: 23 years
+        IC3027:      Male: 24 years
+        IC3028:      Male: 25 years
+        IC3029:      Male: 26 years
+        IC3030:      Male: 27 years
+        IC3031:      Male: 28 years
+        IC3032:      Male: 29 years
+        IC3033:      Male: 30 years
+        IC3034:      Male: 31 years
+        IC3035:      Male: 32 years
+        IC3036:      Male: 33 years
+        IC3037:      Male: 34 years
+        IC3038:      Male: 35 years
+        IC3039:      Male: 36 years
+        IC3040:      Male: 37 years
+        IC3041:      Male: 38 years
+        IC3042:      Male: 39 years
+        IC3043:      Male: 40 years
+        IC3044:      Male: 41 years
+        IC3045:      Male: 42 years
+        IC3046:      Male: 43 years
+        IC3047:      Male: 44 years
+        IC3048:      Male: 45 years
+        IC3049:      Male: 46 years
+        IC3050:      Male: 47 years
+        IC3051:      Male: 48 years
+        IC3052:      Male: 49 years
+        IC3053:      Male: 50 years
+        IC3054:      Male: 51 years
+        IC3055:      Male: 52 years
+        IC3056:      Male: 53 years
+        IC3057:      Male: 54 years
+        IC3058:      Male: 55 years
+        IC3059:      Male: 56 years
+        IC3060:      Male: 57 years
+        IC3061:      Male: 58 years
+        IC3062:      Male: 59 years
+        IC3063:      Male: 60 years
+        IC3064:      Male: 61 years
+        IC3065:      Male: 62 years
+        IC3066:      Male: 63 years
+        IC3067:      Male: 64 years
+        IC3068:      Male: 65 years
+        IC3069:      Male: 66 years
+        IC3070:      Male: 67 years
+        IC3071:      Male: 68 years
+        IC3072:      Male: 69 years
+        IC3073:      Male: 70 years
+        IC3074:      Male: 71 years
+        IC3075:      Male: 72 years
+        IC3076:      Male: 73 years
+        IC3077:      Male: 74 years
+        IC3078:      Male: 75 years
+        IC3079:      Male: 76 years
+        IC3080:      Male: 77 years
+        IC3081:      Male: 78 years
+        IC3082:      Male: 79 years
+        IC3083:      Male: 80 years
+        IC3084:      Male: 81 years
+        IC3085:      Male: 82 years
+        IC3086:      Male: 83 years
+        IC3087:      Male: 84 years
+        IC3088:      Male: 85 years
+        IC3089:      Male: 86 years
+        IC3090:      Male: 87 years
+        IC3091:      Male: 88 years
+        IC3092:      Male: 89 years
+        IC3093:      Male: 90 years
+        IC3094:      Male: 91 years
+        IC3095:      Male: 92 years
+        IC3096:      Male: 93 years
+        IC3097:      Male: 94 years
+        IC3098:      Male: 95 years
+        IC3099:      Male: 96 years
+        IC3100:      Male: 97 years
+        IC3101:      Male: 98 years
+        IC3102:      Male: 99 years
+        IC3103:      Male: 100 to 104 years
+        IC3104:      Male: 105 to 109 years
+        IC3105:      Male: 110 years and over
+        IC3106:      Female
+        IC3107:      Female: Under 1 year
+        IC3108:      Female: 1 year
+        IC3109:      Female: 2 years
+        IC3110:      Female: 3 years
+        IC3111:      Female: 4 years
+        IC3112:      Female: 5 years
+        IC3113:      Female: 6 years
+        IC3114:      Female: 7 years
+        IC3115:      Female: 8 years
+        IC3116:      Female: 9 years
+        IC3117:      Female: 10 years
+        IC3118:      Female: 11 years
+        IC3119:      Female: 12 years
+        IC3120:      Female: 13 years
+        IC3121:      Female: 14 years
+        IC3122:      Female: 15 years
+        IC3123:      Female: 16 years
+        IC3124:      Female: 17 years
+        IC3125:      Female: 18 years
+        IC3126:      Female: 19 years
+        IC3127:      Female: 20 years
+        IC3128:      Female: 21 years
+        IC3129:      Female: 22 years
+        IC3130:      Female: 23 years
+        IC3131:      Female: 24 years
+        IC3132:      Female: 25 years
+        IC3133:      Female: 26 years
+        IC3134:      Female: 27 years
+        IC3135:      Female: 28 years
+        IC3136:      Female: 29 years
+        IC3137:      Female: 30 years
+        IC3138:      Female: 31 years
+        IC3139:      Female: 32 years
+        IC3140:      Female: 33 years
+        IC3141:      Female: 34 years
+        IC3142:      Female: 35 years
+        IC3143:      Female: 36 years
+        IC3144:      Female: 37 years
+        IC3145:      Female: 38 years
+        IC3146:      Female: 39 years
+        IC3147:      Female: 40 years
+        IC3148:      Female: 41 years
+        IC3149:      Female: 42 years
+        IC3150:      Female: 43 years
+        IC3151:      Female: 44 years
+        IC3152:      Female: 45 years
+        IC3153:      Female: 46 years
+        IC3154:      Female: 47 years
+        IC3155:      Female: 48 years
+        IC3156:      Female: 49 years
+        IC3157:      Female: 50 years
+        IC3158:      Female: 51 years
+        IC3159:      Female: 52 years
+        IC3160:      Female: 53 years
+        IC3161:      Female: 54 years
+        IC3162:      Female: 55 years
+        IC3163:      Female: 56 years
+        IC3164:      Female: 57 years
+        IC3165:      Female: 58 years
+        IC3166:      Female: 59 years
+        IC3167:      Female: 60 years
+        IC3168:      Female: 61 years
+        IC3169:      Female: 62 years
+        IC3170:      Female: 63 years
+        IC3171:      Female: 64 years
+        IC3172:      Female: 65 years
+        IC3173:      Female: 66 years
+        IC3174:      Female: 67 years
+        IC3175:      Female: 68 years
+        IC3176:      Female: 69 years
+        IC3177:      Female: 70 years
+        IC3178:      Female: 71 years
+        IC3179:      Female: 72 years
+        IC3180:      Female: 73 years
+        IC3181:      Female: 74 years
+        IC3182:      Female: 75 years
+        IC3183:      Female: 76 years
+        IC3184:      Female: 77 years
+        IC3185:      Female: 78 years
+        IC3186:      Female: 79 years
+        IC3187:      Female: 80 years
+        IC3188:      Female: 81 years
+        IC3189:      Female: 82 years
+        IC3190:      Female: 83 years
+        IC3191:      Female: 84 years
+        IC3192:      Female: 85 years
+        IC3193:      Female: 86 years
+        IC3194:      Female: 87 years
+        IC3195:      Female: 88 years
+        IC3196:      Female: 89 years
+        IC3197:      Female: 90 years
+        IC3198:      Female: 91 years
+        IC3199:      Female: 92 years
+        IC3200:      Female: 93 years
+        IC3201:      Female: 94 years
+        IC3202:      Female: 95 years
+        IC3203:      Female: 96 years
+        IC3204:      Female: 97 years
+        IC3205:      Female: 98 years
+        IC3206:      Female: 99 years
+        IC3207:      Female: 100 to 104 years
+        IC3208:      Female: 105 to 109 years
+        IC3209:      Female: 110 years and over
+ 
+    Table 2:     Sex by Age for the Population in Households
+    Universe:    Population in households
+    Source code: PCT13
+    NHGIS code:  IC4
+        IC4001:      Total
+        IC4002:      Male
+        IC4003:      Male: Under 5 years
+        IC4004:      Male: 5 to 9 years
+        IC4005:      Male: 10 to 14 years
+        IC4006:      Male: 15 to 17 years
+        IC4007:      Male: 18 and 19 years
+        IC4008:      Male: 20 years
+        IC4009:      Male: 21 years
+        IC4010:      Male: 22 to 24 years
+        IC4011:      Male: 25 to 29 years
+        IC4012:      Male: 30 to 34 years
+        IC4013:      Male: 35 to 39 years
+        IC4014:      Male: 40 to 44 years
+        IC4015:      Male: 45 to 49 years
+        IC4016:      Male: 50 to 54 years
+        IC4017:      Male: 55 to 59 years
+        IC4018:      Male: 60 and 61 years
+        IC4019:      Male: 62 to 64 years
+        IC4020:      Male: 65 and 66 years
+        IC4021:      Male: 67 to 69 years
+        IC4022:      Male: 70 to 74 years
+        IC4023:      Male: 75 to 79 years
+        IC4024:      Male: 80 to 84 years
+        IC4025:      Male: 85 years and over
+        IC4026:      Female
+        IC4027:      Female: Under 5 years
+        IC4028:      Female: 5 to 9 years
+        IC4029:      Female: 10 to 14 years
+        IC4030:      Female: 15 to 17 years
+        IC4031:      Female: 18 and 19 years
+        IC4032:      Female: 20 years
+        IC4033:      Female: 21 years
+        IC4034:      Female: 22 to 24 years
+        IC4035:      Female: 25 to 29 years
+        IC4036:      Female: 30 to 34 years
+        IC4037:      Female: 35 to 39 years
+        IC4038:      Female: 40 to 44 years
+        IC4039:      Female: 45 to 49 years
+        IC4040:      Female: 50 to 54 years
+        IC4041:      Female: 55 to 59 years
+        IC4042:      Female: 60 and 61 years
+        IC4043:      Female: 62 to 64 years
+        IC4044:      Female: 65 and 66 years
+        IC4045:      Female: 67 to 69 years
+        IC4046:      Female: 70 to 74 years
+        IC4047:      Female: 75 to 79 years
+        IC4048:      Female: 80 to 84 years
+        IC4049:      Female: 85 years and over
+ 
+    Table 3:     Group Quarters Population by Sex by Age by Group Quarters Type
+    Universe:    Population in group quarters
+    Source code: PCT21
+    NHGIS code:  IDC
+        IDC001:      Total
+        IDC002:      Male
+        IDC003:      Male: Under 18 years
+        IDC004:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405)
+        IDC005:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        IDC006:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal detention centers (101)
+        IDC007:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal prisons (102)
+        IDC008:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): State prisons (103)
+        IDC009:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Local jails and other municipal confinement facilities (104)
+        IDC010:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Correctional residential facilities (105)
+        IDC011:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Military disciplinary barracks and jails (106)
+        IDC012:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        IDC013:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Group homes for juveniles (non-correctional) (201)
+        IDC014:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Residential treatment centers for juveniles (non-correctional) (202)
+        IDC015:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Correctional facilities intended for juveniles (203)
+        IDC016:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        IDC017:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        IDC018:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Mental (Psychiatric) hospitals and psychiatric units in other hospitals (401)
+        IDC019:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Hospitals with patients who have no usual home elsewhere (402)
+        IDC020:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): In-patient hospice facilities (403)
+        IDC021:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Military treatment facilities with assigned patients (404)
+        IDC022:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Residential schools for people with disabilities (405)
+        IDC023:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC024:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        IDC025:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        IDC026:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military barracks and dormitories (non-disciplinary) (601)
+        IDC027:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military ships (602)
+        IDC028:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC029:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Emergency and transitional shelters (with sleeping facilities) for people experiencing homelessness (701)
+        IDC030:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Group homes intended for adults (801)
+        IDC031:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Residential treatment centers for adults (802)
+        IDC032:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Maritime/merchant vessels (900)
+        IDC033:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Workers' group living quarters and Job Corps centers (901)
+        IDC034:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (702, 704, 706, 903-904)
+        IDC035:      Male: 18 to 64 years
+        IDC036:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405)
+        IDC037:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        IDC038:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal detention centers (101)
+        IDC039:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal prisons (102)
+        IDC040:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): State prisons (103)
+        IDC041:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Local jails and other municipal confinement facilities (104)
+        IDC042:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Correctional residential facilities (105)
+        IDC043:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Military disciplinary barracks and jails (106)
+        IDC044:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        IDC045:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Group homes for juveniles (non-correctional) (201)
+        IDC046:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Residential treatment centers for juveniles (non-correctional) (202)
+        IDC047:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Correctional facilities intended for juveniles (203)
+        IDC048:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        IDC049:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        IDC050:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Mental (Psychiatric) hospitals and psychiatric units in other hospitals (401)
+        IDC051:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Hospitals with patients who have no usual home elsewhere (402)
+        IDC052:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): In-patient hospice facilities (403)
+        IDC053:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Military treatment facilities with assigned patients (404)
+        IDC054:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Residential schools for people with disabilities (405)
+        IDC055:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC056:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        IDC057:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        IDC058:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military barracks and dormitories (non-disciplinary) (601)
+        IDC059:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military ships (602)
+        IDC060:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC061:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Emergency and transitional shelters (with sleeping facilities) for people experiencing homelessness (701)
+        IDC062:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Group homes intended for adults (801)
+        IDC063:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Residential treatment centers for adults (802)
+        IDC064:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Maritime/merchant vessels (900)
+        IDC065:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Workers' group living quarters and Job Corps centers (901)
+        IDC066:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (702, 704, 706, 903-904)
+        IDC067:      Male: 65 years and over
+        IDC068:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405)
+        IDC069:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        IDC070:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal detention centers (101)
+        IDC071:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal prisons (102)
+        IDC072:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): State prisons (103)
+        IDC073:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Local jails and other municipal confinement facilities (104)
+        IDC074:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Correctional residential facilities (105)
+        IDC075:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Military disciplinary barracks and jails (106)
+        IDC076:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        IDC077:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Group homes for juveniles (non-correctional) (201)
+        IDC078:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Residential treatment centers for juveniles (non-correctional) (202)
+        IDC079:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Correctional facilities intended for juveniles (203)
+        IDC080:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        IDC081:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        IDC082:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Mental (Psychiatric) hospitals and psychiatric units in other hospitals (401)
+        IDC083:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Hospitals with patients who have no usual home elsewhere (402)
+        IDC084:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): In-patient hospice facilities (403)
+        IDC085:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Military treatment facilities with assigned patients (404)
+        IDC086:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Residential schools for people with disabilities (405)
+        IDC087:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC088:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        IDC089:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        IDC090:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military barracks and dormitories (non-disciplinary) (601)
+        IDC091:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military ships (602)
+        IDC092:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC093:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Emergency and transitional shelters (with sleeping facilities) for people experiencing homelessness (701)
+        IDC094:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Group homes intended for adults (801)
+        IDC095:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Residential treatment centers for adults (802)
+        IDC096:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Maritime/merchant vessels (900)
+        IDC097:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Workers' group living quarters and Job Corps centers (901)
+        IDC098:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (702, 704, 706, 903-904)
+        IDC099:      Female
+        IDC100:      Female: Under 18 years
+        IDC101:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405)
+        IDC102:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        IDC103:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal detention centers (101)
+        IDC104:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal prisons (102)
+        IDC105:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): State prisons (103)
+        IDC106:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Local jails and other municipal confinement facilities (104)
+        IDC107:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Correctional residential facilities (105)
+        IDC108:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Military disciplinary barracks and jails (106)
+        IDC109:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        IDC110:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Group homes for juveniles (non-correctional) (201)
+        IDC111:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Residential treatment centers for juveniles (non-correctional) (202)
+        IDC112:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Correctional facilities intended for juveniles (203)
+        IDC113:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        IDC114:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        IDC115:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Mental (Psychiatric) hospitals and psychiatric units in other hospitals (401)
+        IDC116:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Hospitals with patients who have no usual home elsewhere (402)
+        IDC117:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): In-patient hospice facilities (403)
+        IDC118:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Military treatment facilities with assigned patients (404)
+        IDC119:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Residential schools for people with disabilities (405)
+        IDC120:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC121:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        IDC122:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        IDC123:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military barracks and dormitories (non-disciplinary) (601)
+        IDC124:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military ships (602)
+        IDC125:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC126:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Emergency and transitional shelters (with sleeping facilities) for people experiencing homelessness (701)
+        IDC127:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Group homes intended for adults (801)
+        IDC128:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Residential treatment centers for adults (802)
+        IDC129:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Maritime/merchant vessels (900)
+        IDC130:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Workers' group living quarters and Job Corps centers (901)
+        IDC131:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (702, 704, 706, 903-904)
+        IDC132:      Female: 18 to 64 years
+        IDC133:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405)
+        IDC134:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        IDC135:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal detention centers (101)
+        IDC136:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal prisons (102)
+        IDC137:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): State prisons (103)
+        IDC138:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Local jails and other municipal confinement facilities (104)
+        IDC139:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Correctional residential facilities (105)
+        IDC140:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Military disciplinary barracks and jails (106)
+        IDC141:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        IDC142:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Group homes for juveniles (non-correctional) (201)
+        IDC143:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Residential treatment centers for juveniles (non-correctional) (202)
+        IDC144:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Correctional facilities intended for juveniles (203)
+        IDC145:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        IDC146:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        IDC147:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Mental (Psychiatric) hospitals and psychiatric units in other hospitals (401)
+        IDC148:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Hospitals with patients who have no usual home elsewhere (402)
+        IDC149:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): In-patient hospice facilities (403)
+        IDC150:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Military treatment facilities with assigned patients (404)
+        IDC151:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Residential schools for people with disabilities (405)
+        IDC152:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC153:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        IDC154:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        IDC155:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military barracks and dormitories (non-disciplinary) (601)
+        IDC156:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military ships (602)
+        IDC157:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC158:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Emergency and transitional shelters (with sleeping facilities) for people experiencing homelessness (701)
+        IDC159:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Group homes intended for adults (801)
+        IDC160:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Residential treatment centers for adults (802)
+        IDC161:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Maritime/merchant vessels (900)
+        IDC162:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Workers' group living quarters and Job Corps centers (901)
+        IDC163:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (702, 704, 706, 903-904)
+        IDC164:      Female: 65 years and over
+        IDC165:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405)
+        IDC166:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        IDC167:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal detention centers (101)
+        IDC168:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Federal prisons (102)
+        IDC169:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): State prisons (103)
+        IDC170:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Local jails and other municipal confinement facilities (104)
+        IDC171:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Correctional residential facilities (105)
+        IDC172:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106): Military disciplinary barracks and jails (106)
+        IDC173:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        IDC174:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Group homes for juveniles (non-correctional) (201)
+        IDC175:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Residential treatment centers for juveniles (non-correctional) (202)
+        IDC176:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203): Correctional facilities intended for juveniles (203)
+        IDC177:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        IDC178:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        IDC179:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Mental (Psychiatric) hospitals and psychiatric units in other hospitals (401)
+        IDC180:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Hospitals with patients who have no usual home elsewhere (402)
+        IDC181:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): In-patient hospice facilities (403)
+        IDC182:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Military treatment facilities with assigned patients (404)
+        IDC183:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405): Residential schools for people with disabilities (405)
+        IDC184:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC185:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        IDC186:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        IDC187:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military barracks and dormitories (non-disciplinary) (601)
+        IDC188:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602): Military ships (602)
+        IDC189:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        IDC190:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Emergency and transitional shelters (with sleeping facilities) for people experiencing homelessness (701)
+        IDC191:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Group homes intended for adults (801)
+        IDC192:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Residential treatment centers for adults (802)
+        IDC193:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Maritime/merchant vessels (900)
+        IDC194:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Workers' group living quarters and Job Corps centers (901)
+        IDC195:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (702, 704, 706, 903-904)
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Jonathan Schroeder, David Van Riper, Steven Manson, Grace Cooper, Zachary Krause, Tracy Kugler, Tsu Zhu, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 21.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2026. 
+        http://doi.org/10.18128/D050.V21.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455

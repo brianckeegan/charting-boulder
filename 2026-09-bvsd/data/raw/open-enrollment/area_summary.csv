@@ -1,0 +1,499 @@
+school_year,level,area,area_raw,placed_out,living_in_area_total,oe_out_of_area,pct_enrolled_in_neighborhood,matrix_col_sum
+2016-2017,elementary,Bear Creek,Bear Creek*,1.0,253,30,0.88,252
+2016-2017,elementary,Columbine,Columbine,18.0,687,270,0.58,669
+2016-2017,elementary,Creekside,Creekside*,4.0,514,290,0.43,510
+2016-2017,elementary,Crest View,Crest View,17.0,904,349,0.6,887
+2016-2017,elementary,Douglass,Douglass,17.0,451,82,0.78,434
+2016-2017,elementary,Eisenhower,Eisenhower,4.0,495,173,0.64,491
+2016-2017,elementary,Flatirons,Flatirons,4.0,258,77,0.69,254
+2016-2017,elementary,Foothill,Foothill,10.0,628,137,0.77,618
+2016-2017,elementary,Heatherwood,Heatherwood,2.0,397,75,0.81,395
+2016-2017,elementary,Mesa,Mesa*,3.0,237,47,0.79,234
+2016-2017,elementary,Whittier,Whittier,8.0,497,113,0.76,489
+2016-2017,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,,48,5,0.9,48
+2016-2017,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,3.0,203,37,0.8,200
+2016-2017,elementary,Aspen Creek K-8,Aspen Creek K-8,18.0,427,92,0.74,409
+2016-2017,elementary,Birch,Birch,7.0,362,104,0.69,355
+2016-2017,elementary,Emerald,Emerald,10.0,383,120,0.66,373
+2016-2017,elementary,Kohl,Kohl,8.0,344,60,0.8,336
+2016-2017,elementary,Lafayette,Lafayette,12.0,945,384,0.58,933
+2016-2017,elementary,Ryan,Ryan,10.0,555,220,0.59,545
+2016-2017,elementary,Sanchez,Sanchez,27.0,648,335,0.44,621
+2016-2017,elementary,Coal Creek,Coal Creek,4.0,447,78,0.82,443
+2016-2017,elementary,Fireside,Fireside,4.0,398,56,0.85,394
+2016-2017,elementary,Louisville,Louisville,8.0,635,107,0.82,627
+2016-2017,elementary,Monarch K-8,Monarch K-8,14.0,333,77,0.73,319
+2016-2017,elementary,Eldorado K-8,Eldorado K-8,,441,73,0.83,441
+2016-2017,elementary,Superior,Superior,12.0,482,57,0.86,470
+2016-2017,elementary,Gold Hill,Gold Hill,,9,0,1.0,9
+2016-2017,elementary,Jamestown,Jamestown,,11,5,0.55,11
+2016-2017,elementary,Nederland,Nederland,,304,48,0.84,304
+2016-2017,high,Boulder,Boulder*,18.0,2138,570,0.72,2120
+2016-2017,high,Fairview,Fairview*,11.0,1327,254,0.8,1316
+2016-2017,high,Boulder/Fairview Optional,Boulder/Fairview Optional,1.0,278,29,0.89,277
+2016-2017,high,Broomfield,Broomfield,10.0,1175,200,0.82,1165
+2016-2017,high,Centaurus,Centaurus,10.0,1596,673,0.57,1586
+2016-2017,high,Monarch,Monarch,13.0,1926,597,0.68,1913
+2016-2017,high,Nederland,Nederland,1.0,182,60,0.67,182
+2016-2017,middle,Manhattan,Manhattan,5.0,565,291,0.48,560
+2016-2017,middle,Casey,Casey,6.0,637,159,0.74,631
+2016-2017,middle,Centennial,Centennial,12.0,846,273,0.66,834
+2016-2017,middle,Platt,Platt,9.0,476,117,0.74,467
+2016-2017,middle,Southern Hills,Southern Hills,4.0,523,118,0.77,519
+2016-2017,middle,Aspen Creek K-8,Aspen Creek K-8,1.0,442,121,0.72,441
+2016-2017,middle,Broomfield Heights,Broomfield Heights,1.0,329,46,0.86,328
+2016-2017,middle,Angevine,Angevine,21.0,1096,406,0.61,1075
+2016-2017,middle,Louisville Middle,Louisville Middle,5.0,612,78,0.86,607
+2016-2017,middle,Monarch K-8,Monarch K-8,4.0,385,78,0.79,381
+2016-2017,middle,Eldorado K-8,Eldorado K-8,2.0,594,159,0.73,592
+2016-2017,middle,Nederland,Nederland,3.0,159,26,0.82,156
+2017-2018,elementary,Bear Creek,Bear Creek*,0.0,254,29,0.89,254
+2017-2018,elementary,Columbine,Columbine,19.0,651,232,0.61,632
+2017-2018,elementary,Creekside,Creekside*,8.0,500,277,0.43,492
+2017-2018,elementary,Crest View,Crest View,21.0,885,339,0.59,864
+2017-2018,elementary,Douglass,Douglass,15.0,431,82,0.77,416
+2017-2018,elementary,Eisenhower,Eisenhower,5.0,462,165,0.63,457
+2017-2018,elementary,Flatirons,Flatirons,6.0,275,94,0.64,269
+2017-2018,elementary,Foothill,Foothill,10.0,598,150,0.73,588
+2017-2018,elementary,Heatherwood,Heatherwood,4.0,380,71,0.8,376
+2017-2018,elementary,Mesa,Mesa*,2.0,227,41,0.81,225
+2017-2018,elementary,Whittier,Whittier,6.0,438,107,0.74,432
+2017-2018,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,0.0,44,5,0.89,44
+2017-2018,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,7.0,208,32,0.81,201
+2017-2018,elementary,Aspen Creek K-8,Aspen Creek K-8,14.0,420,85,0.76,406
+2017-2018,elementary,Birch,Birch,7.0,370,106,0.69,363
+2017-2018,elementary,Emerald,Emerald,10.0,365,94,0.72,355
+2017-2018,elementary,Kohl,Kohl,16.0,332,61,0.77,316
+2017-2018,elementary,Lafayette,Lafayette,11.0,651,277,0.56,640
+2017-2018,elementary,Ryan,Ryan,20.0,605,223,0.6,585
+2017-2018,elementary,Sanchez,Sanchez,32.0,686,354,0.44,654
+2017-2018,elementary,Meadowlark,Meadowlark,9.0,372,102,0.0,363
+2017-2018,elementary,Coal Creek,Coal Creek,9.0,470,94,0.78,461
+2017-2018,elementary,Fireside,Fireside,0.0,379,58,0.85,379
+2017-2018,elementary,Louisville,Louisville,9.0,628,113,0.81,619
+2017-2018,elementary,Monarch K-8,Monarch K-8,13.0,333,67,0.76,320
+2017-2018,elementary,Eldorado K-8,Eldorado K-8,0.0,414,74,0.82,414
+2017-2018,elementary,Superior,Superior,10.0,468,53,0.87,458
+2017-2018,elementary,Gold Hill,Gold Hill,0.0,7,3,0.57,7
+2017-2018,elementary,Jamestown,Jamestown,0.0,12,5,0.58,12
+2017-2018,elementary,Nederland,Nederland,0.0,284,36,0.87,284
+2017-2018,high,Boulder,Boulder*,16.0,2239,561,0.74,2223
+2017-2018,high,Fairview,Fairview*,13.0,1385,229,0.83,1372
+2017-2018,high,Boulder/Fairview Optional,Boulder/Fairview Optional,2.0,301,25,0.91,299
+2017-2018,high,Broomfield,Broomfield,7.0,1145,186,0.83,1138
+2017-2018,high,Centaurus,Centaurus,21.0,1683,665,0.59,1662
+2017-2018,high,Monarch,Monarch,10.0,1921,604,0.68,1911
+2017-2018,high,Nederland,Nederland,2.0,178,64,0.63,176
+2017-2018,middle,Manhattan,Manhattan,8.0,561,292,0.47,553
+2017-2018,middle,Casey,Casey,10.0,684,156,0.76,674
+2017-2018,middle,Centennial,Centennial,14.0,852,263,0.67,838
+2017-2018,middle,Platt,Platt,6.0,491,123,0.74,485
+2017-2018,middle,Southern Hills,Southern Hills,8.0,508,111,0.77,500
+2017-2018,middle,Aspen Creek K-8,Aspen Creek K-8,4.0,466,134,0.7,462
+2017-2018,middle,Broomfield Heights,Broomfield Heights,2.0,348,54,0.84,346
+2017-2018,middle,Angevine,Angevine,22.0,913,309,0.64,891
+2017-2018,middle,Meadowlark,Meadowlark,5.0,209,138,0.32,204
+2017-2018,middle,Louisville Middle,Louisville Middle,7.0,640,90,0.85,633
+2017-2018,middle,Monarch K-8,Monarch K-8,2.0,354,88,0.75,352
+2017-2018,middle,Eldorado K-8,Eldorado K-8,4.0,608,164,0.72,604
+2017-2018,middle,Nederland,Nederland,3.0,153,27,0.8,150
+2018-2019,elementary,Bear Creek,Bear Creek*,0.0,242,27,0.89,242
+2018-2019,elementary,Columbine,Columbine,16.0,618,225,0.61,602
+2018-2019,elementary,Creekside,Creekside*,10.0,499,269,0.44,489
+2018-2019,elementary,Crest View,Crest View,26.0,882,352,0.57,856
+2018-2019,elementary,Douglass,Douglass,15.0,402,82,0.76,387
+2018-2019,elementary,Eisenhower,Eisenhower,4.0,489,170,0.64,485
+2018-2019,elementary,Flatirons,Flatirons,1.0,233,78,0.66,232
+2018-2019,elementary,Foothill,Foothill,12.0,574,146,0.72,562
+2018-2019,elementary,Heatherwood,Heatherwood,5.0,343,74,0.77,338
+2018-2019,elementary,Mesa,Mesa*,4.0,221,39,0.81,217
+2018-2019,elementary,Whittier,Whittier,8.0,458,118,0.72,450
+2018-2019,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,0.0,41,1,0.98,41
+2018-2019,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,4.0,202,36,0.8,198
+2018-2019,elementary,Aspen Creek K-8,Aspen Creek K-8,11.0,391,81,0.76,380
+2018-2019,elementary,Birch,Birch,7.0,347,91,0.72,340
+2018-2019,elementary,Emerald,Emerald,12.0,382,86,0.74,370
+2018-2019,elementary,Kohl,Kohl,12.0,329,58,0.79,317
+2018-2019,elementary,Lafayette,Lafayette,13.0,622,264,0.55,609
+2018-2019,elementary,Ryan,Ryan,21.0,647,224,0.62,626
+2018-2019,elementary,Sanchez,Sanchez,36.0,640,319,0.45,604
+2018-2019,elementary,Meadowlark,Meadowlark,9.0,477,94,0.0,468
+2018-2019,elementary,Coal Creek,Coal Creek,8.0,470,95,0.78,462
+2018-2019,elementary,Fireside,Fireside,3.0,388,57,0.85,385
+2018-2019,elementary,Louisville,Louisville,9.0,650,120,0.8,641
+2018-2019,elementary,Monarch K-8,Monarch K-8,8.0,302,70,0.74,294
+2018-2019,elementary,Eldorado K-8,Eldorado K-8,2.0,390,56,0.85,388
+2018-2019,elementary,Superior,Superior,7.0,452,54,0.87,445
+2018-2019,elementary,Gold Hill,Gold Hill,0.0,6,2,0.67,6
+2018-2019,elementary,Jamestown,Jamestown,0.0,11,4,0.64,11
+2018-2019,elementary,Nederland,Nederland,0.0,279,36,0.87,279
+2018-2019,high,Boulder,Boulder*,27.0,2291,555,0.75,2264
+2018-2019,high,Fairview,Fairview*,13.0,1379,220,0.83,1366
+2018-2019,high,Boulder/Fairview Optional,Boulder/Fairview Optional,3.0,309,36,0.87,306
+2018-2019,high,Broomfield,Broomfield,5.0,1118,204,0.81,1113
+2018-2019,high,Centaurus,Centaurus,18.0,1708,668,0.6,1690
+2018-2019,high,Monarch,Monarch,8.0,2025,665,0.67,2017
+2018-2019,high,Nederland,Nederland,3.0,178,63,0.63,175
+2018-2019,middle,Manhattan,Manhattan,4.0,529,259,0.5,525
+2018-2019,middle,Casey,Casey,9.0,685,151,0.77,676
+2018-2019,middle,Centennial,Centennial,21.0,830,235,0.69,809
+2018-2019,middle,Platt,Platt,3.0,462,116,0.74,459
+2018-2019,middle,Southern Hills,Southern Hills,7.0,535,138,0.73,528
+2018-2019,middle,Aspen Creek K-8,Aspen Creek K-8,7.0,461,123,0.72,454
+2018-2019,middle,Broomfield Heights,Broomfield Heights,2.0,347,46,0.86,345
+2018-2019,middle,Angevine,Angevine,17.0,973,320,0.65,956
+2018-2019,middle,Meadowlark,Meadowlark,4.0,218,116,,214
+2018-2019,middle,Louisville Middle,Louisville Middle,12.0,640,80,0.86,628
+2018-2019,middle,Monarch K-8,Monarch K-8,2.0,347,97,0.71,345
+2018-2019,middle,Eldorado K-8,Eldorado K-8,3.0,576,150,0.73,573
+2018-2019,middle,Nederland,Nederland,1.0,144,23,0.83,143
+2019-2020,elementary,Bear Creek,Bear Creek*,0.0,226,27,0.88,226
+2019-2020,elementary,Columbine,Columbine,9.0,621,223,0.63,612
+2019-2020,elementary,Creekside,Creekside*,5.0,526,247,0.52,521
+2019-2020,elementary,Crest View,Crest View,17.0,836,341,0.57,819
+2019-2020,elementary,Douglass,Douglass,9.0,367,78,0.76,358
+2019-2020,elementary,Eisenhower,Eisenhower,3.0,483,155,0.67,480
+2019-2020,elementary,Flatirons,Flatirons,1.0,233,82,0.64,232
+2019-2020,elementary,Foothill,Foothill,7.0,555,134,0.75,548
+2019-2020,elementary,Heatherwood,Heatherwood,1.0,313,71,0.77,312
+2019-2020,elementary,Mesa,Mesa*,1.0,221,48,0.78,220
+2019-2020,elementary,Whittier,Whittier,9.0,419,118,0.7,410
+2019-2020,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,0.0,43,3,0.93,43
+2019-2020,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,2.0,198,38,0.8,196
+2019-2020,elementary,Aspen Creek K-8,Aspen Creek K-8,10.0,370,87,0.74,360
+2019-2020,elementary,Birch,Birch,6.0,342,98,0.7,336
+2019-2020,elementary,Emerald,Emerald,11.0,372,85,0.74,361
+2019-2020,elementary,Kohl,Kohl,20.0,317,57,0.76,297
+2019-2020,elementary,Lafayette,Lafayette,11.0,671,269,0.58,660
+2019-2020,elementary,Ryan,Ryan,19.0,720,254,0.62,701
+2019-2020,elementary,Sanchez,Sanchez,15.0,598,325,0.43,583
+2019-2020,elementary,Meadowlark,Meadowlark,10.0,532,107,0.78,522
+2019-2020,elementary,Coal Creek,Coal Creek,6.0,442,90,0.78,436
+2019-2020,elementary,Fireside,Fireside,2.0,396,55,0.86,394
+2019-2020,elementary,Louisville,Louisville,5.0,611,127,0.78,606
+2019-2020,elementary,Monarch K-8,Monarch K-8,4.0,304,70,0.76,300
+2019-2020,elementary,Eldorado K-8,Eldorado K-8,2.0,356,55,0.84,354
+2019-2020,elementary,Superior,Superior,6.0,453,66,0.84,447
+2019-2020,elementary,Gold Hill,Gold Hill,0.0,5,0,1.0,5
+2019-2020,elementary,Jamestown,Jamestown,1.0,14,3,0.71,13
+2019-2020,elementary,Nederland,Nederland,1.0,260,36,0.86,259
+2019-2020,high,Boulder,Boulder*,16.0,2315,496,0.78,2299
+2019-2020,high,Fairview,Fairview*,12.0,1426,216,0.84,1414
+2019-2020,high,Boulder/Fairview Optional,Boulder/Fairview Optional,4.0,300,33,0.88,296
+2019-2020,high,Broomfield,Broomfield,8.0,1090,189,0.82,1082
+2019-2020,high,Centaurus,Centaurus,17.0,1802,667,0.62,1785
+2019-2020,high,Monarch,Monarch,14.0,2011,672,0.66,1997
+2019-2020,high,Nederland,Nederland,4.0,156,53,0.63,152
+2019-2020,middle,Manhattan,Manhattan,3.0,513,234,0.54,510
+2019-2020,middle,Casey,Casey,8.0,683,174,0.73,675
+2019-2020,middle,Centennial,Centennial,18.0,826,238,0.69,808
+2019-2020,middle,Platt,Platt,5.0,463,126,0.72,458
+2019-2020,middle,Southern Hills,Southern Hills,5.0,518,136,0.73,513
+2019-2020,middle,Aspen Creek K-8,Aspen Creek K-8,5.0,451,134,0.69,446
+2019-2020,middle,Broomfield Heights,Broomfield Heights,2.0,356,40,0.88,354
+2019-2020,middle,Angevine,Angevine,16.0,995,330,0.65,979
+2019-2020,middle,Meadowlark,Meadowlark,5.0,242,98,0.57,237
+2019-2020,middle,Louisville Middle,Louisville Middle,12.0,627,80,0.85,615
+2019-2020,middle,Monarch K-8,Monarch K-8,3.0,357,98,0.72,354
+2019-2020,middle,Eldorado K-8,Eldorado K-8,8.0,548,130,0.75,540
+2019-2020,middle,Nederland,Nederland,1.0,136,26,0.8,135
+2020-2021,elementary,Bear Creek,Bear Creek*,1.0,195,38,0.8,194
+2020-2021,elementary,Columbine,Columbine,18.0,551,226,0.56,533
+2020-2021,elementary,Creekside,Creekside*,6.0,495,242,0.5,489
+2020-2021,elementary,Crest View,Crest View,17.0,764,353,0.52,747
+2020-2021,elementary,Douglass,Douglass,9.0,301,88,0.68,292
+2020-2021,elementary,Eisenhower,Eisenhower,6.0,415,144,0.64,409
+2020-2021,elementary,Flatirons,Flatirons,2.0,207,89,0.56,205
+2020-2021,elementary,Foothill,Foothill,3.0,492,103,0.78,489
+2020-2021,elementary,Heatherwood,Heatherwood,2.0,296,99,0.66,294
+2020-2021,elementary,Mesa,Mesa*,1.0,190,49,0.74,189
+2020-2021,elementary,Whittier,Whittier,10.0,374,119,0.66,364
+2020-2021,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,0.0,37,4,0.89,37
+2020-2021,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,1.0,170,30,0.82,169
+2020-2021,elementary,Aspen Creek K-8,Aspen Creek K-8,9.0,322,92,0.69,313
+2020-2021,elementary,Birch,Birch,7.0,295,95,0.65,288
+2020-2021,elementary,Emerald,Emerald,13.0,328,79,0.72,315
+2020-2021,elementary,Kohl,Kohl,24.0,279,60,0.7,255
+2020-2021,elementary,Lafayette,Lafayette,14.0,611,270,0.54,597
+2020-2021,elementary,Ryan,Ryan,20.0,660,263,0.57,640
+2020-2021,elementary,Sanchez,Sanchez,10.0,546,305,0.42,536
+2020-2021,elementary,Meadowlark,Meadowlark,13.0,517,107,0.77,504
+2020-2021,elementary,Coal Creek,Coal Creek,7.0,392,94,0.74,385
+2020-2021,elementary,Fireside,Fireside,4.0,342,51,0.84,338
+2020-2021,elementary,Louisville,Louisville,3.0,549,125,0.77,546
+2020-2021,elementary,Monarch K-8,Monarch K-8,4.0,270,85,0.67,266
+2020-2021,elementary,Eldorado K-8,Eldorado K-8,3.0,318,66,0.78,315
+2020-2021,elementary,Superior,Superior,6.0,437,61,0.85,431
+2020-2021,elementary,Gold Hill,Gold Hill,0.0,7,0,1.0,7
+2020-2021,elementary,Jamestown,Jamestown,0.0,15,2,0.87,15
+2020-2021,elementary,Nederland,Nederland,1.0,209,31,0.85,208
+2020-2021,high,Boulder,Boulder*,11.0,2364,509,0.78,2353
+2020-2021,high,Fairview,Fairview*,11.0,1405,210,0.84,1394
+2020-2021,high,Boulder/Fairview Optional,Boulder/Fairview Optional,7.0,305,37,0.86,298
+2020-2021,high,Broomfield,Broomfield,8.0,1093,216,0.8,1085
+2020-2021,high,Centaurus,Centaurus,17.0,1774,636,0.63,1757
+2020-2021,high,Monarch,Monarch,13.0,2002,701,0.64,1989
+2020-2021,high,Nederland,Nederland,2.0,162,61,0.61,160
+2020-2021,middle,Manhattan,Manhattan,4.0,461,232,0.49,457
+2020-2021,middle,Casey,Casey,7.0,597,194,0.66,590
+2020-2021,middle,Centennial,Centennial,17.0,747,247,0.65,730
+2020-2021,middle,Platt,Platt,7.0,457,158,0.64,450
+2020-2021,middle,Southern Hills,Southern Hills,3.0,495,170,0.65,492
+2020-2021,middle,Aspen Creek K-8,Aspen Creek K-8,8.0,400,141,0.63,392
+2020-2021,middle,Broomfield Heights,Broomfield Heights,2.0,350,60,0.82,348
+2020-2021,middle,Angevine,Angevine,16.0,967,346,0.63,951
+2020-2021,middle,Meadowlark,Meadowlark,6.0,255,100,0.58,249
+2020-2021,middle,Louisville Middle,Louisville Middle,12.0,577,92,0.82,565
+2020-2021,middle,Monarch K-8,Monarch K-8,6.0,328,103,0.67,322
+2020-2021,middle,Eldorado K-8,Eldorado K-8,5.0,489,153,0.68,484
+2020-2021,middle,Nederland,Nederland,,118,19,0.84,118
+2021-2022,elementary,Bear Creek,Bear Creek*,0.0,197,28,0.86,197
+2021-2022,elementary,Columbine,Columbine,25.0,510,198,0.56,485
+2021-2022,elementary,Creekside,Creekside*,5.0,485,224,0.53,480
+2021-2022,elementary,Crest View,Crest View,19.0,739,322,0.54,720
+2021-2022,elementary,Douglass,Douglass,11.0,314,89,0.68,303
+2021-2022,elementary,Eisenhower,Eisenhower,8.0,418,140,0.65,410
+2021-2022,elementary,Flatirons,Flatirons,7.0,206,73,0.61,199
+2021-2022,elementary,Foothill,Foothill,4.0,493,104,0.78,489
+2021-2022,elementary,Heatherwood,Heatherwood,3.0,303,93,0.68,300
+2021-2022,elementary,Mesa,Mesa*,0.0,198,39,0.8,198
+2021-2022,elementary,Whittier,Whittier,11.0,361,113,0.66,350
+2021-2022,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,0.0,39,3,0.92,39
+2021-2022,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,3.0,158,25,0.82,155
+2021-2022,elementary,Aspen Creek K-8,Aspen Creek K-8,5.0,324,86,0.72,319
+2021-2022,elementary,Birch,Birch,9.0,297,80,0.7,288
+2021-2022,elementary,Emerald,Emerald,11.0,308,58,0.78,297
+2021-2022,elementary,Kohl,Kohl,14.0,280,60,0.74,266
+2021-2022,elementary,Lafayette,Lafayette,13.0,654,261,0.58,641
+2021-2022,elementary,Ryan,Ryan,18.0,680,244,0.61,662
+2021-2022,elementary,Sanchez,Sanchez,10.0,569,297,0.46,559
+2021-2022,elementary,Meadowlark,Meadowlark,14.0,585,147,0.72,571
+2021-2022,elementary,Coal Creek,Coal Creek,7.0,421,86,0.78,414
+2021-2022,elementary,Fireside,Fireside,4.0,363,49,0.85,359
+2021-2022,elementary,Louisville,Louisville,6.0,537,108,0.79,531
+2021-2022,elementary,Monarch K-8,Monarch K-8,3.0,253,67,0.72,250
+2021-2022,elementary,Eldorado K-8,Eldorado K-8,4.0,301,57,0.8,297
+2021-2022,elementary,Superior,Superior,3.0,455,53,0.88,452
+2021-2022,elementary,Gold Hill,Gold Hill,0.0,10,0,1.0,10
+2021-2022,elementary,Jamestown,Jamestown,1.0,14,2,0.79,13
+2021-2022,elementary,Nederland,Nederland,1.0,203,25,0.87,202
+2021-2022,high,Boulder,Boulder*,15.0,2312,463,0.79,2297
+2021-2022,high,Fairview,Fairview*,9.0,1348,197,0.85,1339
+2021-2022,high,Boulder/Fairview Optional,Boulder/Fairview Optional,6.0,311,24,0.9,305
+2021-2022,high,Broomfield,Broomfield,8.0,1077,194,0.81,1069
+2021-2022,high,Centaurus,Centaurus,12.0,1813,620,0.65,1801
+2021-2022,high,Monarch,Monarch,15.0,1958,705,0.63,1943
+2021-2022,high,Nederland,Nederland,,176,58,0.67,176
+2021-2022,middle,Manhattan,Manhattan,7.0,458,232,0.48,451
+2021-2022,middle,Casey,Casey,3.0,568,165,0.7,565
+2021-2022,middle,Centennial,Centennial,13.0,786,239,0.68,773
+2021-2022,middle,Platt,Platt,6.0,400,124,0.68,394
+2021-2022,middle,Southern Hills,Southern Hills,4.0,456,128,0.71,452
+2021-2022,middle,Aspen Creek K-8,Aspen Creek K-8,14.0,351,106,0.66,337
+2021-2022,middle,Broomfield Heights,Broomfield Heights,2.0,339,43,0.87,337
+2021-2022,middle,Angevine,Angevine,20.0,939,295,0.66,919
+2021-2022,middle,Meadowlark,Meadowlark,5.0,253,101,0.58,248
+2021-2022,middle,Louisville Middle,Louisville Middle,9.0,554,84,0.83,545
+2021-2022,middle,Monarch K-8,Monarch K-8,3.0,332,90,0.72,329
+2021-2022,middle,Eldorado K-8,Eldorado K-8,6.0,463,146,0.67,457
+2021-2022,middle,Nederland,Nederland,,123,18,0.85,123
+2022-2023,elementary,Bear Creek,Bear Creek*,0.0,193,31,0.84,193
+2022-2023,elementary,Columbine,Columbine,27.0,513,204,0.55,486
+2022-2023,elementary,Creekside,Creekside*,8.0,501,206,0.57,493
+2022-2023,elementary,Crest View,Crest View,19.0,726,328,0.52,707
+2022-2023,elementary,Douglass,Douglass,9.0,302,81,0.7,293
+2022-2023,elementary,Eisenhower,Eisenhower,10.0,390,142,0.61,380
+2022-2023,elementary,Flatirons,Flatirons,8.0,209,73,0.61,201
+2022-2023,elementary,Foothill,Foothill,3.0,475,91,0.8,472
+2022-2023,elementary,Heatherwood,Heatherwood,5.0,304,94,0.67,299
+2022-2023,elementary,Mesa,Mesa*,1.0,185,37,0.79,184
+2022-2023,elementary,Whittier,Whittier,11.0,359,118,0.64,348
+2022-2023,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,0.0,29,1,0.97,29
+2022-2023,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,3.0,176,33,0.8,173
+2022-2023,elementary,Aspen Creek K-8,Aspen Creek K-8,3.0,320,82,0.73,317
+2022-2023,elementary,Birch,Birch,8.0,301,91,0.67,293
+2022-2023,elementary,Emerald,Emerald,8.0,338,64,0.79,330
+2022-2023,elementary,Kohl,Kohl,12.0,256,51,0.75,244
+2022-2023,elementary,Lafayette,Lafayette,18.0,609,241,0.57,591
+2022-2023,elementary,Ryan,Ryan,28.0,658,244,0.59,630
+2022-2023,elementary,Sanchez,Sanchez,13.0,583,300,0.46,570
+2022-2023,elementary,Meadowlark,Meadowlark,13.0,614,159,0.72,601
+2022-2023,elementary,Coal Creek,Coal Creek,7.0,369,82,0.76,362
+2022-2023,elementary,Fireside,Fireside,5.0,321,35,0.88,316
+2022-2023,elementary,Louisville,Louisville,7.0,521,112,0.77,514
+2022-2023,elementary,Monarch K-8,Monarch K-8,4.0,239,67,0.7,235
+2022-2023,elementary,Eldorado K-8,Eldorado K-8,3.0,295,57,0.8,292
+2022-2023,elementary,Superior,Superior,2.0,415,51,0.87,413
+2022-2023,elementary,Gold Hill,Gold Hill,0.0,10,1,0.9,10
+2022-2023,elementary,Jamestown,Jamestown,4.0,16,2,0.63,12
+2022-2023,elementary,Nederland,Nederland,4.0,195,22,0.87,191
+2022-2023,high,Boulder,Boulder*,19.0,2239,456,0.79,2220
+2022-2023,high,Fairview,Fairview*,19.0,1334,216,0.82,1315
+2022-2023,high,Boulder/Fairview Optional,Boulder/Fairview Optional,3.0,291,28,0.89,288
+2022-2023,high,Broomfield,Broomfield,11.0,1024,155,0.84,1013
+2022-2023,high,Centaurus,Centaurus,21.0,1822,656,0.63,1801
+2022-2023,high,Monarch,Monarch,25.0,1935,665,0.64,1910
+2022-2023,high,Nederland,Nederland,1.0,170,47,0.72,169
+2022-2023,middle,Manhattan,Manhattan,7.0,457,251,0.44,450
+2022-2023,middle,Casey,Casey,9.0,532,165,0.67,523
+2022-2023,middle,Centennial,Centennial,17.0,731,220,0.68,714
+2022-2023,middle,Platt,Platt,5.0,377,115,0.68,372
+2022-2023,middle,Southern Hills,Southern Hills,7.0,425,120,0.7,418
+2022-2023,middle,Aspen Creek K-8,Aspen Creek K-8,16.0,366,121,0.63,350
+2022-2023,middle,Broomfield Heights,Broomfield Heights,3.0,320,46,0.85,317
+2022-2023,middle,Angevine,Angevine,30.0,946,302,0.65,916
+2022-2023,middle,Meadowlark,Meadowlark,5.0,262,100,0.6,257
+2022-2023,middle,Louisville Middle,Louisville Middle,8.0,550,89,0.82,542
+2022-2023,middle,Monarch K-8,Monarch K-8,3.0,323,93,0.7,320
+2022-2023,middle,Eldorado K-8,Eldorado K-8,4.0,427,148,0.64,423
+2022-2023,middle,Nederland,Nederland,1.0,120,17,0.85,119
+2023-2024,elementary,Bear Creek,Bear Creek*,4.0,174,34,0.78,170
+2023-2024,elementary,Columbine,Columbine,26.0,520,217,0.53,494
+2023-2024,elementary,Creekside,Creekside*,10.0,511,220,0.55,501
+2023-2024,elementary,Crest View,Crest View,12.0,689,317,0.52,677
+2023-2024,elementary,Douglass,Douglass,10.0,281,84,0.67,271
+2023-2024,elementary,Eisenhower,Eisenhower,12.0,396,140,0.62,384
+2023-2024,elementary,Flatirons,Flatirons,10.0,205,70,0.61,195
+2023-2024,elementary,Foothill,Foothill,7.0,448,81,0.8,441
+2023-2024,elementary,Heatherwood,Heatherwood,6.0,292,93,0.66,286
+2023-2024,elementary,Mesa,Mesa*,2.0,179,51,0.7,177
+2023-2024,elementary,Whittier,Whittier,3.0,329,130,0.6,326
+2023-2024,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,0.0,28,4,0.86,28
+2023-2024,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,1.0,154,37,0.75,153
+2023-2024,elementary,Aspen Creek K-8,Aspen Creek K-8,2.0,306,66,0.78,304
+2023-2024,elementary,Birch,Birch,9.0,281,84,0.67,272
+2023-2024,elementary,Emerald,Emerald,10.0,324,64,0.77,314
+2023-2024,elementary,Kohl,Kohl,8.0,249,53,0.76,241
+2023-2024,elementary,Lafayette,Lafayette,17.0,614,243,0.58,597
+2023-2024,elementary,Ryan,Ryan,25.0,645,236,0.6,620
+2023-2024,elementary,Sanchez,Sanchez,28.0,591,312,0.42,563
+2023-2024,elementary,Meadowlark,Meadowlark,12.0,614,169,0.71,602
+2023-2024,elementary,Coal Creek,Coal Creek,7.0,347,80,0.75,340
+2023-2024,elementary,Fireside,Fireside,5.0,314,42,0.85,309
+2023-2024,elementary,Louisville,Louisville,9.0,475,97,0.78,466
+2023-2024,elementary,Monarch K-8,Monarch K-8,5.0,248,89,0.62,243
+2023-2024,elementary,Eldorado K-8,Eldorado K-8,4.0,278,62,0.76,274
+2023-2024,elementary,Superior,Superior,2.0,412,51,0.87,410
+2023-2024,elementary,Gold Hill,Gold Hill,0.0,10,1,0.9,10
+2023-2024,elementary,Jamestown,Jamestown,2.0,13,3,0.62,11
+2023-2024,elementary,Nederland,Nederland,2.0,189,25,0.86,187
+2023-2024,high,Boulder,Boulder*,20.0,2178,492,0.76,2158
+2023-2024,high,Fairview,Fairview*,23.0,1298,225,0.81,1275
+2023-2024,high,Boulder/Fairview Optional,Boulder/Fairview Optional,3.0,276,35,0.86,273
+2023-2024,high,Broomfield,Broomfield,8.0,1049,198,0.8,1041
+2023-2024,high,Centaurus,Centaurus,27.0,1866,669,0.63,1839
+2023-2024,high,Monarch,Monarch,21.0,1834,643,0.64,1813
+2023-2024,high,Nederland,Nederland,1.0,172,66,0.61,171
+2023-2024,middle,Manhattan,Manhattan,7.0,462,272,0.4,455
+2023-2024,middle,Casey,Casey,10.0,523,205,0.59,513
+2023-2024,middle,Centennial,Centennial,20.0,750,208,0.7,730
+2023-2024,middle,Platt,Platt,3.0,362,96,0.73,359
+2023-2024,middle,Southern Hills,Southern Hills,10.0,452,135,0.68,442
+2023-2024,middle,Aspen Creek K-8,Aspen Creek K-8,10.0,342,143,0.55,332
+2023-2024,middle,Broomfield Heights,Broomfield Heights,5.0,311,51,0.82,306
+2023-2024,middle,Angevine,Angevine,30.0,969,377,0.58,939
+2023-2024,middle,Meadowlark,Meadowlark,5.0,294,103,0.63,289
+2023-2024,middle,Louisville Middle,Louisville Middle,3.0,545,97,0.82,542
+2023-2024,middle,Monarch K-8,Monarch K-8,5.0,320,104,0.66,315
+2023-2024,middle,Eldorado K-8,Eldorado K-8,4.0,404,162,0.59,400
+2023-2024,middle,Nederland,Nederland,3.0,123,15,0.85,120
+2024-2025,elementary,Bear Creek,Bear Creek*,2.0,170,34,0.79,168
+2024-2025,elementary,Columbine,Columbine,31.0,537,246,0.48,506
+2024-2025,elementary,Creekside,Creekside*,10.0,495,214,0.55,485
+2024-2025,elementary,Crest View,Crest View,18.0,684,325,0.5,666
+2024-2025,elementary,Douglass,Douglass,8.0,270,81,0.67,262
+2024-2025,elementary,Eisenhower,Eisenhower,15.0,373,137,0.59,358
+2024-2025,elementary,Flatirons,Flatirons,6.0,193,67,0.62,187
+2024-2025,elementary,Foothill,Foothill,6.0,403,81,0.78,397
+2024-2025,elementary,Heatherwood,Heatherwood,12.0,305,91,0.66,293
+2024-2025,elementary,Mesa,Mesa*,4.0,177,51,0.69,173
+2024-2025,elementary,Whittier,Whittier,8.0,306,126,0.56,298
+2024-2025,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,0.0,36,6,0.83,36
+2024-2025,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,5.0,143,30,0.76,138
+2024-2025,elementary,Aspen Creek K-8,Aspen Creek K-8,4.0,309,71,0.76,305
+2024-2025,elementary,Birch,Birch,8.0,285,83,0.68,277
+2024-2025,elementary,Emerald,Emerald,7.0,323,74,0.75,316
+2024-2025,elementary,Kohl,Kohl,13.0,248,53,0.73,235
+2024-2025,elementary,Lafayette,Lafayette,13.0,620,241,0.59,607
+2024-2025,elementary,Ryan,Ryan,30.0,631,236,0.58,601
+2024-2025,elementary,Sanchez,Sanchez,30.0,609,337,0.4,579
+2024-2025,elementary,Meadowlark,Meadowlark,10.0,623,184,0.69,613
+2024-2025,elementary,Coal Creek,Coal Creek,10.0,342,91,0.7,332
+2024-2025,elementary,Fireside,Fireside,4.0,303,45,0.84,299
+2024-2025,elementary,Louisville,Louisville,11.0,449,91,0.77,438
+2024-2025,elementary,Monarch K-8,Monarch K-8,7.0,273,120,0.53,266
+2024-2025,elementary,Eldorado K-8,Eldorado K-8,5.0,257,65,0.73,252
+2024-2025,elementary,Superior,Superior,1.0,371,47,0.87,370
+2024-2025,elementary,Gold Hill,Gold Hill,0.0,8,1,0.88,8
+2024-2025,elementary,Jamestown,Jamestown,2.0,11,3,0.55,9
+2024-2025,elementary,Nederland,Nederland,4.0,206,34,0.82,202
+2024-2025,high,Boulder,Boulder*,23.0,2125,489,0.76,2102
+2024-2025,high,Fairview,Fairview*,21.0,1321,249,0.8,1300
+2024-2025,high,Boulder/Fairview Optional,Boulder/Fairview Optional,2.0,256,40,0.84,254
+2024-2025,high,Broomfield,Broomfield,14.0,1023,180,0.81,1009
+2024-2025,high,Centaurus,Centaurus,33.0,1897,676,0.63,1864
+2024-2025,high,Monarch,Monarch,37.0,1814,618,0.64,1777
+2024-2025,high,Nederland,Nederland,,165,58,0.65,165
+2024-2025,middle,Manhattan,Manhattan,6.0,478,268,0.43,472
+2024-2025,middle,Casey,Casey,14.0,542,247,0.52,528
+2024-2025,middle,Centennial,Centennial,16.0,698,209,0.68,682
+2024-2025,middle,Platt,Platt,7.0,352,105,0.68,345
+2024-2025,middle,Southern Hills,Southern Hills,12.0,448,122,0.7,436
+2024-2025,middle,Aspen Creek K-8,Aspen Creek K-8,8.0,350,117,0.64,342
+2024-2025,middle,Broomfield Heights,Broomfield Heights,8.0,342,65,0.79,334
+2024-2025,middle,Angevine,Angevine,27.0,1009,412,0.56,982
+2024-2025,middle,Meadowlark,Meadowlark,6.0,303,110,0.62,297
+2024-2025,middle,Louisville Middle,Louisville Middle,11.0,548,104,0.79,537
+2024-2025,middle,Monarch K-8,Monarch K-8,4.0,299,118,0.59,295
+2024-2025,middle,Eldorado K-8,Eldorado K-8,6.0,414,196,0.51,408
+2024-2025,middle,Nederland,Nederland,4.0,116,18,0.81,112
+2025-2026,elementary,Bear Creek,Bear Creek*,2.0,162,29,0.81,160
+2025-2026,elementary,Columbine,Columbine,28.0,501,252,0.44,473
+2025-2026,elementary,Creekside,Creekside*,7.0,439,192,0.55,432
+2025-2026,elementary,Crest View,Crest View,17.0,657,337,0.46,640
+2025-2026,elementary,Douglass,Douglass,4.0,260,92,0.63,256
+2025-2026,elementary,Eisenhower,Eisenhower,16.0,361,139,0.57,345
+2025-2026,elementary,Flatirons,Flatirons,7.0,195,72,0.59,188
+2025-2026,elementary,Foothill,Foothill,3.0,387,80,0.79,384
+2025-2026,elementary,Heatherwood,Heatherwood,10.0,281,81,0.68,271
+2025-2026,elementary,Mesa,Mesa*,3.0,176,55,0.67,173
+2025-2026,elementary,Whittier,Whittier,8.0,287,127,0.53,279
+2025-2026,elementary,Optional Bear Creek/Creekside,Optional Bear Creek/ Creekside,0.0,27,7,0.74,27
+2025-2026,elementary,Optional Bear Creek/Mesa,Optional Bear Creek/Mesa,5.0,137,24,0.79,132
+2025-2026,elementary,Aspen Creek K-8,Aspen Creek K-8,8.0,320,68,0.76,312
+2025-2026,elementary,Birch,Birch,5.0,266,78,0.69,261
+2025-2026,elementary,Emerald,Emerald,11.0,328,74,0.74,317
+2025-2026,elementary,Kohl,Kohl,14.0,271,70,0.69,257
+2025-2026,elementary,Lafayette,Lafayette,10.0,601,260,0.55,591
+2025-2026,elementary,Ryan,Ryan,28.0,589,219,0.58,561
+2025-2026,elementary,Sanchez,Sanchez,39.0,642,378,0.35,603
+2025-2026,elementary,Meadowlark,Meadowlark,8.0,588,174,0.69,580
+2025-2026,elementary,Coal Creek,Coal Creek,7.0,324,94,0.69,317
+2025-2026,elementary,Fireside,Fireside,3.0,298,36,0.87,295
+2025-2026,elementary,Louisville,Louisville,9.0,413,87,0.77,404
+2025-2026,elementary,Monarch K-8,Monarch K-8,9.0,310,152,0.48,301
+2025-2026,elementary,Eldorado K-8,Eldorado K-8,6.0,246,71,0.69,240
+2025-2026,elementary,Superior,Superior,8.0,360,39,0.87,352
+2025-2026,elementary,Gold Hill,Gold Hill,1.0,11,3,0.64,10
+2025-2026,elementary,Jamestown,Jamestown,2.0,11,3,0.55,9
+2025-2026,elementary,Nederland,Nederland,2.0,197,32,0.83,195
+2025-2026,high,Boulder,Boulder*,25.0,2035,528,0.73,2010
+2025-2026,high,Fairview,Fairview*,15.0,1267,230,0.81,1252
+2025-2026,high,Boulder/Fairview Optional,Boulder/Fairview Optional,2.0,227,29,0.86,225
+2025-2026,high,Broomfield,Broomfield,17.0,994,180,0.8,977
+2025-2026,high,Centaurus,Centaurus,39.0,1907,670,0.63,1868
+2025-2026,high,Monarch,Monarch,29.0,1821,604,0.65,1792
+2025-2026,high,Nederland,Nederland,,158,65,0.59,158
+2025-2026,middle,Manhattan,Manhattan,4.0,467,285,0.38,463
+2025-2026,middle,Casey,Casey,16.0,521,251,0.49,505
+2025-2026,middle,Centennial,Centennial,12.0,656,212,0.66,644
+2025-2026,middle,Platt,Platt,5.0,383,112,0.69,378
+2025-2026,middle,Southern Hills,Southern Hills,5.0,452,130,0.7,447
+2025-2026,middle,Aspen Creek K-8,Aspen Creek K-8,9.0,350,106,0.67,341
+2025-2026,middle,Broomfield Heights,Broomfield Heights,8.0,327,69,0.76,319
+2025-2026,middle,Angevine,Angevine,20.0,1018,447,0.54,998
+2025-2026,middle,Meadowlark,Meadowlark,6.0,329,115,0.63,323
+2025-2026,middle,Louisville Middle,Louisville Middle,7.0,505,99,0.79,498
+2025-2026,middle,Monarch K-8,Monarch K-8,3.0,302,130,0.56,299
+2025-2026,middle,Eldorado K-8,Eldorado K-8,6.0,376,234,0.36,370
+2025-2026,middle,Nederland,Nederland,2.0,106,18,0.81,104

@@ -1,0 +1,181 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0005_ds120_1990_place'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             1990
+Geographic level: Place (by State)
+Extent:           Alabama
+                  Arizona
+                  California
+                  Colorado
+                  Connecticut
+                  Florida
+                  Illinois
+                  Indiana
+                  Iowa
+                  Louisiana
+                  Massachusetts
+                  Michigan
+                  Minnesota
+                  New York
+                  North Carolina
+                  Oregon
+                  Pennsylvania
+                  Texas
+                  Utah
+                  Wisconsin
+Dataset:          1990 Census: STF 1 - 100% Data
+   NHGIS code:    1990_STF1
+   NHGIS ID:      ds120
+Breakdown(s):     Geographic Subarea:
+                     Total area (00)
+ 
+Tables:
+ 
+1. Age
+   Universe:    Persons
+   Source code: NP11
+   NHGIS code:  ET3
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      State/US Abbreviation
+        ANRCA:       Alaska Native Regional Corporation Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land Code
+        RES_ONLYA:   American Indian Reservation [excluding trust lands] Code
+        TRUSTA:      American Indian Reservation [trust lands only] Code
+        AIANCC:      American Indian/Alaska Native Area Class Code
+        RES_TRSTA:   Reservation/Trust Lands Code
+        BLOCKA:      Block Code
+        BLCK_GRPA:   Block Group Code
+        TRACTA:      Census Tract Code
+        CD101A:      Congressional District (101st) Code
+        C_CITYA:     Consolidated City Code
+        CMSA:        Consolidated Metropolitan Statistical Area
+        COUNTYA:     County Code
+        CTY_SUBA:    County Subdivision Code
+        COUSUBCC:    County Subdivision Class Code
+        DIVISIONA:   Division Code
+        MSA_CMSAA:   Metropolitan Statistical Area/Consolidated Metropolitan Statistical Area Code
+        PLACE:       Place Name
+        PLACEA:      Place Code
+        PLACECC:     Place Class Code
+        PLACEDC:     Place Description Code
+        PMSAA:       Primary Metropolitan Statistical Area Code
+        REGIONA:     Region Code
+        STATE:       State Name
+        STATEA:      State Code
+        URBRURALA:   Urban/Rural Code
+        URB_AREAA:   Urban Area Code
+        CD103A:      Congressional District (103rd) Code
+        AREALAND:    Area (land)
+        AREAWAT:     Area (Water)
+        ANPSADPI:    Area Name/PSAD Term/Part Indicator
+        FUNCSTAT:    Functional Status Code
+        INTPTLAT:    Internal Point (latitude)
+        INTPTLNG:    Internal Point (longitude)
+        PSADC:       Political/Statistical Area Description Code
+ 
+Breakdown:
+    Geographic Subarea: Total area (00)
+ 
+    Table 1:     Age
+    Universe:    Persons
+    Source code: NP11
+    NHGIS code:  ET3
+        ET3001:      Under 1 year
+        ET3002:      1 and 2 years
+        ET3003:      3 and 4 years
+        ET3004:      5 years
+        ET3005:      6 years
+        ET3006:      7 to 9 years
+        ET3007:      10 and 11 years
+        ET3008:      12 and 13 years
+        ET3009:      14 years
+        ET3010:      15 years
+        ET3011:      16 years
+        ET3012:      17 years
+        ET3013:      18 years
+        ET3014:      19 years
+        ET3015:      20 years
+        ET3016:      21 years
+        ET3017:      22 to 24 years
+        ET3018:      25 to 29 years
+        ET3019:      30 to 34 years
+        ET3020:      35 to 39 years
+        ET3021:      40 to 44 years
+        ET3022:      45 to 49 years
+        ET3023:      50 to 54 years
+        ET3024:      55 to 59 years
+        ET3025:      60 and 61 years
+        ET3026:      62 to 64 years
+        ET3027:      65 to 69 years
+        ET3028:      70 to 74 years
+        ET3029:      75 to 79 years
+        ET3030:      80 to 84 years
+        ET3031:      85 years and over
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Jonathan Schroeder, David Van Riper, Steven Manson, Grace Cooper, Zachary Krause, Tracy Kugler, Tsu Zhu, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 21.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2026. 
+        http://doi.org/10.18128/D050.V21.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455

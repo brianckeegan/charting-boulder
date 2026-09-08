@@ -1,0 +1,374 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0004_ds259_2020_place'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             2020
+Geographic level: Place (by State)
+Extent:           Alabama
+                  Arizona
+                  California
+                  Colorado
+                  Connecticut
+                  Florida
+                  Illinois
+                  Indiana
+                  Iowa
+                  Louisiana
+                  Massachusetts
+                  Michigan
+                  Minnesota
+                  New York
+                  North Carolina
+                  Oregon
+                  Pennsylvania
+                  Texas
+                  Utah
+                  Wisconsin
+Dataset:          2020 Census: DHC - PCT & HCT Tables [Tracts & Larger Areas]
+   NHGIS code:    2020_DHCb
+   NHGIS ID:      ds259
+Breakdown(s):     Geographic Component:
+                     Total area (00)
+ 
+Tables:
+ 
+1. Sex by Single-Year Age
+   Universe:    Total population
+   Source code: PCT12
+   NHGIS code:  VCG
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      State/US-Abbreviation (USPS)
+        GEOID:       Geographic Record Identifier
+        GEOCODE:     Geographic Code Identifier
+        REGIONA:     Region Code
+        DIVISIONA:   Division Code
+        STATE:       State (FIPS) Name
+        STATEA:      State (FIPS) Code
+        COUNTYA:     County (FIPS) Code
+        COUSUBA:     County Subdivision (FIPS) Code
+        COUSUBCC:    FIPS County Subdivision Class Code
+        SUBMCDA:     Subminor Civil Division (FIPS) Code
+        CONCITA:     Consolidated City (FIPS) Code
+        PLACE:       Place (FIPS) Name
+        PLACEA:      Place (FIPS) Code
+        PLACECC:     FIPS Place Class Code
+        TRACTA:      Census Tract Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land (Census) Code
+        RES_ONLYA:   American Indian Area/Alaska Native Area (Reservation or Statistical Entity Only) Code
+        TRUSTA:      American Indian Area (Off-Reservation Trust Land Only)/Hawaiian Home Land Code
+        AIANHHCC:    FIPS American Indian Area/Alaska Native Area/Hawaiian Home Land Class Code
+        AITSA:       American Indian Tribal Subdivision (Census) Code
+        TTRACTA:     Tribal Census Tract Code
+        ANRCA:       Alaska Native Regional Corporation (FIPS) Code
+        CBSAA:       Metropolitan Statistical Area/Micropolitan Statistical Area Code
+        MEMI:        Metropolitan/Micropolitan Indicator
+        CSAA:        Combined Statistical Area Code
+        METDIVA:     Metropolitan Division Code
+        NECTAA:      New England City and Town Area Code
+        NMEMI:       NECTA Metropolitan/Micropolitan Indicator
+        CNECTAA:     Combined New England City and Town Area Code
+        NECTADIVA:   New England City and Town Area Division Code
+        CBSAPCI:     Metropolitan Statistical Area/Micropolitan Statistical Area Principal City Indicator
+        NECTAPCI:    New England City and Town Area Principal City Indicator
+        UAA:         Urban Area Code
+        URA:         Urban/Rural Code
+        CD116A:      Congressional District (116th) Code
+        SLDU18A:     State Legislative District (Upper Chamber) (2018) Code
+        SLDL18A:     State Legislative District (Lower Chamber) (2018) Code
+        ZCTAA:       ZIP Code Tabulation Area (5-Digit) Code
+        SDELMA:      School District (Elementary) Code
+        SDSECA:      School District (Secondary) Code
+        SDUNIA:      School District (Unified) Code
+        PUMA:        Public Use Microdata Area
+        AREALAND:    Area (Land)
+        AREAWATR:    Area (Water)
+        BASENAME:    Area Base Name
+        NAME:        Area Name-Legal/Statistical Area Description (LSAD) Term-Part Indicator
+        FUNCSTAT:    Functional Status Code
+        INTPTLAT:    Internal Point (Latitude)
+        INTPTLON:    Internal Point (Longitude)
+        LSADC:       Legal/Statistical Area Description Code
+ 
+Breakdown:
+    Geographic Component: Total area (00)
+ 
+    Table 1:     Sex by Single-Year Age
+    Universe:    Total population
+    Source code: PCT12
+    NHGIS code:  VCG
+        VCG001:      Total
+        VCG002:      Male
+        VCG003:      Male: Under 1 year
+        VCG004:      Male: 1 year
+        VCG005:      Male: 2 years
+        VCG006:      Male: 3 years
+        VCG007:      Male: 4 years
+        VCG008:      Male: 5 years
+        VCG009:      Male: 6 years
+        VCG010:      Male: 7 years
+        VCG011:      Male: 8 years
+        VCG012:      Male: 9 years
+        VCG013:      Male: 10 years
+        VCG014:      Male: 11 years
+        VCG015:      Male: 12 years
+        VCG016:      Male: 13 years
+        VCG017:      Male: 14 years
+        VCG018:      Male: 15 years
+        VCG019:      Male: 16 years
+        VCG020:      Male: 17 years
+        VCG021:      Male: 18 years
+        VCG022:      Male: 19 years
+        VCG023:      Male: 20 years
+        VCG024:      Male: 21 years
+        VCG025:      Male: 22 years
+        VCG026:      Male: 23 years
+        VCG027:      Male: 24 years
+        VCG028:      Male: 25 years
+        VCG029:      Male: 26 years
+        VCG030:      Male: 27 years
+        VCG031:      Male: 28 years
+        VCG032:      Male: 29 years
+        VCG033:      Male: 30 years
+        VCG034:      Male: 31 years
+        VCG035:      Male: 32 years
+        VCG036:      Male: 33 years
+        VCG037:      Male: 34 years
+        VCG038:      Male: 35 years
+        VCG039:      Male: 36 years
+        VCG040:      Male: 37 years
+        VCG041:      Male: 38 years
+        VCG042:      Male: 39 years
+        VCG043:      Male: 40 years
+        VCG044:      Male: 41 years
+        VCG045:      Male: 42 years
+        VCG046:      Male: 43 years
+        VCG047:      Male: 44 years
+        VCG048:      Male: 45 years
+        VCG049:      Male: 46 years
+        VCG050:      Male: 47 years
+        VCG051:      Male: 48 years
+        VCG052:      Male: 49 years
+        VCG053:      Male: 50 years
+        VCG054:      Male: 51 years
+        VCG055:      Male: 52 years
+        VCG056:      Male: 53 years
+        VCG057:      Male: 54 years
+        VCG058:      Male: 55 years
+        VCG059:      Male: 56 years
+        VCG060:      Male: 57 years
+        VCG061:      Male: 58 years
+        VCG062:      Male: 59 years
+        VCG063:      Male: 60 years
+        VCG064:      Male: 61 years
+        VCG065:      Male: 62 years
+        VCG066:      Male: 63 years
+        VCG067:      Male: 64 years
+        VCG068:      Male: 65 years
+        VCG069:      Male: 66 years
+        VCG070:      Male: 67 years
+        VCG071:      Male: 68 years
+        VCG072:      Male: 69 years
+        VCG073:      Male: 70 years
+        VCG074:      Male: 71 years
+        VCG075:      Male: 72 years
+        VCG076:      Male: 73 years
+        VCG077:      Male: 74 years
+        VCG078:      Male: 75 years
+        VCG079:      Male: 76 years
+        VCG080:      Male: 77 years
+        VCG081:      Male: 78 years
+        VCG082:      Male: 79 years
+        VCG083:      Male: 80 years
+        VCG084:      Male: 81 years
+        VCG085:      Male: 82 years
+        VCG086:      Male: 83 years
+        VCG087:      Male: 84 years
+        VCG088:      Male: 85 years
+        VCG089:      Male: 86 years
+        VCG090:      Male: 87 years
+        VCG091:      Male: 88 years
+        VCG092:      Male: 89 years
+        VCG093:      Male: 90 years
+        VCG094:      Male: 91 years
+        VCG095:      Male: 92 years
+        VCG096:      Male: 93 years
+        VCG097:      Male: 94 years
+        VCG098:      Male: 95 years
+        VCG099:      Male: 96 years
+        VCG100:      Male: 97 years
+        VCG101:      Male: 98 years
+        VCG102:      Male: 99 years
+        VCG103:      Male: 100 to 104 years
+        VCG104:      Male: 105 to 109 years
+        VCG105:      Male: 110 years and over
+        VCG106:      Female
+        VCG107:      Female: Under 1 year
+        VCG108:      Female: 1 year
+        VCG109:      Female: 2 years
+        VCG110:      Female: 3 years
+        VCG111:      Female: 4 years
+        VCG112:      Female: 5 years
+        VCG113:      Female: 6 years
+        VCG114:      Female: 7 years
+        VCG115:      Female: 8 years
+        VCG116:      Female: 9 years
+        VCG117:      Female: 10 years
+        VCG118:      Female: 11 years
+        VCG119:      Female: 12 years
+        VCG120:      Female: 13 years
+        VCG121:      Female: 14 years
+        VCG122:      Female: 15 years
+        VCG123:      Female: 16 years
+        VCG124:      Female: 17 years
+        VCG125:      Female: 18 years
+        VCG126:      Female: 19 years
+        VCG127:      Female: 20 years
+        VCG128:      Female: 21 years
+        VCG129:      Female: 22 years
+        VCG130:      Female: 23 years
+        VCG131:      Female: 24 years
+        VCG132:      Female: 25 years
+        VCG133:      Female: 26 years
+        VCG134:      Female: 27 years
+        VCG135:      Female: 28 years
+        VCG136:      Female: 29 years
+        VCG137:      Female: 30 years
+        VCG138:      Female: 31 years
+        VCG139:      Female: 32 years
+        VCG140:      Female: 33 years
+        VCG141:      Female: 34 years
+        VCG142:      Female: 35 years
+        VCG143:      Female: 36 years
+        VCG144:      Female: 37 years
+        VCG145:      Female: 38 years
+        VCG146:      Female: 39 years
+        VCG147:      Female: 40 years
+        VCG148:      Female: 41 years
+        VCG149:      Female: 42 years
+        VCG150:      Female: 43 years
+        VCG151:      Female: 44 years
+        VCG152:      Female: 45 years
+        VCG153:      Female: 46 years
+        VCG154:      Female: 47 years
+        VCG155:      Female: 48 years
+        VCG156:      Female: 49 years
+        VCG157:      Female: 50 years
+        VCG158:      Female: 51 years
+        VCG159:      Female: 52 years
+        VCG160:      Female: 53 years
+        VCG161:      Female: 54 years
+        VCG162:      Female: 55 years
+        VCG163:      Female: 56 years
+        VCG164:      Female: 57 years
+        VCG165:      Female: 58 years
+        VCG166:      Female: 59 years
+        VCG167:      Female: 60 years
+        VCG168:      Female: 61 years
+        VCG169:      Female: 62 years
+        VCG170:      Female: 63 years
+        VCG171:      Female: 64 years
+        VCG172:      Female: 65 years
+        VCG173:      Female: 66 years
+        VCG174:      Female: 67 years
+        VCG175:      Female: 68 years
+        VCG176:      Female: 69 years
+        VCG177:      Female: 70 years
+        VCG178:      Female: 71 years
+        VCG179:      Female: 72 years
+        VCG180:      Female: 73 years
+        VCG181:      Female: 74 years
+        VCG182:      Female: 75 years
+        VCG183:      Female: 76 years
+        VCG184:      Female: 77 years
+        VCG185:      Female: 78 years
+        VCG186:      Female: 79 years
+        VCG187:      Female: 80 years
+        VCG188:      Female: 81 years
+        VCG189:      Female: 82 years
+        VCG190:      Female: 83 years
+        VCG191:      Female: 84 years
+        VCG192:      Female: 85 years
+        VCG193:      Female: 86 years
+        VCG194:      Female: 87 years
+        VCG195:      Female: 88 years
+        VCG196:      Female: 89 years
+        VCG197:      Female: 90 years
+        VCG198:      Female: 91 years
+        VCG199:      Female: 92 years
+        VCG200:      Female: 93 years
+        VCG201:      Female: 94 years
+        VCG202:      Female: 95 years
+        VCG203:      Female: 96 years
+        VCG204:      Female: 97 years
+        VCG205:      Female: 98 years
+        VCG206:      Female: 99 years
+        VCG207:      Female: 100 to 104 years
+        VCG208:      Female: 105 to 109 years
+        VCG209:      Female: 110 years and over
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Jonathan Schroeder, David Van Riper, Steven Manson, Grace Cooper, Zachary Krause, Tracy Kugler, Tsu Zhu, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 21.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2026. 
+        http://doi.org/10.18128/D050.V21.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455

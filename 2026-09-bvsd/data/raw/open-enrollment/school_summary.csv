@@ -1,0 +1,691 @@
+school_year,level,school,school_raw,matrix_row_sum,attending_neighborhood,oe_from_within_district,oe_from_outside_district,placements_into_school,unmatched_addresses,within_bvsd_total,enrollment_total,pct_from_neighborhood
+2016-2017,elementary,Bear Creek,Bear Creek *,435,392.0,43.0,2.0,1.0,,436.0,438.0,0.89
+2016-2017,elementary,Columbine,Columbine,475,399.0,76.0,2.0,6.0,3.0,484.0,486.0,0.82
+2016-2017,elementary,Creekside,Creekside *,261,220.0,41.0,5.0,14.0,1.0,276.0,281.0,0.78
+2016-2017,elementary,Crest View,Crest View,591,538.0,53.0,7.0,8.0,,599.0,606.0,0.89
+2016-2017,elementary,Douglass,Douglass,424,352.0,72.0,8.0,2.0,,426.0,434.0,0.81
+2016-2017,elementary,Eisenhower,Eisenhower,394,318.0,76.0,3.0,21.0,,415.0,418.0,0.76
+2016-2017,elementary,Flatirons,Flatirons,250,177.0,73.0,4.0,,,250.0,254.0,0.7
+2016-2017,elementary,Foothill,Foothill,530,481.0,49.0,3.0,8.0,,538.0,541.0,0.89
+2016-2017,elementary,Heatherwood,Heatherwood,336,320.0,16.0,17.0,7.0,,343.0,360.0,0.89
+2016-2017,elementary,Mesa,Mesa *,277,222.0,55.0,3.0,7.0,,284.0,287.0,0.77
+2016-2017,elementary,Whittier,Whittier,415,376.0,39.0,9.0,,,415.0,424.0,0.89
+2016-2017,elementary,Aspen Creek K-8,Aspen Creek K-8,409,317.0,92.0,56.0,7.0,1.0,417.0,473.0,0.67
+2016-2017,elementary,Birch,Birch,289,251.0,38.0,64.0,15.0,,304.0,368.0,0.68
+2016-2017,elementary,Emerald,Emerald,280,253.0,27.0,55.0,5.0,4.0,289.0,344.0,0.74
+2016-2017,elementary,Kohl,Kohl,367,276.0,91.0,77.0,9.0,,376.0,453.0,0.61
+2016-2017,elementary,Lafayette,Lafayette Elem.,613,549.0,64.0,14.0,6.0,,619.0,633.0,0.87
+2016-2017,elementary,Ryan,Ryan,407,325.0,82.0,17.0,8.0,1.0,416.0,433.0,0.75
+2016-2017,elementary,Sanchez,Sanchez,332,286.0,46.0,4.0,5.0,3.0,340.0,344.0,0.83
+2016-2017,elementary,Coal Creek,Coal Creek,407,365.0,42.0,9.0,1.0,,408.0,417.0,0.88
+2016-2017,elementary,Fireside,Fireside,417,338.0,79.0,10.0,16.0,,433.0,443.0,0.76
+2016-2017,elementary,Louisville,Louisville Elem.,558,520.0,38.0,1.0,9.0,1.0,568.0,569.0,0.91
+2016-2017,elementary,Monarch K-8,Monarch K-8,328,242.0,86.0,39.0,8.0,2.0,338.0,377.0,0.64
+2016-2017,elementary,Eldorado K-8,Eldorado K-8,417,368.0,49.0,27.0,5.0,1.0,423.0,450.0,0.82
+2016-2017,elementary,Superior,Superior,457,413.0,44.0,8.0,,,457.0,465.0,0.89
+2016-2017,elementary,Gold Hill,Gold Hill,26,9.0,17.0,,,,26.0,26.0,0.35
+2016-2017,elementary,Jamestown,Jamestown,19,6.0,13.0,,,,19.0,19.0,0.32
+2016-2017,elementary,Nederland,Nederland Elem.,258,256.0,2.0,2.0,,1.0,259.0,261.0,0.98
+2016-2017,elementary,BCSIS,BCSIS,304,,304.0,4.0,1.0,,305.0,309.0,
+2016-2017,elementary,Boulder Explorer,Boulder Explorer,10,,10.0,1.0,,,10.0,11.0,
+2016-2017,elementary,High Peaks,High Peaks,281,,281.0,9.0,,,281.0,290.0,
+2016-2017,elementary,Community Montessori,Comm. Montessori,235,,235.0,14.0,2.0,,237.0,251.0,
+2016-2017,elementary,University Hill International,Uni-Hill Int.,373,,373.0,24.0,25.0,,398.0,422.0,
+2016-2017,elementary,Pioneer,Pioneer,342,,342.0,63.0,28.0,,370.0,433.0,
+2016-2017,elementary,Contracted Ed Program,Contracted Ed Prog,0,,0.0,,,,0.0,0.0,
+2016-2017,elementary,Horizons,Horizons,227,,227.0,4.0,,1.0,228.0,232.0,
+2016-2017,elementary,Peak to Peak,Peak to Peak,327,,327.0,123.0,1.0,,328.0,451.0,
+2016-2017,high,Boulder,Boulder,1908,1634.0,274.0,60.0,10.0,3.0,1921.0,1981.0,0.82
+2016-2017,high,Fairview,Fairview,2064,1226.0,838.0,92.0,10.0,,2074.0,2166.0,0.57
+2016-2017,high,Broomfield,Broomfield,988,965.0,23.0,604.0,3.0,,991.0,1595.0,0.61
+2016-2017,high,Centaurus,Centaurus,1064,913.0,151.0,57.0,3.0,3.0,1070.0,1127.0,0.81
+2016-2017,high,Monarch,Monarch,1549,1316.0,233.0,151.0,6.0,2.0,1557.0,1708.0,0.77
+2016-2017,high,Nederland,Nederland,124,122.0,2.0,2.0,,,124.0,126.0,0.97
+2016-2017,high,Arapahoe Ridge,Arapahoe Ridge,70,,70.0,3.0,17.0,,87.0,90.0,
+2016-2017,high,Boulder Universal,Boulder Universal,48,,48.0,15.0,,,48.0,63.0,
+2016-2017,high,Halcyon,Halcyon,0,,,,12.0,,12.0,12.0,
+2016-2017,high,New Vista,New Vista,254,,254.0,37.0,1.0,,255.0,292.0,
+2016-2017,high,Contracted Ed Program,Contracted Ed Prog,0,,,,,,,,
+2016-2017,high,Boulder Prep,Boulder Prep,66,,66.0,36.0,2.0,,68.0,104.0,
+2016-2017,high,Peak to Peak,Peak-to-Peak,374,,374.0,214.0,,,374.0,588.0,
+2016-2017,high,Justice High,Justice High,50,,50.0,24.0,3.0,1.0,54.0,78.0,
+2016-2017,middle,Manhattan,Manhattan,427,269.0,158.0,12.0,13.0,6.0,446.0,458.0,0.59
+2016-2017,middle,Casey,Casey,624,472.0,152.0,17.0,10.0,1.0,635.0,652.0,0.72
+2016-2017,middle,Centennial,Centennial,619,561.0,58.0,8.0,1.0,,620.0,628.0,0.89
+2016-2017,middle,Platt,Platt,609,350.0,259.0,18.0,11.0,,620.0,638.0,0.55
+2016-2017,middle,Southern Hills,Southern Hills,548,401.0,147.0,5.0,6.0,,554.0,559.0,0.72
+2016-2017,middle,Aspen Creek K-8,Aspen Creek K-8,347,320.0,27.0,79.0,5.0,,352.0,431.0,0.74
+2016-2017,middle,Broomfield Heights,Broomfield Heights,359,282.0,77.0,158.0,3.0,,362.0,520.0,0.54
+2016-2017,middle,Angevine,Angevine,688,669.0,19.0,20.0,2.0,,690.0,710.0,0.94
+2016-2017,middle,Louisville Middle,Louisville Middle,617,529.0,88.0,16.0,7.0,2.0,626.0,642.0,0.82
+2016-2017,middle,Monarch K-8,Monarch K-8,424,303.0,121.0,34.0,6.0,3.0,433.0,467.0,0.65
+2016-2017,middle,Eldorado K-8,Eldorado K-8,448,433.0,15.0,15.0,3.0,,451.0,466.0,0.93
+2016-2017,middle,Nederland,Nederland,131,130.0,1.0,4.0,,,131.0,135.0,0.96
+2016-2017,middle,Boulder Explorer,Boulder Explorer,0,,,,,,,,
+2016-2017,middle,Boulder Universal,Boulder Universal,11,,11.0,5.0,,,11.0,16.0,
+2016-2017,middle,Halcyon,Halcyon,0,,,,5.0,,5.0,5.0,
+2016-2017,middle,Horizons,Horizons,112,,112.0,3.0,,,112.0,115.0,
+2016-2017,middle,Contracted Ed Program,Contract Ed,0,,,,,,,,
+2016-2017,middle,Summit,Summit,353,,353.0,,1.0,,354.0,354.0,
+2016-2017,middle,Justice High,Justice High,1,,1.0,3.0,,,1.0,4.0,
+2016-2017,middle,Peak to Peak,Peak to Peak,273,,273.0,132.0,,,273.0,405.0,
+2017-2018,elementary,Bear Creek,Bear Creek *,439,401.0,38.0,2.0,7.0,0.0,446.0,448.0,0.9
+2017-2018,elementary,Columbine,Columbine,472,400.0,72.0,2.0,9.0,0.0,481.0,483.0,0.83
+2017-2018,elementary,Creekside,Creekside *,251,215.0,36.0,5.0,16.0,0.0,267.0,272.0,0.79
+2017-2018,elementary,Crest View,Crest View,571,525.0,46.0,7.0,4.0,0.0,575.0,582.0,0.9
+2017-2018,elementary,Douglass,Douglass,403,334.0,69.0,7.0,4.0,1.0,408.0,415.0,0.8
+2017-2018,elementary,Eisenhower,Eisenhower,357,292.0,65.0,6.0,22.0,0.0,379.0,385.0,0.76
+2017-2018,elementary,Flatirons,Flatirons,240,175.0,65.0,4.0,1.0,0.0,241.0,245.0,0.71
+2017-2018,elementary,Foothill,Foothill,484,438.0,46.0,1.0,8.0,0.0,492.0,493.0,0.89
+2017-2018,elementary,Heatherwood,Heatherwood,316,305.0,11.0,13.0,8.0,0.0,324.0,337.0,0.91
+2017-2018,elementary,Mesa,Mesa *,262,215.0,47.0,3.0,6.0,0.0,268.0,271.0,0.79
+2017-2018,elementary,Whittier,Whittier,373,325.0,48.0,2.0,5.0,1.0,379.0,381.0,0.85
+2017-2018,elementary,Aspen Creek K-8,Aspen Creek K-8,398,321.0,77.0,56.0,12.0,0.0,410.0,466.0,0.69
+2017-2018,elementary,Birch,Birch,297,257.0,40.0,61.0,13.0,0.0,310.0,371.0,0.69
+2017-2018,elementary,Emerald,Emerald,286,261.0,25.0,62.0,12.0,0.0,298.0,360.0,0.73
+2017-2018,elementary,Kohl,Kohl,340,255.0,85.0,73.0,9.0,0.0,349.0,422.0,0.6
+2017-2018,elementary,Lafayette,Lafayette Elem.,449,363.0,86.0,7.0,9.0,1.0,459.0,466.0,0.78
+2017-2018,elementary,Ryan,Ryan,420,362.0,58.0,16.0,7.0,2.0,429.0,445.0,0.81
+2017-2018,elementary,Sanchez,Sanchez,339,300.0,39.0,7.0,8.0,1.0,348.0,355.0,0.85
+2017-2018,elementary,Meadowlark,Meadowlark,287,261.0,26.0,34.0,4.0,0.0,291.0,325.0,0.8
+2017-2018,elementary,Coal Creek,Coal Creek,408,367.0,41.0,7.0,1.0,0.0,409.0,416.0,0.88
+2017-2018,elementary,Fireside,Fireside,400,321.0,79.0,8.0,11.0,0.0,411.0,419.0,0.77
+2017-2018,elementary,Louisville,Louisville Elem.,536,506.0,30.0,8.0,6.0,1.0,543.0,551.0,0.92
+2017-2018,elementary,Monarch K-8,Monarch K-8,331,253.0,78.0,36.0,11.0,0.0,342.0,378.0,0.67
+2017-2018,elementary,Eldorado K-8,Eldorado K-8,378,340.0,38.0,23.0,5.0,0.0,383.0,406.0,0.84
+2017-2018,elementary,Superior,Superior,449,405.0,44.0,7.0,0.0,1.0,450.0,457.0,0.89
+2017-2018,elementary,Gold Hill,Gold Hill,19,4.0,15.0,0.0,0.0,0.0,19.0,19.0,0.21
+2017-2018,elementary,Jamestown,Jamestown,16,7.0,9.0,1.0,0.0,0.0,16.0,17.0,0.41
+2017-2018,elementary,Nederland,Nederland Elem.,254,248.0,6.0,4.0,0.0,0.0,254.0,258.0,0.96
+2017-2018,elementary,BCSIS,BCSIS,302,,302.0,1.0,1.0,0.0,303.0,304.0,
+2017-2018,elementary,Boulder Explorer,Boulder Explorer,0,,0.0,0.0,0.0,0.0,0.0,0.0,
+2017-2018,elementary,Boulder Universal,Boulder Universal,0,,0.0,1.0,0.0,0.0,0.0,1.0,
+2017-2018,elementary,High Peaks,High Peaks,292,,292.0,6.0,1.0,0.0,293.0,299.0,
+2017-2018,elementary,Community Montessori,Comm. Montessori,229,,229.0,14.0,5.0,0.0,234.0,248.0,
+2017-2018,elementary,University Hill International,Uni-Hill Int.,371,,371.0,23.0,27.0,2.0,400.0,423.0,
+2017-2018,elementary,Pioneer,Pioneer,353,,353.0,63.0,28.0,0.0,381.0,444.0,
+2017-2018,elementary,Horizons,Horizons,229,,229.0,4.0,1.0,0.0,230.0,234.0,
+2017-2018,elementary,Peak to Peak,Peak to Peak,335,,335.0,113.0,2.0,0.0,337.0,450.0,
+2017-2018,high,Boulder,Boulder,1995,1763.0,232.0,42.0,11.0,2.0,2008.0,2050.0,0.86
+2017-2018,high,Fairview,Fairview,2148,1316.0,832.0,63.0,11.0,1.0,2160.0,2223.0,0.59
+2017-2018,high,Broomfield,Broomfield,976,952.0,24.0,595.0,3.0,,979.0,1574.0,0.6
+2017-2018,high,Centaurus,Centaurus,1156,997.0,159.0,59.0,3.0,1.0,1160.0,1219.0,0.82
+2017-2018,high,Monarch,Monarch,1551,1307.0,244.0,160.0,6.0,,1557.0,1717.0,0.76
+2017-2018,high,Nederland,Nederland,113,112.0,1.0,5.0,,,113.0,118.0,0.95
+2017-2018,high,Arapahoe Ridge,Arapahoe Ridge,69,,69.0,10.0,19.0,2.0,90.0,100.0,
+2017-2018,high,Boulder Universal,Boulder Universal,50,,50.0,17.0,1.0,,51.0,68.0,
+2017-2018,high,Halcyon,Halcyon,0,,,,8.0,,8.0,8.0,
+2017-2018,high,New Vista,New Vista,264,,264.0,38.0,2.0,,266.0,304.0,
+2017-2018,high,Boulder Prep,Boulder Prep,45,,45.0,34.0,1.0,,46.0,80.0,
+2017-2018,high,Peak to Peak,Peak-to-Peak,367,,367.0,220.0,2.0,,369.0,589.0,
+2017-2018,high,Justice High,Justice High,47,,47.0,24.0,4.0,1.0,52.0,76.0,
+2017-2018,middle,Manhattan,Manhattan,439,261.0,178.0,24.0,24.0,1.0,464.0,488.0,0.53
+2017-2018,middle,Casey,Casey,648,518.0,130.0,8.0,13.0,,661.0,669.0,0.77
+2017-2018,middle,Centennial,Centennial,637,575.0,62.0,7.0,2.0,,639.0,646.0,0.89
+2017-2018,middle,Platt,Platt,605,362.0,243.0,15.0,7.0,,612.0,627.0,0.58
+2017-2018,middle,Southern Hills,Southern Hills,541,389.0,152.0,7.0,6.0,,547.0,554.0,0.7
+2017-2018,middle,Aspen Creek K-8,Aspen Creek K-8,358,328.0,30.0,83.0,4.0,,362.0,445.0,0.74
+2017-2018,middle,Broomfield Heights,Broomfield Heights,369,292.0,77.0,165.0,11.0,,380.0,545.0,0.54
+2017-2018,middle,Angevine,Angevine,648,582.0,66.0,17.0,4.0,1.0,653.0,670.0,0.87
+2017-2018,middle,Meadowlark,Meadowlark,84,66.0,18.0,19.0,9.0,,93.0,112.0,0.59
+2017-2018,middle,Louisville Middle,Louisville Middle,638,543.0,95.0,16.0,5.0,,643.0,659.0,0.82
+2017-2018,middle,Monarch K-8,Monarch K-8,366,264.0,102.0,33.0,5.0,1.0,372.0,405.0,0.65
+2017-2018,middle,Eldorado K-8,Eldorado K-8,462,440.0,22.0,11.0,1.0,,463.0,474.0,0.93
+2017-2018,middle,Nederland,Nederland,124,123.0,1.0,,,,124.0,124.0,0.99
+2017-2018,middle,Boulder Universal,Boulder Universal,14,,14.0,4.0,,,14.0,18.0,
+2017-2018,middle,Halcyon,Halcyon,0,,,,4.0,,4.0,4.0,
+2017-2018,middle,Horizons,Horizons,112,,112.0,2.0,,,112.0,114.0,
+2017-2018,middle,Summit,Summit,356,,356.0,1.0,,,356.0,357.0,
+2017-2018,middle,Justice High,Justice High,1,,1.0,2.0,,,1.0,3.0,
+2017-2018,middle,Peak to Peak,Peak to Peak,290,,290.0,116.0,,,290.0,406.0,
+2018-2019,elementary,Bear Creek,Bear Creek *,416,386.0,30.0,0.0,9.0,0.0,425.0,425.0,0.91
+2018-2019,elementary,Columbine,Columbine,438,377.0,61.0,4.0,14.0,0.0,452.0,456.0,0.83
+2018-2019,elementary,Creekside,Creekside *,277,220.0,57.0,7.0,8.0,1.0,286.0,293.0,0.75
+2018-2019,elementary,Crest View,Crest View,553,504.0,49.0,8.0,5.0,0.0,558.0,566.0,0.89
+2018-2019,elementary,Douglass,Douglass,383,305.0,78.0,9.0,4.0,0.0,387.0,396.0,0.77
+2018-2019,elementary,Eisenhower,Eisenhower,375,315.0,60.0,11.0,21.0,0.0,396.0,407.0,0.77
+2018-2019,elementary,Flatirons,Flatirons,223,154.0,69.0,5.0,0.0,0.0,223.0,228.0,0.68
+2018-2019,elementary,Foothill,Foothill,449,416.0,33.0,0.0,8.0,0.0,457.0,457.0,0.91
+2018-2019,elementary,Heatherwood,Heatherwood,277,264.0,13.0,10.0,9.0,0.0,286.0,296.0,0.89
+2018-2019,elementary,Mesa,Mesa *,254,209.0,45.0,4.0,2.0,0.0,256.0,260.0,0.8
+2018-2019,elementary,Whittier,Whittier,394,332.0,62.0,3.0,3.0,0.0,397.0,400.0,0.83
+2018-2019,elementary,Aspen Creek K-8,Aspen Creek K-8,366,299.0,67.0,62.0,9.0,0.0,375.0,437.0,0.68
+2018-2019,elementary,Birch,Birch,283,249.0,34.0,54.0,9.0,0.0,292.0,346.0,0.72
+2018-2019,elementary,Emerald,Emerald,319,284.0,35.0,61.0,7.0,0.0,326.0,387.0,0.73
+2018-2019,elementary,Kohl,Kohl,334,259.0,75.0,61.0,7.0,0.0,341.0,402.0,0.64
+2018-2019,elementary,Lafayette,Lafayette Elem.,408,345.0,63.0,9.0,10.0,0.0,418.0,427.0,0.81
+2018-2019,elementary,Ryan,Ryan,443,402.0,41.0,12.0,8.0,0.0,451.0,463.0,0.87
+2018-2019,elementary,Sanchez,Sanchez,319,285.0,34.0,5.0,7.0,0.0,326.0,331.0,0.86
+2018-2019,elementary,Meadowlark,Meadowlark,395,374.0,21.0,33.0,9.0,0.0,404.0,437.0,0.86
+2018-2019,elementary,Coal Creek,Coal Creek,402,367.0,35.0,8.0,0.0,0.0,402.0,410.0,0.9
+2018-2019,elementary,Fireside,Fireside,404,328.0,76.0,9.0,7.0,0.0,411.0,420.0,0.78
+2018-2019,elementary,Louisville,Louisville Elem.,550,521.0,29.0,4.0,9.0,0.0,559.0,563.0,0.93
+2018-2019,elementary,Monarch K-8,Monarch K-8,304,224.0,80.0,27.0,17.0,0.0,321.0,348.0,0.64
+2018-2019,elementary,Eldorado K-8,Eldorado K-8,370,332.0,38.0,22.0,4.0,0.0,374.0,396.0,0.84
+2018-2019,elementary,Superior,Superior,426,391.0,35.0,7.0,6.0,0.0,432.0,439.0,0.89
+2018-2019,elementary,Gold Hill,Gold Hill,19,4.0,15.0,0.0,0.0,0.0,19.0,19.0,0.21
+2018-2019,elementary,Jamestown,Jamestown,14,7.0,7.0,1.0,0.0,0.0,14.0,15.0,0.47
+2018-2019,elementary,Nederland,Nederland Elem.,244,243.0,1.0,4.0,0.0,0.0,244.0,248.0,0.98
+2018-2019,elementary,BCSIS,BCSIS,302,,302.0,3.0,1.0,0.0,303.0,306.0,
+2018-2019,elementary,Boulder Universal,Boulder Universal,3,,3.0,1.0,0.0,0.0,3.0,4.0,
+2018-2019,elementary,High Peaks,High Peaks,278,,278.0,9.0,4.0,0.0,282.0,291.0,
+2018-2019,elementary,Community Montessori,Comm. Montessori,229,,229.0,19.0,6.0,0.0,235.0,254.0,
+2018-2019,elementary,University Hill International,Uni-Hill Int.,366,,366.0,29.0,26.0,1.0,393.0,422.0,
+2018-2019,elementary,Pioneer,Pioneer,340,,340.0,74.0,30.0,0.0,370.0,444.0,
+2018-2019,elementary,Horizons,Horizons,226,,226.0,5.0,3.0,0.0,229.0,234.0,
+2018-2019,elementary,Peak to Peak,Peak to Peak,341,,341.0,107.0,1.0,0.0,342.0,449.0,
+2018-2019,high,Boulder,Boulder,2048,1818.0,230.0,31.0,12.0,,2060.0,2091.0,0.87
+2018-2019,high,Fairview,Fairview,2116,1307.0,809.0,41.0,16.0,1.0,2133.0,2174.0,0.6
+2018-2019,high,Broomfield,Broomfield,937,909.0,28.0,617.0,3.0,1.0,941.0,1558.0,0.58
+2018-2019,high,Centaurus,Centaurus,1233,1022.0,211.0,65.0,4.0,4.0,1241.0,1306.0,0.78
+2018-2019,high,Monarch,Monarch,1570,1352.0,218.0,128.0,8.0,,1578.0,1706.0,0.79
+2018-2019,high,Nederland,Nederland,114,112.0,2.0,6.0,,1.0,115.0,121.0,0.93
+2018-2019,high,Arapahoe Ridge,Arapahoe Ridge,106,,106.0,10.0,24.0,1.0,131.0,141.0,
+2018-2019,high,Boulder Universal,Boulder Universal,28,,28.0,13.0,1.0,,29.0,42.0,
+2018-2019,high,Halcyon,Halcyon,8,,8.0,,,,8.0,8.0,
+2018-2019,high,New Vista,New Vista,267,,267.0,45.0,,,267.0,312.0,
+2018-2019,high,Boulder Prep,Boulder Prep,61,,61.0,38.0,1.0,,62.0,100.0,
+2018-2019,high,Peak to Peak,Peak-to-Peak,388,,388.0,201.0,3.0,1.0,392.0,593.0,
+2018-2019,high,Justice High,Justice High,55,,55.0,33.0,5.0,,60.0,93.0,
+2018-2019,middle,Manhattan,Manhattan,445,266.0,179.0,27.0,17.0,,462.0,489.0,0.54
+2018-2019,middle,Casey,Casey,639,525.0,114.0,11.0,16.0,1.0,656.0,667.0,0.79
+2018-2019,middle,Centennial,Centennial,622,574.0,48.0,8.0,4.0,,626.0,634.0,0.91
+2018-2019,middle,Platt,Platt,558,343.0,215.0,14.0,8.0,,566.0,580.0,0.59
+2018-2019,middle,Southern Hills,Southern Hills,520,390.0,130.0,8.0,10.0,,530.0,538.0,0.72
+2018-2019,middle,Aspen Creek K-8,Aspen Creek K-8,352,331.0,21.0,69.0,3.0,,355.0,424.0,0.78
+2018-2019,middle,Broomfield Heights,Broomfield Heights,368,299.0,69.0,187.0,10.0,,378.0,565.0,0.53
+2018-2019,middle,Angevine,Angevine,673,636.0,37.0,13.0,4.0,2.0,679.0,692.0,0.92
+2018-2019,middle,Meadowlark,Meadowlark,116,98.0,18.0,17.0,7.0,,123.0,140.0,0.7
+2018-2019,middle,Louisville Middle,Louisville Middle,661,548.0,113.0,12.0,5.0,,666.0,678.0,0.81
+2018-2019,middle,Monarch K-8,Monarch K-8,352,248.0,104.0,37.0,5.0,,357.0,394.0,0.63
+2018-2019,middle,Eldorado K-8,Eldorado K-8,445,423.0,22.0,9.0,,,445.0,454.0,0.93
+2018-2019,middle,Nederland,Nederland,122,120.0,2.0,2.0,,1.0,123.0,125.0,0.96
+2018-2019,middle,Boulder Universal,Boulder Universal,14,,14.0,3.0,,,14.0,17.0,
+2018-2019,middle,Halcyon,Halcyon,4,,4.0,,,,4.0,4.0,
+2018-2019,middle,Horizons,Horizons,110,,110.0,3.0,1.0,,111.0,114.0,
+2018-2019,middle,Summit,Summit,354,,354.0,4.0,,,354.0,358.0,
+2018-2019,middle,Justice High,Justice High,0,,,3.0,,,,3.0,
+2018-2019,middle,Peak to Peak,Peak to Peak,300,,300.0,102.0,2.0,,302.0,404.0,
+2019-2020,elementary,Bear Creek,Bear Creek *,393,358.0,35.0,0.0,7.0,0.0,400.0,400.0,0.9
+2019-2020,elementary,Columbine,Columbine,433,389.0,44.0,4.0,12.0,1.0,446.0,450.0,0.86
+2019-2020,elementary,Creekside,Creekside *,322,274.0,48.0,7.0,7.0,0.0,329.0,336.0,0.82
+2019-2020,elementary,Crest View,Crest View,520,478.0,42.0,10.0,6.0,0.0,526.0,536.0,0.89
+2019-2020,elementary,Douglass,Douglass,363,280.0,83.0,7.0,11.0,0.0,374.0,381.0,0.73
+2019-2020,elementary,Eisenhower,Eisenhower,381,325.0,56.0,8.0,13.0,0.0,394.0,402.0,0.81
+2019-2020,elementary,Flatirons,Flatirons,206,150.0,56.0,4.0,1.0,0.0,207.0,211.0,0.71
+2019-2020,elementary,Foothill,Foothill,447,414.0,33.0,0.0,9.0,0.0,456.0,456.0,0.91
+2019-2020,elementary,Heatherwood,Heatherwood,253,241.0,12.0,6.0,9.0,0.0,262.0,268.0,0.9
+2019-2020,elementary,Mesa,Mesa *,254,209.0,45.0,5.0,2.0,0.0,256.0,261.0,0.8
+2019-2020,elementary,Whittier,Whittier,369,292.0,77.0,6.0,3.0,0.0,372.0,378.0,0.77
+2019-2020,elementary,Aspen Creek K-8,Aspen Creek K-8,345,273.0,72.0,64.0,6.0,0.0,351.0,415.0,0.66
+2019-2020,elementary,Birch,Birch,269,238.0,31.0,65.0,11.0,0.0,280.0,345.0,0.69
+2019-2020,elementary,Emerald,Emerald,306,276.0,30.0,53.0,15.0,0.0,321.0,374.0,0.74
+2019-2020,elementary,Kohl,Kohl,301,240.0,61.0,50.0,5.0,0.0,306.0,356.0,0.67
+2019-2020,elementary,Lafayette,Lafayette Elem.,458,391.0,67.0,6.0,8.0,0.0,466.0,472.0,0.83
+2019-2020,elementary,Ryan,Ryan,484,447.0,37.0,10.0,4.0,0.0,488.0,498.0,0.9
+2019-2020,elementary,Sanchez,Sanchez,290,258.0,32.0,7.0,5.0,0.0,295.0,302.0,0.85
+2019-2020,elementary,Meadowlark,Meadowlark,432,415.0,17.0,25.0,5.0,0.0,437.0,462.0,0.9
+2019-2020,elementary,Coal Creek,Coal Creek,373,346.0,27.0,8.0,8.0,0.0,381.0,389.0,0.89
+2019-2020,elementary,Fireside,Fireside,422,339.0,83.0,8.0,7.0,0.0,429.0,437.0,0.78
+2019-2020,elementary,Louisville,Louisville Elem.,499,479.0,20.0,5.0,12.0,0.0,511.0,516.0,0.93
+2019-2020,elementary,Monarch K-8,Monarch K-8,297,230.0,67.0,39.0,12.0,0.0,309.0,348.0,0.66
+2019-2020,elementary,Eldorado K-8,Eldorado K-8,345,299.0,46.0,29.0,5.0,0.0,350.0,379.0,0.79
+2019-2020,elementary,Superior,Superior,420,381.0,39.0,5.0,9.0,0.0,429.0,434.0,0.88
+2019-2020,elementary,Gold Hill,Gold Hill,21,5.0,16.0,0.0,0.0,0.0,21.0,21.0,0.24
+2019-2020,elementary,Jamestown,Jamestown,20,10.0,10.0,0.0,0.0,0.0,20.0,20.0,0.5
+2019-2020,elementary,Nederland,Nederland Elem.,224,223.0,1.0,2.0,0.0,0.0,224.0,226.0,0.99
+2019-2020,elementary,BCSIS,BCSIS,304,,304.0,3.0,0.0,0.0,304.0,307.0,
+2019-2020,elementary,Boulder Universal,Boulder Universal,2,,2.0,0.0,0.0,0.0,2.0,2.0,
+2019-2020,elementary,Halcyon,Halcyon,3,,2.0,0.0,1.0,0.0,3.0,3.0,
+2019-2020,elementary,High Peaks,High Peaks,286,,286.0,10.0,0.0,0.0,286.0,296.0,
+2019-2020,elementary,Community Montessori,Comm. Montessori,225,,225.0,27.0,0.0,0.0,225.0,252.0,
+2019-2020,elementary,University Hill International,Uni-Hill Int.,390,,390.0,26.0,0.0,0.0,390.0,416.0,
+2019-2020,elementary,Pioneer,Pioneer,370,,370.0,64.0,0.0,0.0,370.0,434.0,
+2019-2020,elementary,Horizons,Horizons,225,,225.0,5.0,0.0,0.0,225.0,230.0,
+2019-2020,elementary,Peak to Peak,Peak to Peak,359,,359.0,94.0,0.0,0.0,359.0,453.0,
+2019-2020,high,Boulder,Boulder,2096,1918.0,178.0,25.0,12.0,,2108.0,2133.0,0.9
+2019-2020,high,Fairview,Fairview,2060,1346.0,714.0,34.0,27.0,,2087.0,2121.0,0.63
+2019-2020,high,Broomfield,Broomfield,914,893.0,21.0,633.0,2.0,,916.0,1549.0,0.58
+2019-2020,high,Centaurus,Centaurus,1373,1118.0,255.0,58.0,6.0,,1379.0,1437.0,0.78
+2019-2020,high,Monarch,Monarch,1518,1325.0,193.0,126.0,9.0,,1527.0,1653.0,0.8
+2019-2020,high,Nederland,Nederland,100,99.0,1.0,4.0,1.0,,101.0,105.0,0.94
+2019-2020,high,Arapahoe Ridge,Arapahoe Ridge,118,,118.0,12.0,12.0,,130.0,142.0,
+2019-2020,high,Boulder Universal,Boulder Universal,40,,40.0,10.0,5.0,,45.0,55.0,
+2019-2020,high,Halcyon,Halcyon,11,,11.0,,,,11.0,11.0,
+2019-2020,high,New Vista,New Vista,272,,272.0,52.0,,,272.0,324.0,
+2019-2020,high,Boulder Prep,Boulder Prep,64,,64.0,40.0,1.0,1.0,66.0,106.0,
+2019-2020,high,Peak to Peak,Peak-to-Peak,409,,409.0,181.0,,1.0,410.0,591.0,
+2019-2020,high,Justice High,Justice High,50,,50.0,37.0,,,50.0,87.0,
+2019-2020,middle,Manhattan,Manhattan,492,276.0,216.0,32.0,15.0,,507.0,539.0,0.51
+2019-2020,middle,Casey,Casey,616,501.0,115.0,5.0,13.0,,629.0,634.0,0.79
+2019-2020,middle,Centennial,Centennial,628,570.0,58.0,5.0,2.0,,630.0,635.0,0.9
+2019-2020,middle,Platt,Platt,507,332.0,175.0,16.0,9.0,,516.0,532.0,0.62
+2019-2020,middle,Southern Hills,Southern Hills,507,377.0,130.0,14.0,8.0,,515.0,529.0,0.71
+2019-2020,middle,Aspen Creek K-8,Aspen Creek K-8,332,312.0,20.0,71.0,4.0,,336.0,407.0,0.77
+2019-2020,middle,Broomfield Heights,Broomfield Heights,387,314.0,73.0,165.0,11.0,,398.0,563.0,0.56
+2019-2020,middle,Angevine,Angevine,669,649.0,20.0,10.0,6.0,,675.0,685.0,0.95
+2019-2020,middle,Meadowlark,Meadowlark,160,139.0,21.0,16.0,8.0,,168.0,184.0,0.76
+2019-2020,middle,Louisville Middle,Louisville Middle,643,535.0,108.0,5.0,5.0,,648.0,653.0,0.82
+2019-2020,middle,Monarch K-8,Monarch K-8,345,256.0,89.0,22.0,6.0,,351.0,373.0,0.69
+2019-2020,middle,Eldorado K-8,Eldorado K-8,426,410.0,16.0,10.0,,,426.0,436.0,0.94
+2019-2020,middle,Nederland,Nederland,112,109.0,3.0,2.0,,,112.0,114.0,0.96
+2019-2020,middle,Boulder Universal,Boulder Universal,12,,12.0,5.0,1.0,,13.0,18.0,
+2019-2020,middle,Halcyon,Halcyon,6,,6.0,,1.0,,7.0,7.0,
+2019-2020,middle,Horizons,Horizons,116,,116.0,2.0,,,116.0,118.0,
+2019-2020,middle,Summit,Summit,358,,358.0,1.0,,,358.0,359.0,
+2019-2020,middle,Justice High,Justice High,3,,3.0,7.0,,,3.0,10.0,
+2019-2020,middle,Peak to Peak,Peak to Peak,305,,305.0,98.0,2.0,1.0,308.0,406.0,
+2020-2021,elementary,Bear Creek,Bear Creek *,331,292.0,39.0,0.0,10.0,0.0,341.0,341.0,0.86
+2020-2021,elementary,Columbine,Columbine,361,307.0,54.0,8.0,8.0,2.0,371.0,379.0,0.81
+2020-2021,elementary,Creekside,Creekside *,286,247.0,39.0,3.0,8.0,2.0,296.0,299.0,0.83
+2020-2021,elementary,Crest View,Crest View,433,394.0,39.0,5.0,7.0,0.0,440.0,445.0,0.89
+2020-2021,elementary,Douglass,Douglass,287,204.0,83.0,4.0,6.0,0.0,293.0,297.0,0.69
+2020-2021,elementary,Eisenhower,Eisenhower,311,265.0,46.0,13.0,12.0,0.0,323.0,336.0,0.79
+2020-2021,elementary,Flatirons,Flatirons,166,116.0,50.0,5.0,1.0,0.0,167.0,172.0,0.67
+2020-2021,elementary,Foothill,Foothill,410,386.0,24.0,1.0,9.0,1.0,420.0,421.0,0.92
+2020-2021,elementary,Heatherwood,Heatherwood,205,195.0,10.0,11.0,8.0,0.0,213.0,224.0,0.87
+2020-2021,elementary,Mesa,Mesa *,224,174.0,50.0,4.0,7.0,0.0,231.0,235.0,0.74
+2020-2021,elementary,Whittier,Whittier,318,245.0,73.0,6.0,4.0,1.0,323.0,329.0,0.74
+2020-2021,elementary,Aspen Creek K-8,Aspen Creek K-8,279,221.0,58.0,60.0,7.0,1.0,287.0,347.0,0.64
+2020-2021,elementary,Birch,Birch,219,193.0,26.0,68.0,6.0,0.0,225.0,293.0,0.66
+2020-2021,elementary,Emerald,Emerald,270,236.0,34.0,50.0,18.0,0.0,288.0,338.0,0.7
+2020-2021,elementary,Kohl,Kohl,239,195.0,44.0,47.0,7.0,0.0,246.0,293.0,0.67
+2020-2021,elementary,Lafayette,Lafayette Elem.,398,327.0,71.0,5.0,7.0,0.0,405.0,410.0,0.8
+2020-2021,elementary,Ryan,Ryan,404,377.0,27.0,9.0,4.0,3.0,411.0,420.0,0.9
+2020-2021,elementary,Sanchez,Sanchez,254,231.0,23.0,3.0,6.0,0.0,260.0,263.0,0.88
+2020-2021,elementary,Meadowlark,Meadowlark,407,397.0,10.0,24.0,5.0,0.0,412.0,436.0,0.91
+2020-2021,elementary,Coal Creek,Coal Creek,312,291.0,21.0,8.0,13.0,0.0,325.0,333.0,0.87
+2020-2021,elementary,Fireside,Fireside,356,287.0,69.0,7.0,11.0,2.0,369.0,376.0,0.76
+2020-2021,elementary,Louisville,Louisville Elem.,434,421.0,13.0,3.0,11.0,1.0,446.0,449.0,0.94
+2020-2021,elementary,Monarch K-8,Monarch K-8,252,181.0,71.0,30.0,15.0,1.0,268.0,298.0,0.61
+2020-2021,elementary,Eldorado K-8,Eldorado K-8,275,249.0,26.0,29.0,6.0,0.0,281.0,310.0,0.8
+2020-2021,elementary,Superior,Superior,405,370.0,35.0,6.0,6.0,0.0,411.0,417.0,0.89
+2020-2021,elementary,Gold Hill,Gold Hill,25,7.0,18.0,0.0,0.0,0.0,25.0,25.0,0.28
+2020-2021,elementary,Jamestown,Jamestown,19,13.0,6.0,0.0,0.0,0.0,19.0,19.0,0.68
+2020-2021,elementary,Nederland,Nederland Elem.,177,177.0,0.0,1.0,0.0,0.0,177.0,178.0,0.99
+2020-2021,elementary,BCSIS,BCSIS,281,,281.0,3.0,1.0,0.0,282.0,285.0,
+2020-2021,elementary,Boulder Universal,Boulder Universal,276,,276.0,37.0,0.0,1.0,277.0,314.0,
+2020-2021,elementary,Halcyon,Halcyon,1,,1.0,0.0,3.0,0.0,4.0,4.0,
+2020-2021,elementary,High Peaks,High Peaks,257,,257.0,15.0,1.0,0.0,258.0,273.0,
+2020-2021,elementary,Community Montessori,Comm. Montessori,189,,189.0,17.0,2.0,0.0,191.0,208.0,
+2020-2021,elementary,University Hill International,Uni-Hill Int.,367,,367.0,30.0,0.0,1.0,368.0,398.0,
+2020-2021,elementary,Pioneer,Pioneer,360,,360.0,63.0,2.0,0.0,362.0,425.0,
+2020-2021,elementary,Horizons,Horizons,220,,220.0,6.0,3.0,0.0,223.0,229.0,
+2020-2021,elementary,Peak to Peak,Peak to Peak,362,,362.0,91.0,0.0,0.0,362.0,453.0,
+2020-2021,high,Boulder,Boulder,2081,1953.0,128.0,14.0,13.0,8.0,2102.0,2116.0,0.92
+2020-2021,high,Fairview,Fairview,1982,1336.0,646.0,21.0,20.0,13.0,2015.0,2036.0,0.66
+2020-2021,high,Broomfield,Broomfield,881,869.0,12.0,645.0,1.0,1.0,883.0,1528.0,0.57
+2020-2021,high,Centaurus,Centaurus,1388,1121.0,267.0,57.0,8.0,11.0,1407.0,1464.0,0.77
+2020-2021,high,Monarch,Monarch,1460,1288.0,172.0,102.0,9.0,4.0,1473.0,1575.0,0.82
+2020-2021,high,Nederland,Nederland,101,99.0,2.0,3.0,,2.0,103.0,106.0,0.93
+2020-2021,high,Arapahoe Ridge,Arapahoe Ridge,115,,115.0,14.0,6.0,,121.0,135.0,
+2020-2021,high,Boulder Universal,Boulder Universal,247,,247.0,36.0,4.0,,251.0,287.0,
+2020-2021,high,Halcyon,Halcyon,5,,5.0,,4.0,1.0,10.0,10.0,
+2020-2021,high,New Vista,New Vista,256,,256.0,48.0,1.0,1.0,258.0,306.0,
+2020-2021,high,Boulder Prep,Boulder Prep,58,,58.0,36.0,,1.0,59.0,95.0,
+2020-2021,high,Peak to Peak,Peak-to-Peak,417,,417.0,174.0,,1.0,418.0,592.0,
+2020-2021,high,Justice High,Justice High,45,,45.0,35.0,3.0,,48.0,83.0,
+2020-2021,middle,Manhattan,Manhattan,399,225.0,174.0,27.0,11.0,1.0,411.0,438.0,0.51
+2020-2021,middle,Casey,Casey,482,396.0,86.0,7.0,14.0,,496.0,503.0,0.79
+2020-2021,middle,Centennial,Centennial,533,483.0,50.0,10.0,1.0,3.0,537.0,547.0,0.88
+2020-2021,middle,Platt,Platt,448,292.0,156.0,12.0,11.0,,459.0,471.0,0.62
+2020-2021,middle,Southern Hills,Southern Hills,455,322.0,133.0,10.0,11.0,,466.0,476.0,0.68
+2020-2021,middle,Aspen Creek K-8,Aspen Creek K-8,269,251.0,18.0,85.0,8.0,1.0,278.0,363.0,0.69
+2020-2021,middle,Broomfield Heights,Broomfield Heights,350,288.0,62.0,153.0,11.0,,361.0,514.0,0.56
+2020-2021,middle,Angevine,Angevine,619,605.0,14.0,8.0,5.0,3.0,627.0,635.0,0.95
+2020-2021,middle,Meadowlark,Meadowlark,162,149.0,13.0,14.0,3.0,1.0,166.0,180.0,0.83
+2020-2021,middle,Louisville Middle,Louisville Middle,588,473.0,115.0,6.0,8.0,,596.0,602.0,0.79
+2020-2021,middle,Monarch K-8,Monarch K-8,312,219.0,93.0,25.0,4.0,4.0,320.0,345.0,0.63
+2020-2021,middle,Eldorado K-8,Eldorado K-8,343,331.0,12.0,15.0,1.0,,344.0,359.0,0.92
+2020-2021,middle,Nederland,Nederland,101,99.0,2.0,3.0,,,101.0,104.0,0.95
+2020-2021,middle,Boulder Universal,Boulder Universal,289,,289.0,47.0,,1.0,290.0,337.0,
+2020-2021,middle,Halcyon,Halcyon,4,,4.0,,1.0,,5.0,5.0,
+2020-2021,middle,Horizons,Horizons,115,,115.0,3.0,1.0,,116.0,119.0,
+2020-2021,middle,Summit,Summit,348,,348.0,4.0,1.0,1.0,350.0,354.0,
+2020-2021,middle,Justice High,Justice High,3,,3.0,,,,3.0,3.0,
+2020-2021,middle,Peak to Peak,Peak to Peak,328,,328.0,76.0,2.0,,330.0,406.0,
+2021-2022,elementary,Bear Creek,Bear Creek *,337,300.0,37.0,2.0,7.0,0.0,344.0,346.0,0.87
+2021-2022,elementary,Columbine,Columbine,341,287.0,54.0,8.0,13.0,0.0,354.0,362.0,0.79
+2021-2022,elementary,Creekside,Creekside *,286,256.0,30.0,6.0,9.0,0.0,295.0,301.0,0.85
+2021-2022,elementary,Crest View,Crest View,434,398.0,36.0,7.0,6.0,0.0,440.0,447.0,0.89
+2021-2022,elementary,Douglass,Douglass,279,214.0,65.0,4.0,7.0,0.0,286.0,290.0,0.74
+2021-2022,elementary,Eisenhower,Eisenhower,327,270.0,57.0,9.0,15.0,2.0,344.0,353.0,0.76
+2021-2022,elementary,Flatirons,Flatirons,178,126.0,52.0,3.0,1.0,0.0,179.0,182.0,0.69
+2021-2022,elementary,Foothill,Foothill,421,385.0,36.0,1.0,11.0,1.0,433.0,434.0,0.89
+2021-2022,elementary,Heatherwood,Heatherwood,218,207.0,11.0,12.0,5.0,0.0,223.0,235.0,0.88
+2021-2022,elementary,Mesa,Mesa *,235,190.0,45.0,4.0,8.0,0.0,243.0,247.0,0.77
+2021-2022,elementary,Whittier,Whittier,310,237.0,73.0,7.0,8.0,0.0,318.0,325.0,0.73
+2021-2022,elementary,Aspen Creek K-8,Aspen Creek K-8,301,233.0,68.0,56.0,7.0,0.0,308.0,364.0,0.64
+2021-2022,elementary,Birch,Birch,238,208.0,30.0,61.0,5.0,3.0,246.0,307.0,0.68
+2021-2022,elementary,Emerald,Emerald,275,239.0,36.0,54.0,10.0,0.0,285.0,339.0,0.71
+2021-2022,elementary,Kohl,Kohl,241,206.0,35.0,45.0,4.0,0.0,245.0,290.0,0.71
+2021-2022,elementary,Lafayette,Lafayette Elem.,443,380.0,63.0,0.0,7.0,0.0,450.0,450.0,0.84
+2021-2022,elementary,Ryan,Ryan,440,418.0,22.0,6.0,6.0,1.0,447.0,453.0,0.92
+2021-2022,elementary,Sanchez,Sanchez,279,262.0,17.0,4.0,6.0,1.0,286.0,290.0,0.9
+2021-2022,elementary,Meadowlark,Meadowlark,432,424.0,8.0,16.0,1.0,1.0,434.0,450.0,0.94
+2021-2022,elementary,Coal Creek,Coal Creek,349,328.0,21.0,9.0,13.0,0.0,362.0,371.0,0.88
+2021-2022,elementary,Fireside,Fireside,391,310.0,81.0,11.0,11.0,1.0,403.0,414.0,0.75
+2021-2022,elementary,Louisville,Louisville Elem.,440,423.0,17.0,4.0,8.0,0.0,448.0,452.0,0.94
+2021-2022,elementary,Monarch K-8,Monarch K-8,250,183.0,67.0,24.0,15.0,0.0,265.0,289.0,0.63
+2021-2022,elementary,Eldorado K-8,Eldorado K-8,265,240.0,25.0,29.0,1.0,0.0,266.0,295.0,0.81
+2021-2022,elementary,Superior,Superior,437,399.0,38.0,5.0,11.0,0.0,448.0,453.0,0.88
+2021-2022,elementary,Gold Hill,Gold Hill,17,10.0,7.0,0.0,0.0,0.0,17.0,17.0,0.59
+2021-2022,elementary,Jamestown,Jamestown,20,11.0,9.0,0.0,0.0,0.0,20.0,20.0,0.55
+2021-2022,elementary,Nederland,Nederland Elem.,177,177.0,,3.0,0.0,2.0,179.0,182.0,0.97
+2021-2022,elementary,BCSIS,BCSIS,273,,273.0,9.0,3.0,1.0,277.0,286.0,
+2021-2022,elementary,Boulder Universal,Boulder Universal,65,,65.0,30.0,0.0,1.0,66.0,96.0,
+2021-2022,elementary,Halcyon,Halcyon,0,,,0.0,1.0,0.0,1.0,1.0,
+2021-2022,elementary,High Peaks,High Peaks,240,,240.0,16.0,2.0,1.0,243.0,259.0,
+2021-2022,elementary,Community Montessori,Comm. Montessori,186,,186.0,23.0,2.0,0.0,188.0,211.0,
+2021-2022,elementary,University Hill International,Uni-Hill Int.,372,,372.0,20.0,3.0,0.0,375.0,395.0,
+2021-2022,elementary,Pioneer,Pioneer,361,,361.0,63.0,6.0,0.0,367.0,430.0,
+2021-2022,elementary,Horizons,Horizons,221,,221.0,6.0,5.0,0.0,226.0,232.0,
+2021-2022,elementary,Peak to Peak,Peak to Peak,377,,377.0,74.0,1.0,1.0,379.0,453.0,
+2021-2022,high,Boulder,Boulder,2090,1967.0,123.0,13.0,14.0,6.0,2110.0,2123.0,0.93
+2021-2022,high,Fairview,Fairview,1904,1290.0,614.0,37.0,17.0,8.0,1929.0,1966.0,0.66
+2021-2022,high,Broomfield,Broomfield,889,875.0,14.0,702.0,1.0,3.0,893.0,1595.0,0.55
+2021-2022,high,Centaurus,Centaurus,1494,1181.0,313.0,52.0,11.0,9.0,1514.0,1566.0,0.75
+2021-2022,high,Monarch,Monarch,1401,1238.0,163.0,91.0,7.0,8.0,1416.0,1507.0,0.82
+2021-2022,high,Nederland,Nederland,119,118.0,1.0,,,,119.0,119.0,0.99
+2021-2022,high,Arapahoe Ridge,Arapahoe Ridge,107,,107.0,16.0,4.0,1.0,112.0,128.0,
+2021-2022,high,Boulder Universal,Boulder Universal,153,,153.0,47.0,2.0,1.0,156.0,203.0,
+2021-2022,high,Halcyon,Halcyon,0,,,,6.0,,6.0,6.0,
+2021-2022,high,New Vista,New Vista,245,,245.0,36.0,2.0,,247.0,283.0,
+2021-2022,high,Boulder Prep,Boulder Prep,50,,50.0,44.0,1.0,2.0,53.0,97.0,
+2021-2022,high,Peak to Peak,Peak-to-Peak,437,,437.0,152.0,,1.0,438.0,590.0,
+2021-2022,high,Justice High,Justice High,41,,41.0,41.0,,,41.0,82.0,
+2021-2022,middle,Manhattan,Manhattan,391,219.0,172.0,28.0,10.0,,401.0,429.0,0.51
+2021-2022,middle,Casey,Casey,485,400.0,85.0,8.0,5.0,1.0,491.0,499.0,0.8
+2021-2022,middle,Centennial,Centennial,586,534.0,52.0,2.0,2.0,3.0,591.0,593.0,0.9
+2021-2022,middle,Platt,Platt,430,270.0,160.0,12.0,10.0,2.0,442.0,454.0,0.59
+2021-2022,middle,Southern Hills,Southern Hills,464,324.0,140.0,9.0,7.0,1.0,472.0,481.0,0.67
+2021-2022,middle,Aspen Creek K-8,Aspen Creek K-8,252,231.0,21.0,79.0,9.0,,261.0,340.0,0.68
+2021-2022,middle,Broomfield Heights,Broomfield Heights,355,294.0,61.0,140.0,16.0,3.0,374.0,514.0,0.57
+2021-2022,middle,Angevine,Angevine,638,624.0,14.0,9.0,7.0,1.0,646.0,655.0,0.95
+2021-2022,middle,Meadowlark,Meadowlark,157,147.0,10.0,11.0,,1.0,158.0,169.0,0.87
+2021-2022,middle,Louisville Middle,Louisville Middle,571,461.0,110.0,9.0,9.0,,580.0,589.0,0.78
+2021-2022,middle,Monarch K-8,Monarch K-8,333,239.0,94.0,29.0,5.0,,338.0,367.0,0.65
+2021-2022,middle,Eldorado K-8,Eldorado K-8,327,311.0,16.0,16.0,,,327.0,343.0,0.91
+2021-2022,middle,Nederland,Nederland,105,105.0,,1.0,,,105.0,106.0,0.99
+2021-2022,middle,Boulder Universal,Boulder Universal,51,,51.0,24.0,2.0,,53.0,77.0,
+2021-2022,middle,Halcyon,Halcyon,7,,7.0,,1.0,,8.0,8.0,
+2021-2022,middle,Horizons,Horizons,107,,107.0,6.0,3.0,,110.0,116.0,
+2021-2022,middle,Summit,Summit,345,,345.0,7.0,4.0,,349.0,356.0,
+2021-2022,middle,Justice High,Justice High,0,,,,,,,,
+2021-2022,middle,Peak to Peak,Peak to Peak,326,,326.0,76.0,2.0,1.0,329.0,405.0,
+2022-2023,elementary,Bear Creek,Bear Creek *,330,291.0,39.0,4.0,8.0,0.0,338.0,342.0,0.85
+2022-2023,elementary,Columbine,Columbine,340,282.0,58.0,7.0,12.0,0.0,352.0,359.0,0.79
+2022-2023,elementary,Creekside,Creekside *,320,287.0,33.0,2.0,12.0,3.0,335.0,337.0,0.85
+2022-2023,elementary,Crest View,Crest View,416,379.0,37.0,13.0,5.0,0.0,421.0,434.0,0.87
+2022-2023,elementary,Douglass,Douglass,291,212.0,79.0,0.0,6.0,1.0,298.0,298.0,0.71
+2022-2023,elementary,Eisenhower,Eisenhower,285,238.0,47.0,4.0,12.0,2.0,299.0,303.0,0.79
+2022-2023,elementary,Flatirons,Flatirons,176,128.0,48.0,3.0,2.0,0.0,178.0,181.0,0.71
+2022-2023,elementary,Foothill,Foothill,424,381.0,43.0,1.0,12.0,0.0,436.0,437.0,0.87
+2022-2023,elementary,Heatherwood,Heatherwood,216,205.0,11.0,12.0,5.0,0.0,221.0,233.0,0.88
+2022-2023,elementary,Mesa,Mesa *,229,182.0,47.0,5.0,11.0,1.0,241.0,246.0,0.74
+2022-2023,elementary,Whittier,Whittier,314,230.0,84.0,9.0,6.0,0.0,320.0,329.0,0.7
+2022-2023,elementary,Aspen Creek K-8,Aspen Creek K-8,302,235.0,67.0,64.0,12.0,0.0,314.0,378.0,0.62
+2022-2023,elementary,Birch,Birch,238,202.0,36.0,64.0,4.0,3.0,245.0,309.0,0.65
+2022-2023,elementary,Emerald,Emerald,308,266.0,42.0,49.0,10.0,,318.0,367.0,0.72
+2022-2023,elementary,Kohl,Kohl,226,193.0,33.0,39.0,2.0,0.0,228.0,267.0,0.72
+2022-2023,elementary,Lafayette,Lafayette Elem.,423,350.0,73.0,3.0,6.0,0.0,429.0,432.0,0.81
+2022-2023,elementary,Ryan,Ryan,405,386.0,19.0,5.0,6.0,0.0,411.0,416.0,0.93
+2022-2023,elementary,Sanchez,Sanchez,290,270.0,20.0,7.0,4.0,1.0,295.0,302.0,0.89
+2022-2023,elementary,Meadowlark,Meadowlark,451,442.0,9.0,14.0,8.0,2.0,461.0,475.0,0.93
+2022-2023,elementary,Coal Creek,Coal Creek,303,280.0,23.0,15.0,12.0,0.0,315.0,330.0,0.85
+2022-2023,elementary,Fireside,Fireside,366,281.0,85.0,9.0,9.0,0.0,375.0,384.0,0.73
+2022-2023,elementary,Louisville,Louisville Elem.,433,402.0,31.0,8.0,10.0,0.0,443.0,451.0,0.89
+2022-2023,elementary,Monarch K-8,Monarch K-8,239,168.0,71.0,30.0,16.0,1.0,256.0,286.0,0.59
+2022-2023,elementary,Eldorado K-8,Eldorado K-8,261,235.0,26.0,24.0,2.0,0.0,263.0,287.0,0.82
+2022-2023,elementary,Superior,Superior,405,362.0,43.0,7.0,7.0,1.0,413.0,420.0,0.86
+2022-2023,elementary,Gold Hill,Gold Hill,15,9.0,6.0,0.0,0.0,0.0,15.0,15.0,0.6
+2022-2023,elementary,Jamestown,Jamestown,17,10.0,7.0,0.0,0.0,0.0,17.0,17.0,0.59
+2022-2023,elementary,Nederland,Nederland Elem.,169,169.0,,1.0,0.0,0.0,169.0,170.0,0.99
+2022-2023,elementary,BCSIS,BCSIS,272,,272.0,10.0,2.0,0.0,274.0,284.0,
+2022-2023,elementary,Boulder Universal,Boulder Universal,18,,18.0,12.0,3.0,0.0,21.0,33.0,
+2022-2023,elementary,Halcyon,Halcyon,1,,1.0,0.0,1.0,0.0,2.0,2.0,
+2022-2023,elementary,High Peaks,High Peaks,246,,246.0,17.0,2.0,0.0,248.0,265.0,
+2022-2023,elementary,Community Montessori,Comm. Montessori,193,,193.0,28.0,2.0,1.0,196.0,224.0,
+2022-2023,elementary,University Hill International,Uni-Hill Int.,354,,354.0,18.0,4.0,1.0,359.0,377.0,
+2022-2023,elementary,Pioneer,Pioneer,321,,321.0,62.0,18.0,0.0,339.0,401.0,
+2022-2023,elementary,Horizons,Horizons,211,,211.0,9.0,10.0,0.0,221.0,230.0,
+2022-2023,elementary,Peak to Peak,Peak to Peak,371,,371.0,77.0,1.0,0.0,372.0,449.0,
+2022-2023,high,Boulder,Boulder,2022,1883.0,139.0,14.0,15.0,8.0,2045.0,2059.0,0.91
+2022-2023,high,Fairview,Fairview,1806,1240.0,566.0,44.0,14.0,9.0,1829.0,1873.0,0.66
+2022-2023,high,Broomfield,Broomfield,872,858.0,14.0,750.0,2.0,3.0,877.0,1627.0,0.53
+2022-2023,high,Centaurus,Centaurus,1438,1145.0,293.0,44.0,14.0,12.0,1464.0,1508.0,0.76
+2022-2023,high,Monarch,Monarch,1401,1245.0,156.0,97.0,4.0,13.0,1418.0,1515.0,0.82
+2022-2023,high,Nederland,Nederland,124,122.0,2.0,4.0,,,124.0,128.0,0.95
+2022-2023,high,Arapahoe Ridge,Arapahoe Ridge,139,,139.0,22.0,20.0,,159.0,181.0,
+2022-2023,high,Boulder Universal,Boulder Universal,79,,79.0,37.0,8.0,,87.0,124.0,
+2022-2023,high,Halcyon,Halcyon,9,,9.0,,6.0,,15.0,15.0,
+2022-2023,high,New Vista,New Vista,267,,267.0,38.0,4.0,,271.0,309.0,
+2022-2023,high,Boulder Prep,Boulder Prep,49,,49.0,48.0,10.0,1.0,60.0,108.0,
+2022-2023,high,Peak to Peak,Peak-to-Peak,455,,455.0,138.0,2.0,1.0,458.0,596.0,
+2022-2023,high,Justice High,Justice High,55,,55.0,34.0,5.0,,60.0,94.0,
+2022-2023,middle,Manhattan,Manhattan,354,199.0,155.0,27.0,16.0,2.0,372.0,399.0,0.5
+2022-2023,middle,Casey,Casey,430,358.0,72.0,11.0,6.0,3.0,439.0,450.0,0.8
+2022-2023,middle,Centennial,Centennial,556,494.0,62.0,7.0,2.0,1.0,559.0,566.0,0.87
+2022-2023,middle,Platt,Platt,438,257.0,181.0,10.0,15.0,1.0,454.0,464.0,0.55
+2022-2023,middle,Southern Hills,Southern Hills,432,298.0,134.0,14.0,7.0,1.0,440.0,454.0,0.66
+2022-2023,middle,Aspen Creek K-8,Aspen Creek K-8,253,229.0,24.0,73.0,8.0,,261.0,334.0,0.69
+2022-2023,middle,Broomfield Heights,Broomfield Heights,335,271.0,64.0,140.0,10.0,,345.0,485.0,0.56
+2022-2023,middle,Angevine,Angevine,635,614.0,21.0,11.0,5.0,3.0,643.0,654.0,0.94
+2022-2023,middle,Meadowlark,Meadowlark,168,157.0,11.0,20.0,,,168.0,188.0,0.84
+2022-2023,middle,Louisville Middle,Louisville Middle,573,453.0,120.0,7.0,15.0,,588.0,595.0,0.76
+2022-2023,middle,Monarch K-8,Monarch K-8,336,227.0,109.0,35.0,12.0,,348.0,383.0,0.59
+2022-2023,middle,Eldorado K-8,Eldorado K-8,287,275.0,12.0,12.0,4.0,,291.0,303.0,0.91
+2022-2023,middle,Nederland,Nederland,104,102.0,2.0,4.0,,,104.0,108.0,0.94
+2022-2023,middle,Boulder Universal,Boulder Universal,26,,26.0,11.0,2.0,,28.0,39.0,
+2022-2023,middle,Halcyon,Halcyon,5,,5.0,,2.0,,7.0,7.0,
+2022-2023,middle,Horizons,Horizons,109,,109.0,7.0,2.0,,111.0,118.0,
+2022-2023,middle,Summit,Summit,344,,344.0,5.0,5.0,2.0,351.0,356.0,
+2022-2023,middle,Justice High,Justice High,5,,5.0,1.0,1.0,,6.0,7.0,
+2022-2023,middle,Peak to Peak,Peak to Peak,331,,331.0,71.0,3.0,,334.0,405.0,
+2023-2024,elementary,Bear Creek,Bear Creek *,282,231.0,51.0,7.0,9.0,0.0,291.0,298.0,0.78
+2023-2024,elementary,Columbine,Columbine,337,277.0,60.0,7.0,5.0,3.0,345.0,352.0,0.79
+2023-2024,elementary,Creekside,Creekside *,320,281.0,39.0,3.0,9.0,1.0,330.0,333.0,0.84
+2023-2024,elementary,Crest View,Crest View,398,360.0,38.0,11.0,1.0,0.0,399.0,410.0,0.88
+2023-2024,elementary,Douglass,Douglass,274,187.0,87.0,3.0,9.0,0.0,283.0,286.0,0.65
+2023-2024,elementary,Eisenhower,Eisenhower,296,244.0,52.0,3.0,12.0,0.0,308.0,311.0,0.78
+2023-2024,elementary,Flatirons,Flatirons,156,125.0,31.0,3.0,5.0,0.0,161.0,164.0,0.76
+2023-2024,elementary,Foothill,Foothill,423,360.0,63.0,3.0,11.0,0.0,434.0,437.0,0.82
+2023-2024,elementary,Heatherwood,Heatherwood,206,193.0,13.0,14.0,6.0,0.0,212.0,226.0,0.85
+2023-2024,elementary,Mesa,Mesa *,215,166.0,49.0,5.0,13.0,0.0,228.0,233.0,0.71
+2023-2024,elementary,Whittier,Whittier,272,196.0,76.0,13.0,6.0,0.0,278.0,291.0,0.67
+2023-2024,elementary,Aspen Creek K-8,Aspen Creek K-8,318,238.0,80.0,88.0,12.0,2.0,332.0,420.0,0.57
+2023-2024,elementary,Birch,Birch,217,188.0,29.0,53.0,7.0,2.0,226.0,279.0,0.67
+2023-2024,elementary,Emerald,Emerald,291,250.0,41.0,58.0,6.0,1.0,298.0,356.0,0.7
+2023-2024,elementary,Kohl,Kohl,214,188.0,26.0,30.0,7.0,0.0,221.0,251.0,0.75
+2023-2024,elementary,Lafayette,Lafayette Elem.,430,354.0,76.0,3.0,8.0,3.0,441.0,444.0,0.8
+2023-2024,elementary,Ryan,Ryan,409,384.0,25.0,12.0,5.0,0.0,414.0,426.0,0.9
+2023-2024,elementary,Sanchez,Sanchez,274,251.0,23.0,9.0,0.0,2.0,276.0,285.0,0.88
+2023-2024,elementary,Meadowlark,Meadowlark,439,433.0,6.0,18.0,7.0,0.0,446.0,464.0,0.93
+2023-2024,elementary,Coal Creek,Coal Creek,284,260.0,24.0,11.0,10.0,0.0,294.0,305.0,0.85
+2023-2024,elementary,Fireside,Fireside,370,267.0,103.0,11.0,15.0,0.0,385.0,396.0,0.67
+2023-2024,elementary,Louisville,Louisville Elem.,405,369.0,36.0,8.0,9.0,0.0,414.0,422.0,0.87
+2023-2024,elementary,Monarch K-8,Monarch K-8,230,154.0,76.0,29.0,15.0,0.0,245.0,274.0,0.56
+2023-2024,elementary,Eldorado K-8,Eldorado K-8,237,212.0,25.0,22.0,4.0,0.0,241.0,263.0,0.81
+2023-2024,elementary,Superior,Superior,410,359.0,51.0,8.0,10.0,1.0,421.0,429.0,0.84
+2023-2024,elementary,Gold Hill,Gold Hill,12,9.0,3.0,0.0,0.0,0.0,12.0,12.0,0.75
+2023-2024,elementary,Jamestown,Jamestown,18,8.0,10.0,0.0,0.0,0.0,18.0,18.0,0.44
+2023-2024,elementary,Nederland,Nederland Elem.,163,162.0,1.0,2.0,0.0,0.0,163.0,165.0,0.98
+2023-2024,elementary,BCSIS,BCSIS,251,,251.0,12.0,1.0,1.0,253.0,265.0,
+2023-2024,elementary,Boulder Universal,Boulder Universal,14,,14.0,22.0,5.0,0.0,19.0,41.0,
+2023-2024,elementary,Halcyon,Halcyon,1,,1.0,0.0,2.0,0.0,3.0,3.0,
+2023-2024,elementary,High Peaks,High Peaks,230,,230.0,14.0,1.0,0.0,231.0,245.0,
+2023-2024,elementary,Community Montessori,Comm. Montessori,194,,194.0,31.0,2.0,0.0,196.0,227.0,
+2023-2024,elementary,University Hill International,Uni-Hill Int.,346,,346.0,18.0,7.0,1.0,354.0,372.0,
+2023-2024,elementary,Pioneer,Pioneer,336,,336.0,58.0,21.0,0.0,357.0,415.0,
+2023-2024,elementary,Horizons,Horizons,220,,220.0,13.0,9.0,0.0,229.0,242.0,
+2023-2024,elementary,Peak to Peak,Peak to Peak,374,,374.0,72.0,1.0,0.0,375.0,447.0,
+2023-2024,high,Boulder,Boulder,1941,1772.0,169.0,21.0,24.0,9.0,1974.0,1995.0,0.89
+2023-2024,high,Fairview,Fairview,1761,1182.0,579.0,62.0,12.0,8.0,1781.0,1843.0,0.64
+2023-2024,high,Broomfield,Broomfield,863,843.0,20.0,814.0,3.0,6.0,872.0,1686.0,0.5
+2023-2024,high,Centaurus,Centaurus,1473,1170.0,303.0,55.0,7.0,9.0,1489.0,1544.0,0.76
+2023-2024,high,Monarch,Monarch,1322,1170.0,152.0,83.0,7.0,16.0,1345.0,1428.0,0.82
+2023-2024,high,Nederland,Nederland,107,105.0,2.0,3.0,,,107.0,110.0,0.95
+2023-2024,high,Arapahoe Ridge,Arapahoe Ridge,174,,174.0,28.0,9.0,,183.0,211.0,
+2023-2024,high,Boulder Universal,Boulder Universal,80,,80.0,34.0,14.0,,94.0,128.0,
+2023-2024,high,Halcyon,Halcyon,10,,10.0,,,,10.0,10.0,
+2023-2024,high,New Vista,New Vista,269,,269.0,41.0,3.0,,272.0,313.0,
+2023-2024,high,Boulder Prep,Boulder Prep,58,,58.0,39.0,9.0,1.0,68.0,107.0,
+2023-2024,high,Peak to Peak,Peak-to-Peak,461,,461.0,135.0,3.0,,464.0,599.0,
+2023-2024,high,Justice High,Justice High,51,,51.0,29.0,12.0,1.0,64.0,93.0,
+2023-2024,middle,Manhattan,Manhattan,366,183.0,183.0,35.0,15.0,,381.0,416.0,0.44
+2023-2024,middle,Casey,Casey,376,308.0,68.0,10.0,4.0,,380.0,390.0,0.79
+2023-2024,middle,Centennial,Centennial,614,522.0,92.0,4.0,1.0,,615.0,619.0,0.84
+2023-2024,middle,Platt,Platt,472,263.0,209.0,16.0,15.0,1.0,488.0,504.0,0.52
+2023-2024,middle,Southern Hills,Southern Hills,473,307.0,166.0,18.0,1.0,,474.0,492.0,0.62
+2023-2024,middle,Aspen Creek K-8,Aspen Creek K-8,217,189.0,28.0,89.0,9.0,,226.0,315.0,0.6
+2023-2024,middle,Broomfield Heights,Broomfield Heights,340,255.0,85.0,142.0,11.0,3.0,354.0,496.0,0.51
+2023-2024,middle,Angevine,Angevine,583,562.0,21.0,14.0,5.0,5.0,593.0,607.0,0.93
+2023-2024,middle,Meadowlark,Meadowlark,197,186.0,11.0,22.0,1.0,,198.0,220.0,0.85
+2023-2024,middle,Louisville Middle,Louisville Middle,576,445.0,131.0,14.0,17.0,1.0,594.0,608.0,0.73
+2023-2024,middle,Monarch K-8,Monarch K-8,361,211.0,150.0,38.0,11.0,1.0,373.0,411.0,0.51
+2023-2024,middle,Eldorado K-8,Eldorado K-8,244,238.0,6.0,11.0,7.0,,251.0,262.0,0.91
+2023-2024,middle,Nederland,Nederland,105,105.0,,4.0,,,105.0,109.0,0.96
+2023-2024,middle,Boulder Universal,Boulder Universal,29,,29.0,21.0,2.0,,31.0,52.0,
+2023-2024,middle,Halcyon,Halcyon,0,,,,4.0,,4.0,4.0,
+2023-2024,middle,Horizons,Horizons,108,,108.0,7.0,2.0,,110.0,117.0,
+2023-2024,middle,Summit,Summit,351,,351.0,4.0,6.0,,357.0,361.0,
+2023-2024,middle,Justice High,Justice High,4,,4.0,3.0,3.0,,7.0,10.0,
+2023-2024,middle,Peak to Peak,Peak to Peak,326,,326.0,79.0,1.0,,327.0,406.0,
+2024-2025,elementary,Bear Creek,Bear Creek *,294,230.0,64.0,11.0,13.0,0.0,307.0,318.0,0.72
+2024-2025,elementary,Columbine,Columbine,327,260.0,67.0,7.0,5.0,4.0,336.0,343.0,0.76
+2024-2025,elementary,Creekside,Creekside *,315,271.0,44.0,3.0,9.0,0.0,324.0,327.0,0.83
+2024-2025,elementary,Crest View,Crest View,373,341.0,32.0,10.0,7.0,0.0,380.0,390.0,0.87
+2024-2025,elementary,Douglass,Douglass,267,181.0,86.0,4.0,11.0,0.0,278.0,282.0,0.64
+2024-2025,elementary,Eisenhower,Eisenhower,260,221.0,39.0,3.0,13.0,0.0,273.0,276.0,0.8
+2024-2025,elementary,Flatirons,Flatirons,150,120.0,30.0,4.0,9.0,0.0,159.0,163.0,0.74
+2024-2025,elementary,Foothill,Foothill,399,316.0,83.0,4.0,15.0,0.0,414.0,418.0,0.76
+2024-2025,elementary,Heatherwood,Heatherwood,213,202.0,11.0,14.0,6.0,0.0,219.0,233.0,0.87
+2024-2025,elementary,Mesa,Mesa *,208,157.0,51.0,9.0,13.0,0.0,221.0,230.0,0.68
+2024-2025,elementary,Whittier,Whittier,254,172.0,82.0,6.0,7.0,0.0,261.0,267.0,0.64
+2024-2025,elementary,Aspen Creek K-8,Aspen Creek K-8,317,234.0,83.0,113.0,13.0,0.0,330.0,443.0,0.53
+2024-2025,elementary,Birch,Birch,214,194.0,20.0,54.0,7.0,0.0,221.0,275.0,0.71
+2024-2025,elementary,Emerald,Emerald,279,242.0,37.0,60.0,9.0,0.0,288.0,348.0,0.7
+2024-2025,elementary,Kohl,Kohl,218,182.0,36.0,29.0,7.0,0.0,225.0,254.0,0.72
+2024-2025,elementary,Lafayette,Lafayette Elem.,454,366.0,88.0,2.0,8.0,1.0,463.0,465.0,0.79
+2024-2025,elementary,Ryan,Ryan,390,365.0,25.0,11.0,8.0,1.0,399.0,410.0,0.89
+2024-2025,elementary,Sanchez,Sanchez,275,242.0,33.0,13.0,0.0,2.0,277.0,290.0,0.83
+2024-2025,elementary,Meadowlark,Meadowlark,449,429.0,20.0,15.0,4.0,0.0,453.0,468.0,0.92
+2024-2025,elementary,Coal Creek,Coal Creek,263,241.0,22.0,10.0,10.0,0.0,273.0,283.0,0.85
+2024-2025,elementary,Fireside,Fireside,369,254.0,115.0,15.0,13.0,0.0,382.0,397.0,0.64
+2024-2025,elementary,Louisville,Louisville Elem.,395,347.0,48.0,7.0,15.0,0.0,410.0,417.0,0.83
+2024-2025,elementary,Monarch K-8,Monarch K-8,221,146.0,75.0,28.0,15.0,0.0,236.0,264.0,0.55
+2024-2025,elementary,Eldorado K-8,Eldorado K-8,224,187.0,37.0,25.0,7.0,0.0,231.0,256.0,0.73
+2024-2025,elementary,Superior,Superior,397,323.0,74.0,8.0,11.0,0.0,408.0,416.0,0.78
+2024-2025,elementary,Gold Hill,Gold Hill,10,7.0,3.0,0.0,0.0,0.0,10.0,10.0,0.7
+2024-2025,elementary,Jamestown,Jamestown,17,6.0,11.0,0.0,0.0,0.0,17.0,17.0,0.35
+2024-2025,elementary,Nederland,Nederland Elem.,170,168.0,2.0,2.0,0.0,0.0,170.0,172.0,0.98
+2024-2025,elementary,BCSIS,BCSIS,241,,241.0,10.0,3.0,0.0,244.0,254.0,
+2024-2025,elementary,Boulder Universal,Boulder Universal,19,,19.0,27.0,0.0,0.0,19.0,46.0,
+2024-2025,elementary,Halcyon,Halcyon,0,,0.0,0.0,1.0,0.0,1.0,1.0,
+2024-2025,elementary,High Peaks,High Peaks,231,,231.0,25.0,1.0,0.0,232.0,257.0,
+2024-2025,elementary,Community Montessori,Comm. Montessori,193,,193.0,36.0,1.0,2.0,196.0,232.0,
+2024-2025,elementary,University Hill International,Uni-Hill Int.,354,,354.0,15.0,11.0,0.0,365.0,380.0,
+2024-2025,elementary,Pioneer,Pioneer,320,,320.0,52.0,21.0,4.0,345.0,397.0,
+2024-2025,elementary,Horizons,Horizons,210,,210.0,17.0,11.0,0.0,221.0,238.0,
+2024-2025,elementary,Peak to Peak,Peak to Peak,386,,386.0,59.0,0.0,0.0,386.0,445.0,
+2024-2025,high,Boulder,Boulder,1883,1699.0,184.0,22.0,20.0,9.0,1912.0,1934.0,0.88
+2024-2025,high,Fairview,Fairview,1757,1179.0,578.0,74.0,11.0,12.0,1780.0,1854.0,0.64
+2024-2025,high,Broomfield,Broomfield,844,829.0,15.0,846.0,2.0,,846.0,1692.0,0.49
+2024-2025,high,Centaurus,Centaurus,1471,1188.0,283.0,49.0,19.0,5.0,1495.0,1544.0,0.77
+2024-2025,high,Monarch,Monarch,1323,1159.0,164.0,90.0,5.0,8.0,1336.0,1426.0,0.81
+2024-2025,high,Nederland,Nederland,107,107.0,,6.0,,,107.0,113.0,0.95
+2024-2025,high,Arapahoe Ridge,Arapahoe Ridge,143,,143.0,24.0,14.0,1.0,158.0,182.0,
+2024-2025,high,Boulder Universal,Boulder Universal,87,,87.0,33.0,13.0,,100.0,133.0,
+2024-2025,high,Halcyon,Halcyon,7,,7.0,,2.0,,9.0,9.0,
+2024-2025,high,New Vista,New Vista,282,,282.0,40.0,4.0,,286.0,326.0,
+2024-2025,high,Boulder Prep,Boulder Prep,49,,49.0,34.0,23.0,,72.0,106.0,
+2024-2025,high,Peak to Peak,Peak-to-Peak,469,,469.0,126.0,3.0,,472.0,598.0,
+2024-2025,high,Justice High,Justice High,49,,49.0,33.0,14.0,,63.0,96.0,
+2024-2025,middle,Manhattan,Manhattan,412,204.0,208.0,39.0,27.0,2.0,441.0,480.0,0.43
+2024-2025,middle,Casey,Casey,344,281.0,63.0,12.0,4.0,,348.0,360.0,0.78
+2024-2025,middle,Centennial,Centennial,586,473.0,113.0,4.0,2.0,1.0,589.0,593.0,0.8
+2024-2025,middle,Platt,Platt,455,240.0,215.0,16.0,12.0,,467.0,483.0,0.5
+2024-2025,middle,Southern Hills,Southern Hills,471,314.0,157.0,24.0,5.0,1.0,477.0,501.0,0.63
+2024-2025,middle,Aspen Creek K-8,Aspen Creek K-8,262,225.0,37.0,100.0,9.0,,271.0,371.0,0.61
+2024-2025,middle,Broomfield Heights,Broomfield Heights,335,269.0,66.0,145.0,7.0,1.0,343.0,488.0,0.55
+2024-2025,middle,Angevine,Angevine,598,570.0,28.0,7.0,9.0,2.0,609.0,616.0,0.93
+2024-2025,middle,Meadowlark,Meadowlark,205,187.0,18.0,19.0,2.0,,207.0,226.0,0.83
+2024-2025,middle,Louisville Middle,Louisville Middle,606,433.0,173.0,10.0,11.0,,617.0,627.0,0.69
+2024-2025,middle,Monarch K-8,Monarch K-8,348,177.0,171.0,36.0,14.0,,362.0,398.0,0.44
+2024-2025,middle,Eldorado K-8,Eldorado K-8,223,212.0,11.0,9.0,8.0,,231.0,240.0,0.88
+2024-2025,middle,Nederland,Nederland,95,94.0,1.0,4.0,,,95.0,99.0,0.95
+2024-2025,middle,Boulder Universal,Boulder Universal,23,,23.0,22.0,4.0,,27.0,49.0,
+2024-2025,middle,Halcyon,Halcyon,3,,3.0,,4.0,,7.0,7.0,
+2024-2025,middle,Horizons,Horizons,111,,111.0,6.0,3.0,,114.0,120.0,
+2024-2025,middle,Summit,Summit,358,,358.0,3.0,4.0,1.0,363.0,366.0,
+2024-2025,middle,Justice High,Justice High,3,,3.0,3.0,3.0,,6.0,9.0,
+2024-2025,middle,Peak to Peak,Peak to Peak,332,,332.0,70.0,1.0,1.0,334.0,404.0,
+2025-2026,elementary,Bear Creek,Bear Creek *,286,216.0,70.0,13.0,13.0,0.0,299.0,312.0,0.69
+2025-2026,elementary,Columbine,Columbine,290,221.0,69.0,17.0,4.0,2.0,296.0,313.0,0.71
+2025-2026,elementary,Creekside,Creekside *,277,240.0,37.0,1.0,10.0,0.0,287.0,288.0,0.83
+2025-2026,elementary,Crest View,Crest View,319,303.0,16.0,6.0,5.0,0.0,324.0,330.0,0.92
+2025-2026,elementary,Douglass,Douglass,259,164.0,95.0,8.0,13.0,1.0,273.0,281.0,0.58
+2025-2026,elementary,Eisenhower,Eisenhower,251,206.0,45.0,2.0,12.0,0.0,263.0,265.0,0.78
+2025-2026,elementary,Flatirons,Flatirons,140,116.0,24.0,4.0,7.0,0.0,147.0,151.0,0.77
+2025-2026,elementary,Foothill,Foothill,419,304.0,115.0,4.0,11.0,0.0,430.0,434.0,0.7
+2025-2026,elementary,Heatherwood,Heatherwood,207,190.0,17.0,11.0,7.0,0.0,214.0,225.0,0.84
+2025-2026,elementary,Mesa,Mesa *,204,156.0,48.0,10.0,10.0,0.0,214.0,224.0,0.7
+2025-2026,elementary,Whittier,Whittier,246,152.0,94.0,6.0,5.0,0.0,251.0,257.0,0.59
+2025-2026,elementary,Aspen Creek K-8,Aspen Creek K-8,331,244.0,87.0,131.0,10.0,0.0,341.0,472.0,0.52
+2025-2026,elementary,Birch,Birch,206,183.0,23.0,45.0,7.0,1.0,214.0,259.0,0.71
+2025-2026,elementary,Emerald,Emerald,285,243.0,42.0,74.0,6.0,0.0,291.0,365.0,0.67
+2025-2026,elementary,Kohl,Kohl,215,187.0,28.0,31.0,9.0,1.0,225.0,256.0,0.73
+2025-2026,elementary,Lafayette,Lafayette Elem.,434,331.0,103.0,7.0,9.0,0.0,443.0,450.0,0.74
+2025-2026,elementary,Ryan,Ryan,372,342.0,30.0,13.0,8.0,0.0,380.0,393.0,0.87
+2025-2026,elementary,Sanchez,Sanchez,264,225.0,39.0,9.0,3.0,0.0,267.0,276.0,0.82
+2025-2026,elementary,Meadowlark,Meadowlark,436,406.0,30.0,26.0,9.0,0.0,445.0,471.0,0.86
+2025-2026,elementary,Coal Creek,Coal Creek,253,223.0,30.0,8.0,8.0,0.0,261.0,269.0,0.83
+2025-2026,elementary,Fireside,Fireside,376,259.0,117.0,16.0,12.0,1.0,389.0,405.0,0.64
+2025-2026,elementary,Louisville,Louisville Elem.,363,317.0,46.0,5.0,14.0,0.0,377.0,382.0,0.83
+2025-2026,elementary,Monarch K-8,Monarch K-8,214,149.0,65.0,31.0,17.0,2.0,233.0,264.0,0.56
+2025-2026,elementary,Eldorado K-8,Eldorado K-8,216,169.0,47.0,23.0,11.0,2.0,229.0,252.0,0.67
+2025-2026,elementary,Superior,Superior,410,313.0,97.0,10.0,13.0,0.0,423.0,433.0,0.72
+2025-2026,elementary,Gold Hill,Gold Hill,11,7.0,4.0,0.0,0.0,0.0,11.0,11.0,0.64
+2025-2026,elementary,Jamestown,Jamestown,17,6.0,11.0,0.0,0.0,0.0,17.0,17.0,0.35
+2025-2026,elementary,Nederland,Nederland Elem.,165,163.0,2.0,1.0,0.0,0.0,165.0,166.0,0.98
+2025-2026,elementary,BCSIS,BCSIS,231,,231.0,17.0,4.0,1.0,236.0,253.0,
+2025-2026,elementary,Boulder Universal,Boulder Universal,15,,15.0,24.0,0.0,0.0,15.0,39.0,
+2025-2026,elementary,Halcyon,Halcyon,1,,1.0,0.0,3.0,0.0,4.0,4.0,
+2025-2026,elementary,High Peaks,High Peaks,252,,252.0,28.0,1.0,2.0,255.0,283.0,
+2025-2026,elementary,Community Montessori,Comm. Montessori,165,,165.0,25.0,1.0,2.0,168.0,193.0,
+2025-2026,elementary,University Hill International,Uni-Hill Int.,336,,336.0,21.0,9.0,2.0,347.0,368.0,
+2025-2026,elementary,Pioneer,Pioneer,289,,289.0,64.0,18.0,0.0,307.0,371.0,
+2025-2026,elementary,Horizons,Horizons,212,,212.0,22.0,11.0,0.0,223.0,245.0,
+2025-2026,elementary,Peak to Peak,Peak to Peak,398,,398.0,52.0,0.0,0.0,398.0,450.0,
+2025-2026,high,Boulder,Boulder,1731,1547.0,184.0,28.0,11.0,4.0,1746.0,1774.0,0.87
+2025-2026,high,Fairview,Fairview,1767,1153.0,614.0,75.0,13.0,4.0,1784.0,1859.0,0.62
+2025-2026,high,Broomfield,Broomfield,819,797.0,22.0,849.0,1.0,,820.0,1669.0,0.48
+2025-2026,high,Centaurus,Centaurus,1466,1198.0,268.0,65.0,17.0,8.0,1491.0,1556.0,0.77
+2025-2026,high,Monarch,Monarch,1349,1188.0,161.0,101.0,7.0,10.0,1366.0,1467.0,0.81
+2025-2026,high,Nederland,Nederland,94,93.0,1.0,7.0,,,94.0,101.0,0.92
+2025-2026,high,Arapahoe Ridge,Arapahoe Ridge,121,,121.0,29.0,26.0,1.0,148.0,177.0,
+2025-2026,high,Boulder Universal,Boulder Universal,92,,92.0,41.0,18.0,1.0,111.0,152.0,
+2025-2026,high,Halcyon,Halcyon,9,,9.0,,2.0,,11.0,11.0,
+2025-2026,high,New Vista,New Vista,265,,265.0,42.0,4.0,,269.0,311.0,
+2025-2026,high,Boulder Prep,Boulder Prep,47,,47.0,27.0,13.0,1.0,61.0,88.0,
+2025-2026,high,Peak to Peak,Peak-to-Peak,476,,476.0,112.0,4.0,2.0,482.0,594.0,
+2025-2026,high,Justice High,Justice High,46,,46.0,32.0,11.0,,57.0,89.0,
+2025-2026,middle,Manhattan,Manhattan,393,178.0,215.0,34.0,25.0,,418.0,452.0,0.39
+2025-2026,middle,Casey,Casey,308,254.0,54.0,9.0,1.0,1.0,310.0,319.0,0.8
+2025-2026,middle,Centennial,Centennial,551,432.0,119.0,7.0,1.0,,552.0,559.0,0.77
+2025-2026,middle,Platt,Platt,467,266.0,201.0,12.0,8.0,,475.0,487.0,0.55
+2025-2026,middle,Southern Hills,Southern Hills,536,317.0,219.0,14.0,7.0,1.0,544.0,558.0,0.57
+2025-2026,middle,Aspen Creek K-8,Aspen Creek K-8,270,235.0,35.0,127.0,12.0,,282.0,409.0,0.57
+2025-2026,middle,Broomfield Heights,Broomfield Heights,319,250.0,69.0,151.0,10.0,1.0,330.0,481.0,0.52
+2025-2026,middle,Angevine,Angevine,569,551.0,18.0,12.0,4.0,3.0,576.0,588.0,0.94
+2025-2026,middle,Meadowlark,Meadowlark,225,208.0,17.0,10.0,3.0,,228.0,238.0,0.87
+2025-2026,middle,Louisville Middle,Louisville Middle,607,399.0,208.0,12.0,6.0,,613.0,625.0,0.64
+2025-2026,middle,Monarch K-8,Monarch K-8,375,169.0,206.0,35.0,12.0,1.0,388.0,423.0,0.4
+2025-2026,middle,Eldorado K-8,Eldorado K-8,153,136.0,17.0,9.0,5.0,,158.0,167.0,0.81
+2025-2026,middle,Nederland,Nederland,86,86.0,,5.0,,,86.0,91.0,0.95
+2025-2026,middle,Boulder Universal,Boulder Universal,19,,19.0,13.0,1.0,,20.0,33.0,
+2025-2026,middle,Halcyon,Halcyon,4,,4.0,,,,4.0,4.0,
+2025-2026,middle,Horizons,Horizons,115,,115.0,6.0,2.0,,117.0,123.0,
+2025-2026,middle,Summit,Summit,358,,358.0,3.0,3.0,1.0,362.0,365.0,
+2025-2026,middle,Justice High,Justice High,2,,2.0,2.0,2.0,,4.0,6.0,
+2025-2026,middle,Peak to Peak,Peak to Peak,332,,332.0,71.0,1.0,,333.0,404.0,

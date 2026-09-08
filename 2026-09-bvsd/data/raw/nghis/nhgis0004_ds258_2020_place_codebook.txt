@@ -1,0 +1,247 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0004_ds258_2020_place'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             2020
+Geographic level: Place (by State)
+Extent:           Alabama
+                  Arizona
+                  California
+                  Colorado
+                  Connecticut
+                  Florida
+                  Illinois
+                  Indiana
+                  Iowa
+                  Louisiana
+                  Massachusetts
+                  Michigan
+                  Minnesota
+                  New York
+                  North Carolina
+                  Oregon
+                  Pennsylvania
+                  Texas
+                  Utah
+                  Wisconsin
+Dataset:          2020 Census: DHC - P & H Tables [Blocks & Larger Areas]
+   NHGIS code:    2020_DHCa
+   NHGIS ID:      ds258
+Breakdown(s):     Geographic Component:
+                     Total area (00)
+ 
+Tables:
+ 
+1. Population in Households by Age
+   Universe:    Population in households
+   Source code: P15
+   NHGIS code:  U82
+ 
+2. Group Quarters Population by Sex by Age by Major Group Quarters Type
+   Universe:    Population in group quarters
+   Source code: P18
+   NHGIS code:  U9R
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      State/US-Abbreviation (USPS)
+        GEOID:       Geographic Record Identifier
+        GEOCODE:     Geographic Code Identifier
+        REGIONA:     Region Code
+        DIVISIONA:   Division Code
+        STATE:       State (FIPS) Name
+        STATEA:      State (FIPS) Code
+        COUNTYA:     County (FIPS) Code
+        COUSUBA:     County Subdivision (FIPS) Code
+        COUSUBCC:    FIPS County Subdivision Class Code
+        SUBMCDA:     Subminor Civil Division (FIPS) Code
+        CONCITA:     Consolidated City (FIPS) Code
+        PLACE:       Place (FIPS) Name
+        PLACEA:      Place (FIPS) Code
+        PLACECC:     FIPS Place Class Code
+        TRACTA:      Census Tract Code
+        BLKGRPA:     Block Group Code
+        BLOCKA:      Block Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land (Census) Code
+        RES_ONLYA:   American Indian Area/Alaska Native Area (Reservation or Statistical Entity Only) Code
+        TRUSTA:      American Indian Area (Off-Reservation Trust Land Only)/Hawaiian Home Land Code
+        AIANHHCC:    FIPS American Indian Area/Alaska Native Area/Hawaiian Home Land Class Code
+        AITSA:       American Indian Tribal Subdivision (Census) Code
+        TTRACTA:     Tribal Census Tract Code
+        TBLKGRPA:    Tribal Block Group Code
+        ANRCA:       Alaska Native Regional Corporation (FIPS) Code
+        CBSAA:       Metropolitan Statistical Area/Micropolitan Statistical Area Code
+        MEMI:        Metropolitan/Micropolitan Indicator
+        CSAA:        Combined Statistical Area Code
+        METDIVA:     Metropolitan Division Code
+        NECTAA:      New England City and Town Area Code
+        NMEMI:       NECTA Metropolitan/Micropolitan Indicator
+        CNECTAA:     Combined New England City and Town Area Code
+        NECTADIVA:   New England City and Town Area Division Code
+        CBSAPCI:     Metropolitan Statistical Area/Micropolitan Statistical Area Principal City Indicator
+        NECTAPCI:    New England City and Town Area Principal City Indicator
+        UAA:         Urban Area Code
+        URA:         Urban/Rural Code
+        CD116A:      Congressional District (116th) Code
+        SLDU18A:     State Legislative District (Upper Chamber) (2018) Code
+        SLDL18A:     State Legislative District (Lower Chamber) (2018) Code
+        VTD:         Voting District
+        VTDI:        Voting District Indicator
+        ZCTAA:       ZIP Code Tabulation Area (5-Digit) Code
+        SDELMA:      School District (Elementary) Code
+        SDSECA:      School District (Secondary) Code
+        SDUNIA:      School District (Unified) Code
+        PUMA:        Public Use Microdata Area
+        AREALAND:    Area (Land)
+        AREAWATR:    Area (Water)
+        BASENAME:    Area Base Name
+        NAME:        Area Name-Legal/Statistical Area Description (LSAD) Term-Part Indicator
+        FUNCSTAT:    Functional Status Code
+        INTPTLAT:    Internal Point (Latitude)
+        INTPTLON:    Internal Point (Longitude)
+        LSADC:       Legal/Statistical Area Description Code
+        UGA:         Urban Growth Area
+ 
+Breakdown:
+    Geographic Component: Total area (00)
+ 
+    Table 1:     Population in Households by Age
+    Universe:    Population in households
+    Source code: P15
+    NHGIS code:  U82
+        U82001:      Total
+        U82002:      Under 18 years
+        U82003:      18 years and over
+ 
+    Table 2:     Group Quarters Population by Sex by Age by Major Group Quarters Type
+    Universe:    Population in group quarters
+    Source code: P18
+    NHGIS code:  U9R
+        U9R001:      Total
+        U9R002:      Male
+        U9R003:      Male: Under 18 years
+        U9R004:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405)
+        U9R005:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        U9R006:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        U9R007:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        U9R008:      Male: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        U9R009:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R010:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        U9R011:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        U9R012:      Male: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R013:      Male: 18 to 64 years
+        U9R014:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405)
+        U9R015:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        U9R016:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        U9R017:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        U9R018:      Male: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        U9R019:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R020:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        U9R021:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        U9R022:      Male: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R023:      Male: 65 years and over
+        U9R024:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405)
+        U9R025:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        U9R026:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        U9R027:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        U9R028:      Male: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        U9R029:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R030:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        U9R031:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        U9R032:      Male: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R033:      Female
+        U9R034:      Female: Under 18 years
+        U9R035:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405)
+        U9R036:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        U9R037:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        U9R038:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        U9R039:      Female: Under 18 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        U9R040:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R041:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        U9R042:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        U9R043:      Female: Under 18 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R044:      Female: 18 to 64 years
+        U9R045:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405)
+        U9R046:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        U9R047:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        U9R048:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        U9R049:      Female: 18 to 64 years: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        U9R050:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R051:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        U9R052:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        U9R053:      Female: 18 to 64 years: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R054:      Female: 65 years and over
+        U9R055:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405)
+        U9R056:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Correctional facilities for adults (101-106)
+        U9R057:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Juvenile facilities (201-203)
+        U9R058:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Nursing facilities/Skilled-nursing facilities (301)
+        U9R059:      Female: 65 years and over: Institutionalized population (101-106, 201-203, 301, 401-405): Other institutional facilities (401-405)
+        U9R060:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904)
+        U9R061:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): College/University student housing (501)
+        U9R062:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Military quarters (601-602)
+        U9R063:      Female: 65 years and over: Noninstitutionalized population (501, 601-602, 701-702, 704, 706, 801-802, 900-901, 903-904): Other noninstitutional facilities (701-702, 704, 706, 801-802, 900-901, 903-904)
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Jonathan Schroeder, David Van Riper, Steven Manson, Grace Cooper, Zachary Krause, Tracy Kugler, Tsu Zhu, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 21.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2026. 
+        http://doi.org/10.18128/D050.V21.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455

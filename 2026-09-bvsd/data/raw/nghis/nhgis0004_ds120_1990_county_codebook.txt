@@ -1,0 +1,212 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0004_ds120_1990_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             1990
+Geographic level: County (by State)
+Extent:           Alabama
+                  Arizona
+                  California
+                  Colorado
+                  Connecticut
+                  Florida
+                  Illinois
+                  Indiana
+                  Iowa
+                  Louisiana
+                  Massachusetts
+                  Michigan
+                  Minnesota
+                  New York
+                  North Carolina
+                  Oregon
+                  Pennsylvania
+                  Texas
+                  Utah
+                  Wisconsin
+Dataset:          1990 Census: STF 1 - 100% Data
+   NHGIS code:    1990_STF1
+   NHGIS ID:      ds120
+Breakdown(s):     Geographic Subarea:
+                     Total area (00)
+ 
+Tables:
+ 
+1. Sex by Age
+   Universe:    Persons of Hispanic Origin
+   Source code: NP13
+   NHGIS code:  ET5
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      State/US Abbreviation
+        ANRCA:       Alaska Native Regional Corporation Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land Code
+        RES_ONLYA:   American Indian Reservation [excluding trust lands] Code
+        TRUSTA:      American Indian Reservation [trust lands only] Code
+        AIANCC:      American Indian/Alaska Native Area Class Code
+        RES_TRSTA:   Reservation/Trust Lands Code
+        BLOCKA:      Block Code
+        BLCK_GRPA:   Block Group Code
+        TRACTA:      Census Tract Code
+        CD101A:      Congressional District (101st) Code
+        C_CITYA:     Consolidated City Code
+        CMSA:        Consolidated Metropolitan Statistical Area
+        COUNTY:      County Name
+        COUNTYA:     County Code
+        CTY_SUBA:    County Subdivision Code
+        COUSUBCC:    County Subdivision Class Code
+        DIVISIONA:   Division Code
+        MSA_CMSAA:   Metropolitan Statistical Area/Consolidated Metropolitan Statistical Area Code
+        PLACEA:      Place Code
+        PLACECC:     Place Class Code
+        PLACEDC:     Place Description Code
+        PMSAA:       Primary Metropolitan Statistical Area Code
+        REGIONA:     Region Code
+        STATE:       State Name
+        STATEA:      State Code
+        URBRURALA:   Urban/Rural Code
+        URB_AREAA:   Urban Area Code
+        CD103A:      Congressional District (103rd) Code
+        AREALAND:    Area (land)
+        AREAWAT:     Area (Water)
+        ANPSADPI:    Area Name/PSAD Term/Part Indicator
+        FUNCSTAT:    Functional Status Code
+        INTPTLAT:    Internal Point (latitude)
+        INTPTLNG:    Internal Point (longitude)
+        PSADC:       Political/Statistical Area Description Code
+ 
+Breakdown:
+    Geographic Subarea: Total area (00)
+ 
+    Table 1:     Sex by Age
+    Universe:    Persons of Hispanic Origin
+    Source code: NP13
+    NHGIS code:  ET5
+        ET5001:      Male >> Under 1 year
+        ET5002:      Male >> 1 and 2 years
+        ET5003:      Male >> 3 and 4 years
+        ET5004:      Male >> 5 years
+        ET5005:      Male >> 6 years
+        ET5006:      Male >> 7 to 9 years
+        ET5007:      Male >> 10 and 11 years
+        ET5008:      Male >> 12 and 13 years
+        ET5009:      Male >> 14 years
+        ET5010:      Male >> 15 years
+        ET5011:      Male >> 16 years
+        ET5012:      Male >> 17 years
+        ET5013:      Male >> 18 years
+        ET5014:      Male >> 19 years
+        ET5015:      Male >> 20 years
+        ET5016:      Male >> 21 years
+        ET5017:      Male >> 22 to 24 years
+        ET5018:      Male >> 25 to 29 years
+        ET5019:      Male >> 30 to 34 years
+        ET5020:      Male >> 35 to 39 years
+        ET5021:      Male >> 40 to 44 years
+        ET5022:      Male >> 45 to 49 years
+        ET5023:      Male >> 50 to 54 years
+        ET5024:      Male >> 55 to 59 years
+        ET5025:      Male >> 60 and 61 years
+        ET5026:      Male >> 62 to 64 years
+        ET5027:      Male >> 65 to 69 years
+        ET5028:      Male >> 70 to 74 years
+        ET5029:      Male >> 75 to 79 years
+        ET5030:      Male >> 80 to 84 years
+        ET5031:      Male >> 85 years and over
+        ET5032:      Female >> Under 1 year
+        ET5033:      Female >> 1 and 2 years
+        ET5034:      Female >> 3 and 4 years
+        ET5035:      Female >> 5 years
+        ET5036:      Female >> 6 years
+        ET5037:      Female >> 7 to 9 years
+        ET5038:      Female >> 10 and 11 years
+        ET5039:      Female >> 12 and 13 years
+        ET5040:      Female >> 14 years
+        ET5041:      Female >> 15 years
+        ET5042:      Female >> 16 years
+        ET5043:      Female >> 17 years
+        ET5044:      Female >> 18 years
+        ET5045:      Female >> 19 years
+        ET5046:      Female >> 20 years
+        ET5047:      Female >> 21 years
+        ET5048:      Female >> 22 to 24 years
+        ET5049:      Female >> 25 to 29 years
+        ET5050:      Female >> 30 to 34 years
+        ET5051:      Female >> 35 to 39 years
+        ET5052:      Female >> 40 to 44 years
+        ET5053:      Female >> 45 to 49 years
+        ET5054:      Female >> 50 to 54 years
+        ET5055:      Female >> 55 to 59 years
+        ET5056:      Female >> 60 and 61 years
+        ET5057:      Female >> 62 to 64 years
+        ET5058:      Female >> 65 to 69 years
+        ET5059:      Female >> 70 to 74 years
+        ET5060:      Female >> 75 to 79 years
+        ET5061:      Female >> 80 to 84 years
+        ET5062:      Female >> 85 years and over
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Jonathan Schroeder, David Van Riper, Steven Manson, Grace Cooper, Zachary Krause, Tracy Kugler, Tsu Zhu, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 21.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2026. 
+        http://doi.org/10.18128/D050.V21.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455

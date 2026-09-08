@@ -1,0 +1,280 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0004_ds146_2000_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             2000
+Geographic level: County (by State)
+Extent:           Alabama
+                  Arizona
+                  California
+                  Colorado
+                  Connecticut
+                  Florida
+                  Illinois
+                  Indiana
+                  Iowa
+                  Louisiana
+                  Massachusetts
+                  Michigan
+                  Minnesota
+                  New York
+                  North Carolina
+                  Oregon
+                  Pennsylvania
+                  Texas
+                  Utah
+                  Wisconsin
+Dataset:          2000 Census: SF 1a - 100% Data [Areas Larger Than Block Groups]
+   NHGIS code:    2000_SF1a
+   NHGIS ID:      ds146
+Breakdown(s):     Geographic Subarea:
+                     Total area (00)
+ 
+Tables:
+ 
+1. Population by Sex by Age
+   Universe:    Persons
+   Source code: NP012B
+   NHGIS code:  FMZ
+ 
+2. Population Under 20 Years by Sex by Age
+   Universe:    Persons Under 20 Years of Age
+   Source code: NP014C
+   NHGIS code:  FNG
+ 
+3. Population Under 18 Years in Group Quarters by Group Quarter Type by Age
+   Universe:    Persons Under 18 Years of Age in Group Quarters
+   Source code: NP029B
+   NHGIS code:  FQH
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      File Identification
+        REGIONA:     Region Code
+        DIVISIONA:   Division Code
+        STATE:       State Name
+        STATEA:      State Code
+        COUNTY:      County Name
+        COUNTYA:     County Code
+        CTY_SUBA:    County Subdivision Code
+        COUSUBCC:    FIPS County Subdivion Class Code
+        PLACEA:      Place Code
+        PLACECC:     FIPS Place Class Code
+        PLACEDC:     Place Description Code
+        TRACTA:      Census Tract Code
+        TRBL_CTA:    Tribal Census Tract Code
+        BLCK_GRPA:   Block Group Code
+        TRBL_BGA:    Tribal Block Group Code
+        C_CITYA:     Consolidated City Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land Code
+        RES_ONLYA:   American Indian Area/Alaska Native Area (Reservation or Statistical Entity Only) Code
+        TRUSTA:      American Indian Area (Off-Reservation Trust Land Only)/Hawaiian Home Land Code
+        AIANHHCC:    FIPS American Indian Area/Alaska Native Area/Hawaiian Home Land Class Code
+        AITSCE:      American Indian Tribal Subdivision (Census)
+        TRBL_SUBA:   Tribal Subdivision Code
+        ANRCA:       Alaska Native Regional Corporation Code
+        MSA_CMSAA:   Metropolitan Statistical Area/Consolidated Metropolitan Statistical Area Code
+        CMSA:        Consolidated Metropolitan Statistical Area
+        MACCI:       Metropolitan Area Central City Indicator
+        PMSAA:       Primary Metropolitan Statistical Area Code
+        NECMAA:      New England County Metropolitan Area Code
+        NECMACCI:    New England County Metropolitan Area Central City Indicator
+        URB_AREAA:   Urban Area Code
+        UATYPE:      Urban Area Type
+        CD106A:      Congressional District (106th) Code
+        CD108A:      Congressional District (108th) Code
+        CD109A:      Congressional District (109th) Code
+        ZIP3A:       3-Digit ZIP Code Tabulation Area Code
+        ZCTAA:       5-Digit ZIP Code Tabulation Area Code
+        AREALAND:    Area (Land)
+        AREAWATR:    Area (Water)
+        NAME:        Area Name-Legal/Statistical Area Description (LSAD) Term-Part Indicator
+        FUNCSTAT:    Functional Status Code
+        INTPTLAT:    Internal Point (Latitude)
+        INTPLON:     Internal Point (Longitude)
+        LSADC:       Legal/Statistical Area Description Code
+        MACC:        Metropolitan Area Central City
+        UACP:        Urban Area Central Place
+ 
+Breakdown:
+    Geographic Subarea: Total area (00)
+ 
+    Table 1:     Population by Sex by Age
+    Universe:    Persons
+    Source code: NP012B
+    NHGIS code:  FMZ
+        FMZ001:      Male >> Under 5 years
+        FMZ002:      Male >> 5 to 9 years
+        FMZ003:      Male >> 10 to 14 years
+        FMZ004:      Male >> 15 to 17 years
+        FMZ005:      Male >> 18 and 19 years
+        FMZ006:      Male >> 20 years
+        FMZ007:      Male >> 21 years
+        FMZ008:      Male >> 22 to 24 years
+        FMZ009:      Male >> 25 to 29 years
+        FMZ010:      Male >> 30 to 34 years
+        FMZ011:      Male >> 35 to 39 years
+        FMZ012:      Male >> 40 to 44 years
+        FMZ013:      Male >> 45 to 49 years
+        FMZ014:      Male >> 50 to 54 years
+        FMZ015:      Male >> 55 to 59 years
+        FMZ016:      Male >> 60 and 61 years
+        FMZ017:      Male >> 62 to 64 years
+        FMZ018:      Male >> 65 and 66 years
+        FMZ019:      Male >> 67 to 69 years
+        FMZ020:      Male >> 70 to 74 years
+        FMZ021:      Male >> 75 to 79 years
+        FMZ022:      Male >> 80 to 84 years
+        FMZ023:      Male >> 85 years and over
+        FMZ024:      Female >> Under 5 years
+        FMZ025:      Female >> 5 to 9 years
+        FMZ026:      Female >> 10 to 14 years
+        FMZ027:      Female >> 15 to 17 years
+        FMZ028:      Female >> 18 and 19 years
+        FMZ029:      Female >> 20 years
+        FMZ030:      Female >> 21 years
+        FMZ031:      Female >> 22 to 24 years
+        FMZ032:      Female >> 25 to 29 years
+        FMZ033:      Female >> 30 to 34 years
+        FMZ034:      Female >> 35 to 39 years
+        FMZ035:      Female >> 40 to 44 years
+        FMZ036:      Female >> 45 to 49 years
+        FMZ037:      Female >> 50 to 54 years
+        FMZ038:      Female >> 55 to 59 years
+        FMZ039:      Female >> 60 and 61 years
+        FMZ040:      Female >> 62 to 64 years
+        FMZ041:      Female >> 65 and 66 years
+        FMZ042:      Female >> 67 to 69 years
+        FMZ043:      Female >> 70 to 74 years
+        FMZ044:      Female >> 75 to 79 years
+        FMZ045:      Female >> 80 to 84 years
+        FMZ046:      Female >> 85 years and over
+ 
+    Table 2:     Population Under 20 Years by Sex by Age
+    Universe:    Persons Under 20 Years of Age
+    Source code: NP014C
+    NHGIS code:  FNG
+        FNG001:      Male >> Under 1 year
+        FNG002:      Male >> 1 year
+        FNG003:      Male >> 2 years
+        FNG004:      Male >> 3 years
+        FNG005:      Male >> 4 years
+        FNG006:      Male >> 5 years
+        FNG007:      Male >> 6 years
+        FNG008:      Male >> 7 years
+        FNG009:      Male >> 8 years
+        FNG010:      Male >> 9 years
+        FNG011:      Male >> 10 years
+        FNG012:      Male >> 11 years
+        FNG013:      Male >> 12 years
+        FNG014:      Male >> 13 years
+        FNG015:      Male >> 14 years
+        FNG016:      Male >> 15 years
+        FNG017:      Male >> 16 years
+        FNG018:      Male >> 17 years
+        FNG019:      Male >> 18 years
+        FNG020:      Male >> 19 years
+        FNG021:      Female >> Under 1 year
+        FNG022:      Female >> 1 year
+        FNG023:      Female >> 2 years
+        FNG024:      Female >> 3 years
+        FNG025:      Female >> 4 years
+        FNG026:      Female >> 5 years
+        FNG027:      Female >> 6 years
+        FNG028:      Female >> 7 years
+        FNG029:      Female >> 8 years
+        FNG030:      Female >> 9 years
+        FNG031:      Female >> 10 years
+        FNG032:      Female >> 11 years
+        FNG033:      Female >> 12 years
+        FNG034:      Female >> 13 years
+        FNG035:      Female >> 14 years
+        FNG036:      Female >> 15 years
+        FNG037:      Female >> 16 years
+        FNG038:      Female >> 17 years
+        FNG039:      Female >> 18 years
+        FNG040:      Female >> 19 years
+ 
+    Table 3:     Population Under 18 Years in Group Quarters by Group Quarter Type by Age
+    Universe:    Persons Under 18 Years of Age in Group Quarters
+    Source code: NP029B
+    NHGIS code:  FQH
+        FQH001:      Institutionalized >> Under 3 years
+        FQH002:      Institutionalized >> 3 and 4 years
+        FQH003:      Institutionalized >> 5 years
+        FQH004:      Institutionalized >> 6 to 11 years
+        FQH005:      Institutionalized >> 12 and 13 years
+        FQH006:      Institutionalized >> 14 years
+        FQH007:      Institutionalized >> 15 to 17 years
+        FQH008:      Noninstitutionalized >> Under 3 years
+        FQH009:      Noninstitutionalized >> 3 and 4 years
+        FQH010:      Noninstitutionalized >> 5 years
+        FQH011:      Noninstitutionalized >> 6 to 11 years
+        FQH012:      Noninstitutionalized >> 12 and 13 years
+        FQH013:      Noninstitutionalized >> 14 years
+        FQH014:      Noninstitutionalized >> 15 to 17 years
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Jonathan Schroeder, David Van Riper, Steven Manson, Grace Cooper, Zachary Krause, Tracy Kugler, Tsu Zhu, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 21.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2026. 
+        http://doi.org/10.18128/D050.V21.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455
