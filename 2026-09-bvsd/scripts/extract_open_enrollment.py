@@ -20,7 +20,11 @@ Layout of each PDF (one table per file):
       area, Open Enrollment out of area, % enrolled in neighborhood school
   * a district-total line sits in the first summary row, right block.
 
-Outputs (data/processed/):
+Inputs (data/raw/open-enrollment/):
+  <level>_<school_year>.pdf   one PDF per level x year (fetched once; kept as-is)
+  manifest.json               url, bytes, sha256 per PDF
+
+Outputs (data/processed/open-enrollment/):
   edgelist.csv          school_year, level, source, target, students, ...
   school_summary.csv    per school x year, the 8 right-block columns
   area_summary.csv      per attendance area x year, the 4 bottom-block rows
@@ -29,9 +33,10 @@ Outputs (data/processed/):
   provenance.csv        per file: url, sha256, matrix date stamp, grade line
   audit_report.md       reconciliation checks; errors reported, never fatal
 
-Usage:
-  python extract_matrices.py            # fetch (if missing) + parse + audit
-  python extract_matrices.py --refetch  # force re-download
+Usage (from 2026-09-bvsd/):
+  python scripts/extract_open_enrollment.py            # parse + audit (fetches only if a PDF is missing)
+  python scripts/extract_open_enrollment.py --refetch  # force re-download of every PDF
+Needs pandas, pdfplumber, tabulate.
 """
 from __future__ import annotations
 
@@ -49,9 +54,9 @@ import pdfplumber
 
 pd.options.display.max_columns = 100
 
-ROOT = Path(__file__).resolve().parent
-RAW = ROOT / "data" / "raw"
-OUT = ROOT / "data" / "processed"
+ROOT = Path(__file__).resolve().parents[1]          # 2026-09-bvsd/
+RAW = ROOT / "data" / "raw" / "open-enrollment"       # the PDFs + manifest.json
+OUT = ROOT / "data" / "processed" / "open-enrollment"  # tidy CSVs + audit report
 PAGE_URL = ("https://www.bvsd.org/departments/operational-services/"
             "planning-and-engineering")
 LEVELS = {"elem": "elementary", "middle": "middle", "high": "high"}
