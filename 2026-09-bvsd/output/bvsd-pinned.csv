@@ -54,6 +54,8 @@ county_hpi_multiple_since_1975,17.7
 price_income_index_base_year,2000
 price_income_ratio_boulder_latest,164
 price_income_ratio_peer_median_latest,140
+price_income_ratio_front_range_median_latest,151
+front_range_housing_counties,10
 price_income_ratio_latest_year,2024
 price_income_boulder_above_pct_of_peers,88
 bvcp_preservation_1977,4.58
