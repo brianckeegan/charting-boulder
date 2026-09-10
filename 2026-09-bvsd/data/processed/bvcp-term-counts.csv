@@ -1,0 +1,226 @@
+version,year,family,term,count,word_count
+1977,1977,Preservation,\bpreserv[a-z]*,32,22073
+1977,1977,Preservation,\bopen\s+space,55,22073
+1977,1977,Preservation,\bneighborhood character,1,22073
+1977,1977,Preservation,\bcommunity character,0,22073
+1977,1977,Preservation,\bhistoric character,1,22073
+1977,1977,Preservation,\brural character,0,22073
+1977,1977,Preservation,\bgrowth management,0,22073
+1977,1977,Preservation,\bcompatib[a-z]*,12,22073
+1977,1977,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,9,22073
+1977,1977,Children & schools,\bchild[a-z]*,4,22073
+1977,1977,Children & schools,\bschool[a-z]*,6,22073
+1977,1977,Children & schools,\bstudent[a-z]*,2,22073
+1977,1977,Children & schools,\byouth[a-z]*,0,22073
+1977,1977,Children & schools,\bplayground[a-z]*,0,22073
+1977,1977,Housing affordability,\bafford[a-z]*,0,22073
+1978,1978,Preservation,\bpreserv[a-z]*,32,36613
+1978,1978,Preservation,\bopen\s+space,68,36613
+1978,1978,Preservation,\bneighborhood character,1,36613
+1978,1978,Preservation,\bcommunity character,0,36613
+1978,1978,Preservation,\bhistoric character,1,36613
+1978,1978,Preservation,\brural character,0,36613
+1978,1978,Preservation,\bgrowth management,2,36613
+1978,1978,Preservation,\bcompatib[a-z]*,15,36613
+1978,1978,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,9,36613
+1978,1978,Children & schools,\bchild[a-z]*,4,36613
+1978,1978,Children & schools,\bschool[a-z]*,8,36613
+1978,1978,Children & schools,\bstudent[a-z]*,2,36613
+1978,1978,Children & schools,\byouth[a-z]*,0,36613
+1978,1978,Children & schools,\bplayground[a-z]*,0,36613
+1978,1978,Housing affordability,\bafford[a-z]*,0,36613
+1979,1979,Preservation,\bpreserv[a-z]*,31,40290
+1979,1979,Preservation,\bopen\s+space,64,40290
+1979,1979,Preservation,\bneighborhood character,1,40290
+1979,1979,Preservation,\bcommunity character,0,40290
+1979,1979,Preservation,\bhistoric character,1,40290
+1979,1979,Preservation,\brural character,0,40290
+1979,1979,Preservation,\bgrowth management,2,40290
+1979,1979,Preservation,\bcompatib[a-z]*,15,40290
+1979,1979,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,9,40290
+1979,1979,Children & schools,\bchild[a-z]*,4,40290
+1979,1979,Children & schools,\bschool[a-z]*,9,40290
+1979,1979,Children & schools,\bstudent[a-z]*,2,40290
+1979,1979,Children & schools,\byouth[a-z]*,0,40290
+1979,1979,Children & schools,\bplayground[a-z]*,1,40290
+1979,1979,Housing affordability,\bafford[a-z]*,0,40290
+1981,1981,Preservation,\bpreserv[a-z]*,50,50131
+1981,1981,Preservation,\bopen\s+space,75,50131
+1981,1981,Preservation,\bneighborhood character,1,50131
+1981,1981,Preservation,\bcommunity character,0,50131
+1981,1981,Preservation,\bhistoric character,1,50131
+1981,1981,Preservation,\brural character,0,50131
+1981,1981,Preservation,\bgrowth management,2,50131
+1981,1981,Preservation,\bcompatib[a-z]*,18,50131
+1981,1981,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,10,50131
+1981,1981,Children & schools,\bchild[a-z]*,10,50131
+1981,1981,Children & schools,\bschool[a-z]*,47,50131
+1981,1981,Children & schools,\bstudent[a-z]*,4,50131
+1981,1981,Children & schools,\byouth[a-z]*,4,50131
+1981,1981,Children & schools,\bplayground[a-z]*,19,50131
+1981,1981,Housing affordability,\bafford[a-z]*,1,50131
+1983,1983,Preservation,\bpreserv[a-z]*,59,52464
+1983,1983,Preservation,\bopen\s+space,78,52464
+1983,1983,Preservation,\bneighborhood character,1,52464
+1983,1983,Preservation,\bcommunity character,0,52464
+1983,1983,Preservation,\bhistoric character,3,52464
+1983,1983,Preservation,\brural character,0,52464
+1983,1983,Preservation,\bgrowth management,6,52464
+1983,1983,Preservation,\bcompatib[a-z]*,20,52464
+1983,1983,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,5,52464
+1983,1983,Children & schools,\bchild[a-z]*,9,52464
+1983,1983,Children & schools,\bschool[a-z]*,55,52464
+1983,1983,Children & schools,\bstudent[a-z]*,4,52464
+1983,1983,Children & schools,\byouth[a-z]*,4,52464
+1983,1983,Children & schools,\bplayground[a-z]*,15,52464
+1983,1983,Housing affordability,\bafford[a-z]*,6,52464
+1986,1986,Preservation,\bpreserv[a-z]*,69,52534
+1986,1986,Preservation,\bopen\s+space,77,52534
+1986,1986,Preservation,\bneighborhood character,1,52534
+1986,1986,Preservation,\bcommunity character,0,52534
+1986,1986,Preservation,\bhistoric character,3,52534
+1986,1986,Preservation,\brural character,0,52534
+1986,1986,Preservation,\bgrowth management,5,52534
+1986,1986,Preservation,\bcompatib[a-z]*,18,52534
+1986,1986,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,6,52534
+1986,1986,Children & schools,\bchild[a-z]*,10,52534
+1986,1986,Children & schools,\bschool[a-z]*,59,52534
+1986,1986,Children & schools,\bstudent[a-z]*,4,52534
+1986,1986,Children & schools,\byouth[a-z]*,6,52534
+1986,1986,Children & schools,\bplayground[a-z]*,17,52534
+1986,1986,Housing affordability,\bafford[a-z]*,6,52534
+1990,1990,Preservation,\bpreserv[a-z]*,55,54196
+1990,1990,Preservation,\bopen\s+space,80,54196
+1990,1990,Preservation,\bneighborhood character,0,54196
+1990,1990,Preservation,\bcommunity character,1,54196
+1990,1990,Preservation,\bhistoric character,3,54196
+1990,1990,Preservation,\brural character,0,54196
+1990,1990,Preservation,\bgrowth management,6,54196
+1990,1990,Preservation,\bcompatib[a-z]*,19,54196
+1990,1990,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,18,54196
+1990,1990,Children & schools,\bchild[a-z]*,32,54196
+1990,1990,Children & schools,\bschool[a-z]*,31,54196
+1990,1990,Children & schools,\bstudent[a-z]*,3,54196
+1990,1990,Children & schools,\byouth[a-z]*,14,54196
+1990,1990,Children & schools,\bplayground[a-z]*,3,54196
+1990,1990,Housing affordability,\bafford[a-z]*,15,54196
+1996,1996,Preservation,\bpreserv[a-z]*,119,61498
+1996,1996,Preservation,\bopen\s+space,81,61498
+1996,1996,Preservation,\bneighborhood character,4,61498
+1996,1996,Preservation,\bcommunity character,3,61498
+1996,1996,Preservation,\bhistoric character,1,61498
+1996,1996,Preservation,\brural character,2,61498
+1996,1996,Preservation,\bgrowth management,9,61498
+1996,1996,Preservation,\bcompatib[a-z]*,26,61498
+1996,1996,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,16,61498
+1996,1996,Children & schools,\bchild[a-z]*,23,61498
+1996,1996,Children & schools,\bschool[a-z]*,45,61498
+1996,1996,Children & schools,\bstudent[a-z]*,5,61498
+1996,1996,Children & schools,\byouth[a-z]*,9,61498
+1996,1996,Children & schools,\bplayground[a-z]*,4,61498
+1996,1996,Housing affordability,\bafford[a-z]*,43,61498
+2001,2001,Preservation,\bpreserv[a-z]*,178,70921
+2001,2001,Preservation,\bopen\s+space,115,70921
+2001,2001,Preservation,\bneighborhood character,7,70921
+2001,2001,Preservation,\bcommunity character,7,70921
+2001,2001,Preservation,\bhistoric character,3,70921
+2001,2001,Preservation,\brural character,2,70921
+2001,2001,Preservation,\bgrowth management,12,70921
+2001,2001,Preservation,\bcompatib[a-z]*,25,70921
+2001,2001,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,22,70921
+2001,2001,Children & schools,\bchild[a-z]*,28,70921
+2001,2001,Children & schools,\bschool[a-z]*,56,70921
+2001,2001,Children & schools,\bstudent[a-z]*,8,70921
+2001,2001,Children & schools,\byouth[a-z]*,13,70921
+2001,2001,Children & schools,\bplayground[a-z]*,13,70921
+2001,2001,Housing affordability,\bafford[a-z]*,65,70921
+2005,2005,Preservation,\bpreserv[a-z]*,169,53761
+2005,2005,Preservation,\bopen\s+space,94,53761
+2005,2005,Preservation,\bneighborhood character,7,53761
+2005,2005,Preservation,\bcommunity character,8,53761
+2005,2005,Preservation,\bhistoric character,2,53761
+2005,2005,Preservation,\brural character,3,53761
+2005,2005,Preservation,\bgrowth management,8,53761
+2005,2005,Preservation,\bcompatib[a-z]*,28,53761
+2005,2005,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,16,53761
+2005,2005,Children & schools,\bchild[a-z]*,18,53761
+2005,2005,Children & schools,\bschool[a-z]*,33,53761
+2005,2005,Children & schools,\bstudent[a-z]*,7,53761
+2005,2005,Children & schools,\byouth[a-z]*,10,53761
+2005,2005,Children & schools,\bplayground[a-z]*,6,53761
+2005,2005,Housing affordability,\bafford[a-z]*,49,53761
+2008,2008,Preservation,\bpreserv[a-z]*,168,57116
+2008,2008,Preservation,\bopen\s+space,94,57116
+2008,2008,Preservation,\bneighborhood character,7,57116
+2008,2008,Preservation,\bcommunity character,8,57116
+2008,2008,Preservation,\bhistoric character,2,57116
+2008,2008,Preservation,\brural character,3,57116
+2008,2008,Preservation,\bgrowth management,8,57116
+2008,2008,Preservation,\bcompatib[a-z]*,29,57116
+2008,2008,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,15,57116
+2008,2008,Children & schools,\bchild[a-z]*,17,57116
+2008,2008,Children & schools,\bschool[a-z]*,34,57116
+2008,2008,Children & schools,\bstudent[a-z]*,7,57116
+2008,2008,Children & schools,\byouth[a-z]*,11,57116
+2008,2008,Children & schools,\bplayground[a-z]*,2,57116
+2008,2008,Housing affordability,\bafford[a-z]*,51,57116
+2010,2010,Preservation,\bpreserv[a-z]*,127,36387
+2010,2010,Preservation,\bopen\s+space,56,36387
+2010,2010,Preservation,\bneighborhood character,7,36387
+2010,2010,Preservation,\bcommunity character,4,36387
+2010,2010,Preservation,\bhistoric character,0,36387
+2010,2010,Preservation,\brural character,2,36387
+2010,2010,Preservation,\bgrowth management,6,36387
+2010,2010,Preservation,\bcompatib[a-z]*,25,36387
+2010,2010,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,8,36387
+2010,2010,Children & schools,\bchild[a-z]*,10,36387
+2010,2010,Children & schools,\bschool[a-z]*,31,36387
+2010,2010,Children & schools,\bstudent[a-z]*,7,36387
+2010,2010,Children & schools,\byouth[a-z]*,4,36387
+2010,2010,Children & schools,\bplayground[a-z]*,2,36387
+2010,2010,Housing affordability,\bafford[a-z]*,34,36387
+2015,2015,Preservation,\bpreserv[a-z]*,145,40089
+2015,2015,Preservation,\bopen\s+space,58,40089
+2015,2015,Preservation,\bneighborhood character,9,40089
+2015,2015,Preservation,\bcommunity character,4,40089
+2015,2015,Preservation,\bhistoric character,0,40089
+2015,2015,Preservation,\brural character,4,40089
+2015,2015,Preservation,\bgrowth management,12,40089
+2015,2015,Preservation,\bcompatib[a-z]*,24,40089
+2015,2015,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,7,40089
+2015,2015,Children & schools,\bchild[a-z]*,6,40089
+2015,2015,Children & schools,\bschool[a-z]*,26,40089
+2015,2015,Children & schools,\bstudent[a-z]*,9,40089
+2015,2015,Children & schools,\byouth[a-z]*,5,40089
+2015,2015,Children & schools,\bplayground[a-z]*,0,40089
+2015,2015,Housing affordability,\bafford[a-z]*,57,40089
+2021,2021,Preservation,\bpreserv[a-z]*,161,54451
+2021,2021,Preservation,\bopen\s+space,90,54451
+2021,2021,Preservation,\bneighborhood character,9,54451
+2021,2021,Preservation,\bcommunity character,4,54451
+2021,2021,Preservation,\bhistoric character,0,54451
+2021,2021,Preservation,\brural character,4,54451
+2021,2021,Preservation,\bgrowth management,12,54451
+2021,2021,Preservation,\bcompatib[a-z]*,25,54451
+2021,2021,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,8,54451
+2021,2021,Children & schools,\bchild[a-z]*,8,54451
+2021,2021,Children & schools,\bschool[a-z]*,29,54451
+2021,2021,Children & schools,\bstudent[a-z]*,13,54451
+2021,2021,Children & schools,\byouth[a-z]*,7,54451
+2021,2021,Children & schools,\bplayground[a-z]*,1,54451
+2021,2021,Housing affordability,\bafford[a-z]*,59,54451
+2026 draft,2026,Preservation,\bpreserv[a-z]*,38,24951
+2026 draft,2026,Preservation,\bopen\s+space,34,24951
+2026 draft,2026,Preservation,\bneighborhood character,5,24951
+2026 draft,2026,Preservation,\bcommunity character,2,24951
+2026 draft,2026,Preservation,\bhistoric character,0,24951
+2026 draft,2026,Preservation,\brural character,4,24951
+2026 draft,2026,Preservation,\bgrowth management,2,24951
+2026 draft,2026,Preservation,\bcompatib[a-z]*,2,24951
+2026 draft,2026,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,5,24951
+2026 draft,2026,Children & schools,\bchild[a-z]*,7,24951
+2026 draft,2026,Children & schools,\bschool[a-z]*,16,24951
+2026 draft,2026,Children & schools,\bstudent[a-z]*,5,24951
+2026 draft,2026,Children & schools,\byouth[a-z]*,3,24951
+2026 draft,2026,Children & schools,\bplayground[a-z]*,2,24951
+2026 draft,2026,Housing affordability,\bafford[a-z]*,48,24951

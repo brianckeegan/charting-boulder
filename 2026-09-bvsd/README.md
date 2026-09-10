@@ -9,24 +9,26 @@ BVSD's Resilient Schools proposal (August 25, 2026): four elementary closures, a
 ## Layout
 ```
 2026-09-bvsd/
-├── BVSD.ipynb                     the canonical notebook for the column
+├── bvsd-retrieval.ipynb           fetch + tidy: data/raw -> data/processed (needs API keys)
+├── bvsd-analysis.ipynb            the notebook for the column: read -> visualize (no network)
 ├── appendix/                      earlier analyses, archived and still executable
 │   ├── enrollment-forecast.ipynb  SDO enrollment forecast to 2060 + open-enrollment dynamics
 │   └── peer-projection.ipynb      Boulder vs 25 peer cities, Hamilton–Perry to 2050
-├── scripts/
-│   ├── build_age_tables.py        NHGIS extracts -> data/processed/*-age-*.csv
-│   └── extract_open_enrollment.py BVSD open-enrollment PDFs -> data/processed/open-enrollment/
 ├── data/
 │   ├── raw/                       originals as downloaded; never edited
 │   │   ├── places.csv             registry of the 31 places (Boulder, county ring, peer basket)
 │   │   ├── sdo/                   State Demography Office, Vintage 2024
 │   │   ├── nhgis/                 IPUMS NHGIS extracts 0004 and 0005 (CSV + codebooks)
 │   │   ├── bvcp/                  15 editions of the comprehensive plan, Markdown
+│   │   ├── census/                decennial P12 and ACS answers, as the API returned them
+│   │   ├── fred/                  the 52 FRED series, as the API returned them
 │   │   └── open-enrollment/       30 BVSD "Enrollment Pattern Matrix" PDFs + manifest.json
-│   └── processed/                 tidy tables written by the scripts
+│   └── processed/                 tidy tables written by bvsd-retrieval.ipynb
 └── output/                        figures and CSVs (bvsd-*, forecast-*, peers-*)
 ```
-`BVSD.ipynb` is the only notebook a reader following the column's link needs to open. Everything it uses is a committed file except two live pulls: three house-price and income series from FRED, and one supplementary American Community Survey check from the Census API.
+The two notebooks split on one rule. `bvsd-retrieval.ipynb` may fetch, reshape, filter, join and check; it may not compute a measure the column reports. `bvsd-analysis.ipynb` reads `data/processed/` and does everything else — every percent change, ratio, projection and robustness test. It makes no network call and reads no API key, so a reader can run the argument end to end with nothing but the repository.
+
+A reader following the column's link needs only `bvsd-analysis.ipynb`.
 
 ## Data
 | Dataset | Source | Access | File |
@@ -36,11 +38,12 @@ BVSD's Resilient Schools proposal (August 25, 2026): four elementary closures, a
 | County household projections by type and householder age, 2010–**2050** | [Colorado State Demography Office](https://demography.dola.colorado.gov/assets/html/sdodata.html) | Committed XLSX | `data/raw/sdo/household-county.xlsx` |
 | Decennial census age tables, place and county, 1990 / 2000 / 2010 / 2020 | [IPUMS NHGIS](https://www.nhgis.org/) extracts nhgis0004 and nhgis0005 | Committed CSV + codebooks | `data/raw/nhgis/` |
 | Boulder Valley Comprehensive Plan, 15 editions 1977–2026 draft | [City of Boulder](https://bouldercolorado.gov/services/boulder-valley-comprehensive-plan); Markdown conversions from `2026-03-bvcp/plans/` | Committed Markdown | `data/raw/bvcp/` |
-| County house price index (1975–) and county median household income (1989–) for Boulder and the 25 peer counties | [FHFA All-Transactions HPI](https://www.fhfa.gov/data/hpi) and [Census SAIPE](https://www.census.gov/programs-surveys/saipe.html), both via [FRED](https://fred.stlouisfed.org/) (`ATNHPIUS{county}A`, `MHI{ST}{county}A052NCEN`) | API at runtime — needs `FRED_API_KEY` | (fetched in `BVSD.ipynb`) |
-| ACS 1-year population under 5 by sex, City of Boulder and three eligible peers, 2008–2024 | [U.S. Census Bureau](https://www.census.gov/programs-surveys/acs/) table B01001 | API at runtime — needs `CENSUS_API_KEY` | (fetched in `BVSD.ipynb`) |
+| County house price index (1975–) and county median household income (1989–) for Boulder and the 25 peer counties | [FHFA All-Transactions HPI](https://www.fhfa.gov/data/hpi) and [Census SAIPE](https://www.census.gov/programs-surveys/saipe.html), both via [FRED](https://fred.stlouisfed.org/) (`ATNHPIUS{county}A`, `MHI{ST}{county}A052NCEN`) | API, pulled by `bvsd-retrieval.ipynb` — needs `FRED_API_KEY` | `data/raw/fred/observations.json` |
+| ACS 1-year population under 5 by sex, City of Boulder and three eligible peers, 2008–2024 | [U.S. Census Bureau](https://www.census.gov/programs-surveys/acs/) table B01001 | API, pulled by `bvsd-retrieval.ipynb` — needs `CENSUS_API_KEY` | `data/raw/census/acs1-under5.json` |
 | BVSD Open Enrollment Pattern Matrices, 2016-17 to 2025-26 | [BVSD Planning and Engineering](https://www.bvsd.org/departments/operational-services/planning-and-engineering) | Committed PDFs + manifest (URL, bytes, sha256) | `data/raw/open-enrollment/` |
 | Place registry: Boulder, the Boulder County ring, and the 25-city similar-Boulder basket | Hand-curated; basket from `2025-06-population/similar-boulder.json` | Committed CSV | `data/raw/places.csv` |
-| District anchors: K-12 enrollment 2020-21, K-5 enrollment and capacity 2025-26, utilization, five-year loss | NCES CCD; BVSD Resilient Schools proposal | Hardcoded | `BVSD.ipynb` §2 |
+| National population by age, 2010 and 2020 | [U.S. Census Bureau](https://www.census.gov/data/developers.html) decennial table P12 (2010 SF1, 2020 DHC) | API, pulled by `bvsd-retrieval.ipynb` — needs `CENSUS_API_KEY` | `data/raw/census/national-p12-*.json` |
+| District anchors: K-12 enrollment 2020-21, K-5 enrollment and capacity 2025-26, utilization, five-year loss | NCES CCD; BVSD Resilient Schools proposal | Hardcoded | `bvsd-analysis.ipynb` §2 |
 
 The household projection stops at 2050 and is not extended by any model; every series that ends earlier than the others says so where it appears.
 
@@ -52,15 +55,28 @@ The BVCP corpus is 15 editions, not the 17 files in `2026-03-bvcp/plans/`. Two o
 
 Processed tables:
 
-| File | Built by | Contents |
-|---|---|---|
-| `data/processed/place-age-groups.csv` | `scripts/build_age_tables.py` | 31 places × 4 censuses × 19 age groups |
-| `data/processed/county-age-groups.csv` | `scripts/build_age_tables.py` | 28 counties × 4 censuses × 19 age groups (Broomfield from 2010) |
-| `data/processed/place-age-single.csv` | `scripts/build_age_tables.py` | 31 places, single years 0–19, 2000 / 2010 / 2020 |
-| `data/processed/open-enrollment/` | `scripts/extract_open_enrollment.py` | Tidy edgelist (attendance area → school), school, area and district summaries, name crosswalk, provenance, audit report |
+Every file below is written by `bvsd-retrieval.ipynb`, which prints a manifest of the lot in its
+last cell.
+
+| File | Contents |
+|---|---|
+| `data/processed/places.csv` | The place registry, validated: 31 places, FIPS widths and state agreement checked |
+| `data/processed/place-age-groups.csv` | 31 places × 4 censuses × 19 age groups |
+| `data/processed/county-age-groups.csv` | 28 counties × 4 censuses × 19 age groups (Broomfield from 2010) |
+| `data/processed/place-age-single.csv` | 31 places, single years 0–19, 2000 / 2010 / 2020 |
+| `data/processed/national-age-groups.csv` | National population by decennial P12 age row, 2010 and 2020 |
+| `data/processed/sdo-sya-bvsd.csv` | Boulder and Broomfield counties, single year of age, 1990–2060 |
+| `data/processed/sdo-components-bvsd.csv` | Births, deaths and net migration for the two counties, 1970–2060 |
+| `data/processed/sdo-households-bvsd.csv` | Households by type and householder age for the two counties, 2010–2050 |
+| `data/processed/acs-under5.csv` | ACS 1-year under-5 estimate and 90% margin, 4 cities × 16 years |
+| `data/processed/county-hpi.csv` | FHFA house price index, annual, 26 counties |
+| `data/processed/county-income.csv` | SAIPE median household income, annual, 26 counties |
+| `data/processed/bvcp-term-counts.csv` | One count per plan edition per keyword term, with the edition's word count |
+| `data/processed/open-enrollment/` | Tidy edgelist (attendance area → school), school, area and district summaries, name crosswalk, provenance, audit report |
 
 ## Notebooks
-- `BVSD.ipynb` — the canonical notebook. The district's own baseline; the peer comparison over two decades; the two divergent projections to 2060 and the gap between them; the shared mechanism behind falling births and rising housing cost; and the plan's own vocabulary across fifteen editions. Headline numbers are pinned to `output/bvsd-pinned.csv`.
+- `bvsd-retrieval.ipynb` — fetch and tidy. Reads `data/raw/`, calls the Census and FRED APIs, saves each API answer as returned under `data/raw/`, and writes every tidy table to `data/processed/`. It draws no chart and makes no argument. Needs both API keys; about five minutes end to end.
+- `bvsd-analysis.ipynb` — the notebook for the column. The district's own baseline; the peer comparison over two decades; the two divergent projections to 2060 and the gap between them; the shared mechanism behind falling births and rising housing cost; and the plan's own vocabulary across fifteen editions. Reads `data/processed/` only, with no network call and no API key. Headline numbers are pinned to `output/bvsd-pinned.csv`.
 - `appendix/enrollment-forecast.ipynb` — the fuller SDO-grounded enrollment forecast, four capture-ratio scenarios, post-consolidation utilization against the two-classes-per-grade rule, and ten years of open-enrollment matrices.
 - `appendix/peer-projection.ipynb` — the fuller peer analysis: observed counts for all 31 places, the Hamilton–Perry engine with its backtest and a three-vintage sensitivity, and two city-grain decompositions.
 
@@ -104,19 +120,22 @@ Births and housing cost move together:
 - The price-to-income ratio is a relative index, not a multiple of income. A value of 150 means prices grew half again as fast as median household income since 2000; it does not say a house costs 1.5 times a year's income.
 - The peer lines in the housing chart are counties, not cities. For several peers the county is far larger than the city the basket names, so the line describes a much bigger housing market than the city. Boulder is the unusual case where city, county and metropolitan area sit close together.
 - County median household income publishes no value for 1990, 1991, 1992, 1994 or 1996 in any county, which leaves three isolated years before the annual series becomes continuous in 1997. New Haven County's income stops in 2021, when Connecticut replaced counties with planning regions for federal statistics.
-- The plan-vocabulary counts are surface matches over converted text, and they count what the plan says rather than what it did. The three vocabularies are reported separately and never divided into each other: a ratio between two word lists is set by how many terms each list holds and how common those words are, so it measures the lists. The notebook prints a leave-one-out table showing how far each series moves when any single term is dropped. Two term choices carry weight: `famil*` is matched only where it is not part of "single-family" and the like, because 180 of its 343 occurrences are zoning vocabulary; and character is matched as a phrase rather than a stem, because the bare stem picks up 271 occurrences of "characteristics" and "characterized".
+- The plan-vocabulary counts are surface matches over converted text, and they count what the plan says rather than what it did. The three vocabularies are reported separately and never divided into each other: a ratio between two word lists is set by how many terms each list holds and how common those words are, so it measures the lists. The retrieval notebook counts one term at a time, and the analysis notebook prints a leave-one-out table showing how far each series moves when any single term is dropped. Two term choices carry weight: `famil*` is matched only where it is not part of "single-family" and the like, because 180 of its 343 occurrences are zoning vocabulary; and character is matched as a phrase rather than a stem, because the bare stem picks up 271 occurrences of "characteristics" and "characterized".
 - The enrollment matrices (appendix) count BVSD students only, so exits to charters outside the count, private school, or homeschool are invisible. Two of the thirty files fail the row or column reconciliation by one pupil.
-- The American Community Survey one-year file gives an annual reading of the City of Boulder's under-5 cohort, and the notebook pulls it, but it cannot referee the decennial finding. Boulder's margin of error runs 23% of the estimate at the median and the series swings between consecutive years by more than the decennial count moved across the whole 2010s. It is reported as a check that failed to resolve, not as corroboration. There is no 2020 release.
+- The American Community Survey one-year file gives an annual reading of the City of Boulder's under-5 cohort, and the retrieval notebook pulls it, but it cannot referee the decennial finding. Boulder's margin of error runs 23% of the estimate at the median and the series swings between consecutive years by more than the decennial count moved across the whole 2010s. It is reported as a check that failed to resolve, not as corroboration. There is no 2020 release.
 
 ## Reproduce
+The analysis notebook alone, from the committed tables. No key, no network:
 ```
-pip install pandas numpy matplotlib seaborn openpyxl requests jupyter   # BVSD.ipynb and build_age_tables.py
-pip install pdfplumber tabulate                                        # extract_open_enrollment.py only
-export FRED_API_KEY=...                    # free from https://fred.stlouisfed.org/docs/api/api_key.html
-export CENSUS_API_KEY=...                  # free from https://api.census.gov/data/key_signup.html
-python scripts/build_age_tables.py         # data/raw/nhgis -> data/processed
-python scripts/extract_open_enrollment.py  # data/raw/open-enrollment -> data/processed/open-enrollment
-jupyter nbconvert --to notebook --execute --inplace BVSD.ipynb
+pip install pandas numpy matplotlib seaborn jupyter
+jupyter nbconvert --to notebook --execute --inplace bvsd-analysis.ipynb
+```
+To rebuild the tables it reads as well:
+```
+pip install requests openpyxl pdfplumber tabulate
+export FRED_API_KEY=...      # free from https://fred.stlouisfed.org/docs/api/api_key.html
+export CENSUS_API_KEY=...    # free from https://api.census.gov/data/key_signup.html
+jupyter nbconvert --to notebook --execute --inplace bvsd-retrieval.ipynb
 ```
 Run everything from this directory; the appendix notebooks run from `appendix/`. NHGIS data are redistributed here under IPUMS's allowance for subsets that support a specific publication; cite IPUMS NHGIS, University of Minnesota, www.nhgis.org.
 
