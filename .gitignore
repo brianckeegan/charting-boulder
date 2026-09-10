@@ -102,3 +102,8 @@ qcew_*_raw/
 qcew_boulder_raw/
 
 census_api.json
+
+# Work in progress. The 2026-08-wildfire piece is not ready to publish, so the
+# whole directory stays out of the repository. Delete this rule when the piece
+# is ready, then add the directory in a commit of its own.
+/2026-08-wildfire/
