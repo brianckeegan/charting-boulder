@@ -28,6 +28,15 @@ sdo_front_range_median_10_17_change_2020_2050_pct,3.6
 sdo_colorado_less_boulder_10_17_change_2020_2050_pct,-0.6
 sdo_boulder_beats_front_range_buckets,1
 front_range_comparison_counties,10
+boulder_city_permits_per_1k_2010_2025,61.6
+peer_city_median_permits_per_1k_2010_2025,72.4
+ring_town_median_permits_per_1k_2010_2025,127.1
+boulder_city_1unit_share_pct,17.4
+peer_city_median_1unit_share_pct,29.2
+boulder_city_permit_rate_delta_per_1k,0.0
+peer_city_median_permit_rate_delta_per_1k,2.2
+erie_permits_per_1k_2010_2025,439.6
+boulder_county_over_city_permit_ratio,4.1
 acs_under5_median_moe_pct,23.0
 acs_under5_mean_abs_year_change,936
 decennial_under5_change_2010_2020,708

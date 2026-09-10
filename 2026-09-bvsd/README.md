@@ -21,6 +21,7 @@ BVSD's Resilient Schools proposal (August 25, 2026): four elementary closures, a
 │   │   ├── nhgis/                 IPUMS NHGIS extracts 0004 and 0005 (CSV + codebooks)
 │   │   ├── bvcp/                  15 editions of the comprehensive plan, Markdown
 │   │   ├── sedac/                 25 SEDAC/Hauer county SSP projection workbooks
+│   │   ├── bps/                   Census Building Permits Survey rows for the registry's places
 │   │   ├── census/                decennial P12 and ACS answers, as the API returned them
 │   │   ├── fred/                  the 52 FRED series, as the API returned them
 │   │   └── open-enrollment/       30 BVSD "Enrollment Pattern Matrix" PDFs + manifest.json
@@ -42,6 +43,8 @@ A reader following the column's link needs only `bvsd-analysis.ipynb`.
 | County house price index (1975–) and county median household income (1989–) for Boulder and the 25 peer counties | [FHFA All-Transactions HPI](https://www.fhfa.gov/data/hpi) and [Census SAIPE](https://www.census.gov/programs-surveys/saipe.html), both via [FRED](https://fred.stlouisfed.org/) (`ATNHPIUS{county}A`, `MHI{ST}{county}A052NCEN`) | API, pulled by `bvsd-retrieval.ipynb` — needs `FRED_API_KEY` | `data/raw/fred/observations.json` |
 | ACS 1-year population under 5 by sex, City of Boulder and three eligible peers, 2008–2024 | [U.S. Census Bureau](https://www.census.gov/programs-surveys/acs/) table B01001 | API, pulled by `bvsd-retrieval.ipynb` — needs `CENSUS_API_KEY` | `data/raw/census/acs1-under5.json` |
 | County population projections by age, sex and race under the five SSPs, 2020–2100 | [SEDAC](https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100) / [Hauer 2019](https://doi.org/10.17605/OSF.IO/9YNFC), published by CIESIN 2021 | Committed XLSX (25 workbooks, 96 MB) | `data/raw/sedac/` |
+| Housing units authorized by building permit, by place and structure size, 2010–2025 | [Census Building Permits Survey](https://www.census.gov/construction/bps/) place files | Downloaded by `bvsd-retrieval.ipynb`; the registry's rows kept | `data/raw/bps/place-permits-raw.csv` |
+| Housing units authorized by building permit, by county, 1990–2025 | Census BPS via [FRED](https://fred.stlouisfed.org/) (`BPPRIV{FIPS}`) | API, pulled by `bvsd-retrieval.ipynb` — needs `FRED_API_KEY` | `data/raw/fred/permit-observations.json` |
 | BVSD Open Enrollment Pattern Matrices, 2016-17 to 2025-26 | [BVSD Planning and Engineering](https://www.bvsd.org/departments/operational-services/planning-and-engineering) | Committed PDFs + manifest (URL, bytes, sha256) | `data/raw/open-enrollment/` |
 | Place registry: Boulder, the Boulder County ring, and the 25-city similar-Boulder basket | Hand-curated; basket from `2025-06-population/similar-boulder.json` | Committed CSV | `data/raw/places.csv` |
 | National population by age, 2010 and 2020 | [U.S. Census Bureau](https://www.census.gov/data/developers.html) decennial table P12 (2010 SF1, 2020 DHC) | API, pulled by `bvsd-retrieval.ipynb` — needs `CENSUS_API_KEY` | `data/raw/census/national-p12-*.json` |
@@ -78,6 +81,8 @@ last cell.
 | `data/processed/bvcp-term-counts.csv` | One count per plan edition per keyword term, with the edition's word count |
 | `data/processed/sedac-county-age-ssp.csv` | The 26 basket counties plus Broomfield × 18 age groups × 5 SSPs × 2020–2100 |
 | `data/processed/sedac-national-age-ssp.csv` | Every US county summed, same age groups, scenarios and years |
+| `data/processed/place-permits.csv` | 30 places × 16 years × 4 structure sizes, buildings and units |
+| `data/processed/county-permits.csv` | 41 counties, annual units authorized, 1990–2025 |
 | `data/processed/open-enrollment/` | Tidy edgelist (attendance area → school), school, area and district summaries, name crosswalk, provenance, audit report |
 
 ## Notebooks
@@ -114,6 +119,12 @@ The two futures diverge:
 - Carried through the district's own arithmetic, K-5 utilization of the post-consolidation system troughs at 72% in 2029 and reaches 75% by 2060 under the state's forecast; under the cohort projection it never falls below 97% and reaches 113%. The two differ by 38 percentage points of utilization on the same capacity.
 - The cohort projection also implies 22% more county residents by 2060 than the state's. Its extra children come with extra adults.
 
+The housing that got built was built outside the city:
+- The City of Boulder authorized 62 housing units per 1,000 of its 2010 residents between 2010 and 2025, against a peer-city median of 72. It ranks 15th of 25. Only 17% were 1-unit houses, against a peer median of 29%, ranking 16th of 25.
+- Boulder's annual permit rate in 2023–2025 is the same as its 2010–2012 rate to a tenth of a unit per thousand (+0.0). The median peer city rose 2.2 and the median Boulder County ring town rose 9.6.
+- Erie, eight miles away and in the same county, authorized 440 units per 1,000 residents, 86% of them houses, and raised its annual rate by 26.8 per thousand. Boulder County as a whole authorized 4.1 times what the City of Boulder did; at county grain Boulder reads 84 per 1,000 against a Front Range median of 127, which is unremarkable and about the wrong place.
+- Two coverage facts, both checked rather than assumed: Bloomington, Indiana files no separate place record because Monroe County reports as one jurisdiction, so it appears only in the county table; New Haven files a full sixteen years as a city even though FRED's New Haven County series ends in 2022.
+
 Births and housing cost move together:
 - Annual births in the two counties fell 20% between 2000 and 2024. Deaths overtake births in 2031. Net migration stays positive throughout, about +2,400 a year over 2015–2024 and higher in the forecast, so the counties keep importing adults while the child cohorts shrink.
 - The share of households with a child falls from 32.2% (2010) to 27.6% (2025) to 24.9% (2050), where the state's household projection ends.
@@ -130,6 +141,8 @@ The arrow chart's endpoints are exported for redrawing elsewhere: `output/bvsd-f
 - The cohort projection is not a forecast. It carries the 2010→2020 transition forward unchanged, including the 2000s birth echo moving through Boulder's schools, and it implies a substantially larger county. Hamilton–Perry is validated in the literature to roughly 15 years; 2060 is 40 years past the launch, and the backtest error (6.4% median absolute, at ten years) is a floor on uncertainty rather than a confidence interval.
 - The state forecast is not an observation either. Its post-2025 recovery rests on assumptions about fertility and migration. Presenting both is the point.
 - County is not district. Boulder County includes St. Vrain Valley territory and Broomfield is split; the capture ratio absorbs the overlap as a share, anchored on one K-12 count and one K-5 count.
+- Building permits are authorizations, not completions. A permit can lapse, and a large project can be permitted years before anyone lives in it. The Census imputes for jurisdictions that report fewer than twelve months in a year; the retrieval notebook prints how many place-years that affects. FRED's county `BPPRIV` series is titled "Structures" and carries units: the sixty-four Colorado county series sum to the Colorado "Units" series within a few percent.
+- Permit rates use the 2010 census population as the denominator, the start of the window, so a place that doubled does not divide a sixteen-year flow by its larger self. The 2020-based rate is carried in the same table.
 - The Front Range median is a region, not a set of matched places. Denver, Douglas and Weld grow from very different starting points and for very different reasons, so the median describes the corridor rather than any city like Boulder. The peer-city basket is the matched comparison; the Front Range is the geographic one, and they answer different questions.
 - In the SDO series, 2020 is an estimate and 2050 a forecast of the same vintage, so that window mixes a measured base with a modelled end. The SDO's 2020 estimate for Boulder County is within 0.06% of the census count.
 - The SEDAC projections are not a prediction and are not endorsed here. They are controlled to national SSP totals and distributed to counties from historical trends; Hauer's own documentation warns that a small early error compounds over the horizon, and Striessnig et al. (2019) and Jiang et al. (2020) hold the method better suited to shorter periods than 2100. They appear because they are the only source that projects the peer counties on the same basis as Boulder, and because their disagreement with the state forecast is itself the finding. Nothing in this folder adjudicates between them.
