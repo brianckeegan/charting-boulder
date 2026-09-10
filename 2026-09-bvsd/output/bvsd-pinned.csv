@@ -31,7 +31,11 @@ households_with_kids_share_2025_pct,27.6
 households_with_kids_share_2050_pct,24.9
 household_series_last_year,2050
 county_hpi_multiple_since_1975,17.7
-price_vs_income_multiple_since_1989,2.5
+price_income_index_base_year,2000
+price_income_ratio_boulder_latest,164
+price_income_ratio_peer_median_latest,140
+price_income_ratio_latest_year,2024
+price_income_boulder_above_pct_of_peers,88
 bvcp_preservation_to_families_ratio,8.1
 bvcp_ratio_pre_2001,13.7
 bvcp_ratio_2001_onward,6.4
