@@ -20,7 +20,6 @@ BVSD's Resilient Schools proposal (August 25, 2026): four elementary closures, a
 │   │   ├── sdo/                   State Demography Office, Vintage 2024
 │   │   ├── nhgis/                 IPUMS NHGIS extracts 0004 and 0005 (CSV + codebooks)
 │   │   ├── bvcp/                  15 editions of the comprehensive plan, Markdown
-│   │   ├── sedac/                 25 SEDAC/Hauer county SSP projection workbooks
 │   │   ├── bps/                   Census Building Permits Survey rows for the registry's places
 │   │   ├── census/                decennial P12 and ACS answers, as the API returned them
 │   │   ├── fred/                  the 52 FRED series, as the API returned them
@@ -42,7 +41,6 @@ A reader following the column's link needs only `bvsd-analysis.ipynb`.
 | Boulder Valley Comprehensive Plan, 15 editions 1977–2026 draft | [City of Boulder](https://bouldercolorado.gov/services/boulder-valley-comprehensive-plan); Markdown conversions from `2026-03-bvcp/plans/` | Committed Markdown | `data/raw/bvcp/` |
 | County house price index (1975–) and county median household income (1989–) for Boulder and the 25 peer counties | [FHFA All-Transactions HPI](https://www.fhfa.gov/data/hpi) and [Census SAIPE](https://www.census.gov/programs-surveys/saipe.html), both via [FRED](https://fred.stlouisfed.org/) (`ATNHPIUS{county}A`, `MHI{ST}{county}A052NCEN`) | API, pulled by `bvsd-retrieval.ipynb` — needs `FRED_API_KEY` | `data/raw/fred/observations.json` |
 | ACS 1-year population under 5 by sex, City of Boulder and three eligible peers, 2008–2024 | [U.S. Census Bureau](https://www.census.gov/programs-surveys/acs/) table B01001 | API, pulled by `bvsd-retrieval.ipynb` — needs `CENSUS_API_KEY` | `data/raw/census/acs1-under5.json` |
-| County population projections by age, sex and race under the five SSPs, 2020–2100 | [SEDAC](https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100) / [Hauer 2019](https://doi.org/10.17605/OSF.IO/9YNFC), published by CIESIN 2021 | Committed XLSX (25 workbooks, 96 MB) | `data/raw/sedac/` |
 | Housing units authorized by building permit, by place and structure size, 2010–2025 | [Census Building Permits Survey](https://www.census.gov/construction/bps/) place files | Downloaded by `bvsd-retrieval.ipynb`; the registry's rows kept | `data/raw/bps/place-permits-raw.csv` |
 | Housing units by place, 2010 and 2020 censuses | [U.S. Census Bureau](https://www.census.gov/data/developers.html) table H1 (2010 SF1, 2020 DHC) | API, pulled by `bvsd-retrieval.ipynb` — needs `CENSUS_API_KEY` | `data/processed/place-housing-units.csv` |
 | Housing units authorized by building permit, by county, 1990–2025 | Census BPS via [FRED](https://fred.stlouisfed.org/) (`BPPRIV{FIPS}`) | API, pulled by `bvsd-retrieval.ipynb` — needs `FRED_API_KEY` | `data/raw/fred/permit-observations.json` |
@@ -56,8 +54,6 @@ The household projection stops at 2050 and is not extended by any model; every s
 NHGIS tables used: 1990 STF1 NP11 (age), 2000 SF1 NP012B (sex by age) and NP014C (sex by single year under 20), 2010 SF1 PCT12 and 2020 DHC PCT12 (sex by single year). The 1990 and 2000 tables have no single years above 19, so the finest grain shared by all four censuses is 19 age groups (0–4 … 15–17, 18–19, 20–24 … 85+). Extract nhgis0004 also shipped 1990 NP13 (Hispanic-origin sex by age) and 2020 P15/P18; those files are kept as shipped but not used.
 
 Every price and income figure is county grain. The Boulder MSA is Boulder County and contains no other county, so the two labels describe one territory; the peer basket has no metropolitan series that matches it, and every peer county has both a price and an income series. `similar-boulder.json` gives Iowa City the county code 19087 while naming Johnson County; 19087 is Henry County and Johnson County is 19103. Both `places.csv` and `2025-06-population/similar-boulder.json` now carry the corrected code, and no finding in this folder depended on it.
-
-The SEDAC projections are counties only, in 18 five-year age groups whose 15–19 band cannot be split. So `bvsd-fig3` alone drops to county grain for both of its panels and to six coarser buckets (0–4, 5–14, 15–24, 25–44, 45–64, 65+) that the census, Census table P12 and SEDAC can each build exactly. Boulder County is not the City of Boulder: its under-5 fall over the 2010s is 16.0%, against the city's 17.9%. SEDAC's 2020 column is a projection whose inputs predate the 2020 census, and it sits +5.7% above the census count for Boulder County and between −3.9% and +8.4% across the 26 counties, so every rate of change is computed inside one source and never across two.
 
 The BVCP corpus is 15 editions, not the 17 files in `2026-03-bvcp/plans/`. Two of those files (`bvcp-1978.md`, `bvcp-1978-apr.md`) are printings of the 1977 plan's 1978 revision and share 79–83% of their sentences with each other; both are left out.
 
@@ -80,8 +76,6 @@ last cell.
 | `data/processed/county-hpi.csv` | FHFA house price index, annual, 26 counties |
 | `data/processed/county-income.csv` | SAIPE median household income, annual, 26 counties |
 | `data/processed/bvcp-term-counts.csv` | One count per plan edition per keyword term, with the edition's word count |
-| `data/processed/sedac-county-age-ssp.csv` | The 26 basket counties plus Broomfield × 18 age groups × 5 SSPs × 2020–2100 |
-| `data/processed/sedac-national-age-ssp.csv` | Every US county summed, same age groups, scenarios and years |
 | `data/processed/place-permits.csv` | 30 places × 16 years × 4 structure sizes, buildings and units |
 | `data/processed/place-housing-units.csv` | Housing units counted in each place, 2010 and 2020 censuses (table H1) |
 | `data/processed/county-permits.csv` | 41 counties, annual units authorized, 1990–2025 |
@@ -107,14 +101,9 @@ The peer comparison splits in two:
 - The reversal is shared, but Boulder's position is not. Reading that same ratio for all 26 cities across three censuses, 23 of 26 gained through the 2000s and lost through the 2010s. Boulder went from 99 to 111 to 72, one of six cities that fell from at or above replacement in 2010 to below it in 2020, and only Mountain View and Provo fell further in the 2010s — both from much higher starting points.
 - The annual survey cannot settle the question either way. Boulder's ACS 1-year under-5 estimate moves by 936 children between consecutive years on average, against a decennial 2010→2020 change of 708, and carries the widest margin of error of the four eligible cities.
 
-The state's own forecast concentrates the loss in the school ages:
+The state's own forecast concentrates the loss in the school ages (`bvsd-fig3`, county grain — Boulder County is about three times the City of Boulder):
 - Over 2020–2050 the SDO has Boulder County's 5–9 cohort falling 7.8% and its 10–17 cohort falling 17.2%, while the Front Range median rises 6.0% and 3.6% and Colorado less Boulder moves +2.3% and −0.6%. Boulder County beats the Front Range median in one of ten age buckets and Colorado less Boulder in two.
 - The comparison group is the 10 counties of the [Front Range Urban Corridor](https://en.wikipedia.org/wiki/Front_Range_Urban_Corridor) other than Boulder with at least 50,000 residents in 2020: El Paso, Denver, Arapahoe, Jefferson, Adams, Douglas, Larimer, Weld, Pueblo and Broomfield. Fremont, Elbert, Teller, Park, Clear Creek and Gilpin are dropped because a single age bucket in a county of a few thousand swings tens of points on a few hundred people. Every county in the group is printed in the notebook, so no county disappears into the median.
-
-A third forecast disagrees with the state's, and the county comparison shows it:
-- At county grain, Boulder County's under-5 count fell 16.0% over the 2010s against a peer-county median of −6.5% and −8.9% nationally, and its 65+ rose 73.6% against +45.3% and +38.6%. The city pattern survives the change of unit.
-- The SEDAC/Hauer SSP projections, the only source that projects Boulder's peers on the same basis as Boulder, put Boulder County's 5–14 cohort **up 58.0%** between 2020 and 2050 under the middle pathway. The Colorado State Demography Office, on the same county over the same window, puts it **down 12.0%**. The two published forecasts are 70 points apart on the cohort the closures are about.
-- The SEDAC scenarios alone span 85 points at 5–14 (+17.7% under SSP3 to +102.6% under SSP5), so the pathway chosen moves the answer more than the cohort does. Which forecast a decision rests on is therefore a choice, not a reading.
 
 The two futures diverge:
 - The state forecasts 52,276 resident 5–17s in the two counties by 2060. A Hamilton–Perry projection carrying the 2010→2020 cohort transition forward gives 72,898, a gap of 39%. The gap runs from +17% at 2030 to +39% at 2060, narrowing into 2050 where the state's assumed birth rebound lands.
@@ -149,7 +138,6 @@ The arrow chart's endpoints are exported for redrawing elsewhere: `output/bvsd-f
 - The counted change in housing stock between the two censuses, divided by units permitted in the same years, is a consistency check and not a completion rate. It runs from 28% to 258% across the basket, because annexation, conversion and demolition all move a counted stock without appearing in the permit series, and the two censuses count units on their own definition. No single place's value carries weight.
 - The Front Range median is a region, not a set of matched places. Denver, Douglas and Weld grow from very different starting points and for very different reasons, so the median describes the corridor rather than any city like Boulder. The peer-city basket is the matched comparison; the Front Range is the geographic one, and they answer different questions.
 - In the SDO series, 2020 is an estimate and 2050 a forecast of the same vintage, so that window mixes a measured base with a modelled end. The SDO's 2020 estimate for Boulder County is within 0.06% of the census count.
-- The SEDAC projections are not a prediction and are not endorsed here. They are controlled to national SSP totals and distributed to counties from historical trends; Hauer's own documentation warns that a small early error compounds over the horizon, and Striessnig et al. (2019) and Jiang et al. (2020) hold the method better suited to shorter periods than 2100. They appear because they are the only source that projects the peer counties on the same basis as Boulder, and because their disagreement with the state forecast is itself the finding. Nothing in this folder adjudicates between them.
 - Post-plan capacity is back-derived from the proposal's 68→75% and 9,732 K-5 pupils; the district has not published a school-by-school capacity table.
 - The April 2020 enumeration sent college students home, which moves the 18–24 counts feeding the 2010→2020 cohort ratios for Boulder and much of its peer basket.
 - Annexation sits inside the cohort ratios: ring towns and Sunbelt peers that grew by annexing family subdivisions show cohort gains that are not migration into a fixed area.
