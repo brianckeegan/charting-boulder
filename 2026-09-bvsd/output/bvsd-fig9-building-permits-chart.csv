@@ -1,0 +1,9 @@
+name,houses_per_1k,larger_per_1k,total_per_1k,house_share_pct,delta_per_1k,unit
+Erie,376.6,63.0,439.6,85.7,26.8,city
+Lafayette,58.0,86.5,144.4,40.1,-7.6,city
+Longmont,45.3,81.7,127.1,35.7,9.6,city
+Front Range counties (median),,126.5,126.5,,3.6,county
+Superior,60.8,50.4,111.2,54.7,16.7,city
+Louisville,65.0,30.0,95.0,68.4,1.4,city
+peer city median,21.1,51.3,72.4,29.2,2.2,city
+Boulder,10.7,50.9,61.6,17.4,0.0,city
