@@ -69,7 +69,7 @@ last cell.
 | `data/processed/county-age-groups.csv` | 28 counties × 4 censuses × 19 age groups (Broomfield from 2010) |
 | `data/processed/place-age-single.csv` | 31 places, single years 0–19, 2000 / 2010 / 2020 |
 | `data/processed/national-age-groups.csv` | National population by decennial P12 age row, 2010 and 2020 |
-| `data/processed/sdo-sya-bvsd.csv` | Boulder and Broomfield counties, single year of age, 1990–2060 |
+| `data/processed/sdo-sya-frontrange.csv` | The 17 Colorado counties of the Front Range Urban Corridor plus the published Colorado row, single year of age, 1990–2060 |
 | `data/processed/sdo-components-bvsd.csv` | Births, deaths and net migration for the two counties, 1970–2060 |
 | `data/processed/sdo-households-bvsd.csv` | Households by type and householder age for the two counties, 2010–2050 |
 | `data/processed/acs-under5.csv` | ACS 1-year under-5 estimate and 90% margin, 4 cities × 16 years |
@@ -100,6 +100,10 @@ The peer comparison splits in two:
 - The reversal is shared, but Boulder's position is not. Reading that same ratio for all 26 cities across three censuses, 23 of 26 gained through the 2000s and lost through the 2010s. Boulder went from 99 to 111 to 72, one of six cities that fell from at or above replacement in 2010 to below it in 2020, and only Mountain View and Provo fell further in the 2010s — both from much higher starting points.
 - The annual survey cannot settle the question either way. Boulder's ACS 1-year under-5 estimate moves by 936 children between consecutive years on average, against a decennial 2010→2020 change of 708, and carries the widest margin of error of the four eligible cities.
 
+The state's own forecast concentrates the loss in the school ages:
+- Over 2020–2050 the SDO has Boulder County's 5–9 cohort falling 7.8% and its 10–17 cohort falling 17.2%, while the Front Range median rises 6.0% and 3.6% and Colorado moves +1.8% and −1.5%. Boulder County beats the Front Range median in one of ten age buckets.
+- The comparison group is the 10 counties of the [Front Range Urban Corridor](https://en.wikipedia.org/wiki/Front_Range_Urban_Corridor) other than Boulder with at least 50,000 residents in 2020: El Paso, Denver, Arapahoe, Jefferson, Adams, Douglas, Larimer, Weld, Pueblo and Broomfield. Fremont, Elbert, Teller, Park, Clear Creek and Gilpin are dropped because a single age bucket in a county of a few thousand swings tens of points on a few hundred people. Every county in the group is printed in the notebook, so no county disappears into the median.
+
 A third forecast disagrees with the state's, and the county comparison shows it:
 - At county grain, Boulder County's under-5 count fell 16.0% over the 2010s against a peer-county median of −6.5% and −8.9% nationally, and its 65+ rose 73.6% against +45.3% and +38.6%. The city pattern survives the change of unit.
 - The SEDAC/Hauer SSP projections, the only source that projects Boulder's peers on the same basis as Boulder, put Boulder County's 5–14 cohort **up 58.0%** between 2020 and 2050 under the middle pathway. The Colorado State Demography Office, on the same county over the same window, puts it **down 12.0%**. The two published forecasts are 70 points apart on the cohort the closures are about.
@@ -126,6 +130,8 @@ The arrow chart's endpoints are exported for redrawing elsewhere: `output/bvsd-f
 - The cohort projection is not a forecast. It carries the 2010→2020 transition forward unchanged, including the 2000s birth echo moving through Boulder's schools, and it implies a substantially larger county. Hamilton–Perry is validated in the literature to roughly 15 years; 2060 is 40 years past the launch, and the backtest error (6.4% median absolute, at ten years) is a floor on uncertainty rather than a confidence interval.
 - The state forecast is not an observation either. Its post-2025 recovery rests on assumptions about fertility and migration. Presenting both is the point.
 - County is not district. Boulder County includes St. Vrain Valley territory and Broomfield is split; the capture ratio absorbs the overlap as a share, anchored on one K-12 count and one K-5 count.
+- The Front Range median is a region, not a set of matched places. Denver, Douglas and Weld grow from very different starting points and for very different reasons, so the median describes the corridor rather than any city like Boulder. The peer-city basket is the matched comparison; the Front Range is the geographic one, and they answer different questions.
+- In the SDO series, 2020 is an estimate and 2050 a forecast of the same vintage, so that window mixes a measured base with a modelled end. The SDO's 2020 estimate for Boulder County is within 0.06% of the census count.
 - The SEDAC projections are not a prediction and are not endorsed here. They are controlled to national SSP totals and distributed to counties from historical trends; Hauer's own documentation warns that a small early error compounds over the horizon, and Striessnig et al. (2019) and Jiang et al. (2020) hold the method better suited to shorter periods than 2100. They appear because they are the only source that projects the peer counties on the same basis as Boulder, and because their disagreement with the state forecast is itself the finding. Nothing in this folder adjudicates between them.
 - Post-plan capacity is back-derived from the proposal's 68→75% and 9,732 K-5 pupils; the district has not published a school-by-school capacity table.
 - The April 2020 enumeration sent college students home, which moves the 18–24 counts feeding the 2010→2020 cohort ratios for Boulder and much of its peer basket.

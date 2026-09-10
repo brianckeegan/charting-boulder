@@ -21,6 +21,13 @@ sdo_5_14_change_2020_2050_pct,-12.0
 sedac_ssp2_5_14_change_2020_2050_pct,58.0
 sedac_5_14_change_2020_2050_range_pct,17.7 to 102.6
 forecast_disagreement_5_14_points,70.0
+sdo_boulder_county_5_9_change_2020_2050_pct,-7.8
+sdo_boulder_county_10_17_change_2020_2050_pct,-17.2
+sdo_front_range_median_5_9_change_2020_2050_pct,6.0
+sdo_front_range_median_10_17_change_2020_2050_pct,3.6
+sdo_colorado_10_17_change_2020_2050_pct,-1.5
+sdo_boulder_beats_front_range_buckets,1
+front_range_comparison_counties,10
 acs_under5_median_moe_pct,23.0
 acs_under5_mean_abs_year_change,936
 decennial_under5_change_2010_2020,708
