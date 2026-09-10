@@ -101,7 +101,7 @@ The peer comparison splits in two:
 - The annual survey cannot settle the question either way. Boulder's ACS 1-year under-5 estimate moves by 936 children between consecutive years on average, against a decennial 2010→2020 change of 708, and carries the widest margin of error of the four eligible cities.
 
 The state's own forecast concentrates the loss in the school ages:
-- Over 2020–2050 the SDO has Boulder County's 5–9 cohort falling 7.8% and its 10–17 cohort falling 17.2%, while the Front Range median rises 6.0% and 3.6% and Colorado moves +1.8% and −1.5%. Boulder County beats the Front Range median in one of ten age buckets.
+- Over 2020–2050 the SDO has Boulder County's 5–9 cohort falling 7.8% and its 10–17 cohort falling 17.2%, while the Front Range median rises 6.0% and 3.6% and Colorado less Boulder moves +2.3% and −0.6%. Boulder County beats the Front Range median in one of ten age buckets and Colorado less Boulder in two.
 - The comparison group is the 10 counties of the [Front Range Urban Corridor](https://en.wikipedia.org/wiki/Front_Range_Urban_Corridor) other than Boulder with at least 50,000 residents in 2020: El Paso, Denver, Arapahoe, Jefferson, Adams, Douglas, Larimer, Weld, Pueblo and Broomfield. Fremont, Elbert, Teller, Park, Clear Creek and Gilpin are dropped because a single age bucket in a county of a few thousand swings tens of points on a few hundred people. Every county in the group is printed in the notebook, so no county disappears into the median.
 
 A third forecast disagrees with the state's, and the county comparison shows it:
