@@ -26,7 +26,7 @@ BVSD's Resilient Schools proposal (August 25, 2026): four elementary closures, a
 │   └── processed/                 tidy tables written by the scripts
 └── output/                        figures and CSVs (bvsd-*, forecast-*, peers-*)
 ```
-`BVSD.ipynb` is the only notebook a reader following the column's link needs to open. Everything it uses is a committed file except the three house-price and income series, which it pulls live from FRED.
+`BVSD.ipynb` is the only notebook a reader following the column's link needs to open. Everything it uses is a committed file except two live pulls: three house-price and income series from FRED, and one supplementary American Community Survey check from the Census API.
 
 ## Data
 | Dataset | Source | Access | File |
@@ -37,6 +37,7 @@ BVSD's Resilient Schools proposal (August 25, 2026): four elementary closures, a
 | Decennial census age tables, place and county, 1990 / 2000 / 2010 / 2020 | [IPUMS NHGIS](https://www.nhgis.org/) extracts nhgis0004 and nhgis0005 | Committed CSV + codebooks | `data/raw/nhgis/` |
 | Boulder Valley Comprehensive Plan, 15 editions 1977–2026 draft | [City of Boulder](https://bouldercolorado.gov/services/boulder-valley-comprehensive-plan); Markdown conversions from `2026-03-bvcp/plans/` | Committed Markdown | `data/raw/bvcp/` |
 | Boulder County house price index (1975–), Boulder MSA house price index (1978–), Boulder County median household income (1989–) | [FRED](https://fred.stlouisfed.org/) series `ATNHPIUS08013A`, `ATNHPIUS14500Q`, `MHICO08013A052NCEN` | API at runtime — needs `FRED_API_KEY` | (fetched in `BVSD.ipynb`) |
+| ACS 1-year population under 5 by sex, City of Boulder and three eligible peers, 2008–2024 | [U.S. Census Bureau](https://www.census.gov/programs-surveys/acs/) table B01001 | API at runtime — needs `CENSUS_API_KEY` | (fetched in `BVSD.ipynb`) |
 | BVSD Open Enrollment Pattern Matrices, 2016-17 to 2025-26 | [BVSD Planning and Engineering](https://www.bvsd.org/departments/operational-services/planning-and-engineering) | Committed PDFs + manifest (URL, bytes, sha256) | `data/raw/open-enrollment/` |
 | Place registry: Boulder, the Boulder County ring, and the 25-city similar-Boulder basket | Hand-curated; basket from `2025-06-population/similar-boulder.json` | Committed CSV | `data/raw/places.csv` |
 | District anchors: K-12 enrollment 2020-21, K-5 enrollment and capacity 2025-26, utilization, five-year loss | NCES CCD; BVSD Resilient Schools proposal | Hardcoded | `BVSD.ipynb` §2 |
@@ -71,6 +72,7 @@ The peer comparison splits in two:
 - Boulder's school-age (5–17) count rose 17.4% between 2010 and 2020, above the peer median of +10.8%. The cohort already in the schools grew faster in Boulder than in the median peer.
 - Boulder's under-5 count fell 17.9% over the same decade against a peer median of −4.8%, steeper than 84% of peers. Children aged 0–9 in 2020 were 14.7% below what Boulder's own 2010 child ratios imply for its 2020 adults, more negative than 92% of peers.
 - In 2020 the City of Boulder had 72 children aged 0–4 per 100 aged 10–14. Madison had 116 and Cambridge 142.
+- The annual survey cannot settle the question either way. Boulder's ACS 1-year under-5 estimate moves by 936 children between consecutive years on average, against a decennial 2010→2020 change of 708, and carries the widest margin of error of the four eligible cities.
 
 The two futures diverge:
 - The state forecasts 52,276 resident 5–17s in the two counties by 2060. A Hamilton–Perry projection carrying the 2010→2020 cohort transition forward gives 72,898, a gap of 39%. The gap runs from +17% at 2030 to +39% at 2060, narrowing into 2050 where the state's assumed birth rebound lands.
@@ -96,13 +98,14 @@ Births and housing cost move together:
 - Sexes are pooled in the child ratios (the 1990 table has no sex split), and 5–17 is prorated from 15–19 using each place's 2020 share. The Hamilton–Perry K-5 cohort takes the 5–9 group plus a fifth of the 10–14 group.
 - The plan-vocabulary counts are surface matches over converted text. "Open space" is 38% of the preservation count and carries a Boulder-specific administrative meaning alongside its plain one; "affordable housing" also belongs to the housing vocabulary of the 2026-03 piece, so the two families are not disjoint.
 - The enrollment matrices (appendix) count BVSD students only, so exits to charters outside the count, private school, or homeschool are invisible. Two of the thirty files fail the row or column reconciliation by one pupil.
-- The American Community Survey one-year file would give an annual rather than decennial reading of the City of Boulder's under-5 cohort. It is not used: the Census API requires a key.
+- The American Community Survey one-year file gives an annual reading of the City of Boulder's under-5 cohort, and the notebook pulls it, but it cannot referee the decennial finding. Boulder's margin of error runs 23% of the estimate at the median and the series swings between consecutive years by more than the decennial count moved across the whole 2010s. It is reported as a check that failed to resolve, not as corroboration. There is no 2020 release.
 
 ## Reproduce
 ```
 pip install pandas numpy matplotlib seaborn openpyxl requests jupyter   # BVSD.ipynb and build_age_tables.py
 pip install pdfplumber tabulate                                        # extract_open_enrollment.py only
 export FRED_API_KEY=...                    # free from https://fred.stlouisfed.org/docs/api/api_key.html
+export CENSUS_API_KEY=...                  # free from https://api.census.gov/data/key_signup.html
 python scripts/build_age_tables.py         # data/raw/nhgis -> data/processed
 python scripts/extract_open_enrollment.py  # data/raw/open-enrollment -> data/processed/open-enrollment
 jupyter nbconvert --to notebook --execute --inplace BVSD.ipynb

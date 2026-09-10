@@ -14,6 +14,9 @@ boulder_under5_steeper_than_pct_of_peers,84
 boulder_0_9_vs_implied_2020_pct,-14.7
 boulder_0_9_gap_steeper_than_pct_of_peers,92
 boulder_0_4_per_100_of_10_14_2020,72
+acs_under5_median_moe_pct,23.0
+acs_under5_mean_abs_year_change,936
+decennial_under5_change_2010_2020,708
 backtest_median_abs_error_pct,6.4
 fork_5_17_sdo_2060,52276
 fork_5_17_hp_2060,72898
