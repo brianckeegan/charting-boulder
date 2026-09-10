@@ -117,6 +117,8 @@ Births and housing cost move together:
 - Measured consistently at county grain, house price per dollar of median household income stood at 164 in Boulder County in 2024 against a base of 100 in 2000. The peer median is 140, and only three of the 25 peer counties sit above Boulder.
 - Across fifteen editions of the comprehensive plan, three vocabularies move differently, measured per 1,000 words. Preservation language rises from 4.6 in 1977 to a peak of 6.4 in 2015 and falls to 3.5 in the 2026 draft. Children-and-schools language is flat for fifty years: 1.0 in 1977, a peak of 2.0 in 2001, and 1.5 in 2026. Housing-affordability language starts at zero, passes children and schools in 2015, and reaches 1.9 by 2026. The plan learned to talk about housing cost. It did not learn to talk about children.
 
+The arrow chart's endpoints are exported for redrawing elsewhere: `output/bvsd-fig5-pipeline-arrows.csv` is one row per city with both coordinate pairs, and `output/bvsd-fig5-pipeline-arrows-long.csv` is the same numbers with one row per arrow endpoint, the shape a connected scatter plot wants.
+
 (Headline figures are pinned in the final section of each notebook: `output/bvsd-pinned.csv`, `output/forecast-pinned.csv`, `output/peers-pinned.csv`.)
 
 ## Limitations
