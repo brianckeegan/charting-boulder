@@ -37,6 +37,10 @@ boulder_city_permit_rate_delta_per_1k,0.0
 peer_city_median_permit_rate_delta_per_1k,2.2
 erie_permits_per_1k_2010_2025,439.6
 boulder_county_over_city_permit_ratio,4.1
+boulder_city_permits_per_1k_stock,138.0
+peer_city_median_permits_per_1k_stock,173.5
+ring_town_median_permits_per_1k_stock,313.1
+front_range_county_median_permits_per_1k,126.5
 acs_under5_median_moe_pct,23.0
 acs_under5_mean_abs_year_change,936
 decennial_under5_change_2010_2020,708
