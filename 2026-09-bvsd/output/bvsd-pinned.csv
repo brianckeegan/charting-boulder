@@ -14,6 +14,13 @@ boulder_under5_steeper_than_pct_of_peers,84
 boulder_0_9_vs_implied_2020_pct,-14.7
 boulder_0_9_gap_steeper_than_pct_of_peers,92
 boulder_0_4_per_100_of_10_14_2020,72
+boulder_county_under5_change_2010_2020_pct,-16.0
+boulder_county_5_14_change_2010_2020_pct,1.2
+sedac_ssp2_2020_vs_census_boulder_county_pct,5.7
+sdo_5_14_change_2020_2050_pct,-12.0
+sedac_ssp2_5_14_change_2020_2050_pct,58.0
+sedac_5_14_change_2020_2050_range_pct,17.7 to 102.6
+forecast_disagreement_5_14_points,70.0
 acs_under5_median_moe_pct,23.0
 acs_under5_mean_abs_year_change,936
 decennial_under5_change_2010_2020,708
