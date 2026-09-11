@@ -12,7 +12,7 @@ Upstream of the 2026 BVCP update cycle and durable conversations about land use,
 | BVCP plan versions, 1977–2026 draft | [City of Boulder Comprehensive Planning](https://bouldercolorado.gov/services/boulder-valley-comprehensive-plan) and archived historical PDFs | Derived Markdown committed to `corpus/`; source PDFs documented in this README but not committed (size) | `corpus/BVCP YYYY Mmm.md` (×17) |
 | Voyage-4-large document embeddings | [Voyage AI](https://docs.voyageai.com/) `voyage-4-large` (1024-dim) | API at runtime — requires `VOYAGE_API_KEY` env var | Cached in `cache/voyage4large_chunk_embeddings.pkl` |
 
-The seventeen plan versions and their nominal dates:
+The eighteen plan versions and their nominal dates:
 
 | Year | File |
 |---|---|
@@ -33,10 +33,11 @@ The seventeen plan versions and their nominal dates:
 | 2015 | `BVCP 2015.md` |
 | 2021 | `BVCP 2021 Mar.md` |
 | 2026 Draft | `BVCP 2026 Mar.md` |
+| 2026 (Aug, approved) | `bvcp-2026-aug.md` |
 
 ### Corpus retrieval
 
-The PDFs of each historic BVCP version were collected from the City of Boulder's comprehensive-planning archive, scanned-document holdings, and adjacent municipal archives. They were converted to Markdown via Datalab and other PDF-to-Markdown tools, then placed in `corpus/`. The committed Markdown files are the canonical inputs to both notebooks; the source PDFs are not committed (they are large and reproducible from the Markdown plus the public archive).
+The PDFs of each historic BVCP version were collected from the City of Boulder's comprehensive-planning archive, scanned-document holdings, and adjacent municipal archives. They were converted to Markdown via Datalab and other PDF-to-Markdown tools, then placed in `corpus/`. The approved 2026 plan (`bvcp-2026-aug.md`) was converted from the city's approval document (Word) by mapping its paragraph styles onto the same heading, list, quote and table forms; the notebooks in this folder still read the March draft, and `2026-09-bvsd` reads the approved edition in its place. The committed Markdown files are the canonical inputs to both notebooks; the source PDFs are not committed (they are large and reproducible from the Markdown plus the public archive).
 
 ## Notebooks
 - `bvcp-corpus-analysis.ipynb` — four-movement computational reading: (1) vocabulary trajectories, modal-verb commitment vs. aspiration, and TF-IDF distinctiveness; (2) document architecture, section inventories, and policy-numbering density; (3) sentence-level carryover and longest-surviving passages; (4) semantic drift via TF-IDF cosine similarity, NMF topic structure, and section-level theme drift.

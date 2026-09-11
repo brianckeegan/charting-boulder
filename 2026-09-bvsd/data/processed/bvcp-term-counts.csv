@@ -209,18 +209,18 @@ version,year,family,term,count,word_count
 2021,2021,Children & schools,\byouth[a-z]*,7,54451
 2021,2021,Children & schools,\bplayground[a-z]*,1,54451
 2021,2021,Housing affordability,\bafford[a-z]*,59,54451
-2026 draft,2026,Preservation,\bpreserv[a-z]*,38,24951
-2026 draft,2026,Preservation,\bopen\s+space,34,24951
-2026 draft,2026,Preservation,\bneighborhood character,5,24951
-2026 draft,2026,Preservation,\bcommunity character,2,24951
-2026 draft,2026,Preservation,\bhistoric character,0,24951
-2026 draft,2026,Preservation,\brural character,4,24951
-2026 draft,2026,Preservation,\bgrowth management,2,24951
-2026 draft,2026,Preservation,\bcompatib[a-z]*,2,24951
-2026 draft,2026,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,5,24951
-2026 draft,2026,Children & schools,\bchild[a-z]*,7,24951
-2026 draft,2026,Children & schools,\bschool[a-z]*,16,24951
-2026 draft,2026,Children & schools,\bstudent[a-z]*,5,24951
-2026 draft,2026,Children & schools,\byouth[a-z]*,3,24951
-2026 draft,2026,Children & schools,\bplayground[a-z]*,2,24951
-2026 draft,2026,Housing affordability,\bafford[a-z]*,48,24951
+2026,2026,Preservation,\bpreserv[a-z]*,61,28154
+2026,2026,Preservation,\bopen\s+space,58,28154
+2026,2026,Preservation,\bneighborhood character,0,28154
+2026,2026,Preservation,\bcommunity character,3,28154
+2026,2026,Preservation,\bhistoric character,0,28154
+2026,2026,Preservation,\brural character,6,28154
+2026,2026,Preservation,\bgrowth management,0,28154
+2026,2026,Preservation,\bcompatib[a-z]*,3,28154
+2026,2026,Children & schools,(?<!single-)(?<!single )(?<!multi-)(?<!multi )(?<!multiple-)(?<!multiple )(?<!two-)(?<!two )\bfamil[a-z]*,8,28154
+2026,2026,Children & schools,\bchild[a-z]*,6,28154
+2026,2026,Children & schools,\bschool[a-z]*,19,28154
+2026,2026,Children & schools,\bstudent[a-z]*,7,28154
+2026,2026,Children & schools,\byouth[a-z]*,2,28154
+2026,2026,Children & schools,\bplayground[a-z]*,2,28154
+2026,2026,Housing affordability,\bafford[a-z]*,42,28154
