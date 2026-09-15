@@ -1,0 +1,4 @@
+from_year,to_year,repeat_endorsers,repeat_sided,same_side_share
+2019,2021,134,125,0.712
+2021,2025,112,97,0.9484536082474226
+2025,2026,54,44,0.7272727272727273
