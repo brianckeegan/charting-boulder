@@ -382,7 +382,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2015,Suzanne Jones,e00552,person,,,False,False,False,Endorsers
 2015,Suzanne Jones,e00676,person,,,False,False,False,Endorsers
 2015,Suzanne Jones,e00726,person,,,True,True,False,Endorsers
-2015,Suzanne Jones,e00804,person,,,False,True,False,Endorsers
+2015,Suzanne Jones,e00804,person,,former,False,True,False,Endorsers
 2015,Suzanne Jones,e00880,person,,former,False,True,False,Endorsers
 2015,Suzanne Jones,e00962,person,,current,True,True,False,Endorsers
 2015,Suzanne Jones,e00967,person,,current,False,True,False,Endorsers
@@ -887,7 +887,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2019,Bob Yates,e01089,person,,,False,False,False,Bob's Backers
 2019,Bob Yates,e01092,person,,,False,False,False,Bob's Backers
 2019,Bob Yates,e01095,person,,former,True,True,False,Bob's Backers
-2019,Bob Yates,e01100,person,,,False,True,False,Bob's Backers
+2019,Bob Yates,e01100,person,,current,False,True,False,Bob's Backers
 2019,Bob Yates,e01102,person,,,False,False,False,Bob's Backers
 2019,Bob Yates,e01103,person,,,False,False,False,Bob's Backers
 2019,Bob Yates,e01107,person,,,False,False,False,Bob's Backers
@@ -970,7 +970,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2019,Bob Yates,e01319,person,,,False,False,False,Bob's Backers
 2019,Bob Yates,e01326,person,,,False,False,False,Bob's Backers
 2019,Bob Yates,e01327,person,,,False,False,False,Bob's Backers
-2019,Bob Yates,e01329,person,,,False,False,False,Bob's Backers
+2019,Bob Yates,e01329,person,,current,False,True,False,Bob's Backers
 2019,Bob Yates,e01330,person,,,False,False,False,Bob's Backers
 2019,Bob Yates,e01334,person,,,False,False,False,Bob's Backers
 2019,Bob Yates,e01336,person,,,False,False,False,Bob's Backers
@@ -1449,9 +1449,9 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2019,Rachel Friend,e00786,person,,former,True,True,False,Elected Officials / Candidates / Board Members*
 2019,Rachel Friend,e00786,person,,former,True,True,False,All Endorsements
 2019,Rachel Friend,e00794,person,,,False,False,False,All Endorsements
-2019,Rachel Friend,e00804,person,,,False,True,False,Elected Officials / Candidates / Board Members*
-2019,Rachel Friend,e00804,person,,,False,True,False,Featured Endorsements
-2019,Rachel Friend,e00804,person,,,False,True,False,All Endorsements
+2019,Rachel Friend,e00804,person,,current,False,True,False,Elected Officials / Candidates / Board Members*
+2019,Rachel Friend,e00804,person,,current,False,True,False,Featured Endorsements
+2019,Rachel Friend,e00804,person,,current,False,True,False,All Endorsements
 2019,Rachel Friend,e00830,person,,,False,False,False,All Endorsements
 2019,Rachel Friend,e00851,person,,,False,False,False,All Endorsements
 2019,Rachel Friend,e00852,person,,,False,False,False,All Endorsements
@@ -1523,7 +1523,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2019,Rachel Friend,e01596,person,,,False,False,False,All Endorsements
 2019,Rachel Friend,e01602,person,,,False,False,False,All Endorsements
 2019,Rachel Friend,e01606,person,,current,False,True,False,Elected Officials / Candidates / Board Members*
-2019,Rachel Friend,e01606,person,,,False,True,False,All Endorsements
+2019,Rachel Friend,e01606,person,,current,False,True,False,All Endorsements
 2019,Rachel Friend,e01618,person,,,False,False,False,All Endorsements
 2019,Rachel Friend,e01626,person,,current,False,True,False,Elected Officials / Candidates / Board Members*
 2019,Rachel Friend,e01626,person,,current,False,True,False,All Endorsements
@@ -1743,7 +1743,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2021,Lauren Folkerts,e01483,person,,,False,False,True,Add Your Name to the List of Endorsers
 2021,Lauren Folkerts,e01513,person,,,False,False,False,Add Your Name to the List of Endorsers
 2021,Lauren Folkerts,e01581,person,,,False,False,False,Add Your Name to the List of Endorsers
-2021,Lauren Folkerts,e01606,person,,,False,True,False,Add Your Name to the List of Endorsers
+2021,Lauren Folkerts,e01606,person,,current,False,True,False,Add Your Name to the List of Endorsers
 2021,Lauren Folkerts,e01626,person,,current,False,True,False,Add Your Name to the List of Endorsers
 2021,Lauren Folkerts,e01786,person,,,False,False,False,Add Your Name to the List of Endorsers
 2021,Lauren Folkerts,e01794,person,,,False,False,True,Add Your Name to the List of Endorsers
@@ -2146,7 +2146,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2021,Tara Winer,e01249,person,,,False,False,False,Endorsers in Our Community
 2021,Tara Winer,e01255,person,,former,True,True,False,Endorsements by Elected Officials
 2021,Tara Winer,e01255,person,,former,True,True,False,Awards
-2021,Tara Winer,e01329,person,,current,False,False,False,Endorsements by Elected Officials
+2021,Tara Winer,e01329,person,,current,False,True,False,Endorsements by Elected Officials
 2021,Tara Winer,e01331,person,,,False,False,False,Endorsers in Our Community
 2021,Tara Winer,e01341,person,,,False,False,False,Endorsers in Our Community
 2021,Tara Winer,e01344,person,,,False,False,False,Endorsers in Our Community
@@ -2398,7 +2398,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2023,Tara Winer,e00782,person,,,False,False,False,Endorsers in Our Community
 2023,Tara Winer,e00784,person,,,False,False,False,Endorsers in Our Community
 2023,Tara Winer,e00792,person,,,False,False,False,Endorsers in Our Community
-2023,Tara Winer,e00804,person,,,False,True,False,Endorsements by Elected Officials
+2023,Tara Winer,e00804,person,,current,False,True,False,Endorsements by Elected Officials
 2023,Tara Winer,e00811,person,,,False,False,False,Endorsers in Our Community
 2023,Tara Winer,e00830,person,,,False,False,False,Endorsers in Our Community
 2023,Tara Winer,e00831,person,,,False,False,False,Endorsers in Our Community
@@ -2812,7 +2812,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2025,Mark Wallach,e00097,person,,,False,False,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00098,person,,,False,False,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00100,person,,former,True,True,False,some of my enthusiastic supporters
-2025,Mark Wallach,e00103,person,,,True,True,False,some of my enthusiastic supporters
+2025,Mark Wallach,e00103,person,,former,True,True,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00106,person,,,False,False,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00117,person,,current,True,True,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00121,person,,,False,False,False,some of my enthusiastic supporters
@@ -2878,7 +2878,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2025,Mark Wallach,e00777,person,,,False,False,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00782,person,,,False,False,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00792,person,,,False,False,False,some of my enthusiastic supporters
-2025,Mark Wallach,e00804,person,,,False,True,False,some of my enthusiastic supporters
+2025,Mark Wallach,e00804,person,,former,False,True,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00804,person,,former,False,True,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00811,person,,,False,False,False,some of my enthusiastic supporters
 2025,Mark Wallach,e00831,person,,,False,False,False,some of my enthusiastic supporters
@@ -3316,7 +3316,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2025,Rob Kaplan,e00702,person,,current,True,True,False,Rob's Endorsers
 2025,Rob Kaplan,e00741,person,,current,False,True,False,Rob's Endorsers
 2025,Rob Kaplan,e00792,person,,,False,False,False,Community Endorsers
-2025,Rob Kaplan,e00804,person,,,False,True,False,Rob's Endorsers
+2025,Rob Kaplan,e00804,person,,former,False,True,False,Rob's Endorsers
 2025,Rob Kaplan,e00858,person,,current,False,True,True,Rob's Endorsers
 2025,Rob Kaplan,e00890,person,,,False,False,True,Community Endorsers
 2025,Rob Kaplan,e00959,person,,,False,False,True,Community Endorsers
@@ -3332,7 +3332,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2025,Rob Kaplan,e01062,person,,former,True,True,False,Community Endorsers
 2025,Rob Kaplan,e01073,person,,current,True,True,False,Rob's Endorsers
 2025,Rob Kaplan,e01079,person,,,False,False,False,Community Endorsers
-2025,Rob Kaplan,e01100,person,,,False,True,False,Rob's Endorsers
+2025,Rob Kaplan,e01100,person,,current,False,True,False,Rob's Endorsers
 2025,Rob Kaplan,e01113,person,,current,True,True,False,Rob's Endorsers
 2025,Rob Kaplan,e01170,person,,,False,False,False,Community Endorsers
 2025,Rob Kaplan,e01218,person,,,False,False,False,Community Endorsers
@@ -3500,7 +3500,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2026,Jill Grano,e00761,person,,,False,False,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e00771,person,,,False,False,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e00773,person,,,False,False,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
-2026,Jill Grano,e00804,person,,,False,True,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
+2026,Jill Grano,e00804,person,,former,False,True,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e00812,person,,,False,False,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e00827,person,,current,False,False,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e00837,person,,,False,False,True,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
@@ -3522,7 +3522,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2026,Jill Grano,e01260,person,,former,False,True,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e01292,person,,,True,True,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e01303,person,,,False,False,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
-2026,Jill Grano,e01332,person,,current,False,False,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
+2026,Jill Grano,e01332,person,,current,False,True,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e01366,person,,,False,False,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e01383,person,,,False,True,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
 2026,Jill Grano,e01417,person,,,False,False,False,I am grateful to have endorsements from so many Boulder residents across the political spectrum . I would love to add your name to the list!
@@ -3556,8 +3556,8 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2026,Ryan Schuchard,e00028,person,,,True,True,True,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e00043,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e00082,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
-2026,Ryan Schuchard,e00103,person,,,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
-2026,Ryan Schuchard,e00117,person,,former,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
+2026,Ryan Schuchard,e00103,person,,current,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
+2026,Ryan Schuchard,e00117,person,,current,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
 2026,Ryan Schuchard,e00152,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e00218,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e00232,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
@@ -3593,11 +3593,11 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2026,Ryan Schuchard,e01073,person,,current,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
 2026,Ryan Schuchard,e01077,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e01094,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
-2026,Ryan Schuchard,e01113,person,,former,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
+2026,Ryan Schuchard,e01113,person,,current,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
 2026,Ryan Schuchard,e01134,person,,former,False,True,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e01156,person,,,False,False,True,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e01164,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
-2026,Ryan Schuchard,e01189,person,,former,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
+2026,Ryan Schuchard,e01189,person,,current,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
 2026,Ryan Schuchard,e01194,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e01201,person,,,False,False,True,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e01214,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
@@ -3614,7 +3614,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2026,Ryan Schuchard,e01606,person,,former,False,True,False,BOULDER CITY COUNCIL COLLEAGUES
 2026,Ryan Schuchard,e01626,person,,current,False,True,False,BOULDER CITY COUNCIL COLLEAGUES
 2026,Ryan Schuchard,e01691,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
-2026,Ryan Schuchard,e01739,person,,former,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
+2026,Ryan Schuchard,e01739,person,,current,True,True,False,BOULDER CITY COUNCIL COLLEAGUES
 2026,Ryan Schuchard,e01762,person,,,False,False,False,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e01794,person,,,False,False,True,OTHER CURRENT AND FORMER ELECTED OFFICIALS
 2026,Ryan Schuchard,e01803,person,,current,False,True,False,BOULDER CITY COUNCIL COLLEAGUES
@@ -3668,7 +3668,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2026,Tina Marquis,e00137,person,,current,False,True,True,Endorsements
 2026,Tina Marquis,e00167,person,,former,False,True,False,Endorsements
 2026,Tina Marquis,e00185,person,,former,True,True,False,Endorsements
-2026,Tina Marquis,e00204,person,,,False,False,False,Endorsements
+2026,Tina Marquis,e00204,person,,current,False,True,False,Endorsements
 2026,Tina Marquis,e00205,person,,,False,False,False,Endorsements
 2026,Tina Marquis,e00379,person,,,False,False,False,Endorsements
 2026,Tina Marquis,e00406,person,,,False,False,True,Endorsements
@@ -3693,7 +3693,7 @@ year,candidate_sov,node_id,endorser_type,org_type,office_status_at_endorsement,h
 2026,Tina Marquis,e01182,person,,,False,False,False,Endorsements
 2026,Tina Marquis,e01214,person,,,False,False,False,Endorsements
 2026,Tina Marquis,e01331,person,,,False,False,False,Endorsements
-2026,Tina Marquis,e01332,person,,current,False,False,False,Endorsements
+2026,Tina Marquis,e01332,person,,current,False,True,False,Endorsements
 2026,Tina Marquis,e01374,person,,current,False,True,False,Endorsements
 2026,Tina Marquis,e01452,person,,,False,False,False,Endorsements
 2026,Tina Marquis,e01492,person,,current,True,True,False,Endorsements
