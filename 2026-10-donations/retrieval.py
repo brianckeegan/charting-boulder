@@ -108,23 +108,58 @@ camp["contest"] = [cmap[(r.year, r.candidate)].contest if (r.year, r.candidate) 
 camp["votes"] = [cmap[(r.year, r.candidate)].votes if (r.year, r.candidate) in cmap else "" for r in camp.itertuples()]
 camp["elected"] = [cmap[(r.year, r.candidate)].elected if (r.year, r.candidate) in cmap else "" for r in camp.itertuples()]
 
-# ----------------------------------------------------------------------------- group slates (parsed.csv) -> slate labels
+# ----------------------------------------------------------------------------- group slates -> slate labels
+# Two sources, unioned: the positions read from the captured slate pages (parsed.csv, unchecked) and the checked
+# cells of the reference charts (endorsements/reference/cells.csv, Eric Budd's comparison charts 2021-2025).
 parsed = pd.read_csv(ARCH / "endorsements" / "guides" / "parsed.csv", dtype=str).fillna("")
 parsed["year"] = parsed.year.astype(int)
-slates = parsed[(parsed.level == "city") & parsed.contest.isin(["council", "mayor"]) & parsed.position.isin(["endorse", "rank-1", "rank-2"])]
-slates = slates[["year", "group", "contest", "choice", "position", "reported_by"]].drop_duplicates()
+POS = ["endorse", "rank-1", "rank-2"]
+s1 = parsed[(parsed.level == "city") & parsed.contest.isin(["council", "mayor"]) & parsed.position.isin(POS)]
+s1 = s1[["year", "group", "contest", "choice", "position", "reported_by"]].assign(source="parsed")
+ref = pd.read_csv(ARCH / "endorsements" / "reference" / "cells.csv", dtype=str).fillna("")
+ref["year"] = ref.year.astype(int)
+s2 = ref[ref.position.isin(POS)][["year", "group", "contest", "choice", "position"]].assign(reported_by="eric_budd_chart", source="reference")
+slates = pd.concat([s1, s2]).drop_duplicates(["year", "group", "contest", "choice"], keep="first")
 slates.to_csv(PROC / "group-slates.csv", index=False)
-# side labels: A = the PLAN-Boulder County slate (growth-skeptic), B = the Better Boulder / Boulder Progressives slate
-# (pro-housing, progressive); AB = endorsed by both poles; blank = endorsed by neither. Other groups are not used for
-# the label, because their alignment moved over the decade (Sierra Club endorsed PLAN's slate in 2015 and 2017 and
-# Better Boulder's from 2019; Open Boulder sided with PLAN on three of four picks in 2025).
+# side labels. The axis is the decade's two poles: PLAN-Boulder County (A) against Better Boulder and Boulder
+# Progressives (B). Every other endorsing group with a bloc in the archive's groups.csv (`orientation` growth-skeptic
+# or progressive) is aligned year by year from its own picks: it labels a year on the side where all its
+# pole-labelled picks fall, and does not label a year in which its picks split across the poles (the Sierra Club
+# in 2015 and 2017, the labor council in 2019 and 2021, Open Boulder in 2025). A group with no pole-labelled pick in
+# a year falls back to its bloc. Newspapers, questionnaires and the business groups (which sat on different sides in
+# 2017 and 2023) never label. A candidate is A or B from the union of the poles and the aligned groups, AB when
+# both sides endorsed them, blank when neither did.
+groups = pd.read_csv(ARCH / "endorsements" / "groups.csv", dtype=str).fillna("")
+BLOC = {r.slug: ("A" if r.orientation == "growth-skeptic" else "B" if r.orientation == "progressive" else "") for r in groups.itertuples()}
 POLE_A = {"plan_boulder_county"}; POLE_B = {"better_boulder", "boulder_progressives"}
-def side_of(year, cand):
+def pole_side(year, cand):
     g = set(slates[(slates.year == year) & (slates.choice == cand)].group)
     a, b = bool(g & POLE_A), bool(g & POLE_B)
     return "AB" if a and b else "A" if a else "B" if b else ""
+pole = {(y, c): pole_side(y, c) for y, c in slates[["year", "choice"]].drop_duplicates().itertuples(index=False)}
+align_rows = []
+for (y, g), sub in slates.groupby(["year", "group"]):
+    if g in POLE_A | POLE_B or not BLOC.get(g):
+        continue
+    labs = [pole[(y, c)] for c in sub.choice]
+    na, nb = sum(v == "A" for v in labs), sum(v == "B" for v in labs)
+    align = "A" if na and not nb else "B" if nb and not na else BLOC[g] if not (na or nb) else ""
+    align_rows.append(dict(year=y, group=g, bloc=BLOC[g], picks=len(labs), picks_pole_A=na, picks_pole_B=nb, alignment=align,
+                           basis="own picks" if (na or nb) else "bloc"))
+ALIGN = pd.DataFrame(align_rows); ALIGN.to_csv(PROC / "group-alignment.csv", index=False)
+ALIGNED = {(r.year, r.group): r.alignment for r in ALIGN.itertuples() if r.alignment}
+def side_of(year, cand, rule="aligned"):
+    if rule == "poles":
+        return pole.get((year, cand), "")
+    g = set(slates[(slates.year == year) & (slates.choice == cand)].group)
+    sides = {"A" for x in g if x in POLE_A} | {"B" for x in g if x in POLE_B} | {ALIGNED[(year, x)] for x in g if (year, x) in ALIGNED}
+    a, b = "A" in sides, "B" in sides
+    return "AB" if a and b else "A" if a else "B" if b else ""
 camp["slate_side"] = [side_of(r.year, r.candidate_sov) if r.kind == "candidate" else "" for r in camp.itertuples()]
+camp["slate_side_two_poles"] = [side_of(r.year, r.candidate_sov, "poles") if r.kind == "candidate" else "" for r in camp.itertuples()]
 camp["slate_groups"] = [";".join(sorted(slates[(slates.year == r.year) & (slates.choice == r.candidate_sov)].group.unique())) if r.kind == "candidate" else "" for r in camp.itertuples()]
+cc = camp[camp.kind == "candidate"]
+print(pd.crosstab(cc.year, cc.slate_side).to_string()); print("two-pole rule differs on", int((cc.slate_side != cc.slate_side_two_poles).sum()), "candidate-years")
 camp.sort_values(["year", "kind", "campaign_id"]).to_csv(PROC / "campaigns.csv", index=False)
 
 # ----------------------------------------------------------------------------- endorsers (candidate pages) -> anonymized edges
