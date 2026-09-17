@@ -97,3 +97,19 @@ Rows whose code is `9999`, or whose name matches a totals pattern, are dropped f
 **Why.** NCES CCD covers those years at school grain, so the panel has no hole — it simply has one source instead of two, and `source` says which. Writing a third parser shape for three years, when a validated source already covers them, buys accuracy the archive can already get.
 
 **What it costs.** Those years have no second source to reconcile against, and CDE is the count of record everywhere else. The reconciliation table has no row for them, which is the honest representation.
+
+## D14 — A teacher-FTE row must satisfy the file's own arithmetic — 2026-09-17
+
+Every row parsed out of a CDE pupil/teacher ratio report is kept only if `enrollment ÷ teacher_fte` equals the printed ratio to within 5%. Rows that fail are dropped and counted, never repaired by guesswork.
+
+**Why.** These reports wrap long school names onto a second line, and a wrapped row shifts every field one place left — the enrollment lands in the FTE column. It produces numbers that look like data: Douglas County High School came out with **1,893 teachers**, and the 2016–2018 state totals ran 31% high. No checksum in the file catches this, because the misread row is internally consistent. The printed ratio is a third figure the file already carries, and it is what makes the shift detectable.
+
+**What it costs.** A row whose published ratio is itself wrong is dropped along with the genuinely broken ones. The parse report in `audit/teacher-fte-parse.json` records how many rows each file lost, so the trade is visible per year.
+
+## D15 — District teacher FTE rests on NCES; CDE is the cross-check — 2026-09-17
+
+`district-teacher-fte-ccd.csv` is the district staffing series, 1987–2024. `district-teacher-fte-cde.csv` holds 17 rows and is presented as a comparison, not a series.
+
+**Why.** CDE publishes school-grain FTE in eleven years and district-grain in almost none: most of its district-level staff reports are average-salary tables in a shape that carries no FTE column. NCES carries district teacher FTE every year from 1987, with a level breakdown CDE never publishes. Building the district tier on the thinner source to keep it CDE-first would mean a series with holes in nine years out of ten.
+
+**Related, and a source defect rather than a decision.** CDE publishes its 2016 and 2017 pupil/teacher ratio reports at different URLs, but the two files are byte-identical — same SHA-256, same 583,100 bytes, same 1,784 schools, same 49,277.5 FTE. The later one is dropped rather than presented as a second year of data, so **2017 is absent from `school-teacher-fte.csv`**.

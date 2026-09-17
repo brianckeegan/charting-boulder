@@ -20,6 +20,9 @@ Boulder Valley's Resilient Schools proposal treats four closures as a local prob
 | `source-reconciliation.csv` | 21 | 2004–2024 | year |
 | `district-reconciliation.csv` | 14 | 1986–1999 | year |
 | `district-year-overlap.csv` | 1,269 | 1977–1987 | district × year |
+| `school-teacher-fte.csv` | 19,880 | 2003–2024 | school × year |
+| `district-teacher-fte-ccd.csv` | 7,879 | **1987–2024** | district × year |
+| `district-teacher-fte-cde.csv` | 17 | 2016–2024 | district × year |
 
 All in `data/processed/`, long format, UTF-8. `DATA-DICTIONARY.md` documents every column; `audit/validation.md` is the report the pipeline writes about itself and is regenerated from the data rather than maintained by hand.
 
@@ -49,7 +52,7 @@ Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the 
 |---|---|---|---|
 | [CDE Artemis ED5/90.17](https://spl.cde.state.co.us/artemis/edserials/ed59017internet/) | School enrollment by grade | 2004–2018 | Spine |
 | [CDE pupil-membership archives](https://ed.cde.state.co.us/cdereval/pupilmembership-statistics/data-insights-resources-archives) | School enrollment by grade | 2019–2024 | Spine |
-| [CDE staff statistics](https://ed.cde.state.co.us/cdereval/staffstatistics) | Teacher FTE by school | 2022–2024 | Spine |
+| [CDE staff statistics](https://ed.cde.state.co.us/cdereval/staffstatistics) and [Artemis ED2.88](https://spl.cde.state.co.us/artemis/edserials/ed288internet/) | Teacher FTE by school | 2003–2024, eleven years | Spine |
 | [CDE Artemis ED2/79.19](https://spl.cde.state.co.us/artemis/edserials/ed27919internet/) | District enrollment by grade; district trends | 1986–1999, and 1977–1985 via the 1986 volume | District tier |
 | [NCES CCD](https://nces.ed.gov/ccd/), via the [Urban Institute API](https://educationdata.urban.org/) | School enrollment by grade, teacher FTE, coordinates, charter flag, status | 1986–2024 | Secondary, harmonized and compared |
 
@@ -91,8 +94,10 @@ Three conventions worth knowing before you join anything:
 |---|---|
 | School enrollment, CDE | 2004–2024 |
 | School enrollment, NCES | 1986–2024 |
-| **Teacher FTE by school, CDE** | **2022–2024 only** |
+| Teacher FTE by school, CDE | 2003, 2004, 2013–2016, 2018, 2019, 2022–2024 |
 | Teacher FTE by school, NCES | 1986–2024 |
+| **Teacher FTE by district, NCES** | **1987–2024**, with a level breakdown |
+| Teacher FTE by district, CDE | 2016–2024, thin |
 | District enrollment by grade | 1986–2024 |
 | District fall membership | **1977–2024**, except 2000–2003 |
 | Coordinates | 64,744 of 65,841 school-years |
@@ -100,7 +105,8 @@ Three conventions worth knowing before you join anything:
 Two gaps are deliberate and one is not:
 
 - **2000–2003 has no district row, and 2001–2003 no CDE school data.** 2001 and 2002 publish school-by-grade as PDF only; 2003 uses an indented panel layout the parser does not read. NCES covers those years at school grain, so the school panel has no hole — it has one source instead of two.
-- **CDE publishes school-grain teacher FTE in eight years** (2013, 2016–2019, 2022–2024), but five of those are PDFs the parser does not read. Only the three spreadsheet years are in the archive. Those five PDFs could go through the same OCR path as the yearbooks; see `ROADMAP.md`.
+- **2005–2012 teacher FTE is not parsed.** Those CDE ratio PDFs place every character as its own run with unreliable line positions, so fields merge and rows scramble. Eight years of school-grain FTE sit behind that; NCES covers them at both grains meanwhile.
+- **2017 teacher FTE does not exist.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs, but the files are byte-identical. The later duplicate is dropped rather than presented as a second year.
 - **The yearbooks' Table 1** — school counts, staff, pupil/teacher ratio, dropout rate — is converted and sits in `data/interim/yearbooks/` but is not yet parsed into any table.
 
 ## Closures
@@ -124,7 +130,7 @@ Two gaps are deliberate and one is not:
 ├── README.md               this file
 ├── TASK.md                 the task this folder carries out
 ├── DATA-DICTIONARY.md      every column, its units and its missingness
-├── decision-log.md         fourteen dated decisions and why
+├── decision-log.md         fifteen dated decisions and why
 ├── ROADMAP.md              what is deferred, and to when
 ├── CHANGELOG.md            what changed, and what broke on the way
 ├── pipeline/
@@ -133,6 +139,7 @@ Two gaps are deliberate and one is not:
 │   ├── schema.py           canonical grades, code padding, missing-value rules
 │   ├── extract.py          one parser per source shape
 │   ├── normalize.py        harmonize, join, build the registry, reconcile
+│   ├── teacher_fte.py      the staff reports, both grains -> three FTE tables
 │   └── audit.py            write audit/validation.md from the pipeline's output
 ├── datalab-ocr.py          re-OCR the scanned yearbooks through the Datalab API
 ├── proof-run.py            the original three-year probe, kept as the audit's evidence
@@ -143,6 +150,7 @@ Two gaps are deliberate and one is not:
 │   └── row-totals.json     its results per volume
 └── data/
     ├── raw/cde/            56 CDE originals with manifest.json (sha256, URL, date)
+    ├── raw/fte/            36 CDE staff reports, likewise
     ├── raw/ccd/            NCES API responses (not committed; re-downloadable)
     ├── raw/yearbooks/      scanned volumes (not committed; 110 MB each)
     ├── interim/yearbooks/  the OCR markdown, one file per converted page
@@ -158,6 +166,7 @@ The pipeline needs no key — every source but the yearbook re-OCR is open:
 pip install pandas openpyxl xlrd
 python3 -m pipeline.sources      # what exists  -> data/lookups/inventory.csv
 python3 -m pipeline.fetch        # download it  -> data/raw/cde/ + manifest
+python3 -m pipeline.teacher_fte  # staffing     -> the three FTE tables
 python3 -m pipeline.normalize    # harmonize    -> data/processed/
 python3 -m pipeline.audit        # check it     -> audit/validation.md
 ```

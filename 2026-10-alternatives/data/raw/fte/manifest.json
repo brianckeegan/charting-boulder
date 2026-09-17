@@ -1,0 +1,362 @@
+{
+  "membership-2000-ed59017200023internet.pdf": {
+    "bytes": 73961,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student Teacher Ratios (PDF)",
+    "series": "membership",
+    "sha256": "d9e54b5dfa2426e19abcc0f6452822f9805454100bdefe73fc2dae4f88f6e6ea",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/2000/ed59017200023internet.pdf",
+    "year": 2000
+  },
+  "membership-2001-ed59017200124internet.pdf": {
+    "bytes": 76726,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student Teacher Ratios (PDF)",
+    "series": "membership",
+    "sha256": "364df735492149f286116a5700ec2ff0caa5d1c6aee5213536f8db50edb82eec",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/2001/ed59017200124internet.pdf",
+    "year": 2001
+  },
+  "membership-2002-ed59017200225internet.pdf": {
+    "bytes": 83070,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student Teacher Ratios (PDF)",
+    "series": "membership",
+    "sha256": "1196010de531cb8c592a19994e106ed2420cc2c17914bd2fa2d16aa19bd3a881",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/2002/ed59017200225internet.pdf",
+    "year": 2002
+  },
+  "membership-2003-ed59017200364internet.pdf": {
+    "bytes": 79028,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student Teacher Ratios",
+    "series": "membership",
+    "sha256": "3caba11b1077b0ff281f7901ce5cd45dda7731a0d1d65db0dc7a01170bb1bf1c",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/2003/ed59017200364internet.pdf",
+    "year": 2003
+  },
+  "membership-2003-ed59017200365internet.xls": {
+    "bytes": 288256,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "xls",
+    "label": "Student Teacher Ratios",
+    "series": "membership",
+    "sha256": "2a3aaf73fbf7a88a10e7d220431fa88700086dbe3d5b697c0e547865705a21b7",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/2003/ed59017200365internet.xls",
+    "year": 2003
+  },
+  "membership-2004-ed59017200432internet.pdf": {
+    "bytes": 106264,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student Teacher Ratios",
+    "series": "membership",
+    "sha256": "0ac9e68012a4044d6b18d775e49c4bd3e59b52e4d0b77e06e87e0ab816cd6fcf",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/2004/ed59017200432internet.pdf",
+    "year": 2004
+  },
+  "membership-2004-ed59017200433internet.xls": {
+    "bytes": 348672,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "xls",
+    "label": "Student Teacher Ratios",
+    "series": "membership",
+    "sha256": "ca9ea0c7f05a7828c7391714cc70eb0ec16b5c90bb5c134868629197347e020a",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/2004/ed59017200433internet.xls",
+    "year": 2004
+  },
+  "staff-2000-ed288200021internet.pdf": {
+    "bytes": 128159,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "a6faa85792a20a2a5445518e735db1efe831c4c42c7e4a5e4febb10aeac4dba9",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2000/ed288200021internet.pdf",
+    "year": 2000
+  },
+  "staff-2001-ed288200121internet.pdf": {
+    "bytes": 134793,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "12e1927c0bf95a50e52522904fadea7fac94281b7d041b6936f0d240ac127b5f",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2001/ed288200121internet.pdf",
+    "year": 2001
+  },
+  "staff-2002-ed288200222internet.pdf": {
+    "bytes": 146088,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "040fa068312cc4a25ea143970d5e7e3a41588cdc2beaa19b8f27ea9685379b7b",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2002/ed288200222internet.pdf",
+    "year": 2002
+  },
+  "staff-2003-ed288200321internet.pdf": {
+    "bytes": 128768,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "d0e347df1022d7c6544e07b7d255867101d630392e1a41ffff45549db0beff15",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2003/ed288200321internet.pdf",
+    "year": 2003
+  },
+  "staff-2004-ed288200421internet.pdf": {
+    "bytes": 146345,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "fd02da0786661595912401d63abfbb63cc73308aca9709900d34714b3d6ba0eb",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2004/ed288200421internet.pdf",
+    "year": 2004
+  },
+  "staff-2005-ed288200521internet.pdf": {
+    "bytes": 170836,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "01982c62db950bb581807ea01079f4f06678da246352410421f44fa6720ab18c",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2005/ed288200521internet.pdf",
+    "year": 2005
+  },
+  "staff-2006-ed288200621internet.pdf": {
+    "bytes": 195718,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "9943222edbe77401a9a0e417315c686aac255d2624785aebc45b2ba889f217e1",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2006/ed288200621internet.pdf",
+    "year": 2006
+  },
+  "staff-2007-ed288200721internet.pdf": {
+    "bytes": 190275,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "f4bd45b0cf01c6932fa57f21c78863c23def0af41d7dd4b87ee585ab8d5476a9",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2007/ed288200721internet.pdf",
+    "year": 2007
+  },
+  "staff-2008-ed288200821internet.pdf": {
+    "bytes": 194513,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "fffc9a7b3d799b5c01eaa8efce9ef7a9d280a3672c65bb7b015e7ceea5f33403",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2008/ed288200821internet.pdf",
+    "year": 2008
+  },
+  "staff-2009-ed288200921internet.pdf": {
+    "bytes": 247224,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "1bfae027fbf2d18bc6d57033db262618fb1611d20399d9e976b6bcf4236294fc",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2009/ed288200921internet.pdf",
+    "year": 2009
+  },
+  "staff-2010-ed288201021internet.pdf": {
+    "bytes": 283192,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "9e821113bfea88b34d1e60aaaeb2b437572284d273bf0139682b6c9d0aa4f9a7",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2010/ed288201021internet.pdf",
+    "year": 2010
+  },
+  "staff-2011-ed288201121internet.pdf": {
+    "bytes": 214313,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "05cd7295dd843ede88764a629b6556ef54a62af1a0530c50fe859074a4afb261",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2011/ed288201121internet.pdf",
+    "year": 2011
+  },
+  "staff-2012-ed288201222internet.pdf": {
+    "bytes": 211700,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "5d4f8bac0635da1164de0730ef61a2ebf6cdc452db2d2bfb332ac92a4a771ffa",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2012/ed288201222internet.pdf",
+    "year": 2012
+  },
+  "staff-2013-ed288201308internet.pdf": {
+    "bytes": 1735435,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Pupil-teacher ratios by school (PDF)",
+    "series": "staff",
+    "sha256": "0a135cdca57aee02cce73e7b81584098f5c800ec2d095ee58941dd54ea71de9d",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2013/ed288201308internet.pdf",
+    "year": 2013
+  },
+  "staff-2014-ed288201407internet.pdf": {
+    "bytes": 1509743,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "00e592437328f018d7e727dc511ea38d4f8aeac0b6d04c82b7a6757c4d557d2b",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2014/ed288201407internet.pdf",
+    "year": 2014
+  },
+  "staff-2015-ed288201507internet.pdf": {
+    "bytes": 1646481,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student-teacher ratios (PDF)",
+    "series": "staff",
+    "sha256": "a00cdff7fb707dd33593f57105a594c4a8d2ab4361a56be806e85748cc59f24d",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2015/ed288201507internet.pdf",
+    "year": 2015
+  },
+  "staff-2016-ed288201607internet.pdf": {
+    "bytes": 583100,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Pupil-teacher ratio by school (PDF)",
+    "series": "staff",
+    "sha256": "9ce51d91b2d42296962d0d5fe56bedf691f7bc22e92d50dfbaaddf06d168ede9",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2016/ed288201607internet.pdf",
+    "year": 2016
+  },
+  "staff-2017-ed288201707internet.pdf": {
+    "bytes": 583100,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Pupil-teacher ratio by school (PDF)",
+    "series": "staff",
+    "sha256": "9ce51d91b2d42296962d0d5fe56bedf691f7bc22e92d50dfbaaddf06d168ede9",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2017/ed288201707internet.pdf",
+    "year": 2017
+  },
+  "staff-2018-ed288201807internet.pdf": {
+    "bytes": 598238,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Pupil-teacher ratio by school (PDF)",
+    "series": "staff",
+    "sha256": "47eac92daf8b6a66c70db5bc60a48a38e073892d773fcace21c47243fcd05010",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2018/ed288201807internet.pdf",
+    "year": 2018
+  },
+  "staff-2019-ed288201907internet.pdf": {
+    "bytes": 659696,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Pupil-teacher ratio by school (PDF)",
+    "series": "staff",
+    "sha256": "b9da043dfa9da712242110e0983ea4e0781cd72c05b6d66298b7e6751fa2dace",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2019/ed288201907internet.pdf",
+    "year": 2019
+  },
+  "staff-2022-20222023AverageTeachersSalaryFTE_PublishedReportupdated41323.pdf": {
+    "bytes": 189136,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Average Teacher Salary (PDF)",
+    "series": "staff",
+    "sha256": "059f5082d39c52d2b12305543d2367706c67d2b77935ebe4836f655b9e6b7c97",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/c9a5c23a-de3f-4bc3-8765-0d272d8c06e5",
+    "year": 2022
+  },
+  "staff-2022-20222023AverageTeachersSalaryFTE_PublishedReportupdated41323.xlsx": {
+    "bytes": 33698,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "xlsx",
+    "label": "Average Teacher Salary (XLSX)",
+    "series": "staff",
+    "sha256": "4c017c0fad6c42f7d08eb0dfd4ca75bdb93d60e009d5c60b47a1e695a8ec3ae6",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/9014775c-07db-4556-9831-1fe904e7be75",
+    "year": 2022
+  },
+  "staff-2022-20222023PupilTeacherRatiopublishedreport.pdf": {
+    "bytes": 623227,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "pdf",
+    "label": "Student Teacher Ratios by School (PDF)",
+    "series": "staff",
+    "sha256": "ffc5d78e3954b7263d21e30afe86e93b048c17a78829a7bebc36f294079c6a26",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/759e3f58-dd73-4e18-aab4-5050bb0f7dc1",
+    "year": 2022
+  },
+  "staff-2022-20222023PupilTeacherRatiopublishedreport1.xlsx": {
+    "bytes": 134043,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "xlsx",
+    "label": "Student Teacher Ratios by School (XLSX)",
+    "series": "staff",
+    "sha256": "306bb0cc1c382e921ae2569ce38c7c2469afc3d36a00786cc3035947383f4a26",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/fc32f952-2545-44fe-bd98-3981d447cc83",
+    "year": 2022
+  },
+  "staff-2023-2023-2024PupilTeacherRatiobyLEA.xlsx": {
+    "bytes": 160153,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "xlsx",
+    "label": "Student Teacher Ratios by District (XLSX)",
+    "series": "staff",
+    "sha256": "8c7d6994cf7a61b61509e17e9f6f29d817a34848ff36fe8d16b1b66d72286023",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/90d9119f-d4b0-4896-b81a-e1e43a20f9b3",
+    "year": 2023
+  },
+  "staff-2023-2023-2024PupilTeacherRatiobySchool.xlsx": {
+    "bytes": 179921,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "xlsx",
+    "label": "Student Teacher Ratios by School (XLSX)",
+    "series": "staff",
+    "sha256": "f9f11b2f1a2267748068d01bfc1a25903aa01efbc99c4439a06ae54f7eba788b",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/95e52b1d-f4b7-4be9-9b65-199f3f9cac11",
+    "year": 2023
+  },
+  "staff-2024-2024-2025AverageTeacherSalaryandFTE33125.xlsx": {
+    "bytes": 35155,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "xlsx",
+    "label": "2024-2025 Average Teacher Salary (XLSX)",
+    "series": "staff",
+    "sha256": "8a9e8c500935b890fae3d18e3cf5f017fbd250962ec25af9cbb592b351519ec8",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/f415c0df-a162-42de-9405-eeeb44190f8e",
+    "year": 2024
+  },
+  "staff-2024-2024-2025PupilTeacherRatiobySchool.xlsx": {
+    "bytes": 117535,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "xlsx",
+    "label": "2024-2025 Student Teacher Ratios by School (XLSX)",
+    "series": "staff",
+    "sha256": "4e53cd6637a6f3f3abde3e207e1b2b4782737056af0a7a9bd900b397c734fb5a",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/9e71cf39-e241-4258-8475-0bdd9724940e",
+    "year": 2024
+  },
+  "staff-2024-StudentTeacherRatiosbyLEA2024-2025.xlsx": {
+    "bytes": 27231,
+    "fetched_at": "2026-09-17T21:32:13+00:00",
+    "format": "xlsx",
+    "label": "2024-2025 Student Teacher Ratios by LEA (XLSX)",
+    "series": "staff",
+    "sha256": "fedd51c0f1dce954cc77ba9de551e678852aaef385344937847961fc4db5c296",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/3efbd8a4-7f21-4a98-81d6-e43b6f236765",
+    "year": 2024
+  }
+}

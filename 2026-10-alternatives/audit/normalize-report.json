@@ -861,53 +861,49 @@
       }
     },
     "cde_teacher": {
+      "2003": {
+        "schools_with_fte": 1647,
+        "total_fte": 44298.83000000008
+      },
+      "2004": {
+        "schools_with_fte": 1666,
+        "total_fte": 44657.84400000015
+      },
+      "2013": {
+        "schools_with_fte": 1782,
+        "total_fte": 49534.949999999946
+      },
+      "2014": {
+        "schools_with_fte": 1821,
+        "total_fte": 50801.906899999994
+      },
+      "2015": {
+        "schools_with_fte": 1837,
+        "total_fte": 51251.019999999895
+      },
+      "2016": {
+        "schools_with_fte": 1784,
+        "total_fte": 49277.52999999988
+      },
+      "2018": {
+        "schools_with_fte": 1769,
+        "total_fte": 49499.75999999989
+      },
+      "2019": {
+        "schools_with_fte": 1888,
+        "total_fte": 53303.400000000045
+      },
       "2022": {
-        "header_row": 2,
-        "columns": [
-          "County Code",
-          "District Code",
-          "County Name",
-          "District Name",
-          "School Code",
-          "School Name",
-          "PK-12 Count",
-          "Teacher FTE",
-          "Pupil/Teacher FTE Ratio"
-        ],
         "schools_with_fte": 1913,
-        "total_fte": 52929.8,
-        "carries_own_enrollment": false
+        "total_fte": 52929.79999999992
       },
       "2023": {
-        "header_row": 2,
-        "columns": [
-          "School Year",
-          "LEA",
-          "LEA Name",
-          "School Code",
-          "School Name",
-          "PK-12 Count",
-          "Teacher FTE",
-          "Pupil/Teacher FTE Ratio"
-        ],
         "schools_with_fte": 1891,
-        "total_fte": 52969.4,
-        "carries_own_enrollment": false
+        "total_fte": 52969.39999999992
       },
       "2024": {
-        "header_row": 2,
-        "columns": [
-          "School Year",
-          "LEA Code",
-          "School Code",
-          "School Name",
-          "Enrollment Count",
-          "Teacher FTE",
-          "Pupil/Teacher FTE Ratio"
-        ],
         "schools_with_fte": 1882,
-        "total_fte": 52709.5,
-        "carries_own_enrollment": true
+        "total_fte": 52709.50000000002
       }
     },
     "ccd": {

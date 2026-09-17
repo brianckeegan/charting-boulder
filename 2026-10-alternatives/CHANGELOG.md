@@ -54,3 +54,32 @@ The pipeline runs end to end and `data/processed/` exists.
 
 - 2001–2003 are CCD-only on the school side; no CDE parser reads those layouts.
 - From 2021 CDE and NCES diverge by 6,000–16,000 pupils, concentrated in multi-district online and charter schools. Before 2021 they agree to within a few hundred.
+
+## 2026-09-17 — teaching staff
+
+Teacher FTE joins enrollment, at both grains. The archive now answers "how many teachers" on the same panel that answers "how many pupils".
+
+### Added
+
+- `pipeline/teacher_fte.py` — retrieval and parsing of every CDE staff report in both serials, plus the NCES district-level staffing pull.
+- `data/processed/school-teacher-fte.csv` — **19,880 rows, eleven years**: 2003, 2004, 2013–2016, 2018, 2019, 2022–2024. The CDE school-grain series was three years before this.
+- `data/processed/district-teacher-fte-ccd.csv` — **7,879 rows, 1987–2024**, with a prek/kindergarten/elementary/secondary split CDE never publishes. The longest staffing series in the archive.
+- `data/processed/district-teacher-fte-cde.csv` — 17 rows, 2016–2024, as a cross-check against NCES rather than a series.
+- `data/raw/fte/` — 36 published originals with `manifest.json` (sha256, URL, retrieval date).
+- `audit/teacher-fte-parse.json` and `audit/teacher-fte.log` — rows kept, rows dropped and why, per file.
+
+### Fixed during the build
+
+- **Wrapped rows put enrollment in the FTE column.** Douglas County High School read as 1,893 teachers, and the 2016–2018 totals ran 31% high. Caught with the file's own arithmetic — see D14.
+- A **2-digit county code** was counted as a district code, which turned district rows into school rows: 2013 produced 185 "schools".
+- A **`STATE OVERALL`** row carrying 53,458 FTE was read as a district.
+- `shift_text` skipped every digit, because the guard tested the input character rather than the decoded one, and subset-font numerals sit below codepoint 32.
+- Page grouping concatenated 52 copies of the header until the key included the page.
+- Field splitting assumed whole runs; some files place each character separately. The split now measures the median run length per line.
+- A `17:1` ratio format in the 2024 spreadsheet parsed as missing.
+
+### Known
+
+- **2005–2012 is not parsed.** Those ratio PDFs place every character as its own run with unreliable line positions, so fields merge and rows scramble. Eight years of school-grain FTE sit behind it; NCES covers them at both grains meanwhile.
+- **2017 does not exist as a distinct year.** CDE's 2016 and 2017 files are byte-identical. See D15.
+- Against NCES for the same year and state, the CDE school totals land within 0.3% to 4.5%.

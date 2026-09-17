@@ -38,7 +38,7 @@ One row per school per year. Identity, totals and the things that are not per-gr
 | `district_name` | string | As printed that year |
 | `enrollment_total_cde` | integer | Sum across grades. Checked against the file's own printed total |
 | `enrollment_total_ccd` | integer | CCD grade code 99, where published |
-| `teacher_fte_cde` | decimal | From the staff series. Empty before about 2013 and in years CDE reports district grain only |
+| `teacher_fte_cde` | decimal | Joined from `school-teacher-fte.csv` on `(year, school_code)`. Present in eleven years: 2003, 2004, 2013–2016, 2018, 2019, 2022–2024 |
 | `teacher_fte_ccd` | decimal | CCD `teachers_fte`, 1986–2024 |
 | `enrollment_reported_in_fte_file` | integer | The staff file's own enrollment count. Not a duplicate of `enrollment_total_cde` — it is an independent figure, and a disagreement is a crosswalk fault worth investigating |
 | `latitude`, `longitude` | decimal | Carried backward from a recent CCD directory. Empty where no directory year gives a real value |
@@ -88,6 +88,47 @@ The longest series in the archive, and **the only one reaching before 1986**. Bu
 
 The yearbooks' Table 1 (school counts, staff, pupil/teacher ratio, dropout rate) is converted and sits in `data/interim/yearbooks/`, but is **not yet parsed into this table**. See `ROADMAP.md`.
 
+## `school-teacher-fte.csv`
+
+Teacher FTE by school, from CDE's own "Pupil/Teacher Ratio" reports. **19,880 rows, eleven years**: 2003, 2004, 2013–2016, 2018, 2019, 2022–2024.
+
+| Column | Type | Notes |
+|---|---|---|
+| `year` | integer | Fall of the school year |
+| `district_code`, `school_code` | string | Zero-padded CDE codes |
+| `district_name`, `school_name`, `county_name` | string | As printed that year |
+| `teacher_fte` | decimal | Teacher full-time equivalents at that school |
+| `enrollment_reported` | integer | The file's own enrollment count — **not** a duplicate of the membership tables, and a disagreement is worth investigating |
+| `pupil_teacher_ratio` | decimal | As published, not recomputed |
+| `source` | string | The published file each row came from |
+
+Every row satisfies the file's own arithmetic: enrollment ÷ FTE equals the printed ratio to within 5%. Rows that fail are dropped rather than guessed at, because a row that splits across two lines silently puts the enrollment in the FTE column — Douglas County High School came out with 1,893 teachers before this check existed.
+
+Compared against NCES for the same year and state, these totals land within 0.3% to 4.5%.
+
+**2017 is absent, and that is a source defect rather than a gap in this archive.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs, but the files are byte-identical — same SHA-256, same 583,100 bytes. Parsing both produced two years with exactly the same 1,784 schools and 49,277.5 FTE. The later duplicate is dropped.
+
+## `district-teacher-fte-ccd.csv`
+
+Teacher FTE by district from NCES. **The longest staffing series in the archive: 7,879 rows, 1987–2024.** It also carries a breakdown by level that CDE never publishes.
+
+| Column | Type | Notes |
+|---|---|---|
+| `year` | integer | |
+| `leaid` | string | NCES district id, the stable key |
+| `district_code` | string | CDE district code where NCES carries it |
+| `district_name` | string | |
+| `teacher_fte` | decimal | Total teacher FTE |
+| `teacher_fte_prek`, `teacher_fte_kindergarten`, `teacher_fte_elementary`, `teacher_fte_secondary` | decimal | The level split. Often empty in early years |
+| `staff_total_fte` | decimal | All staff, not only teachers. Sparse before about 2015 |
+| `enrollment_reported` | integer | NCES district enrollment |
+
+Statewide it runs 30,887 FTE in 1987 to 53,388 in 2024.
+
+## `district-teacher-fte-cde.csv`
+
+CDE's own district-grain teacher FTE, 17 rows across 2016–2024. Thin on purpose: most of CDE's district-level staff reports are average-salary tables in a different shape, and are not parsed. The district staffing series rests on NCES; this table is a cross-check where it overlaps.
+
 ## `source-reconciliation.csv`
 
 One row **per year**, not per school: the two sources compared across the whole state. `cde_schools`, `ccd_schools`, `matched`, `exact_agreement`, `median_abs_diff`, `cde_total`, `ccd_total`, `cde_prek`, `ccd_prek`, `gap_excluding_prek`.
@@ -112,7 +153,7 @@ It has one blind spot worth stating plainly: an aggregate row passes it. The 201
 | School-level anything, 1986–1999 on the CDE side | The yearbooks have no school-level table |
 | `enrollment_cde`, 1986–2003 | CDE publishes no machine-readable school-grain file; CCD covers those years |
 | `enrollment_ccd`, 2025 | CCD has not released it |
-| `teacher_fte_cde`, all but 2013, 2016–2019 and 2022–2024 | CDE publishes school-grain teacher FTE in those eight years only; CCD carries it from 1986 |
+| `teacher_fte_cde`, all but 2003, 2004, 2013–2016, 2018, 2019 and 2022–2024 | CDE publishes school-grain teacher FTE in those eleven years only; CCD carries it from 1986. 2005–2012 is published but not parsed, and 2017 duplicates 2016 byte for byte |
 | `is_charter`, before 2000 | CCD does not carry the flag that far back |
 | `latitude` / `longitude`, schools that closed before about 2013 | No directory year gives them a real coordinate |
 | `closing_day_membership`, each volume's own final year | Not yet observed when the volume was printed |

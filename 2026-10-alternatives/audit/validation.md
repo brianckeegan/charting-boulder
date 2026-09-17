@@ -42,8 +42,8 @@ parse fault until shown otherwise.
 | 2000 | 1,639 | 0 | 0 | 1,602 |
 | 2001 | 1,671 | 0 | 0 | 1,656 |
 | 2002 | 1,708 | 0 | 0 | 1,692 |
-| 2003 | 1,734 | 0 | 0 | 1,722 |
-| 2004 | 1,716 | 1,688 | 0 | 1,713 |
+| 2003 | 1,734 | 0 | 1,641 | 1,722 |
+| 2004 | 1,716 | 1,688 | 1,666 | 1,713 |
 | 2005 | 1,730 | 1,703 | 0 | 1,730 |
 | 2006 | 1,762 | 1,736 | 0 | 1,762 |
 | 2007 | 1,783 | 1,748 | 0 | 1,783 |
@@ -52,13 +52,13 @@ parse fault until shown otherwise.
 | 2010 | 1,836 | 1,787 | 0 | 1,835 |
 | 2011 | 1,844 | 1,804 | 0 | 1,843 |
 | 2012 | 1,845 | 1,816 | 0 | 1,844 |
-| 2013 | 1,861 | 1,824 | 0 | 1,860 |
-| 2014 | 1,873 | 1,835 | 0 | 1,872 |
-| 2015 | 1,877 | 1,852 | 0 | 1,876 |
-| 2016 | 1,902 | 1,876 | 0 | 1,898 |
+| 2013 | 1,861 | 1,824 | 1,781 | 1,860 |
+| 2014 | 1,873 | 1,835 | 1,820 | 1,872 |
+| 2015 | 1,877 | 1,852 | 1,837 | 1,876 |
+| 2016 | 1,902 | 1,876 | 1,784 | 1,898 |
 | 2017 | 1,923 | 1,888 | 0 | 1,920 |
-| 2018 | 1,932 | 1,902 | 0 | 1,930 |
-| 2019 | 1,944 | 1,906 | 0 | 1,940 |
+| 2018 | 1,932 | 1,902 | 1,769 | 1,930 |
+| 2019 | 1,944 | 1,906 | 1,887 | 1,940 |
 | 2020 | 1,946 | 1,914 | 0 | 1,942 |
 | 2021 | 1,964 | 1,928 | 0 | 1,960 |
 | 2022 | 1,973 | 1,933 | 1,913 | 1,965 |
@@ -164,8 +164,11 @@ honest part of this table.
 ## Known gaps
 
 - Pre-kindergarten exists on the CDE side only.
-- School-level teacher FTE starts around 2013 on the CDE side and is
-  not published in every year; CCD carries it from 1986.
+- School-level teacher FTE covers eleven CDE years: 2003, 2004,
+  2013-2016, 2018, 2019 and 2022-2024. 2005-2012 is published but
+  not parsed, and CDE's 2017 file duplicates 2016 byte for byte, so
+  it is dropped. CCD carries school FTE from 1986 and district FTE
+  from 1987.
 - The 1986–1999 tier is district grain: those yearbooks contain no
   school-level table at all.
 - CCD ends before the last CDE year, so the most recent years have no
