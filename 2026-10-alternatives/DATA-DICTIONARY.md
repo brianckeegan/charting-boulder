@@ -64,6 +64,12 @@ One row per school, not per school-year. The registry.
 
 `year, district_code, district_name, county_name, grade, enrollment, source`. Two eras, distinguished by `source`: the re-OCR'd yearbooks (`yearbook-<year>`), and the modern years summed up from the school panel (`cde-school-sum`). The yearbook era carries the `SPECIAL_EDUCATION` and `UNGRADED` grade codes, which the school tier does not.
 
+## `unit_type`, on both district tables
+
+`district` or `boces`. A Board of Cooperative Educational Services is a shared agency several districts run together, not a district, and the yearbooks list them alongside districts — which is why a volume reports 180 reporting units where Colorado had 176 districts.
+
+They are flagged, never removed. Their pupils are real and NCES counts them too: dropping the 185 BOCES pupils from 1992 turns an exact match with NCES into a 185-pupil shortfall, and the same happens in 1993, 1996 and 1999. Filter on `unit_type = 'district'` to count districts; leave them in to total pupils.
+
 ## `district-year.csv`
 
 The longest series in the archive, and **the only one reaching before 1986**. Built from the yearbooks' Table 4, which each volume prints as its own rolling ten-year window, so the volumes overlap and read the same district-years independently.

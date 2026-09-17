@@ -95,6 +95,22 @@ def base_key(name: str, county: str = "") -> str:
     return f"{county_key}|{base}" if county_key else base
 
 
+# A Board of Cooperative Educational Services is a shared agency several
+# districts run together, not a district. The yearbooks list them alongside
+# districts, which is why a volume reports 180-183 reporting units where
+# Colorado had 176 districts.
+#
+# They are flagged, never removed. Their pupils are real and NCES counts them
+# too: dropping the 185 BOCES pupils from 1992 turns an exact match with NCES
+# into a 185-pupil shortfall, and the same in 1993, 1996 and 1999. The count
+# of districts is what was misleading, not the totals.
+BOCES = re.compile(r"\bBOCE?S\b|BOARD OF COOPERATIVE", re.I)
+
+
+def unit_type(name: str) -> str:
+    return "boces" if BOCES.search(str(name)) else "district"
+
+
 # Base keys that need their suffix to stay, because two real districts share
 # the base. Filled by index_district_names() before any key is built.
 _AMBIGUOUS: set[str] = set()
@@ -405,8 +421,8 @@ def main() -> None:
 
     district_grade = [{
         "year": r["year"], "district_code": r["district_code"], "district_name": r["district_name"],
-        "county_name": r["county_name"], "grade": r["grade"], "enrollment": r["enrollment"],
-        "source": r["source"],
+        "county_name": r["county_name"], "unit_type": unit_type(r["district_name"]),
+        "grade": r["grade"], "enrollment": r["enrollment"], "source": r["source"],
     } for r in yb_grades]
 
     # The modern era's district tier is the school panel summed by district.
@@ -420,10 +436,12 @@ def main() -> None:
         district_grade.append({
             "year": year, "district_code": code,
             "district_name": modern_names.get((year, code), ""), "county_name": "",
+            "unit_type": unit_type(modern_names.get((year, code), "")),
             "grade": grade, "enrollment": value, "source": "cde-school-sum",
         })
     write_csv(PROCESSED / "district-enrollment-by-grade.csv", district_grade, [
-        "year", "district_code", "district_name", "county_name", "grade", "enrollment", "source"])
+        "year", "district_code", "district_name", "county_name", "unit_type",
+        "grade", "enrollment", "source"])
 
     # District-year: one continuous fall-membership series, 1977 to the
     # present.
@@ -550,8 +568,10 @@ def main() -> None:
             "source": "cde-school-sum",
         })
 
+    for row in district_year:
+        row["unit_type"] = unit_type(row.get("district_name", ""))
     write_csv(PROCESSED / "district-year.csv", district_year, [
-        "year", "school_year", "district_code", "district_name", "county_name",
+        "year", "school_year", "district_code", "district_name", "county_name", "unit_type",
         "fall_membership", "closing_day_membership", "average_daily_membership", "adae", "source"])
     if overlap_rows:
         agree = sum(1 for r in overlap_rows if r["agree"])
