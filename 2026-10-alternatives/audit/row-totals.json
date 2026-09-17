@@ -1,0 +1,20 @@
+{
+  "1986": {
+    "year": 1986,
+    "status": "checked",
+    "rows_checked": 175,
+    "passed": 175,
+    "failed": 0,
+    "pass_rate": 1.0,
+    "failures": []
+  },
+  "1987": {
+    "year": 1987,
+    "status": "checked",
+    "rows_checked": 177,
+    "passed": 177,
+    "failed": 0,
+    "pass_rate": 1.0,
+    "failures": []
+  }
+}

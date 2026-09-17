@@ -1,0 +1,390 @@
+{
+  "pages": {
+    "10": {
+      "chars": 10167,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "request_id": "qSxiCs52PBpbs1kL1sUS5g"
+    },
+    "11": {
+      "chars": 10664,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": 5.0,
+      "request_id": "Nako1HXz-u5fz6kcmEDsPg"
+    },
+    "12": {
+      "chars": 11877,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": 5.0,
+      "request_id": "D2hht0qMQsRCoj_tfD48ng"
+    },
+    "13": {
+      "chars": 7849,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "request_id": "3GVMDfrYtAmPXW2fY15vhg"
+    },
+    "14": {
+      "chars": 12604,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "request_id": "BlxuPGRfyzUIuZqOP1tSuQ"
+    },
+    "15": {
+      "chars": 11490,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "request_id": "j_oDA090iEpnvqxwKPs8Lw"
+    },
+    "16": {
+      "chars": 13533,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "request_id": "nQkMwyQnugJduiTUOcxyzg"
+    },
+    "17": {
+      "chars": 10537,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": 5.0,
+      "request_id": "zPA8xSb7sXANtHW3hMMLSw"
+    },
+    "18": {
+      "chars": 9249,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "request_id": "IC-Y8Hrg9wcKFf3dskWc-g"
+    },
+    "19": {
+      "chars": 12659,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "request_id": "6OmTnvIv9eOkQmA_x8FScw"
+    },
+    "20": {
+      "chars": 4569,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "request_id": "IsDMWjeLEzJdJ7t5iHfs_g"
+    },
+    "21": {
+      "chars": 5883,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "3Wbx0EdxCTd3DJ6XyyDYNg"
+    },
+    "22": {
+      "chars": 6430,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "BKPOUccnR9tRzDmAsbZTvw"
+    },
+    "23": {
+      "chars": 6487,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "xq3UW7f7iPsW0plqGwAqQg"
+    },
+    "24": {
+      "chars": 6187,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "aAyUHzvENEE6DughInnnyA"
+    },
+    "25": {
+      "chars": 4975,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": 5.0,
+      "request_id": "-P18F5FuHIXf_24W3cSnqQ"
+    },
+    "26": {
+      "chars": 6943,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "-zXHmKbWwqiX2PKEA9QGlQ"
+    },
+    "27": {
+      "chars": 5883,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": 5.0,
+      "request_id": "slLYA7-8rUfm6CSMeXBFNw"
+    },
+    "28": {
+      "chars": 4908,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": 5.0,
+      "request_id": "kQdbzOuMjaRpbwgeKIQNQA"
+    },
+    "29": {
+      "chars": 5917,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "AzG3L8PhGTWt0W7O4YsVzw"
+    },
+    "3": {
+      "chars": 192,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": 3.0,
+      "request_id": "pg_ibVvwrS6stmvvOCyMmA"
+    },
+    "30": {
+      "chars": 6772,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "QX3IFbZSfEGBb-gbIBbdFg"
+    },
+    "4": {
+      "chars": 2623,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "TABLE OF CONTENTS",
+      "quality": null,
+      "request_id": "Zn0DDLoMdaWyRamTzGAi-Q"
+    },
+    "43": {
+      "chars": 1237,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "eqkfj8pQJ-pSOXBpW-JrCQ"
+    },
+    "44": {
+      "chars": 6237,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "8vUO0m-DS8U5VBBCpzCDbA"
+    },
+    "45": {
+      "chars": 6290,
+      "cost_cents": 0,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "GBa1-4gevxU_BF2_wsqOoQ"
+    },
+    "46": {
+      "chars": 5954,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "h8A7HIcBe3yO4G8GafiJiw"
+    },
+    "47": {
+      "chars": 6507,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "CsyLcnCC5Yuc7Z04nDq0YA"
+    },
+    "48": {
+      "chars": 5912,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": 4.667,
+      "request_id": "8x23ctTqbqZnlpG40mHDYQ"
+    },
+    "49": {
+      "chars": 6248,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "4BIVvTsbB_rifmzMofIt3w"
+    },
+    "5": {
+      "chars": 91,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": 5.0,
+      "request_id": "oMb6laKrmMnwKTlmcEke_A"
+    },
+    "50": {
+      "chars": 6531,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "8bUNe3ASY4Hx3J9yaZUadg"
+    },
+    "51": {
+      "chars": 5870,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "oEqUXvRC9tdlHE3YNcsLig"
+    },
+    "52": {
+      "chars": 5901,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "01PPWsoLlT0-FIP0_4vlMg"
+    },
+    "53": {
+      "chars": 6332,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "SiB05raYpmyygjrZNWkQ_w"
+    },
+    "54": {
+      "chars": 6197,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "rFW4kxTLR8fdUNRwj-cfFw"
+    },
+    "55": {
+      "chars": 6374,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "KOWFypPqxPjQBT1bi9Xt6w"
+    },
+    "56": {
+      "chars": 6632,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "PulQG2To1J8U7V-tighKqA"
+    },
+    "57": {
+      "chars": 6367,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "gCEN1rTSHUEPRhRyMbIYyQ"
+    },
+    "58": {
+      "chars": 5943,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "mq5wRM_kSIQNYBQPcmKTxg"
+    },
+    "59": {
+      "chars": 5828,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "40KqMFlvoLHqy3BOKWEUdg"
+    },
+    "6": {
+      "chars": 1231,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "INTRODUCTION",
+      "quality": null,
+      "request_id": "9hOHVQ1xNwawHM2n81f8eQ"
+    },
+    "60": {
+      "chars": 6237,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "KLoB8I0rHvExyEeIuxVRTg"
+    },
+    "61": {
+      "chars": 6374,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": 4.833,
+      "request_id": "wgrg2yfquZSTG3EZh0vu1w"
+    },
+    "62": {
+      "chars": 6405,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "8tVN_xzu3E5ccT3fin32eA"
+    },
+    "7": {
+      "chars": 81,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "",
+      "quality": 5.0,
+      "request_id": "rwUwS4Pi80ce2bXFK17SCg"
+    },
+    "8": {
+      "chars": 5326,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "",
+      "quality": 5.0,
+      "request_id": "kbbG1Y_cFCiv9hQjpLTu8g"
+    },
+    "9": {
+      "chars": 12368,
+      "cost_cents": 0.75,
+      "guessed_table": "district_summary",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "request_id": "wB-n9SbVK7gAeu6GDcWzoA"
+    }
+  },
+  "total_cost_cents": 35.25,
+  "year": 1986
+}

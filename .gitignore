@@ -108,13 +108,10 @@ census_api.json
 # is ready, then add the directory in a commit of its own.
 /2026-08-wildfire/
 
-# Work in progress. 2026-06-budget-tool and 2026-10-donations are not ready to
-# show as finished work, so both directories are untracked here and drop out of
-# the current tree. Unlike 2026-08-wildfire, these two were already committed
-# and pushed before this rule was added — their files and full commit history
-# stay in the repository's git history and on GitHub, and the budget widget
-# stays live at its existing URL. This rule only removes them from what a
-# fresh checkout of main shows today. Delete it and re-add each directory in
-# its own commit when the piece is ready.
-/2026-06-budget-tool/
-/2026-10-donations/
+# 2026-10-alternatives. Two kinds of raw file are left out. The scanned CDE
+# yearbooks are about 110 MB each and are deleted by datalab-ocr.py once its
+# page images are extracted. The NCES CCD API responses are re-downloadable by
+# proof-run.py. Both are checksummed in data/raw/manifest.json, which is what
+# reproducibility needs; the small CDE originals are committed.
+2026-10-alternatives/data/raw/yearbooks/
+2026-10-alternatives/data/raw/ccd-*.json
