@@ -1,0 +1,79 @@
+{
+  "ccd-directory-2001.json": {
+    "bytes": 2089377,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "NCES CCD school directory, Colorado, 2001. Carries teachers_fte.",
+    "sha256": "8a0b376aa4cf37b817233705d31bfb02db6260145b37d18df56240b53a99be97",
+    "url": "https://educationdata.urban.org/api/v1/schools/ccd/directory/2001/?fips=8"
+  },
+  "ccd-directory-2013.json": {
+    "bytes": 2345528,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "NCES CCD school directory, Colorado, 2013. Carries teachers_fte.",
+    "sha256": "b68dde80d9e259baf8dcfc93c35973940404b9fd231caf5421bf238122cb4937",
+    "url": "https://educationdata.urban.org/api/v1/schools/ccd/directory/2013/?fips=8"
+  },
+  "ccd-directory-2023.json": {
+    "bytes": 2529190,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "NCES CCD school directory, Colorado, 2023. Carries teachers_fte.",
+    "sha256": "0133aadc472d3a67fe04038633062c55b7b46ad05da43d78b7616201622963f4",
+    "url": "https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=8"
+  },
+  "ccd-enrollment-2001.json": {
+    "bytes": 1608364,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "NCES CCD enrollment by grade, Colorado, 2001.",
+    "sha256": "14317effe28de6aedfbab3e920b2656c2720e7129b5319800c2b3369add6c8ff",
+    "url": "https://educationdata.urban.org/api/v1/schools/ccd/enrollment/2001/grade-<g>/?fips=8"
+  },
+  "ccd-enrollment-2013.json": {
+    "bytes": 1859738,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "NCES CCD enrollment by grade, Colorado, 2013.",
+    "sha256": "5deaad2925a060eaf830596a021c2e823eb75f6e740212901151cd89eb423086",
+    "url": "https://educationdata.urban.org/api/v1/schools/ccd/enrollment/2013/grade-<g>/?fips=8"
+  },
+  "ccd-enrollment-2023.json": {
+    "bytes": 1977293,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "NCES CCD enrollment by grade, Colorado, 2023.",
+    "sha256": "71ec70fdc198de4ac19a3485ad1f90575cd5a7e8911d9ccbff896ddd4cf06998",
+    "url": "https://educationdata.urban.org/api/v1/schools/ccd/enrollment/2023/grade-<g>/?fips=8"
+  },
+  "membership-2001.pdf": {
+    "bytes": 227260,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "Fall 2001 Pupil Membership by School and Grade Level. PDF only.",
+    "sha256": "e03c5517e33906b1ccdd16594f5e83bea02eb921011ebd232d759418298652db",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/2001/ed59017200113internet.pdf"
+  },
+  "membership-2013.xls": {
+    "bytes": 496640,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "Pupil Membership by School and Grade Level, 2013. XLS.",
+    "sha256": "8b207a75e8981cea14fd5adc6d4508f93118bff28925a904c4062972b3a80df5",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/2013/ed590172013033internet.xls"
+  },
+  "membership-2024.xlsx": {
+    "bytes": 221914,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "2024-25 PK-12 Membership Grade Level by School. XLSX.",
+    "sha256": "ce0b2fc80bb824e35c16d938ebe92803202574d21629b1e1cd02180cd17680d0",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/7efacffc-8335-4735-9b12-fee840351810"
+  },
+  "teacher-fte-2013.pdf": {
+    "bytes": 1735435,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "Pupil-teacher ratios by school, Fall 2013. PDF.",
+    "sha256": "0a135cdca57aee02cce73e7b81584098f5c800ec2d095ee58941dd54ea71de9d",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2013/ed288201308internet.pdf"
+  },
+  "teacher-fte-2024.xlsx": {
+    "bytes": 117535,
+    "fetched_at": "2026-09-17T15:57:53+00:00",
+    "note": "2024-2025 Student Teacher Ratios by School. XLSX.",
+    "sha256": "4e53cd6637a6f3f3abde3e207e1b2b4782737056af0a7a9bd900b397c734fb5a",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/9e71cf39-e241-4258-8475-0bdd9724940e"
+  }
+}

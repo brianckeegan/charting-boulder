@@ -1,0 +1,53 @@
+cff-version: 1.2.0
+title: "Colorado school-level enrollment and teacher FTE archive"
+message: "If you use this archive, please cite it and the underlying sources."
+type: dataset
+authors:
+  - family-names: Keegan
+    given-names: Brian C.
+repository-code: "https://github.com/brianckeegan/charting-boulder"
+url: "https://github.com/brianckeegan/charting-boulder/tree/main/2026-10-alternatives"
+abstract: >-
+  Annual Colorado public-school enrollment by grade with teacher full-time
+  equivalents, plus a district-level panel reaching back to the 1977-78 school
+  year. Built from Colorado Department of Education fall pupil membership and
+  staff statistics, with the National Center for Education Statistics Common
+  Core of Data harmonized alongside and reconciled school by school. The
+  1986-1999 Colorado yearbooks are district grain only and were re-read from
+  the page scans, because their embedded OCR layer loses most numeric columns.
+keywords:
+  - Colorado
+  - public schools
+  - enrollment
+  - pupil membership
+  - teacher full-time equivalents
+  - school closures
+  - education data
+license: MIT
+date-released: "2026-09-17"
+references:
+  - type: data
+    title: "Fall pupil membership"
+    authors:
+      - name: "Colorado Department of Education"
+    url: "https://spl.cde.state.co.us/artemis/edserials/ed59017internet/"
+  - type: data
+    title: "Pupil membership and related information"
+    authors:
+      - name: "Colorado Department of Education"
+    url: "https://spl.cde.state.co.us/artemis/edserials/ed27919internet/"
+  - type: data
+    title: "School/district staff statistics"
+    authors:
+      - name: "Colorado Department of Education"
+    url: "https://ed.cde.state.co.us/cdereval/staffstatistics"
+  - type: data
+    title: "Common Core of Data"
+    authors:
+      - name: "National Center for Education Statistics"
+    url: "https://nces.ed.gov/ccd/"
+  - type: software
+    title: "Education Data Portal API"
+    authors:
+      - name: "Urban Institute"
+    url: "https://educationdata.urban.org/"

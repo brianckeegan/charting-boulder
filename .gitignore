@@ -107,3 +107,11 @@ census_api.json
 # whole directory stays out of the repository. Delete this rule when the piece
 # is ready, then add the directory in a commit of its own.
 /2026-08-wildfire/
+
+# 2026-10-alternatives. Two kinds of raw file are left out. The scanned CDE
+# yearbooks are about 110 MB each and are deleted by datalab-ocr.py once its
+# page images are extracted. The NCES CCD API responses are re-downloadable by
+# proof-run.py. Both are checksummed in data/raw/manifest.json, which is what
+# reproducibility needs; the small CDE originals are committed.
+2026-10-alternatives/data/raw/yearbooks/
+2026-10-alternatives/data/raw/ccd-*.json
