@@ -94,7 +94,16 @@ Schools with a usable latitude: 1,179 of 1,680 in 2001, but **1,860 of 1,860 in 
 
 ## A14 — The row totals confirm the re-OCR, they do not merely look right
 
-Every row in these tables carries its own printed total, which gives a checksum the OCR cannot fake. In the re-OCR of the 1986 Table 2, `CALHAN RJ-1` sums across its sixteen cells to exactly the printed 370, and `HARRISON 2` to exactly the printed 9,463. In Table 4 the four measures for `MAPLETON 1` land on a 1986-87 fall membership of 4,997, which is what Table 2 independently reports for the same district in the same volume. **The cleaning step must run this checksum on every row and record the failures**, because it is the only mechanical proof that a scanned row was read correctly.
+Every row in these tables carries its own printed total, which gives a checksum the OCR cannot fake. In the re-OCR of the 1986 Table 2, `CALHAN RJ-1` sums across its sixteen cells to exactly the printed 370, and `HARRISON 2` to exactly the printed 9,463. In Table 4 the four measures for `MAPLETON 1` land on a 1986-87 fall membership of 4,997, which is what Table 2 independently reports for the same district in the same volume.
+
+Run over whole volumes by `check-row-totals.py`, the result is unambiguous:
+
+| Volume | Rows checked | Grades sum to the printed total |
+|---|---|---|
+| 1986 | 175 | **175 (100%)** |
+| 1987 | 177 | **177 (100%)** |
+
+Every district row in both volumes reconciles. **The cleaning step must run this checksum on every row and record the failures**, because it is the only mechanical proof that a scanned row was read correctly. It is cheap, it is decisive, and on this evidence the re-OCR earns the trust the embedded layer never could.
 
 ## A15 — The default Python user agent is blocked
 
