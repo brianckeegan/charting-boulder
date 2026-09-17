@@ -1,0 +1,150 @@
+{
+  "1986": {
+    "enrollment_district": "pdf"
+  },
+  "1987": {
+    "enrollment_district": "pdf"
+  },
+  "1988": {
+    "enrollment_district": "pdf"
+  },
+  "1989": {
+    "enrollment_district": "pdf"
+  },
+  "1990": {
+    "enrollment_district": "pdf"
+  },
+  "1991": {
+    "enrollment_district": "pdf"
+  },
+  "1992": {
+    "enrollment_district": "pdf"
+  },
+  "1993": {
+    "enrollment_district": "pdf"
+  },
+  "1994": {
+    "enrollment_district": "pdf"
+  },
+  "1995": {
+    "enrollment_district": "pdf"
+  },
+  "1996": {
+    "enrollment_district": "pdf"
+  },
+  "1997": {
+    "enrollment_district": "pdf"
+  },
+  "1998": {
+    "enrollment_district": "pdf"
+  },
+  "1999": {
+    "enrollment_district": "pdf"
+  },
+  "2000": {
+    "teacher_fte_district": "pdf"
+  },
+  "2001": {
+    "enrollment_school": "pdf",
+    "teacher_fte_district": "pdf"
+  },
+  "2002": {
+    "enrollment_school": "pdf",
+    "teacher_fte_district": "pdf"
+  },
+  "2003": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "xls"
+  },
+  "2004": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "xls"
+  },
+  "2005": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "pdf"
+  },
+  "2006": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "pdf"
+  },
+  "2007": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "pdf"
+  },
+  "2008": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "pdf"
+  },
+  "2009": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "pdf"
+  },
+  "2010": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "pdf"
+  },
+  "2011": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "pdf"
+  },
+  "2012": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "pdf"
+  },
+  "2013": {
+    "enrollment_school": "xls",
+    "teacher_fte_district": "pdf",
+    "teacher_fte_school": "pdf"
+  },
+  "2014": {
+    "enrollment_school": "xlsx",
+    "teacher_fte_district": "pdf"
+  },
+  "2015": {
+    "enrollment_school": "xlsx",
+    "teacher_fte_district": "pdf"
+  },
+  "2016": {
+    "enrollment_school": "xlsx",
+    "teacher_fte_district": "pdf",
+    "teacher_fte_school": "pdf"
+  },
+  "2017": {
+    "enrollment_school": "xlsx",
+    "teacher_fte_district": "pdf",
+    "teacher_fte_school": "pdf"
+  },
+  "2018": {
+    "enrollment_school": "xlsx",
+    "teacher_fte_district": "pdf",
+    "teacher_fte_school": "pdf"
+  },
+  "2019": {
+    "enrollment_school": "xlsx",
+    "teacher_fte_district": "pdf",
+    "teacher_fte_school": "pdf"
+  },
+  "2020": {
+    "enrollment_school": "xlsx"
+  },
+  "2021": {
+    "enrollment_school": "xlsx"
+  },
+  "2022": {
+    "enrollment_school": "xlsx",
+    "teacher_fte_district": "xlsx",
+    "teacher_fte_school": "xlsx"
+  },
+  "2023": {
+    "enrollment_school": "xlsx",
+    "teacher_fte_district": "xlsx",
+    "teacher_fte_school": "xlsx"
+  },
+  "2024": {
+    "enrollment_district": "xlsx",
+    "enrollment_school": "xlsx",
+    "teacher_fte_district": "xlsx",
+    "teacher_fte_school": "xlsx"
+  }
+}

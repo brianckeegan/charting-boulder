@@ -57,6 +57,12 @@ YEARS = list(range(1986, 2000))
 WORKERS = 4
 PACE_SECONDS = 6.5
 
+# Page-span settings. MAX_GAP is how many unflagged pages may sit inside one
+# run of a table before it is treated as two tables; MARGIN extends each run
+# at both ends to catch a continuation page past the last repeated heading.
+MAX_GAP = 10
+MARGIN = 4
+
 # The tables worth paying to read, matched against the embedded text layer.
 # Headings drift across fourteen volumes, so each pattern is loose and the
 # page's real identity is taken from what Datalab returns, not from this match.
@@ -145,24 +151,49 @@ def page_images(pdf: bytes) -> list[bytes]:
 
 
 def wanted_pages(texts: list[str]) -> dict[int, str]:
-    """Page index -> which table it looks like. Neighbours are included
-    because the text layer and the image sequence are not always aligned one
-    to one, and a table that runs over a page break has no heading on its
-    later pages."""
+    """Page index -> which table it looks like.
+
+    A long table repeats its heading on most pages but not all, and the
+    embedded OCR layer misses some of the ones it does repeat. Taking only
+    the flagged pages therefore under-covers the table: in the 1986 volume
+    that lost roughly half the districts, because the pages in the gaps were
+    never sent for OCR at all and so were invisible to every later stage.
+
+    So a table is treated as a contiguous SPAN. Each run of flagged pages
+    claims every page from its first to its last, gaps included, plus a
+    margin on each end to catch a continuation page that trails past the last
+    heading. Over-sending costs 0.75 cents a page; under-sending silently
+    loses districts.
+    """
     hits: dict[int, str] = {}
     for i, text in enumerate(texts):
         for label, pattern in WANTED.items():
             if re.search(pattern, text or "", re.I):
                 hits[i] = label
                 break
-    # A table runs until the next different heading, so carry the label
-    # forward across the pages between headings.
+    if not hits:
+        return {}
+
     spread: dict[int, str] = {}
-    for i in sorted(hits):
-        spread[i] = hits[i]
-        for j in (i - 1, i + 1):
-            if 0 <= j < len(texts):
-                spread.setdefault(j, hits[i])
+    flagged = sorted(hits)
+    # Group flagged pages into runs of the same table, allowing a gap of a few
+    # unflagged pages inside one run.
+    run_start = previous = flagged[0]
+    label = hits[run_start]
+
+    def claim(start: int, end: int, table: str) -> None:
+        for j in range(max(0, start - MARGIN), min(len(texts), end + MARGIN + 1)):
+            spread.setdefault(j, table)
+
+    for page in flagged[1:]:
+        same_table = hits[page] == label
+        if same_table and page - previous <= MAX_GAP:
+            previous = page
+            continue
+        claim(run_start, previous, label)
+        run_start = previous = page
+        label = hits[page]
+    claim(run_start, previous, label)
     return spread
 
 

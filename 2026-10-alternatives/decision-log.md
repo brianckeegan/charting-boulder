@@ -30,7 +30,7 @@ Rather than back-filling with a district figure.
 
 Not a choice so much as a finding. Every table in those fourteen yearbooks is by school district; there is no school-level table in the series.
 
-**Consequence.** The school panel starts in 2000. The district panel runs 1977–2025.
+**Consequence.** *On the CDE side* the school panel starts in 2004, the first year with a machine-readable school-grain file the parser reads. NCES CCD carries school-grain data from 1986, so the panel itself runs 1986–2024 with CCD alone for the early years. The district panel runs 1977–2024.
 
 ## D5 — The scanned yearbooks are re-OCR'd through Datalab — 2026-09-17
 
@@ -75,3 +75,25 @@ Documented, but with no pipeline-as-code, no CI, no governance set.
 The CDE spreadsheets and PDFs are committed. The CCD API responses (12 MB for three years) and the yearbook PDFs (about 110 MB each) are not.
 
 **Why.** The CDE originals are small, and government files move and vanish. The large files are re-downloadable and their SHA-256 checksums are recorded in `data/raw/manifest.json`, which is what reproducibility actually requires. This follows the repository's existing practice for the OEWS and QCEW raw directories.
+
+## D11 — The long panel carries no names — 2026-09-17
+
+`school-enrollment-by-grade.csv` holds only identifiers, grade and the two counts. Names, districts and coordinates live in `school-year.csv`.
+
+**Why.** A school has about fourteen grade rows a year. Repeating its name, its district's name and a source filename on each of them made the file 65 MB and added nothing: the values are identical within a school-year. Slimming it to identifiers plus counts took it to 24 MB. Join on `(year, school_code)`.
+
+## D12 — Aggregate rows are excluded by name, not just by code — 2026-09-17
+
+Rows whose code is `9999`, or whose name matches a totals pattern, are dropped from the school tier and counted in the parse report.
+
+**Why.** The 2010 file ends with a STATE TOTALS row coded 9999/9999 carrying all 843,316 pupils. Read as a school it doubled the state exactly. **The row-total checksum did not catch it**, because an aggregate row sums correctly against itself — every one of that year's 1,799 rows passed. Only comparing the school sums against the file's own district rows exposed it.
+
+**What this costs.** A real school named "Totals for Something" would be dropped. None exists in 39 years of data, and the count of excluded rows is reported per file so the trade stays visible.
+
+## D13 — Two known parser gaps are left as gaps — 2026-09-17
+
+2001 and 2002 publish school-by-grade as PDF only; 2003 uses an indented panel layout the parser does not read. All three are left unparsed on the CDE side rather than half-extracted.
+
+**Why.** NCES CCD covers those years at school grain, so the panel has no hole — it simply has one source instead of two, and `source` says which. Writing a third parser shape for three years, when a validated source already covers them, buys accuracy the archive can already get.
+
+**What it costs.** Those years have no second source to reconcile against, and CDE is the count of record everywhere else. The reconciliation table has no row for them, which is the honest representation.

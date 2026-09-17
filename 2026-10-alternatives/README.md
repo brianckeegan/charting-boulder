@@ -8,33 +8,48 @@ Boulder Valley's Resilient Schools proposal treats four closures as a local prob
 
 ## Status
 
-**Early. The archive does not exist yet.** This folder currently holds the proposal for building it, and the audit evidence the proposal rests on.
+**The archive is built.** The school panel runs 1986–2024 and the district panel reaches back to 1977-78. The scanned yearbook tier is still being converted, so the district tier grows as volumes land.
 
-- `TASK.md` — the proposed audit, retrieval and cleaning task
-- `audit/proof-run.md` — sixteen findings, each established by fetching and parsing a real file
-- `proof-run.py` — the probe that produced them, for 2001, 2013 and 2024
-- `datalab-ocr.py` — re-OCR of the scanned 1986–1999 yearbooks; 1986 complete, the rest running
+| | |
+|---|---|
+| School × year × grade | 647,881 rows, 1986–2024 |
+| School × year | 65,841 rows |
+| School registry | 2,723 schools with auto-labelled closures |
+| District × year × grade | 77,377 rows |
+| District × year (trends) | reaches back to **1977-78** |
+
+`audit/validation.md` is the report the pipeline writes about itself, failures included. Do not trust this table over that one — it is regenerated from the data.
 
 ## Layout
 
 ```
 2026-10-alternatives/
-├── TASK.md                 the proposed task: audit, retrieval, cleaning
-├── DATA-DICTIONARY.md      the schema the task is to produce
+├── TASK.md                 the task this folder carries out
+├── DATA-DICTIONARY.md      the schema, as built
 ├── decision-log.md         dated decisions and why
 ├── ROADMAP.md              what is deliberately deferred, and to when
-├── proof-run.py            probe: three years, both sources, harmonized and compared
+├── pipeline/
+│   ├── sources.py          discover every published file -> data/lookups/inventory.csv
+│   ├── fetch.py            download what the inventory says is needed, with a manifest
+│   ├── schema.py           canonical grades, code padding, missing-value rules
+│   ├── extract.py          one parser per source shape
+│   ├── normalize.py        harmonize, join, build the registry, reconcile
+│   └── audit.py            write audit/validation.md from the pipeline's own output
 ├── datalab-ocr.py          re-OCR the scanned yearbooks through the Datalab API
+├── proof-run.py            the original three-year probe, kept as the audit's evidence
 ├── audit/
-│   ├── proof-run.md        the findings, in prose
-│   ├── proof-run.json      the same findings, machine-readable
-│   └── ocr-run.log         the OCR job's transcript
+│   ├── validation.md       the report the pipeline writes about itself
+│   ├── proof-run.md        the sixteen audit findings, in prose
+│   ├── row-totals.json     yearbook checksum results per volume
+│   └── *.log               job transcripts
 └── data/
     ├── raw/                originals as downloaded; never edited
-    │   ├── manifest.json   url, bytes, sha256, fetched-at for every file
-    │   └── yearbooks/      scanned volumes (not committed; large, re-downloadable)
-    ├── interim/            harmonized per-year tables and the OCR markdown
-    └── processed/          the archive itself — empty until the task runs
+    │   ├── cde/            56 CDE spreadsheets and PDFs, with manifest.json
+    │   ├── ccd/            NCES API responses (not committed; re-downloadable)
+    │   └── yearbooks/      scanned volumes (not committed; 110 MB each)
+    ├── interim/            the OCR markdown, one file per converted page
+    ├── lookups/            inventory, coverage, district crosswalk
+    └── processed/          the archive
 ```
 
 ## Data
@@ -61,33 +76,38 @@ The full list is in `audit/proof-run.md`. The findings that most change the work
 
 ## Reproduce
 
-The probe, which needs no key:
+The pipeline, end to end. No key needed — every source but the yearbook re-OCR is open:
 
 ```
 pip install pandas openpyxl xlrd
-python3 proof-run.py
+python3 -m pipeline.sources      # what exists  -> data/lookups/inventory.csv
+python3 -m pipeline.fetch        # download it  -> data/raw/cde/ + manifest
+python3 -m pipeline.normalize    # harmonize    -> data/processed/
+python3 -m pipeline.audit        # check it     -> audit/validation.md
 ```
 
-The re-OCR, which needs a [Datalab](https://www.datalab.to/) key:
+The yearbook re-OCR needs a [Datalab](https://www.datalab.to/) key, and costs about 0.75 cents a page:
 
 ```
 export DATALAB_API_KEY=...
-python3 datalab-ocr.py            # all volumes, 1986-1999
-python3 datalab-ocr.py 1986       # one volume
+python3 datalab-ocr.py                 # all volumes, 1986-1999
+python3 audit/check-row-totals.py      # verify them against their printed totals
 ```
 
-Both are resumable: a file already downloaded, or a page already converted, is skipped.
+Every step is resumable: a file already downloaded, or a page already converted, is skipped.
 
 ## Limitations
 
-These apply to the archive as designed, and will move into the data dictionary as it is built.
+Fuller detail, and the per-column missingness, is in `DATA-DICTIONARY.md`.
 
 - Nothing here is causal, and nothing here is a forecast. The archive is a count of pupils and teachers by school and year.
 - A school's disappearance from the panel is auto-labelled and never hand-checked, so the closure count is approximate everywhere. A closure, a merger, a rename and a code change can look alike from the data.
 - CDE's count is a single October day, and CCD's is collected on its own basis. The two agree closely but are not the same measurement.
 - Pre-kindergarten exists on the CDE side only.
 - School coordinates come from a recent directory carried backward. A school that moved buildings carries its later location.
-- The 2000–2002 school tables are extracted from PDFs and may not reach the accuracy of the spreadsheet years.
+- CDE publishes no machine-readable school-grain file before 2004. For 1986–2003 the school panel is NCES CCD alone, with no second source to check it against.
+- The 2003 file uses an indented panel layout the parser does not read; 2001 and 2002 are PDF only. Those three years are CCD-only as a result.
+- From 2021 the two sources diverge by 6,000 to 16,000 pupils. The gap is concentrated in multi-district online and charter schools, which CDE reports centrally and CCD attributes differently; before 2021 the two agree to within a few hundred.
 - County is not district, and district is not attendance area. None of these boundaries nest cleanly.
 
 ## Column

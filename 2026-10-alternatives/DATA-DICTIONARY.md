@@ -1,6 +1,6 @@
 # Data dictionary
 
-The schema `TASK.md` is to produce. **Nothing in `data/processed/` exists yet** — this describes the target, so that the cleaning step is written against a stated contract rather than inventing one as it goes. Columns marked *planned* have no data behind them today.
+The schema of `data/processed/`, as built. Row counts and year spans are in `audit/validation.md`, which is regenerated from the data itself rather than maintained by hand.
 
 Conventions that hold everywhere in this archive:
 
@@ -10,7 +10,7 @@ Conventions that hold everywhere in this archive:
 - Every table carries a `source` column, so a row can always be traced to the file it came from.
 - Long format throughout. One row per observation, not one column per year.
 
-## `school-enrollment-by-grade.csv` *(planned)*
+## `school-enrollment-by-grade.csv`
 
 The core panel. One row per school per year per grade.
 
@@ -19,13 +19,15 @@ The core panel. One row per school per year per grade.
 | `year` | integer | Fall of the school year |
 | `ncessch` | string | NCES school id, 12 characters. The stable key across renames and code changes |
 | `school_code` | string | CDE school code, 4 digits. Not unique statewide in every year |
-| `district_code` | string | CDE district code, 4 digits |
+| `district_code` | string | CDE district code, 4 digits. Empty where only CCD covers the year |
 | `grade` | string | `PK`, `K`, `1` … `12`. See the grade notes below |
 | `enrollment_cde` | integer | CDE October count. Empty where CDE publishes no school-grain file that year |
-| `enrollment_ccd` | integer | NCES CCD. Empty before 1986, after 2023, and for `PK` in every year |
-| `source` | string | Which file each value came from |
+| `enrollment_ccd` | integer | NCES CCD. Empty before 1986, after 2024, and for `PK` in every year |
+| `source` | string | `cde`, `ccd`, or `both` — which sources contributed this cell |
 
-## `school-year.csv` *(planned)*
+This table is deliberately narrow. Names, district names and coordinates are **not** repeated here; they live in `school-year.csv`, one row per school-year instead of once per grade row. Carrying them on all fourteen grade rows of every school made the file 65 MB and added no information. Join on `(year, school_code)`.
+
+## `school-year.csv`
 
 One row per school per year. Identity, totals and the things that are not per-grade.
 
@@ -37,14 +39,13 @@ One row per school per year. Identity, totals and the things that are not per-gr
 | `enrollment_total_cde` | integer | Sum across grades. Checked against the file's own printed total |
 | `enrollment_total_ccd` | integer | CCD grade code 99, where published |
 | `teacher_fte_cde` | decimal | From the staff series. Empty before about 2013 and in years CDE reports district grain only |
-| `teacher_fte_ccd` | decimal | CCD `teachers_fte`, 1986–2023 |
-| `pupil_teacher_ratio_cde` | decimal | As CDE publishes it, not recomputed |
+| `teacher_fte_ccd` | decimal | CCD `teachers_fte`, 1986–2024 |
+| `enrollment_reported_in_fte_file` | integer | The staff file's own enrollment count. Not a duplicate of `enrollment_total_cde` — it is an independent figure, and a disagreement is a crosswalk fault worth investigating |
 | `latitude`, `longitude` | decimal | Carried backward from a recent CCD directory. Empty where no directory year gives a real value |
 | `is_charter` | boolean | CCD `charter`. Empty before 2000, which is when CCD starts carrying it |
 | `status` | string | CCD `school_status`: open, closed, new, added, inactive, reopened |
-| `row_total_check` | string | `pass`, `fail`, or `not_applicable`. See the checksum note below |
 
-## `schools.csv` *(planned)*
+## `schools.csv`
 
 One row per school, not per school-year. The registry.
 
@@ -59,49 +60,53 @@ One row per school, not per school-year. The registry.
 | `closure_confidence` | string | `high`, `medium`, `low`. **Never hand-verified** — see `decision-log.md`, D6 |
 | `closure_evidence` | string | What produced the label: CCD status, a code reuse, a near name match |
 
-## `district-enrollment-by-grade.csv` *(planned)*
+## `district-enrollment-by-grade.csv`
 
-District × year × grade, 1986–2025. Carries two columns the school tier does not, because the yearbooks report them: `special_education` and `ungraded`.
+`year, district_code, district_name, county_name, grade, enrollment, source`. Two eras, distinguished by `source`: the re-OCR'd yearbooks (`yearbook-<year>`), and the modern years summed up from the school panel (`cde-school-sum`). The yearbook era carries the `SPECIAL_EDUCATION` and `UNGRADED` grade codes, which the school tier does not.
 
-## `district-year.csv` *(planned)*
+## `district-year.csv`
 
-District × year, **1977–2025** — the longest series in the archive, and the only one reaching before 1986. From the yearbooks' Table 4 and Table 1.
+The longest series in the archive, and **the only one reaching before 1986**. Built from the yearbooks' Table 4, which each volume prints as its own rolling ten-year window, so the volumes overlap and read the same district-years independently.
 
 | Column | Type | Notes |
 |---|---|---|
-| `year`, `district_code`, `district_name`, `county_name` | | County appears in the yearbooks and in CDE files before about 2019 |
-| `fall_membership` | integer | The October count, comparable to every other year in the archive |
-| `closing_day_membership` | integer | Yearbooks only. Empty for the volume's own final year, which had not happened when it was printed |
-| `average_daily_membership` | decimal | Yearbooks only |
-| `adae` | decimal | Average daily attendance equivalent. Yearbooks only |
-| `schools_elementary`, `schools_middle`, `schools_senior`, `schools_other`, `schools_total` | integer | Yearbook Table 1 |
-| `staff_certificated`, `staff_noncertificated`, `classroom_teachers` | decimal | Yearbook Table 1 |
-| `pupil_teacher_ratio`, `teacher_student_ratio` | decimal | As published |
-| `dropout_rate` | decimal | Grades 10–12 only, as the yearbooks define it |
-| `source_volume`, `source_page` | string | Which yearbook and which page, so any figure can be checked against the scan |
+| `year` | integer | Fall of the school year |
+| `school_year` | string | As printed, e.g. `1977-78` |
+| `district_code` | string | Matched by name; empty where no modern district carries that name |
+| `district_name`, `county_name` | string | As printed in the yearbook |
+| `fall_membership` | integer | The October count, comparable to the rest of the archive |
+| `closing_day_membership` | integer | Empty for each volume's own final year, which had not happened when it was printed |
+| `average_daily_membership` | decimal | |
+| `adae` | decimal | Average daily attendance equivalent |
+| `source` | string | Which volume and table the row came from |
 
-## `source-reconciliation.csv` *(planned)*
+The yearbooks' Table 1 (school counts, staff, pupil/teacher ratio, dropout rate) is converted and sits in `data/interim/yearbooks/`, but is **not yet parsed into this table**. See `ROADMAP.md`.
 
-One row per school per overlapping year. `enrollment_cde`, `enrollment_ccd`, `difference`, `difference_excluding_prek`, and `expected_reason` where the gap has a known cause.
+## `source-reconciliation.csv`
+
+One row **per year**, not per school: the two sources compared across the whole state. `cde_schools`, `ccd_schools`, `matched`, `exact_agreement`, `median_abs_diff`, `cde_total`, `ccd_total`, `cde_prek`, `ccd_prek`, `gap_excluding_prek`.
 
 ## Grade notes
 
 - **`PK` is CDE-only.** NCES CCD publishes no pre-kindergarten rows for Colorado in any year checked. On the CCD side `PK` is *missing*, not zero. Colorado's PK is roughly 31,800 pupils a year, so treating it as zero would understate CCD by about 3.6% and make the two sources look irreconcilable when they are not.
-- **`K` is a sum.** CDE publishes Half-Day K and Full-Day K as separate columns; CCD and the yearbooks publish one undivided K. The archive sums them and also keeps `k_half` and `k_full` in `school-year.csv`, because the split is itself informative.
+- **`K` is a sum.** CDE publishes Half-Day K and Full-Day K as separate columns from about 2014; CCD and the yearbooks publish one undivided K. The archive sums them. The half/full split is **not** preserved separately — recovering it means going back to the raw file, which `data/raw/cde/` keeps.
 - **Grade headers are ordinals in the source** (`1st` … `12th`), and are stored here as bare numbers.
 - **`special_education` and `ungraded`** appear in the yearbooks' district tables and in some school files. They are kept as their own categories and are never folded into a numbered grade.
 
 ## The row-total check
 
-Every source table prints its own row total. The cleaning step sums the grade cells and compares. `row_total_check` records the outcome, and both numbers are kept when they disagree. This matters most for the scanned 1986–1999 tier, where it is the only mechanical proof that an OCR'd row was read correctly — in the 1986 volume, `CALHAN RJ-1` sums to exactly its printed 370 and `HARRISON 2` to exactly its printed 9,463.
+Every source table prints its own row total. The cleaning step sums the grade cells and compares, and the pass and fail counts per file land in `audit/validation.md` and `audit/normalize-report.json`. The check is **not** carried as a column on each row.
+
+It has one blind spot worth stating plainly: an aggregate row passes it. The 2010 file ends with a STATE TOTALS row coded 9999 carrying all 843,316 pupils, and that row sums correctly against itself — read as a school it doubled the state exactly while every checksum passed. Only comparing school sums against the district rows caught it. This matters most for the scanned 1986–1999 tier, where it is the only mechanical proof that an OCR'd row was read correctly — in the 1986 volume, `CALHAN RJ-1` sums to exactly its printed 370 and `HARRISON 2` to exactly its printed 9,463.
 
 ## Known missingness, by design
 
 | Cell | Why |
 |---|---|
 | School-level anything, 1986–1999 on the CDE side | The yearbooks have no school-level table |
-| `enrollment_ccd`, 2024–2025 | CCD had not released those years at the time of the audit |
-| `teacher_fte_cde`, before about 2013 | CDE published teacher counts by district only |
+| `enrollment_cde`, 1986–2003 | CDE publishes no machine-readable school-grain file; CCD covers those years |
+| `enrollment_ccd`, 2025 | CCD has not released it |
+| `teacher_fte_cde`, all but 2013, 2016–2019 and 2022–2024 | CDE publishes school-grain teacher FTE in those eight years only; CCD carries it from 1986 |
 | `is_charter`, before 2000 | CCD does not carry the flag that far back |
 | `latitude` / `longitude`, schools that closed before about 2013 | No directory year gives them a real coordinate |
 | `closing_day_membership`, each volume's own final year | Not yet observed when the volume was printed |
