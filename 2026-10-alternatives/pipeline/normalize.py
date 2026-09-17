@@ -439,6 +439,43 @@ def main() -> None:
               f"{exact:,} exact, gap ex-PK {recon[-1]['gap_excluding_prek']:+,}")
     write_csv(PROCESSED / "source-reconciliation.csv", recon, list(recon[0].keys()) if recon else ["year"])
 
+    # ---- district reconciliation, the yearbook tier's real check ----------
+    # The row-total checksum can only speak for rows it was given, and it
+    # passes on an aggregate row that sums correctly against itself - which is
+    # exactly how a "** STATE TOTALS:" row doubled three volumes while every
+    # checksum reported clean. Summing each volume's numbered grades and
+    # comparing against NCES for the same year is the check that caught it,
+    # because NCES is collected independently of the scanned book.
+    print("\nReconciling the yearbook tier against NCES")
+    district_recon = []
+    ccd_by_year: dict[int, int] = defaultdict(int)
+    for row in ccd_enrollment:
+        if row["grade"] != "UNGRADED":
+            ccd_by_year[row["year"]] += row["enrollment"]
+    yb_by_year: dict[int, int] = defaultdict(int)
+    yb_districts: dict[int, set] = defaultdict(set)
+    for row in yb_grades:
+        yb_districts[row["year"]].add(row["district_name"])
+        if row["grade"] not in ("SPECIAL_EDUCATION", "UNGRADED", "PK"):
+            yb_by_year[row["year"]] += row["enrollment"]
+    for year in sorted(yb_by_year):
+        ccd_total = ccd_by_year.get(year)
+        if not ccd_total:
+            continue
+        diff = yb_by_year[year] - ccd_total
+        district_recon.append({
+            "year": year,
+            "districts": len(yb_districts[year]),
+            "yearbook_k12": yb_by_year[year],
+            "ccd_k12": ccd_total,
+            "difference": diff,
+            "pct_difference": round(diff / ccd_total, 6),
+        })
+        print(f"  {year}: yearbook {yb_by_year[year]:,} vs NCES {ccd_total:,}  {diff:+,} ({diff / ccd_total:+.2%})")
+    if district_recon:
+        write_csv(PROCESSED / "district-reconciliation.csv", district_recon,
+                  list(district_recon[0].keys()))
+
     report["counts"] = {
         "school_enrollment_rows": len(panel),
         "school_year_rows": len(school_year_rows),

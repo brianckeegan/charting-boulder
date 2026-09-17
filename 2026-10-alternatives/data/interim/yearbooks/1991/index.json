@@ -1,5 +1,70 @@
 {
   "pages": {
+    "1": {
+      "chars": 691,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO STATE BOARD OF EDUCATION 1992",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "10": {
+      "chars": 3265,
+      "cost_cents": 0,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1987 THROUGH FALL 1991 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "KMyF0wk-J2MHGfpcDd7buw"
+    },
+    "11": {
+      "chars": 3329,
+      "cost_cents": 0,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1987 THROUGH FALL 1991 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "MsqpQXD5QYU9yVvk0rDOuw"
+    },
+    "12": {
+      "chars": 3621,
+      "cost_cents": 0,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1987 THROUGH FALL 1991 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "y_fRKpEq4IMXIEgZWj6CqQ"
+    },
+    "13": {
+      "chars": 3198,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1987 THROUGH FALL 1991 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "GxyJ2orcFkaujpK4vwnWcw"
+    },
+    "14": {
+      "chars": 3495,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1987 THROUGH FALL 1991 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "hDvHHrAlLN_x69umxXPXdQ"
+    },
+    "15": {
+      "chars": 3429,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1987 THROUGH FALL 1991 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "0_N-1LaF-ZObNx15PT7_ow"
+    },
+    "16": {
+      "chars": 3363,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1987 THROUGH FALL 1991 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "TS4id6rZBZ8Inu-qdRve3g"
+    },
     "17": {
       "chars": 4155,
       "cost_cents": 0.75,
@@ -23,6 +88,15 @@
       "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
       "quality": null,
       "request_id": "RGM3Mls-N3fwIOipu9HqFA"
+    },
+    "2": {
+      "chars": 315,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "PUPIL MEMBERSHIP AND RELATED INFORMATION - FALL 1991",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
     },
     "20": {
       "chars": 7633,
@@ -104,6 +178,15 @@
       "quality": null,
       "request_id": "gJ26tVPqmDgVMljWwJnFPQ"
     },
+    "3": {
+      "chars": 563,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "ACKNOWLEDGEMENTS",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
     "30": {
       "chars": 5892,
       "cost_cents": 0.75,
@@ -160,6 +243,14 @@
       "quality": null,
       "request_id": "rHbaCVHUIa0MfVD7ZV_k_g"
     },
+    "37": {
+      "chars": 4340,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "YGAMxJSBDFx2a0P6cHiuTQ"
+    },
     "38": {
       "chars": 4621,
       "cost_cents": 0.75,
@@ -200,6 +291,30 @@
       "quality": 5.0,
       "request_id": "1GueBA6cCG8oybssWtn09Q"
     },
+    "42": {
+      "chars": 5781,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "90ZVWv5SmYjquKdXYPVnbQ"
+    },
+    "43": {
+      "chars": 4734,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "7CDQoesWigHMr9Afw69XMg"
+    },
+    "44": {
+      "chars": 4559,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "I81w9mfmluuUMkHN088jvQ"
+    },
     "5": {
       "chars": 2262,
       "cost_cents": 0.75,
@@ -215,9 +330,36 @@
       "heading": "INTRODUCTION",
       "quality": 5.0,
       "request_id": "KCpytEc9bmlqwh4MbuV0Mw"
+    },
+    "7": {
+      "chars": 229,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "8": {
+      "chars": 4331,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "ILLUSTRATION 1:",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "9": {
+      "chars": 6271,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "ILLUSTRATION 2:",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
     }
   },
-  "pages_on_disk": 27,
-  "total_cost_cents": 20.25,
+  "pages_on_disk": 44,
+  "total_cost_cents": 26.25,
   "year": 1991
 }

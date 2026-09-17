@@ -1,5 +1,93 @@
 {
   "pages": {
+    "0": {
+      "chars": 624,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "PUPIL MEMBERSHIP AND RELATED INFORMATION FALL 1992",
+      "quality": 5.0,
+      "request_id": "KPZr8yf-I_exDpaWpyVmTQ"
+    },
+    "1": {
+      "chars": 1031,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO STATE BOARD OF EDUCATION",
+      "quality": 5.0,
+      "request_id": "o1i19V5qdr06-XMlhPK-UQ"
+    },
+    "10": {
+      "chars": 4677,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "ILLUSTRATION 2",
+      "quality": 5.0,
+      "request_id": "wvJ5YfBBrr78uTBkBM6-dA"
+    },
+    "11": {
+      "chars": 4610,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "ILLUSTRATION 3",
+      "quality": 5.0,
+      "request_id": "x9e93gsH2NQ0HD61oMD83Q"
+    },
+    "12": {
+      "chars": 3264,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1988 THROUGH FALL 1992 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "nJCpbRJBXY9lQL9MqFEgSw"
+    },
+    "13": {
+      "chars": 3328,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1988 THROUGH FALL 1992 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "RvOdN3UsylT8py_0ViCv1A"
+    },
+    "14": {
+      "chars": 3622,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": 5.0,
+      "request_id": "J3K9WdrmI02PDdeYMqQPdQ"
+    },
+    "15": {
+      "chars": 3197,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1988 THROUGH FALL 1992 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "vt902TSK3v3uaLRZRt6WiQ"
+    },
+    "16": {
+      "chars": 3494,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1988 THROUGH FALL 1992 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "Oq-MqJalNGkyXfb4MvNhQA"
+    },
+    "17": {
+      "chars": 3728,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1988 THROUGH FALL 1992 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "faHY9DcjSA-Fcgx28fM07A"
+    },
+    "18": {
+      "chars": 3068,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1988 THROUGH FALL 1992 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "fWJ11q_43tTiQ6thl-cy5g"
+    },
     "19": {
       "chars": 4032,
       "cost_cents": 0.75,
@@ -7,6 +95,14 @@
       "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN STUDENT MEMBERSHIP FALL 1988 THROUGH FALL 1992 BY SCHOOL DISTRICT",
       "quality": null,
       "request_id": "ker83XkvLG3uFTNmYNQrgw"
+    },
+    "2": {
+      "chars": 406,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "PUPIL MEMBERSHIP AND RELATED INFORMATION - FALL 1992",
+      "quality": null,
+      "request_id": "AbarXeAWoUaBhjoWAoLjrw"
     },
     "20": {
       "chars": 10712,
@@ -168,6 +264,14 @@
       "quality": 5.0,
       "request_id": "AqZG-s02z4dG7bXZg5zxAw"
     },
+    "39": {
+      "chars": 4339,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "n2JM20O7UNFdf5R20Ron8A"
+    },
     "4": {
       "chars": 2962,
       "cost_cents": 0.75,
@@ -216,6 +320,30 @@
       "quality": null,
       "request_id": "Eym_3oNtTsYa_MREzSR3sg"
     },
+    "45": {
+      "chars": 3869,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "BNNynkOEGTHak_7hmdtA1w"
+    },
+    "46": {
+      "chars": 4558,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "JgCZCk1G2N91vHJwx3rJQw"
+    },
+    "47": {
+      "chars": 5521,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "Vu5s-9va_d_lfV6MYXE2rg"
+    },
     "5": {
       "chars": 2,
       "cost_cents": 0.75,
@@ -223,9 +351,41 @@
       "heading": "",
       "quality": 5.0,
       "request_id": "loeBGva6qnz8OkTUv3_IDw"
+    },
+    "6": {
+      "chars": 3318,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "INTRODUCTION",
+      "quality": null,
+      "request_id": "SYrUriQJr2nv6nOXQCbNlQ"
+    },
+    "7": {
+      "chars": 7643,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "Colorado Public Education Facts",
+      "quality": 5.0,
+      "request_id": "lz_1QTwjjjIIdgSeiWTE3w"
+    },
+    "8": {
+      "chars": 5103,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": 5.0,
+      "request_id": "CxG4HpPyYKVLIMhrdJ1Hdw"
+    },
+    "9": {
+      "chars": 3877,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "ILLUSTRATION 1 STUDENT MEMBERSHIP IN COLORADO'S TEN LARGEST AND DENVER/METRO AREA DISTRICTS",
+      "quality": 5.0,
+      "request_id": "WTPlit_vE2a9fhF-8w1bjw"
     }
   },
-  "pages_on_disk": 28,
-  "total_cost_cents": 21.0,
+  "pages_on_disk": 48,
+  "total_cost_cents": 36.0,
   "year": 1992
 }

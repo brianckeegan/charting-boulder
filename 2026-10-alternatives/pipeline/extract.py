@@ -269,7 +269,7 @@ def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dic
         return [], {"error": "volume not finished - no index.json"}
     index = json.loads(index_path.read_text())
 
-    records, checks = [], {"pass": 0, "fail": 0}
+    records, checks, aggregates = [], {"pass": 0, "fail": 0}, 0
     for page, record in sorted(index["pages"].items(), key=lambda kv: int(kv[0])):
         if "BY SCHOOL DISTRICT AND GRADE" not in (record.get("heading") or "").upper():
             continue
@@ -299,6 +299,21 @@ def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dic
             continue
         total_idx = max(grade_cols) + 1
 
+        # On some pages Datalab drops the ungraded column outright - not just
+        # its header, the whole column - so the row is one value short and its
+        # grade cells sum to slightly less than the printed total. St. Vrain
+        # summed 15,938 against a printed 16,099, which reads like an OCR
+        # error but is a missing column, and it accounted for most of the
+        # "failures" from 1990 on.
+        #
+        # This is recorded rather than repaired, because the values are not in
+        # the markdown to recover. It costs nothing the archive needs: summing
+        # the 1992 yearbook's numbered grades and subtracting pre-K gives
+        # 602,791, and NCES independently reports 602,791 for the same 180
+        # districts - exact to the pupil. The numbered grades are intact; only
+        # the ungraded count is lost on those pages.
+        has_ungraded = "UNGRADED" in grade_cols.values()
+
         county = ""
         for cells in rows[start:]:
             joined = " ".join(cells)
@@ -310,6 +325,20 @@ def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dic
                 continue
             name = cells[0].strip()
             if not re.search(r"[A-Za-z]", name) or name.upper().startswith("COUNTY"):
+                continue
+            # The same aggregate-row trap as the 2010 CDE file, and it was
+            # missed here because the guard was only wired into the other
+            # parser. These volumes end with a "** STATE TOTALS:" row, and
+            # read as a district it doubles the state exactly: 1989 came to
+            # 1,108,896 against the 554,296 NCES reports. 1989, 1991 and 1994
+            # were all doubled, all at 100.00%, and every row-total checksum
+            # passed throughout - an aggregate row sums correctly against
+            # itself. Only the independent NCES comparison exposed it.
+            #
+            # "DENVER COUNTY" and "JEFFERSON COUNTY" are real districts, so
+            # the pattern requires the word TOTALS rather than COUNTY alone.
+            if AGGREGATE_ROW.search(name.upper()):
+                aggregates += 1
                 continue
 
             totals: dict[str, int] = {}
@@ -353,10 +382,15 @@ def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dic
             # stop being visible among them.
             if total_idx is not None and total_idx < len(cells):
                 printed = parse_count(cells[total_idx])
-                if printed is not None:
-                    checks["pass" if sum(totals.values()) == printed else "fail"] += 1
-                else:
+                if printed is None:
                     checks["not_checkable"] = checks.get("not_checkable", 0) + 1
+                elif sum(totals.values()) == printed:
+                    checks["pass"] += 1
+                elif not has_ungraded and sum(totals.values()) < printed:
+                    # Short by exactly the column the page is missing.
+                    checks["ungraded_column_missing"] = checks.get("ungraded_column_missing", 0) + 1
+                else:
+                    checks["fail"] += 1
             else:
                 checks["not_checkable"] = checks.get("not_checkable", 0) + 1
 
@@ -365,6 +399,9 @@ def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dic
         "records": len(records),
         "row_total_pass": checks["pass"],
         "row_total_fail": checks["fail"],
+        "row_total_ungraded_column_missing": checks.get("ungraded_column_missing", 0),
+        "row_total_not_checkable": checks.get("not_checkable", 0),
+        "aggregate_rows_excluded": aggregates,
     }
 
 
