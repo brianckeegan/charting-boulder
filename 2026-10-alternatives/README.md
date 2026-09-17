@@ -1,94 +1,193 @@
 # 2026-10-alternatives
 
+A cleaned archive of Colorado public-school enrollment and teaching staff, built from four sources spanning 1977 to 2024.
+
 ## Question
 
 Which Colorado schools have closed, when, and where were they? And what would a steady-state distribution of schools look like under the State Demography Office's forecasts to 2050 and 2060?
 
-Boulder Valley's Resilient Schools proposal treats four closures as a local problem with a local answer. Colorado has been closing and opening schools for forty years. The archive built here is the evidence base for asking whether Boulder's situation is unusual, and for modelling what a district that stopped losing pupils would actually look like.
+Boulder Valley's Resilient Schools proposal treats four closures as a local problem with a local answer. Colorado has been opening and closing schools for forty years. This archive is the evidence base for asking whether Boulder's situation is unusual, and for modelling what a district that stopped losing pupils would look like. The model itself is a separate task (`ROADMAP.md`); the archive is shaped to feed it.
 
-## Status
+## What is here
 
-**Early. The archive does not exist yet.** This folder currently holds the proposal for building it, and the audit evidence the proposal rests on.
+| Table | Rows | Span | Grain |
+|---|---:|---|---|
+| `school-enrollment-by-grade.csv` | 647,881 | 1986–2024 | school × year × grade |
+| `school-year.csv` | 65,841 | 1986–2024 | school × year |
+| `schools.csv` | 2,723 | — | school |
+| `district-enrollment-by-grade.csv` | 93,326 | 1986–2024 | district × year × grade |
+| `district-year.csv` | 7,852 | **1977–2024** | district × year |
+| `source-reconciliation.csv` | 21 | 2004–2024 | year |
+| `district-reconciliation.csv` | 14 | 1986–1999 | year |
+| `district-year-overlap.csv` | 1,269 | 1977–1987 | district × year |
 
-- `TASK.md` — the proposed audit, retrieval and cleaning task
-- `audit/proof-run.md` — sixteen findings, each established by fetching and parsing a real file
-- `proof-run.py` — the probe that produced them, for 2001, 2013 and 2024
-- `datalab-ocr.py` — re-OCR of the scanned 1986–1999 yearbooks; 1986 complete, the rest running
+All in `data/processed/`, long format, UTF-8. `DATA-DICTIONARY.md` documents every column; `audit/validation.md` is the report the pipeline writes about itself and is regenerated from the data rather than maintained by hand.
+
+## How good is it
+
+Two checks, both against sources collected independently of the documents being read.
+
+**The scanned 1986–1999 yearbooks, against NCES.** Each volume's numbered grades summed and compared:
+
+| Year | Diff | Year | Diff | Year | Diff |
+|---|---:|---|---:|---|---:|
+| 1986 | +261 | 1991 | +5 | 1996 | **0** |
+| 1987 | +861 | 1992 | **0** | 1997 | **0** |
+| 1988 | **−3,842** | 1993 | **0** | 1998 | **0** |
+| 1989 | +152 | 1994 | **0** | 1999 | **0** |
+| 1990 | **0** | 1995 | +42 | | |
+
+Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the one weak volume**, at −0.70% with three genuine row-total failures; treat it with more caution than the rest.
+
+**The modern CDE spreadsheets, against NCES**, school by school. From 2005 to 2020 the two agree to within a few hundred pupils out of 850,000, several years exactly. From 2021 they diverge by 6,000 to 16,000, concentrated in multi-district online and charter schools that CDE reports centrally and NCES attributes differently — a real difference in attribution, not a parse fault.
+
+**A third check, internal.** Each yearbook reprints the previous nine years, so most district-years are read twice. **1,267 of 1,269 agree exactly (99.8%)** — two OCR passes over the same printed figures. `district-year-overlap.csv` carries every comparison.
+
+## Sources
+
+| Source | Supplies | Years | Role |
+|---|---|---|---|
+| [CDE Artemis ED5/90.17](https://spl.cde.state.co.us/artemis/edserials/ed59017internet/) | School enrollment by grade | 2004–2018 | Spine |
+| [CDE pupil-membership archives](https://ed.cde.state.co.us/cdereval/pupilmembership-statistics/data-insights-resources-archives) | School enrollment by grade | 2019–2024 | Spine |
+| [CDE staff statistics](https://ed.cde.state.co.us/cdereval/staffstatistics) | Teacher FTE by school | 2022–2024 | Spine |
+| [CDE Artemis ED2/79.19](https://spl.cde.state.co.us/artemis/edserials/ed27919internet/) | District enrollment by grade; district trends | 1986–1999, and 1977–1985 via the 1986 volume | District tier |
+| [NCES CCD](https://nces.ed.gov/ccd/), via the [Urban Institute API](https://educationdata.urban.org/) | School enrollment by grade, teacher FTE, coordinates, charter flag, status | 1986–2024 | Secondary, harmonized and compared |
+
+CDE is the count of record wherever it publishes. NCES is carried alongside it in its own columns and compared, never silently substituted. The `source` column on every row says which contributed.
+
+## Schema
+
+Full detail in `DATA-DICTIONARY.md`. The shape:
+
+```
+school-enrollment-by-grade.csv   the core panel, deliberately narrow
+  year, ncessch, school_code, district_code, grade,
+  enrollment_cde, enrollment_ccd, source
+
+school-year.csv                  everything that is not per-grade
+  year, ncessch, school_code, district_code, school_name, district_name,
+  enrollment_total_cde, enrollment_total_ccd,
+  teacher_fte_cde, teacher_fte_ccd, enrollment_reported_in_fte_file,
+  latitude, longitude, is_charter, status
+
+schools.csv                      the registry, one row per school
+  ncessch, school_codes, names, district_codes, first_year, last_year,
+  closure_label, closure_confidence, closure_evidence, latitude, longitude
+
+district-year.csv                the longest series, 1977 onward
+  year, school_year, district_code, district_name, county_name, unit_type,
+  fall_membership, closing_day_membership, average_daily_membership, adae, source
+```
+
+Three conventions worth knowing before you join anything:
+
+- **Codes are zero-padded strings.** `0010` is a district; `10.0` is a bug. Read them as text.
+- **The grade panel carries no names.** A school has fourteen grade rows a year and its name is identical on all of them, so names live in `school-year.csv`. Join on `(year, school_code)`.
+- **`ncessch` is the stable key.** A CDE school code is not unique statewide in every year, and it changes. The NCES id survives renames and recodes, which is what the registry keys on.
+
+## Coverage, honestly
+
+| | |
+|---|---|
+| School enrollment, CDE | 2004–2024 |
+| School enrollment, NCES | 1986–2024 |
+| **Teacher FTE by school, CDE** | **2022–2024 only** |
+| Teacher FTE by school, NCES | 1986–2024 |
+| District enrollment by grade | 1986–2024 |
+| District fall membership | **1977–2024**, except 2000–2003 |
+| Coordinates | 64,744 of 65,841 school-years |
+
+Two gaps are deliberate and one is not:
+
+- **2000–2003 has no district row, and 2001–2003 no CDE school data.** 2001 and 2002 publish school-by-grade as PDF only; 2003 uses an indented panel layout the parser does not read. NCES covers those years at school grain, so the school panel has no hole — it has one source instead of two.
+- **CDE publishes school-grain teacher FTE in eight years** (2013, 2016–2019, 2022–2024), but five of those are PDFs the parser does not read. Only the three spreadsheet years are in the archive. Those five PDFs could go through the same OCR path as the yearbooks; see `ROADMAP.md`.
+- **The yearbooks' Table 1** — school counts, staff, pupil/teacher ratio, dropout rate — is converted and sits in `data/interim/yearbooks/` but is not yet parsed into any table.
+
+## Closures
+
+`schools.csv` labels a school's disappearance from the panel, from the data alone:
+
+| Label | Confidence | Schools |
+|---|---|---:|
+| still_open | high | 1,934 |
+| closed | high | 614 |
+| renamed | low | 101 |
+| closed | medium | 57 |
+| code_changed | low | 17 |
+
+**Never hand-verified**, by decision (`decision-log.md`, D6). A closure, a merger, a rename and a code change can look alike from the data, and the confidence column is the honest part of this table. Anything labelled `low` should be checked before it carries weight.
 
 ## Layout
 
 ```
 2026-10-alternatives/
-├── TASK.md                 the proposed task: audit, retrieval, cleaning
-├── DATA-DICTIONARY.md      the schema the task is to produce
-├── decision-log.md         dated decisions and why
-├── ROADMAP.md              what is deliberately deferred, and to when
-├── proof-run.py            probe: three years, both sources, harmonized and compared
+├── README.md               this file
+├── TASK.md                 the task this folder carries out
+├── DATA-DICTIONARY.md      every column, its units and its missingness
+├── decision-log.md         fourteen dated decisions and why
+├── ROADMAP.md              what is deferred, and to when
+├── CHANGELOG.md            what changed, and what broke on the way
+├── pipeline/
+│   ├── sources.py          discover what exists  -> data/lookups/inventory.csv
+│   ├── fetch.py            download what is needed, with a checksummed manifest
+│   ├── schema.py           canonical grades, code padding, missing-value rules
+│   ├── extract.py          one parser per source shape
+│   ├── normalize.py        harmonize, join, build the registry, reconcile
+│   └── audit.py            write audit/validation.md from the pipeline's output
 ├── datalab-ocr.py          re-OCR the scanned yearbooks through the Datalab API
+├── proof-run.py            the original three-year probe, kept as the audit's evidence
 ├── audit/
-│   ├── proof-run.md        the findings, in prose
-│   ├── proof-run.json      the same findings, machine-readable
-│   └── ocr-run.log         the OCR job's transcript
+│   ├── validation.md       the report the pipeline writes about itself
+│   ├── proof-run.md        the sixteen findings the task was designed against
+│   ├── check-row-totals.py the yearbook checksum, as a reusable check
+│   └── row-totals.json     its results per volume
 └── data/
-    ├── raw/                originals as downloaded; never edited
-    │   ├── manifest.json   url, bytes, sha256, fetched-at for every file
-    │   └── yearbooks/      scanned volumes (not committed; large, re-downloadable)
-    ├── interim/            harmonized per-year tables and the OCR markdown
-    └── processed/          the archive itself — empty until the task runs
+    ├── raw/cde/            56 CDE originals with manifest.json (sha256, URL, date)
+    ├── raw/ccd/            NCES API responses (not committed; re-downloadable)
+    ├── raw/yearbooks/      scanned volumes (not committed; 110 MB each)
+    ├── interim/yearbooks/  the OCR markdown, one file per converted page
+    ├── lookups/            inventory, coverage map, district crosswalk
+    └── processed/          the archive
 ```
-
-## Data
-
-| Dataset | Source | Access | Grain and years |
-|---|---|---|---|
-| Fall pupil membership by school and grade | [CDE Artemis ED5/90.17](https://spl.cde.state.co.us/artemis/edserials/ed59017internet/) | Committed originals | School × grade, 2000–2024 |
-| Pupil membership, current era | [CDE pupil-membership archives](https://ed.cde.state.co.us/cdereval/pupilmembership-statistics/data-insights-resources-archives) | Committed originals | School × grade, 2019–2025 |
-| Pupil membership and related information | [CDE Artemis ED2/79.19](https://spl.cde.state.co.us/artemis/edserials/ed27919internet/) | Re-OCR'd; PDFs not committed | District × grade, 1986–1999; district trends from 1977-78 |
-| School and district staff statistics | [CDE Artemis ED2.88](https://spl.cde.state.co.us/artemis/edserials/ed288internet/) and [CDE staff statistics](https://ed.cde.state.co.us/cdereval/staffstatistics) | Committed originals | Teacher FTE by school, about 2013–2025; by district, 1986–2025 |
-| Common Core of Data | [NCES](https://nces.ed.gov/ccd/), via the [Urban Institute Education Data API](https://educationdata.urban.org/) | API; responses not committed | School enrollment by grade, teacher FTE, coordinates, charter flag, status, 1986–2023 |
-
-CDE is the count of record wherever it publishes. CCD is harmonized alongside it and compared school by school, never silently substituted.
-
-## What the audit established
-
-The full list is in `audit/proof-run.md`. The findings that most change the work:
-
-- **The 1986–1999 yearbooks have no school-level table.** Every table in them is by district. Those fourteen years cannot feed a school-level archive at all, whatever is done about the OCR.
-- **But they reach back further than expected.** The 1986 volume's Table 4 is a ten-year district panel, 1977-78 to 1986-87, on four measures. That extends the district tier nine years earlier than the series' own start.
-- **The scans' embedded OCR keeps words and loses numbers.** The district-by-grade table recovers 3.9% of its cells; the staff table recovers none. Re-OCR through Datalab returns the complete grid, and the tables' own printed row totals prove it: `HARRISON 2` sums across sixteen cells to exactly the printed 9,463.
-- **CDE and NCES agree to 0.03%.** In 2013, school by school, 1,781 of 1,826 schools matched and 1,257 agreed exactly. The statewide gap is 31,967 pupils — of which 31,741 is pre-kindergarten, which CCD does not publish for Colorado. Excluding it, the gap is 226.
-- **Teacher FTE at school grain is much younger than enrollment.** Roughly 2013 onward on the CDE side, and not in every year. CCD carries it from 1986, which is the main reason CCD is in the archive at all.
 
 ## Reproduce
 
-The probe, which needs no key:
+The pipeline needs no key — every source but the yearbook re-OCR is open:
 
 ```
 pip install pandas openpyxl xlrd
-python3 proof-run.py
+python3 -m pipeline.sources      # what exists  -> data/lookups/inventory.csv
+python3 -m pipeline.fetch        # download it  -> data/raw/cde/ + manifest
+python3 -m pipeline.normalize    # harmonize    -> data/processed/
+python3 -m pipeline.audit        # check it     -> audit/validation.md
 ```
 
-The re-OCR, which needs a [Datalab](https://www.datalab.to/) key:
+The yearbook re-OCR needs a [Datalab](https://www.datalab.to/) key and costs about 0.75 cents a page — roughly $6 for all fourteen volumes:
 
 ```
 export DATALAB_API_KEY=...
-python3 datalab-ocr.py            # all volumes, 1986-1999
-python3 datalab-ocr.py 1986       # one volume
+python3 datalab-ocr.py                 # all volumes, 1986-1999
+python3 audit/check-row-totals.py      # verify against their printed totals
 ```
 
-Both are resumable: a file already downloaded, or a page already converted, is skipped.
+Every step is resumable: a file already downloaded, or a page already converted, is skipped.
 
 ## Limitations
 
-These apply to the archive as designed, and will move into the data dictionary as it is built.
+- Nothing here is causal and nothing is a forecast. It is a count of pupils and teachers by school and year.
+- **CDE's count is a single October day**; NCES collects on its own basis. They agree closely, but they are not the same measurement.
+- **Pre-kindergarten is CDE-only.** NCES publishes no pre-K for Colorado in any year, so `enrollment_ccd` is *missing* for PK, never zero. Colorado's PK is about 31,800 pupils a year, so treating it as zero makes the two sources look irreconcilable when they are not.
+- **Kindergarten is a sum.** CDE splits Half-Day K and Full-Day K from about 2014; the archive adds them. The split is not preserved — recover it from `data/raw/cde/`.
+- **Coordinates are carried backward** from a recent NCES directory, so a school that moved buildings carries its later location.
+- **BOCES are not districts.** Boards of Cooperative Educational Services appear alongside districts in the yearbooks and are flagged `unit_type = 'boces'`, not removed — NCES counts their pupils too, and dropping them breaks four exact reconciliations. Filter to count districts; leave them in to total pupils.
+- **71 yearbook rows are short by exactly the ungraded column**, which the OCR drops on some pages. The numbered grades are unaffected.
+- County is not district, and district is not attendance area. None of these boundaries nest.
 
-- Nothing here is causal, and nothing here is a forecast. The archive is a count of pupils and teachers by school and year.
-- A school's disappearance from the panel is auto-labelled and never hand-checked, so the closure count is approximate everywhere. A closure, a merger, a rename and a code change can look alike from the data.
-- CDE's count is a single October day, and CCD's is collected on its own basis. The two agree closely but are not the same measurement.
-- Pre-kindergarten exists on the CDE side only.
-- School coordinates come from a recent directory carried backward. A school that moved buildings carries its later location.
-- The 2000–2002 school tables are extracted from PDFs and may not reach the accuracy of the spreadsheet years.
-- County is not district, and district is not attendance area. None of these boundaries nest cleanly.
+## A note on checking
+
+Ten bugs surfaced building this, and every one produced plausible output. A header read as `1.0` filed first-graders as grade 10. A `STATE TOTALS` row doubled the state in the 2010 CDE file and again in three yearbook volumes. Page selection skipped continuation pages, losing half the districts in a volume. Two columns headed `District Code` collapsed 2006 to a single district.
+
+**Row-total checksums caught none of the worst four.** An aggregate row sums correctly against itself, and a page never converted cannot fail a test it is never given. Only comparison against an independently collected source exposed them — which is why `district-reconciliation.csv` and `source-reconciliation.csv` are pipeline outputs rather than something done once by hand.
 
 ## Column
 

@@ -1,5 +1,21 @@
 {
   "pages": {
+    "0": {
+      "chars": 347,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "**PUPIL MEMBERSHIP AND RELATED INFORMATION FALL 1986**",
+      "quality": null,
+      "request_id": "XY_mE5dA_d-x3C1fLVE48g"
+    },
+    "1": {
+      "chars": 532,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "**COLORADO STATE BOARD OF EDUCATION 1987**",
+      "quality": null,
+      "request_id": "FIgPlrgkl7V2fxS1yJ0bTg"
+    },
     "10": {
       "chars": 10167,
       "cost_cents": 0.75,
@@ -79,6 +95,14 @@
       "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
       "quality": null,
       "request_id": "6OmTnvIv9eOkQmA_x8FScw"
+    },
+    "2": {
+      "chars": 222,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "PUPIL MEMBERSHIP AND RELATED INFORMATION FALL 1986",
+      "quality": 5.0,
+      "request_id": "22JPDm6irQlDJQsbtxsn2Q"
     },
     "20": {
       "chars": 4569,
@@ -176,6 +200,30 @@
       "quality": null,
       "request_id": "QX3IFbZSfEGBb-gbIBbdFg"
     },
+    "31": {
+      "chars": 4368,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "KoK9sjiquRBv9aNMIjsusA"
+    },
+    "32": {
+      "chars": 5772,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "kj43g9sPSzCjLgTTF92KVQ"
+    },
+    "33": {
+      "chars": 3913,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "LhS8uifMCokIBGzJEHHYvg"
+    },
     "4": {
       "chars": 2623,
       "cost_cents": 0.75,
@@ -183,6 +231,30 @@
       "heading": "TABLE OF CONTENTS",
       "quality": null,
       "request_id": "Zn0DDLoMdaWyRamTzGAi-Q"
+    },
+    "40": {
+      "chars": 4968,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "wFgERrxEzTvQz-JnGaJPrw"
+    },
+    "41": {
+      "chars": 5122,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "WQO62f9f4E-I1c_nRS_THg"
+    },
+    "42": {
+      "chars": 6045,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "WNZHLLv6fKAZshcis2W_Vw"
     },
     "43": {
       "chars": 1237,
@@ -360,6 +432,30 @@
       "quality": null,
       "request_id": "8tVN_xzu3E5ccT3fin32eA"
     },
+    "63": {
+      "chars": 5975,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "vPEuL0eocgE6RF9BmpogiQ"
+    },
+    "64": {
+      "chars": 6566,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "lbzixv_NUpbRN8U-ym1Omg"
+    },
+    "65": {
+      "chars": 5954,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION TRENDS IN ENROLLMENT 1977-78 - 1986-87 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "lE5Y2glRGDZtXgKJWwXquQ"
+    },
     "7": {
       "chars": 81,
       "cost_cents": 0.75,
@@ -385,6 +481,7 @@
       "request_id": "wB-n9SbVK7gAeu6GDcWzoA"
     }
   },
-  "total_cost_cents": 35.25,
+  "pages_on_disk": 60,
+  "total_cost_cents": 44.25,
   "year": 1986
 }

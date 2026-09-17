@@ -1,0 +1,418 @@
+{
+  "pages": {
+    "0": {
+      "chars": 1435,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "PUPIL MEMBERSHIP AND RELATED INFORMATION FALL 1996",
+      "quality": 4.667,
+      "request_id": "1gBZBPcmfpD4SETuPBZlRA"
+    },
+    "1": {
+      "chars": 2,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": 5.0,
+      "request_id": "hQKyWujPckgFiIpY89DHGQ"
+    },
+    "10": {
+      "chars": 3602,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "ILLUSTRATION 2",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "11": {
+      "chars": 6586,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "12": {
+      "chars": 5665,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "13": {
+      "chars": 6111,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "14": {
+      "chars": 6306,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "15": {
+      "chars": 5442,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "16": {
+      "chars": 6334,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "17": {
+      "chars": 5888,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "18": {
+      "chars": 5740,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "19": {
+      "chars": 5242,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "2": {
+      "chars": 412,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "**PUPIL MEMBERSHIP AND RELATED INFORMATION - FALL 1996**",
+      "quality": 5.0,
+      "request_id": "dtfg9hLh3GTCSGVId7vTQA"
+    },
+    "20": {
+      "chars": 6138,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN COLORADO PUBLIC SCHOOL STUDENT MEMBERSHIP BY SCHOOL DISTRICT",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "21": {
+      "chars": 10703,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "22": {
+      "chars": 10856,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "23": {
+      "chars": 7623,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "24": {
+      "chars": 10598,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "25": {
+      "chars": 10173,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "26": {
+      "chars": 8582,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "27": {
+      "chars": 9762,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "28": {
+      "chars": 12600,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "29": {
+      "chars": 10468,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "3": {
+      "chars": 973,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "ACKNOWLEDGEMENTS",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "30": {
+      "chars": 11508,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "31": {
+      "chars": 10773,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "32": {
+      "chars": 9818,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "33": {
+      "chars": 5678,
+      "cost_cents": 0,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": 5.0,
+      "request_id": "jOgdi-l7A8dnTVA3jg1HgA"
+    },
+    "34": {
+      "chars": 5350,
+      "cost_cents": 0,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": 5.0,
+      "request_id": "grXvXxkvCmtm-UzCvWU0Dw"
+    },
+    "35": {
+      "chars": 4014,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "fDZadS_0NDXEVFenkobX2A"
+    },
+    "36": {
+      "chars": 5610,
+      "cost_cents": 0,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": 5.0,
+      "request_id": "HFbt6W6z_YVQMhngzpLWPQ"
+    },
+    "37": {
+      "chars": 4341,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": 5.0,
+      "request_id": "Fl-TdDHb3iKn1zAoRORBOw"
+    },
+    "38": {
+      "chars": 5877,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "SgQxc-K6wqJ6Syd6IfJaHg"
+    },
+    "39": {
+      "chars": 4829,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": 5.0,
+      "request_id": "Y_RlJSzVPVKbHrlKqWiJBw"
+    },
+    "4": {
+      "chars": 2650,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "TABLE OF CONTENTS",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "40": {
+      "chars": 4330,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "4wUMNwUxt8M9TWa03OAXHA"
+    },
+    "41": {
+      "chars": 4746,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": 5.0,
+      "request_id": "BnywzpNPZdPTOQvlLBj29w"
+    },
+    "42": {
+      "chars": 4302,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "2qa0zxKshSy4s69JD2BCIg"
+    },
+    "43": {
+      "chars": 6810,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "V7syI4JELPZRvzkxu1oUtg"
+    },
+    "44": {
+      "chars": 3815,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "pzQmf1dYhLsbzf-AN5N7Eg"
+    },
+    "45": {
+      "chars": 5771,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "GG8puvcSEWNPY7-z-DRkWg"
+    },
+    "46": {
+      "chars": 4724,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "bvASKuRfYb1s1VX4dGxelQ"
+    },
+    "47": {
+      "chars": 4549,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "A04Lul4Kndp8CAHwI4OQ8A"
+    },
+    "5": {
+      "chars": 2,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "6": {
+      "chars": 2988,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "INTRODUCTION",
+      "quality": null,
+      "request_id": "EH6HjsjhIshIwX0AoDYLQw"
+    },
+    "7": {
+      "chars": 8533,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "Colorado Public Education Facts",
+      "quality": 4.833,
+      "request_id": "aK2uYyvoupOKJXGoDou4JQ"
+    },
+    "8": {
+      "chars": 4519,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": 5.0,
+      "request_id": "zZAXPojnjDtnwF5XftPebQ"
+    },
+    "9": {
+      "chars": 4455,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "ILLUSTRATION 1 STUDENT MEMBERSHIP IN COLORADO'S TEN LARGEST AND DENVER/METRO AREA DISTRICTS",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    }
+  },
+  "pages_on_disk": 48,
+  "total_cost_cents": 13.5,
+  "year": 1996
+}

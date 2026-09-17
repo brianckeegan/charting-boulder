@@ -115,3 +115,5 @@ census_api.json
 # reproducibility needs; the small CDE originals are committed.
 2026-10-alternatives/data/raw/yearbooks/
 2026-10-alternatives/data/raw/ccd-*.json
+2026-10-alternatives/data/raw/ccd/
+2026-10-alternatives/data/raw/indexes/

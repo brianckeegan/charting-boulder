@@ -1,5 +1,21 @@
 {
   "pages": {
+    "0": {
+      "chars": 299,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "PUPIL MEMBERSHIP AND RELATED INFORMATION FALL 1987",
+      "quality": null,
+      "request_id": "LgTH8v78OnkkpYc15k9tiQ"
+    },
+    "1": {
+      "chars": 467,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO STATE BOARD OF EDUCATION",
+      "quality": 5.0,
+      "request_id": "c2U7nyvzB04Ep8_33DAwag"
+    },
     "10": {
       "chars": 10791,
       "cost_cents": 0.75,
@@ -79,6 +95,14 @@
       "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
       "quality": null,
       "request_id": "9MCFxxcvU3FNMc7YUWX4RQ"
+    },
+    "2": {
+      "chars": 302,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "PUPIL MEMBERSHIP AND RELATED INFORMATION - FALL 1987",
+      "quality": 5.0,
+      "request_id": "UZadBm0--71a55kkUZw3aw"
     },
     "20": {
       "chars": 11018,
@@ -192,6 +216,30 @@
       "quality": null,
       "request_id": "5a8ipPX5XY9MX9iVCpSS6Q"
     },
+    "33": {
+      "chars": 4789,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "K1p8KBv3SYuwTK1JL0Flkw"
+    },
+    "34": {
+      "chars": 4581,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "XE15MplnGEIhZPoAcTJaCw"
+    },
+    "35": {
+      "chars": 5627,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "nYHHTzlGECar9UeRU1eO4w"
+    },
     "4": {
       "chars": 1858,
       "cost_cents": 0.75,
@@ -199,6 +247,30 @@
       "heading": "TABLE OF CONTENTS",
       "quality": 5.0,
       "request_id": "FCxFtchnDB6b9NzBDjU3ug"
+    },
+    "40": {
+      "chars": 4086,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "9_IzsCLmZrA1DaHhr80NjQ"
+    },
+    "41": {
+      "chars": 4121,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "jWeinWEE0JvBpgDvlX8ZoA"
+    },
+    "42": {
+      "chars": 6045,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "eiMnVNfNy3VYUwjtKYjGAw"
     },
     "43": {
       "chars": 1097,
@@ -344,6 +416,14 @@
       "quality": null,
       "request_id": "8PKa9Emt40M86jIO8XnGKA"
     },
+    "6": {
+      "chars": 1627,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "INTRODUCTION",
+      "quality": 4.667,
+      "request_id": "oRFi0Kp7p0wIrtabSu3iUw"
+    },
     "60": {
       "chars": 6248,
       "cost_cents": 0.75,
@@ -408,6 +488,38 @@
       "quality": null,
       "request_id": "eaI2k3NO2fwkcC8-MluUjg"
     },
+    "68": {
+      "chars": 6014,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION LISTING OF 1987 SPRING AND SUMMER GRADUATES BY DISTRICT, ETHNIC AND SEX",
+      "quality": null,
+      "request_id": "YdvuePCUeVM3R8wxuMsgZw"
+    },
+    "69": {
+      "chars": 6329,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION LISTING OF 1987 SPRING AND SUMMER GRADUATES BY DISTRICT, ETHNIC AND SEX",
+      "quality": 5.0,
+      "request_id": "6g9OylgnuP8V5uHExAXEFQ"
+    },
+    "7": {
+      "chars": 1080,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": 5.0,
+      "request_id": "njS76uMdx2le-A_pQvA5cw"
+    },
+    "70": {
+      "chars": 6329,
+      "cost_cents": 0.75,
+      "guessed_table": "district_trends",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION LISTING OF 1987 SPRING AND SUMMER GRADUATES BY DISTRICT, ETHNIC AND SEX",
+      "quality": null,
+      "request_id": "m_uhRAHOYL7izj6WuPpnXw"
+    },
     "8": {
       "chars": 2322,
       "cost_cents": 0.75,
@@ -425,6 +537,7 @@
       "request_id": "Ufk7m8cR7gJJ24CcwpI5Ug"
     }
   },
-  "total_cost_cents": 39.75,
+  "pages_on_disk": 67,
+  "total_cost_cents": 50.25,
   "year": 1987
 }
