@@ -65,21 +65,64 @@ DISTRICT_SUFFIX = re.compile(
     r"\b(RE|R|J|JT|RJ|RD|C|UD)?[-\s]?\d+\s*(J|JT|J1|A)?$", re.I)
 
 
+def split_district_name(name: str) -> tuple[str, str]:
+    """Split a district name into its base and its organisational suffix.
+
+    The suffix is printed inconsistently across volumes - the same district is
+    "AGATE" in one book and "AGATE 300" in the next, "CALHAN" and "CALHAN
+    RJ-1", "AULT-HIGHLAND RE-9" and "AULT-HIGHLAND" - and some names carry a
+    footnote asterisk. So it cannot simply be kept, or the same district fails
+    to match itself across two books.
+
+    Nor can it simply be dropped: Garfield RE-2 (Rifle, about 1,560 pupils)
+    and Garfield 16 (Parachute, about 165) are different districts in the same
+    county, distinguishable only by that suffix. `district_key` therefore
+    keeps it only where it does real work.
+    """
+    text = re.sub(r"[*†‡]", " ", str(name).upper())
+    text = re.sub(r"[^A-Z0-9 -]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    match = re.search(r"\s((?:RE|R|J|JT|RJ|RD|C|UD)?[- ]?\d+[A-Z]*)$", text)
+    if match:
+        return text[:match.start()].strip(), re.sub(r"[^A-Z0-9]", "", match.group(1))
+    return text, ""
+
+
+def base_key(name: str, county: str = "") -> str:
+    base, _ = split_district_name(name)
+    base = re.sub(r"[^A-Z0-9]", "", base)
+    county_key = re.sub(r"[^A-Z]", "", str(county).upper())
+    return f"{county_key}|{base}" if county_key else base
+
+
+# Base keys that need their suffix to stay, because two real districts share
+# the base. Filled by index_district_names() before any key is built.
+_AMBIGUOUS: set[str] = set()
+
+
+def index_district_names(rows: list[dict]) -> None:
+    """Find the base names that more than one district actually uses."""
+    suffixes: dict[str, set] = defaultdict(set)
+    for row in rows:
+        key = base_key(row.get("district_name", ""), row.get("county_name", ""))
+        _, suffix = split_district_name(row.get("district_name", ""))
+        if suffix:
+            suffixes[key].add(suffix)
+    _AMBIGUOUS.clear()
+    _AMBIGUOUS.update(k for k, found in suffixes.items() if len(found) > 1)
+
+
 def district_key(name: str, county: str = "") -> str:
     """A comparable key for a district name.
 
-    The yearbooks print "MAPLETON 1" and "SANGRE DE CRISTO RE-22J"; the modern
-    CDE files print "Mapleton 1" and "Sangre De Cristo Re-22j". The trailing
-    organisational suffix is the least stable part across forty years, so it
-    is stripped and the county is used to disambiguate the remainder.
+    County plus base name, with the organisational suffix appended only where
+    two real districts share that base (see `index_district_names`).
     """
-    text = re.sub(r"[^A-Z0-9 ]", " ", str(name).upper())
-    text = re.sub(r"\s+", " ", text).strip()
-    text = DISTRICT_SUFFIX.sub("", text).strip()
-    text = re.sub(r"\b(SCHOOL DISTRICT|SCHOOLS|DISTRICT|COUNTY)\b", "", text).strip()
-    text = re.sub(r"\s+", " ", text)
-    county_key = re.sub(r"[^A-Z]", "", str(county).upper())
-    return f"{county_key}|{text}" if county_key else text
+    key = base_key(name, county)
+    if key in _AMBIGUOUS:
+        _, suffix = split_district_name(name)
+        return f"{key}#{suffix}" if suffix else key
+    return key
 
 
 def build_district_crosswalk(cde_school_records: list[dict]) -> dict[str, dict]:
@@ -382,24 +425,141 @@ def main() -> None:
     write_csv(PROCESSED / "district-enrollment-by-grade.csv", district_grade, [
         "year", "district_code", "district_name", "county_name", "grade", "enrollment", "source"])
 
-    # District-year: the yearbook trends table, which is the only source
-    # reaching before 1986.
+    # District-year: one continuous fall-membership series, 1977 to the
+    # present.
+    #
+    # Each volume reprints the previous nine years, so most district-years are
+    # read from two or more books, and summing them all gave 700,000 pupils
+    # for 1978 against Colorado's actual 560,000.
+    #
+    # One volume supplies each year outright, rather than merging readings
+    # district by district across books.
+    #
+    # Merging looked reasonable and was not. The same district is "AGATE" in
+    # one volume and "AGATE 300" in the next, "CALHAN" and "CALHAN RJ-1",
+    # "DOLORES COUNTY RE NO" and "DOLORES RE-2" - real renames as well as
+    # inconsistent printing. Matching by name reached 82%, and the residue
+    # double-counted, inflating 1978 to 700,000 pupils against Colorado's
+    # actual 560,000. A name-matching rule good enough for a total would have
+    # to be perfect, and this one cannot be.
+    #
+    # Taking every row for a year from a single volume removes the problem
+    # instead of mitigating it. Name matching is still used for the overlap
+    # comparison below, where failing to match two readings costs a
+    # comparison rather than corrupting a sum.
+    volumes_by_year: dict[int, set] = defaultdict(set)
+    for row in yb_trends:
+        volumes_by_year[row["year"]].add(int(re.search(r"yearbook-(\d{4})", row["source"]).group(1)))
+    chosen_volume = {
+        year: (year if year in found else min(found))
+        for year, found in volumes_by_year.items()
+    }
+
+    # The series: every row from the year's chosen volume, keyed on the name
+    # exactly as that volume prints it. No cross-volume matching is involved,
+    # so a rename cannot double-count.
+    index_district_names(yb_trends + yb_grades + cde_school)
     trend_index: dict[tuple, dict] = {}
     for row in yb_trends:
+        volume = int(re.search(r"yearbook-(\d{4})", row["source"]).group(1))
+        if volume != chosen_volume.get(row["year"]):
+            continue
+        key = (row["year"], row["district_name"], row["county_name"])
         hit = (crosswalk.get(district_key(row["district_name"], row["county_name"]))
                or crosswalk.get(district_key(row["district_name"])))
-        key = (row["year"], row["district_name"])
-        entry = trend_index.setdefault(key, {
+        record = trend_index.setdefault(key, {
             "year": row["year"], "school_year": row["school_year"],
             "district_code": hit["district_code"] if hit else "",
             "district_name": row["district_name"], "county_name": row["county_name"],
-            "source": row["source"],
+            "source": f"yearbook-{volume}-table4",
         })
-        entry[row["measure"]] = row["value"]
+        record.setdefault(row["measure"], row["value"])
+
+    # The overlap comparison is separate, and only here does name matching
+    # matter: failing to match two readings costs a comparison, not a sum.
+    readings: dict[tuple, list[dict]] = defaultdict(list)
+    for row in yb_trends:
+        if row["measure"] != "fall_membership":
+            continue
+        volume = int(re.search(r"yearbook-(\d{4})", row["source"]).group(1))
+        readings[(row["year"], district_key(row["district_name"], row["county_name"]))].append(
+            {**row, "volume": volume})
+
+    overlap_rows = []
+    for key, entries in readings.items():
+        year, _ = key
+        by_measure = {"fall_membership": entries}
+        chosen = min(entries, key=lambda e: abs(e["volume"] - year))
+        # Two volumes reading the same printed figure is two independent OCR
+        # passes over one source. Where they disagree, one of them is wrong,
+        # and the size of the disagreement measures the OCR directly - against
+        # the book itself rather than against NCES.
+        fall = by_measure.get("fall_membership", [])
+        if len(fall) > 1:
+            values = {e["volume"]: e["value"] for e in fall}
+            distinct = set(values.values())
+            overlap_rows.append({
+                "year": year,
+                "district_name": chosen["district_name"],
+                "county_name": chosen["county_name"],
+                "volumes": ";".join(str(v) for v in sorted(values)),
+                "readings": ";".join(f"{v}:{int(values[v])}" for v in sorted(values)),
+                "agree": len(distinct) == 1,
+                "spread": int(max(distinct) - min(distinct)),
+                "chosen_volume": chosen["volume"],
+                "chosen_value": int(chosen["value"]),
+            })
+
     district_year = sorted(trend_index.values(), key=lambda r: (r["year"], r["district_name"]))
+
+    # 1986-1999 comes from each volume's own grade table rather than its
+    # trends table. The ten-year, four-measure Table 4 only exists in the
+    # early volumes; from about 1992 the books print a shorter five-year
+    # trend instead, and 1988 and 1999 print none at all. The grade table is
+    # in every volume and is the better source anyway - summed and compared
+    # against NCES it lands within 0.00% in several years.
+    covered = {row["year"] for row in district_year}
+    grade_totals: dict[tuple, dict] = {}
+    for row in yb_grades:
+        if row["year"] in covered or row["grade"] in ("SPECIAL_EDUCATION", "UNGRADED"):
+            continue
+        key = (row["year"], row["district_name"], row["county_name"])
+        entry = grade_totals.setdefault(key, {
+            "year": row["year"], "school_year": f"{row['year']}-{str(row['year'] + 1)[2:]}",
+            "district_code": row.get("district_code", ""),
+            "district_name": row["district_name"], "county_name": row["county_name"],
+            "fall_membership": 0, "source": f"{row['source']}-grades",
+        })
+        entry["fall_membership"] += row["enrollment"]
+    district_year.extend(grade_totals.values())
+
+    # Extend the same series through the modern era by summing the school
+    # panel, so one column carries fall membership from 1977 to the present.
+    modern_totals: dict[tuple, int] = defaultdict(int)
+    for row in cde_school:
+        if row["grade"] not in ("SPECIAL_EDUCATION", "UNGRADED"):
+            modern_totals[(row["year"], row["district_code"])] += row["enrollment"]
+    for (year, code), value in sorted(modern_totals.items()):
+        if not code:
+            continue
+        district_year.append({
+            "year": year, "school_year": f"{year}-{str(year + 1)[2:]}",
+            "district_code": code,
+            "district_name": modern_names.get((year, code), ""),
+            "county_name": "", "fall_membership": value,
+            "source": "cde-school-sum",
+        })
+
     write_csv(PROCESSED / "district-year.csv", district_year, [
         "year", "school_year", "district_code", "district_name", "county_name",
         "fall_membership", "closing_day_membership", "average_daily_membership", "adae", "source"])
+    if overlap_rows:
+        agree = sum(1 for r in overlap_rows if r["agree"])
+        print(f"  overlapping district-years: {len(overlap_rows):,}, "
+              f"{agree:,} agree exactly ({agree / len(overlap_rows):.1%})")
+        write_csv(PROCESSED / "district-year-overlap.csv",
+                  sorted(overlap_rows, key=lambda r: (-r["spread"], r["year"])),
+                  list(overlap_rows[0].keys()))
 
     # ---- reconciliation --------------------------------------------------
     print("\nReconciling CDE against CCD")

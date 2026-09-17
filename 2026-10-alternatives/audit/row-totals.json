@@ -78,10 +78,10 @@
   "1991": {
     "year": 1991,
     "status": "checked",
-    "rows_checked": 165,
-    "passed": 154,
-    "failed": 11,
-    "pass_rate": 0.9333,
+    "rows_checked": 181,
+    "passed": 169,
+    "failed": 12,
+    "pass_rate": 0.9337,
     "failures": [
       {
         "page": "p031.md",
@@ -124,6 +124,12 @@
         "row": "THOMPSON",
         "summed": 12160,
         "printed": 12265
+      },
+      {
+        "page": "p037.md",
+        "row": "MONTROSE COUNTY",
+        "summed": 4576,
+        "printed": 4607
       },
       {
         "page": "p039.md",
@@ -325,6 +331,180 @@
   },
   "1996": {
     "year": 1996,
-    "status": "incomplete - no index.json"
+    "status": "checked",
+    "rows_checked": 170,
+    "passed": 163,
+    "failed": 7,
+    "pass_rate": 0.9588,
+    "failures": [
+      {
+        "page": "p034.md",
+        "row": "CHEYENNE COUNTY",
+        "summed": 351,
+        "printed": 352
+      },
+      {
+        "page": "p035.md",
+        "row": "CONSOLIDATED",
+        "summed": 447,
+        "printed": 448
+      },
+      {
+        "page": "p035.md",
+        "row": "DOUGLAS COUNTY",
+        "summed": 24457,
+        "printed": 24495
+      },
+      {
+        "page": "p036.md",
+        "row": "LEWIS-PALMER",
+        "summed": 3782,
+        "printed": 3787
+      },
+      {
+        "page": "p040.md",
+        "row": "MONTROSE COUNTY",
+        "summed": 5262,
+        "printed": 5326
+      },
+      {
+        "page": "p040.md",
+        "row": "FORT MORGAN",
+        "summed": 3045,
+        "printed": 3077
+      },
+      {
+        "page": "p042.md",
+        "row": "MONTE VISTA",
+        "summed": 1425,
+        "printed": 1474
+      }
+    ]
+  },
+  "1997": {
+    "year": 1997,
+    "status": "checked",
+    "rows_checked": 174,
+    "passed": 171,
+    "failed": 3,
+    "pass_rate": 0.9828,
+    "failures": [
+      {
+        "page": "p034.md",
+        "row": "NORTH CONEJOS",
+        "summed": 1195,
+        "printed": 1225
+      },
+      {
+        "page": "p036.md",
+        "row": "MANITOU SPRINGS",
+        "summed": 1389,
+        "printed": 1392
+      },
+      {
+        "page": "p039.md",
+        "row": "PLATEAU VALLEY",
+        "summed": 402,
+        "printed": 578
+      }
+    ]
+  },
+  "1998": {
+    "year": 1998,
+    "status": "checked",
+    "rows_checked": 181,
+    "passed": 169,
+    "failed": 12,
+    "pass_rate": 0.9337,
+    "failures": [
+      {
+        "page": "p036.md",
+        "row": "NORTHGLENN-THORNTON",
+        "summed": 27877,
+        "printed": 27955
+      },
+      {
+        "page": "p036.md",
+        "row": "ADAMS COUNTY",
+        "summed": 5894,
+        "printed": 6102
+      },
+      {
+        "page": "p037.md",
+        "row": "NORTH CONEJOS",
+        "summed": 1180,
+        "printed": 1209
+      },
+      {
+        "page": "p038.md",
+        "row": "DOUGLAS COUNTY",
+        "summed": 29764,
+        "printed": 29847
+      },
+      {
+        "page": "p039.md",
+        "row": "BIG SANDY",
+        "summed": 370,
+        "printed": 371
+      },
+      {
+        "page": "p040.md",
+        "row": "ROARING FORK",
+        "summed": 4860,
+        "printed": 4909
+      },
+      {
+        "page": "p040.md",
+        "row": "GILPIN COUNTY",
+        "summed": 376,
+        "printed": 384
+      },
+      {
+        "page": "p040.md",
+        "row": "GUNNISON WATERSHED",
+        "summed": 1650,
+        "printed": 1672
+      },
+      {
+        "page": "p042.md",
+        "row": "PLATEAU VALLEY",
+        "summed": 383,
+        "printed": 557
+      },
+      {
+        "page": "p043.md",
+        "row": "MONTROSE COUNTY",
+        "summed": 5247,
+        "printed": 5338
+      },
+      {
+        "page": "p047.md",
+        "row": "MOUNTAIN BOCES",
+        "summed": 0,
+        "printed": 107
+      },
+      {
+        "page": "p047.md",
+        "row": "SOUTHWEST BOCES",
+        "summed": 0,
+        "printed": 142
+      }
+    ]
+  },
+  "1999": {
+    "year": 1999,
+    "status": "checked",
+    "rows_checked": 182,
+    "passed": 181,
+    "failed": 1,
+    "pass_rate": 0.9945,
+    "failures": [
+      {
+        "page": "p025.md",
+        "row": "DOUGLAS COUNTY",
+        "summed": 32376,
+        "printed": 32446
+      }
+    ]
   }
 }

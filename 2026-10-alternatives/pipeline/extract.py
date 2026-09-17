@@ -64,13 +64,33 @@ def _find_header(rows: list[list], minimum_grades: int = 8) -> tuple[int, dict[i
     return None
 
 
-def _column_finder(header: list[str]):
-    def find(*patterns: str) -> int | None:
-        for j, name in enumerate(header):
-            for pattern in patterns:
-                if re.search(pattern, name, re.I):
+def _column_finder(header: list[str], sample: list | None = None, code_width: int = 4):
+    """Find a column by header pattern, checking the values when it matters.
+
+    Header names are not unique. The 2006 file has TWO columns headed
+    "District Code": the first holds the school year (20062007) and the second
+    the real code (0010). Taking the first match gave every school in the
+    state the same district, and the year collapsed to a single district in
+    the output - visible only because a district count of 1 is absurd.
+
+    So when several columns match and a sample row is available, prefer one
+    whose value is the right width for a code.
+    """
+    def find(*patterns: str, as_code: bool = False) -> int | None:
+        matches = [j for j, name in enumerate(header)
+                   if any(re.search(p, name, re.I) for p in patterns)]
+        if not matches:
+            return None
+        if as_code and sample and len(matches) > 1:
+            for j in matches:
+                if j >= len(sample):
+                    continue
+                text = str(sample[j]).strip()
+                if text.endswith(".0"):
+                    text = text[:-2]
+                if text.isdigit() and len(text) <= code_width:
                     return j
-        return None
+        return matches[0]
     return find
 
 
@@ -87,16 +107,17 @@ def parse_cde_school_sheet(path: Path, year: int, source: str) -> tuple[list[dic
         return [], {"error": "no header row with enough grade columns"}
     header_idx, grade_cols = found
     header = [str(v).strip() for v in rows[header_idx]]
-    find = _column_finder(header)
+    first_data = rows[header_idx + 1] if header_idx + 1 < len(rows) else None
+    find = _column_finder(header, first_data)
 
     # Header wording drifts hard across 24 vintages: "School Code" becomes
     # "Sch Code", "District Code" becomes "Distr Code", and from about 2019
     # the district pair is renamed "Organization". Matching only the long
     # spellings silently lost nine of the twenty-four years.
     cols = {
-        "school_code": find(r"^(school|sch)\s*(code|number|no)\b", r"(school|sch).*code"),
+        "school_code": find(r"^(school|sch)\s*(code|number|no)\b", r"(school|sch).*code", as_code=True),
         "school_name": find(r"^(school|sch)\s*name", r"^school$"),
-        "district_code": find(r"(district|distr|lea|organization).*(code|number|no)"),
+        "district_code": find(r"(district|distr|lea|organization).*(code|number|no)", as_code=True),
         "district_name": find(r"(district|distr|lea|organization).*name", r"^district$"),
         "county_name": find(r"county.*name"),
         "total": find(r"^total$", r"pk-?12\s*(count|total)", r"^count$"),

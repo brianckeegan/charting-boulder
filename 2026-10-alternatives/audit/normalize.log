@@ -68,15 +68,18 @@ Reading NCES CCD
 Reading re-OCR'd yearbooks
   yearbook 1986: 176 districts, totals 178/178; trends 165 districts
   yearbook 1987: 175 districts, totals 177/177; trends 174 districts
-  yearbook 1988: 128 districts, totals 128/128; trends 0 districts
-  yearbook 1989: 133 districts, totals 135/135; trends 0 districts
-  yearbook 1990: 166 districts, totals 122/168; trends 0 districts
-  yearbook 1991: 163 districts, totals 154/165; trends 0 districts
-  yearbook 1992: 164 districts, totals 143/166; trends 0 districts
-  yearbook 1993: 182 districts, totals 167/184; trends 0 districts
-  yearbook 1994: 183 districts, totals 175/185; trends 0 districts
-  yearbook 1995: 180 districts, totals 176/182; trends 0 districts
-  yearbook 1996: volume not finished - no index.json
+  yearbook 1988: 175 districts, totals 170/173; trends 0 districts
+  yearbook 1989: 179 districts, totals 181/181; trends 0 districts
+  yearbook 1990: 179 districts, totals 130/136; trends 0 districts
+  yearbook 1991: 178 districts, totals 157/168; trends 0 districts
+  yearbook 1992: 180 districts, totals 149/156; trends 0 districts
+  yearbook 1993: 182 districts, totals 160/169; trends 0 districts
+  yearbook 1994: 182 districts, totals 167/176; trends 0 districts
+  yearbook 1995: 180 districts, totals 151/180; trends 0 districts
+  yearbook 1996: 183 districts, totals 155/175; trends 0 districts
+  yearbook 1997: 182 districts, totals 178/178; trends 0 districts
+  yearbook 1998: 180 districts, totals 154/169; trends 0 districts
+  yearbook 1999: 180 districts, totals 180/180; trends 0 districts
 
 Building the school panel
   wrote data/processed/school-enrollment-by-grade.csv: 647,881 rows
@@ -86,8 +89,10 @@ Building the school registry
   wrote data/processed/schools.csv: 2,723 rows
 
 Building the district tier
-  wrote data/processed/district-enrollment-by-grade.csv: 77,377 rows
-  wrote data/processed/district-year.csv: 2,517 rows
+  wrote data/processed/district-enrollment-by-grade.csv: 93,326 rows
+  wrote data/processed/district-year.csv: 7,852 rows
+  overlapping district-years: 1,269, 1,267 agree exactly (99.8%)
+  wrote data/processed/district-year-overlap.csv: 1,269 rows
 
 Reconciling CDE against CCD
   2004: 1,652/1,688 matched, 1,203 exact, gap ex-PK +421
@@ -112,5 +117,22 @@ Reconciling CDE against CCD
   2023: 1,836/1,906 matched, 1,035 exact, gap ex-PK +15,638
   2024: 1,828/1,903 matched, 1,041 exact, gap ex-PK +15,814
   wrote data/processed/source-reconciliation.csv: 21 rows
+
+Reconciling the yearbook tier against NCES
+  1986: yearbook 549,934 vs NCES 549,673  +261 (+0.05%)
+  1987: yearbook 551,228 vs NCES 550,367  +861 (+0.16%)
+  1988: yearbook 547,013 vs NCES 550,855  -3,842 (-0.70%)
+  1989: yearbook 554,448 vs NCES 554,296  +152 (+0.03%)
+  1990: yearbook 565,909 vs NCES 565,909  +0 (+0.00%)
+  1991: yearbook 584,964 vs NCES 584,959  +5 (+0.00%)
+  1992: yearbook 602,791 vs NCES 602,791  +0 (+0.00%)
+  1993: yearbook 615,729 vs NCES 615,729  +0 (+0.00%)
+  1994: yearbook 629,325 vs NCES 629,325  +0 (+0.00%)
+  1995: yearbook 644,477 vs NCES 644,435  +42 (+0.01%)
+  1996: yearbook 659,917 vs NCES 659,917  +0 (+0.00%)
+  1997: yearbook 673,291 vs NCES 673,291  +0 (+0.00%)
+  1998: yearbook 684,820 vs NCES 684,820  +0 (+0.00%)
+  1999: yearbook 693,991 vs NCES 693,991  +0 (+0.00%)
+  wrote data/processed/district-reconciliation.csv: 14 rows
 
 Wrote /home/user/charting-boulder/2026-10-alternatives/audit/normalize-report.json

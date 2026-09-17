@@ -10,13 +10,13 @@ number here is a check the archive ran on itself, failures included.
 | `school-enrollment-by-grade.csv` | 647,881 |
 | `school-year.csv` | 65,841 |
 | `schools.csv` | 2,723 |
-| `district-enrollment-by-grade.csv` | 77,377 |
-| `district-year.csv` | 2,517 |
+| `district-enrollment-by-grade.csv` | 93,326 |
+| `district-year.csv` | 7,852 |
 | `source-reconciliation.csv` | 21 |
 
 - School panel: **1986–2024**, 39 years.
-- District panel: **1986–2024**, 31 years.
-- District trends: **1977–1987** (the only series reaching before 1986).
+- District panel: **1986–2024**, 35 years.
+- District trends: **1977–2024** (the only series reaching before 1986).
 
 ## Schools per year
 
@@ -125,19 +125,23 @@ and comparing is the one mechanical proof a row was read correctly.
 | CDE spreadsheet | 2024 | 1,903 | 1,903 | 0 |
 | Yearbook (re-OCR) | 1986 | 178 | 178 | 0 |
 | Yearbook (re-OCR) | 1987 | 177 | 177 | 0 |
-| Yearbook (re-OCR) | 1988 | 128 | 128 | 0 |
-| Yearbook (re-OCR) | 1989 | 135 | 135 | 0 |
-| Yearbook (re-OCR) | 1990 | 168 | 122 | 46 |
-| Yearbook (re-OCR) | 1991 | 165 | 154 | 11 |
-| Yearbook (re-OCR) | 1992 | 166 | 143 | 23 |
-| Yearbook (re-OCR) | 1993 | 184 | 167 | 17 |
-| Yearbook (re-OCR) | 1994 | 185 | 175 | 10 |
-| Yearbook (re-OCR) | 1995 | 182 | 176 | 6 |
+| Yearbook (re-OCR) | 1988 | 173 | 170 | 3 |
+| Yearbook (re-OCR) | 1989 | 181 | 181 | 0 |
+| Yearbook (re-OCR) | 1990 | 136 | 130 | 6 |
+| Yearbook (re-OCR) | 1991 | 168 | 157 | 11 |
+| Yearbook (re-OCR) | 1992 | 156 | 149 | 7 |
+| Yearbook (re-OCR) | 1993 | 169 | 160 | 9 |
+| Yearbook (re-OCR) | 1994 | 176 | 167 | 9 |
+| Yearbook (re-OCR) | 1995 | 180 | 151 | 29 |
+| Yearbook (re-OCR) | 1996 | 175 | 155 | 20 |
+| Yearbook (re-OCR) | 1997 | 178 | 178 | 0 |
+| Yearbook (re-OCR) | 1998 | 169 | 154 | 15 |
+| Yearbook (re-OCR) | 1999 | 180 | 180 | 0 |
 
 ## Joins
 
 - CDE rows matched to an NCES school id: **509,936 of 510,623** (99.9%)
-- Yearbook rows matched to a district code: **23,935 of 25,951** (92.2%)
+- Yearbook rows matched to a district code: **33,050 of 39,352** (84.0%)
 
 An unmatched row is kept, not dropped. A school with no NCES id still
 carries its CDE code and its counts; it simply cannot be followed
