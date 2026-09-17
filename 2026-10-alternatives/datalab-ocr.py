@@ -275,9 +275,30 @@ def process_volume(year: int, key: str) -> dict:
                 except Exception as exc:  # noqa: BLE001
                     print(f"    FAILED: {exc}", file=sys.stderr)
 
+    # Record every page on disk, not just the ones this run sent. index.json is
+    # only written when a volume finishes, so a volume interrupted part-way and
+    # resumed later would otherwise list only the second run's pages - and
+    # check-row-totals.py reads this index to know which table each page holds.
+    for page_file in sorted(out_dir.glob("p*.md")):
+        i = int(page_file.stem[1:])
+        if str(i) in index["pages"]:
+            continue
+        markdown = page_file.read_text()
+        index["pages"][str(i)] = {
+            "guessed_table": targets.get(i),
+            "request_id": None,
+            "cost_cents": None,
+            "quality": None,
+            "heading": next((ln.strip("# ").strip() for ln in markdown.splitlines()
+                             if ln.startswith("#")), "")[:120],
+            "chars": len(markdown),
+            "recovered_from_disk": True,
+        }
+
     index["total_cost_cents"] = round(
         sum((p.get("cost_cents") or 0) for p in index["pages"].values()), 2
     )
+    index["pages_on_disk"] = len(list(out_dir.glob("p*.md")))
     index_path.write_text(json.dumps(index, indent=2, sort_keys=True) + "\n")
 
     # The PDF is 110 MB and re-downloadable; the page images and markdown are
