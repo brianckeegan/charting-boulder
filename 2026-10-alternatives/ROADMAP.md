@@ -35,3 +35,10 @@ From `TASK.md`. These are the assignable pieces of the work this folder proposes
 - Has CCD released 2024 since the audit? If so the overlap extends by a year and `V2` relaxes.
 - Do the yearbook table headings drift enough across fourteen volumes to defeat the page-selection patterns in `datalab-ocr.py`? The per-volume `index.json` will show it.
 - Is a four-digit CDE school code ever reused across districts within one year? The registry keys on the NCES id so that it does not matter, but the answer changes how much the CDE code can be trusted as a join key elsewhere.
+
+## Added after the build — 2026-09-17
+
+- [ ] **Five teacher-FTE PDFs** (2013, 2016–2019) — CDE publishes school-grain teacher FTE in eight years, but only the three spreadsheet years (2022–2024) are parsed. The five PDFs can go through the same Datalab path as the yearbooks, which would take the CDE teacher series from three years to eight.
+- [ ] **The yearbooks' Table 1** — school counts, staff, pupil/teacher ratio and dropout rate by district. Already converted and sitting in `data/interim/yearbooks/`; nothing parses it yet. It would add a district-level staff series for 1986–1999, where the archive currently has none.
+- [ ] **1988** — the one yearbook volume that does not reconcile against NCES, at −0.70%, with three genuine row-total failures. Every other volume is within 0.16%.
+- [ ] **2001–2003 on the CDE side** — 2001 and 2002 are PDF-only, 2003 uses an indented panel layout. NCES covers those years, so this buys a second source rather than filling a hole.
