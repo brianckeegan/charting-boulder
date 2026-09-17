@@ -107,14 +107,3 @@ census_api.json
 # whole directory stays out of the repository. Delete this rule when the piece
 # is ready, then add the directory in a commit of its own.
 /2026-08-wildfire/
-
-# Work in progress. 2026-06-budget-tool and 2026-10-donations are not ready to
-# show as finished work, so both directories are untracked here and drop out of
-# the current tree. Unlike 2026-08-wildfire, these two were already committed
-# and pushed before this rule was added — their files and full commit history
-# stay in the repository's git history and on GitHub, and the budget widget
-# stays live at its existing URL. This rule only removes them from what a
-# fresh checkout of main shows today. Delete it and re-add each directory in
-# its own commit when the piece is ready.
-/2026-06-budget-tool/
-/2026-10-donations/

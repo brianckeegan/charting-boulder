@@ -1,0 +1,153 @@
+campaign_id,year,committee_type,committee,committee_number,candidate,kind,n_donors,dollars_itemized,candidate_sov,contest,votes,elected,slate_side,slate_side_two_poles,slate_groups
+2015|cand|Aaron Brockett,2015,Official Candidate Committee,Aaron Brockett for City Council,2015-OCC-008,Aaron Brockett,candidate,160.0,10757.12,Aaron Brockett,council,10213,TRUE,B,B,better_boulder;daily_camera;open_boulder;sierra_club_indian_peaks
+2015|cand|Bob Yates,2015,Official Candidate Committee,Bob Yates for Council,2015-OCC-007,Bob Yates,candidate,186.0,16784.19,Bob Yates,council,12242,TRUE,B,B,better_boulder;boulder_weekly;open_boulder
+2015|cand|Cynthia Carlisle,2015,Official Candidate Committee,Cindy Carlisle for Council,2015-OCC-012,Cynthia Carlisle,candidate,149.0,10590.26,Cindy Carlisle,council,8861,FALSE,A,A,boulder_weekly;plan_boulder_county
+2015|cand|Donald Cote,2015,Official Candidate Committee,Don Cote for Council,2015-OCC-014,Donald Cote,candidate,42.0,3340.0,Don Cote,council,5822,FALSE,,,daily_camera
+2015|cand|Edward Jabari,2015,Official Candidate Committee,Jabari for City Council,2015-OCC-020,Edward Jabari,candidate,3.0,160.0,Edward Jabari,council,1846,FALSE,,,
+2015|cand|Jan Burton,2015,Official Candidate Committee,Jan for Boulder,2015-OCC-019,Jan Burton,candidate,123.0,10204.41,Jan Burton,council,8986,TRUE,B,,daily_camera;open_boulder
+2015|cand|Julianne McCabe,2015,Official Candidate Committee,Julie McCabe for Council,2015-OCC-013,Julianne McCabe,candidate,1.0,100.0,Julianne McCabe,council,4000,FALSE,,,daily_camera
+2015|cand|Jyotsna Raj,2015,Official Candidate Committee,Raj for Council,2015-OCC-006,Jyotsna Raj,candidate,152.0,7921.0,Jyotsna Raj,council,6444,FALSE,A,A,plan_boulder_county
+2015|cand|Keith Percy,2015,Official Candidate Committee,Comrade Keith Percy for Council,2015-OCC-017,Keith Percy,candidate,6.0,320.17,Comrade Keith Percy,council,901,FALSE,,,
+2015|cand|Lauren (Cha Cha) Spinrad,2015,Official Candidate Committee,Cha Cha for Boulder Council,2015-OCC-015,Lauren (Cha Cha) Spinrad,candidate,50.0,2390.0,Cha Cha Spinrad,council,2016,FALSE,,,
+2015|cand|Leonard May,2015,Official Candidate Committee,May for Council,2015-OCC-009,Leonard May,candidate,137.0,8281.8,Leonard May,council,6705,FALSE,A,A,plan_boulder_county;sierra_club_indian_peaks
+2015|cand|Lisa Morzel,2015,Official Candidate Committee,Lisa Morzel for Council,2015-OCC-005,Lisa Morzel,candidate,138.0,9250.0,Lisa Morzel,council,10810,TRUE,A,A,boulder_weekly;plan_boulder_county;sierra_club_indian_peaks
+2015|cand|Michael Kruteck,2015,Official Candidate Committee,Kruteck for Council,2015-OCC-016,Michael Kruteck,candidate,65.0,5835.0,Michael Kruteck,council,8819,FALSE,,,boulder_weekly;daily_camera
+2015|cand|Suzanne Jones,2015,Official Candidate Committee,Suzanne Jones for Council,2015-OCC-010,Suzanne Jones,candidate,150.0,9759.52,Suzanne Jones,council,11294,TRUE,AB,AB,better_boulder;boulder_weekly;plan_boulder_county;sierra_club_indian_peaks
+2015|cand|Tim Plass,2015,Official Candidate Committee,Plass for Council,2015-OCC-011,Tim Plass,candidate,149.0,10851.0,Tim Plass,council,8109,FALSE,B,B,better_boulder;open_boulder;sierra_club_indian_peaks
+2015|cand|William Rigler,2015,Official Candidate Committee,Rigler for City Council,2015-OCC-021,William Rigler,candidate,136.0,8897.0,Bill Rigler,council,5644,FALSE,B,B,better_boulder;open_boulder
+2015|issue|Against 300 and 301 for a Better Boulder,2015,Issue Committee,Against 300 and 301 for a Better Boulder,2015-ISC-038,,issue,1.0,900.0,,,,,,,
+2015|issue|Citizens for Development Shall Pay Its Own Way,2015,Issue Committee,Citizens for Development Shall Pay Its Own Way,2015-ISC-001,,issue,119.0,19533.6,,,,,,,
+2015|issue|Citizens for One Boulder,2015,Issue Committee,Citizens for One Boulder,2015-ISC-003,,issue,147.0,35856.7,,,,,,,
+2015|issue|Coalition for One Boulder,2015,Issue Committee,Coalition for One Boulder,2015-ISC-004,,issue,116.0,38978.92,,,,,,,
+2015|issue|Neighborhoods' Right to Vote on Land Use Regulation Changes,2015,Issue Committee,Neighborhoods' Right to Vote on Land Use Regulation Changes,2015-ISC-002,,issue,136.0,19706.62,,,,,,,
+2015|issue|PLAN-Boulder County Issues Committee 2015,2015,Issue Committee,PLAN-Boulder County Issues Committee 2015,2015-ISC-030,,issue,2.0,35.0,,,,,,,
+2015|issue|Renew the Climate Action Plan Committee,2015,Issue Committee,Renew the Climate Action Plan Committee,2015-ISC-032,,issue,8.0,874.36,,,,,,,
+2015|issue|Renew the Utility General Fund Occupation Tax Committee,2015,Issue Committee,Renew the Utility General Fund Occupation Tax Committee,2015-ISC-033,,issue,9.0,924.37,,,,,,,
+2015|issue|Sierra Club Issue Committee,2015,Issue Committee,Sierra Club Issue Committee,2015-ISC-035,,issue,0.0,0.0,,,,,,,
+2015|issue|Yes on 2N: A Fair Deal for Boulder,2015,Issue Committee,Yes on 2N: A Fair Deal for Boulder,2015-ISC-039,,issue,13.0,43726.56,,,,,,,
+2016|issue|Boulder Choices for Boulder Homes,2016,Issue Committee,Boulder Choices for Boulder Homes,2016-ISC-002,,issue,7.0,672.53,,,,,,,
+2016|issue|Boulder Voters for Term Limits,2016,Issue Committee,Boulder Voters for Term Limits,2016-ISC-003,,issue,18.0,39902.159999999996,,,,,,,
+2016|issue|Healthy Boulder Kids,2016,Issue Committee,Healthy Boulder Kids,2016-ISC-001,,issue,54.0,890356.56,,,,,,,
+2016|issue|Legalize Boulder,2016,Issue Committee,Legalize Boulder,2016-ISC-004,,issue,2.0,43.5,,,,,,,
+2016|issue|New Era Colorado Action Fund,2016,Issue Committee,New Era Colorado Action Fund,2016-ISC-007,,issue,0.0,0.0,,,,,,,
+2016|issue|No on 2H: Stop the Beverage and Grocery Tax,2016,Issue Committee,No on 2H: Stop the Beverage and Grocery Tax,2016-ISC-005,,issue,1.0,13678.0,,,,,,,
+2016|issue|PLAN-Boulder County Issues Committee 2016,2016,Issue Committee,PLAN-Boulder County Issues Committee 2016,2016-ISC-006,,issue,0.0,0.0,,,,,,,
+2017|cand|Adam Swetlik,2017,Official Candidate Committee,Adam Swetlik for Boulder,2017-OCC-013,Adam Swetlik,candidate,114.0,5400.16,Adam Swetlik,council,1940,FALSE,,,
+2017|cand|Camilo Casas,2017,Official Candidate Committee,boulder.parti.vote,2017-OCC-014,Camilo Casas,candidate,4.0,250.0,Camilo Casas,council,1100,FALSE,,,
+2017|cand|Cynthia Carlisle,2017,Official Candidate Committee,Cindy Carlisle for Council,2017-OCC-001,Cynthia Carlisle,candidate,139.0,9950.0,Cindy Carlisle,council,12359,FALSE,A,A,plan_boulder_county;sierra_club_indian_peaks;together4boulder
+2017|cand|Edward R. Byrne,2017,Official Candidate Committee,Byrne for Council,2017-OCC-010,Edward R. Byrne,candidate,166.0,11523.66,Ed Byrne,council,7143,FALSE,B,,daily_camera;south_boulder_creek_action_group
+2017|cand|Eric Budd,2017,Official Candidate Committee,Elect Eric Budd,2017-OCC-006,Eric Budd,candidate,236.0,9341.0,Eric Budd,council,8600,FALSE,B,B,better_boulder;engage_boulder;open_boulder
+2017|cand|Jan Burton,2017,Official Candidate Committee,Jan for Boulder,2017-OCC-008,Jan Burton,candidate,151.0,12310.73,Jan Burton,council,11273,FALSE,B,B,better_boulder;daily_camera;engage_boulder;open_boulder;south_boulder_creek_action_group
+2017|cand|Jill Grano,2017,Official Candidate Committee,Jill for City Council,2017-OCC-005,Jill Grano,candidate,149.0,11241.0,Jill Adler Grano,council,13496,TRUE,B,B,better_boulder;boulder_weekly;daily_camera;engage_boulder;open_boulder;sierra_club_indian_peaks;south_boulder_creek_action_group
+2017|cand|John Gerstle,2017,Official Candidate Committee,John Gerstle for Boulder City Council,2017-OCC-004,John Gerstle,candidate,120.0,9883.0,John Gerstle,council,11535,FALSE,A,A,plan_boulder_county;sierra_club_indian_peaks;together4boulder
+2017|cand|Maria Young,2017,Official Candidate Committee,Young for Council,2017-OCC-003,Maria Young,candidate,172.0,10356.12,Mary Dolores Young,council,14956,,A,A,boulder_weekly;plan_boulder_county;sierra_club_indian_peaks;together4boulder
+2017|cand|Mark McIntyre,2017,Official Candidate Committee,Mark McIntyre for Boulder City Council,2017-OCC-011,Mark McIntyre,candidate,118.0,9300.0,Mark McIntyre,council,10373,FALSE,B,B,better_boulder;daily_camera;engage_boulder;open_boulder
+2017|cand|Matthew Benjamin,2017,Official Candidate Committee,Committee to Nominate Matt Benjamin for Council,2017-OCC-009,Matthew Benjamin,candidate,91.0,6155.69,Matt Benjamin,council,7561,FALSE,,,boulder_weekly;daily_camera
+2017|cand|Mirabai Nagle,2017,Official Candidate Committee,NAGLE FOR COUNCIL,2017-OCC-007,Mirabai Nagle,candidate,154.0,10175.0,Mirabai Kuk Nagle,council,12659,TRUE,A,A,boulder_weekly;plan_boulder_county;together4boulder
+2017|cand|Samuel Weaver,2017,Official Candidate Committee,Sam Weaver for City Council,2017-OCC-002,Samuel Weaver,candidate,147.0,9650.0,Sam Weaver,council,14545,TRUE,A,A,boulder_weekly;plan_boulder_county;sierra_club_indian_peaks;together4boulder
+2017|cand|William Rigler,2017,Official Candidate Committee,Rigler for City Council,2017-OCC-012,William Rigler,candidate,137.0,10105.0,Bill Rigler,council,8742,FALSE,B,B,better_boulder;engage_boulder;open_boulder;south_boulder_creek_action_group
+2017|issue|Community Culture Safety YES,2017,Issue Committee,Community Culture Safety YES,2017-ISC-016,,issue,46.0,22999.87,,,,,,,
+2017|issue|Empower Our Future,2017,Issue Committee,Empower Our Future,2017-ISC-018,,issue,92.0,33859.86,,,,,,,
+2017|issue|No on 2L,2017,Issue Committee,No on 2L,2017-ISC-023,,issue,23.0,11931.0,,,,,,,
+2017|issue|PLAN Boulder County Issue Committee,2017,Issue Committee,PLAN Boulder County Issue Committee,2017-ISC-022,,issue,7.0,465.0,,,,,,,
+2017|issue|Shrink Emissions Now,2017,Issue Committee,Shrink Emissions Now,2017-ISC-029,,issue,1.0,90.0,,,,,,,
+2017|issue|Sierra Club IPG Issue Committee,2017,Issue Committee,Sierra Club IPG Issue Committee,2017-ISC-025,,issue,1.0,100.0,,,,,,,
+2017|issue|Voters for 100% Renewables,2017,Issue Committee,Voters for 100% Renewables,2017-ISC-019,,issue,0.0,0.0,,,,,,,
+2018|issue|Healthy Kids; Healthy Boulder,2018,Issue Committee,Healthy Kids; Healthy Boulder,2018-ISC-001,,issue,5.0,34489.0,,,,,,,
+2018|issue|Hold Polluters Accountable,2018,Issue Committee,Hold Polluters Accountable,2018-ISC-002,,issue,2.0,244.28,,,,,,,
+2019|cand|Aaron Brockett,2019,Official Candidate Committee,Aaron Brockett for City Council,2019-OCC-013,Aaron Brockett,candidate,144.0,10162.77,Aaron Brockett,council,15779,TRUE,B,B,better_boulder;boulder_area_labor_council;boulder_coalition;boulder_progressives;boulder_weekly;daily_camera;open_boulder;south_boulder_creek_action_group;yellow_scene
+2019|cand|Adam Swetlik,2019,Official Candidate Committee,Adam Swetlik for Boulder,2019-OCC-002,Adam Swetlik,candidate,146.0,10006.69,Adam Swetlik,council,14442,TRUE,A,A,boulder_weekly;plan_boulder_county
+2019|cand|Andrew Celani,2019,Official Candidate Committee,Celani for Council,2019-OCC-017,Andrew Celani,candidate,10.0,705.0,Andy Celani,council,2438,FALSE,,,
+2019|cand|Benita Duran,2019,Official Candidate Committee,Benita Duran for City Council,2019-OCC-004,Benita Duran,candidate,136.0,10525.0,Benita Duran,council,11576,FALSE,B,B,better_boulder;boulder_area_labor_council;boulder_coalition;boulder_progressives;open_boulder;south_boulder_creek_action_group;yellow_scene
+2019|cand|Brian Dolan,2019,Official Candidate Committee,Brian Dolan for Council,2019-OCC-010,Brian Dolan,candidate,116.0,7600.0,Brian Dolan,council,10855,FALSE,A,A,plan_boulder_county
+2019|cand|Corina Julca,2019,Official Candidate Committee,Corina for Boulder,2019-OCC-016,Corina Julca,candidate,136.0,7905.0,Corina Julca,council,11048,FALSE,A,A,plan_boulder_county
+2019|cand|Gala Orba,2019,Official Candidate Committee,The Committee to Elect Gala Orba,2019-OCC-008,Gala Orba,candidate,45.0,2937.18,Gala Wilhelmina Orba,council,1852,FALSE,,,
+2019|cand|J. Tamar Stone,2019,Official Candidate Committee,Stone for Council,2019-OCC-011,J. Tamar Stone,candidate,5.0,500.0,J. Tamar Stone,council,,,,,
+2019|cand|Junie Joseph,2019,Official Candidate Committee,Junie for Boulder City Council Team,2019-OCC-003,Junie Joseph,candidate,223.0,10469.19,Junie Joseph,council,17322,TRUE,B,B,better_boulder;boulder_area_labor_council;boulder_coalition;boulder_progressives;boulder_weekly;daily_camera;open_boulder;south_boulder_creek_action_group;yellow_scene
+2019|cand|Mark McIntyre,2019,Official Candidate Committee,Mark McIntyre for Boulder City Council Committee,2019-OCC-007,Mark McIntyre,candidate,146.0,11027.51,Mark McIntyre,council,13493,FALSE,B,B,better_boulder;boulder_coalition;boulder_progressives;daily_camera;open_boulder;south_boulder_creek_action_group
+2019|cand|Mark Wallach,2019,Official Candidate Committee,Wallach for Council,2019-OCC-012,Mark Wallach,candidate,133.0,10340.0,Mark Wallach,council,14173,TRUE,A,A,boulder_area_labor_council;boulder_weekly;plan_boulder_county;yellow_scene
+2019|cand|Nikki McCord,2019,Official Candidate Committee,Nikki with Boulder,2019-OCC-006,Nikki McCord,candidate,142.0,8680.0,Nikki McCord,council,4207,FALSE,,,boulder_area_labor_council
+2019|cand|Paul Cure,2019,Official Candidate Committee,Common Ground LLC,2019-OCC-019,Paul Cure,candidate,8.0,620.0,Paul Cure,council,4046,FALSE,,,daily_camera
+2019|cand|Rachel Friend,2019,Official Candidate Committee,Friend for City Council,2019-OCC-005,Rachel Friend,candidate,157.0,10633.26,Rachel Friend,council,17230,TRUE,B,B,better_boulder;boulder_coalition;boulder_progressives;boulder_weekly;daily_camera;open_boulder;south_boulder_creek_action_group;yellow_scene
+2019|cand|Robert Yates,2019,Official Candidate Committee,Bob Yates for Council,2019-OCC-009,Robert Yates,candidate,239.0,20738.75,Bob Yates,council,17508,TRUE,B,B,better_boulder;boulder_coalition;boulder_weekly;daily_camera;open_boulder;south_boulder_creek_action_group
+2019|cand|Susan Peterson,2019,Official Candidate Committee,Susan for City Council,2019-OCC-001,Susan Peterson,candidate,153.0,9787.0,Susan Peterson,council,12961,FALSE,A,A,boulder_area_labor_council;plan_boulder_county;yellow_scene
+2019|issue|Open Space YES! 2019,2019,Ballot Measure Committee,Open Space YES! 2019,2019-BMC-021,,issue,77.0,8570.0,,,,,,,
+2019|issue|PLAN Boulder BMC,2019,Ballot Measure Committee,PLAN Boulder BMC,2019-BMC-023,,issue,5.0,1400.0,,,,,,,
+2020|issue|CLOSED Balanced Boulder,2020,Ballot Measure Committee,CLOSED Balanced Boulder,2020-BMC-006,,issue,2.0,419.0,,,,,,,
+2020|issue|CLOSED Bedrooms Are For People,2020,Ballot Measure Committee,CLOSED Bedrooms Are For People,2020-BMC-002,,issue,271.0,30453.52,,,,,,,
+2020|issue|CLOSED Citizen's Conditions for Annexation of CU-South,2020,Ballot Measure Committee,CLOSED Citizen's Conditions for Annexation of CU-South,2020-BMC-005,,issue,12.0,1920.0,,,,,,,
+2020|issue|CLOSED End the Muni - Let Real Carbon Reduction Begin,2020,Ballot Measure Committee,CLOSED End the Muni - Let Real Carbon Reduction Begin,2020-BMC-001,,issue,72.0,7765.0,,,,,,,
+2020|issue|Committee for Boulder's Great Green Deal,2020,Ballot Measure Committee,Committee for Boulder's Great Green Deal,2020-BMC-007,,issue,109.0,47886.07,,,,,,,
+2020|issue|New Era Colorado Voter Guide,2020,Ballot Measure Committee,New Era Colorado Voter Guide,2020-BMC-009,,issue,0.0,0.0,,,,,,,
+2020|issue|No Eviction Without Representation,2020,Ballot Measure Committee,No Eviction Without Representation,2020-BMC-003,,issue,182.0,24258.34,,,,,,,
+2020|issue|No on 2C For Local Power,2020,Ballot Measure Committee,No on 2C For Local Power,2020-BMC-008,,issue,78.0,37156.46,,,,,,,
+2020|issue|Our Mayor-Our Choice,2020,Ballot Measure Committee,Our Mayor-Our Choice,2020-BMC-004,,issue,34.0,10715.0,,,,,,,
+2021|cand|Daniel Williams,2021,Official Candidate Committee,Dan for Boulder Council,2021-OCC-013,Daniel Williams,candidate,131.0,10766.0,Dan Williams,council,13614,FALSE,B,B,bedrooms_are_for_people;better_boulder;boulder_area_labor_council;boulder_coalition;boulder_progressives;boulder_weekly;colorado_working_families_party;open_boulder;sierra_club_indian_peaks;south_boulder_creek_action_group;united_campus_workers;yellow_scene
+2021|cand|David Takahashi,2021,Official Candidate Committee,Takahashi for Boulder,2021-OCC-016,David Takahashi,candidate,93.0,7085.0,David Takahashi,council,8429,FALSE,B,,sierra_club_indian_peaks
+2021|cand|Jacques Decalo,2021,Official Candidate Committee,Jacques Decalo for City Council,2021-OCC-017,Jacques Decalo,candidate,19.0,1270.0,Jacques Decalo,council,3908,FALSE,A,A,daily_camera;plan_boulder_county
+2021|cand|Lauren Folkerts,2021,Official Candidate Committee,Lauren Folkerts for Boulder,2021-OCC-007,Lauren Folkerts,candidate,145.0,10990.0,Lauren Folkerts,council,15763,TRUE,B,B,bedrooms_are_for_people;better_boulder;boulder_area_labor_council;boulder_coalition;boulder_dsa;boulder_progressives;boulder_weekly;open_boulder;sierra_club_indian_peaks;south_boulder_creek_action_group;united_campus_workers;yellow_scene
+2021|cand|Mark Wallach,2021,Official Candidate Committee,Wallach for Council,2021-OCC-006,Mark Wallach,candidate,128.0,11019.93,Mark Wallach,council,17683,TRUE,A,A,advocates_for_clean_teens;boulder_area_labor_council;boulder_weekly;daily_camera;frwrd_boulder;plan_boulder_county;safer_boulder;thinkboulder;together4boulder
+2021|cand|Matthew Benjamin,2021,Official Candidate Committee,Matt Benjamin for Council,2021-OCC-008,Matthew Benjamin,candidate,125.0,10165.0,Matt Benjamin,council,16501,TRUE,B,B,bedrooms_are_for_people;better_boulder;boulder_area_labor_council;boulder_coalition;boulder_progressives;boulder_weekly;colorado_working_families_party;daily_camera;open_boulder;sierra_club_indian_peaks;south_boulder_creek_action_group;united_campus_workers;yellow_scene
+2021|cand|Michael Christy,2021,Official Candidate Committee,Michael for Boulder,2021-OCC-012,Michael Christy,candidate,131.0,10930.0,Michael Christy,council,14558,FALSE,A,A,advocates_for_clean_teens;daily_camera;frwrd_boulder;plan_boulder_county;safer_boulder;thinkboulder;together4boulder;yellow_scene
+2021|cand|Nicole Speer,2021,Official Candidate Committee,Together with Nicole Speer,2021-OCC-005,Nicole Speer,candidate,155.0,10866.0,Nicole Speer,council,16287,TRUE,B,B,bedrooms_are_for_people;better_boulder;boulder_area_labor_council;boulder_coalition;boulder_dsa;boulder_progressives;boulder_weekly;colorado_working_families_party;cwa_colorado_wyoming;open_boulder;sierra_club_indian_peaks;south_boulder_creek_action_group;united_campus_workers;yellow_scene
+2021|cand|Steven Rosenblum,2021,Official Candidate Committee,Steve for Boulder,2021-OCC-009,Steven Rosenblum,candidate,125.0,11574.0,Steve Rosenblum,council,13309,FALSE,A,A,advocates_for_clean_teens;frwrd_boulder;plan_boulder_county;safer_boulder;thinkboulder;together4boulder
+2021|cand|Tara Winer,2021,Official Candidate Committee,Tara Winer for Council,2021-OCC-010,Tara Winer,candidate,138.0,12086.0,Tara Winer,council,15205,TRUE,A,A,advocates_for_clean_teens;daily_camera;frwrd_boulder;plan_boulder_county;safer_boulder;thinkboulder;together4boulder
+2021|issue|Bedrooms Are For People,2021,Ballot Measure Committee,Bedrooms Are For People,2021-BMC-001,,issue,192.0,30762.45,,,,,,,
+2021|issue|NO on 301:  A Wolf in Sheep's Clothing,2021,Ballot Measure Committee,NO on 301:  A Wolf in Sheep's Clothing,2021-BMC-024,,issue,6.0,2327.65,,,,,,,
+2021|issue|NO on Bedroom$,2021,Ballot Measure Committee,NO on Bedroom$,2021-BMC-002,,issue,88.0,15557.98,,,,,,,
+2021|issue|Protect Our Neighbors,2021,Ballot Measure Committee,Protect Our Neighbors,2021-BMC-011,,issue,106.0,18190.5,,,,,,,
+2021|issue|Save CU South,2021,Ballot Measure Committee,Save CU South,2021-BMC-003,,issue,97.0,16445.58,,,,,,,
+2021|issue|Sierra Club Indian Peaks BMC,2021,Ballot Measure Committee,Sierra Club Indian Peaks BMC,2021-BMC-022,,issue,16.0,2100.0,,,,,,,
+2021|issue|The Humane Clothing Act Committee,2021,Ballot Measure Committee,The Humane Clothing Act Committee,2021-BMC-004,,issue,1.0,140.0,,,,,,,
+2022|issue|Boulder Progressives,2022,Ballot Measure Committee,Boulder Progressives,2022-BMC-006,,issue,24.0,2740.0,,,,,,,
+2022|issue|No More Delay for Flood Safety,2022,Ballot Measure Committee,No More Delay for Flood Safety,2022-BMC-002,,issue,94.0,77603.65,,,,,,,
+2022|issue|People for Voter Turnout,2022,Ballot Measure Committee,People for Voter Turnout,2022-BMC-003,,issue,64.0,12560.98,,,,,,,
+2022|issue|Repeal CU South Annexation,2022,Ballot Measure Committee,Repeal CU South Annexation,2022-BMC-001,,issue,196.0,43447.03,,,,,,,
+2022|issue|Save Boulder's Wild Spaces,2022,Ballot Measure Committee,Save Boulder's Wild Spaces,2022-BMC-004,,issue,2.0,1455.3,,,,,,,
+2022|issue|Save Local Elections,2022,Ballot Measure Committee,Save Local Elections,2022-BMC-005,,issue,68.0,12659.74,,,,,,,
+2023|cand|Aaron Brockett,2023,Official Candidate Committee,Brockett for Mayor,2023-OCC-010,Aaron Brockett,candidate,140.0,11305.0,Aaron Brockett,mayor,,,B,B,bedrooms_are_for_people;better_boulder;boulder_area_labor_council;boulder_dsa;boulder_progressives;boulder_weekly;colorado_immigrant_rights_coalition;colorado_working_families_party;daily_camera;sierra_club_indian_peaks;yellow_scene
+2023|cand|Aaron Neyer,2023,Official Candidate Committee,Regeneration Boulder,2023-OCC-015,Aaron Neyer,candidate,27.0,1178.0,Aaron Gabriel Neyer,council,3483,FALSE,B,,bedrooms_are_for_people;boulder_area_labor_council
+2023|cand|Christina Marquis,2023,Official Candidate Committee,Tina for Boulder City Council,2023-OCC-012,Christina Marquis,candidate,123.0,10835.0,Tina Marquis,council,14958,TRUE,A,A,boulder_elevated;daily_camera;plan_boulder_county;safer_boulder
+2023|cand|Jacques Decalo,2023,Official Candidate Committee,Jacques for Council,2023-OCC-009,Jacques Decalo,candidate,98.0,4965.0,Jacques Decalo,council,3329,FALSE,,,
+2023|cand|Jennifer Robins,2023,Official Candidate Committee,Jenny for Boulder,2023-OCC-006,Jennifer Robins,candidate,133.0,11605.0,Jenny Robins,council,11249,FALSE,A,A,boulder_elevated;colorado_restaurant_association_boco;plan_boulder_county;safer_boulder
+2023|cand|Nicole Speer,2023,Official Candidate Committee,Together with Nicole Speer,2023-OCC-003,Nicole Speer,candidate,172.0,11435.14,Nicole Speer,mayor,,,B,B,bedrooms_are_for_people;boulder_area_labor_council;boulder_dsa;boulder_progressives;boulder_weekly;co_black_women_action;colorado_working_families_party;united_campus_workers;yellow_scene
+2023|cand|Paul Tweedlie,2023,Official Candidate Committee,Tweedlie for Mayor,2023-OCC-016,Paul Tweedlie,candidate,1.0,41.64,Paul Tweedlie,mayor,,,,,
+2023|cand|Robert Yates,2023,Official Candidate Committee,Bob Yates for Mayor,2023-OCC-005,Robert Yates,candidate,410.0,36958.99,Bob Yates,mayor,,,A,A,boulder_elevated;daily_camera;plan_boulder_county;safer_boulder
+2023|cand|Ryan Schuchard,2023,Official Candidate Committee,Friends of Ryan Schuchard,2023-OCC-013,Ryan Schuchard,candidate,146.0,11105.0,Ryan Schuchard,council,14411,TRUE,B,B,bedrooms_are_for_people;better_boulder;boulder_progressives;boulder_weekly;co_black_women_action;daily_camera;run_on_climate;sierra_club_indian_peaks;yellow_scene
+2023|cand|Silas Atkins,2023,Official Candidate Committee,Silas Atkins For Boulder,2023-OCC-014,Silas Atkins,candidate,21.0,1394.78,Silas Atkins,council,6829,FALSE,B,,bedrooms_are_for_people;boulder_area_labor_council;boulder_dsa;boulder_weekly;co_black_women_action;united_campus_workers
+2023|cand|Taishya Adams,2023,Official Candidate Committee,Friends 4 Taishya Adams,2023-OCC-004,Taishya Adams,candidate,167.0,11372.74,Taishya Adams,council,14633,TRUE,B,B,bedrooms_are_for_people;better_boulder;boulder_area_labor_council;boulder_dsa;boulder_progressives;boulder_weekly;daily_camera;sierra_club_indian_peaks;united_campus_workers;yellow_scene
+2023|cand|Tara Winer,2023,Official Candidate Committee,Tara Winer for Council,2023-OCC-007,Tara Winer,candidate,153.0,13320.33,Tara Winer,council,21255,TRUE,AB,AB,better_boulder;boulder_elevated;boulder_weekly;daily_camera;plan_boulder_county;safer_boulder;sierra_club_indian_peaks;yellow_scene
+2023|cand|Terri Brncic,2023,Official Candidate Committee,Terri Brncic for Council,2023-OCC-011,Terri Brncic,candidate,116.0,11210.0,Terri Brncic,council,14365,FALSE,A,A,boulder_elevated;colorado_restaurant_association_boco;plan_boulder_county;safer_boulder
+2023|cand|Waylon Lewis,2023,Official Candidate Committee,Waylon Lewis for Boulder,2023-OCC-008,Waylon Lewis,candidate,150.0,11305.0,Waylon Lewis,council,8862,FALSE,B,B,bedrooms_are_for_people;better_boulder;colorado_restaurant_association_boco;sierra_club_indian_peaks;yellow_scene
+2023|issue|PLAN-Boulder County Ballot Measure Committee,2023,Ballot Measure Committee,PLAN-Boulder County Ballot Measure Committee,2023-BMC-022,,issue,1.0,50.0,,,,,,,
+2023|issue|Safe Zones 4 Kids,2023,Ballot Measure Committee,Safe Zones 4 Kids,2023-BMC-001,,issue,65.0,18434.0,,,,,,,
+2023|issue|Solutions not Safe Zones,2023,Ballot Measure Committee,Solutions not Safe Zones,2023-BMC-002,,issue,37.0,4757.21,,,,,,,
+2023|issue|Yes on 2A,2023,Ballot Measure Committee,Yes on 2A,2023-BMC-020,,issue,52.0,30012.22,,,,,,,
+2024|issue|Airport Neighborhood Campaign,2024,Ballot Measure Committee,Airport Neighborhood Campaign,2024-BMC-001,,issue,4.0,23308.33,,,,,,,
+2024|issue|Save Boulder Airport,2024,Ballot Measure Committee,Save Boulder Airport,2024-BMC-002,,issue,121.0,36881.67,,,,,,,
+2025|cand|Aaron Stone,2025,Official Candidate Committee,Aaron Stone for Boulder,2025-OCC-014,Aaron Stone,candidate,113.0,5195.04,Aaron Stone,council,2707,FALSE,,,
+2025|cand|Jennifer Robins,2025,Official Candidate Committee,Jenny For Boulder,2025-OCC-010,Jennifer Robins,candidate,131.0,13870.0,Jennifer Robins,council,14781,FALSE,A,A,boulder_elevated;open_boulder;plan_boulder_county;stop_antisemitism_colorado
+2025|cand|Lauren Folkerts,2025,Official Candidate Committee,Lauren Folkerts for Boulder,2025-OCC-006,Lauren Folkerts,candidate,155.0,11994.0,Lauren Folkerts,council,14222,FALSE,B,B,better_boulder;boulder_area_labor_council;boulder_dsa;boulder_progressives;boulder_weekly;co_black_women_action;co_blueflower_fund;colorado_working_families_party;cwa_colorado_wyoming;daily_camera;new_era_colorado_action_fund;sierra_club_indian_peaks;yellow_scene
+2025|cand|Mark Wallach,2025,Official Candidate Committee,Wallach for Council,2025-OCC-009,Mark Wallach,candidate,127.0,11994.0,Mark Wallach,council,17476,TRUE,AB,AB,better_boulder;boulder_elevated;boulder_weekly;daily_camera;open_boulder;plan_boulder_county;stop_antisemitism_colorado
+2025|cand|Matthew Benjamin,2025,Official Candidate Committee,Matt Benjamin for Council,2025-OCC-005,Matthew Benjamin,candidate,128.0,11900.0,Matt Benjamin,council,20276,TRUE,B,B,better_boulder;boulder_progressives;boulder_weekly;daily_camera;open_boulder;sierra_club_indian_peaks;stop_antisemitism_colorado
+2025|cand|Maxwell Lord,2025,Official Candidate Committee,Max Lord for Boulder,2025-OCC-013,Maxwell Lord,candidate,58.0,1516.15,Maxwell Lord,council,2853,FALSE,B,,boulder_area_labor_council;yellow_scene
+2025|cand|Nicole Speer,2025,Official Candidate Committee,Together with Nicole Speer,2025-OCC-008,Nicole Speer,candidate,157.0,11894.0,Nicole Speer,council,16165,TRUE,B,B,better_boulder;boulder_area_labor_council;boulder_progressives;boulder_weekly;co_black_women_action;co_blueflower_fund;colorado_working_families_party;cwa_colorado_wyoming;daily_camera;lgbtq_victory_fund;new_era_colorado_action_fund;sierra_club_indian_peaks;stop_antisemitism_colorado;yellow_scene
+2025|cand|Rachel Isaacson,2025,Official Candidate Committee,Rachel Rose for Boulder,2025-OCC-007,Rachel Isaacson,candidate,34.0,1782.98,Rachel Rose Isaacson,council,5085,FALSE,B,,boulder_area_labor_council;new_era_colorado_action_fund
+2025|cand|Robert Kaplan,2025,Official Candidate Committee,Rob for Boulder,2025-OCC-011,Robert Kaplan,candidate,132.0,11894.0,Rob Kaplan,council,15867,TRUE,A,A,open_boulder;plan_boulder_county;stop_antisemitism_colorado
+2025|cand|Robert Smoke,2025,Official Candidate Committee,Smoke for Council,2025-OCC-015,Robert Smoke,candidate,28.0,1981.0,Rob Smoke,council,1499,FALSE,,,
+2025|issue|Committee for Boulder Power,2025,Ballot Measure Committee,Committee for Boulder Power,2025-BMC-003,,issue,1.0,100.0,,,,,,,
+2025|issue|Infrastructure and Housing Ballot Measure Committee,2025,Ballot Measure Committee,Infrastructure and Housing Ballot Measure Committee,2025-BMC-004,,issue,7.0,795.1800000000001,,,,,,,
+2025|issue|Keep West Pearl Open,2025,Ballot Measure Committee,Keep West Pearl Open,2025-BMC-002,,issue,21.0,8668.0,,,,,,,
+2025|issue|Pearl For You,2025,Ballot Measure Committee,Pearl For You,2025-BMC-001,,issue,21.0,3600.0,,,,,,,
+2026|cand|Aaron Brockett,2026,Official Candidate Committee,Aaron Brockett for Mayor,2026-OCC-012,Aaron Brockett,candidate,143.0,12266.0,Aaron Brockett,mayor,,,B,B,boulder_progressives
+2026|cand|Aquiles La Grave,2026,Official Candidate Committee,Aquiles La Grave for Mayor,2026-OCC-022,Aquiles La Grave,candidate,64.0,5765.0,Aquiles La Grave,mayor,,,,,
+2026|cand|Christina Marquis,2026,Official Candidate Committee,Tina for Boulder City Council,2026-OCC-015,Christina Marquis,candidate,104.0,8949.13,Tina Marquis,council,,,B,B,boulder_progressives
+2026|cand|Jamillah Richmond,2026,Official Candidate Committee,Jamillah; A New Voice for Boulder,2026-OCC-016,Jamillah Richmond,candidate,27.0,1925.0,Jamillah Richmond,council,,,B,B,boulder_progressives
+2026|cand|Jill Grano,2026,Official Candidate Committee,Jill for Council,2026-OCC-008,Jill Grano,candidate,113.0,8821.72,Jill Grano,council,,,B,B,boulder_progressives
+2026|cand|Rachel Isaacson,2026,Official Candidate Committee,Rachel Rose for Boulder,2026-OCC-004,Rachel Isaacson,candidate,123.0,5187.08,Rachel Isaacson,council,,,,,
+2026|cand|Ryan Jamieson,2026,Official Candidate Committee,Jamieson for Boulder,2026-OCC-011,Ryan Jamieson,candidate,0.0,0.0,Ryan Jamieson,council,,,,,
+2026|cand|Ryan Schuchard,2026,Official Candidate Committee,Friends of Ryan Schuchard,2026-OCC-007,Ryan Schuchard,candidate,107.0,8276.0,Ryan Schuchard,council,,,B,B,boulder_progressives
+2026|cand|Samuel Fuqua,2026,Official Candidate Committee,Sam Fuqua For Boulder,2026-OCC-018,Samuel Fuqua,candidate,118.0,7261.0,Sam Fuqua,council,,,B,B,boulder_progressives
+2026|cand|Tara Winer,2026,Official Candidate Committee,Tara Winer for Council,2026-OCC-005,Tara Winer,candidate,145.0,12555.0,Tara Winer,council,,,,,
+2026|issue|Boulder Firefighters for a Stronger Boulder,2026,Ballot Measure Committee,Boulder Firefighters for a Stronger Boulder,2026-BMC-002,,issue,1.0,242.0,,,,,,,
+2026|issue|Vacancy to Vitality,2026,Ballot Measure Committee,Vacancy to Vitality,2026-BMC-001,,issue,2.0,132.11,,,,,,,
