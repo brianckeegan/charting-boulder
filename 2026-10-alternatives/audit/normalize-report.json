@@ -861,6 +861,18 @@
       }
     },
     "cde_teacher": {
+      "2000": {
+        "schools_with_fte": 1558,
+        "total_fte": 40868.039
+      },
+      "2001": {
+        "schools_with_fte": 1593,
+        "total_fte": 43022.56590000002
+      },
+      "2002": {
+        "schools_with_fte": 1621,
+        "total_fte": 44243.43919999997
+      },
       "2003": {
         "schools_with_fte": 1647,
         "total_fte": 44298.83000000008
@@ -868,6 +880,38 @@
       "2004": {
         "schools_with_fte": 1666,
         "total_fte": 44657.84400000015
+      },
+      "2005": {
+        "schools_with_fte": 1671,
+        "total_fte": 44649.64480000006
+      },
+      "2006": {
+        "schools_with_fte": 1718,
+        "total_fte": 46215.569100000044
+      },
+      "2007": {
+        "schools_with_fte": 1731,
+        "total_fte": 46973.47789999994
+      },
+      "2008": {
+        "schools_with_fte": 1710,
+        "total_fte": 46487.36799999999
+      },
+      "2009": {
+        "schools_with_fte": 1760,
+        "total_fte": 48063.93930000016
+      },
+      "2010": {
+        "schools_with_fte": 1770,
+        "total_fte": 47112.903000000035
+      },
+      "2011": {
+        "schools_with_fte": 1776,
+        "total_fte": 46205.059999999874
+      },
+      "2012": {
+        "schools_with_fte": 1787,
+        "total_fte": 46957.88999999998
       },
       "2013": {
         "schools_with_fte": 1782,
@@ -882,16 +926,16 @@
         "total_fte": 51251.019999999895
       },
       "2016": {
-        "schools_with_fte": 1784,
-        "total_fte": 49277.52999999988
+        "schools_with_fte": 1860,
+        "total_fte": 51461.16999999986
       },
       "2018": {
-        "schools_with_fte": 1769,
-        "total_fte": 49499.75999999989
+        "schools_with_fte": 1891,
+        "total_fte": 52694.91999999995
       },
       "2019": {
-        "schools_with_fte": 1888,
-        "total_fte": 53303.400000000045
+        "schools_with_fte": 1892,
+        "total_fte": 53440.30000000003
       },
       "2022": {
         "schools_with_fte": 1913,
@@ -899,7 +943,7 @@
       },
       "2023": {
         "schools_with_fte": 1891,
-        "total_fte": 52969.39999999992
+        "total_fte": 52969.399999999914
       },
       "2024": {
         "schools_with_fte": 1882,

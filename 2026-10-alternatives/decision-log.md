@@ -106,10 +106,30 @@ Every row parsed out of a CDE pupil/teacher ratio report is kept only if `enroll
 
 **What it costs.** A row whose published ratio is itself wrong is dropped along with the genuinely broken ones. The parse report in `audit/teacher-fte-parse.json` records how many rows each file lost, so the trade is visible per year.
 
-## D15 — District teacher FTE rests on NCES; CDE is the cross-check — 2026-09-17
+## D15 — District teacher FTE carries both what CDE states and what its schools sum to — 2026-09-17
 
-`district-teacher-fte-ccd.csv` is the district staffing series, 1987–2024. `district-teacher-fte-cde.csv` holds 17 rows and is presented as a comparison, not a series.
+`district-teacher-fte-cde.csv` holds two figures per district-year in their own columns: `teacher_fte_published`, which is what CDE states the district holds, and `teacher_fte_school_sum`, which is the district's schools added up. Neither is ever substituted for the other, and `teacher_fte_difference` is the comparison.
 
-**Why.** CDE publishes school-grain FTE in eleven years and district-grain in almost none: most of its district-level staff reports are average-salary tables in a shape that carries no FTE column. NCES carries district teacher FTE every year from 1987, with a level breakdown CDE never publishes. Building the district tier on the thinner source to keep it CDE-first would mean a series with holes in nine years out of ten.
+**Why.** CDE publishes a district total in three years out of twenty-five: 2010, where the ratio report prints a `<district> TOTALS*` row after each district's schools, and 2023 and 2024, where there is a by-district spreadsheet. Building the table only from those would give three years. Building it only from sums would throw away CDE's own statement in the years it makes one. Carrying both is the rule the school panel already follows with CDE and NCES, and it turns the overlap into a check: **551 district-years carry both and 396 agree to the hundredth of an FTE**, including all 185 districts in 2023.
 
-**Related, and a source defect rather than a decision.** CDE publishes its 2016 and 2017 pupil/teacher ratio reports at different URLs, but the two files are byte-identical — same SHA-256, same 583,100 bytes, same 1,784 schools, same 49,277.5 FTE. The later one is dropped rather than presented as a second year of data, so **2017 is absent from `school-teacher-fte.csv`**.
+**What this replaces.** The first version of this table had **seventeen rows**, and every one of them was wrong. Thirteen were schools whose own code had been merged into their name, leaving one code behind — and one code is what marked a row as a district, so "HULSTROM OPTIONS K-8 SCHOOL" was filed as a district. Three more were state totals. The by-district spreadsheets for 2023 and 2024 were being read, but their code column is headed `LEA` rather than `LEA Code`, so every district in both years took an empty code, collapsed onto one key, and survived only as the unnamed row at the bottom of the file carrying the state total. Nothing in the table's own shape showed this: seventeen rows spanning nine years looked like thin coverage, which is how it was described, rather than like a bug.
+
+**Also a source defect, not a decision.** CDE publishes its 2016 and 2017 pupil/teacher ratio reports at different URLs, but the two files are byte-identical — same SHA-256, same 583,100 bytes. The later one is dropped rather than presented as a second year of data, so **2017 is absent from both teacher tables**.
+
+## D16 — A run-together row is re-cut using the file's own arithmetic, never guessed — 2026-09-17
+
+Where two printed columns run together into one field, every way of cutting the trailing text into three figures is tried, and a cut is accepted only if the first divided by the second equals the third to the precision the third is printed at. Where more than one cut survives, the one that keeps the most of the row's own field boundaries wins. Where none does, the row is dropped.
+
+**Why.** In these reports the space between two right-aligned figures is often narrower than a character, so "34.5" and "17.2173913" arrive as "34.517.2173913". Every row of the 2002 report is like this, and 2007, 2008 and 2012 are partly so. The tables print three numbers whose relationship is fixed — membership over teacher FTE is the ratio — and that is what makes the split recoverable rather than a guess.
+
+**The bounds matter, and getting them wrong is silent.** CDE truncates the printed ratio rather than rounding it, so 616 over 31.15 is 19.7753 and the file says 19.77; a half-unit window rejects the correct cut and the row is lost. But a whole-unit window on a ratio printed as "1" accepts almost any pair of numbers, and Hagen Early Education Center came out of a clean row with **8,435 teachers**. Both bounds are applied and the tighter one holds.
+
+**A row that already reads as three figures is taken at its word**, subject to the 5% check the archive has always applied, and only a row that fails that is re-cut. A clean row can never be silently re-split into a different set of numbers.
+
+## D17 — A district row has to be a district the file itself names — 2026-09-17
+
+A row read as district grain is kept only if its code and name appear together as a district in the same file's school rows. A file that publishes districts and nothing else is exempt, because it has no school rows for a missing code to have come from.
+
+**Why.** Grain was decided by counting codes: two codes meant district plus school, one meant district alone. A school row whose school code merged into its name leaves one code behind and passes that test, and that is the whole of how `district-teacher-fte-cde.csv` came to be seventeen rows of schools. The file that prints a school also prints its district beside it, so the file itself says which codes are districts — no list has to be maintained here.
+
+**What it costs.** A real district that appears in no school row would be dropped. None does, and the count of rows this rejects is reported per file in `audit/teacher-fte-parse.json`.

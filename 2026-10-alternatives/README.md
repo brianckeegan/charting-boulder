@@ -20,9 +20,9 @@ Boulder Valley's Resilient Schools proposal treats four closures as a local prob
 | `source-reconciliation.csv` | 21 | 2004–2024 | year |
 | `district-reconciliation.csv` | 14 | 1986–1999 | year |
 | `district-year-overlap.csv` | 1,269 | 1977–1987 | district × year |
-| `school-teacher-fte.csv` | 19,880 | 2003–2024 | school × year |
+| `school-teacher-fte.csv` | 38,777 | 2000–2024 | school × year |
 | `district-teacher-fte-ccd.csv` | 7,879 | **1987–2024** | district × year |
-| `district-teacher-fte-cde.csv` | 17 | 2016–2024 | district × year |
+| `district-teacher-fte-cde.csv` | 4,037 | 2000–2024 | district × year |
 
 All in `data/processed/`, long format, UTF-8. `DATA-DICTIONARY.md` documents every column; `audit/validation.md` is the report the pipeline writes about itself and is regenerated from the data rather than maintained by hand.
 
@@ -42,6 +42,10 @@ Two checks, both against sources collected independently of the documents being 
 
 Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the one weak volume**, at −0.70% with three genuine row-total failures; treat it with more caution than the rest.
 
+**Teacher FTE, against NCES**, year by year. Every one of the twenty-two CDE years lands between 0.7% and 4.4% below the NCES state total, and sixteen of them within 2%. The gap is in the same direction throughout, which is what a consistent difference in what counts as a teacher looks like rather than a parse that comes and goes.
+
+**And CDE against itself.** In 2010, 2023 and 2024 CDE publishes district totals as well as school rows, so the schools can be summed and compared with what CDE says the district holds: **551 district-years carry both, and 396 agree to the hundredth of an FTE — all 185 of them in 2023.**
+
 **The modern CDE spreadsheets, against NCES**, school by school. From 2005 to 2020 the two agree to within a few hundred pupils out of 850,000, several years exactly. From 2021 they diverge by 6,000 to 16,000, concentrated in multi-district online and charter schools that CDE reports centrally and NCES attributes differently — a real difference in attribution, not a parse fault.
 
 **A third check, internal.** Each yearbook reprints the previous nine years, so most district-years are read twice. **1,267 of 1,269 agree exactly (99.8%)** — two OCR passes over the same printed figures. `district-year-overlap.csv` carries every comparison.
@@ -52,7 +56,7 @@ Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the 
 |---|---|---|---|
 | [CDE Artemis ED5/90.17](https://spl.cde.state.co.us/artemis/edserials/ed59017internet/) | School enrollment by grade | 2004–2018 | Spine |
 | [CDE pupil-membership archives](https://ed.cde.state.co.us/cdereval/pupilmembership-statistics/data-insights-resources-archives) | School enrollment by grade | 2019–2024 | Spine |
-| [CDE staff statistics](https://ed.cde.state.co.us/cdereval/staffstatistics) and [Artemis ED2.88](https://spl.cde.state.co.us/artemis/edserials/ed288internet/) | Teacher FTE by school | 2003–2024, eleven years | Spine |
+| [CDE staff statistics](https://ed.cde.state.co.us/cdereval/staffstatistics) and [Artemis ED2.88](https://spl.cde.state.co.us/artemis/edserials/ed288internet/) | Teacher FTE by school | 2000–2024, twenty-two years | Spine |
 | [CDE Artemis ED2/79.19](https://spl.cde.state.co.us/artemis/edserials/ed27919internet/) | District enrollment by grade; district trends | 1986–1999, and 1977–1985 via the 1986 volume | District tier |
 | [NCES CCD](https://nces.ed.gov/ccd/), via the [Urban Institute API](https://educationdata.urban.org/) | School enrollment by grade, teacher FTE, coordinates, charter flag, status | 1986–2024 | Secondary, harmonized and compared |
 
@@ -94,10 +98,10 @@ Three conventions worth knowing before you join anything:
 |---|---|
 | School enrollment, CDE | 2004–2024 |
 | School enrollment, NCES | 1986–2024 |
-| Teacher FTE by school, CDE | 2003, 2004, 2013–2016, 2018, 2019, 2022–2024 |
+| Teacher FTE by school, CDE | **2000–2024**, every year but 2017, 2020 and 2021 |
 | Teacher FTE by school, NCES | 1986–2024 |
 | **Teacher FTE by district, NCES** | **1987–2024**, with a level breakdown |
-| Teacher FTE by district, CDE | 2016–2024, thin |
+| Teacher FTE by district, CDE | **2000–2024**, 181–186 districts a year |
 | District enrollment by grade | 1986–2024 |
 | District fall membership | **1977–2024**, except 2000–2003 |
 | Coordinates | 64,744 of 65,841 school-years |
@@ -105,8 +109,8 @@ Three conventions worth knowing before you join anything:
 Two gaps are deliberate and one is not:
 
 - **2000–2003 has no district row, and 2001–2003 no CDE school data.** 2001 and 2002 publish school-by-grade as PDF only; 2003 uses an indented panel layout the parser does not read. NCES covers those years at school grain, so the school panel has no hole — it has one source instead of two.
-- **2005–2012 teacher FTE is not parsed.** Those CDE ratio PDFs place every character as its own run with unreliable line positions, so fields merge and rows scramble. Eight years of school-grain FTE sit behind that; NCES covers them at both grains meanwhile.
-- **2017 teacher FTE does not exist.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs, but the files are byte-identical. The later duplicate is dropped rather than presented as a second year.
+- **2017 teacher FTE does not exist.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs, but the files are byte-identical. The later duplicate is dropped rather than presented as a second year. 2020 and 2021 CDE published no ratio report at all.
+- **The 2000–2002 and 2004 membership PDFs still read as nothing**, and 2003's and 2012's ratio reports lose about 200 rows each to layouts the parser does not recover. The staff serial covers every one of those years, so no year is missing — but each is one file's reading rather than two.
 - **The yearbooks' Table 1** — school counts, staff, pupil/teacher ratio, dropout rate — is converted and sits in `data/interim/yearbooks/` but is not yet parsed into any table.
 
 ## Closures
@@ -130,7 +134,7 @@ Two gaps are deliberate and one is not:
 ├── README.md               this file
 ├── TASK.md                 the task this folder carries out
 ├── DATA-DICTIONARY.md      every column, its units and its missingness
-├── decision-log.md         fifteen dated decisions and why
+├── decision-log.md         seventeen dated decisions and why
 ├── ROADMAP.md              what is deferred, and to when
 ├── CHANGELOG.md            what changed, and what broke on the way
 ├── pipeline/
@@ -194,7 +198,7 @@ Every step is resumable: a file already downloaded, or a page already converted,
 
 ## A note on checking
 
-Ten bugs surfaced building this, and every one produced plausible output. A header read as `1.0` filed first-graders as grade 10. A `STATE TOTALS` row doubled the state in the 2010 CDE file and again in three yearbook volumes. Page selection skipped continuation pages, losing half the districts in a volume. Two columns headed `District Code` collapsed 2006 to a single district.
+Ten bugs surfaced building this, and every one produced plausible output. A header read as `1.0` filed first-graders as grade 10. A `STATE TOTALS` row doubled the state in the 2010 CDE file and again in three yearbook volumes. Page selection skipped continuation pages, losing half the districts in a volume. Two columns headed `District Code` collapsed 2006 to a single district. A district code column headed `LEA` rather than `LEA Code` went unmatched, so every district in two years collapsed onto one key and the whole table came out as a single row holding the state total.
 
 **Row-total checksums caught none of the worst four.** An aggregate row sums correctly against itself, and a page never converted cannot fail a test it is never given. Only comparison against an independently collected source exposed them — which is why `district-reconciliation.csv` and `source-reconciliation.csv` are pipeline outputs rather than something done once by hand.
 

@@ -1,45 +1,56 @@
 {
   "membership-2000-ed59017200023internet.pdf": {
-    "error": "no text extracted"
+    "error": "no text extracted",
+    "district_rows_dropped": 0,
+    "district_rows": 0
   },
   "staff-2000-ed288200021internet.pdf": {
-    "grain": "unknown",
+    "grain": "school",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 32,
-    "school_rows": 0,
+    "records": 1558,
+    "rows_skipped": 21,
+    "school_rows": 1558,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 40868.0,
+    "district_rows_dropped": 0
   },
   "membership-2001-ed59017200124internet.pdf": {
-    "error": "no text extracted"
+    "error": "no text extracted",
+    "district_rows_dropped": 0,
+    "district_rows": 0
   },
   "staff-2001-ed288200121internet.pdf": {
-    "grain": "unknown",
+    "grain": "school",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 37,
-    "school_rows": 0,
+    "records": 1593,
+    "rows_skipped": 24,
+    "school_rows": 1593,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 43022.6,
+    "district_rows_dropped": 0
   },
   "membership-2002-ed59017200225internet.pdf": {
-    "error": "no text extracted"
+    "error": "no text extracted",
+    "district_rows_dropped": 0,
+    "district_rows": 0
   },
   "staff-2002-ed288200222internet.pdf": {
-    "grain": "unknown",
+    "grain": "school",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 48,
-    "school_rows": 0,
+    "records": 1621,
+    "rows_skipped": 27,
+    "school_rows": 1621,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 44243.4,
+    "district_rows_dropped": 0
   },
   "membership-2003-ed59017200364internet.pdf": {
-    "error": "no text extracted"
+    "error": "no text extracted",
+    "district_rows_dropped": 0,
+    "district_rows": 0
   },
   "membership-2003-ed59017200365internet.xls": {
     "grain": "school",
@@ -49,27 +60,30 @@
     "rows_skipped": 0,
     "school_rows": 1647,
     "district_rows": 0,
-    "total_fte": 44298.8
+    "total_fte": 44298.8,
+    "district_rows_dropped": 0
   },
   "staff-2003-ed288200321internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 51,
-    "school_rows": 0,
+    "records": 1640,
+    "rows_skipped": 47,
+    "school_rows": 1639,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 43991.6,
+    "district_rows_dropped": 1
   },
   "membership-2004-ed59017200432internet.pdf": {
     "grain": "unknown",
     "font_offset": 0,
     "label": "Student Teacher Ratios",
     "records": 0,
-    "rows_skipped": 107,
+    "rows_skipped": 5006,
     "school_rows": 0,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 0,
+    "district_rows_dropped": 0
   },
   "membership-2004-ed59017200433internet.xls": {
     "grain": "school",
@@ -79,97 +93,107 @@
     "rows_skipped": 0,
     "school_rows": 1666,
     "district_rows": 0,
-    "total_fte": 44657.8
+    "total_fte": 44657.8,
+    "district_rows_dropped": 0
   },
   "staff-2004-ed288200421internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 48,
-    "school_rows": 0,
+    "records": 1660,
+    "rows_skipped": 9,
+    "school_rows": 1653,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 44531.4,
+    "district_rows_dropped": 7
   },
   "staff-2005-ed288200521internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 1348,
-    "school_rows": 0,
+    "records": 1687,
+    "rows_skipped": 6,
+    "school_rows": 1671,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 45185.0,
+    "district_rows_dropped": 16
   },
   "staff-2006-ed288200621internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 278,
-    "school_rows": 0,
-    "district_rows": 0,
-    "total_fte": 0
+    "records": 1723,
+    "rows_skipped": 104,
+    "school_rows": 1722,
+    "district_rows": 1,
+    "total_fte": 46285.3,
+    "district_rows_dropped": 0
   },
   "staff-2007-ed288200721internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 78,
-    "school_rows": 0,
+    "records": 1733,
+    "rows_skipped": 195,
+    "school_rows": 1731,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 47031.0,
+    "district_rows_dropped": 2
   },
   "staff-2008-ed288200821internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 174,
-    "school_rows": 0,
+    "records": 1757,
+    "rows_skipped": 6,
+    "school_rows": 1710,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 48005.8,
+    "district_rows_dropped": 47
   },
   "staff-2009-ed288200921internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 282,
-    "school_rows": 0,
+    "records": 1858,
+    "rows_skipped": 7,
+    "school_rows": 1844,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 48589.4,
+    "district_rows_dropped": 14
   },
   "staff-2010-ed288201021internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 365,
-    "school_rows": 0,
-    "district_rows": 0,
-    "total_fte": 0
+    "records": 1957,
+    "rows_skipped": 19,
+    "school_rows": 1770,
+    "district_rows": 181,
+    "total_fte": 95669.4,
+    "district_rows_dropped": 6
   },
   "staff-2011-ed288201121internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 235,
-    "school_rows": 0,
+    "records": 1791,
+    "rows_skipped": 11,
+    "school_rows": 1776,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 46635.4,
+    "district_rows_dropped": 15
   },
   "staff-2012-ed288201222internet.pdf": {
-    "grain": "unknown",
+    "grain": "mixed",
     "font_offset": 29,
     "label": "Student-teacher ratios (PDF)",
-    "records": 0,
-    "rows_skipped": 146,
-    "school_rows": 0,
+    "records": 1804,
+    "rows_skipped": 198,
+    "school_rows": 1787,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 47527.3,
+    "district_rows_dropped": 17
   },
   "staff-2013-ed288201308internet.pdf": {
     "grain": "school",
@@ -179,7 +203,8 @@
     "rows_skipped": 171,
     "school_rows": 1782,
     "district_rows": 0,
-    "total_fte": 49534.9
+    "total_fte": 49534.9,
+    "district_rows_dropped": 0
   },
   "staff-2014-ed288201407internet.pdf": {
     "grain": "school",
@@ -189,7 +214,8 @@
     "rows_skipped": 5,
     "school_rows": 1823,
     "district_rows": 0,
-    "total_fte": 50805.9
+    "total_fte": 50805.9,
+    "district_rows_dropped": 0
   },
   "staff-2015-ed288201507internet.pdf": {
     "grain": "school",
@@ -199,67 +225,74 @@
     "rows_skipped": 13,
     "school_rows": 1837,
     "district_rows": 0,
-    "total_fte": 51251.0
+    "total_fte": 51251.0,
+    "district_rows_dropped": 0
   },
   "staff-2016-ed288201607internet.pdf": {
-    "grain": "mixed",
+    "grain": "school",
     "font_offset": 0,
     "label": "Pupil-teacher ratio by school (PDF)",
-    "records": 1788,
-    "rows_skipped": 429,
-    "school_rows": 1784,
-    "district_rows": 4,
-    "total_fte": 49355.7
+    "records": 1860,
+    "rows_skipped": 224,
+    "school_rows": 1860,
+    "district_rows": 0,
+    "total_fte": 51461.2,
+    "district_rows_dropped": 0
   },
   "staff-2018-ed288201807internet.pdf": {
-    "grain": "mixed",
+    "grain": "school",
     "font_offset": 0,
     "label": "Pupil-teacher ratio by school (PDF)",
-    "records": 1773,
-    "rows_skipped": 565,
-    "school_rows": 1769,
-    "district_rows": 4,
-    "total_fte": 49600.1
+    "records": 1891,
+    "rows_skipped": 283,
+    "school_rows": 1891,
+    "district_rows": 0,
+    "total_fte": 52694.9,
+    "district_rows_dropped": 0
   },
   "staff-2019-ed288201907internet.pdf": {
-    "grain": "mixed",
+    "grain": "school",
     "font_offset": 0,
     "label": "Pupil-teacher ratio by school (PDF)",
     "records": 1898,
-    "rows_skipped": 326,
-    "school_rows": 1894,
-    "district_rows": 4,
-    "total_fte": 53454.1
+    "rows_skipped": 320,
+    "school_rows": 1898,
+    "district_rows": 0,
+    "total_fte": 53454.1,
+    "district_rows_dropped": 0
   },
   "staff-2022-20222023AverageTeachersSalaryFTE_PublishedReportupdated41323.pdf": {
-    "grain": "district",
+    "grain": "unknown",
     "font_offset": 0,
     "label": "Average Teacher Salary (PDF)",
-    "records": 1,
-    "rows_skipped": 205,
+    "records": 0,
+    "rows_skipped": 206,
     "school_rows": 0,
-    "district_rows": 1,
-    "total_fte": 1.0
+    "district_rows": 0,
+    "total_fte": 0,
+    "district_rows_dropped": 0
   },
   "staff-2022-20222023AverageTeachersSalaryFTE_PublishedReportupdated41323.xlsx": {
-    "grain": "district",
+    "grain": "unknown",
     "font_offset": 0,
     "label": "Average Teacher Salary (XLSX)",
-    "records": 1,
-    "rows_skipped": 200,
+    "records": 0,
+    "rows_skipped": 201,
     "school_rows": 0,
-    "district_rows": 1,
-    "total_fte": 1.0
+    "district_rows": 0,
+    "total_fte": 0,
+    "district_rows_dropped": 0
   },
   "staff-2022-20222023PupilTeacherRatiopublishedreport.pdf": {
     "grain": "mixed",
     "font_offset": 0,
     "label": "Student Teacher Ratios by School (PDF)",
-    "records": 1910,
-    "rows_skipped": 16,
-    "school_rows": 1906,
-    "district_rows": 4,
-    "total_fte": 52851.3
+    "records": 1114,
+    "rows_skipped": 804,
+    "school_rows": 133,
+    "district_rows": 981,
+    "total_fte": 32215.8,
+    "district_rows_dropped": 0
   },
   "staff-2022-20222023PupilTeacherRatiopublishedreport1.xlsx": {
     "grain": "school",
@@ -269,17 +302,19 @@
     "rows_skipped": 0,
     "school_rows": 1913,
     "district_rows": 0,
-    "total_fte": 52929.8
+    "total_fte": 52929.8,
+    "district_rows_dropped": 0
   },
   "staff-2023-2023-2024PupilTeacherRatiobyLEA.xlsx": {
     "grain": "district",
     "font_offset": 0,
     "label": "Student Teacher Ratios by District (XLSX)",
-    "records": 186,
+    "records": 185,
     "rows_skipped": 0,
     "school_rows": 0,
-    "district_rows": 186,
-    "total_fte": 105938.8
+    "district_rows": 185,
+    "total_fte": 52969.4,
+    "district_rows_dropped": 0
   },
   "staff-2023-2023-2024PupilTeacherRatiobySchool.xlsx": {
     "grain": "school",
@@ -289,7 +324,8 @@
     "rows_skipped": 0,
     "school_rows": 1891,
     "district_rows": 0,
-    "total_fte": 52969.4
+    "total_fte": 52969.4,
+    "district_rows_dropped": 0
   },
   "staff-2024-2024-2025AverageTeacherSalaryandFTE33125.xlsx": {
     "grain": "unknown",
@@ -299,7 +335,8 @@
     "rows_skipped": 202,
     "school_rows": 0,
     "district_rows": 0,
-    "total_fte": 0
+    "total_fte": 0,
+    "district_rows_dropped": 0
   },
   "staff-2024-2024-2025PupilTeacherRatiobySchool.xlsx": {
     "grain": "school",
@@ -309,7 +346,8 @@
     "rows_skipped": 0,
     "school_rows": 1882,
     "district_rows": 0,
-    "total_fte": 52709.5
+    "total_fte": 52709.5,
+    "district_rows_dropped": 0
   },
   "staff-2024-StudentTeacherRatiosbyLEA2024-2025.xlsx": {
     "grain": "district",
@@ -319,6 +357,21 @@
     "rows_skipped": 0,
     "school_rows": 0,
     "district_rows": 185,
-    "total_fte": 53512.7
+    "total_fte": 53512.7,
+    "district_rows_dropped": 0
+  },
+  "_second_readings": {
+    "2009": 84,
+    "2014": 2,
+    "2019": 6
+  },
+  "_district_comparison": {
+    "district_years_with_both": 551,
+    "exact_agreement": 396,
+    "published_years": [
+      2010,
+      2023,
+      2024
+    ]
   }
 }
