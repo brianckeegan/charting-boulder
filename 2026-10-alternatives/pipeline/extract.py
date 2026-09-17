@@ -297,6 +297,7 @@ def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dic
                 break
         if not grade_cols:
             continue
+        total_idx = max(grade_cols) + 1
 
         county = ""
         for cells in rows[start:]:
@@ -336,14 +337,28 @@ def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dic
 
             # Every row prints its total; this is the only mechanical proof an
             # OCR'd row was read correctly (finding A14).
-            printed = None
-            for cell in reversed(cells):
-                printed = parse_count(cell)
+            #
+            # Only rows carrying the full grade set are checked. Counting a
+            # partial row as a failure made this disagree with
+            # audit/check-row-totals.py on the same volume - 135/181 here
+            # against 137/142 there - which is worse than having one check,
+            # because two numbers for one fact means neither can be quoted.
+            # The total sits in the column after the last grade column, and
+            # its position is taken from the header rather than from the end
+            # of the row. Reading "the last numeric cell" instead looked right
+            # until a page came back with one column fewer than its header:
+            # the ungraded count then posed as the total, and 41 sound rows
+            # were reported as failures on the 1990 volume alone. A check that
+            # cries wolf is worse than no check, because the real failures
+            # stop being visible among them.
+            if total_idx is not None and total_idx < len(cells):
+                printed = parse_count(cells[total_idx])
                 if printed is not None:
-                    break
-            summed = sum(totals.values())
-            if printed is not None:
-                checks["pass" if summed == printed else "fail"] += 1
+                    checks["pass" if sum(totals.values()) == printed else "fail"] += 1
+                else:
+                    checks["not_checkable"] = checks.get("not_checkable", 0) + 1
+            else:
+                checks["not_checkable"] = checks.get("not_checkable", 0) + 1
 
     return records, {
         "districts": len({r["district_name"] for r in records}),

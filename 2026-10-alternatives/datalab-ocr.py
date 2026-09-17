@@ -159,11 +159,22 @@ def wanted_pages(texts: list[str]) -> dict[int, str]:
     that lost roughly half the districts, because the pages in the gaps were
     never sent for OCR at all and so were invisible to every later stage.
 
-    So a table is treated as a contiguous SPAN. Each run of flagged pages
-    claims every page from its first to its last, gaps included, plus a
-    margin on each end to catch a continuation page that trails past the last
-    heading. Over-sending costs 0.75 cents a page; under-sending silently
-    loses districts.
+    So a table is treated as one contiguous SPAN from its first flagged page
+    to its last, gaps included, plus a margin on each end for continuation
+    pages that trail past the final heading.
+
+    Grouping flagged pages into runs with a maximum gap was not enough. In
+    volumes whose embedded layer is poorer, the gaps between legible headings
+    exceed any gap threshold worth setting, so a single table split into
+    several runs and the pages between them were never sent. The 1989 volume
+    lost 45 districts that way and recovered all of them once the span was
+    widened - the pages were always in the book.
+
+    These tables are contiguous blocks in every volume checked, so min-to-max
+    per table is the honest description of where each one lives. Over-sending
+    costs 0.75 cents a page. Under-sending loses districts that no later check
+    can catch: a page that is never converted cannot fail a checksum, so the
+    archive reports a clean pass rate on whatever it happened to look at.
     """
     hits: dict[int, str] = {}
     for i, text in enumerate(texts):
@@ -174,26 +185,15 @@ def wanted_pages(texts: list[str]) -> dict[int, str]:
     if not hits:
         return {}
 
+    bounds: dict[str, tuple[int, int]] = {}
+    for page, label in hits.items():
+        first, last = bounds.get(label, (page, page))
+        bounds[label] = (min(first, page), max(last, page))
+
     spread: dict[int, str] = {}
-    flagged = sorted(hits)
-    # Group flagged pages into runs of the same table, allowing a gap of a few
-    # unflagged pages inside one run.
-    run_start = previous = flagged[0]
-    label = hits[run_start]
-
-    def claim(start: int, end: int, table: str) -> None:
-        for j in range(max(0, start - MARGIN), min(len(texts), end + MARGIN + 1)):
-            spread.setdefault(j, table)
-
-    for page in flagged[1:]:
-        same_table = hits[page] == label
-        if same_table and page - previous <= MAX_GAP:
-            previous = page
-            continue
-        claim(run_start, previous, label)
-        run_start = previous = page
-        label = hits[page]
-    claim(run_start, previous, label)
+    for label, (first, last) in bounds.items():
+        for j in range(max(0, first - MARGIN), min(len(texts), last + MARGIN + 1)):
+            spread.setdefault(j, label)
     return spread
 
 

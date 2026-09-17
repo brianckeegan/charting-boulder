@@ -1,5 +1,71 @@
 {
   "pages": {
+    "0": {
+      "chars": 635,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "PUPIL MEMBERSHIP AND RELATED INFORMATION FALL 1990",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "1": {
+      "chars": 889,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO STATE BOARD OF EDUCATION 1991",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
+    },
+    "10": {
+      "chars": 3227,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN PUPIL MEMBERSHIP FALL 1986 THROUGH FALL 1990 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "qhz1pmKV8P2hox9Jrvb_Qg"
+    },
+    "11": {
+      "chars": 3425,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN PUPIL MEMBERSHIP FALL 1986 THROUGH FALL 1990 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "8Et8AOdN6pPJd7XZaZ68VA"
+    },
+    "12": {
+      "chars": 3196,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN PUPIL MEMBERSHIP FALL 1986 THROUGH FALL 1990 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "WPI_9kiV1fVrq_a7KMsPBg"
+    },
+    "13": {
+      "chars": 3493,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN PUPIL MEMBERSHIP FALL 1986 THROUGH FALL 1990 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "OVxqkUl0dqGwkoNwH-TanA"
+    },
+    "14": {
+      "chars": 3427,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN PUPIL MEMBERSHIP FALL 1986 THROUGH FALL 1990 BY SCHOOL DISTRICT",
+      "quality": 5.0,
+      "request_id": "lMQmMa81GdZuPwT5nn2KLA"
+    },
+    "15": {
+      "chars": 3361,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN PUPIL MEMBERSHIP FALL 1986 THROUGH FALL 1990 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "ODJ6MSISbUTiemO8c3Flbg"
+    },
     "16": {
       "chars": 3328,
       "cost_cents": 0.75,
@@ -31,6 +97,15 @@
       "heading": "COLORADO DEPARTMENT OF EDUCATION SUMMARY OF SELECTED SCHOOL DISTRICT DATA",
       "quality": null,
       "request_id": "uPgHAwe37n-EiqoS2CuCIw"
+    },
+    "2": {
+      "chars": 317,
+      "cost_cents": null,
+      "guessed_table": "district_by_grade",
+      "heading": "PUPIL MEMBERSHIP AND RELATED INFORMATION - FALL 1990",
+      "quality": null,
+      "recovered_from_disk": true,
+      "request_id": null
     },
     "20": {
       "chars": 9408,
@@ -176,6 +251,14 @@
       "quality": null,
       "request_id": "xzBv-rDbC92_9r-e3L7lNw"
     },
+    "37": {
+      "chars": 4486,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND GRADE",
+      "quality": null,
+      "request_id": "qQgQE1hw7QCHzO91h7gewQ"
+    },
     "38": {
       "chars": 5042,
       "cost_cents": 0.75,
@@ -208,6 +291,30 @@
       "quality": null,
       "request_id": "9QmEB2ajYx7OtuxzCDKH3A"
     },
+    "41": {
+      "chars": 5781,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "eFYVv_Z9ucXgapmMiFReBA"
+    },
+    "42": {
+      "chars": 4734,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": 5.0,
+      "request_id": "4a9wF57E4GTyAA_XYl3EFA"
+    },
+    "43": {
+      "chars": 4559,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION FALL MEMBERSHIP BY SCHOOL DISTRICT AND ETHNIC/RACIAL GROUP",
+      "quality": null,
+      "request_id": "QtwoDGlxwdNTDwd4ebswaQ"
+    },
     "5": {
       "chars": 826,
       "cost_cents": 0.75,
@@ -215,9 +322,41 @@
       "heading": "",
       "quality": 5.0,
       "request_id": "QHeUGncQK-p61MtQkEp3Ew"
+    },
+    "6": {
+      "chars": 2048,
+      "cost_cents": 0,
+      "guessed_table": "district_by_grade",
+      "heading": "INTRODUCTION",
+      "quality": 5.0,
+      "request_id": "k_hoAy7dqyCyf9rXSQIEfw"
+    },
+    "7": {
+      "chars": 568,
+      "cost_cents": 0,
+      "guessed_table": "district_by_grade",
+      "heading": "",
+      "quality": 5.0,
+      "request_id": "Ku00fJ33h_po4VuuRjrYJQ"
+    },
+    "8": {
+      "chars": 5025,
+      "cost_cents": 0,
+      "guessed_table": "district_by_grade",
+      "heading": "STATE TRENDS IN FALL MEMBERSHIP FROM 1986 TO 1990",
+      "quality": 5.0,
+      "request_id": "agvaLBd0vTFpn87ifJXyow"
+    },
+    "9": {
+      "chars": 3557,
+      "cost_cents": 0.75,
+      "guessed_table": "district_by_grade",
+      "heading": "COLORADO DEPARTMENT OF EDUCATION STATE TRENDS IN PUPIL MEMBERSHIP FALL 1986 THROUGH FALL 1990 BY SCHOOL DISTRICT",
+      "quality": null,
+      "request_id": "xnsXJjS6aH_IrFWNcJOAgA"
     }
   },
-  "pages_on_disk": 27,
-  "total_cost_cents": 20.25,
+  "pages_on_disk": 44,
+  "total_cost_cents": 28.5,
   "year": 1990
 }

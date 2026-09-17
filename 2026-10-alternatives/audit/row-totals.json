@@ -2,8 +2,8 @@
   "1986": {
     "year": 1986,
     "status": "checked",
-    "rows_checked": 175,
-    "passed": 175,
+    "rows_checked": 178,
+    "passed": 178,
     "failed": 0,
     "pass_rate": 1.0,
     "failures": []
@@ -16,5 +16,315 @@
     "failed": 0,
     "pass_rate": 1.0,
     "failures": []
+  },
+  "1988": {
+    "year": 1988,
+    "status": "checked",
+    "rows_checked": 175,
+    "passed": 175,
+    "failed": 0,
+    "pass_rate": 1.0,
+    "failures": []
+  },
+  "1989": {
+    "year": 1989,
+    "status": "checked",
+    "rows_checked": 182,
+    "passed": 182,
+    "failed": 0,
+    "pass_rate": 1.0,
+    "failures": []
+  },
+  "1990": {
+    "year": 1990,
+    "status": "checked",
+    "rows_checked": 142,
+    "passed": 137,
+    "failed": 5,
+    "pass_rate": 0.9648,
+    "failures": [
+      {
+        "page": "p031.md",
+        "row": "DENVER COUNTY",
+        "summed": 58998,
+        "printed": 59013
+      },
+      {
+        "page": "p036.md",
+        "row": "MONTROSE COUNTY",
+        "summed": 4458,
+        "printed": 4488
+      },
+      {
+        "page": "p038.md",
+        "row": "MONTE VISTA",
+        "summed": 1343,
+        "printed": 1360
+      },
+      {
+        "page": "p039.md",
+        "row": "ARICKAREE",
+        "summed": 140,
+        "printed": 141
+      },
+      {
+        "page": "p039.md",
+        "row": "GREELEY",
+        "summed": 11647,
+        "printed": 11657
+      }
+    ]
+  },
+  "1991": {
+    "year": 1991,
+    "status": "checked",
+    "rows_checked": 165,
+    "passed": 154,
+    "failed": 11,
+    "pass_rate": 0.9333,
+    "failures": [
+      {
+        "page": "p031.md",
+        "row": "ST. VRAIN VALLEY",
+        "summed": 15445,
+        "printed": 15651
+      },
+      {
+        "page": "p033.md",
+        "row": "EAGLE COUNTY",
+        "summed": 2896,
+        "printed": 2897
+      },
+      {
+        "page": "p033.md",
+        "row": "AGATE",
+        "summed": 65,
+        "printed": 66
+      },
+      {
+        "page": "p033.md",
+        "row": "COLORADO SPRINGS",
+        "summed": 30516,
+        "printed": 30602
+      },
+      {
+        "page": "p033.md",
+        "row": "MANITOU SPRINGS",
+        "summed": 1222,
+        "printed": 1231
+      },
+      {
+        "page": "p035.md",
+        "row": "DURANGO",
+        "summed": 4193,
+        "printed": 4200
+      },
+      {
+        "page": "p035.md",
+        "row": "THOMPSON",
+        "summed": 12160,
+        "printed": 12265
+      },
+      {
+        "page": "p039.md",
+        "row": "DEL NORTE",
+        "summed": 683,
+        "printed": 686
+      },
+      {
+        "page": "p039.md",
+        "row": "MONTE VISTA",
+        "summed": 1395,
+        "printed": 1411
+      },
+      {
+        "page": "p039.md",
+        "row": "SARGENT",
+        "summed": 463,
+        "printed": 465
+      },
+      {
+        "page": "p040.md",
+        "row": "GREELEY",
+        "summed": 12112,
+        "printed": 12126
+      }
+    ]
+  },
+  "1992": {
+    "year": 1992,
+    "status": "checked",
+    "rows_checked": 129,
+    "passed": 123,
+    "failed": 6,
+    "pass_rate": 0.9535,
+    "failures": [
+      {
+        "page": "p033.md",
+        "row": "ST. VRAIN VALLEY",
+        "summed": 15938,
+        "printed": 16099
+      },
+      {
+        "page": "p037.md",
+        "row": "DURANGO",
+        "summed": 4332,
+        "printed": 4335
+      },
+      {
+        "page": "p037.md",
+        "row": "THOMPSON",
+        "summed": 12469,
+        "printed": 12559
+      },
+      {
+        "page": "p041.md",
+        "row": "MONTE VISTA",
+        "summed": 1386,
+        "printed": 1388
+      },
+      {
+        "page": "p041.md",
+        "row": "MOUNTAIN VALLEY",
+        "summed": 198,
+        "printed": 199
+      },
+      {
+        "page": "p042.md",
+        "row": "LONE STAR",
+        "summed": 65,
+        "printed": 66
+      }
+    ]
+  },
+  "1993": {
+    "year": 1993,
+    "status": "checked",
+    "rows_checked": 160,
+    "passed": 154,
+    "failed": 6,
+    "pass_rate": 0.9625,
+    "failures": [
+      {
+        "page": "p032.md",
+        "row": "ST. VRAIN VALLEY",
+        "summed": 15980,
+        "printed": 16192
+      },
+      {
+        "page": "p036.md",
+        "row": "LAKE COUNTY",
+        "summed": 1099,
+        "printed": 1100
+      },
+      {
+        "page": "p036.md",
+        "row": "DURANGO",
+        "summed": 4460,
+        "printed": 4468
+      },
+      {
+        "page": "p036.md",
+        "row": "THOMPSON",
+        "summed": 12757,
+        "printed": 12837
+      },
+      {
+        "page": "p038.md",
+        "row": "MONTROSE COUNTY",
+        "summed": 4850,
+        "printed": 4889
+      },
+      {
+        "page": "p040.md",
+        "row": "MONTE VISTA",
+        "summed": 1403,
+        "printed": 1412
+      }
+    ]
+  },
+  "1994": {
+    "year": 1994,
+    "status": "checked",
+    "rows_checked": 185,
+    "passed": 177,
+    "failed": 8,
+    "pass_rate": 0.9568,
+    "failures": [
+      {
+        "page": "p032.md",
+        "row": "ST. VRAIN VALLEY",
+        "summed": 16314,
+        "printed": 16482
+      },
+      {
+        "page": "p032.md",
+        "row": "BUENA VISTA",
+        "summed": 818,
+        "printed": 859
+      },
+      {
+        "page": "p033.md",
+        "row": "DENVER COUNTY",
+        "summed": 62770,
+        "printed": 62773
+      },
+      {
+        "page": "p034.md",
+        "row": "COLORADO SPRINGS",
+        "summed": 32395,
+        "printed": 32539
+      },
+      {
+        "page": "p036.md",
+        "row": "DURANGO",
+        "summed": 4605,
+        "printed": 4612
+      },
+      {
+        "page": "p036.md",
+        "row": "THOMPSON",
+        "summed": 13036,
+        "printed": 13137
+      },
+      {
+        "page": "p037.md",
+        "row": "PLATEAU VALLEY",
+        "summed": 387,
+        "printed": 565
+      },
+      {
+        "page": "p038.md",
+        "row": "MONTROSE COUNTY",
+        "summed": 5039,
+        "printed": 5078
+      }
+    ]
+  },
+  "1995": {
+    "year": 1995,
+    "status": "checked",
+    "rows_checked": 182,
+    "passed": 180,
+    "failed": 2,
+    "pass_rate": 0.989,
+    "failures": [
+      {
+        "page": "p035.md",
+        "row": "DENVER COUNTY",
+        "summed": 64312,
+        "printed": 64322
+      },
+      {
+        "page": "p040.md",
+        "row": "MONTROSE COUNTY",
+        "summed": 5106,
+        "printed": 5165
+      }
+    ]
+  },
+  "1996": {
+    "year": 1996,
+    "status": "incomplete - no index.json"
   }
 }
