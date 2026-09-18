@@ -187,8 +187,11 @@ Four things are missing or thin, and each is here for its own reason:
     ├── raw/yearbooks/      scanned volumes (not committed; 110 MB each)
     ├── interim/yearbooks/  the OCR markdown, one file per converted page
     ├── raw/geo/            census TIGER and PL 94-171, with manifest.json
-    ├── raw/proposal/       resolution 26-27, the work session deck, and
-    │                       Boulder's subcommunity boundaries, with checksums
+    ├── raw/proposal/       resolution 26-27, the work session deck, the
+    │                       2025-26 school profiles, and Boulder's
+    │                       subcommunity boundaries, with checksums
+    ├── raw/geo/bvsd/       the district's attendance areas, capacities and
+    │                       school locations, from its ArcGIS services
     ├── lookups/            inventory, coverage map, district and county crosswalks
     ├── analysis/           the working set the notebooks build on
     └── processed/          the archive
@@ -229,41 +232,54 @@ throughout, and **they land in the same place** — BVSD's two-classes-a-grade
 standard is about 300 pupils, which is also where Colorado's observed closure
 rate flattens. The district's standard is not unusual.
 
-Resolution 26-27 and the 15 September 2026 work session are in
-`data/raw/proposal/`, and the analysis is scored against the district's own
-figures wherever it has them.
+Built on the district's own attendance areas and capacities, taken from the
+three BVSD ArcGIS web maps (last edited 20 February 2026 — the vintage the
+proposal was drawn against), and scored against the resolution and the
+15 September 2026 work session in `data/raw/proposal/`.
 
-**16 of Boulder Valley's 31 elementary schools are already below the bar**;
-BVSD's own count, from different data, is 14. The proposal's closures leave
-eight. Clearing the bar by closing alone would take thirteen. **Redrawing
-boundaries across the buildings that already exist clears the district's own
-standard without closing any** — moving about a quarter of elementary pupils.
+**The archive counts 14 elementary schools below the bar. So does BVSD.** Two
+readings of the same district from different data, landing on the same number.
 
-That option is not on the list of six the board was given (work session, slide
-7). Boundary redrawing appears six times in the resolution, always as a
-consequence of a closure, never as an alternative to one.
+| | buildings | below the bar | pupils moved |
+|---|---:|---:|---:|
+| Today | 26 | 14 | — |
+| The proposal | 22 | 8 | 952 |
+| Redraw to capacity, close nothing | 26 | 9 | 694 |
 
-The district has enough elementary-age children for 35 schools at its own
-standard and runs 31. Its problem is not the number of buildings. It is where
-they are.
+Those two rows are the same answer by different means. The proposal gets one
+more school over the bar; redrawing moves 258 fewer children and closes
+nothing.
+
+Neither reaches the standard, because **nothing does**. Closing until every
+school clears 300 pupils takes twelve closures and leaves the district at
+**104% of its own capacity** with eight schools overfull. The bar cannot be
+met by closing.
+
+Redrawing attendance boundaries on its own is not among the six options the
+board was given (work session, slide 7). It appears six times in the
+resolution, always as a consequence of a closure, never as an alternative to
+one.
+
+Eleven per cent of the district's children live in an area that loses its
+school — concentrated outside the City of Boulder and on University Hill.
 
 ### What the analysis is missing
 
-**Capacity for 29 of the 31 elementary schools.** The work session gives
-capacity and utilisation for Mesa and Bear Creek only — the worked example on
-slide 20. Every other school's is a chart, not a table. So utilisation, the
-district's second metric and the one the 68%-to-75% target is stated in,
-cannot be computed here. A capacity-by-school table is the single most useful
-thing still missing.
+**Capacity is February 2026; enrollment is not.** The attendance-area layer's
+own enrollment field gives a district utilisation of 86%, the work session
+says 68%, and the archive's K–5 enrollment over that capacity gives 62%. The
+three disagree school by school. Capacity is a building's size and moves
+slowly, so it is the field taken from the layer; the enrollment on top of it
+is the archive's.
 
-**The catchment model matches one of its two available checks** — Mesa within
-6% of the district's resident count, Bear Creek at 45%. It is used only to
-compare levers, which share the bias, never to describe one school.
+**Redrawing is modelled as proportional to capacity, not as real lines.** What
+it establishes is a ceiling — what the existing buildings could hold — not a
+map. An actual redraw is constrained by geography this model does not see.
 
-Catchments are straight-line nearest-school, and BVSD says 67–70% of students
-attend their neighbourhood school, so about a third of the real assignment is
-choice this model does not see. The child geography is the 2020 census.
-`data/analysis/known-gaps.csv` carries the rest.
+**Open enrollment is a third of the district.** BVSD's profile report puts it
+at 33% attending a school other than their neighbourhood one in 2025;
+everything here is resident-based. **Focus schools have no catchment** and the
+proposal moves three of them. `data/analysis/known-gaps.csv` carries the rest.
 
 ## Reproduce
 
