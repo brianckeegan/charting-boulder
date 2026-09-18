@@ -157,7 +157,7 @@ Four things are missing or thin, and each is here for its own reason:
 ├── README.md               this file
 ├── TASK.md                 the task this folder carries out
 ├── DATA-DICTIONARY.md      every column, its units and its missingness
-├── decision-log.md         nineteen dated decisions and why
+├── decision-log.md         twenty-one dated decisions and why
 ├── ROADMAP.md              what is deferred, and to when
 ├── CHANGELOG.md            what changed, and what broke on the way
 ├── pipeline/
@@ -168,6 +168,8 @@ Four things are missing or thin, and each is here for its own reason:
 │   │                    yearbooks' district summary table
 │   ├── normalize.py        harmonize, join, build the registry, reconcile
 │   ├── teacher_fte.py      the staff reports, both grains -> three FTE tables
+│   ├── oe_matrix.py        BVSD's Enrollment Pattern Matrices, read from the
+│   │                    characters up: the headings are printed sideways
 │   └── audit.py            write audit/validation.md from the pipeline's output
 ├── alternatives-retrieval.ipynb  fetch + tidy  -> data/analysis/
 ├── alternatives-analysis.ipynb   read + argue  -> output/
@@ -219,7 +221,7 @@ gone within two years, while its recent trend adds nothing once size is known.
 **2. How many schools does the demography support?** Fitted across 178
 Colorado districts over 35 years rather than Boulder's own history, with
 district fixed effects. A district that loses 10% of its school-age population
-ends up with **7.4% fewer teachers and 4.2% fewer schools** — Colorado
+ends up with **7.6% fewer teachers and 4.4% fewer schools** — Colorado
 districts have consistently chosen smaller schools over fewer schools. Boulder
 County's 5-to-17 population falls to about 2030 and is then flat for thirty
 years, which puts Boulder Valley near 53 schools in 2060 against 56 today.
@@ -263,6 +265,25 @@ one.
 Eleven per cent of the district's children live in an area that loses its
 school — concentrated outside the City of Boulder and on University Hill.
 
+**4. Why is a school small?** Every catchment model above assumes a child
+attends the school whose area they live in. A third of Boulder Valley's pupils
+do not, and the district publishes exactly who: an Enrollment Pattern Matrix
+per level, every attendance area against every school. All 69 school rows in
+the three 2025-26 matrices rebuild to their printed totals exactly, so this is
+the district's own arithmetic rather than an inference from it.
+
+It draws a distinction the proposal does not. **A school can be small because
+few children live in its area, or because the children who live there go
+elsewhere.** Only the first is demographic, and only the first is fixed by
+closing a building. The four closing elementary areas are on the demographic
+side — a median of 228 children against 324 for those staying open — and that
+case holds. But **the five areas whose families leave most are all staying
+open**, and 1,246 children live in them and attend school somewhere else.
+Sanchez has 642 children in its area, 276 in its school and 378 going
+elsewhere: the largest single pool of pupils the district is not capturing, in
+a school below the bar that is not on the list. Across every elementary area,
+2,915 children open-enrol out against 7,223 places filled.
+
 ### What the analysis is missing
 
 **Capacity is February 2026; enrollment is not.** The attendance-area layer's
@@ -276,10 +297,13 @@ is the archive's.
 it establishes is a ceiling — what the existing buildings could hold — not a
 map. An actual redraw is constrained by geography this model does not see.
 
-**Open enrollment is a third of the district.** BVSD's profile report puts it
-at 33% attending a school other than their neighbourhood one in 2025;
-everything here is resident-based. **Focus schools have no catchment** and the
-proposal moves three of them. `data/analysis/known-gaps.csv` carries the rest.
+**Open enrollment is measured, not modelled.** Section 4 reads where pupils
+actually go, but the five levers in section 3 are still resident-based: they
+move catchment lines, not the choices families make inside them. The matrices
+are one year, 2025-26, and every year back to 2016-17 sits in `2026-09-bvsd/`,
+so the trend is available and unused. **Focus schools have no catchment** and
+the proposal moves three of them. `data/analysis/known-gaps.csv` carries the
+rest.
 
 ## Reproduce
 
@@ -302,6 +326,12 @@ pip install geopandas matplotlib statsmodels
 jupyter execute alternatives-retrieval.ipynb   # -> data/analysis/
 jupyter execute alternatives-analysis.ipynb    # -> output/
 ```
+
+The retrieval notebook reads two files from the folder next door rather than
+copying them: the State Demography Office's single-year-of-age county file in
+`2026-09-bvsd/data/raw/sdo/`, and the 2025-26 Enrollment Pattern Matrices in
+`2026-09-bvsd/data/raw/open-enrollment/`. Both are committed there with their
+URLs and checksums. It needs the whole repository, not this folder alone.
 
 The order of the last three matters. `teacher_fte` writes the district staffing table for 2000 onward; `normalize` extends it back to 1986 from the yearbooks, where the district name crosswalk lives. Running `normalize` alone leaves the yearbook era in place but stale; running `teacher_fte` alone truncates the table to 2000.
 

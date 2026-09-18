@@ -149,3 +149,19 @@ The 1999 yearbook's classroom teacher FTE is stored under **1998**. Its school c
 **Why.** It is one measure of one thing — how many teachers a Colorado district employs — and splitting it by how it happened to be printed would make the ordinary question, how staffing changed over forty years, a join. The archive already mixes eras inside one table wherever the measure is the same: `district-year.csv` runs from 1977 on the same basis.
 
 **What it costs, and the guard.** A scanned 1991 figure and a 2023 spreadsheet figure sit in the same column, distinguished only by `source`. That is a real hazard, so the columns that exist in only one era are kept separate rather than merged into a single "staff" column: `staff_certificated_fte` and `schools_published` are yearbook-era, `teacher_fte_school_sum` and `schools_in_sum` are modern, and a row that carries the first pair and not the second is obviously from the scans without reading `source` at all.
+
+## D20 — The Enrollment Pattern Matrices are read where they already sit — 2026-09-18
+
+The 2025-26 matrices are read from `2026-09-bvsd/data/raw/open-enrollment/` rather than fetched again into this folder's `data/raw/proposal/`.
+
+**Why.** That folder already holds every year from 2016-17, each with the URL it came from and its checksum, and the three files are byte-identical to what the published URLs serve today. A second copy is a second thing to keep in step and a second answer to the question of which is the original. The same reasoning already governs the State Demography Office's single-year-of-age file, read from the same neighbour.
+
+**What it costs.** This folder is no longer self-contained: `alternatives-retrieval.ipynb` will not run without its sibling. That is already true of the demography, and the README's reproduce section names both.
+
+## D21 — Open enrollment is reported, not folded into the levers — 2026-09-18
+
+Section 4 measures where Boulder Valley's pupils actually go. The five levers in section 3 stay resident-based.
+
+**Why.** The matrices say what families chose under today's schools and today's boundaries. Closing a school or redrawing a line changes what they are choosing between, and nothing here says how they would choose again. Carrying a 2025-26 departure rate through to 2060 would dress an assumption as a measurement, and the departure rates are the largest numbers in the analysis: Sanchez keeps 35% of the children living in its area.
+
+**What it costs.** The levers answer "if every child attended their own area's school", which no lever achieves and today's district misses by a third. Section 4 is therefore the honest limit on sections 2 and 3 rather than an extension of them, and it is where the reader is sent: a school small because its area emptied and a school small because its families left are the same number and different problems.

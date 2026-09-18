@@ -1,5 +1,5 @@
 what,where_it_would_come_from,status
-BVSD capacity by school,the Resilient Schools presentation,not supplied; utilisation cannot be computed against the district's own bar
-City of Boulder neighbourhood boundaries,opendata.bouldercolorado.gov,HTTP 522 throughout; block groups and municipalities stand in
+"Resident children by single year of age, by block",the census,PL 94-171 gives under-18 only; a district-wide child-to-pupil ratio stands in
 "Teacher FTE, 1999 / 2017 / 2020 / 2021",CDE,not published; the staffing model is silent in those years
 County population before 1990,SDO,"the series starts in 1990, so the panel does too"
+Open enrollment before 2025-26,the Enrollment Pattern Matrices,every year from 2016-17 is committed next door; only the current one is read

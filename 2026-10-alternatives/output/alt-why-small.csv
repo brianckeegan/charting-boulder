@@ -1,0 +1,26 @@
+level,attendance_area,oe_out_of_area,pct_staying_in_neighborhood_school,placed_out_of_area,students_living_in_area,key,school,total_enrollment,attending_neighborhood_school,oe_in_from_district,oe_in_from_outside,below_bar,children_leaving,if_all_stayed,closing
+elementary,Aspen Creek K-8,68.0,0.76,8.0,320.0,Aspen Creek K-8,Aspen Creek K-8,472.0,244.0,87.0,131.0,False,68.0,320.0,False
+elementary,Bear Creek*,29.0,0.81,2.0,162.0,Bear Creek,Bear Creek *,312.0,216.0,70.0,13.0,False,29.0,162.0,False
+elementary,Birch,78.0,0.69,5.0,266.0,Birch,Birch,259.0,183.0,23.0,45.0,True,78.0,266.0,True
+elementary,Coal Creek,94.0,0.69,7.0,324.0,Coal Creek,Coal Creek,269.0,223.0,30.0,8.0,True,94.0,324.0,False
+elementary,Columbine,252.0,0.44,28.0,501.0,Columbine,Columbine,313.0,221.0,69.0,17.0,False,252.0,501.0,False
+elementary,Creekside*,192.0,0.55,7.0,439.0,Creekside,Creekside *,288.0,240.0,37.0,1.0,True,192.0,439.0,False
+elementary,Crest View,337.0,0.46,17.0,657.0,Crest View,Crest View,330.0,303.0,16.0,6.0,False,337.0,657.0,False
+elementary,Douglass,92.0,0.63,4.0,260.0,Douglass,Douglass,281.0,164.0,95.0,8.0,True,92.0,260.0,True
+elementary,Eisenhower,139.0,0.57,16.0,361.0,Eisenhower,Eisenhower,265.0,206.0,45.0,2.0,True,139.0,361.0,False
+elementary,Eldorado K-8,71.0,0.69,6.0,246.0,Eldorado K-8,Eldorado K-8,252.0,169.0,47.0,23.0,True,71.0,246.0,False
+elementary,Emerald,74.0,0.74,11.0,328.0,Emerald,Emerald,365.0,243.0,42.0,74.0,False,74.0,328.0,False
+elementary,Fireside,36.0,0.87,3.0,298.0,Fireside,Fireside,405.0,259.0,117.0,16.0,False,36.0,298.0,False
+elementary,Flatirons,72.0,0.59,7.0,195.0,Flatirons,Flatirons,151.0,116.0,24.0,4.0,True,72.0,195.0,True
+elementary,Foothill,80.0,0.79,3.0,387.0,Foothill,Foothill,434.0,304.0,115.0,4.0,False,80.0,387.0,False
+elementary,Gold Hill,3.0,0.64,1.0,11.0,Gold Hill,Gold Hill,11.0,7.0,4.0,0.0,True,3.0,11.0,False
+elementary,Heatherwood,81.0,0.68,10.0,281.0,Heatherwood,Heatherwood,225.0,190.0,17.0,11.0,True,81.0,281.0,False
+elementary,Jamestown,3.0,0.55,2.0,11.0,Jamestown,Jamestown,17.0,6.0,11.0,0.0,True,3.0,11.0,False
+elementary,Kohl,70.0,0.69,14.0,271.0,Kohl,Kohl,256.0,187.0,28.0,31.0,True,70.0,271.0,False
+elementary,Meadowlark,174.0,0.69,8.0,588.0,Meadowlark,Meadowlark,471.0,406.0,30.0,26.0,False,174.0,588.0,False
+elementary,Mesa*,55.0,0.67,3.0,176.0,Mesa,Mesa *,224.0,156.0,48.0,10.0,True,55.0,176.0,True
+elementary,Monarch K-8,152.0,0.48,9.0,310.0,Monarch K-8,Monarch K-8,264.0,149.0,65.0,31.0,True,152.0,310.0,False
+elementary,Ryan,219.0,0.58,28.0,589.0,Ryan,Ryan,393.0,342.0,30.0,13.0,False,219.0,589.0,False
+elementary,Sanchez,378.0,0.35,39.0,642.0,Sanchez,Sanchez,276.0,225.0,39.0,9.0,True,378.0,642.0,False
+elementary,Superior,39.0,0.87,8.0,360.0,Superior,Superior,433.0,313.0,97.0,10.0,False,39.0,360.0,False
+elementary,Whittier,127.0,0.53,8.0,287.0,Whittier,Whittier,257.0,152.0,94.0,6.0,True,127.0,287.0,False
