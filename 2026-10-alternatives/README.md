@@ -189,7 +189,8 @@ Four things are missing or thin, and each is here for its own reason:
     ├── raw/ccd/            NCES API responses (not committed; re-downloadable)
     ├── raw/yearbooks/      scanned volumes (not committed; 110 MB each)
     ├── interim/yearbooks/  the OCR markdown, one file per converted page
-    ├── raw/geo/            census TIGER and PL 94-171, with manifest.json
+    ├── raw/geo/            census TIGER, PL 94-171 and the 2020 DHC, with
+    │                       manifest.json (not committed; re-downloadable)
     ├── raw/proposal/       resolution 26-27, the work session deck, the
     │                       2025-26 school profiles, and Boulder's
     │                       subcommunity boundaries, with checksums
@@ -302,6 +303,17 @@ about a quarter. **16 of 30 areas have lost more than five points of their
 catchment**; the three worst are Monarch K-8 (−25), Whittier (−23) and
 Eldorado K-8 (−15), and none of them is closing.
 
+**How many children the district has at all.** The census counts children and
+the matrices count pupils, and the 2020 census and the 2019-20 matrix describe
+the same months, so the two can be compared without extrapolating. Across the
+22 areas with both, **BVSD enrolled 9,560 of the children living in them**
+against 11,166 aged 5 to 10 or 13,178 aged 5 to 11 — 86% or 73%, depending
+where the elementary band is drawn. The level moves with the band and the
+ranking does not (Spearman 0.98), so what this measures is the spread:
+Flatirons and Heatherwood sit near the bottom on either reading, and their
+children are not in the district's schools at all rather than in a different
+one of them.
+
 ### What the analysis is missing
 
 **Capacity is February 2026; enrollment is not.** The attendance-area layer's
@@ -319,7 +331,12 @@ map. An actual redraw is constrained by geography this model does not see.
 pupils actually go, for ten years, but the five levers in section 3 are still
 resident-based: they move catchment lines, not the choices families make
 inside them, and nothing here says how families would choose again under
-different schools. **Focus schools have no catchment** and the proposal moves
+different schools. **The elementary age band is approximate.** 5-to-17 is exact per block from
+the 2020 DHC, but single years of age stop at the tract, so the elementary
+split is a tract profile carried onto its blocks — and K-5 spans ages 5 to 11
+with the ends only partly in it. Both bands are carried throughout.
+
+**Focus schools have no catchment** and the proposal moves
 three of them. `data/analysis/known-gaps.csv` carries the rest.
 
 ## Reproduce

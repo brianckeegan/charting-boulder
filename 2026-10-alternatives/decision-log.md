@@ -175,3 +175,13 @@ Section 4 measures where Boulder Valley's pupils actually go. The five levers in
 **What it rests on.** Two identities, both exact integer arithmetic: the flows in an area's column come to the children living there less those placed out, and the areas' open enrolment out equals the schools' open enrolment in. The first names the footer rows; the second confirms them. A third, that the computed share matches the printed percentage to within half a point, is a check rather than a constraint.
 
 **What it costs.** The search can fail, and where it does the file is reported unread rather than half-read. It also needs slack: one area in one file may miss by a pupil or two, so the accepted reading is the one with the most exact areas rather than only a perfect one, and `oe-checks.csv` carries the count for every file. Four exceptions survive across thirty matrices, each named in the retrieval notebook and each a property of BVSD's published figures — among them Meadowlark, whose share is printed as 0% in its opening year.
+
+## D23 — Two elementary age bands, both carried — 2026-09-18
+
+Wherever a count of elementary-age children is used, ages 5-10 and ages 5-11 are both computed and both reported, rather than one being chosen.
+
+**Why.** A Colorado child is five by the October kindergarten starts, so by the April a census is taken the K-5 roll spans ages five to eleven with the years at each end only partly in it. 5-to-10 is the planner's convention and understates the roll; 5-to-11 brackets it and overstates. Choosing one would put a number on the page that looks exact and is not, and choosing the one that made the answer tidiest would be fitting the band to the result: against 5-to-10 two attendance areas enrol more than 100% of their children, which is not a finding about those areas but about the band.
+
+**What it buys.** The difference is large — 86% of the district's elementary-age children against 73% — and the ranking is not: Spearman 0.98 between the two. So the spread across areas is reportable and the level is not, and saying which is which is the point of carrying both.
+
+**What it costs.** Two columns everywhere one would do, and a reader who wants a single number does not get one.

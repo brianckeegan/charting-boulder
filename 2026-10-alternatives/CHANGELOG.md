@@ -204,3 +204,21 @@ Three independent tests, reported per file in `data/analysis/oe-checks.csv`:
 - **The district's totals column was carried as an attendance area**, and the middle schools' areas were not carried at all. Both came of matching the printed captions, which in these files do not survive extraction: three different footer labels match the same run-together text box.
 - **Columns were taken from the right-hand edge of each cell**, but the figures are centred, not right-aligned. A percentage under its counts was enough to split one column into two.
 
+## 2026-09-18 — how old the children are
+
+The analysis had been counting everyone under eighteen, which is three school systems wide. The 2020 **Demographic and Housing Characteristics file** gives age for the same blocks of the same census, so the school-age count is now measured rather than inferred.
+
+### Added
+
+- `data/raw/geo/co2020.dhc.zip` — 198 MB, fetched and checksummed like the other census downloads, not committed.
+- **P12, sex by age in bands, is published down to the block.** Its 5-9, 10-14 and 15-17 bands give an exact 5-to-17 count per block — the same band the State Demography Office forecasts and the staffing model is fitted on. The district holds **31,937 children aged 5 to 17** against 41,063 under 18.
+- **PCT12, single years of age, stops at the tract.** Its profile splits each tract's 5-to-17 into the elementary years and the rest, and that split is carried onto the tract's blocks. Both a 5-to-10 and a 5-to-11 band are kept (D23): **13,720 and 16,184** children.
+- `children_5_17`, `children_5_10` and `children_5_11` on `bvsd-blocks.geojson` and on every attendance-area table.
+- **How many of an area's children the district has at all** — the 2020 census and the 2019-20 matrix describe the same months, so the two can be compared directly. Across the 22 areas with both, BVSD enrolled 9,560 of the children living in them: 86% of those aged 5 to 10, 73% of those aged 5 to 11.
+
+### How it is checked
+
+- **All 7,193 blocks agree exactly** between PL 94-171 and the DHC, on total population and on the under-18 count. The two files are tabulations of the same enumeration, so this is the test of the segment offsets, and it is exact rather than approximate.
+- The 5-to-10 and 5-to-11 readings rank the attendance areas the same way (**Spearman 0.98**) while differing by thirteen points on the level, so the spread is reportable and the level is not.
+- The share of the district's children in an area that loses its school is **11% on all three age bands**, so that figure does not depend on the choice.
+
