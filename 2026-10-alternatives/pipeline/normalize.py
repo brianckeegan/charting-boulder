@@ -48,6 +48,7 @@ CCD_CACHE = HERE / "data" / "raw" / "ccd"
 YEARBOOKS = HERE / "data" / "interim" / "yearbooks"
 PROCESSED = HERE / "data" / "processed"
 LOOKUPS = HERE / "data" / "lookups"
+DISTRICT_ALIASES = LOOKUPS / "district-aliases.csv"
 AUDIT = HERE / "audit"
 
 CCD_YEARS = range(1986, 2025)  # 2024 was released since the audit
@@ -85,11 +86,72 @@ def split_district_name(name: str) -> tuple[str, str]:
     keeps it only where it does real work.
     """
     text = re.sub(r"[*†‡]", " ", str(name).upper())
+    # A parenthetical names the town - "WELD RE-1 (GILCREST)", "PARK (ESTES
+    # PARK) R-3" - and is not part of the district's name. It is not always
+    # last, so it cannot be matched only at the end. The joint marker "(J)"
+    # is part of the name, so only a parenthetical of three letters or more
+    # is dropped.
+    # Read the other way round where the parenthetical is the district and
+    # what precedes it is the county: "WELD RE-1 (GILCREST)" is Gilcrest RE-1,
+    # and dropping the bracket would leave Gilcrest and Keenesburg both
+    # called Weld.
+    inverted = re.match(r"^\s*[A-Z][A-Z .'-]*?\s+"
+                        r"((?:RE|R|J|JT|RJ|RD|C|UD)?[- ]?\d+[A-Z]{0,2})\s*"
+                        r"\(\s*([A-Z][A-Z ]{2,})\)\s*$", text)
+    if inverted:
+        text = f"{inverted.group(2).strip()} {inverted.group(1)}"
+    text = re.sub(r"\(\s*[A-Z][A-Z ]{2,}\)", " ", text)
     text = re.sub(r"[^A-Z0-9 -]", " ", text)
+    # NCES prints the legal name - "SCHOOL DISTRICT NO. 1 IN THE COUNTY OF
+    # DENVER AND STATE OF COLORADO" - where CDE prints "DENVER COUNTY 1". The
+    # clause is not dropped but turned around, because it is the only part of
+    # the legal name that says which district this is: struck out, Denver's
+    # name and Arapahoe's both reduce to "1".
+    legal = re.search(r"\s+IN\s+THE\s+COUNTY\s+OF\s+([A-Z][A-Z ]*?)"
+                      r"(?:\s+(?:AND\s+)?ST[A-Z]*\b.*)?$", text)
+    county_said = re.sub(r"\s+(?:AND\s+)?ST[A-Z]*$", "", legal.group(1).strip()) if legal else ""
+    if len(county_said) > 3:
+        text = f"{county_said} COUNTY {text[:legal.start()].strip()}"
+    else:
+        # A truncated or multi-county clause names nothing usable. Drop it,
+        # unless dropping it would leave a bare number for a name.
+        shortened = re.sub(r"\s+(?:IN|OF)\s+THE\s+COUNT.*$", " ", text)
+        shortened = re.sub(r"\s+AND\s+STATE\s+OF\b.*$", " ", shortened)
+        if re.search(r"[A-Z]", re.sub(r"\bNO\b|\bSCH(?:OOL)? DIST(?:RICT)?\b", " ", shortened)):
+            text = shortened
+    text = re.sub(r"\bNO\b(?=\s*-?\s*\d)", " ", text)
+    text = re.sub(r"\s+SCHOOLS?\s*$", " ", text)
+    # "School district" is boilerplate, and dropping it is not cosmetic. CDE
+    # writes Fort Lupton as "WELD COUNTY S/D RE-8" and Gilcrest as "WELD
+    # COUNTY RE-1"; with the boilerplate kept they have different base names,
+    # so nothing noticed that both are called Weld County, and the yearbooks'
+    # unsuffixed "WELD COUNTY" was handed to whichever the crosswalk saw
+    # last - 3080, Gilcrest - taking four years of Fort Lupton's pupils with
+    # it. Stripped, the two collide on one base and the suffix decides, which
+    # is what `index_district_names` exists for.
+    text = re.sub(r"\bS D\b|\bSCH(?:OOL)? DIST(?:RICT)?\b", " ", text)
+    text = re.sub(r"\bCO\b(?= )", "COUNTY", text)
     text = re.sub(r"\s+", " ", text).strip()
-    match = re.search(r"\s((?:RE|R|J|JT|RJ|RD|C|UD)?[- ]?\d+[A-Z]*)$", text)
+    # The joint-district marker is printed "RE 2(J)" in one book and "RE-2J" in
+    # the next, and stripping the brackets above leaves the J standing alone.
+    # It has to be pulled back into the suffix, or "BOULDER VALLEY RE 2(J)"
+    # keeps "RE 2 J" in its base name and never matches "BOULDER VALLEY".
+    # The designator is printed every way a typewriter allows: "9-R", "26 JT",
+    # "RE-1-J", "R2-J", "27J". Read too narrowly, Durango 9-R keeps its number
+    # in its base name and never matches the volume that prints plain
+    # "DURANGO". The trailing letter groups are capped at two characters so
+    # that a place name appended after the designator - "12 FIVE STAR" - is
+    # not swallowed as part of it.
+    match = re.search(
+        r"\s((?:RE|R|J|JT|RJ|RD|C|UD)?[- ]?\d+[A-Z]{0,2}(?:[- ][A-Z]{1,2})*)$", text)
     if match:
-        return text[:match.start()].strip(), re.sub(r"[^A-Z0-9]", "", match.group(1))
+        suffix = re.sub(r"[^A-Z0-9]", "", match.group(1))
+        # And it has to be dropped from the suffix as well. It says the
+        # district crosses a county line, not which district it is: no two
+        # districts are told apart by it, but a book that prints it where
+        # another does not would otherwise look like two districts.
+        suffix = re.sub(r"(?<=\d)J$", "", suffix)
+        return text[:match.start()].strip(), suffix
     return text, ""
 
 
@@ -122,15 +184,26 @@ _AMBIGUOUS: set[str] = set()
 
 
 def index_district_names(rows: list[dict]) -> None:
-    """Find the base names that more than one district actually uses."""
-    suffixes: dict[str, set] = defaultdict(set)
+    """Find the base names that more than one district actually uses.
+
+    Read off the district codes, not the printed suffixes. Counting suffixes
+    asks whether a name was ever written two ways, which is a different and
+    much commoner thing: Durango is "DURANGO 9-R" in one volume and "DURANGO
+    9R" in another, and no second Durango exists. Counting codes asks whether
+    two districts answer to the base, which is the question the suffix is
+    being kept to settle.
+    """
+    codes: dict[str, set] = defaultdict(set)
     for row in rows:
-        key = base_key(row.get("district_name", ""), row.get("county_name", ""))
-        _, suffix = split_district_name(row.get("district_name", ""))
-        if suffix:
-            suffixes[key].add(suffix)
+        code = row.get("district_code") or ""
+        if not code:
+            continue
+        for key in {base_key(row.get("district_name", "")),
+                    base_key(row.get("district_name", ""), row.get("county_name", ""))}:
+            if key and not key.endswith("|"):
+                codes[key].add(code)
     _AMBIGUOUS.clear()
-    _AMBIGUOUS.update(k for k, found in suffixes.items() if len(found) > 1)
+    _AMBIGUOUS.update(k for k, found in codes.items() if len(found) > 1)
 
 
 def district_key(name: str, county: str = "") -> str:
@@ -152,6 +225,13 @@ def build_district_crosswalk(cde_school_records: list[dict]) -> dict[str, dict]:
     Built from the CDE school files themselves, which carry both the code and
     the name, so it needs no hand-maintained list. Later years win where a
     name is reused, because the modern code is the one the archive keys on.
+
+    Six districts are beyond any rule, because the name in the yearbook and
+    the name in the modern file have nothing in common: Fort Lupton RE-8 is
+    now Weld County S/D RE-8, Gilcrest RE-1 is now Weld County RE-1, Custer
+    County's only district was called Consolidated C-1 for twenty-three years.
+    Those are read from data/lookups/district-aliases.csv, which records for
+    each one the membership either side of the change that identifies it.
     """
     by_key: dict[str, dict] = {}
     for record in sorted(cde_school_records, key=lambda r: r["year"]):
@@ -161,8 +241,32 @@ def build_district_crosswalk(cde_school_records: list[dict]) -> dict[str, dict]:
         for key in {district_key(name), district_key(name, record.get("county_name", ""))}:
             if not key or key.endswith("|"):
                 continue
+            # A base name two districts share cannot be coded by that base.
+            # Garfield County has Garfield RE-2 in Rifle and Garfield 16 in
+            # Parachute; a file that prints either as plain "GARFIELD" was
+            # being handed whichever code was seen last, which put nine years
+            # of Rifle's pupils - 2,193 rising to 3,787 - under Parachute's
+            # code, a district of about 700 at the time. The suffix is what
+            # tells them apart, so without one the name resolves to nothing
+            # and the row is left uncoded rather than coded wrongly.
+            if key in _AMBIGUOUS and "#" not in key:
+                continue
             by_key[key] = {"district_code": code, "district_name": name}
+
+    for alias in load_district_aliases():
+        key = district_key(alias["district_name"], alias["county_name"])
+        by_key[key] = {"district_code": normalize_code(alias["district_code"], 4),
+                       "district_name": alias["district_name"],
+                       "via": f"alias ({alias['reason']})"}
     return by_key
+
+
+def load_district_aliases() -> list[dict]:
+    """Districts the automatic crosswalk cannot reach, and why."""
+    if not DISTRICT_ALIASES.exists():
+        return []
+    with DISTRICT_ALIASES.open(newline="", encoding="utf-8") as handle:
+        return [row for row in csv.DictReader(handle) if row.get("district_code")]
 
 
 # --------------------------------------------------------------------------
@@ -308,6 +412,66 @@ def load_ccd() -> tuple[list[dict], list[dict], dict]:
     return enrollment, school_years, meta
 
 
+def _name_distance(a: str, b: str, ceiling: int = 2) -> int:
+    """Levenshtein distance, given up on once it cannot matter."""
+    if abs(len(a) - len(b)) > ceiling:
+        return ceiling + 1
+    previous = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        current = [i]
+        for j, cb in enumerate(b, 1):
+            current.append(min(previous[j] + 1, current[-1] + 1,
+                               previous[j - 1] + (ca != cb)))
+        previous = current
+    return previous[-1]
+
+
+def repair_trend_names(trends: list[dict], roster: dict[str, dict]) -> list[dict]:
+    """Repair district names the OCR damaged on the trend pages.
+
+    Page 63 of the 1986 volume lost the first character of every district
+    name - "SUMMIT RE-1" came back as "UMMIT RE-1", "TELLURIDE" as
+    "ELLURIDE" - while the figures beside them and the county in the next
+    cell read cleanly. It is a left-edge crop on one page, not a bad scan.
+    Page 58 misread Montrose as MONTRASE in both the district and the county.
+
+    Neither is guessed at. The same volume prints the same districts in its
+    grade and summary tables, which that crop did not touch, so the repair is
+    a lookup inside one document: a damaged name is accepted only where
+    exactly one name in the volume's own roster fits it, either by having lost
+    up to three leading characters or by differing in at most two characters
+    at the same length and the same organisational suffix. Anything matching
+    two roster names, or none, is left as the OCR read it.
+    """
+    known = {k: v for k, v in roster.items()}
+    repairs: list[dict] = []
+    fixes: dict[str, dict] = {}
+    for row in trends:
+        raw = row["district_name"]
+        key = re.sub(r"\s+", " ", re.sub(r"[^A-Z0-9 ]", " ", raw.upper())).strip()
+        if key in known or key in fixes:
+            continue
+        suffix = split_district_name(key)[1]
+        head = [k for k in known if k.endswith(key) and 0 < len(k) - len(key) <= 3]
+        near = [k for k in known
+                if len(k) == len(key) and split_district_name(k)[1] == suffix
+                and _name_distance(k, key) <= 2]
+        match = head[0] if len(head) == 1 else (near[0] if len(near) == 1 else "")
+        if not match:
+            continue
+        fixes[key] = known[match]
+        repairs.append({"read_as": raw, "repaired_to": known[match]["district_name"],
+                        "rule": "truncated" if len(head) == 1 else "misread"})
+
+    for row in trends:
+        key = re.sub(r"\s+", " ", re.sub(r"[^A-Z0-9 ]", " ", row["district_name"].upper())).strip()
+        fix = fixes.get(key)
+        if fix:
+            row["district_name"] = fix["district_name"]
+            row["county_name"] = fix["county_name"] or row["county_name"]
+    return repairs
+
+
 def load_yearbooks() -> tuple[list[dict], list[dict], list[dict], dict]:
     grade_records, trend_records, summary_records, meta = [], [], [], {}
     for volume in sorted(YEARBOOKS.iterdir()):
@@ -317,6 +481,19 @@ def load_yearbooks() -> tuple[list[dict], list[dict], list[dict], dict]:
         grades, ginfo = parse_yearbook_district_grade(volume, year)
         trends, tinfo = parse_yearbook_trends(volume, year)
         summary, sinfo = parse_yearbook_district_summary(volume, year)
+
+        # The volume's own roster, from the two tables the crop missed.
+        roster: dict[str, dict] = {}
+        for record in grades + summary:
+            key = re.sub(r"\s+", " ",
+                         re.sub(r"[^A-Z0-9 ]", " ", record["district_name"].upper())).strip()
+            roster.setdefault(key, record)
+        repairs = repair_trend_names(trends, roster)
+        tinfo["name_repairs"] = repairs
+        for repair in repairs:
+            print(f"    {year} trends: read \"{repair['read_as']}\", "
+                  f"filed as \"{repair['repaired_to']}\" ({repair['rule']})")
+
         grade_records.extend(grades)
         trend_records.extend(trends)
         summary_records.extend(summary)
@@ -514,6 +691,9 @@ def main() -> None:
 
     # ---- district tier ---------------------------------------------------
     print("\nBuilding the district tier")
+    # Which base names two districts share has to be settled before the
+    # crosswalk is built, not after: the crosswalk is what consults it.
+    index_district_names(yb_trends + yb_grades + yb_summary + cde_school)
     crosswalk = build_district_crosswalk(cde_school)
     (LOOKUPS / "district-crosswalk.json").write_text(
         json.dumps(crosswalk, indent=2, sort_keys=True) + "\n")
@@ -796,11 +976,20 @@ def main() -> None:
     print(f"  {len(staffing):,} district-years 1986-1999; "
           f"{matched:,} matched to a CDE district code ({matched / len(staffing):.1%})")
 
+    # This step adds the yearbook years to a table pipeline.teacher_fte has
+    # already written the modern years into, so it has to read that file
+    # before rewriting it - and it must drop the rows it is about to replace
+    # first. Without that the step appends to its own output: nine runs of the
+    # pipeline had put nine identical copies of every 1986-1999 district-year
+    # in the file, 23,931 rows where there are 2,659, and every reader of it
+    # multiplied to match. A pipeline that cannot be run twice is not a
+    # pipeline, so the guard is on the source, which says who owns each row.
     existing_path = PROCESSED / "district-teacher-fte-cde.csv"
     existing = []
     if existing_path.exists():
         with existing_path.open(encoding="utf-8") as handle:
-            existing = [dict(r) for r in csv.DictReader(handle)]
+            existing = [dict(r) for r in csv.DictReader(handle)
+                        if not str(r.get("source", "")).startswith("yearbook-")]
             for row in existing:
                 row["unit_type"] = unit_type(row.get("district_name", ""))
     columns = ["year", "district_code", "district_name", "county_name", "unit_type",

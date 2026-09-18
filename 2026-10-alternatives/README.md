@@ -12,17 +12,19 @@ Boulder Valley's Resilient Schools proposal treats four closures as a local prob
 
 | Table | Rows | Span | Grain |
 |---|---:|---|---|
-| `school-enrollment-by-grade.csv` | 647,881 | 1986–2024 | school × year × grade |
-| `school-year.csv` | 65,841 | 1986–2024 | school × year |
-| `schools.csv` | 2,723 | — | school |
-| `district-enrollment-by-grade.csv` | 93,326 | 1986–2024 | district × year × grade |
-| `district-year.csv` | 7,852 | **1977–2024** | district × year |
-| `source-reconciliation.csv` | 21 | 2004–2024 | year |
+| `school-enrollment-by-grade.csv` | 685,060 | 1986–2024 | school × year × grade |
+| `school-year.csv` | 65,851 | 1986–2024 | school × year |
+| `schools.csv` | 2,724 | — | school |
+| `district-enrollment-by-grade.csv` | 100,914 | 1986–2024 | district × year × grade |
+| `district-year.csv` | 8,507 | **1977–2024** | district × year |
+| `source-reconciliation.csv` | 24 | 2001–2024 | year |
 | `district-reconciliation.csv` | 14 | 1986–1999 | year |
-| `district-year-overlap.csv` | 1,269 | 1977–1987 | district × year |
+| `district-year-overlap.csv` | 1,531 | 1978–1987 | district × year |
 | `school-teacher-fte.csv` | 38,777 | 2000–2024 | school × year |
 | `district-teacher-fte-ccd.csv` | 7,879 | **1987–2024** | district × year |
-| `district-teacher-fte-cde.csv` | 6,695 | **1986–2024** | district × year |
+| `district-teacher-fte-cde.csv` | 6,732 | **1986–2024** | district × year |
+| `nonpublic-enrollment-by-grade.csv` | 64,286 | 2003–2014 | school × year × grade |
+| `nonpublic-year.csv` | 12 | 2003–2014 | year |
 
 All in `data/processed/`, long format, UTF-8. `DATA-DICTIONARY.md` documents every column; `audit/validation.md` is the report the pipeline writes about itself and is regenerated from the data rather than maintained by hand.
 
@@ -43,6 +45,8 @@ Six checks. Five compare the archive against a source collected independently of
 Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the one weak volume**, at −0.70% with three genuine row-total failures; treat it with more caution than the rest.
 
 **Teacher FTE, against NCES**, year by year. Every one of the twenty-two CDE years lands between 0.7% and 4.4% below the NCES state total, and sixteen of them within 2%. The gap is in the same direction throughout, which is what a consistent difference in what counts as a teacher looks like rather than a parse that comes and goes.
+
+**Districts joined to their codes.** 98.3% of district-years carry a CDE district code — 97.2% in 1977–85, 96.0% in 1986–99, 100% from 2000 — so BVSD and the seven Front Range districts it is compared against each run 1977 to 2024 unbroken but for Fall 2000, which CDE never published. What is left uncoded is named rather than hidden: 92 non-BOCES rows where one printed name covers two districts, or where the district merged away before 2000 (`DATA-DICTIONARY.md`). Getting this wrong is not cosmetic — reading the names too narrowly had put four years of Fort Lupton's pupils under Gilcrest's code and nine years of Rifle's under Parachute's (D27).
 
 **The yearbooks' district staffing, against NCES.** The summary table in each volume prints classroom teacher FTE by district. Summed and compared with the NCES state total: **every year from 1987 to 1998 lands within 1.3%**, five of them within 0.2%, and 1991 agrees to a fifth of one FTE out of 33,093. 1986 is the one year with nothing to check it against, because NCES district staffing starts in 1987.
 

@@ -774,7 +774,7 @@ def parse_yearbook_trends(volume_dir: Path, year: int) -> tuple[list[dict], dict
             continue
 
         school_years: list[str] = []
-        district = county = ""
+        district = county = pending = ""
         for cells in _markdown_rows(page_file.read_text()):
             years_in_row = [c for c in cells if re.fullmatch(r"(19|20)\d{2}-\d{2}", c.strip())]
             if len(years_in_row) >= 5:
@@ -787,9 +787,24 @@ def parse_yearbook_trends(volume_dir: Path, year: int) -> tuple[list[dict], dict
             if measure is None:
                 joined = " ".join(cells)
                 county_match = re.search(r"COUNTY:\s*([A-Z][A-Z .'-]+)", joined, re.I)
-                if county_match and re.search(r"[A-Za-z]", cells[0]):
+                if not county_match:
+                    # A heading row whose county half the OCR put on the next
+                    # line. Hold the name until that line arrives.
+                    pending = cells[0].strip()
+                    continue
+                if label.startswith("COUNTY:"):
+                    # The name is not in this row - it is the line above. Read
+                    # as written, five counties became districts: "COUNTY:
+                    # WELD" was filed with Gilcrest's 1,800 pupils, and
+                    # Gilcrest itself was lost. The split falls on whole pages
+                    # at a time, so it takes real districts with it.
+                    district = pending
+                elif re.search(r"[A-Za-z]", cells[0]):
                     district = cells[0].strip()
-                    county = county_match.group(1).strip().title()
+                else:
+                    continue
+                county = county_match.group(1).strip().title()
+                pending = ""
                 continue
             if not district or not school_years:
                 continue

@@ -50,8 +50,8 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2003,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,1754.3092,school_sum,,1754.3092,48.0,school_panel,,48.0,34869.0,34869.0,34869.0,74777.0,33081.0,Estimate
 2004,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,1832.5213,school_sum,,1832.5213,52.0,school_panel,,52.0,36353.0,36353.0,36353.0,76363.0,34151.0,Estimate
 2005,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,1834.6522,school_sum,,1834.6522,50.0,school_panel,,50.0,37591.0,37591.0,37591.0,78386.0,35267.0,Estimate
-2006,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,1792.0069,school_sum,,1792.0069,49.0,school_panel,,49.0,37337.0,37337.0,37337.0,81080.0,36440.0,Estimate
-2007,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,1861.4682,school_sum,,1861.4682,50.0,school_panel,,50.0,38815.0,38815.0,38815.0,82938.0,36881.0,Estimate
+2006,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,1792.0069,school_sum,,1792.0069,52.0,school_panel,,52.0,37337.0,37337.0,37337.0,81080.0,36440.0,Estimate
+2007,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,1861.4682,school_sum,,1861.4682,51.0,school_panel,,51.0,38815.0,38815.0,38815.0,82938.0,36881.0,Estimate
 2008,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,1637.9637,school_sum,,1637.9637,53.0,school_panel,,53.0,40804.0,40804.0,40804.0,85046.0,37364.0,Estimate
 2009,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,1988.1003,school_sum,,1988.1003,53.0,school_panel,,53.0,41949.0,41949.0,41949.0,87403.0,37751.0,Estimate
 2010,0020,ADAMS 12 FIVE STAR SCHOOLS,Adams,001,district,2069.631,published,2069.631,2002.029,54.0,school_panel,,54.0,41957.0,41951.0,41951.0,88959.0,37607.0,Estimate
@@ -121,12 +121,12 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2004,0040,BRIGHTON 27J,Adams,001,district,517.7943,school_sum,,517.7943,15.0,school_panel,,15.0,9256.0,9256.0,9256.0,76363.0,34151.0,Estimate
 2005,0040,BRIGHTON 27J,Adams,001,district,545.5014,school_sum,,545.5014,15.0,school_panel,,15.0,10450.0,10450.0,10450.0,78386.0,35267.0,Estimate
 2006,0040,BRIGHTON 27J,Adams,001,district,625.5765,school_sum,,625.5765,16.0,school_panel,,16.0,11569.0,11569.0,11569.0,81080.0,36440.0,Estimate
-2007,0040,BRIGHTON 27J,Adams,001,district,656.457,school_sum,,656.457,18.0,school_panel,,18.0,12608.0,12608.0,12608.0,82938.0,36881.0,Estimate
-2008,0040,BRIGHTON 27J,Adams,001,district,704.0391,school_sum,,704.0391,21.0,school_panel,,21.0,13711.0,13711.0,13711.0,85046.0,37364.0,Estimate
-2009,0040,BRIGHTON 27J,Adams,001,district,755.5191,school_sum,,755.5191,22.0,school_panel,,22.0,14469.0,14469.0,14469.0,87403.0,37751.0,Estimate
-2010,0040,BRIGHTON 27J,Adams,001,district,718.142,published,718.142,711.353,23.0,school_panel,,23.0,15063.0,15063.0,15063.0,88959.0,37607.0,Estimate
-2011,0040,BRIGHTON 27J,Adams,001,district,755.67,school_sum,,755.67,23.0,school_panel,,23.0,15646.0,15646.0,15646.0,91259.0,37349.0,Estimate
-2012,0040,BRIGHTON 27J,Adams,001,district,737.2,school_sum,,737.2,24.0,school_panel,,24.0,16163.0,16163.0,16163.0,93630.0,36591.0,Estimate
+2007,0040,BRIGHTON 27J,Adams,001,district,656.457,school_sum,,656.457,19.0,school_panel,,19.0,12608.0,12608.0,12608.0,82938.0,36881.0,Estimate
+2008,0040,BRIGHTON 27J,Adams,001,district,704.0391,school_sum,,704.0391,23.0,school_panel,,23.0,13711.0,13711.0,13711.0,85046.0,37364.0,Estimate
+2009,0040,BRIGHTON 27J,Adams,001,district,755.5191,school_sum,,755.5191,23.0,school_panel,,23.0,14469.0,14469.0,14485.0,87403.0,37751.0,Estimate
+2010,0040,BRIGHTON 27J,Adams,001,district,718.142,published,718.142,711.353,25.0,school_panel,,25.0,15063.0,15063.0,15089.0,88959.0,37607.0,Estimate
+2011,0040,BRIGHTON 27J,Adams,001,district,755.67,school_sum,,755.67,24.0,school_panel,,24.0,15646.0,15646.0,15668.0,91259.0,37349.0,Estimate
+2012,0040,BRIGHTON 27J,Adams,001,district,737.2,school_sum,,737.2,25.0,school_panel,,25.0,16163.0,16163.0,16184.0,93630.0,36591.0,Estimate
 2013,0040,BRIGHTON 27J,Adams,001,district,792.43,school_sum,,792.43,26.0,school_panel,,26.0,16698.0,16698.0,16717.0,95884.0,36224.0,Estimate
 2014,0040,SCHOOL DISTRICT 27J,Adams,001,district,827.3521,school_sum,,827.3521,26.0,school_panel,,26.0,17103.0,17103.0,17129.0,97916.0,35911.0,Estimate
 2015,0040,SCHOOL DISTRICT 27J,Adams,001,district,815.39,school_sum,,815.39,26.0,school_panel,,26.0,17042.0,17042.0,17069.0,99774.0,36039.0,Estimate
@@ -162,7 +162,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2010,0050,BENNETT 29J,Adams,001,district,62.882,published,62.882,62.882,5.0,school_panel,,5.0,1150.0,1150.0,1150.0,88959.0,37607.0,Estimate
 2011,0050,BENNETT 29J,Adams,001,district,64.83,school_sum,,64.83,5.0,school_panel,,5.0,1085.0,1085.0,1085.0,91259.0,37349.0,Estimate
 2012,0050,BENNETT 29J,Adams,001,district,63.24,school_sum,,63.24,5.0,school_panel,,5.0,1044.0,1044.0,1044.0,93630.0,36591.0,Estimate
-2013,0050,BENNETT 29J,Adams,001,district,52.78,school_sum,,52.78,4.0,school_panel,,4.0,1013.0,1013.0,1013.0,95884.0,36224.0,Estimate
+2013,0050,BENNETT 29J,Adams,001,district,52.78,school_sum,,52.78,5.0,school_panel,,5.0,1013.0,1013.0,1013.0,95884.0,36224.0,Estimate
 2014,0050,BENNETT 29J,Adams,001,district,52.3643,school_sum,,52.3643,4.0,school_panel,,4.0,1079.0,1079.0,1079.0,97916.0,35911.0,Estimate
 2015,0050,BENNETT 29J,Adams,001,district,54.88,school_sum,,54.88,4.0,school_panel,,4.0,1100.0,1100.0,1100.0,99774.0,36039.0,Estimate
 2016,0050,BENNETT 29J,Adams,001,district,56.89,published,56.89,56.89,4.0,school_panel,,4.0,1089.0,1089.0,1089.0,100584.0,35709.0,Estimate
@@ -190,7 +190,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2003,0060,STRASBURG 31J,Adams,001,district,43.0,school_sum,,43.0,4.0,school_panel,,4.0,890.0,890.0,890.0,74777.0,33081.0,Estimate
 2004,0060,STRASBURG 31J,Adams,001,district,49.25,school_sum,,49.25,5.0,school_panel,,5.0,932.0,932.0,932.0,76363.0,34151.0,Estimate
 2005,0060,STRASBURG 31J,Adams,001,district,48.25,school_sum,,48.25,5.0,school_panel,,5.0,977.0,977.0,977.0,78386.0,35267.0,Estimate
-2006,0060,STRASBURG 31J,Adams,001,district,55.0,school_sum,,55.0,4.0,school_panel,,4.0,958.0,958.0,958.0,81080.0,36440.0,Estimate
+2006,0060,STRASBURG 31J,Adams,001,district,55.0,school_sum,,55.0,5.0,school_panel,,5.0,958.0,958.0,958.0,81080.0,36440.0,Estimate
 2007,0060,STRASBURG 31J,Adams,001,district,59.0508,school_sum,,59.0508,4.0,school_panel,,4.0,1006.0,1006.0,1006.0,82938.0,36881.0,Estimate
 2008,0060,STRASBURG 31J,Adams,001,district,60.0,school_sum,,60.0,4.0,school_panel,,4.0,1009.0,1009.0,1009.0,85046.0,37364.0,Estimate
 2009,0060,STRASBURG 31J,Adams,001,district,59.11,school_sum,,59.11,4.0,school_panel,,4.0,1041.0,1041.0,1041.0,87403.0,37751.0,Estimate
@@ -370,7 +370,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2008,0123,SHERIDAN 2,Arapahoe,005,district,95.3837,school_sum,,95.3837,5.0,school_panel,,5.0,1640.0,1640.0,1640.0,103256.0,40321.0,Estimate
 2009,0123,SHERIDAN 2,Arapahoe,005,district,97.8004,school_sum,,97.8004,5.0,school_panel,,5.0,1595.0,1595.0,1595.0,105183.0,40669.0,Estimate
 2010,0123,SHERIDAN 2,Arapahoe,005,district,104.613,published,104.613,104.612,5.0,school_panel,,5.0,1653.0,1653.0,1653.0,106831.0,40662.0,Estimate
-2011,0123,SHERIDAN 2,Arapahoe,005,district,96.29,school_sum,,96.29,4.0,school_panel,,4.0,1641.0,1641.0,1641.0,107973.0,40579.0,Estimate
+2011,0123,SHERIDAN 2,Arapahoe,005,district,96.29,school_sum,,96.29,5.0,school_panel,,5.0,1641.0,1641.0,1641.0,107973.0,40579.0,Estimate
 2012,0123,SHERIDAN 2,Arapahoe,005,district,96.78,school_sum,,96.78,5.0,school_panel,,5.0,1584.0,1584.0,1584.0,109211.0,40314.0,Estimate
 2013,0123,SHERIDAN 2,Arapahoe,005,district,84.55,school_sum,,84.55,5.0,school_panel,,5.0,1583.0,1583.0,1583.0,110901.0,40227.0,Estimate
 2014,0123,SHERIDAN 2,Arapahoe,005,district,86.9185,school_sum,,86.9185,5.0,school_panel,,5.0,1536.0,1536.0,1536.0,112354.0,40161.0,Estimate
@@ -553,8 +553,8 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2016,0190,BYERS 32J,Arapahoe,005,district,73.91,published,73.91,72.06,7.0,school_panel,,7.0,3019.0,3019.0,3019.0,114867.0,40830.0,Estimate
 2017,0190,,Arapahoe,005,,,,,,7.0,school_panel,,7.0,2872.0,2872.0,2872.0,114689.0,40484.0,Estimate
 2018,0190,BYERS 32J,Arapahoe,005,district,71.18,published,71.18,71.18,11.0,school_panel,,11.0,2916.0,2916.0,2916.0,115532.0,40323.0,Estimate
-2019,0190,Byers 32J,Arapahoe,005,district,67.5,school_sum,,67.5,10.0,school_panel,,10.0,2344.0,2344.0,2344.0,115444.0,39705.0,Estimate
-2020,0190,,Arapahoe,005,,,,,,10.0,school_panel,,10.0,5359.0,5359.0,5359.0,115329.0,39053.0,Estimate
+2019,0190,Byers 32J,Arapahoe,005,district,67.5,school_sum,,67.5,11.0,school_panel,,11.0,2344.0,2344.0,2344.0,115444.0,39705.0,Estimate
+2020,0190,,Arapahoe,005,,,,,,11.0,school_panel,,11.0,5359.0,5359.0,5359.0,115329.0,39053.0,Estimate
 2021,0190,,Arapahoe,005,,,,,,10.0,school_panel,,10.0,5352.0,5352.0,5352.0,114808.0,38507.0,Estimate
 2022,0190,Byers 32J,Arapahoe,005,district,135.6,published,135.6,135.5,10.0,school_panel,,10.0,5671.0,5671.0,5671.0,114002.0,38360.0,Estimate
 2023,0190,Byers 32J,Arapahoe,005,district,135.8,published,135.8,135.8,10.0,school_panel,,10.0,6456.0,6456.0,6456.0,112867.0,38252.0,Estimate
@@ -579,10 +579,10 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2007,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,101.75,school_sum,,101.75,5.0,school_panel,,5.0,1545.0,1545.0,1545.0,1917.0,645.0,Estimate
 2008,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,100.4572,school_sum,,100.4572,5.0,school_panel,,5.0,1525.0,1525.0,1525.0,1868.0,621.0,Estimate
 2009,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,96.7286,school_sum,,96.7286,5.0,school_panel,,5.0,1517.0,1517.0,1517.0,1800.0,596.0,Estimate
-2010,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,87.414,published,87.414,87.415,4.0,school_panel,,4.0,1492.0,1492.0,1492.0,1797.0,602.0,Estimate
+2010,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,87.414,published,87.414,87.415,5.0,school_panel,,5.0,1492.0,1492.0,1492.0,1797.0,602.0,Estimate
 2011,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,84.26,school_sum,,84.26,4.0,school_panel,,4.0,1405.0,1405.0,1405.0,1726.0,623.0,Estimate
 2012,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,84.64,school_sum,,84.64,4.0,school_panel,,4.0,1371.0,1371.0,1371.0,1713.0,603.0,Estimate
-2013,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,85.13,school_sum,,85.13,3.0,school_panel,,3.0,1323.0,1323.0,1323.0,1701.0,587.0,Estimate
+2013,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,85.13,school_sum,,85.13,4.0,school_panel,,4.0,1323.0,1323.0,1323.0,1701.0,587.0,Estimate
 2014,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,84.6272,school_sum,,84.6272,3.0,school_panel,,3.0,1326.0,1326.0,1326.0,1654.0,578.0,Estimate
 2015,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,84.14,school_sum,,84.14,3.0,school_panel,,3.0,1372.0,1372.0,1372.0,1646.0,590.0,Estimate
 2016,0220,ARCHULETA COUNTY 50 JT,Archuleta,007,district,88.52,published,88.52,87.74,3.0,school_panel,,3.0,1568.0,1568.0,1568.0,1737.0,584.0,Estimate
@@ -717,15 +717,15 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2005,0260,VILAS RE-5,Baca,009,district,14.6243,school_sum,,14.6243,5.0,school_panel,,5.0,2044.0,2044.0,2044.0,678.0,198.0,Estimate
 2006,0260,VILAS RE-5,Baca,009,district,55.5709,school_sum,,55.5709,5.0,school_panel,,5.0,4424.0,4424.0,4424.0,676.0,193.0,Estimate
 2007,0260,VILAS RE-5,Baca,009,district,61.4188,school_sum,,61.4188,5.0,school_panel,,5.0,3789.0,3789.0,3789.0,647.0,186.0,Estimate
-2008,0260,VILAS RE-5,Baca,009,district,32.6498,school_sum,,32.6498,4.0,school_panel,,4.0,487.0,487.0,487.0,627.0,184.0,Estimate
+2008,0260,VILAS RE-5,Baca,009,district,32.6498,school_sum,,32.6498,5.0,school_panel,,5.0,487.0,487.0,487.0,627.0,184.0,Estimate
 2009,0260,VILAS RE-5,Baca,009,district,27.7595,school_sum,,27.7595,4.0,school_panel,,4.0,415.0,415.0,415.0,602.0,192.0,Estimate
-2010,0260,VILAS RE-5,Baca,009,district,12.333,published,12.333,10.333,3.0,school_panel,,3.0,354.0,354.0,354.0,596.0,213.0,Estimate
+2010,0260,VILAS RE-5,Baca,009,district,12.333,published,12.333,10.333,4.0,school_panel,,4.0,354.0,354.0,354.0,596.0,213.0,Estimate
 2011,0260,VILAS RE-5,Baca,009,district,23.75,school_sum,,23.75,3.0,school_panel,,3.0,289.0,289.0,289.0,580.0,213.0,Estimate
 2012,0260,VILAS RE-5,Baca,009,district,16.99,school_sum,,16.99,3.0,school_panel,,3.0,216.0,216.0,216.0,564.0,223.0,Estimate
 2013,0260,VILAS RE-5,Baca,009,district,10.18,school_sum,,10.18,3.0,school_panel,,3.0,127.0,127.0,127.0,555.0,221.0,Estimate
 2014,0260,VILAS RE-5,Baca,009,district,10.5665,school_sum,,10.5665,3.0,school_panel,,3.0,104.0,104.0,104.0,539.0,212.0,Estimate
 2015,0260,VILAS RE-5,Baca,009,district,8.03,school_sum,,8.03,3.0,school_panel,,3.0,52.0,52.0,52.0,530.0,207.0,Estimate
-2016,0260,VILAS RE-5,Baca,009,district,6.38,published,6.38,6.38,2.0,school_panel,,2.0,42.0,42.0,42.0,520.0,203.0,Estimate
+2016,0260,VILAS RE-5,Baca,009,district,6.38,published,6.38,6.38,3.0,school_panel,,3.0,42.0,42.0,42.0,520.0,203.0,Estimate
 2017,0260,,Baca,009,,,,,,2.0,school_panel,,2.0,45.0,45.0,45.0,554.0,193.0,Estimate
 2018,0260,VILAS RE-5,Baca,009,district,6.25,published,6.25,5.01,2.0,school_panel,,2.0,44.0,44.0,44.0,574.0,185.0,Estimate
 2019,0260,Vilas RE-5,Baca,009,district,6.2,school_sum,,6.2,2.0,school_panel,,2.0,103.0,103.0,103.0,574.0,196.0,Estimate
@@ -1294,8 +1294,18 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2022,0770,Crowley County RE-1-J,Crowley,025,district,18.0,published,18.0,17.9,2.0,school_panel,,2.0,384.0,384.0,379.0,493.0,165.0,Estimate
 2023,0770,Crowley County RE-1-J,Crowley,025,district,20.1,published,20.1,20.1,3.0,school_panel,,3.0,347.0,347.0,343.0,516.0,162.0,Estimate
 2024,0770,Crowley County RE-1-J,Crowley,025,district,21.7,published,21.7,21.7,3.0,school_panel,,3.0,332.0,332.0,330.0,535.0,160.0,Estimate
-2000,0860,CONSOLIDATED C-1,Custer,027,district,32.7313,school_sum,,32.7313,2.0,fte_file,,,,,,594.0,194.0,Estimate
-2001,0860,CONSOLIDATED C-1,Custer,027,district,34.195,school_sum,,34.195,3.0,fte_file,,,,,,622.0,204.0,Estimate
+1990,0860,CONSOLIDATED C-1,Custer,027,district,25.0,published,25.0,,2.0,published,2.0,,343.0,,,402.0,116.0,Estimate
+1991,0860,CONSOLIDATED C-1,Custer,027,district,26.0,published,26.0,,2.0,published,2.0,,369.0,,,413.0,120.0,Estimate
+1992,0860,CONSOLIDATED C-1,Custer,027,district,25.0,published,25.0,,2.0,published,2.0,,346.0,,,429.0,126.0,Estimate
+1993,0860,CONSOLIDATED C-1,Custer,027,district,25.0,published,25.0,,2.0,published,2.0,,412.0,,,453.0,137.0,Estimate
+1994,0860,CONSOLIDATED C-1,Custer,027,district,27.5,published,27.5,,2.0,published,2.0,,410.0,,,463.0,142.0,Estimate
+1995,0860,CONSOLIDATED C-1,Custer,027,district,28.5,published,28.5,,2.0,published,2.0,,425.0,,,494.0,152.0,Estimate
+1996,0860,CONSOLIDATED C-1,Custer,027,district,28.5,published,28.5,,2.0,published,2.0,,448.0,,,526.0,165.0,Estimate
+1997,0860,CONSOLIDATED C-1,Custer,027,district,31.7,published,31.7,,2.0,published,2.0,,430.0,,,552.0,173.0,Estimate
+1998,0860,CONSOLIDATED C-1,Custer,027,district,29.7,published,29.7,,2.0,published,2.0,,423.0,,,561.0,178.0,Estimate
+1999,0860,CONSOLIDATED C-1,Custer,027,district,,,,,2.0,published,2.0,,433.0,,,580.0,186.0,Estimate
+2000,0860,CONSOLIDATED C-1,Custer,027,district,32.7313,school_sum,,32.7313,,,,,,,,594.0,194.0,Estimate
+2001,0860,CONSOLIDATED C-1,Custer,027,district,34.195,school_sum,,34.195,,,,,,,,622.0,204.0,Estimate
 2002,0860,CONSOLIDATED C-1,Custer,027,district,37.0163,school_sum,,37.0163,3.0,school_panel,,3.0,,,517.0,623.0,199.0,Estimate
 2003,0860,CUSTER COUNTY SCHOOL DISTRICT C-1,Custer,027,district,37.8587,school_sum,,37.8587,3.0,school_panel,,3.0,493.0,493.0,493.0,630.0,196.0,Estimate
 2004,0860,CUSTER COUNTY SCHOOL DISTRICT C-1,Custer,027,district,38.3444,school_sum,,38.3444,3.0,school_panel,,3.0,527.0,527.0,527.0,636.0,181.0,Estimate
@@ -1370,27 +1380,27 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2003,0880,DENVER COUNTY 1,Denver,031,district,4184.0573,school_sum,,4184.0573,148.0,school_panel,,148.0,72100.0,72100.0,72100.0,79314.0,42576.0,Estimate
 2004,0880,DENVER COUNTY 1,Denver,031,district,4009.5831,school_sum,,4009.5831,152.0,school_panel,,152.0,72410.0,72410.0,72410.0,78092.0,43844.0,Estimate
 2005,0880,DENVER COUNTY 1,Denver,031,district,3911.7787,school_sum,,3911.7787,153.0,school_panel,,153.0,72312.0,72312.0,72312.0,77335.0,44691.0,Estimate
-2006,0880,DENVER COUNTY 1,Denver,031,district,4029.9444,school_sum,,4029.9444,149.0,school_panel,,149.0,72561.0,72561.0,72561.0,78249.0,44839.0,Estimate
-2007,0880,DENVER COUNTY 1,Denver,031,district,4090.3251,school_sum,,4090.3251,147.0,school_panel,,147.0,73053.0,73053.0,73053.0,80079.0,45005.0,Estimate
-2008,0880,DENVER COUNTY 1,Denver,031,district,4311.5233,school_sum,,4311.5233,142.0,school_panel,,142.0,74176.0,74176.0,74176.0,82122.0,44869.0,Estimate
-2009,0880,DENVER COUNTY 1,Denver,031,district,4539.0058,school_sum,,4539.0058,147.0,school_panel,,147.0,77255.0,77255.0,77255.0,84225.0,44659.0,Estimate
-2010,0880,DENVER COUNTY 1,Denver,031,district,4681.445,published,4681.445,4646.478,151.0,school_panel,,151.0,78317.0,78317.0,78317.0,86257.0,44060.0,Estimate
-2011,0880,DENVER COUNTY 1,Denver,031,district,4550.93,school_sum,,4550.93,163.0,school_panel,,163.0,80863.0,80863.0,80863.0,88234.0,44178.0,Estimate
-2012,0880,DENVER COUNTY 1,Denver,031,district,4892.62,school_sum,,4892.62,172.0,school_panel,,172.0,83377.0,83377.0,83377.0,89843.0,43620.0,Estimate
-2013,0880,DENVER COUNTY 1,Denver,031,district,5269.5,school_sum,,5269.5,183.0,school_panel,,183.0,86043.0,86043.0,86043.0,91505.0,43303.0,Estimate
-2014,0880,DENVER COUNTY 1,Denver,031,district,5783.2881,school_sum,,5783.2881,188.0,school_panel,,188.0,88839.0,88839.0,88839.0,93151.0,43267.0,Estimate
-2015,0880,DENVER COUNTY 1,Denver,031,district,5938.59,school_sum,,5938.59,197.0,school_panel,,197.0,90234.0,90234.0,90234.0,95253.0,43740.0,Estimate
-2016,0880,DENVER COUNTY 1,Denver,031,district,6011.34,published,6011.34,5967.66,203.0,school_panel,,203.0,91132.0,91132.0,91131.0,96625.0,43375.0,Estimate
-2017,0880,,Denver,031,,,,,,207.0,school_panel,,207.0,91794.0,91794.0,91792.0,95544.0,43351.0,Estimate
-2018,0880,DENVER COUNTY 1,Denver,031,district,6194.27,published,6194.27,6169.07,205.0,school_panel,,205.0,91998.0,91998.0,91998.0,95732.0,42498.0,Estimate
-2019,0880,Denver County 1,Denver,031,district,6164.7,school_sum,,6164.7,206.0,school_panel,,206.0,92112.0,92112.0,92112.0,95695.0,41414.0,Estimate
-2020,0880,,Denver,031,,,,,,204.0,school_panel,,204.0,89061.0,89061.0,89061.0,95260.0,41175.0,Estimate
-2021,0880,,Denver,031,,,,,,204.0,school_panel,,204.0,88889.0,88889.0,88889.0,93618.0,39322.0,Estimate
-2022,0880,Denver County 1,Denver,031,district,6002.8,published,6002.8,5980.9,202.0,school_panel,,202.0,87864.0,87864.0,87864.0,92203.0,38664.0,Estimate
-2023,0880,Denver County 1,Denver,031,district,5953.8,published,5953.8,5953.8,196.0,school_panel,,196.0,88235.0,88235.0,88235.0,91092.0,38321.0,Estimate
-2024,0880,Denver County 1,Denver,031,district,6047.0,published,6047.0,6011.3,197.0,school_panel,,197.0,90450.0,90450.0,90450.0,89918.0,38346.0,Estimate
+2006,0880,DENVER COUNTY 1,Denver,031,district,4029.9444,school_sum,,4029.9444,152.0,school_panel,,152.0,72561.0,72561.0,72561.0,78249.0,44839.0,Estimate
+2007,0880,DENVER COUNTY 1,Denver,031,district,4090.3251,school_sum,,4090.3251,152.0,school_panel,,152.0,73053.0,73053.0,73053.0,80079.0,45005.0,Estimate
+2008,0880,DENVER COUNTY 1,Denver,031,district,4311.5233,school_sum,,4311.5233,153.0,school_panel,,153.0,74176.0,74176.0,74176.0,82122.0,44869.0,Estimate
+2009,0880,DENVER COUNTY 1,Denver,031,district,4539.0058,school_sum,,4539.0058,151.0,school_panel,,151.0,77255.0,77255.0,77267.0,84225.0,44659.0,Estimate
+2010,0880,DENVER COUNTY 1,Denver,031,district,4681.445,published,4681.445,4646.478,158.0,school_panel,,158.0,78317.0,78317.0,78339.0,86257.0,44060.0,Estimate
+2011,0880,DENVER COUNTY 1,Denver,031,district,4550.93,school_sum,,4550.93,166.0,school_panel,,166.0,80863.0,80863.0,80863.0,88234.0,44178.0,Estimate
+2012,0880,DENVER COUNTY 1,Denver,031,district,4892.62,school_sum,,4892.62,178.0,school_panel,,178.0,83377.0,83377.0,83377.0,89843.0,43620.0,Estimate
+2013,0880,DENVER COUNTY 1,Denver,031,district,5269.5,school_sum,,5269.5,187.0,school_panel,,187.0,86043.0,86043.0,86046.0,91505.0,43303.0,Estimate
+2014,0880,DENVER COUNTY 1,Denver,031,district,5783.2881,school_sum,,5783.2881,191.0,school_panel,,191.0,88839.0,88839.0,88839.0,93151.0,43267.0,Estimate
+2015,0880,DENVER COUNTY 1,Denver,031,district,5938.59,school_sum,,5938.59,201.0,school_panel,,201.0,90234.0,90234.0,90235.0,95253.0,43740.0,Estimate
+2016,0880,DENVER COUNTY 1,Denver,031,district,6011.34,published,6011.34,5967.66,206.0,school_panel,,206.0,91132.0,91132.0,91137.0,96625.0,43375.0,Estimate
+2017,0880,,Denver,031,,,,,,210.0,school_panel,,210.0,91794.0,91794.0,91820.0,95544.0,43351.0,Estimate
+2018,0880,DENVER COUNTY 1,Denver,031,district,6194.27,published,6194.27,6169.07,211.0,school_panel,,211.0,91998.0,91998.0,92039.0,95732.0,42498.0,Estimate
+2019,0880,Denver County 1,Denver,031,district,6164.7,school_sum,,6164.7,208.0,school_panel,,208.0,92112.0,92112.0,92143.0,95695.0,41414.0,Estimate
+2020,0880,,Denver,031,,,,,,208.0,school_panel,,208.0,89061.0,89061.0,89081.0,95260.0,41175.0,Estimate
+2021,0880,,Denver,031,,,,,,208.0,school_panel,,208.0,88889.0,88889.0,88911.0,93618.0,39322.0,Estimate
+2022,0880,Denver County 1,Denver,031,district,6002.8,published,6002.8,5980.9,207.0,school_panel,,207.0,87864.0,87864.0,87883.0,92203.0,38664.0,Estimate
+2023,0880,Denver County 1,Denver,031,district,5953.8,published,5953.8,5953.8,203.0,school_panel,,203.0,88235.0,88235.0,88258.0,91092.0,38321.0,Estimate
+2024,0880,Denver County 1,Denver,031,district,6047.0,published,6047.0,6011.3,198.0,school_panel,,198.0,90450.0,90450.0,90471.0,89918.0,38346.0,Estimate
 1990,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,23.0,published,23.0,,3.0,school_panel,3.0,3.0,322.0,,322.0,311.0,105.0,Estimate
-1991,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,23.5,published,23.5,,3.0,published,3.0,,305.0,,,289.0,95.0,Estimate
+1991,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,23.5,published,23.5,,3.0,school_panel,3.0,3.0,305.0,,305.0,289.0,95.0,Estimate
 1992,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,23.5,published,23.5,,3.0,school_panel,3.0,3.0,330.0,,330.0,277.0,91.0,Estimate
 1993,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,22.5,published,22.5,,3.0,school_panel,3.0,3.0,311.0,,311.0,276.0,90.0,Estimate
 1994,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,22.5,published,22.5,,3.0,school_panel,3.0,3.0,332.0,,332.0,288.0,90.0,Estimate
@@ -1417,7 +1427,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2015,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,22.02,school_sum,,22.02,3.0,school_panel,,3.0,283.0,283.0,283.0,328.0,95.0,Estimate
 2016,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,21.53,published,21.53,21.53,3.0,school_panel,,3.0,273.0,273.0,273.0,325.0,91.0,Estimate
 2017,0890,,Dolores,033,,,,,,3.0,school_panel,,3.0,250.0,250.0,250.0,328.0,83.0,Estimate
-2018,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,16.22,published,16.22,16.22,2.0,school_panel,,2.0,238.0,238.0,238.0,322.0,78.0,Estimate
+2018,0890,DOLORES COUNTY RE NO.2,Dolores,033,district,16.22,published,16.22,16.22,3.0,school_panel,,3.0,238.0,238.0,238.0,322.0,78.0,Estimate
 2019,0890,Dolores County RE No.2,Dolores,033,district,19.1,school_sum,,19.1,2.0,school_panel,,2.0,232.0,232.0,232.0,315.0,70.0,Estimate
 2020,0890,,Dolores,033,,,,,,3.0,school_panel,,3.0,231.0,231.0,230.0,313.0,65.0,Estimate
 2021,0890,,Dolores,033,,,,,,3.0,school_panel,,3.0,254.0,254.0,253.0,327.0,73.0,Estimate
@@ -1655,7 +1665,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2008,0960,AGATE 300,Elbert,039,district,10.4545,school_sum,,10.4545,2.0,school_panel,,2.0,56.0,56.0,56.0,4758.0,1158.0,Estimate
 2009,0960,AGATE 300,Elbert,039,district,8.8625,school_sum,,8.8625,2.0,school_panel,,2.0,45.0,45.0,45.0,4727.0,1130.0,Estimate
 2010,0960,AGATE 300,Elbert,039,district,8.073,published,8.073,8.072,2.0,school_panel,,2.0,33.0,33.0,33.0,4676.0,1128.0,Estimate
-2011,0960,AGATE 300,Elbert,039,district,1.4,school_sum,,1.4,1.0,school_panel,,1.0,9.0,9.0,9.0,4579.0,1040.0,Estimate
+2011,0960,AGATE 300,Elbert,039,district,1.4,school_sum,,1.4,2.0,school_panel,,2.0,9.0,9.0,9.0,4579.0,1040.0,Estimate
 2012,0960,AGATE 300,Elbert,039,district,2.38,school_sum,,2.38,1.0,school_panel,,1.0,10.0,10.0,10.0,4474.0,982.0,Estimate
 2013,0960,AGATE 300,Elbert,039,district,2.15,school_sum,,2.15,1.0,school_panel,,1.0,12.0,12.0,12.0,4375.0,946.0,Estimate
 2014,0960,AGATE 300,Elbert,039,district,2.2252,school_sum,,2.2252,1.0,school_panel,,1.0,10.0,10.0,10.0,4334.0,923.0,Estimate
@@ -1826,15 +1836,15 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2004,1010,COLORADO SPRINGS 11,El Paso,041,district,1883.1338,school_sum,,1883.1338,66.0,school_panel,,66.0,31420.0,31420.0,31420.0,109097.0,41287.0,Estimate
 2005,1010,COLORADO SPRINGS 11,El Paso,041,district,1859.5497,school_sum,,1859.5497,67.0,school_panel,,67.0,30959.0,30959.0,30959.0,109916.0,41927.0,Estimate
 2006,1010,COLORADO SPRINGS 11,El Paso,041,district,1845.5137,school_sum,,1845.5137,62.0,school_panel,,62.0,30029.0,30029.0,30029.0,112184.0,42786.0,Estimate
-2007,1010,COLORADO SPRINGS 11,El Paso,041,district,1829.3314,school_sum,,1829.3314,63.0,school_panel,,63.0,29496.0,29496.0,29496.0,113129.0,43010.0,Estimate
-2008,1010,COLORADO SPRINGS 11,El Paso,041,district,1733.1971,school_sum,,1733.1971,64.0,school_panel,,64.0,29271.0,29271.0,29271.0,114228.0,43523.0,Estimate
-2009,1010,COLORADO SPRINGS 11,El Paso,041,district,1704.3996,school_sum,,1704.3996,58.0,school_panel,,58.0,29641.0,29641.0,29641.0,115014.0,44033.0,Estimate
-2010,1010,COLORADO SPRINGS 11,El Paso,041,district,1845.933,published,1845.933,1820.094,59.0,school_panel,,59.0,29459.0,29459.0,29459.0,118126.0,45338.0,Estimate
-2011,1010,COLORADO SPRINGS 11,El Paso,041,district,1771.44,school_sum,,1771.44,59.0,school_panel,,59.0,29509.0,29509.0,29509.0,119598.0,45600.0,Estimate
-2012,1010,COLORADO SPRINGS 11,El Paso,041,district,1687.94,school_sum,,1687.94,59.0,school_panel,,59.0,28993.0,28993.0,28993.0,120351.0,45509.0,Estimate
-2013,1010,COLORADO SPRINGS 11,El Paso,041,district,1669.09,school_sum,,1669.09,57.0,school_panel,,57.0,28404.0,28404.0,28404.0,121102.0,45436.0,Estimate
+2007,1010,COLORADO SPRINGS 11,El Paso,041,district,1829.3314,school_sum,,1829.3314,66.0,school_panel,,66.0,29496.0,29496.0,29496.0,113129.0,43010.0,Estimate
+2008,1010,COLORADO SPRINGS 11,El Paso,041,district,1733.1971,school_sum,,1733.1971,68.0,school_panel,,68.0,29271.0,29271.0,29271.0,114228.0,43523.0,Estimate
+2009,1010,COLORADO SPRINGS 11,El Paso,041,district,1704.3996,school_sum,,1704.3996,68.0,school_panel,,68.0,29641.0,29641.0,29673.0,115014.0,44033.0,Estimate
+2010,1010,COLORADO SPRINGS 11,El Paso,041,district,1845.933,published,1845.933,1820.094,60.0,school_panel,,60.0,29459.0,29459.0,29498.0,118126.0,45338.0,Estimate
+2011,1010,COLORADO SPRINGS 11,El Paso,041,district,1771.44,school_sum,,1771.44,60.0,school_panel,,60.0,29509.0,29509.0,29543.0,119598.0,45600.0,Estimate
+2012,1010,COLORADO SPRINGS 11,El Paso,041,district,1687.94,school_sum,,1687.94,60.0,school_panel,,60.0,28993.0,28993.0,29032.0,120351.0,45509.0,Estimate
+2013,1010,COLORADO SPRINGS 11,El Paso,041,district,1669.09,school_sum,,1669.09,61.0,school_panel,,61.0,28404.0,28404.0,28448.0,121102.0,45436.0,Estimate
 2014,1010,COLORADO SPRINGS 11,El Paso,041,district,1710.0192,school_sum,,1710.0192,57.0,school_panel,,57.0,28332.0,28332.0,28332.0,121088.0,45646.0,Estimate
-2015,1010,COLORADO SPRINGS 11,El Paso,041,district,1628.4,school_sum,,1628.4,56.0,school_panel,,56.0,27937.0,27937.0,27937.0,121758.0,46325.0,Estimate
+2015,1010,COLORADO SPRINGS 11,El Paso,041,district,1628.4,school_sum,,1628.4,57.0,school_panel,,57.0,27937.0,27937.0,27937.0,121758.0,46325.0,Estimate
 2016,1010,COLORADO SPRINGS 11,El Paso,041,district,1655.58,published,1655.58,1641.36,56.0,school_panel,,56.0,27911.0,27911.0,27911.0,123245.0,46640.0,Estimate
 2017,1010,,El Paso,041,,,,,,56.0,school_panel,,56.0,27427.0,27427.0,27427.0,124204.0,46794.0,Estimate
 2018,1010,COLORADO SPRINGS 11,El Paso,041,district,1614.85,published,1614.85,1598.7,56.0,school_panel,,56.0,26395.0,26395.0,26395.0,125671.0,46924.0,Estimate
@@ -1843,7 +1853,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2021,1010,,El Paso,041,,,,,,57.0,school_panel,,57.0,23366.0,23366.0,23359.0,125361.0,45776.0,Estimate
 2022,1010,Colorado Springs 11,El Paso,041,district,1441.1,published,1441.1,1422.0,57.0,school_panel,,57.0,22729.0,22729.0,22725.0,123038.0,45644.0,Estimate
 2023,1010,Colorado Springs 11,El Paso,041,district,1435.1999999999996,published,1435.1999999999996,1435.2,58.0,school_panel,,58.0,22744.0,22744.0,22740.0,122062.0,45404.0,Estimate
-2024,1010,Colorado Springs 11,El Paso,041,district,1494.3,published,1494.3,1473.2,59.0,school_panel,,59.0,22265.0,22265.0,22227.0,119980.0,45275.0,Estimate
+2024,1010,Colorado Springs 11,El Paso,041,district,1494.3,published,1494.3,1473.2,60.0,school_panel,,60.0,22265.0,22265.0,22227.0,119980.0,45275.0,Estimate
 1990,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,133.5,published,133.5,,6.0,school_panel,6.0,6.0,2549.0,,2549.0,75651.0,34263.0,Estimate
 1991,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,133.5,published,133.5,,6.0,school_panel,6.0,6.0,2543.0,,2543.0,77694.0,34423.0,Estimate
 1992,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,134.8,published,134.8,,6.0,school_panel,6.0,6.0,2699.0,,2699.0,81347.0,35404.0,Estimate
@@ -1862,7 +1872,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2005,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,266.6012,school_sum,,266.6012,9.0,school_panel,,9.0,4563.0,4563.0,4563.0,109916.0,41927.0,Estimate
 2006,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,302.6506,school_sum,,302.6506,10.0,school_panel,,10.0,4786.0,4786.0,4786.0,112184.0,42786.0,Estimate
 2007,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,311.086,school_sum,,311.086,10.0,school_panel,,10.0,4851.0,4851.0,4851.0,113129.0,43010.0,Estimate
-2008,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,291.2267,school_sum,,291.2267,9.0,school_panel,,9.0,4643.0,4643.0,4643.0,114228.0,43523.0,Estimate
+2008,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,291.2267,school_sum,,291.2267,10.0,school_panel,,10.0,4643.0,4643.0,4643.0,114228.0,43523.0,Estimate
 2009,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,282.3966,school_sum,,282.3966,9.0,school_panel,,9.0,4578.0,4578.0,4578.0,115014.0,44033.0,Estimate
 2010,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,295.009,published,295.009,294.009,9.0,school_panel,,9.0,4561.0,4561.0,4561.0,118126.0,45338.0,Estimate
 2011,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,291.28,school_sum,,291.28,9.0,school_panel,,9.0,4612.0,4612.0,4612.0,119598.0,45600.0,Estimate
@@ -1874,11 +1884,11 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2017,1020,,El Paso,041,,,,,,11.0,school_panel,,11.0,5220.0,5220.0,5220.0,124204.0,46794.0,Estimate
 2018,1020,CHEYENNE MOUNTAIN 12,El Paso,041,district,362.11,published,362.11,361.25,11.0,school_panel,,11.0,5274.0,5274.0,5274.0,125671.0,46924.0,Estimate
 2019,1020,Cheyenne Mountain 12,El Paso,041,district,359.6,school_sum,,359.6,11.0,school_panel,,11.0,5309.0,5309.0,5309.0,126199.0,46405.0,Estimate
-2020,1020,,El Paso,041,,,,,,11.0,school_panel,,11.0,5243.0,5243.0,5243.0,126429.0,45943.0,Estimate
-2021,1020,,El Paso,041,,,,,,8.0,school_panel,,8.0,3641.0,3641.0,3639.0,125361.0,45776.0,Estimate
-2022,1020,Cheyenne Mountain 12,El Paso,041,district,250.9,published,250.9,234.5,8.0,school_panel,,8.0,3723.0,3723.0,3720.0,123038.0,45644.0,Estimate
-2023,1020,Cheyenne Mountain 12,El Paso,041,district,233.9,published,233.9,233.9,8.0,school_panel,,8.0,3739.0,3739.0,3738.0,122062.0,45404.0,Estimate
-2024,1020,Cheyenne Mountain 12,El Paso,041,district,248.7,published,248.7,241.7,8.0,school_panel,,8.0,3725.0,3725.0,3721.0,119980.0,45275.0,Estimate
+2020,1020,,El Paso,041,,,,,,12.0,school_panel,,12.0,5243.0,5243.0,5270.0,126429.0,45943.0,Estimate
+2021,1020,,El Paso,041,,,,,,9.0,school_panel,,9.0,3641.0,3641.0,3663.0,125361.0,45776.0,Estimate
+2022,1020,Cheyenne Mountain 12,El Paso,041,district,250.9,published,250.9,234.5,9.0,school_panel,,9.0,3723.0,3723.0,3737.0,123038.0,45644.0,Estimate
+2023,1020,Cheyenne Mountain 12,El Paso,041,district,233.9,published,233.9,233.9,9.0,school_panel,,9.0,3739.0,3739.0,3763.0,122062.0,45404.0,Estimate
+2024,1020,Cheyenne Mountain 12,El Paso,041,district,248.7,published,248.7,241.7,9.0,school_panel,,9.0,3725.0,3725.0,3745.0,119980.0,45275.0,Estimate
 1990,1030,MANITOU SPRINGS 14,El Paso,041,district,60.2,published,60.2,,4.0,school_panel,4.0,4.0,1127.0,,1127.0,75651.0,34263.0,Estimate
 1991,1030,MANITOU SPRINGS 14,El Paso,041,district,62.3,published,62.3,,4.0,school_panel,4.0,4.0,1231.0,,1231.0,77694.0,34423.0,Estimate
 1992,1030,MANITOU SPRINGS 14,El Paso,041,district,65.6,published,65.6,,4.0,school_panel,4.0,4.0,1309.0,,1309.0,81347.0,35404.0,Estimate
@@ -2334,7 +2344,17 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2022,1180,Roaring Fork RE-1,Garfield,045,district,396.5,published,396.5,393.1,14.0,school_panel,,14.0,5772.0,5772.0,5771.0,11415.0,3786.0,Estimate
 2023,1180,Roaring Fork RE-1,Garfield,045,district,398.30000000000007,published,398.30000000000007,398.3,14.0,school_panel,,14.0,5846.0,5846.0,5841.0,11388.0,3720.0,Estimate
 2024,1180,Roaring Fork RE-1,Garfield,045,district,410.0,published,410.0,410.1,14.0,school_panel,,14.0,5842.0,5842.0,5839.0,11289.0,3705.0,Estimate
-2000,1195,GARFIELD RE-2,Garfield,045,district,192.5328,school_sum,,192.5328,7.0,fte_file,,,,,,8709.0,3289.0,Estimate
+1990,1195,GARFIELD RE-2,Garfield,045,district,126.0,published,126.0,,7.0,published,7.0,,2563.0,,,5869.0,2478.0,Estimate
+1991,1195,GARFIELD RE-2,Garfield,045,district,132.5,published,132.5,,7.0,published,7.0,,2568.0,,,6089.0,2539.0,Estimate
+1992,1195,GARFIELD RE-2,Garfield,045,district,136.0,published,136.0,,7.0,published,7.0,,2687.0,,,6121.0,2525.0,Estimate
+1993,1195,GARFIELD RE-2,Garfield,045,district,140.9,published,140.9,,7.0,published,7.0,,2866.0,,,6368.0,2597.0,Estimate
+1994,1195,GARFIELD RE-2,Garfield,045,district,152.6,published,152.6,,7.0,published,7.0,,3012.0,,,6750.0,2725.0,Estimate
+1995,1195,GARFIELD RE-2,Garfield,045,district,160.4,published,160.4,,7.0,published,7.0,,3139.0,,,7132.0,2850.0,Estimate
+1996,1195,GARFIELD RE-2,Garfield,045,district,167.5,published,167.5,,7.0,published,7.0,,3235.0,,,7386.0,2917.0,Estimate
+1997,1195,GARFIELD RE-2,Garfield,045,district,174.9,published,174.9,,8.0,published,8.0,,3338.0,,,7630.0,2982.0,Estimate
+1998,1195,GARFIELD RE-2,Garfield,045,district,,,,,7.0,published,7.0,,3491.0,,,8098.0,3130.0,Estimate
+1999,1195,GARFIELD RE-2,Garfield,045,district,,,,,7.0,published,7.0,,3481.0,,,8396.0,3208.0,Estimate
+2000,1195,GARFIELD RE-2,Garfield,045,district,192.5328,school_sum,,192.5328,,,,,,,,8709.0,3289.0,Estimate
 2001,1195,GARFIELD RE-2,Garfield,045,district,201.4799,school_sum,,201.4799,5.0,school_panel,,5.0,2813.0,2813.0,2813.0,8985.0,3441.0,Estimate
 2002,1195,GARFIELD RE-2,Garfield,045,district,215.6071,school_sum,,215.6071,5.0,school_panel,,5.0,2849.0,2849.0,2849.0,9074.0,3543.0,Estimate
 2003,1195,GARFIELD RE-2,Garfield,045,district,211.7777,school_sum,,211.7777,7.0,school_panel,,7.0,3810.0,3810.0,3810.0,9054.0,3682.0,Estimate
@@ -2359,20 +2379,20 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2022,1195,Garfield Re-2,Garfield,045,district,292.1,published,292.1,292.1,10.0,school_panel,,10.0,4662.0,4662.0,4662.0,11415.0,3786.0,Estimate
 2023,1195,Garfield Re-2,Garfield,045,district,292.0,published,292.0,292.0,10.0,school_panel,,10.0,4786.0,4786.0,4786.0,11388.0,3720.0,Estimate
 2024,1195,Garfield Re-2,Garfield,045,district,269.0,published,269.0,269.0,10.0,school_panel,,10.0,4695.0,4695.0,4695.0,11289.0,3705.0,Estimate
-1990,1220,,Garfield,045,,,,,,10.0,school_panel,,10.0,,,2968.0,5869.0,2478.0,Estimate
-1991,1220,,Garfield,045,,,,,,10.0,school_panel,,10.0,,,2977.0,6089.0,2539.0,Estimate
-1992,1220,,Garfield,045,,,,,,10.0,school_panel,,10.0,,,3167.0,6121.0,2525.0,Estimate
-1993,1220,,Garfield,045,,,,,,10.0,school_panel,,10.0,,,3359.0,6368.0,2597.0,Estimate
-1994,1220,,Garfield,045,,,,,,10.0,school_panel,,10.0,,,3612.0,6750.0,2725.0,Estimate
-1995,1220,,Garfield,045,,,,,,10.0,school_panel,,10.0,,,3787.0,7132.0,2850.0,Estimate
-1996,1220,,Garfield,045,,,,,,10.0,school_panel,,10.0,,,3911.0,7386.0,2917.0,Estimate
-1997,1220,,Garfield,045,,,,,,11.0,school_panel,,11.0,,,4085.0,7630.0,2982.0,Estimate
-1998,1220,,Garfield,045,,,,,,11.0,school_panel,,11.0,,,4237.0,8098.0,3130.0,Estimate
-1999,1220,,Garfield,045,,,,,,11.0,school_panel,,11.0,,,4272.0,8396.0,3208.0,Estimate
-2000,1220,GARFIELD 16,Garfield,045,district,53.057,school_sum,,53.057,10.0,school_panel,,10.0,,,4474.0,8709.0,3289.0,Estimate
-2001,1220,GARFIELD 16,Garfield,045,district,48.9809,school_sum,,48.9809,5.0,school_panel,,5.0,406.0,406.0,1794.0,8985.0,3441.0,Estimate
-2002,1220,GARFIELD 16,Garfield,045,district,60.5,school_sum,,60.5,6.0,school_panel,,6.0,473.0,473.0,1819.0,9074.0,3543.0,Estimate
-2003,1220,GARFIELD 16,Garfield,045,district,60.0001,school_sum,,60.0001,5.0,school_panel,,5.0,996.0,996.0,996.0,9054.0,3682.0,Estimate
+1990,1220,GARFIELD 16,Garfield,045,district,31.0,published,31.0,,3.0,published,3.0,,405.0,,,5869.0,2478.0,Estimate
+1991,1220,GARFIELD 16,Garfield,045,district,29.0,published,29.0,,3.0,published,3.0,,409.0,,,6089.0,2539.0,Estimate
+1992,1220,GARFIELD 16,Garfield,045,district,31.0,published,31.0,,3.0,published,3.0,,480.0,,,6121.0,2525.0,Estimate
+1993,1220,GARFIELD 16,Garfield,045,district,32.8,published,32.8,,3.0,published,3.0,,493.0,,,6368.0,2597.0,Estimate
+1994,1220,GARFIELD 16,Garfield,045,district,33.9,published,33.9,,3.0,published,3.0,,600.0,,,6750.0,2725.0,Estimate
+1995,1220,GARFIELD 16,Garfield,045,district,41.1,published,41.1,,3.0,published,3.0,,648.0,,,7132.0,2850.0,Estimate
+1996,1220,GARFIELD 16,Garfield,045,district,43.0,published,43.0,,3.0,published,3.0,,676.0,,,7386.0,2917.0,Estimate
+1997,1220,GARFIELD 16,Garfield,045,district,45.0,published,45.0,,3.0,published,3.0,,747.0,,,7630.0,2982.0,Estimate
+1998,1220,GARFIELD 16,Garfield,045,district,41.8,published,41.8,,3.0,published,3.0,,746.0,,,8098.0,3130.0,Estimate
+1999,1220,GARFIELD 16,Garfield,045,district,,,,,3.0,published,3.0,,791.0,,,8396.0,3208.0,Estimate
+2000,1220,GARFIELD 16,Garfield,045,district,53.057,school_sum,,53.057,,,,,,,,8709.0,3289.0,Estimate
+2001,1220,GARFIELD 16,Garfield,045,district,48.9809,school_sum,,48.9809,2.0,school_panel,,2.0,406.0,406.0,406.0,8985.0,3441.0,Estimate
+2002,1220,GARFIELD 16,Garfield,045,district,60.5,school_sum,,60.5,3.0,school_panel,,3.0,473.0,473.0,473.0,9074.0,3543.0,Estimate
+2003,1220,GARFIELD 16,Garfield,045,district,60.0001,school_sum,,60.0001,4.0,school_panel,,4.0,996.0,996.0,996.0,9054.0,3682.0,Estimate
 2004,1220,GARFIELD 16,Garfield,045,district,61.2582,school_sum,,61.2582,4.0,school_panel,,4.0,1000.0,1000.0,1000.0,9033.0,3838.0,Estimate
 2005,1220,GARFIELD 16,Garfield,045,district,64.8043,school_sum,,64.8043,4.0,school_panel,,4.0,1033.0,1033.0,1033.0,9162.0,3964.0,Estimate
 2006,1220,GARFIELD 16,Garfield,045,district,66.8668,school_sum,,66.8668,4.0,school_panel,,4.0,1174.0,1174.0,1174.0,9526.0,4121.0,Estimate
@@ -2454,7 +2474,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2012,1340,WEST GRAND 1-JT.,Grand,049,district,36.58,school_sum,,36.58,3.0,school_panel,,3.0,434.0,434.0,434.0,2175.0,722.0,Estimate
 2013,1340,WEST GRAND 1-JT.,Grand,049,district,36.84,school_sum,,36.84,3.0,school_panel,,3.0,440.0,440.0,440.0,2166.0,664.0,Estimate
 2014,1340,WEST GRAND 1-JT.,Grand,049,district,37.96,school_sum,,37.96,3.0,school_panel,,3.0,422.0,422.0,422.0,2174.0,616.0,Estimate
-2015,1340,WEST GRAND 1-JT,Grand,049,district,36.88,school_sum,,36.88,2.0,school_panel,,2.0,441.0,441.0,441.0,2168.0,590.0,Estimate
+2015,1340,WEST GRAND 1-JT,Grand,049,district,36.88,school_sum,,36.88,3.0,school_panel,,3.0,441.0,441.0,441.0,2168.0,590.0,Estimate
 2016,1340,WEST GRAND 1-JT,Grand,049,district,36.99,published,36.99,36.99,2.0,school_panel,,2.0,423.0,423.0,423.0,2133.0,623.0,Estimate
 2017,1340,,Grand,049,,,,,,2.0,school_panel,,2.0,406.0,406.0,406.0,2069.0,647.0,Estimate
 2018,1340,WEST GRAND 1-JT,Grand,049,district,40.68,published,40.68,40.68,2.0,school_panel,,2.0,408.0,408.0,408.0,2018.0,642.0,Estimate
@@ -2485,7 +2505,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2008,1350,EAST GRAND 2,Grand,049,district,112.7614,school_sum,,112.7614,6.0,school_panel,,6.0,1464.0,1464.0,1464.0,2141.0,814.0,Estimate
 2009,1350,EAST GRAND 2,Grand,049,district,108.1028,school_sum,,108.1028,6.0,school_panel,,6.0,1438.0,1438.0,1438.0,2139.0,810.0,Estimate
 2010,1350,EAST GRAND 2,Grand,049,district,98.817,published,98.817,98.817,6.0,school_panel,,6.0,1325.0,1325.0,1325.0,2174.0,821.0,Estimate
-2011,1350,EAST GRAND 2,Grand,049,district,97.12,school_sum,,97.12,5.0,school_panel,,5.0,1273.0,1273.0,1273.0,2174.0,770.0,Estimate
+2011,1350,EAST GRAND 2,Grand,049,district,97.12,school_sum,,97.12,6.0,school_panel,,6.0,1273.0,1273.0,1273.0,2174.0,770.0,Estimate
 2012,1350,EAST GRAND 2,Grand,049,district,100.54,school_sum,,100.54,5.0,school_panel,,5.0,1245.0,1245.0,1245.0,2175.0,722.0,Estimate
 2013,1350,EAST GRAND 2,Grand,049,district,98.72,school_sum,,98.72,5.0,school_panel,,5.0,1264.0,1264.0,1264.0,2166.0,664.0,Estimate
 2014,1350,EAST GRAND 2,Grand,049,district,94.0653,school_sum,,94.0653,5.0,school_panel,,5.0,1299.0,1299.0,1299.0,2174.0,616.0,Estimate
@@ -2520,7 +2540,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2008,1360,GUNNISON WATERSHED RE1J,Gunnison,051,district,136.1419,school_sum,,136.1419,7.0,school_panel,,7.0,1839.0,1839.0,1839.0,1924.0,789.0,Estimate
 2009,1360,GUNNISON WATERSHED RE1J,Gunnison,051,district,141.3445,school_sum,,141.3445,7.0,school_panel,,7.0,1818.0,1818.0,1818.0,1963.0,779.0,Estimate
 2010,1360,GUNNISON WATERSHED RE1J,Gunnison,051,district,140.172,published,140.172,140.173,7.0,school_panel,,7.0,1864.0,1864.0,1864.0,2003.0,774.0,Estimate
-2011,1360,GUNNISON WATERSHED RE1J,Gunnison,051,district,133.34,school_sum,,133.34,5.0,school_panel,,5.0,1844.0,1844.0,1844.0,2072.0,763.0,Estimate
+2011,1360,GUNNISON WATERSHED RE1J,Gunnison,051,district,133.34,school_sum,,133.34,7.0,school_panel,,7.0,1844.0,1844.0,1844.0,2072.0,763.0,Estimate
 2012,1360,GUNNISON WATERSHED RE1J,Gunnison,051,district,131.27,school_sum,,131.27,5.0,school_panel,,5.0,1846.0,1846.0,1846.0,2048.0,780.0,Estimate
 2013,1360,GUNNISON WATERSHED RE1J,Gunnison,051,district,132.28,school_sum,,132.28,5.0,school_panel,,5.0,1934.0,1934.0,1934.0,2054.0,782.0,Estimate
 2014,1360,GUNNISON WATERSHED RE1J,Gunnison,051,district,127.7078,school_sum,,127.7078,7.0,school_panel,,7.0,1929.0,1929.0,1929.0,2060.0,767.0,Estimate
@@ -2587,10 +2607,10 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2005,1390,HUERFANO RE-1,Huerfano,055,district,51.0624,school_sum,,51.0624,5.0,school_panel,,5.0,747.0,747.0,747.0,1115.0,385.0,Estimate
 2006,1390,HUERFANO RE-1,Huerfano,055,district,51.5908,school_sum,,51.5908,5.0,school_panel,,5.0,700.0,700.0,700.0,1062.0,367.0,Estimate
 2007,1390,HUERFANO RE-1,Huerfano,055,district,46.8588,school_sum,,46.8588,5.0,school_panel,,5.0,702.0,702.0,702.0,1057.0,346.0,Estimate
-2008,1390,HUERFANO RE-1,Huerfano,055,district,49.7265,school_sum,,49.7265,4.0,school_panel,,4.0,691.0,691.0,691.0,1046.0,332.0,Estimate
+2008,1390,HUERFANO RE-1,Huerfano,055,district,49.7265,school_sum,,49.7265,5.0,school_panel,,5.0,691.0,691.0,691.0,1046.0,332.0,Estimate
 2009,1390,HUERFANO RE-1,Huerfano,055,district,47.8573,school_sum,,47.8573,4.0,school_panel,,4.0,620.0,620.0,620.0,920.0,279.0,Estimate
 2010,1390,HUERFANO RE-1,Huerfano,055,district,43.225,published,43.225,43.226,4.0,school_panel,,4.0,575.0,575.0,575.0,894.0,273.0,Estimate
-2011,1390,HUERFANO RE-1,Huerfano,055,district,40.24,school_sum,,40.24,3.0,school_panel,,3.0,554.0,554.0,554.0,843.0,274.0,Estimate
+2011,1390,HUERFANO RE-1,Huerfano,055,district,40.24,school_sum,,40.24,4.0,school_panel,,4.0,554.0,554.0,554.0,843.0,274.0,Estimate
 2012,1390,HUERFANO RE-1,Huerfano,055,district,41.49,school_sum,,41.49,3.0,school_panel,,3.0,520.0,520.0,520.0,820.0,282.0,Estimate
 2013,1390,HUERFANO RE-1,Huerfano,055,district,42.97,school_sum,,42.97,3.0,school_panel,,3.0,511.0,511.0,511.0,819.0,271.0,Estimate
 2014,1390,HUERFANO RE-1,Huerfano,055,district,44.0562,school_sum,,44.0562,3.0,school_panel,,3.0,537.0,537.0,537.0,820.0,257.0,Estimate
@@ -2663,7 +2683,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2011,1410,NORTH PARK R-1,Jackson,057,district,22.11,school_sum,,22.11,2.0,school_panel,,2.0,196.0,196.0,196.0,200.0,63.0,Estimate
 2012,1410,NORTH PARK R-1,Jackson,057,district,22.13,school_sum,,22.13,2.0,school_panel,,2.0,206.0,206.0,206.0,208.0,54.0,Estimate
 2013,1410,NORTH PARK R-1,Jackson,057,district,19.33,school_sum,,19.33,2.0,school_panel,,2.0,213.0,213.0,213.0,212.0,48.0,Estimate
-2014,1410,NORTH PARK R-1,Jackson,057,district,20.4632,school_sum,,20.4632,1.0,school_panel,,1.0,190.0,190.0,190.0,207.0,55.0,Estimate
+2014,1410,NORTH PARK R-1,Jackson,057,district,20.4632,school_sum,,20.4632,2.0,school_panel,,2.0,190.0,190.0,190.0,207.0,55.0,Estimate
 2015,1410,NORTH PARK R-1,Jackson,057,district,22.03,school_sum,,22.03,1.0,school_panel,,1.0,197.0,197.0,197.0,201.0,57.0,Estimate
 2016,1410,NORTH PARK R-1,Jackson,057,district,19.53,published,19.53,19.53,1.0,school_panel,,1.0,192.0,192.0,192.0,202.0,59.0,Estimate
 2017,1410,,Jackson,057,,,,,,1.0,school_panel,,1.0,186.0,186.0,186.0,192.0,63.0,Estimate
@@ -3006,24 +3026,24 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2004,1520,DURANGO 9-R,La Plata,067,district,312.1811,school_sum,,312.1811,12.0,school_panel,,12.0,4604.0,4604.0,4604.0,7529.0,2367.0,Estimate
 2005,1520,DURANGO 9-R,La Plata,067,district,314.4764,school_sum,,314.4764,12.0,school_panel,,12.0,4658.0,4658.0,4658.0,7563.0,2446.0,Estimate
 2006,1520,DURANGO 9-R,La Plata,067,district,314.6249,school_sum,,314.6249,12.0,school_panel,,12.0,4768.0,4768.0,4768.0,7494.0,2503.0,Estimate
-2007,1520,DURANGO 9-R,La Plata,067,district,330.1542,school_sum,,330.1542,11.0,school_panel,,11.0,4820.0,4820.0,4820.0,7537.0,2598.0,Estimate
-2008,1520,DURANGO 9-R,La Plata,067,district,322.4957,school_sum,,322.4957,10.0,school_panel,,10.0,4839.0,4839.0,4839.0,7634.0,2730.0,Estimate
-2009,1520,DURANGO 9-R,La Plata,067,district,300.7051,school_sum,,300.7051,10.0,school_panel,,10.0,4697.0,4697.0,4697.0,7569.0,2818.0,Estimate
-2010,1520,DURANGO 9-R,La Plata,067,district,289.516,published,289.516,286.266,10.0,school_panel,,10.0,4675.0,4675.0,4675.0,7600.0,2900.0,Estimate
-2011,1520,DURANGO 9-R,La Plata,067,district,279.89,school_sum,,279.89,10.0,school_panel,,10.0,4537.0,4537.0,4537.0,7602.0,2894.0,Estimate
-2012,1520,DURANGO 9-R,La Plata,067,district,286.13,school_sum,,286.13,10.0,school_panel,,10.0,4575.0,4575.0,4575.0,7660.0,2856.0,Estimate
-2013,1520,DURANGO 9-R,La Plata,067,district,289.98,school_sum,,289.98,11.0,school_panel,,11.0,4659.0,4659.0,4659.0,7827.0,2752.0,Estimate
-2014,1520,DURANGO 9-R,La Plata,067,district,278.9263,school_sum,,278.9263,12.0,school_panel,,12.0,4564.0,4564.0,4564.0,7899.0,2736.0,Estimate
-2015,1520,DURANGO 9-R,La Plata,067,district,289.89,school_sum,,289.89,12.0,school_panel,,12.0,4670.0,4670.0,4670.0,7983.0,2752.0,Estimate
-2016,1520,DURANGO 9-R,La Plata,067,district,354.46,published,354.46,354.46,13.0,school_panel,,13.0,5026.0,5026.0,5026.0,8062.0,2729.0,Estimate
-2017,1520,,La Plata,067,,,,,,14.0,school_panel,,14.0,5222.0,5222.0,5222.0,8087.0,2627.0,Estimate
-2018,1520,DURANGO 9-R,La Plata,067,district,392.96,published,392.96,391.94,14.0,school_panel,,14.0,5406.0,5406.0,5406.0,8112.0,2581.0,Estimate
-2019,1520,Durango 9-R,La Plata,067,district,391.7,school_sum,,391.7,14.0,school_panel,,14.0,5543.0,5543.0,5543.0,7989.0,2411.0,Estimate
-2020,1520,,La Plata,067,,,,,,14.0,school_panel,,14.0,6931.0,6931.0,6931.0,8063.0,2330.0,Estimate
-2021,1520,,La Plata,067,,,,,,14.0,school_panel,,14.0,5797.0,5797.0,5794.0,8212.0,2237.0,Estimate
+2007,1520,DURANGO 9-R,La Plata,067,district,330.1542,school_sum,,330.1542,13.0,school_panel,,13.0,4820.0,4820.0,4820.0,7537.0,2598.0,Estimate
+2008,1520,DURANGO 9-R,La Plata,067,district,322.4957,school_sum,,322.4957,12.0,school_panel,,12.0,4839.0,4839.0,4839.0,7634.0,2730.0,Estimate
+2009,1520,DURANGO 9-R,La Plata,067,district,300.7051,school_sum,,300.7051,11.0,school_panel,,11.0,4697.0,4697.0,4699.0,7569.0,2818.0,Estimate
+2010,1520,DURANGO 9-R,La Plata,067,district,289.516,published,289.516,286.266,11.0,school_panel,,11.0,4675.0,4675.0,4688.0,7600.0,2900.0,Estimate
+2011,1520,DURANGO 9-R,La Plata,067,district,279.89,school_sum,,279.89,11.0,school_panel,,11.0,4537.0,4537.0,4559.0,7602.0,2894.0,Estimate
+2012,1520,DURANGO 9-R,La Plata,067,district,286.13,school_sum,,286.13,11.0,school_panel,,11.0,4575.0,4575.0,4590.0,7660.0,2856.0,Estimate
+2013,1520,DURANGO 9-R,La Plata,067,district,289.98,school_sum,,289.98,12.0,school_panel,,12.0,4659.0,4659.0,4670.0,7827.0,2752.0,Estimate
+2014,1520,DURANGO 9-R,La Plata,067,district,278.9263,school_sum,,278.9263,13.0,school_panel,,13.0,4564.0,4564.0,4564.0,7899.0,2736.0,Estimate
+2015,1520,DURANGO 9-R,La Plata,067,district,289.89,school_sum,,289.89,13.0,school_panel,,13.0,4670.0,4670.0,4670.0,7983.0,2752.0,Estimate
+2016,1520,DURANGO 9-R,La Plata,067,district,354.46,published,354.46,354.46,14.0,school_panel,,14.0,5026.0,5026.0,5026.0,8062.0,2729.0,Estimate
+2017,1520,,La Plata,067,,,,,,15.0,school_panel,,15.0,5222.0,5222.0,5222.0,8087.0,2627.0,Estimate
+2018,1520,DURANGO 9-R,La Plata,067,district,392.96,published,392.96,391.94,15.0,school_panel,,15.0,5406.0,5406.0,5406.0,8112.0,2581.0,Estimate
+2019,1520,Durango 9-R,La Plata,067,district,391.7,school_sum,,391.7,15.0,school_panel,,15.0,5543.0,5543.0,5543.0,7989.0,2411.0,Estimate
+2020,1520,,La Plata,067,,,,,,15.0,school_panel,,15.0,6931.0,6931.0,6931.0,8063.0,2330.0,Estimate
+2021,1520,,La Plata,067,,,,,,15.0,school_panel,,15.0,5797.0,5797.0,5794.0,8212.0,2237.0,Estimate
 2022,1520,Durango 9-R,La Plata,067,district,389.0,published,389.0,389.0,14.0,school_panel,,14.0,5595.0,5595.0,5452.0,8230.0,2186.0,Estimate
 2023,1520,Durango 9-R,La Plata,067,district,398.2,published,398.2,398.2,14.0,school_panel,,14.0,5267.0,5267.0,5146.0,8027.0,2167.0,Estimate
-2024,1520,Durango 9-R,La Plata,067,district,339.9,published,339.9,339.9,13.0,school_panel,,13.0,4492.0,4492.0,4337.0,7935.0,2164.0,Estimate
+2024,1520,Durango 9-R,La Plata,067,district,339.9,published,339.9,339.9,14.0,school_panel,,14.0,4492.0,4492.0,4337.0,7935.0,2164.0,Estimate
 1990,1530,BAYFIELD 10 JT-R,La Plata,067,district,47.2,published,47.2,,3.0,school_panel,3.0,3.0,818.0,,818.0,6042.0,2268.0,Estimate
 1991,1530,BAYFIELD 10 JT-R,La Plata,067,district,52.3,published,52.3,,3.0,school_panel,3.0,3.0,826.0,,826.0,6181.0,2257.0,Estimate
 1992,1530,BAYFIELD 10 JT-R,La Plata,067,district,52.3,published,52.3,,3.0,school_panel,3.0,3.0,883.0,,883.0,6336.0,2260.0,Estimate
@@ -3042,8 +3062,8 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2005,1530,BAYFIELD 10 JT-R,La Plata,067,district,80.772,school_sum,,80.772,3.0,school_panel,,3.0,1192.0,1192.0,1192.0,7563.0,2446.0,Estimate
 2006,1530,BAYFIELD 10 JT-R,La Plata,067,district,83.4146,school_sum,,83.4146,3.0,school_panel,,3.0,1311.0,1311.0,1311.0,7494.0,2503.0,Estimate
 2007,1530,BAYFIELD 10 JT-R,La Plata,067,district,85.6583,school_sum,,85.6583,3.0,school_panel,,3.0,1358.0,1358.0,1358.0,7537.0,2598.0,Estimate
-2008,1530,BAYFIELD 10 JT-R,La Plata,067,district,85.9883,school_sum,,85.9883,3.0,school_panel,,3.0,1345.0,1345.0,1345.0,7634.0,2730.0,Estimate
-2009,1530,BAYFIELD 10 JT-R,La Plata,067,district,90.5005,school_sum,,90.5005,3.0,school_panel,,3.0,1406.0,1406.0,1406.0,7569.0,2818.0,Estimate
+2008,1530,BAYFIELD 10 JT-R,La Plata,067,district,85.9883,school_sum,,85.9883,4.0,school_panel,,4.0,1345.0,1345.0,1345.0,7634.0,2730.0,Estimate
+2009,1530,BAYFIELD 10 JT-R,La Plata,067,district,90.5005,school_sum,,90.5005,4.0,school_panel,,4.0,1406.0,1406.0,1406.0,7569.0,2818.0,Estimate
 2010,1530,BAYFIELD 10 JT-R,La Plata,067,district,88.606,published,88.606,88.606,3.0,school_panel,,3.0,1405.0,1405.0,1405.0,7600.0,2900.0,Estimate
 2011,1530,BAYFIELD 10 JT-R,La Plata,067,district,84.67,school_sum,,84.67,3.0,school_panel,,3.0,1362.0,1362.0,1362.0,7602.0,2894.0,Estimate
 2012,1530,BAYFIELD 10 JT-R,La Plata,067,district,84.1,school_sum,,84.1,3.0,school_panel,,3.0,1402.0,1402.0,1402.0,7660.0,2856.0,Estimate
@@ -3077,12 +3097,12 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2005,1540,IGNACIO 11 JT,La Plata,067,district,63.0448,school_sum,,63.0448,5.0,school_panel,,5.0,751.0,751.0,751.0,7563.0,2446.0,Estimate
 2006,1540,IGNACIO 11 JT,La Plata,067,district,63.905,school_sum,,63.905,5.0,school_panel,,5.0,791.0,791.0,791.0,7494.0,2503.0,Estimate
 2007,1540,IGNACIO 11 JT,La Plata,067,district,62.8835,school_sum,,62.8835,5.0,school_panel,,5.0,811.0,811.0,811.0,7537.0,2598.0,Estimate
-2008,1540,IGNACIO 11 JT,La Plata,067,district,65.9156,school_sum,,65.9156,5.0,school_panel,,5.0,813.0,813.0,813.0,7634.0,2730.0,Estimate
-2009,1540,IGNACIO 11 JT,La Plata,067,district,63.5376,school_sum,,63.5376,5.0,school_panel,,5.0,797.0,797.0,797.0,7569.0,2818.0,Estimate
+2008,1540,IGNACIO 11 JT,La Plata,067,district,65.9156,school_sum,,65.9156,6.0,school_panel,,6.0,813.0,813.0,813.0,7634.0,2730.0,Estimate
+2009,1540,IGNACIO 11 JT,La Plata,067,district,63.5376,school_sum,,63.5376,6.0,school_panel,,6.0,797.0,797.0,797.0,7569.0,2818.0,Estimate
 2010,1540,IGNACIO 11 JT,La Plata,067,district,65.001,published,65.001,64.501,5.0,school_panel,,5.0,751.0,751.0,751.0,7600.0,2900.0,Estimate
-2011,1540,IGNACIO 11 JT,La Plata,067,district,61.6,school_sum,,61.6,4.0,school_panel,,4.0,759.0,759.0,759.0,7602.0,2894.0,Estimate
+2011,1540,IGNACIO 11 JT,La Plata,067,district,61.6,school_sum,,61.6,5.0,school_panel,,5.0,759.0,759.0,759.0,7602.0,2894.0,Estimate
 2012,1540,IGNACIO 11 JT,La Plata,067,district,62.23,school_sum,,62.23,4.0,school_panel,,4.0,718.0,718.0,718.0,7660.0,2856.0,Estimate
-2013,1540,IGNACIO 11 JT,La Plata,067,district,63.09,school_sum,,63.09,3.0,school_panel,,3.0,763.0,763.0,763.0,7827.0,2752.0,Estimate
+2013,1540,IGNACIO 11 JT,La Plata,067,district,63.09,school_sum,,63.09,4.0,school_panel,,4.0,763.0,763.0,763.0,7827.0,2752.0,Estimate
 2014,1540,IGNACIO 11 JT,La Plata,067,district,66.2214,school_sum,,66.2214,3.0,school_panel,,3.0,791.0,791.0,791.0,7899.0,2736.0,Estimate
 2015,1540,IGNACIO 11 JT,La Plata,067,district,66.3,school_sum,,66.3,3.0,school_panel,,3.0,857.0,857.0,857.0,7983.0,2752.0,Estimate
 2016,1540,IGNACIO 11 JT,La Plata,067,district,69.54,published,69.54,69.54,3.0,school_panel,,3.0,869.0,869.0,869.0,8062.0,2729.0,Estimate
@@ -3110,20 +3130,20 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2003,1550,POUDRE R-1,Larimer,069,district,1417.9694,school_sum,,1417.9694,55.0,school_panel,,55.0,24891.0,24891.0,24891.0,45533.0,16264.0,Estimate
 2004,1550,POUDRE R-1,Larimer,069,district,1476.2949,school_sum,,1476.2949,52.0,school_panel,,52.0,25000.0,25000.0,25000.0,45638.0,16591.0,Estimate
 2005,1550,POUDRE R-1,Larimer,069,district,1484.2766,school_sum,,1484.2766,52.0,school_panel,,52.0,25215.0,25215.0,25215.0,45242.0,16764.0,Estimate
-2006,1550,POUDRE R-1,Larimer,069,district,1447.2123,school_sum,,1447.2123,52.0,school_panel,,52.0,25430.0,25430.0,25430.0,45426.0,16997.0,Estimate
-2007,1550,POUDRE R-1,Larimer,069,district,1474.0508,school_sum,,1474.0508,52.0,school_panel,,52.0,25599.0,25599.0,25599.0,45801.0,17281.0,Estimate
-2008,1550,POUDRE R-1,Larimer,069,district,1498.7251,school_sum,,1498.7251,51.0,school_panel,,51.0,25953.0,25953.0,25953.0,46103.0,17542.0,Estimate
+2006,1550,POUDRE R-1,Larimer,069,district,1447.2123,school_sum,,1447.2123,53.0,school_panel,,53.0,25430.0,25430.0,25430.0,45426.0,16997.0,Estimate
+2007,1550,POUDRE R-1,Larimer,069,district,1474.0508,school_sum,,1474.0508,54.0,school_panel,,54.0,25599.0,25599.0,25599.0,45801.0,17281.0,Estimate
+2008,1550,POUDRE R-1,Larimer,069,district,1498.7251,school_sum,,1498.7251,54.0,school_panel,,54.0,25953.0,25953.0,25953.0,46103.0,17542.0,Estimate
 2009,1550,POUDRE R-1,Larimer,069,district,1541.8918,school_sum,,1541.8918,52.0,school_panel,,52.0,26520.0,26520.0,26520.0,46464.0,17584.0,Estimate
-2010,1550,POUDRE R-1,Larimer,069,district,1495.356,published,1495.356,1485.658,51.0,school_panel,,51.0,26923.0,26923.0,26923.0,46579.0,17493.0,Estimate
-2011,1550,POUDRE R-1,Larimer,069,district,1537.77,school_sum,,1537.77,50.0,school_panel,,50.0,27497.0,27497.0,27497.0,47252.0,17392.0,Estimate
+2010,1550,POUDRE R-1,Larimer,069,district,1495.356,published,1495.356,1485.658,52.0,school_panel,,52.0,26923.0,26923.0,26923.0,46579.0,17493.0,Estimate
+2011,1550,POUDRE R-1,Larimer,069,district,1537.77,school_sum,,1537.77,51.0,school_panel,,51.0,27497.0,27497.0,27497.0,47252.0,17392.0,Estimate
 2012,1550,POUDRE R-1,Larimer,069,district,1606.15,school_sum,,1606.15,51.0,school_panel,,51.0,27903.0,27903.0,27903.0,47959.0,17401.0,Estimate
 2013,1550,POUDRE R-1,Larimer,069,district,1615.85,school_sum,,1615.85,52.0,school_panel,,52.0,28430.0,28430.0,28430.0,48634.0,17480.0,Estimate
 2014,1550,POUDRE R-1,Larimer,069,district,1660.6192,school_sum,,1660.6192,53.0,school_panel,,53.0,29045.0,29045.0,29045.0,49532.0,17745.0,Estimate
-2015,1550,POUDRE R-1,Larimer,069,district,1703.94,school_sum,,1703.94,52.0,school_panel,,52.0,29510.0,29510.0,29510.0,50772.0,18030.0,Estimate
+2015,1550,POUDRE R-1,Larimer,069,district,1703.94,school_sum,,1703.94,53.0,school_panel,,53.0,29510.0,29510.0,29510.0,50772.0,18030.0,Estimate
 2016,1550,POUDRE R-1,Larimer,069,district,1738.43,published,1738.43,1723.22,52.0,school_panel,,52.0,29671.0,29671.0,29671.0,51300.0,18094.0,Estimate
 2017,1550,,Larimer,069,,,,,,52.0,school_panel,,52.0,30004.0,30004.0,30004.0,51885.0,17931.0,Estimate
 2018,1550,POUDRE R-1,Larimer,069,district,1777.9,published,1777.9,1762.22,53.0,school_panel,,53.0,30447.0,30447.0,30447.0,52608.0,17838.0,Estimate
-2019,1550,Poudre R-1,Larimer,069,district,1792.9,school_sum,,1792.9,51.0,school_panel,,51.0,30727.0,30727.0,30727.0,53323.0,17490.0,Estimate
+2019,1550,Poudre R-1,Larimer,069,district,1792.9,school_sum,,1792.9,54.0,school_panel,,54.0,30727.0,30727.0,30727.0,53323.0,17490.0,Estimate
 2020,1550,,Larimer,069,,,,,,51.0,school_panel,,51.0,29417.0,29417.0,29417.0,53235.0,17159.0,Estimate
 2021,1550,,Larimer,069,,,,,,52.0,school_panel,,52.0,29941.0,29941.0,29907.0,53723.0,16818.0,Estimate
 2022,1550,Poudre R-1,Larimer,069,district,1850.1,published,1850.1,1834.5,53.0,school_panel,,53.0,30087.0,30087.0,29977.0,54220.0,16825.0,Estimate
@@ -3147,22 +3167,22 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2005,1560,THOMPSON R-2J,Larimer,069,district,807.6369,school_sum,,807.6369,29.0,school_panel,,29.0,15051.0,15051.0,15051.0,45242.0,16764.0,Estimate
 2006,1560,THOMPSON R-2J,Larimer,069,district,812.3179,school_sum,,812.3179,30.0,school_panel,,30.0,15265.0,15265.0,15265.0,45426.0,16997.0,Estimate
 2007,1560,THOMPSON R-2J,Larimer,069,district,868.7282,school_sum,,868.7282,30.0,school_panel,,30.0,15304.0,15304.0,15304.0,45801.0,17281.0,Estimate
-2008,1560,THOMPSON R-2J,Larimer,069,district,882.4082,school_sum,,882.4082,31.0,school_panel,,31.0,15332.0,15332.0,15332.0,46103.0,17542.0,Estimate
-2009,1560,THOMPSON R-2J,Larimer,069,district,890.8354,school_sum,,890.8354,31.0,school_panel,,31.0,15225.0,15225.0,15225.0,46464.0,17584.0,Estimate
+2008,1560,THOMPSON R-2J,Larimer,069,district,882.4082,school_sum,,882.4082,32.0,school_panel,,32.0,15332.0,15332.0,15332.0,46103.0,17542.0,Estimate
+2009,1560,THOMPSON R-2J,Larimer,069,district,890.8354,school_sum,,890.8354,32.0,school_panel,,32.0,15225.0,15225.0,15225.0,46464.0,17584.0,Estimate
 2010,1560,THOMPSON R-2J,Larimer,069,district,891.218,published,891.218,884.138,33.0,school_panel,,33.0,15310.0,15310.0,15310.0,46579.0,17493.0,Estimate
 2011,1560,THOMPSON R2-J,Larimer,069,district,829.63,school_sum,,829.63,34.0,school_panel,,34.0,15655.0,15655.0,15655.0,47252.0,17392.0,Estimate
 2012,1560,THOMPSON R2-J,Larimer,069,district,847.05,school_sum,,847.05,35.0,school_panel,,35.0,16042.0,16042.0,16042.0,47959.0,17401.0,Estimate
 2013,1560,THOMPSON R2-J,Larimer,069,district,853.27,school_sum,,853.27,35.0,school_panel,,35.0,16210.0,16210.0,16210.0,48634.0,17480.0,Estimate
-2014,1560,THOMPSON R2-J,Larimer,069,district,857.2915,school_sum,,857.2915,34.0,school_panel,,34.0,16133.0,16133.0,16133.0,49532.0,17745.0,Estimate
+2014,1560,THOMPSON R2-J,Larimer,069,district,857.2915,school_sum,,857.2915,35.0,school_panel,,35.0,16133.0,16133.0,16133.0,49532.0,17745.0,Estimate
 2015,1560,THOMPSON R2-J,Larimer,069,district,867.18,school_sum,,867.18,34.0,school_panel,,34.0,16043.0,16043.0,16043.0,50772.0,18030.0,Estimate
 2016,1560,THOMPSON R2-J,Larimer,069,district,901.41,published,901.41,893.77,35.0,school_panel,,35.0,16280.0,16280.0,16280.0,51300.0,18094.0,Estimate
 2017,1560,,Larimer,069,,,,,,35.0,school_panel,,35.0,16278.0,16278.0,16278.0,51885.0,17931.0,Estimate
 2018,1560,THOMPSON R2-J,Larimer,069,district,910.74,published,910.74,896.74,35.0,school_panel,,35.0,16181.0,16181.0,16181.0,52608.0,17838.0,Estimate
-2019,1560,Thompson R2-J,Larimer,069,district,906.4,school_sum,,906.4,33.0,school_panel,,33.0,16163.0,16163.0,16163.0,53323.0,17490.0,Estimate
+2019,1560,Thompson R2-J,Larimer,069,district,906.4,school_sum,,906.4,35.0,school_panel,,35.0,16163.0,16163.0,16163.0,53323.0,17490.0,Estimate
 2020,1560,,Larimer,069,,,,,,33.0,school_panel,,33.0,14965.0,14965.0,14821.0,53235.0,17159.0,Estimate
 2021,1560,,Larimer,069,,,,,,35.0,school_panel,,35.0,15291.0,15291.0,15280.0,53723.0,16818.0,Estimate
-2022,1560,Thompson R2-J,Larimer,069,district,918.5,published,918.5,905.0,34.0,school_panel,,34.0,15212.0,15212.0,15083.0,54220.0,16825.0,Estimate
-2023,1560,Thompson R2-J,Larimer,069,district,897.1999999999999,published,897.1999999999999,897.2,32.0,school_panel,,32.0,15039.0,15039.0,14907.0,54330.0,16481.0,Estimate
+2022,1560,Thompson R2-J,Larimer,069,district,918.5,published,918.5,905.0,35.0,school_panel,,35.0,15212.0,15212.0,15083.0,54220.0,16825.0,Estimate
+2023,1560,Thompson R2-J,Larimer,069,district,897.1999999999999,published,897.1999999999999,897.2,34.0,school_panel,,34.0,15039.0,15039.0,14907.0,54330.0,16481.0,Estimate
 2024,1560,Thompson R2-J,Larimer,069,district,933.5,published,933.5,914.3,32.0,school_panel,,32.0,14751.0,14751.0,14580.0,54087.0,16283.0,Estimate
 1990,1570,PARK (ESTES PARK) R-3,Larimer,069,district,68.1,published,68.1,,3.0,school_panel,3.0,3.0,1149.0,,1149.0,33639.0,13802.0,Estimate
 1991,1570,PARK (ESTES PARK) R-3,Larimer,069,district,69.7,published,69.7,,3.0,school_panel,3.0,3.0,1217.0,,1217.0,34736.0,13964.0,Estimate
@@ -3182,7 +3202,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2005,1570,PARK (ESTES PARK) R-3,Larimer,069,district,83.829,school_sum,,83.829,4.0,school_panel,,4.0,1265.0,1265.0,1265.0,45242.0,16764.0,Estimate
 2006,1570,PARK (ESTES PARK) R-3,Larimer,069,district,81.764,school_sum,,81.764,3.0,school_panel,,3.0,1272.0,1272.0,1272.0,45426.0,16997.0,Estimate
 2007,1570,PARK (ESTES PARK) R-3,Larimer,069,district,84.8165,school_sum,,84.8165,3.0,school_panel,,3.0,1206.0,1206.0,1206.0,45801.0,17281.0,Estimate
-2008,1570,PARK (ESTES PARK) R-3,Larimer,069,district,84.4513,school_sum,,84.4513,3.0,school_panel,,3.0,1186.0,1186.0,1186.0,46103.0,17542.0,Estimate
+2008,1570,PARK (ESTES PARK) R-3,Larimer,069,district,84.4513,school_sum,,84.4513,4.0,school_panel,,4.0,1186.0,1186.0,1186.0,46103.0,17542.0,Estimate
 2009,1570,PARK (ESTES PARK) R-3,Larimer,069,district,87.2095,school_sum,,87.2095,4.0,school_panel,,4.0,1210.0,1210.0,1210.0,46464.0,17584.0,Estimate
 2010,1570,PARK (ESTES PARK) R-3,Larimer,069,district,76.757,published,76.757,76.757,4.0,school_panel,,4.0,1159.0,1159.0,1159.0,46579.0,17493.0,Estimate
 2011,1570,PARK (ESTES PARK) R-3,Larimer,069,district,82.69,school_sum,,82.69,4.0,school_panel,,4.0,1175.0,1175.0,1175.0,47252.0,17392.0,Estimate
@@ -3196,7 +3216,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2019,1570,Estes Park R-3,Larimer,069,district,76.8,school_sum,,76.8,4.0,school_panel,,4.0,1151.0,1151.0,1151.0,53323.0,17490.0,Estimate
 2020,1570,,Larimer,069,,,,,,4.0,school_panel,,4.0,1021.0,1021.0,1021.0,53235.0,17159.0,Estimate
 2021,1570,,Larimer,069,,,,,,4.0,school_panel,,4.0,1058.0,1058.0,1058.0,53723.0,16818.0,Estimate
-2022,1570,Estes Park R-3,Larimer,069,district,75.9,published,75.9,76.0,3.0,school_panel,,3.0,1061.0,1061.0,1014.0,54220.0,16825.0,Estimate
+2022,1570,Estes Park R-3,Larimer,069,district,75.9,published,75.9,76.0,4.0,school_panel,,4.0,1061.0,1061.0,1014.0,54220.0,16825.0,Estimate
 2023,1570,Estes Park R-3,Larimer,069,district,73.6,published,73.6,73.6,3.0,school_panel,,3.0,1015.0,1015.0,971.0,54330.0,16481.0,Estimate
 2024,1570,Estes Park R-3,Larimer,069,district,69.3,published,69.3,69.2,3.0,school_panel,,3.0,956.0,956.0,882.0,54087.0,16283.0,Estimate
 1990,1580,TRINIDAD 1,Las Animas,071,district,97.0,published,97.0,,5.0,school_panel,5.0,5.0,1599.0,,1599.0,2628.0,894.0,Estimate
@@ -3293,7 +3313,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2011,1600,HOEHNE REORGANIZED 3,Las Animas,071,district,20.9,school_sum,,20.9,3.0,school_panel,,3.0,351.0,351.0,351.0,2288.0,815.0,Estimate
 2012,1600,HOEHNE REORGANIZED 3,Las Animas,071,district,19.82,school_sum,,19.82,3.0,school_panel,,3.0,385.0,385.0,385.0,2221.0,796.0,Estimate
 2013,1600,HOEHNE REORGANIZED 3,Las Animas,071,district,23.83,school_sum,,23.83,3.0,school_panel,,3.0,359.0,359.0,359.0,2181.0,761.0,Estimate
-2014,1600,HOEHNE REORGANIZED 3,Las Animas,071,district,22.6037,school_sum,,22.6037,1.0,school_panel,,1.0,363.0,363.0,363.0,2142.0,715.0,Estimate
+2014,1600,HOEHNE REORGANIZED 3,Las Animas,071,district,22.6037,school_sum,,22.6037,3.0,school_panel,,3.0,363.0,363.0,363.0,2142.0,715.0,Estimate
 2015,1600,HOEHNE REORGANIZED 3,Las Animas,071,district,21.33,school_sum,,21.33,1.0,school_panel,,1.0,359.0,359.0,359.0,2124.0,696.0,Estimate
 2016,1600,HOEHNE REORGANIZED 3,Las Animas,071,district,16.25,published,16.25,16.25,1.0,school_panel,,1.0,354.0,354.0,354.0,2105.0,682.0,Estimate
 2017,1600,,Las Animas,071,,,,,,1.0,school_panel,,1.0,359.0,359.0,359.0,2069.0,678.0,Estimate
@@ -3360,10 +3380,10 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2008,1750,BRANSON REORGANIZED 82,Las Animas,071,district,30.2159,school_sum,,30.2159,4.0,school_panel,,4.0,513.0,513.0,513.0,2462.0,826.0,Estimate
 2009,1750,BRANSON REORGANIZED 82,Las Animas,071,district,28.5536,school_sum,,28.5536,4.0,school_panel,,4.0,493.0,493.0,493.0,2403.0,844.0,Estimate
 2010,1750,BRANSON REORGANIZED 82,Las Animas,071,district,28.551,published,28.551,28.551,4.0,school_panel,,4.0,470.0,470.0,470.0,2349.0,849.0,Estimate
-2011,1750,BRANSON REORGANIZED 82,Las Animas,071,district,27.49,school_sum,,27.49,3.0,school_panel,,3.0,438.0,438.0,438.0,2288.0,815.0,Estimate
+2011,1750,BRANSON REORGANIZED 82,Las Animas,071,district,27.49,school_sum,,27.49,4.0,school_panel,,4.0,438.0,438.0,438.0,2288.0,815.0,Estimate
 2012,1750,BRANSON REORGANIZED 82,Las Animas,071,district,26.89,school_sum,,26.89,3.0,school_panel,,3.0,452.0,452.0,452.0,2221.0,796.0,Estimate
 2013,1750,BRANSON REORGANIZED 82,Las Animas,071,district,29.32,school_sum,,29.32,3.0,school_panel,,3.0,480.0,480.0,480.0,2181.0,761.0,Estimate
-2014,1750,BRANSON REORGANIZED 82,Las Animas,071,district,25.236,school_sum,,25.236,2.0,school_panel,,2.0,450.0,450.0,450.0,2142.0,715.0,Estimate
+2014,1750,BRANSON REORGANIZED 82,Las Animas,071,district,25.236,school_sum,,25.236,3.0,school_panel,,3.0,450.0,450.0,450.0,2142.0,715.0,Estimate
 2015,1750,BRANSON REORGANIZED 82,Las Animas,071,district,29.89,school_sum,,29.89,2.0,school_panel,,2.0,464.0,464.0,464.0,2124.0,696.0,Estimate
 2016,1750,BRANSON REORGANIZED 82,Las Animas,071,district,28.2,published,28.2,28.2,2.0,school_panel,,2.0,471.0,471.0,471.0,2105.0,682.0,Estimate
 2017,1750,,Las Animas,071,,,,,,2.0,school_panel,,2.0,462.0,462.0,462.0,2069.0,678.0,Estimate
@@ -3584,18 +3604,18 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2022,1850,Frenchman RE-3,Logan,075,district,21.8,published,21.8,21.7,2.0,school_panel,,2.0,221.0,221.0,221.0,3101.0,1065.0,Estimate
 2023,1850,Frenchman RE-3,Logan,075,district,21.700000000000003,published,21.700000000000003,21.7,2.0,school_panel,,2.0,221.0,221.0,221.0,3083.0,1002.0,Estimate
 2024,1850,Frenchman RE-3,Logan,075,district,18.4,published,18.4,18.4,2.0,school_panel,,2.0,222.0,222.0,221.0,3088.0,989.0,Estimate
-1990,1860,BUFFALO RE-4,Logan,075,district,18.0,published,18.0,,2.0,published,2.0,,213.0,,,3441.0,1223.0,Estimate
-1991,1860,BUFFALO RE-4,Logan,075,district,18.0,published,18.0,,2.0,published,2.0,,239.0,,,3423.0,1211.0,Estimate
-1992,1860,BUFFALO RE-4,Logan,075,district,15.5,published,15.5,,2.0,published,2.0,,256.0,,,3413.0,1204.0,Estimate
-1993,1860,BUFFALO RE-4,Logan,075,district,17.0,published,17.0,,2.0,published,2.0,,273.0,,,3464.0,1217.0,Estimate
-1994,1860,BUFFALO RE-4,Logan,075,district,19.0,published,19.0,,2.0,published,2.0,,278.0,,,3606.0,1262.0,Estimate
-1995,1860,BUFFALO RE-4,Logan,075,district,18.0,published,18.0,,2.0,published,2.0,,274.0,,,3682.0,1285.0,Estimate
-1996,1860,BUFFALO RE-4,Logan,075,district,17.2,published,17.2,,2.0,published,2.0,,277.0,,,3712.0,1291.0,Estimate
-1997,1860,BUFFALO RE-4,Logan,075,district,20.2,published,20.2,,2.0,published,2.0,,277.0,,,3751.0,1298.0,Estimate
-1998,1860,BUFFALO RE-4,Logan,075,district,23.0,published,23.0,,2.0,published,2.0,,266.0,,,3724.0,1285.0,Estimate
-1999,1860,BUFFALO RE-4,Logan,075,district,,,,,2.0,published,2.0,,284.0,,,3748.0,1290.0,Estimate
-2000,1860,BUFFALO RE-4,Logan,075,district,20.0,school_sum,,20.0,2.0,fte_file,,,,,,3786.0,1298.0,Estimate
-2001,1860,BUFFALO RE-4,Logan,075,district,19.0,school_sum,,19.0,1.0,school_panel,,1.0,152.0,152.0,152.0,3957.0,1415.0,Estimate
+1990,1860,BUFFALO RE-4,Logan,075,district,18.0,published,18.0,,2.0,school_panel,2.0,2.0,213.0,,213.0,3441.0,1223.0,Estimate
+1991,1860,BUFFALO RE-4,Logan,075,district,18.0,published,18.0,,2.0,school_panel,2.0,2.0,239.0,,239.0,3423.0,1211.0,Estimate
+1992,1860,BUFFALO RE-4,Logan,075,district,15.5,published,15.5,,2.0,school_panel,2.0,2.0,256.0,,256.0,3413.0,1204.0,Estimate
+1993,1860,BUFFALO RE-4,Logan,075,district,17.0,published,17.0,,2.0,school_panel,2.0,2.0,273.0,,273.0,3464.0,1217.0,Estimate
+1994,1860,BUFFALO RE-4,Logan,075,district,19.0,published,19.0,,2.0,school_panel,2.0,2.0,278.0,,278.0,3606.0,1262.0,Estimate
+1995,1860,BUFFALO RE-4,Logan,075,district,18.0,published,18.0,,2.0,school_panel,2.0,2.0,274.0,,274.0,3682.0,1285.0,Estimate
+1996,1860,BUFFALO RE-4,Logan,075,district,17.2,published,17.2,,2.0,school_panel,2.0,2.0,277.0,,277.0,3712.0,1291.0,Estimate
+1997,1860,BUFFALO RE-4,Logan,075,district,20.2,published,20.2,,2.0,school_panel,2.0,2.0,277.0,,277.0,3751.0,1298.0,Estimate
+1998,1860,BUFFALO RE-4,Logan,075,district,23.0,published,23.0,,2.0,school_panel,2.0,2.0,266.0,,266.0,3724.0,1285.0,Estimate
+1999,1860,BUFFALO RE-4,Logan,075,district,,,,,2.0,school_panel,2.0,2.0,284.0,,284.0,3748.0,1290.0,Estimate
+2000,1860,BUFFALO RE-4,Logan,075,district,20.0,school_sum,,20.0,2.0,school_panel,,2.0,,,300.0,3786.0,1298.0,Estimate
+2001,1860,BUFFALO RE-4,Logan,075,district,19.0,school_sum,,19.0,2.0,school_panel,,2.0,152.0,152.0,302.0,3957.0,1415.0,Estimate
 2002,1860,BUFFALO RE-4,Logan,075,district,22.5,school_sum,,22.5,2.0,school_panel,,2.0,301.0,301.0,301.0,3785.0,1378.0,Estimate
 2003,1860,BUFFALO RE-4,Logan,075,district,23.0,school_sum,,23.0,2.0,school_panel,,2.0,309.0,309.0,309.0,3763.0,1379.0,Estimate
 2004,1860,BUFFALO RE-4,Logan,075,district,23.25,school_sum,,23.25,2.0,school_panel,,2.0,306.0,306.0,306.0,3666.0,1336.0,Estimate
@@ -3741,24 +3761,24 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2004,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1122.9562,school_sum,,1122.9562,39.0,school_panel,,39.0,20120.0,20120.0,20120.0,22280.0,7817.0,Estimate
 2005,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1125.4071,school_sum,,1125.4071,39.0,school_panel,,39.0,20571.0,20571.0,20571.0,22361.0,8050.0,Estimate
 2006,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1170.518,school_sum,,1170.518,42.0,school_panel,,42.0,21166.0,21166.0,21166.0,22838.0,8466.0,Estimate
-2007,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1198.5485,school_sum,,1198.5485,42.0,school_panel,,42.0,21281.0,21281.0,21281.0,23427.0,8915.0,Estimate
-2008,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1147.773,school_sum,,1147.773,42.0,school_panel,,42.0,22114.0,22114.0,22114.0,23749.0,9308.0,Estimate
-2009,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1241.0867,school_sum,,1241.0867,43.0,school_panel,,43.0,22008.0,22008.0,22008.0,24238.0,9730.0,Estimate
-2010,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1305.894,published,1305.894,1259.817,44.0,school_panel,,44.0,22091.0,22081.0,22081.0,24600.0,9951.0,Estimate
-2011,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1210.72,school_sum,,1210.72,45.0,school_panel,,45.0,21914.0,21914.0,21914.0,24544.0,9895.0,Estimate
-2012,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1189.87,school_sum,,1189.87,45.0,school_panel,,45.0,21714.0,21714.0,21714.0,24484.0,9613.0,Estimate
-2013,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1227.77,school_sum,,1227.77,45.0,school_panel,,45.0,21894.0,21894.0,21894.0,24486.0,9392.0,Estimate
-2014,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1245.5007,school_sum,,1245.5007,46.0,school_panel,,46.0,21742.0,21742.0,21742.0,24358.0,9162.0,Estimate
-2015,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1231.94,school_sum,,1231.94,45.0,school_panel,,45.0,21904.0,21904.0,21904.0,24514.0,9074.0,Estimate
-2016,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1284.54,published,1284.54,1241.61,45.0,school_panel,,45.0,22105.0,22105.0,22105.0,24730.0,8918.0,Estimate
-2017,2000,,Mesa,077,,,,,,45.0,school_panel,,45.0,22084.0,22084.0,22084.0,24823.0,8791.0,Estimate
-2018,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1297.49,published,1297.49,1265.5,45.0,school_panel,,45.0,22082.0,22082.0,22082.0,24929.0,8611.0,Estimate
-2019,2000,Mesa County Valley 51,Mesa,077,district,1264.8,school_sum,,1264.8,48.0,school_panel,,48.0,22046.0,22046.0,21994.0,24831.0,8427.0,Estimate
-2020,2000,,Mesa,077,,,,,,46.0,school_panel,,46.0,21081.0,21081.0,21081.0,24804.0,8208.0,Estimate
-2021,2000,,Mesa,077,,,,,,46.0,school_panel,,46.0,21315.0,21315.0,21314.0,24824.0,8064.0,Estimate
-2022,2000,Mesa County Valley 51,Mesa,077,district,1253.6,school_sum,,1253.6,45.0,school_panel,,45.0,20851.0,20851.0,20744.0,24738.0,7868.0,Estimate
-2023,2000,Mesa County Valley 51,Mesa,077,district,1224.2,published,1224.2,1224.2,45.0,school_panel,,45.0,20208.0,20208.0,20068.0,24629.0,7641.0,Estimate
-2024,2000,Mesa County Valley 51,Mesa,077,district,1260.9,published,1260.9,1199.8,44.0,school_panel,,44.0,19900.0,19900.0,19735.0,24488.0,7524.0,Estimate
+2007,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1198.5485,school_sum,,1198.5485,43.0,school_panel,,43.0,21281.0,21281.0,21281.0,23427.0,8915.0,Estimate
+2008,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1147.773,school_sum,,1147.773,46.0,school_panel,,46.0,22114.0,22114.0,22114.0,23749.0,9308.0,Estimate
+2009,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1241.0867,school_sum,,1241.0867,44.0,school_panel,,44.0,22008.0,22008.0,22028.0,24238.0,9730.0,Estimate
+2010,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1305.894,published,1305.894,1259.817,46.0,school_panel,,46.0,22091.0,22081.0,22099.0,24600.0,9951.0,Estimate
+2011,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1210.72,school_sum,,1210.72,46.0,school_panel,,46.0,21914.0,21914.0,21922.0,24544.0,9895.0,Estimate
+2012,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1189.87,school_sum,,1189.87,46.0,school_panel,,46.0,21714.0,21714.0,21730.0,24484.0,9613.0,Estimate
+2013,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1227.77,school_sum,,1227.77,47.0,school_panel,,47.0,21894.0,21894.0,21906.0,24486.0,9392.0,Estimate
+2014,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1245.5007,school_sum,,1245.5007,47.0,school_panel,,47.0,21742.0,21742.0,21746.0,24358.0,9162.0,Estimate
+2015,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1231.94,school_sum,,1231.94,47.0,school_panel,,47.0,21904.0,21904.0,21904.0,24514.0,9074.0,Estimate
+2016,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1284.54,published,1284.54,1241.61,46.0,school_panel,,46.0,22105.0,22105.0,22105.0,24730.0,8918.0,Estimate
+2017,2000,,Mesa,077,,,,,,46.0,school_panel,,46.0,22084.0,22084.0,22084.0,24823.0,8791.0,Estimate
+2018,2000,MESA COUNTY VALLEY 51,Mesa,077,district,1297.49,published,1297.49,1265.5,46.0,school_panel,,46.0,22082.0,22082.0,22082.0,24929.0,8611.0,Estimate
+2019,2000,Mesa County Valley 51,Mesa,077,district,1264.8,school_sum,,1264.8,49.0,school_panel,,49.0,22046.0,22046.0,21994.0,24831.0,8427.0,Estimate
+2020,2000,,Mesa,077,,,,,,47.0,school_panel,,47.0,21081.0,21081.0,21084.0,24804.0,8208.0,Estimate
+2021,2000,,Mesa,077,,,,,,47.0,school_panel,,47.0,21315.0,21315.0,21327.0,24824.0,8064.0,Estimate
+2022,2000,Mesa County Valley 51,Mesa,077,district,1253.6,school_sum,,1253.6,47.0,school_panel,,47.0,20851.0,20851.0,20762.0,24738.0,7868.0,Estimate
+2023,2000,Mesa County Valley 51,Mesa,077,district,1224.2,published,1224.2,1224.2,48.0,school_panel,,48.0,20208.0,20208.0,20078.0,24629.0,7641.0,Estimate
+2024,2000,Mesa County Valley 51,Mesa,077,district,1260.9,published,1260.9,1199.8,46.0,school_panel,,46.0,19900.0,19900.0,19753.0,24488.0,7524.0,Estimate
 1990,2010,CREEDE CONSOLIDATED 1,Mineral,079,district,10.0,published,10.0,,2.0,school_panel,2.0,2.0,88.0,,88.0,74.0,49.0,Estimate
 1991,2010,CREEDE CONSOLIDATED 1,Mineral,079,district,11.0,published,11.0,,2.0,school_panel,2.0,2.0,92.0,,92.0,77.0,49.0,Estimate
 1992,2010,CREEDE CONSOLIDATED 1,Mineral,079,district,11.0,published,11.0,,2.0,school_panel,2.0,2.0,94.0,,94.0,82.0,47.0,Estimate
@@ -3810,7 +3830,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2003,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,146.8077,school_sum,,146.8077,9.0,school_panel,,9.0,2507.0,2507.0,2507.0,2687.0,922.0,Estimate
 2004,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,145.9655,school_sum,,145.9655,9.0,school_panel,,9.0,2402.0,2402.0,2402.0,2618.0,933.0,Estimate
 2005,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,148.2921,school_sum,,148.2921,9.0,school_panel,,9.0,2400.0,2400.0,2400.0,2548.0,932.0,Estimate
-2006,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,141.2391,school_sum,,141.2391,8.0,school_panel,,8.0,2395.0,2395.0,2395.0,2554.0,959.0,Estimate
+2006,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,141.2391,school_sum,,141.2391,9.0,school_panel,,9.0,2395.0,2395.0,2395.0,2554.0,959.0,Estimate
 2007,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,142.2099,school_sum,,142.2099,8.0,school_panel,,8.0,2414.0,2414.0,2414.0,2579.0,974.0,Estimate
 2008,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,140.2254,school_sum,,140.2254,8.0,school_panel,,8.0,2386.0,2386.0,2386.0,2581.0,996.0,Estimate
 2009,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,144.7793,school_sum,,144.7793,8.0,school_panel,,8.0,2536.0,2536.0,2536.0,2596.0,1020.0,Estimate
@@ -3818,11 +3838,11 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2011,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,131.32,school_sum,,131.32,8.0,school_panel,,8.0,2299.0,2299.0,2299.0,2602.0,1002.0,Estimate
 2012,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,133.82,school_sum,,133.82,8.0,school_panel,,8.0,2280.0,2280.0,2280.0,2579.0,925.0,Estimate
 2013,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,137.08,school_sum,,137.08,8.0,school_panel,,8.0,2241.0,2241.0,2241.0,2599.0,906.0,Estimate
-2014,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,133.7465,school_sum,,133.7465,7.0,school_panel,,7.0,2175.0,2175.0,2175.0,2573.0,876.0,Estimate
+2014,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,133.7465,school_sum,,133.7465,8.0,school_panel,,8.0,2175.0,2175.0,2175.0,2573.0,876.0,Estimate
 2015,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,129.53,school_sum,,129.53,8.0,school_panel,,8.0,2200.0,2200.0,2192.0,2572.0,882.0,Estimate
 2016,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,130.03,published,130.03,129.61,8.0,school_panel,,8.0,2219.0,2219.0,2219.0,2597.0,904.0,Estimate
 2017,2020,,Moffat,081,,,,,,8.0,school_panel,,8.0,2248.0,2248.0,2248.0,2563.0,917.0,Estimate
-2018,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,126.56,published,126.56,126.57,7.0,school_panel,,7.0,2307.0,2307.0,2307.0,2557.0,892.0,Estimate
+2018,2020,MOFFAT COUNTY RE:NO 1,Moffat,081,district,126.56,published,126.56,126.57,8.0,school_panel,,8.0,2307.0,2307.0,2307.0,2557.0,892.0,Estimate
 2019,2020,Moffat County RE: No 1,Moffat,081,district,126.2,school_sum,,126.2,7.0,school_panel,,7.0,2202.0,2202.0,2202.0,2515.0,883.0,Estimate
 2020,2020,,Moffat,081,,,,,,7.0,school_panel,,7.0,2068.0,2068.0,2068.0,2514.0,825.0,Estimate
 2021,2020,,Moffat,081,,,,,,7.0,school_panel,,7.0,2118.0,2118.0,2090.0,2525.0,788.0,Estimate
@@ -3921,7 +3941,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2009,2070,MANCOS RE-6,Montezuma,083,district,30.483,school_sum,,30.483,3.0,school_panel,,3.0,373.0,373.0,373.0,4377.0,1601.0,Estimate
 2010,2070,MANCOS RE-6,Montezuma,083,district,31.278,published,31.278,31.278,3.0,school_panel,,3.0,369.0,369.0,369.0,4349.0,1614.0,Estimate
 2011,2070,MANCOS RE-6,Montezuma,083,district,29.79,school_sum,,29.79,3.0,school_panel,,3.0,374.0,374.0,374.0,4275.0,1613.0,Estimate
-2012,2070,MANCOS RE-6,Montezuma,083,district,27.53,school_sum,,27.53,3.0,school_panel,,3.0,396.0,396.0,396.0,4286.0,1549.0,Estimate
+2012,2070,MANCOS RE-6,Montezuma,083,district,27.53,school_sum,,27.53,4.0,school_panel,,4.0,396.0,396.0,396.0,4286.0,1549.0,Estimate
 2013,2070,MANCOS RE-6,Montezuma,083,district,30.45,school_sum,,30.45,4.0,school_panel,,4.0,416.0,416.0,416.0,4279.0,1527.0,Estimate
 2014,2070,MANCOS RE-6,Montezuma,083,district,35.0227,school_sum,,35.0227,4.0,school_panel,,4.0,455.0,455.0,455.0,4266.0,1531.0,Estimate
 2015,2070,MANCOS RE-6,Montezuma,083,district,36.44,school_sum,,36.44,4.0,school_panel,,4.0,496.0,496.0,496.0,4247.0,1543.0,Estimate
@@ -3961,12 +3981,12 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2014,2180,MONTROSE COUNTY RE-1J,Montrose,085,district,367.7737,school_sum,,367.7737,15.0,school_panel,,15.0,6087.0,6087.0,6087.0,7319.0,2346.0,Estimate
 2015,2180,MONTROSE COUNTY RE-1J,Montrose,085,district,354.14,school_sum,,354.14,15.0,school_panel,,15.0,6162.0,6162.0,6162.0,7233.0,2333.0,Estimate
 2016,2180,MONTROSE COUNTY RE-1J,Montrose,085,district,344.5,published,344.5,341.46,15.0,school_panel,,15.0,6252.0,6252.0,6252.0,7181.0,2237.0,Estimate
-2017,2180,,Montrose,085,,,,,,14.0,school_panel,,14.0,6260.0,6260.0,6260.0,7065.0,2289.0,Estimate
+2017,2180,,Montrose,085,,,,,,15.0,school_panel,,15.0,6260.0,6260.0,6260.0,7065.0,2289.0,Estimate
 2018,2180,MONTROSE COUNTY RE-1J,Montrose,085,district,346.87,published,346.87,343.18,14.0,school_panel,,14.0,6154.0,6154.0,6154.0,7006.0,2287.0,Estimate
 2019,2180,Montrose County RE-1J,Montrose,085,district,344.2,school_sum,,344.2,14.0,school_panel,,14.0,6215.0,6215.0,6215.0,6984.0,2178.0,Estimate
 2020,2180,,Montrose,085,,,,,,14.0,school_panel,,14.0,5836.0,5836.0,5836.0,6989.0,2092.0,Estimate
 2021,2180,,Montrose,085,,,,,,14.0,school_panel,,14.0,6061.0,6061.0,6055.0,6945.0,2081.0,Estimate
-2022,2180,Montrose County RE-1J,Montrose,085,district,339.9,published,339.9,337.9,15.0,school_panel,,15.0,6035.0,6035.0,6029.0,6950.0,2046.0,Estimate
+2022,2180,Montrose County RE-1J,Montrose,085,district,339.9,published,339.9,337.9,16.0,school_panel,,16.0,6035.0,6035.0,6029.0,6950.0,2046.0,Estimate
 2023,2180,Montrose County RE-1J,Montrose,085,district,330.70000000000005,published,330.70000000000005,330.7,15.0,school_panel,,15.0,6038.0,6038.0,6029.0,6956.0,2002.0,Estimate
 2024,2180,Montrose County RE-1J,Montrose,085,district,352.5,published,352.5,350.3,15.0,school_panel,,15.0,5991.0,5991.0,5977.0,6874.0,2053.0,Estimate
 1990,2190,WEST END RE-2,Montrose,085,district,26.0,published,26.0,,3.0,school_panel,3.0,3.0,411.0,,411.0,5123.0,1640.0,Estimate
@@ -4794,9 +4814,9 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2007,2700,PUEBLO COUNTY RURAL 70,Pueblo,101,district,464.1027,school_sum,,464.1027,24.0,school_panel,,24.0,8798.0,8798.0,8798.0,28135.0,10292.0,Estimate
 2008,2700,PUEBLO COUNTY 70,Pueblo,101,district,477.6805,school_sum,,477.6805,25.0,school_panel,,25.0,8901.0,8901.0,8901.0,28241.0,10369.0,Estimate
 2009,2700,PUEBLO COUNTY 70,Pueblo,101,district,485.9187,school_sum,,485.9187,25.0,school_panel,,25.0,8929.0,8929.0,8929.0,28219.0,10425.0,Estimate
-2010,2700,PUEBLO COUNTY RURAL 70,Pueblo,101,district,469.634,published,469.634,469.633,24.0,school_panel,,24.0,8836.0,8836.0,8836.0,28361.0,10539.0,Estimate
+2010,2700,PUEBLO COUNTY RURAL 70,Pueblo,101,district,469.634,published,469.634,469.633,25.0,school_panel,,25.0,8836.0,8836.0,8836.0,28361.0,10539.0,Estimate
 2011,2700,PUEBLO COUNTY 70,Pueblo,101,district,462.17,school_sum,,462.17,25.0,school_panel,,25.0,8971.0,8971.0,8971.0,28419.0,10255.0,Estimate
-2012,2700,PUEBLO COUNTY 70,Pueblo,101,district,475.81,school_sum,,475.81,24.0,school_panel,,24.0,9107.0,9107.0,9107.0,28545.0,9913.0,Estimate
+2012,2700,PUEBLO COUNTY 70,Pueblo,101,district,475.81,school_sum,,475.81,25.0,school_panel,,25.0,9107.0,9107.0,9107.0,28545.0,9913.0,Estimate
 2013,2700,PUEBLO COUNTY 70,Pueblo,101,district,503.32,school_sum,,503.32,24.0,school_panel,,24.0,9257.0,9257.0,9257.0,28615.0,9587.0,Estimate
 2014,2700,PUEBLO COUNTY 70,Pueblo,101,district,498.1863,school_sum,,498.1863,24.0,school_panel,,24.0,9310.0,9310.0,9310.0,28597.0,9397.0,Estimate
 2015,2700,PUEBLO COUNTY 70,Pueblo,101,district,485.78,school_sum,,485.78,24.0,school_panel,,24.0,9582.0,9582.0,9582.0,28876.0,9328.0,Estimate
@@ -4805,7 +4825,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2018,2700,PUEBLO COUNTY 70,Pueblo,101,district,514.47,published,514.47,513.58,25.0,school_panel,,25.0,10033.0,10033.0,10033.0,28657.0,9338.0,Estimate
 2019,2700,Pueblo County 70,Pueblo,101,district,542.8,school_sum,,542.8,26.0,school_panel,,26.0,10555.0,10555.0,10555.0,28454.0,9229.0,Estimate
 2020,2700,,Pueblo,101,,,,,,26.0,school_panel,,26.0,10320.0,10320.0,10320.0,28014.0,9022.0,Estimate
-2021,2700,,Pueblo,101,,,,,,25.0,school_panel,,25.0,10247.0,10247.0,10232.0,27704.0,8862.0,Estimate
+2021,2700,,Pueblo,101,,,,,,26.0,school_panel,,26.0,10247.0,10247.0,10232.0,27704.0,8862.0,Estimate
 2022,2700,Pueblo County 70,Pueblo,101,district,565.6,school_sum,,565.6,27.0,school_panel,,27.0,10629.0,10629.0,10501.0,27362.0,8769.0,Estimate
 2023,2700,Pueblo County 70,Pueblo,101,district,582.2999999999998,published,582.2999999999998,582.3,27.0,school_panel,,27.0,10655.0,10655.0,10644.0,27094.0,8633.0,Estimate
 2024,2700,Pueblo County 70,Pueblo,101,district,563.4,published,563.4,563.7,26.0,school_panel,,26.0,10392.0,10392.0,10386.0,26836.0,8498.0,Estimate
@@ -4864,7 +4884,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2007,2720,RANGELY RE-4,Rio Blanco,103,district,31.1111,school_sum,,31.1111,3.0,school_panel,,3.0,495.0,495.0,495.0,1007.0,379.0,Estimate
 2008,2720,RANGELY RE-4,Rio Blanco,103,district,35.3324,school_sum,,35.3324,3.0,school_panel,,3.0,517.0,517.0,517.0,989.0,405.0,Estimate
 2009,2720,RANGELY RE-4,Rio Blanco,103,district,31.0,school_sum,,31.0,3.0,school_panel,,3.0,505.0,505.0,505.0,1040.0,443.0,Estimate
-2010,2720,RANGELY RE-4,Rio Blanco,103,district,30.5,published,30.5,30.5,2.0,school_panel,,2.0,480.0,480.0,480.0,1127.0,484.0,Estimate
+2010,2720,RANGELY RE-4,Rio Blanco,103,district,30.5,published,30.5,30.5,3.0,school_panel,,3.0,480.0,480.0,480.0,1127.0,484.0,Estimate
 2011,2720,RANGELY RE-4,Rio Blanco,103,district,16.98,school_sum,,16.98,2.0,school_panel,,2.0,525.0,525.0,525.0,1188.0,506.0,Estimate
 2012,2720,RANGELY RE-4,Rio Blanco,103,district,30.87,school_sum,,30.87,2.0,school_panel,,2.0,561.0,561.0,561.0,1247.0,482.0,Estimate
 2013,2720,RANGELY RE-4,Rio Blanco,103,district,31.59,school_sum,,31.59,2.0,school_panel,,2.0,555.0,555.0,555.0,1261.0,468.0,Estimate
@@ -5167,8 +5187,8 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 1995,2810,CENTER 26 JT,Saguache,109,district,53.0,published,53.0,,3.0,school_panel,3.0,3.0,743.0,,743.0,1183.0,396.0,Estimate
 1996,2810,CENTER 26 JT,Saguache,109,district,54.0,published,54.0,,3.0,school_panel,3.0,3.0,766.0,,766.0,1210.0,399.0,Estimate
 1997,2810,CENTER 26 JT,Saguache,109,district,54.5,published,54.5,,3.0,school_panel,3.0,3.0,742.0,,742.0,1213.0,395.0,Estimate
-1998,2810,,Saguache,109,,,,,,3.0,school_panel,,3.0,,,729.0,1221.0,392.0,Estimate
-1999,2810,,Saguache,109,,,,,,3.0,school_panel,,3.0,,,682.0,1254.0,398.0,Estimate
+1998,2810,CENTER 26JT,Saguache,109,district,55.0,published,55.0,,3.0,school_panel,3.0,3.0,729.0,,729.0,1221.0,392.0,Estimate
+1999,2810,CENTER 26JT,Saguache,109,district,,,,,3.0,school_panel,3.0,3.0,682.0,,682.0,1254.0,398.0,Estimate
 2000,2810,CENTER 26 JT,Saguache,109,district,49.4113,school_sum,,49.4113,3.0,school_panel,,3.0,,,690.0,1289.0,403.0,Estimate
 2001,2810,CENTER 26 JT,Saguache,109,district,52.302,school_sum,,52.302,3.0,school_panel,,3.0,650.0,650.0,650.0,1238.0,433.0,Estimate
 2002,2810,CENTER 26 JT,Saguache,109,district,54.2638,school_sum,,54.2638,4.0,school_panel,,4.0,651.0,651.0,666.0,1216.0,449.0,Estimate
@@ -5344,9 +5364,9 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 1997,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,18.0,published,18.0,,2.0,published,2.0,,148.0,,,481.0,150.0,Estimate
 1998,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,19.7,published,19.7,,2.0,published,2.0,,139.0,,,468.0,149.0,Estimate
 1999,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,,,,,2.0,published,2.0,,156.0,,,469.0,153.0,Estimate
-2000,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,18.8398,school_sum,,18.8398,2.0,fte_file,,,,,,470.0,155.0,Estimate
-2001,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,18.2343,school_sum,,18.2343,2.0,fte_file,,,,,,445.0,162.0,Estimate
-2002,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,15.5335,school_sum,,15.5335,2.0,fte_file,,,,,,432.0,159.0,Estimate
+2000,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,18.8398,school_sum,,18.8398,,,,,,,,470.0,155.0,Estimate
+2001,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,18.2343,school_sum,,18.2343,,,,,,,,445.0,162.0,Estimate
+2002,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,15.5335,school_sum,,15.5335,,,,,,,,432.0,159.0,Estimate
 2003,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,15.0452,school_sum,,15.0452,2.0,school_panel,,2.0,110.0,110.0,110.0,429.0,159.0,Estimate
 2004,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,14.0391,school_sum,,14.0391,2.0,school_panel,,2.0,116.0,116.0,116.0,399.0,146.0,Estimate
 2005,2865,PLATTE VALLEY RE-3,Sedgwick,115,district,15.8937,school_sum,,15.8937,2.0,school_panel,,2.0,114.0,114.0,114.0,398.0,146.0,Estimate
@@ -5649,12 +5669,18 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2022,3070,Woodlin R-104,Washington,121,district,9.5,published,9.5,9.5,2.0,school_panel,,2.0,82.0,82.0,82.0,843.0,266.0,Estimate
 2023,3070,Woodlin R-104,Washington,121,district,9.6,published,9.6,9.6,2.0,school_panel,,2.0,76.0,76.0,76.0,868.0,252.0,Estimate
 2024,3070,Woodlin R-104,Washington,121,district,8.5,published,8.5,8.5,2.0,school_panel,,2.0,74.0,74.0,74.0,849.0,256.0,Estimate
-1996,3080,WELD COUNTY RE-8,Weld,123,district,155.7,published,155.7,,5.0,school_panel,5.0,5.0,2655.0,,2655.0,32923.0,12718.0,Estimate
-1997,3080,WELD COUNTY RE-8,Weld,123,district,151.3,published,151.3,,5.0,school_panel,5.0,5.0,2662.0,,2662.0,33992.0,13071.0,Estimate
-1998,3080,,Weld,123,,,,,,4.0,school_panel,,4.0,,,2635.0,35165.0,13460.0,Estimate
-1999,3080,,Weld,123,,,,,,4.0,school_panel,,4.0,,,2642.0,36202.0,13797.0,Estimate
-2000,3080,GILCREST RE-1,Weld,123,district,131.3631,school_sum,,131.3631,4.0,school_panel,,4.0,,,2684.0,37436.0,14202.0,Estimate
-2001,3080,WELD COUNTY RE-1,Weld,123,district,132.4256,school_sum,,132.4256,7.0,school_panel,,7.0,2018.0,2018.0,2427.0,38815.0,15123.0,Estimate
+1990,3080,WELD RE-1 (GILCREST),Weld,123,district,96.5,published,96.5,,6.0,published,6.0,,1722.0,,,26644.0,10584.0,Estimate
+1991,3080,WELD RE-1 (GILCREST),Weld,123,district,100.3,published,100.3,,6.0,published,6.0,,1660.0,,,27450.0,10844.0,Estimate
+1992,3080,GILCREST RE-1,Weld,123,district,97.0,published,97.0,,6.0,published,6.0,,1752.0,,,28372.0,11159.0,Estimate
+1993,3080,GILCREST RE-1,Weld,123,district,100.0,published,100.0,,6.0,published,6.0,,1813.0,,,29554.0,11572.0,Estimate
+1994,3080,GILCREST RE-1,Weld,123,district,126.0,published,126.0,,6.0,published,6.0,,1866.0,,,30728.0,11976.0,Estimate
+1995,3080,GILCREST RE-1,Weld,123,district,122.9,published,122.9,,6.0,published,6.0,,1913.0,,,31944.0,12394.0,Estimate
+1996,3080,GILCREST RE-1,Weld,123,district,122.8,published,122.8,,6.0,published,6.0,,1970.0,,,32923.0,12718.0,Estimate
+1997,3080,GILCREST RE-1,Weld,123,district,122.7,published,122.7,,6.0,published,6.0,,2028.0,,,33992.0,13071.0,Estimate
+1998,3080,GILCREST RE-1,Weld,123,district,129.2,published,129.2,,6.0,published,6.0,,1959.0,,,35165.0,13460.0,Estimate
+1999,3080,GILCREST RE-1,Weld,123,district,,,,,6.0,published,6.0,,1937.0,,,36202.0,13797.0,Estimate
+2000,3080,GILCREST RE-1,Weld,123,district,131.3631,school_sum,,131.3631,,,,,,,,37436.0,14202.0,Estimate
+2001,3080,WELD COUNTY RE-1,Weld,123,district,132.4256,school_sum,,132.4256,6.0,school_panel,,6.0,2018.0,2018.0,2018.0,38815.0,15123.0,Estimate
 2002,3080,WELD COUNTY RE-1,Weld,123,district,146.6109,school_sum,,146.6109,6.0,school_panel,,6.0,1914.0,1914.0,1914.0,39853.0,15721.0,Estimate
 2003,3080,WELD COUNTY RE-1,Weld,123,district,149.222,school_sum,,149.222,6.0,school_panel,,6.0,2001.0,2001.0,2001.0,41364.0,16527.0,Estimate
 2004,3080,WELD COUNTY RE-1,Weld,123,district,146.9102,school_sum,,146.9102,6.0,school_panel,,6.0,2021.0,2021.0,2021.0,42470.0,17235.0,Estimate
@@ -5713,6 +5739,8 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2022,3085,Eaton RE-2,Weld,123,district,123.0,published,123.0,123.0,5.0,school_panel,,5.0,1977.0,1977.0,1977.0,67663.0,23589.0,Estimate
 2023,3085,Eaton RE-2,Weld,123,district,129.9,published,129.9,129.9,5.0,school_panel,,5.0,2007.0,2007.0,2007.0,68781.0,24081.0,Estimate
 2024,3085,Eaton RE-2,Weld,123,district,127.2,published,127.2,127.2,5.0,school_panel,,5.0,2000.0,2000.0,2000.0,69769.0,24634.0,Estimate
+1990,3090,WELD RE-3 (KEENESBURG),Weld,123,district,66.5,published,66.5,,4.0,school_panel,4.0,4.0,1246.0,,1246.0,26644.0,10584.0,Estimate
+1991,3090,WELD RE-3 (KEENESBURG),Weld,123,district,68.0,published,68.0,,4.0,school_panel,4.0,4.0,1193.0,,1193.0,27450.0,10844.0,Estimate
 1992,3090,KEENESBURG RE-3(J),Weld,123,district,67.0,published,67.0,,4.0,school_panel,4.0,4.0,1244.0,,1244.0,28372.0,11159.0,Estimate
 1993,3090,KEENESBURG RE-3(J),Weld,123,district,67.5,published,67.5,,4.0,school_panel,4.0,4.0,1334.0,,1334.0,29554.0,11572.0,Estimate
 1994,3090,KEENESBURG RE-3(J),Weld,123,district,81.5,published,81.5,,4.0,school_panel,4.0,4.0,1343.0,,1343.0,30728.0,11976.0,Estimate
@@ -5861,7 +5889,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 1997,3130,PLATTE VALLEY RE-7,Weld,123,district,64.3,published,64.3,,2.0,published,2.0,,1038.0,,,33992.0,13071.0,Estimate
 1998,3130,PLATTE VALLEY RE-7,Weld,123,district,67.3,published,67.3,,2.0,published,2.0,,1077.0,,,35165.0,13460.0,Estimate
 1999,3130,PLATTE VALLEY RE-7,Weld,123,district,,,,,3.0,published,3.0,,1094.0,,,36202.0,13797.0,Estimate
-2000,3130,PLATTE VALLEY RE-7,Weld,123,district,76.4233,school_sum,,76.4233,3.0,fte_file,,,,,,37436.0,14202.0,Estimate
+2000,3130,PLATTE VALLEY RE-7,Weld,123,district,76.4233,school_sum,,76.4233,,,,,,,,37436.0,14202.0,Estimate
 2001,3130,PLATTE VALLEY RE-7,Weld,123,district,76.0559,school_sum,,76.0559,2.0,school_panel,,2.0,568.0,568.0,568.0,38815.0,15123.0,Estimate
 2002,3130,PLATTE VALLEY RE-7,Weld,123,district,76.0559,school_sum,,76.0559,2.0,school_panel,,2.0,597.0,597.0,597.0,39853.0,15721.0,Estimate
 2003,3130,PLATTE VALLEY RE-7,Weld,123,district,76.6924,school_sum,,76.6924,3.0,school_panel,,3.0,1141.0,1141.0,1141.0,41364.0,16527.0,Estimate
@@ -5886,9 +5914,19 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2022,3130,Platte Valley RE-7,Weld,123,district,80.4,published,80.4,80.4,3.0,school_panel,,3.0,1094.0,1094.0,1094.0,67663.0,23589.0,Estimate
 2023,3130,Platte Valley RE-7,Weld,123,district,82.2,published,82.2,82.2,4.0,school_panel,,4.0,1179.0,1179.0,1177.0,68781.0,24081.0,Estimate
 2024,3130,Platte Valley RE-7,Weld,123,district,83.4,published,83.4,83.3,4.0,school_panel,,4.0,1195.0,1195.0,1195.0,69769.0,24634.0,Estimate
-2000,3140,WELD COUNTY S/D RE-8,Weld,123,district,167.9983,school_sum,,167.9983,4.0,fte_file,,,,,,37436.0,14202.0,Estimate
+1990,3140,FORT LUPTON RE-8,Weld,123,district,112.0,published,112.0,,4.0,published,4.0,,2320.0,,,26644.0,10584.0,Estimate
+1991,3140,FORT LUPTON RE-8,Weld,123,district,112.5,published,112.5,,4.0,published,4.0,,2384.0,,,27450.0,10844.0,Estimate
+1992,3140,FORT LUPTON RE-8,Weld,123,district,116.8,published,116.8,,4.0,published,4.0,,2490.0,,,28372.0,11159.0,Estimate
+1993,3140,FORT LUPTON RE-8,Weld,123,district,118.5,published,118.5,,4.0,published,4.0,,2545.0,,,29554.0,11572.0,Estimate
+1994,3140,FORT LUPTON RE-8,Weld,123,district,141.1,published,141.1,,4.0,published,4.0,,2583.0,,,30728.0,11976.0,Estimate
+1995,3140,FORT LUPTON RE-8,Weld,123,district,141.6,published,141.6,,5.0,published,5.0,,2576.0,,,31944.0,12394.0,Estimate
+1996,3140,WELD COUNTY RE-8,Weld,123,district,155.7,published,155.7,,5.0,published,5.0,,2655.0,,,32923.0,12718.0,Estimate
+1997,3140,WELD COUNTY RE-8,Weld,123,district,151.3,published,151.3,,5.0,published,5.0,,2662.0,,,33992.0,13071.0,Estimate
+1998,3140,FORT LUPTON RE-8,Weld,123,district,162.3,published,162.3,,4.0,published,4.0,,2635.0,,,35165.0,13460.0,Estimate
+1999,3140,FORT LUPTON RE-8,Weld,123,district,,,,,4.0,published,4.0,,2642.0,,,36202.0,13797.0,Estimate
+2000,3140,WELD COUNTY S/D RE-8,Weld,123,district,167.9983,school_sum,,167.9983,,,,,,,,37436.0,14202.0,Estimate
 2001,3140,WELD COUNTY S/D RE-8,Weld,123,district,174.1031,school_sum,,174.1031,3.0,school_panel,,3.0,2264.0,2264.0,2264.0,38815.0,15123.0,Estimate
-2002,3140,WELD COUNTY S/D RE-8,Weld,123,district,177.3458,school_sum,,177.3458,4.0,school_panel,,4.0,2257.0,2257.0,2622.0,39853.0,15721.0,Estimate
+2002,3140,WELD COUNTY S/D RE-8,Weld,123,district,177.3458,school_sum,,177.3458,3.0,school_panel,,3.0,2257.0,2257.0,2257.0,39853.0,15721.0,Estimate
 2003,3140,WELD COUNTY S/D RE-8,Weld,123,district,156.1323,school_sum,,156.1323,4.0,school_panel,,4.0,2586.0,2586.0,2586.0,41364.0,16527.0,Estimate
 2004,3140,WELD COUNTY S/D RE-8,Weld,123,district,150.5942,school_sum,,150.5942,4.0,school_panel,,4.0,2565.0,2565.0,2565.0,42470.0,17235.0,Estimate
 2005,3140,WELD COUNTY S/D RE-8,Weld,123,district,151.7527,school_sum,,151.7527,4.0,school_panel,,4.0,2531.0,2531.0,2531.0,44192.0,18255.0,Estimate
@@ -6094,7 +6132,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2017,3210,,Yuma,125,,,,,,3.0,school_panel,,3.0,722.0,722.0,722.0,1957.0,711.0,Estimate
 2018,3210,WRAY RD-2,Yuma,125,district,52.2,published,52.2,52.2,3.0,school_panel,,3.0,731.0,731.0,731.0,1973.0,704.0,Estimate
 2019,3210,Wray RD-2,Yuma,125,district,53.2,school_sum,,53.2,3.0,school_panel,,3.0,759.0,759.0,759.0,1977.0,717.0,Estimate
-2020,3210,,Yuma,125,,,,,,2.0,school_panel,,2.0,747.0,747.0,747.0,1981.0,695.0,Estimate
+2020,3210,,Yuma,125,,,,,,3.0,school_panel,,3.0,747.0,747.0,747.0,1981.0,695.0,Estimate
 2021,3210,,Yuma,125,,,,,,2.0,school_panel,,2.0,749.0,749.0,745.0,1974.0,686.0,Estimate
 2022,3210,Wray RD-2,Yuma,125,district,48.1,published,48.1,48.1,2.0,school_panel,,2.0,729.0,729.0,724.0,1991.0,693.0,Estimate
 2023,3210,Wray RD-2,Yuma,125,district,49.0,published,49.0,49.0,2.0,school_panel,,2.0,742.0,742.0,733.0,1995.0,681.0,Estimate
@@ -6138,7 +6176,7 @@ year,district_code,district_name,county,countyfips,unit_type,teacher_fte,teacher
 2013,3230,LIBERTY J-4,Yuma,125,district,10.5,school_sum,,10.5,2.0,school_panel,,2.0,69.0,69.0,69.0,1917.0,743.0,Estimate
 2014,3230,LIBERTY J-4,Yuma,125,district,4.8846,school_sum,,4.8846,2.0,school_panel,,2.0,80.0,80.0,80.0,1942.0,736.0,Estimate
 2015,3230,LIBERTY J-4,Yuma,125,district,6.05,school_sum,,6.05,2.0,school_panel,,2.0,77.0,77.0,77.0,1899.0,739.0,Estimate
-2016,3230,LIBERTY J-4,Yuma,125,district,9.25,published,9.25,9.25,1.0,school_panel,,1.0,80.0,80.0,80.0,1939.0,731.0,Estimate
+2016,3230,LIBERTY J-4,Yuma,125,district,9.25,published,9.25,9.25,2.0,school_panel,,2.0,80.0,80.0,80.0,1939.0,731.0,Estimate
 2017,3230,,Yuma,125,,,,,,1.0,school_panel,,1.0,72.0,72.0,72.0,1957.0,711.0,Estimate
 2018,3230,LIBERTY J-4,Yuma,125,district,10.64,published,10.64,10.64,1.0,school_panel,,1.0,65.0,65.0,65.0,1973.0,704.0,Estimate
 2019,3230,Liberty J-4,Yuma,125,district,9.6,school_sum,,9.6,1.0,school_panel,,1.0,68.0,68.0,68.0,1977.0,717.0,Estimate

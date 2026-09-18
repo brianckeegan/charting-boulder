@@ -5,16 +5,16 @@
     "rate": 0.9818
   },
   "yearbook_rows_matched_to_district_code": {
-    "matched": 33273,
+    "matched": 37615,
     "total": 39352,
-    "rate": 0.8455
+    "rate": 0.9559
   },
   "counts": {
     "school_enrollment_rows": 685060,
     "school_year_rows": 65851,
     "schools_in_registry": 2724,
     "district_grade_rows": 100914,
-    "district_year_rows": 8392,
+    "district_year_rows": 8507,
     "reconciliation_years": 24,
     "years_covered_school": [
       1986,
@@ -1328,13 +1328,60 @@
           "aggregate_rows_excluded": 1
         },
         "trends": {
-          "districts": 165,
+          "districts": 176,
           "records": 6849,
           "years": [
             1977,
             1978,
             1979,
             "..."
+          ],
+          "name_repairs": [
+            {
+              "read_as": "MONTRASE COUNTY RE-1J",
+              "repaired_to": "MONTROSE COUNTY RE-1J",
+              "rule": "misread"
+            },
+            {
+              "read_as": "ENTER 26 JT.",
+              "repaired_to": "CENTER 26 JT.",
+              "rule": "truncated"
+            },
+            {
+              "read_as": "ILVERTON 1",
+              "repaired_to": "SILVERTON 1",
+              "rule": "truncated"
+            },
+            {
+              "read_as": "ELLURIDE R-1",
+              "repaired_to": "TELLURIDE R-1",
+              "rule": "truncated"
+            },
+            {
+              "read_as": "ORWOOD R-2J",
+              "repaired_to": "NORWOOD R-2J",
+              "rule": "truncated"
+            },
+            {
+              "read_as": "GNAR 18",
+              "repaired_to": "EGNAR 18",
+              "rule": "truncated"
+            },
+            {
+              "read_as": "ULESBURG RE-1",
+              "repaired_to": "JULESBURG RE-1",
+              "rule": "truncated"
+            },
+            {
+              "read_as": "LATTE VALLEY RE-3",
+              "repaired_to": "PLATTE VALLEY RE-3",
+              "rule": "truncated"
+            },
+            {
+              "read_as": "UMMIT RE-1",
+              "repaired_to": "SUMMIT RE-1",
+              "rule": "truncated"
+            }
           ]
         },
         "summary": {
@@ -1361,13 +1408,30 @@
           "aggregate_rows_excluded": 1
         },
         "trends": {
-          "districts": 174,
+          "districts": 180,
           "records": 7001,
           "years": [
             1978,
             1979,
             1980,
             "..."
+          ],
+          "name_repairs": [
+            {
+              "read_as": "DOLOROS RE-4A",
+              "repaired_to": "DOLORES RE-4A",
+              "rule": "misread"
+            },
+            {
+              "read_as": "MONTR\u00d6SE COUNTY RE-1J",
+              "repaired_to": "MONTROSE COUNTY RE-1J",
+              "rule": "misread"
+            },
+            {
+              "read_as": "GURAY",
+              "repaired_to": "OURAY",
+              "rule": "misread"
+            }
           ]
         },
         "summary": {
@@ -1396,7 +1460,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 195,
@@ -1424,7 +1489,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 185,
@@ -1452,7 +1518,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 191,
@@ -1480,7 +1547,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 194,
@@ -1508,7 +1576,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 193,
@@ -1536,7 +1605,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 193,
@@ -1564,7 +1634,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 193,
@@ -1592,7 +1663,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 193,
@@ -1620,7 +1692,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 193,
@@ -1648,7 +1721,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 189,
@@ -1676,7 +1750,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 181,
@@ -1704,7 +1779,8 @@
         "trends": {
           "districts": 0,
           "records": 0,
-          "years": []
+          "years": [],
+          "name_repairs": []
         },
         "summary": {
           "districts": 182,

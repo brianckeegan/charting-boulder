@@ -9,3 +9,4 @@ lever,buildings,pupils_median,pupils_smallest,below_bar,over_capacity,utilisatio
 "5. Do nothing, 2040",26,245.72754960565493,8.698320340023184,17,0,0.5500945162793766,0.0,control over which schools get small
 "4. Shrink in place, 2060",26,266.08204712304763,10.43459008325677,19,0,0.5491889517503563,788.030360723428,"school size, shared evenly"
 "5. Do nothing, 2060",26,245.32303338864014,8.684001181898767,17,0,0.5491889517503563,0.0,control over which schools get small
+"6. Fill the buildings, close nothing",26,300.0,19.0,2,0,0.6872069107363225,0.0,who attends; depends on other districts' losses
