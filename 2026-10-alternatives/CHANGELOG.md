@@ -322,3 +322,23 @@ Eight districts no rule can reach, because the yearbook name and the modern name
 ### What is still uncoded, and why
 
 Ninety-two non-BOCES district-years, all named in the table and all for stated reasons: Garfield and Yuma, where one printed name covers two districts; and five small districts — Vona, Egnar, Genoa RE-13, Arriba RE-31, Arapahoe R-3 — that merged into successors before 2000. A predecessor is not given its successor's code, because that would silently merge two districts' histories.
+
+## 2026-09-18 — asking what a closure does, without the bad comparisons
+
+### Section 8: the staggered-timing estimator
+
+Section 7 compares a district closing schools against every district not closing schools *that* year — including districts four years into their own aftermath. With rounds spread from 1992 to 2019 the regression makes a great many such comparisons, and the two-way fixed-effects estimate is a weighted average over them in which some weights are negative.
+
+Section 8 builds only the clean comparisons: each cohort against districts not yet treated, averaged by cohort size (Callaway–Sant'Anna), with intervals from 1,000 draws resampling whole districts. 18 cohorts covering 33 districts, against 145 that never ran a round.
+
+**The finding holds and the buildings part gets stronger.** Schools fall 16.9% at the round — the same as section 7 — but where section 7 had the effect fading to 10.1% by the fifth year with an interval covering zero, the clean estimate is still **15.6% down and excludes zero**. The fade was the comparison group: a district five years past its own round was serving as a yardstick for a district at its round, which closes the gap between them whether or not anything reopened. Nothing reopened.
+
+The pre-period straightens out too. Section 7's school count was already 10.0% down four years before a round with the interval excluding zero — a pre-trend that undermines the design. On clean comparisons it is 7.2% down and covers zero.
+
+**Enrolment and staffing still do not move.** Enrolment five years out is −0.2% [−6.4%, +6.8%]. Staffing is +2.2% [−3.5%, +8.9%], so section 7's apparent upward drift to +5.9% does not survive either. One crack is named rather than hidden: four years *before* a round staffing sits 5.2% high and that interval only just excludes zero, so the staff null rests on less than the enrolment null does.
+
+`output/alt-closure-impacts-staggered.csv` and `alt-fig10-closure-impacts-staggered.png`.
+
+### A stale number in section 7
+
+Section 7's prose said the school count was "still 14% down five years later". Its own output file said 10.1%, with an interval covering zero. The prose was wrong when it was written and is corrected, along with the staffing sentence.

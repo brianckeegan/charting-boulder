@@ -229,3 +229,15 @@ Page 63 of the 1986 yearbook lost the first character of every district name —
 **Why inside one volume.** The roster is then the same printer, the same year and the same districts, so a match is a lookup rather than a guess. Matching against every name the archive has ever held would make "ORWOOD" a choice between Norwood and any other name ending that way, in any year.
 
 **What it costs, and what is left over.** Nine repairs in 1986 and three in 1987, each printed by name when the pipeline runs so it can be disputed. Two names the rule cannot reach — the 1986 volume's other tables do not carry Dolores at all, and Genoa-Hugo is misread in 1988 only — sit in `district-aliases.csv` with the membership either side that identifies them. Anything matching two roster names, or none, is left exactly as the OCR read it.
+
+## D29 — A district in its own aftermath is not a comparison — 2026-09-18
+
+Section 8 re-estimates the closure effect with the Callaway–Sant'Anna estimator: each cohort of districts running a round in the same year against districts **not yet treated**, averaged across cohorts by the number of districts, with intervals from 1,000 bootstrap draws resampling whole districts rather than district-years.
+
+**Why.** Section 7's regression takes as its comparison every district not closing schools in that year, which includes districts four years into their own aftermath. Colorado's rounds run from 1992 to 2019, so that is not a rare case. The two-way fixed-effects coefficient is a weighted average over all such comparisons and some of those weights are negative, which means a result can come out of the weighting.
+
+**What it changed.** The buildings effect is the same at the round — 16.9% either way — and different afterwards. Section 7 had it fading to 10.1% by the fifth year with the interval covering zero; on clean comparisons it is 15.6% down and excludes zero. The fade was mechanical: a district that had already closed schools makes a shrinking yardstick. Section 7's pre-trend goes the same way, from 10.0% down four years ahead of a round with the interval excluding zero, to 7.2% down covering it.
+
+**Why a cohort of one district is kept.** A single-district cohort is still a clean two-by-two — that district's change less the comparisons'. Requiring two would discard 29 of the 33 treated districts and rest the pre-trend on three. The uncertainty comes from the bootstrap, not from counting districts within a cohort.
+
+**What it does not fix.** The staffing path still shows about 5% too much staff four years before a round, only just excluding zero, so districts do drift into rounds differently staffed than their comparisons. That is stated in the section rather than left for a reader to find. The window is still five years.
