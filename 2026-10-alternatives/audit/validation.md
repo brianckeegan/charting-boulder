@@ -7,15 +7,15 @@ number here is a check the archive ran on itself, failures included.
 
 | Table | Rows |
 |---|---:|
-| `school-enrollment-by-grade.csv` | 647,881 |
-| `school-year.csv` | 65,841 |
-| `schools.csv` | 2,723 |
-| `district-enrollment-by-grade.csv` | 93,326 |
-| `district-year.csv` | 7,852 |
-| `source-reconciliation.csv` | 21 |
+| `school-enrollment-by-grade.csv` | 685,060 |
+| `school-year.csv` | 65,851 |
+| `schools.csv` | 2,724 |
+| `district-enrollment-by-grade.csv` | 100,914 |
+| `district-year.csv` | 8,392 |
+| `source-reconciliation.csv` | 24 |
 
 - School panel: **1986–2024**, 39 years.
-- District panel: **1986–2024**, 35 years.
+- District panel: **1986–2024**, 38 years.
 - District trends: **1977–2024** (the only series reaching before 1986).
 
 ## Schools per year
@@ -40,9 +40,9 @@ parse fault until shown otherwise.
 | 1998 | 1,565 | 0 | 0 | 1,519 |
 | 1999 | 1,588 | 0 | 0 | 1,547 |
 | 2000 | 1,639 | 0 | 1,558 | 1,602 |
-| 2001 | 1,671 | 0 | 1,593 | 1,656 |
-| 2002 | 1,708 | 0 | 1,621 | 1,692 |
-| 2003 | 1,734 | 0 | 1,641 | 1,722 |
+| 2001 | 1,673 | 1,260 | 1,593 | 1,657 |
+| 2002 | 1,710 | 1,328 | 1,621 | 1,693 |
+| 2003 | 1,740 | 1,664 | 1,647 | 1,728 |
 | 2004 | 1,716 | 1,688 | 1,666 | 1,713 |
 | 2005 | 1,730 | 1,703 | 1,671 | 1,730 |
 | 2006 | 1,762 | 1,736 | 1,718 | 1,762 |
@@ -73,6 +73,9 @@ gap of roughly 31,000 pupils that is entirely definitional.
 
 | Year | Matched schools | Exact agreement | Median diff | Gap excluding PK |
 |---|---:|---:|---:|---:|
+| 2001 | 1,239 | 927 (74.8%) | 0 | +0 |
+| 2002 | 1,307 | 965 (73.8%) | 0 | +0 |
+| 2003 | 1,631 | 1,190 (73.0%) | 0 | +227 |
 | 2004 | 1,652 | 1,203 (72.8%) | 0 | +421 |
 | 2005 | 1,673 | 1,200 (71.7%) | 0 | +0 |
 | 2006 | 1,706 | 1,213 (71.1%) | 0 | +0 |
@@ -102,6 +105,9 @@ and comparing is the one mechanical proof a row was read correctly.
 
 | Source | Year | Rows checked | Pass | Fail |
 |---|---|---:|---:|---:|
+| CDE spreadsheet | 2001 | 1,630 | 1,630 | 0 |
+| CDE spreadsheet | 2002 | 1,662 | 1,662 | 0 |
+| CDE spreadsheet | 2003 | 1,664 | 1,664 | 0 |
 | CDE spreadsheet | 2004 | 1,688 | 1,688 | 0 |
 | CDE spreadsheet | 2005 | 1,703 | 1,703 | 0 |
 | CDE spreadsheet | 2006 | 1,736 | 1,736 | 0 |
@@ -140,8 +146,8 @@ and comparing is the one mechanical proof a row was read correctly.
 
 ## Joins
 
-- CDE rows matched to an NCES school id: **509,936 of 510,623** (99.9%)
-- Yearbook rows matched to a district code: **33,050 of 39,352** (84.0%)
+- CDE rows matched to an NCES school id: **569,436 of 580,007** (98.2%)
+- Yearbook rows matched to a district code: **33,273 of 39,352** (84.5%)
 
 An unmatched row is kept, not dropped. A school with no NCES id still
 carries its CDE code and its counts; it simply cannot be followed
@@ -157,7 +163,7 @@ honest part of this table.
 |---|---|---:|
 | still_open | high | 1,934 |
 | closed | high | 614 |
-| renamed | low | 101 |
+| renamed | low | 102 |
 | closed | medium | 57 |
 | code_changed | low | 17 |
 

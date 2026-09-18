@@ -48,7 +48,11 @@ PROCESSED = HERE / "data" / "processed"
 AUDIT = HERE / "audit"
 
 USER_AGENT = "charting-boulder/pipeline (+https://github.com/brianckeegan/charting-boulder)"
-RATIO_FILE = re.compile(r"pupil.?teacher|student.?teacher|teacher.*fte", re.I)
+RATIO_FILE = re.compile(
+    r"pupil.?teacher|student.?teacher|teacher.*fte|average.*teacher.*salar", re.I)
+# The Artemis salary volumes print a district's Total FTE beside its average
+# salary, which for 2017 is the only district staffing CDE published at all.
+SALARY_FILE = re.compile(r"average.*teacher.*salar", re.I)
 
 # Column names that mark a successfully decoded header.
 HEADER_WORDS = re.compile(
@@ -750,7 +754,97 @@ def parse_sheet(rows: list[list[str]], year: int, source: str) -> list[dict]:
     return out
 
 
+def parse_salary_pdf(path: Path, year: int, label: str) -> tuple[list[dict], dict]:
+    """The Artemis average-salary volumes: district Total FTE and mean salary.
+
+    The row is drawn in two pieces. The identity comes first - county code,
+    county name, district code, district name - and the two figures follow on
+    a line of their own, so nothing on either line identifies the other. What
+    pairs them is that they alternate, and the roadmap's worry was that there
+    is no third printed number to check a pairing against.
+
+    There is one, just not on the page: for 2016, 2018 and 2019 the same
+    volumes' ratio reports give each district's FTE as the sum of its schools,
+    and this has to agree with that. 2017 has no ratio report - CDE published
+    2016's file again under the 2017 URL, byte for byte - so it is the year
+    this exists to fill, and the years around it are what say whether it can
+    be trusted to fill it.
+    """
+    rows, offset = pdf_rows(path)
+    if not rows:
+        return [], {"error": "no text extracted"}
+
+    figure = re.compile(r"[\d,]+(?:\.\d+)?")
+    records, pending, skipped, unpaired, checked = [], None, 0, 0, 0
+    for fields in rows:
+        fields = [str(f).strip() for f in fields if str(f).strip()]
+        if not fields:
+            continue
+        # The two figures, on a line of their own. The comma matters: the
+        # archive's own number reader rejects "1,696.82" by design, and using
+        # it here dropped every district above a thousand FTE - which is every
+        # large district in the state, and two thirds of Colorado's teachers.
+        if len(fields) == 2 and figure.fullmatch(fields[0]):
+            value = _as_number(fields[0].replace(",", ""))
+            if pending and pending[1] and value is not None and value > 0:
+                records.append({
+                    "year": year, "source": path.name, "grain": "district",
+                    "district_code": pending[0], "district_name": pending[1],
+                    "county_name": pending[2], "school_code": "", "school_name": "",
+                    "teacher_fte": value, "enrollment": None, "ratio": None,
+                })
+                pending = None
+            else:
+                unpaired += 1
+            continue
+        # From 2018 the volume prints the whole row on one line, and prints it
+        # three times over: two categories of teacher and their total. That is
+        # the third figure the earlier layout lacks, so here the pairing does
+        # not have to be trusted - the parts must add to the whole.
+        if len(fields) >= 8 and re.fullmatch(r"\d{4}", fields[0]):
+            figures = [_as_number(f.replace(",", "")) for f in fields[2:]]
+            if len(figures) >= 6 and all(f is not None for f in figures[:6]):
+                part_a, part_b, whole = figures[0], figures[2], figures[4]
+                if abs(part_a + part_b - whole) < 0.01 and whole > 0:
+                    records.append({
+                        "year": year, "source": path.name, "grain": "district",
+                        "district_code": normalize_code(fields[0]),
+                        "district_name": " ".join(fields[1:2]).strip(),
+                        "county_name": "", "school_code": "", "school_name": "",
+                        "teacher_fte": whole, "enrollment": None, "ratio": None,
+                    })
+                    checked += 1
+                    continue
+            skipped += 1
+            continue
+        codes = [i for i, f in enumerate(fields) if re.fullmatch(r"\d{4}", f)]
+        if codes:
+            at = codes[-1]
+            name = " ".join(fields[at + 1:]).strip()
+            county = next((f for f in fields[:at] if not f.isdigit()), "")
+            if pending and not pending[1]:
+                skipped += 1
+            pending = (normalize_code(fields[at]), name, county or (pending[2] if pending else ""))
+            continue
+        # A district whose row was broken by a page turn arrives as its code
+        # on one line and its name on the next.
+        if pending and not pending[1] and not any(c.isdigit() for c in " ".join(fields)):
+            pending = (pending[0], " ".join(fields).strip(), pending[2])
+            continue
+        skipped += 1
+    return records, {
+        "grain": "district" if records else "unknown", "font_offset": offset or 0,
+        "label": label, "records": len(records), "rows_skipped": skipped,
+        "figures_without_a_district": unpaired,
+        "rows_checked_against_their_parts": checked,
+        "school_rows": 0, "district_rows": len(records),
+        "total_fte": round(sum(r["teacher_fte"] for r in records), 1),
+    }
+
+
 def parse_file(path: Path, year: int, label: str) -> tuple[list[dict], dict]:
+    if SALARY_FILE.search(label) and path.suffix.lower() == ".pdf":
+        return parse_salary_pdf(path, year, label)
     if path.suffix.lower() in (".xls", ".xlsx"):
         rows = read_sheet_rows(path)
         offset = 0
@@ -943,6 +1037,49 @@ def main() -> None:
             + (f"  -{dropped} false district" if dropped else ""))
         print(f"  {year} {item['series']:10s} {note}")
         parsed.extend(records)
+
+    # A year can repeat another without repeating its bytes. CDE published the
+    # 2016 ratio report again at the 2017 URL, which the checksum caught; it
+    # published the 2016 salary report again at the 2017 URL too, and that one
+    # is a different file carrying the same 197 districts and the same 52,079
+    # FTE to the decimal. Byte-identical is one way for a year not to exist,
+    # and this is the other.
+    by_year: dict[int, dict[str, float]] = defaultdict(dict)
+    for row in parsed:
+        if row["grain"] == "district" and row["district_code"]:
+            by_year[row["year"]][row["district_code"]] = row["teacher_fte"]
+    repeated = []
+    for year in sorted(by_year):
+        for earlier in sorted(y for y in by_year if y < year):
+            if by_year[year] and by_year[year] == by_year[earlier]:
+                repeated.append((year, earlier, len(by_year[year])))
+                break
+    for year, earlier, count in repeated:
+        print(f"\n  {year} district staffing repeats {earlier} exactly "
+              f"({count} districts, same FTE to the decimal); dropped")
+    dropped_years = {year for year, _earlier, _count in repeated}
+    parsed = [r for r in parsed
+              if not (r["grain"] == "district" and r["year"] in dropped_years)]
+
+    # A district-grain file that carries far fewer districts than the state has
+    # is a bad reading, not a small year. 2019's salary volume extracts with
+    # its cells merged - "1,896.1" and its salary run together - and the check
+    # against the printed parts throws those rows out, which is correct and
+    # leaves 154 districts holding 10,132 FTE where the state has 185 and
+    # 53,454. Published, that would be a year of Colorado missing two thirds
+    # of its teachers.
+    district_counts = {year: len({r["district_code"] for r in parsed
+                                  if r["grain"] == "district" and r["year"] == year
+                                  and r["district_code"]})
+                       for year in {r["year"] for r in parsed}}
+    expected = max(district_counts.values()) if district_counts else 0
+    partial = {year for year, count in district_counts.items()
+               if count and count < 0.9 * expected}
+    for year in sorted(partial):
+        print(f"\n  {year} district staffing covers {district_counts[year]} districts "
+              f"against {expected} elsewhere; too few to publish, dropped")
+    parsed = [r for r in parsed
+              if not (r["grain"] == "district" and r["year"] in partial)]
 
     duplicates: dict[int, int] = defaultdict(int)
     resolved = resolve_by_name(parsed)

@@ -1,21 +1,21 @@
 {
   "cde_rows_matched_to_nces_id": {
-    "matched": 509936,
-    "total": 510623,
-    "rate": 0.9987
+    "matched": 569436,
+    "total": 580007,
+    "rate": 0.9818
   },
   "yearbook_rows_matched_to_district_code": {
-    "matched": 33050,
+    "matched": 33273,
     "total": 39352,
-    "rate": 0.8399
+    "rate": 0.8455
   },
   "counts": {
-    "school_enrollment_rows": 647881,
-    "school_year_rows": 65841,
-    "schools_in_registry": 2723,
-    "district_grade_rows": 93326,
-    "district_year_rows": 7852,
-    "reconciliation_years": 21,
+    "school_enrollment_rows": 685060,
+    "school_year_rows": 65851,
+    "schools_in_registry": 2724,
+    "district_grade_rows": 100914,
+    "district_year_rows": 8392,
+    "reconciliation_years": 24,
     "years_covered_school": [
       1986,
       2024
@@ -27,31 +27,44 @@
   },
   "parse_meta": {
     "cde_school": {
+      "2001": {
+        "layout": "indented",
+        "name_columns": 1,
+        "schools": 1630,
+        "records": 22820,
+        "rows_aggregate_excluded": 249,
+        "rows_dropped_no_school_code": 89,
+        "row_total_pass": 1630,
+        "row_total_fail": 0,
+        "district_total_pass": 178,
+        "district_total_fail": 0,
+        "district_total_worst": null
+      },
+      "2002": {
+        "layout": "flat",
+        "name_columns": 3,
+        "schools": 1662,
+        "records": 23268,
+        "rows_aggregate_excluded": 185,
+        "rows_dropped_no_school_code": 141,
+        "row_total_pass": 1662,
+        "row_total_fail": 0,
+        "district_total_pass": 178,
+        "district_total_fail": 0,
+        "district_total_worst": null
+      },
       "2003": {
-        "error": "no school code column",
-        "header": [
-          "",
-          "COUNTY/DISTRICT/SCHOOL",
-          "",
-          "",
-          "",
-          "",
-          "PK",
-          "K",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
-          "9",
-          "10",
-          "11",
-          "12",
-          "TOTAL",
-          ""
+        "schools": 1664,
+        "records": 23296,
+        "rows_aggregate_excluded": 247,
+        "rows_dropped_no_school_code": 36,
+        "row_total_pass": 1664,
+        "row_total_fail": 0,
+        "district_total_pass": 180,
+        "district_total_fail": 1,
+        "district_total_worst": [
+          "EXPEDITIONARY BOCES",
+          227
         ]
       },
       "2004": {
