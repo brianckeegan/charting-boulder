@@ -473,6 +473,13 @@ DISTRICT_SUBTOTAL = re.compile(r"^(?P<name>.+?)\s+TOTALS?\s*\*?$", re.I)
 NOT_A_DISTRICT = re.compile(r"^(STATE|COUNTY|GRAND|SCHOOL|DISTRICT|ALL)$", re.I)
 
 
+NAME_NOISE = re.compile(r"[^A-Z0-9]+")
+
+
+def name_key(text: str) -> str:
+    return NAME_NOISE.sub(" ", (text or "").upper()).strip()
+
+
 def _as_number(text: str) -> float | None:
     """A printed figure, or None if this is not one.
 
@@ -647,12 +654,22 @@ def parse_row(fields: list[str]) -> dict | None:
     else:
         district_name = subtotal.group("name") if subtotal else names[-1]
         school_name = ""
+    # A county is never the district repeated. The 2010 report writes its
+    # subtotal rows as "0010 | MAPLETON 1 | MAPLETON 1 TOTALS*", which put the
+    # district's own name in the county column for all 181 of them - a value
+    # that looks like data, joins to nothing, and would have quietly dropped
+    # every 2010 district out of any analysis keyed on county.
+    county_name = names[0] if len(names) > (2 if grain == "school" else 1) else ""
+    if (name_key(county_name) == name_key(district_name)
+            or re.search(r"\d", county_name)
+            or name_key(county_name) in ("NONE", "N A")):
+        county_name = ""
     return {
         "grain": grain,
         "county_code": county_code,
         "district_code": normalize_code(codes[0]) if codes else "",
         "school_code": normalize_code(codes[1]) if len(codes) >= 2 else "",
-        "county_name": names[0] if len(names) > (2 if grain == "school" else 1) else "",
+        "county_name": county_name,
         "district_name": district_name,
         "school_name": school_name,
         "enrollment_reported": enrollment,
@@ -831,13 +848,6 @@ def ccd_district_fte(year: int, cache: Path) -> list[dict]:
             "source": f"ccd-lea-{year}",
         })
     return out
-
-
-NAME_NOISE = re.compile(r"[^A-Z0-9]+")
-
-
-def name_key(text: str) -> str:
-    return NAME_NOISE.sub(" ", (text or "").upper()).strip()
 
 
 def keep_district_rows(records: list[dict]) -> tuple[list[dict], int]:

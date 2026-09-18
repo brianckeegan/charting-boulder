@@ -25,7 +25,7 @@ from __future__ import annotations
 import csv
 import json
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 from .extract import (
@@ -623,6 +623,51 @@ def main() -> None:
                   sorted(overlap_rows, key=lambda r: (-r["spread"], r["year"])),
                   list(overlap_rows[0].keys()))
 
+    # ---- district to county -----------------------------------------------
+    #
+    # Every analysis that joins a district to a population has to get from a
+    # district code to a county, and no single source states it in every year:
+    # the yearbooks print a county heading over each block of districts, CDE's
+    # school files carry a county column in some years and not others, and the
+    # by-district spreadsheets carry none at all. The statements are gathered
+    # from wherever they appear and written out once, so the join is made in
+    # one place and can be checked.
+    #
+    # A district can genuinely sit in more than one county. The crosswalk keeps
+    # the county stated most often and records the rest rather than choosing
+    # silently.
+    county_claims: dict[str, Counter] = defaultdict(Counter)
+    for row in cde_school + yb_summary:
+        code = row.get("district_code") or ""
+        county = (row.get("county_name") or "").strip()
+        if code and county and not county.upper().startswith("COLORADO BOC"):
+            county_claims[code][county.upper()] += 1
+    for row in yb_summary:
+        # The yearbook rows carry a county but no code; match by name.
+        if row.get("county_name") and not row.get("county_name", "").upper().startswith("COLORADO BOC"):
+            hit = (crosswalk.get(district_key(row["district_name"], row["county_name"]))
+                   or crosswalk.get(district_key(row["district_name"])))
+            if hit:
+                county_claims[hit["district_code"]][row["county_name"].strip().upper()] += 1
+
+    district_county = {}
+    for code, claims in county_claims.items():
+        (best, count), = claims.most_common(1)
+        district_county[code] = {
+            "district_code": code,
+            "county_name": best.title(),
+            "statements": sum(claims.values()),
+            "agreement": round(count / sum(claims.values()), 4),
+            "also_stated": ";".join(sorted(n.title() for n in claims if n != best)),
+        }
+    write_csv(LOOKUPS / "district-county.csv", sorted(district_county.values(),
+              key=lambda r: r["district_code"]),
+              ["district_code", "county_name", "statements", "agreement", "also_stated"])
+    split = sum(1 for r in district_county.values() if r["also_stated"])
+    print(f"\nDistrict to county")
+    print(f"  {len(district_county):,} districts placed in a county; "
+          f"{split} are stated in more than one")
+
     # ---- the yearbook era of the district staffing table ------------------
     #
     # district-teacher-fte-cde.csv is written by pipeline.teacher_fte and
@@ -702,6 +747,15 @@ def main() -> None:
     combined = sorted(list(staffing.values()) + existing,
                       key=lambda r: (int(r["year"]), str(r["district_code"]),
                                      str(r["district_name"])))
+    filled = 0
+    for row in combined:
+        stated = (row.get("county_name") or "").strip()
+        known = district_county.get(str(row.get("district_code") or ""))
+        if not stated and known:
+            row["county_name"] = known["county_name"]
+            filled += 1
+    if filled:
+        print(f"  {filled:,} district-years given a county from the crosswalk")
     write_csv(existing_path, combined, columns)
     years = sorted({int(r["year"]) for r in combined})
     print(f"  the table now spans {years[0]}-{years[-1]}")
