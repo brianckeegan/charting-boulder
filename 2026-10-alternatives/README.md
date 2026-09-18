@@ -303,6 +303,27 @@ about a quarter. **16 of 30 areas have lost more than five points of their
 catchment**; the three worst are Monarch K-8 (−25), Whittier (−23) and
 Eldorado K-8 (−15), and none of them is closing.
 
+**6. Is Boulder unusual?** The model in question 2 is fitted on 178 districts
+and was applied to one; here it is applied to all of them, on each district's
+own county forecast. **Boulder Valley ranks 69th of 166 by the contraction its
+demography implies — 68 Colorado districts face a larger one.** Its county's
+5-to-17 population falls 13% to 2060 against a statewide median of 9%, and its
+own school count comes out 2% lower.
+
+The second reading is cross-sectional, and it needs no model: among the **19
+Colorado districts with 10,000 pupils or more**, Boulder Valley's average
+school of 500 pupils is the **8th smallest**, against a peer median of 557.
+Seven large districts run smaller schools, Denver (459) and Colorado Springs 11
+(377) among them. Colorado Springs runs fifty-nine schools at an average
+seventy-seven pupils *below* Boulder Valley's viability bar.
+
+Neither reading makes Boulder Valley an outlier. That cuts against two things
+the proposal leans on: that the district faces a decline out of proportion to
+the state, and that a district of its size cannot run schools of the size it
+has. What it does not settle is whether it *should* — a peer median describes
+what districts do, not what is right, and the bar the levers are scored against
+remains BVSD's own.
+
 **How many children the district has at all.** The census counts children and
 the matrices count pupils, and the 2020 census and the 2019-20 matrix describe
 the same months, so the two can be compared without extrapolating. Across the

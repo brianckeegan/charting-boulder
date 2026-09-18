@@ -222,3 +222,19 @@ The analysis had been counting everyone under eighteen, which is three school sy
 - The 5-to-10 and 5-to-11 readings rank the attendance areas the same way (**Spearman 0.98**) while differing by thirteen points on the level, so the spread is reportable and the level is not.
 - The share of the district's children in an area that loses its school is **11% on all three age bands**, so that figure does not depend on the choice.
 
+## 2026-09-18 — the statewide steady state
+
+Section 6. The panel model was fitted on 178 districts and applied to one; it is now applied to all of them, which answers a question the proposal keeps implying and never tests.
+
+### What it found
+
+- **Boulder Valley ranks 69th of 166** by the contraction its demography implies to 2060. Sixty-eight Colorado districts face a larger one. Its county's 5-to-17 population falls 13% against a statewide median of 9%, and its own school count comes out 2% lower — 4% on demography alone, before the fitted time trend.
+- **Its schools are ordinary too.** Among the 19 Colorado districts with 10,000 pupils or more, Boulder Valley's average school of 500 pupils is the 8th smallest against a peer median of 557. Denver runs 459, Colorado Springs 11 runs 377 across fifty-nine schools — seventy-seven pupils below BVSD's own viability bar.
+- 110 of the 166 districts sit in a county whose school-age population falls, but only 71 shed schools on the model, because districts have historically absorbed most of a decline in school size rather than in school count.
+
+### How it is built
+
+- `data/analysis/county-school-age.csv` — the SDO forecast for all 65 counties, 1990-2060, written out by the retrieval notebook. Section 2's Boulder projection now reads it too, instead of reaching into the raw file.
+- The within-district reading uses the panel model's elasticity directly: with district fixed effects the level cancels in a ratio, so each district needs only its own county's path.
+- **The cross-sectional reading uses no fitted form at all.** A log-log line across a range from 25 pupils to 90,450 puts Denver 60% above its own norm, which is a statement about the functional form rather than about Denver. Average school size by district-size band, and then Boulder Valley against its actual peers, needs no such assumption.
+

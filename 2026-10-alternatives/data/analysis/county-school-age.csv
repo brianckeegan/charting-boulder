@@ -1,0 +1,4616 @@
+countyfips,county,year,datatype,pop_5_17,pop_0_4
+000,Colorado,1990,Estimate,608961,257722
+000,Colorado,1991,Estimate,624068,259840
+000,Colorado,1992,Estimate,644843,265087
+000,Colorado,1993,Estimate,666735,270460
+000,Colorado,1994,Estimate,687721,275175
+000,Colorado,1995,Estimate,707339,279156
+000,Colorado,1996,Estimate,725199,282398
+000,Colorado,1997,Estimate,743633,285750
+000,Colorado,1998,Estimate,764641,289857
+000,Colorado,1999,Estimate,786695,294308
+000,Colorado,2000,Estimate,809565,299654
+000,Colorado,2001,Estimate,822018,306879
+000,Colorado,2002,Estimate,824923,312913
+000,Colorado,2003,Estimate,824762,319674
+000,Colorado,2004,Estimate,826291,325246
+000,Colorado,2005,Estimate,829033,330396
+000,Colorado,2006,Estimate,840118,336239
+000,Colorado,2007,Estimate,852437,340384
+000,Colorado,2008,Estimate,863158,343115
+000,Colorado,2009,Estimate,872629,343586
+000,Colorado,2010,Estimate,884376,343666
+000,Colorado,2011,Estimate,894125,340507
+000,Colorado,2012,Estimate,903912,335206
+000,Colorado,2013,Estimate,914462,331625
+000,Colorado,2014,Estimate,923201,330446
+000,Colorado,2015,Estimate,934845,332649
+000,Colorado,2016,Estimate,942454,333385
+000,Colorado,2017,Estimate,943426,333248
+000,Colorado,2018,Estimate,947155,331690
+000,Colorado,2019,Estimate,947779,327048
+000,Colorado,2020,Estimate,947166,323777
+000,Colorado,2021,Estimate,944801,318576
+000,Colorado,2022,Estimate,940401,316707
+000,Colorado,2023,Estimate,936082,315646
+000,Colorado,2024,Estimate,929657,316193
+000,Colorado,2025,Forecast,919039,315568
+000,Colorado,2026,Forecast,907573,316078
+000,Colorado,2027,Forecast,900629,316640
+000,Colorado,2028,Forecast,897072,317986
+000,Colorado,2029,Forecast,895372,319514
+000,Colorado,2030,Forecast,893238,321463
+000,Colorado,2031,Forecast,892062,323479
+000,Colorado,2032,Forecast,893586,325399
+000,Colorado,2033,Forecast,895271,327280
+000,Colorado,2034,Forecast,895892,329174
+000,Colorado,2035,Forecast,897896,330960
+000,Colorado,2036,Forecast,900925,332580
+000,Colorado,2037,Forecast,905060,334088
+000,Colorado,2038,Forecast,908705,335397
+000,Colorado,2039,Forecast,912902,336415
+000,Colorado,2040,Forecast,916525,337102
+000,Colorado,2041,Forecast,920603,337417
+000,Colorado,2042,Forecast,924707,337385
+000,Colorado,2043,Forecast,928773,337017
+000,Colorado,2044,Forecast,932453,336356
+000,Colorado,2045,Forecast,935661,335449
+000,Colorado,2046,Forecast,938457,334329
+000,Colorado,2047,Forecast,940794,333053
+000,Colorado,2048,Forecast,942585,331638
+000,Colorado,2049,Forecast,943700,330169
+000,Colorado,2050,Forecast,944262,328669
+000,Colorado,2051,Forecast,944278,327164
+000,Colorado,2052,Forecast,943718,325826
+000,Colorado,2053,Forecast,942616,324687
+000,Colorado,2054,Forecast,940936,323782
+000,Colorado,2055,Forecast,938803,323103
+000,Colorado,2056,Forecast,936242,322680
+000,Colorado,2057,Forecast,933548,322371
+000,Colorado,2058,Forecast,930723,322158
+000,Colorado,2059,Forecast,927851,322034
+000,Colorado,2060,Forecast,925039,321983
+001,Adams,1990,Estimate,53967,23427
+001,Adams,1991,Estimate,55519,23992
+001,Adams,1992,Estimate,57048,24563
+001,Adams,1993,Estimate,58906,25267
+001,Adams,1994,Estimate,60885,26017
+001,Adams,1995,Estimate,63223,26916
+001,Adams,1996,Estimate,65280,27690
+001,Adams,1997,Estimate,67191,28389
+001,Adams,1998,Estimate,69409,29216
+001,Adams,1999,Estimate,71628,30033
+001,Adams,2000,Estimate,70181,29752
+001,Adams,2001,Estimate,71653,30305
+001,Adams,2002,Estimate,73795,31849
+001,Adams,2003,Estimate,74777,33081
+001,Adams,2004,Estimate,76363,34151
+001,Adams,2005,Estimate,78386,35267
+001,Adams,2006,Estimate,81080,36440
+001,Adams,2007,Estimate,82938,36881
+001,Adams,2008,Estimate,85046,37364
+001,Adams,2009,Estimate,87403,37751
+001,Adams,2010,Estimate,88959,37607
+001,Adams,2011,Estimate,91259,37349
+001,Adams,2012,Estimate,93630,36591
+001,Adams,2013,Estimate,95884,36224
+001,Adams,2014,Estimate,97916,35911
+001,Adams,2015,Estimate,99774,36039
+001,Adams,2016,Estimate,100584,35709
+001,Adams,2017,Estimate,100046,35536
+001,Adams,2018,Estimate,100346,35329
+001,Adams,2019,Estimate,99901,34939
+001,Adams,2020,Estimate,99928,34486
+001,Adams,2021,Estimate,99274,34152
+001,Adams,2022,Estimate,98936,34078
+001,Adams,2023,Estimate,98583,34260
+001,Adams,2024,Estimate,97924,34698
+001,Adams,2025,Forecast,96956,34985
+001,Adams,2026,Forecast,95964,35527
+001,Adams,2027,Forecast,95783,36090
+001,Adams,2028,Forecast,95895,36615
+001,Adams,2029,Forecast,96010,37076
+001,Adams,2030,Forecast,96776,37488
+001,Adams,2031,Forecast,97125,37823
+001,Adams,2032,Forecast,98015,38022
+001,Adams,2033,Forecast,98496,38176
+001,Adams,2034,Forecast,99236,38270
+001,Adams,2035,Forecast,99945,38304
+001,Adams,2036,Forecast,100794,38288
+001,Adams,2037,Forecast,101788,38240
+001,Adams,2038,Forecast,102619,38146
+001,Adams,2039,Forecast,103562,38014
+001,Adams,2040,Forecast,104260,37851
+001,Adams,2041,Forecast,104850,37666
+001,Adams,2042,Forecast,105297,37465
+001,Adams,2043,Forecast,105616,37264
+001,Adams,2044,Forecast,105814,37076
+001,Adams,2045,Forecast,105835,36908
+001,Adams,2046,Forecast,105768,36764
+001,Adams,2047,Forecast,105606,36648
+001,Adams,2048,Forecast,105363,36556
+001,Adams,2049,Forecast,105060,36481
+001,Adams,2050,Forecast,104739,36424
+001,Adams,2051,Forecast,104389,36378
+001,Adams,2052,Forecast,104009,36357
+001,Adams,2053,Forecast,103611,36362
+001,Adams,2054,Forecast,103222,36395
+001,Adams,2055,Forecast,102850,36453
+001,Adams,2056,Forecast,102509,36535
+001,Adams,2057,Forecast,102227,36610
+001,Adams,2058,Forecast,102004,36676
+001,Adams,2059,Forecast,101843,36730
+001,Adams,2060,Forecast,101741,36771
+003,Alamosa,1990,Estimate,2796,1181
+003,Alamosa,1991,Estimate,2795,1152
+003,Alamosa,1992,Estimate,2777,1124
+003,Alamosa,1993,Estimate,2795,1105
+003,Alamosa,1994,Estimate,2821,1095
+003,Alamosa,1995,Estimate,2875,1092
+003,Alamosa,1996,Estimate,2917,1083
+003,Alamosa,1997,Estimate,2945,1071
+003,Alamosa,1998,Estimate,2970,1054
+003,Alamosa,1999,Estimate,3008,1045
+003,Alamosa,2000,Estimate,3059,1038
+003,Alamosa,2001,Estimate,3058,1049
+003,Alamosa,2002,Estimate,3010,1066
+003,Alamosa,2003,Estimate,2990,1073
+003,Alamosa,2004,Estimate,2900,1112
+003,Alamosa,2005,Estimate,2844,1127
+003,Alamosa,2006,Estimate,2778,1138
+003,Alamosa,2007,Estimate,2716,1134
+003,Alamosa,2008,Estimate,2672,1152
+003,Alamosa,2009,Estimate,2624,1169
+003,Alamosa,2010,Estimate,2622,1199
+003,Alamosa,2011,Estimate,2666,1209
+003,Alamosa,2012,Estimate,2702,1190
+003,Alamosa,2013,Estimate,2750,1168
+003,Alamosa,2014,Estimate,2805,1151
+003,Alamosa,2015,Estimate,2832,1130
+003,Alamosa,2016,Estimate,2845,1090
+003,Alamosa,2017,Estimate,2871,1080
+003,Alamosa,2018,Estimate,2882,1056
+003,Alamosa,2019,Estimate,2876,1006
+003,Alamosa,2020,Estimate,2918,996
+003,Alamosa,2021,Estimate,2989,996
+003,Alamosa,2022,Estimate,3011,993
+003,Alamosa,2023,Estimate,3013,974
+003,Alamosa,2024,Estimate,2982,950
+003,Alamosa,2025,Forecast,2989,935
+003,Alamosa,2026,Forecast,2969,919
+003,Alamosa,2027,Forecast,2937,896
+003,Alamosa,2028,Forecast,2902,886
+003,Alamosa,2029,Forecast,2847,884
+003,Alamosa,2030,Forecast,2821,881
+003,Alamosa,2031,Forecast,2792,882
+003,Alamosa,2032,Forecast,2734,885
+003,Alamosa,2033,Forecast,2699,891
+003,Alamosa,2034,Forecast,2673,897
+003,Alamosa,2035,Forecast,2645,905
+003,Alamosa,2036,Forecast,2624,912
+003,Alamosa,2037,Forecast,2608,921
+003,Alamosa,2038,Forecast,2597,928
+003,Alamosa,2039,Forecast,2588,935
+003,Alamosa,2040,Forecast,2576,940
+003,Alamosa,2041,Forecast,2577,943
+003,Alamosa,2042,Forecast,2591,944
+003,Alamosa,2043,Forecast,2597,945
+003,Alamosa,2044,Forecast,2610,943
+003,Alamosa,2045,Forecast,2624,939
+003,Alamosa,2046,Forecast,2639,935
+003,Alamosa,2047,Forecast,2652,928
+003,Alamosa,2048,Forecast,2666,922
+003,Alamosa,2049,Forecast,2674,914
+003,Alamosa,2050,Forecast,2680,905
+003,Alamosa,2051,Forecast,2687,896
+003,Alamosa,2052,Forecast,2685,888
+003,Alamosa,2053,Forecast,2682,881
+003,Alamosa,2054,Forecast,2676,876
+003,Alamosa,2055,Forecast,2665,871
+003,Alamosa,2056,Forecast,2653,866
+003,Alamosa,2057,Forecast,2640,863
+003,Alamosa,2058,Forecast,2624,861
+003,Alamosa,2059,Forecast,2607,858
+003,Alamosa,2060,Forecast,2592,858
+005,Arapahoe,1990,Estimate,75721,31321
+005,Arapahoe,1991,Estimate,77912,31582
+005,Arapahoe,1992,Estimate,80937,32275
+005,Arapahoe,1993,Estimate,83069,32583
+005,Arapahoe,1994,Estimate,85048,32802
+005,Arapahoe,1995,Estimate,86485,32797
+005,Arapahoe,1996,Estimate,88397,32953
+005,Arapahoe,1997,Estimate,90215,33054
+005,Arapahoe,1998,Estimate,93099,33516
+005,Arapahoe,1999,Estimate,95119,33639
+005,Arapahoe,2000,Estimate,97248,33780
+005,Arapahoe,2001,Estimate,98499,34421
+005,Arapahoe,2002,Estimate,99264,35231
+005,Arapahoe,2003,Estimate,99238,35909
+005,Arapahoe,2004,Estimate,99580,36929
+005,Arapahoe,2005,Estimate,99070,37828
+005,Arapahoe,2006,Estimate,100001,38754
+005,Arapahoe,2007,Estimate,101715,39625
+005,Arapahoe,2008,Estimate,103256,40321
+005,Arapahoe,2009,Estimate,105183,40669
+005,Arapahoe,2010,Estimate,106831,40662
+005,Arapahoe,2011,Estimate,107973,40579
+005,Arapahoe,2012,Estimate,109211,40314
+005,Arapahoe,2013,Estimate,110901,40227
+005,Arapahoe,2014,Estimate,112354,40161
+005,Arapahoe,2015,Estimate,114045,40644
+005,Arapahoe,2016,Estimate,114867,40830
+005,Arapahoe,2017,Estimate,114689,40484
+005,Arapahoe,2018,Estimate,115532,40323
+005,Arapahoe,2019,Estimate,115444,39705
+005,Arapahoe,2020,Estimate,115329,39053
+005,Arapahoe,2021,Estimate,114808,38507
+005,Arapahoe,2022,Estimate,114002,38360
+005,Arapahoe,2023,Estimate,112867,38252
+005,Arapahoe,2024,Estimate,111727,38421
+005,Arapahoe,2025,Forecast,110469,38399
+005,Arapahoe,2026,Forecast,109256,38412
+005,Arapahoe,2027,Forecast,108174,38348
+005,Arapahoe,2028,Forecast,107472,38335
+005,Arapahoe,2029,Forecast,107024,38322
+005,Arapahoe,2030,Forecast,106603,38522
+005,Arapahoe,2031,Forecast,106220,38827
+005,Arapahoe,2032,Forecast,106099,39218
+005,Arapahoe,2033,Forecast,105852,39643
+005,Arapahoe,2034,Forecast,105632,40100
+005,Arapahoe,2035,Forecast,105741,40572
+005,Arapahoe,2036,Forecast,106083,41029
+005,Arapahoe,2037,Forecast,106673,41492
+005,Arapahoe,2038,Forecast,107293,41938
+005,Arapahoe,2039,Forecast,107975,42352
+005,Arapahoe,2040,Forecast,108645,42718
+005,Arapahoe,2041,Forecast,109377,43032
+005,Arapahoe,2042,Forecast,110123,43293
+005,Arapahoe,2043,Forecast,111056,43505
+005,Arapahoe,2044,Forecast,112028,43667
+005,Arapahoe,2045,Forecast,113041,43783
+005,Arapahoe,2046,Forecast,114036,43853
+005,Arapahoe,2047,Forecast,115003,43874
+005,Arapahoe,2048,Forecast,115929,43849
+005,Arapahoe,2049,Forecast,116768,43783
+005,Arapahoe,2050,Forecast,117534,43693
+005,Arapahoe,2051,Forecast,118203,43587
+005,Arapahoe,2052,Forecast,118764,43496
+005,Arapahoe,2053,Forecast,119216,43433
+005,Arapahoe,2054,Forecast,119558,43402
+005,Arapahoe,2055,Forecast,119800,43410
+005,Arapahoe,2056,Forecast,119947,43460
+005,Arapahoe,2057,Forecast,120033,43533
+005,Arapahoe,2058,Forecast,120070,43633
+005,Arapahoe,2059,Forecast,120078,43757
+005,Arapahoe,2060,Forecast,120069,43909
+007,Archuleta,1990,Estimate,1140,450
+007,Archuleta,1991,Estimate,1187,451
+007,Archuleta,1992,Estimate,1234,453
+007,Archuleta,1993,Estimate,1287,458
+007,Archuleta,1994,Estimate,1353,465
+007,Archuleta,1995,Estimate,1463,483
+007,Archuleta,1996,Estimate,1623,516
+007,Archuleta,1997,Estimate,1733,529
+007,Archuleta,1998,Estimate,1848,538
+007,Archuleta,1999,Estimate,1918,535
+007,Archuleta,2000,Estimate,2004,530
+007,Archuleta,2001,Estimate,2031,556
+007,Archuleta,2002,Estimate,2007,568
+007,Archuleta,2003,Estimate,1958,593
+007,Archuleta,2004,Estimate,1893,622
+007,Archuleta,2005,Estimate,1890,622
+007,Archuleta,2006,Estimate,1923,638
+007,Archuleta,2007,Estimate,1917,645
+007,Archuleta,2008,Estimate,1868,621
+007,Archuleta,2009,Estimate,1800,596
+007,Archuleta,2010,Estimate,1797,602
+007,Archuleta,2011,Estimate,1726,623
+007,Archuleta,2012,Estimate,1713,603
+007,Archuleta,2013,Estimate,1701,587
+007,Archuleta,2014,Estimate,1654,578
+007,Archuleta,2015,Estimate,1646,590
+007,Archuleta,2016,Estimate,1737,584
+007,Archuleta,2017,Estimate,1795,609
+007,Archuleta,2018,Estimate,1801,619
+007,Archuleta,2019,Estimate,1810,607
+007,Archuleta,2020,Estimate,1816,597
+007,Archuleta,2021,Estimate,1835,608
+007,Archuleta,2022,Estimate,1875,578
+007,Archuleta,2023,Estimate,1881,557
+007,Archuleta,2024,Estimate,1905,531
+007,Archuleta,2025,Forecast,1861,529
+007,Archuleta,2026,Forecast,1858,513
+007,Archuleta,2027,Forecast,1847,508
+007,Archuleta,2028,Forecast,1853,510
+007,Archuleta,2029,Forecast,1832,514
+007,Archuleta,2030,Forecast,1829,515
+007,Archuleta,2031,Forecast,1834,516
+007,Archuleta,2032,Forecast,1841,519
+007,Archuleta,2033,Forecast,1838,520
+007,Archuleta,2034,Forecast,1838,523
+007,Archuleta,2035,Forecast,1820,524
+007,Archuleta,2036,Forecast,1820,527
+007,Archuleta,2037,Forecast,1828,528
+007,Archuleta,2038,Forecast,1838,529
+007,Archuleta,2039,Forecast,1834,531
+007,Archuleta,2040,Forecast,1841,531
+007,Archuleta,2041,Forecast,1849,533
+007,Archuleta,2042,Forecast,1860,533
+007,Archuleta,2043,Forecast,1866,533
+007,Archuleta,2044,Forecast,1872,533
+007,Archuleta,2045,Forecast,1876,531
+007,Archuleta,2046,Forecast,1881,529
+007,Archuleta,2047,Forecast,1883,528
+007,Archuleta,2048,Forecast,1885,527
+007,Archuleta,2049,Forecast,1888,526
+007,Archuleta,2050,Forecast,1886,525
+007,Archuleta,2051,Forecast,1883,524
+007,Archuleta,2052,Forecast,1883,523
+007,Archuleta,2053,Forecast,1880,524
+007,Archuleta,2054,Forecast,1877,524
+007,Archuleta,2055,Forecast,1871,525
+007,Archuleta,2056,Forecast,1865,525
+007,Archuleta,2057,Forecast,1864,528
+007,Archuleta,2058,Forecast,1861,530
+007,Archuleta,2059,Forecast,1856,532
+007,Archuleta,2060,Forecast,1856,534
+009,Baca,1990,Estimate,853,304
+009,Baca,1991,Estimate,830,292
+009,Baca,1992,Estimate,803,279
+009,Baca,1993,Estimate,805,278
+009,Baca,1994,Estimate,819,279
+009,Baca,1995,Estimate,824,279
+009,Baca,1996,Estimate,842,279
+009,Baca,1997,Estimate,848,279
+009,Baca,1998,Estimate,841,273
+009,Baca,1999,Estimate,840,271
+009,Baca,2000,Estimate,836,266
+009,Baca,2001,Estimate,794,256
+009,Baca,2002,Estimate,749,237
+009,Baca,2003,Estimate,731,228
+009,Baca,2004,Estimate,700,214
+009,Baca,2005,Estimate,678,198
+009,Baca,2006,Estimate,676,193
+009,Baca,2007,Estimate,647,186
+009,Baca,2008,Estimate,627,184
+009,Baca,2009,Estimate,602,192
+009,Baca,2010,Estimate,596,213
+009,Baca,2011,Estimate,580,213
+009,Baca,2012,Estimate,564,223
+009,Baca,2013,Estimate,555,221
+009,Baca,2014,Estimate,539,212
+009,Baca,2015,Estimate,530,207
+009,Baca,2016,Estimate,520,203
+009,Baca,2017,Estimate,554,193
+009,Baca,2018,Estimate,574,185
+009,Baca,2019,Estimate,574,196
+009,Baca,2020,Estimate,549,206
+009,Baca,2021,Estimate,568,207
+009,Baca,2022,Estimate,582,201
+009,Baca,2023,Estimate,579,202
+009,Baca,2024,Estimate,606,192
+009,Baca,2025,Forecast,619,188
+009,Baca,2026,Forecast,620,189
+009,Baca,2027,Forecast,615,188
+009,Baca,2028,Forecast,622,180
+009,Baca,2029,Forecast,617,185
+009,Baca,2030,Forecast,611,181
+009,Baca,2031,Forecast,600,181
+009,Baca,2032,Forecast,590,181
+009,Baca,2033,Forecast,594,179
+009,Baca,2034,Forecast,588,179
+009,Baca,2035,Forecast,580,179
+009,Baca,2036,Forecast,572,180
+009,Baca,2037,Forecast,561,180
+009,Baca,2038,Forecast,556,180
+009,Baca,2039,Forecast,555,181
+009,Baca,2040,Forecast,553,183
+009,Baca,2041,Forecast,549,184
+009,Baca,2042,Forecast,554,184
+009,Baca,2043,Forecast,552,185
+009,Baca,2044,Forecast,552,185
+009,Baca,2045,Forecast,551,186
+009,Baca,2046,Forecast,554,186
+009,Baca,2047,Forecast,555,185
+009,Baca,2048,Forecast,556,185
+009,Baca,2049,Forecast,559,185
+009,Baca,2050,Forecast,560,182
+009,Baca,2051,Forecast,562,180
+009,Baca,2052,Forecast,562,180
+009,Baca,2053,Forecast,561,180
+009,Baca,2054,Forecast,560,179
+009,Baca,2055,Forecast,560,177
+009,Baca,2056,Forecast,557,177
+009,Baca,2057,Forecast,556,176
+009,Baca,2058,Forecast,556,176
+009,Baca,2059,Forecast,555,176
+009,Baca,2060,Forecast,554,176
+011,Bent,1990,Estimate,1002,331
+011,Bent,1991,Estimate,972,321
+011,Bent,1992,Estimate,978,324
+011,Bent,1993,Estimate,1027,339
+011,Bent,1994,Estimate,1025,339
+011,Bent,1995,Estimate,1043,346
+011,Bent,1996,Estimate,1045,347
+011,Bent,1997,Estimate,1038,345
+011,Bent,1998,Estimate,1092,362
+011,Bent,1999,Estimate,1081,358
+011,Bent,2000,Estimate,1067,354
+011,Bent,2001,Estimate,976,344
+011,Bent,2002,Estimate,1000,380
+011,Bent,2003,Estimate,1031,406
+011,Bent,2004,Estimate,962,341
+011,Bent,2005,Estimate,918,312
+011,Bent,2006,Estimate,856,279
+011,Bent,2007,Estimate,798,244
+011,Bent,2008,Estimate,803,254
+011,Bent,2009,Estimate,818,280
+011,Bent,2010,Estimate,812,285
+011,Bent,2011,Estimate,797,270
+011,Bent,2012,Estimate,724,250
+011,Bent,2013,Estimate,715,239
+011,Bent,2014,Estimate,738,227
+011,Bent,2015,Estimate,756,227
+011,Bent,2016,Estimate,726,218
+011,Bent,2017,Estimate,755,217
+011,Bent,2018,Estimate,754,207
+011,Bent,2019,Estimate,736,220
+011,Bent,2020,Estimate,636,203
+011,Bent,2021,Estimate,630,218
+011,Bent,2022,Estimate,675,236
+011,Bent,2023,Estimate,747,268
+011,Bent,2024,Estimate,781,258
+011,Bent,2025,Forecast,810,233
+011,Bent,2026,Forecast,826,215
+011,Bent,2027,Forecast,821,188
+011,Bent,2028,Forecast,809,162
+011,Bent,2029,Forecast,806,146
+011,Bent,2030,Forecast,766,143
+011,Bent,2031,Forecast,732,142
+011,Bent,2032,Forecast,706,141
+011,Bent,2033,Forecast,669,142
+011,Bent,2034,Forecast,645,144
+011,Bent,2035,Forecast,614,144
+011,Bent,2036,Forecast,597,146
+011,Bent,2037,Forecast,563,147
+011,Bent,2038,Forecast,534,149
+011,Bent,2039,Forecast,513,150
+011,Bent,2040,Forecast,489,152
+011,Bent,2041,Forecast,469,152
+011,Bent,2042,Forecast,456,153
+011,Bent,2043,Forecast,457,153
+011,Bent,2044,Forecast,456,151
+011,Bent,2045,Forecast,459,150
+011,Bent,2046,Forecast,461,150
+011,Bent,2047,Forecast,463,148
+011,Bent,2048,Forecast,465,147
+011,Bent,2049,Forecast,466,144
+011,Bent,2050,Forecast,468,142
+011,Bent,2051,Forecast,466,139
+011,Bent,2052,Forecast,465,136
+011,Bent,2053,Forecast,465,132
+011,Bent,2054,Forecast,463,130
+011,Bent,2055,Forecast,458,127
+011,Bent,2056,Forecast,454,125
+011,Bent,2057,Forecast,450,122
+011,Bent,2058,Forecast,446,121
+011,Bent,2059,Forecast,440,120
+011,Bent,2060,Forecast,434,117
+013,Boulder,1990,Estimate,36200,15999
+013,Boulder,1991,Estimate,37256,16043
+013,Boulder,1992,Estimate,38669,16308
+013,Boulder,1993,Estimate,40332,16655
+013,Boulder,1994,Estimate,41448,16757
+013,Boulder,1995,Estimate,42464,16802
+013,Boulder,1996,Estimate,43408,16804
+013,Boulder,1997,Estimate,44362,16798
+013,Boulder,1998,Estimate,45952,17018
+013,Boulder,1999,Estimate,47852,17328
+013,Boulder,2000,Estimate,45400,16624
+013,Boulder,2001,Estimate,46840,16953
+013,Boulder,2002,Estimate,46661,16961
+013,Boulder,2003,Estimate,45891,16892
+013,Boulder,2004,Estimate,45409,16975
+013,Boulder,2005,Estimate,44843,17006
+013,Boulder,2006,Estimate,45246,17208
+013,Boulder,2007,Estimate,45553,17313
+013,Boulder,2008,Estimate,45954,17207
+013,Boulder,2009,Estimate,46149,16814
+013,Boulder,2010,Estimate,46415,16557
+013,Boulder,2011,Estimate,47258,16214
+013,Boulder,2012,Estimate,48157,15808
+013,Boulder,2013,Estimate,49022,15527
+013,Boulder,2014,Estimate,49229,15305
+013,Boulder,2015,Estimate,50085,15168
+013,Boulder,2016,Estimate,50043,14957
+013,Boulder,2017,Estimate,49929,14553
+013,Boulder,2018,Estimate,49698,14125
+013,Boulder,2019,Estimate,49136,13584
+013,Boulder,2020,Estimate,48100,13184
+013,Boulder,2021,Estimate,47061,12832
+013,Boulder,2022,Estimate,46265,12836
+013,Boulder,2023,Estimate,44981,12647
+013,Boulder,2024,Estimate,43997,12526
+013,Boulder,2025,Forecast,42745,12302
+013,Boulder,2026,Forecast,41504,12133
+013,Boulder,2027,Forecast,40806,12164
+013,Boulder,2028,Forecast,39999,12240
+013,Boulder,2029,Forecast,39298,12404
+013,Boulder,2030,Forecast,38685,12526
+013,Boulder,2031,Forecast,38126,12677
+013,Boulder,2032,Forecast,37596,12841
+013,Boulder,2033,Forecast,37240,13055
+013,Boulder,2034,Forecast,37077,13302
+013,Boulder,2035,Forecast,37139,13567
+013,Boulder,2036,Forecast,37262,13828
+013,Boulder,2037,Forecast,37465,14068
+013,Boulder,2038,Forecast,37670,14276
+013,Boulder,2039,Forecast,37940,14449
+013,Boulder,2040,Forecast,38270,14580
+013,Boulder,2041,Forecast,38672,14672
+013,Boulder,2042,Forecast,39150,14710
+013,Boulder,2043,Forecast,39582,14699
+013,Boulder,2044,Forecast,39992,14642
+013,Boulder,2045,Forecast,40354,14546
+013,Boulder,2046,Forecast,40687,14412
+013,Boulder,2047,Forecast,40972,14252
+013,Boulder,2048,Forecast,41193,14071
+013,Boulder,2049,Forecast,41332,13877
+013,Boulder,2050,Forecast,41372,13676
+013,Boulder,2051,Forecast,41329,13477
+013,Boulder,2052,Forecast,41202,13285
+013,Boulder,2053,Forecast,40997,13103
+013,Boulder,2054,Forecast,40722,12931
+013,Boulder,2055,Forecast,40389,12772
+013,Boulder,2056,Forecast,40007,12628
+013,Boulder,2057,Forecast,39586,12499
+013,Boulder,2058,Forecast,39135,12391
+013,Boulder,2059,Forecast,38673,12300
+013,Boulder,2060,Forecast,38207,12230
+014,Broomfield,1990,Estimate,0,0
+014,Broomfield,1991,Estimate,0,0
+014,Broomfield,1992,Estimate,0,0
+014,Broomfield,1993,Estimate,0,0
+014,Broomfield,1994,Estimate,0,0
+014,Broomfield,1995,Estimate,0,0
+014,Broomfield,1996,Estimate,0,0
+014,Broomfield,1997,Estimate,0,0
+014,Broomfield,1998,Estimate,0,0
+014,Broomfield,1999,Estimate,0,0
+014,Broomfield,2000,Estimate,8326,2997
+014,Broomfield,2001,Estimate,8873,3173
+014,Broomfield,2002,Estimate,8963,3255
+014,Broomfield,2003,Estimate,9334,3463
+014,Broomfield,2004,Estimate,9476,3575
+014,Broomfield,2005,Estimate,9710,3715
+014,Broomfield,2006,Estimate,10197,3915
+014,Broomfield,2007,Estimate,10536,4031
+014,Broomfield,2008,Estimate,10638,4030
+014,Broomfield,2009,Estimate,10707,3984
+014,Broomfield,2010,Estimate,10749,3913
+014,Broomfield,2011,Estimate,11029,3819
+014,Broomfield,2012,Estimate,11352,3696
+014,Broomfield,2013,Estimate,11570,3612
+014,Broomfield,2014,Estimate,11804,3636
+014,Broomfield,2015,Estimate,12231,3741
+014,Broomfield,2016,Estimate,12380,3789
+014,Broomfield,2017,Estimate,12522,3779
+014,Broomfield,2018,Estimate,12604,3703
+014,Broomfield,2019,Estimate,12591,3647
+014,Broomfield,2020,Estimate,12699,3685
+014,Broomfield,2021,Estimate,12728,3563
+014,Broomfield,2022,Estimate,12668,3496
+014,Broomfield,2023,Estimate,12496,3510
+014,Broomfield,2024,Estimate,12514,3518
+014,Broomfield,2025,Forecast,12321,3560
+014,Broomfield,2026,Forecast,12177,3629
+014,Broomfield,2027,Forecast,12113,3702
+014,Broomfield,2028,Forecast,12122,3770
+014,Broomfield,2029,Forecast,12157,3796
+014,Broomfield,2030,Forecast,12246,3823
+014,Broomfield,2031,Forecast,12381,3811
+014,Broomfield,2032,Forecast,12461,3817
+014,Broomfield,2033,Forecast,12623,3778
+014,Broomfield,2034,Forecast,12670,3782
+014,Broomfield,2035,Forecast,12784,3761
+014,Broomfield,2036,Forecast,12916,3777
+014,Broomfield,2037,Forecast,13003,3778
+014,Broomfield,2038,Forecast,13114,3807
+014,Broomfield,2039,Forecast,13225,3833
+014,Broomfield,2040,Forecast,13321,3869
+014,Broomfield,2041,Forecast,13393,3891
+014,Broomfield,2042,Forecast,13452,3900
+014,Broomfield,2043,Forecast,13498,3915
+014,Broomfield,2044,Forecast,13521,3919
+014,Broomfield,2045,Forecast,13553,3925
+014,Broomfield,2046,Forecast,13565,3933
+014,Broomfield,2047,Forecast,13598,3954
+014,Broomfield,2048,Forecast,13635,3965
+014,Broomfield,2049,Forecast,13675,3972
+014,Broomfield,2050,Forecast,13708,3991
+014,Broomfield,2051,Forecast,13765,3985
+014,Broomfield,2052,Forecast,13814,3984
+014,Broomfield,2053,Forecast,13878,3984
+014,Broomfield,2054,Forecast,13909,3994
+014,Broomfield,2055,Forecast,13952,3996
+014,Broomfield,2056,Forecast,13972,4012
+014,Broomfield,2057,Forecast,13993,4030
+014,Broomfield,2058,Forecast,14016,4050
+014,Broomfield,2059,Forecast,14033,4069
+014,Broomfield,2060,Forecast,14069,4087
+015,Chaffee,1990,Estimate,2200,705
+015,Chaffee,1991,Estimate,2200,697
+015,Chaffee,1992,Estimate,2212,697
+015,Chaffee,1993,Estimate,2283,712
+015,Chaffee,1994,Estimate,2324,717
+015,Chaffee,1995,Estimate,2381,728
+015,Chaffee,1996,Estimate,2427,734
+015,Chaffee,1997,Estimate,2439,731
+015,Chaffee,1998,Estimate,2429,720
+015,Chaffee,1999,Estimate,2456,723
+015,Chaffee,2000,Estimate,2482,722
+015,Chaffee,2001,Estimate,2427,729
+015,Chaffee,2002,Estimate,2390,752
+015,Chaffee,2003,Estimate,2329,768
+015,Chaffee,2004,Estimate,2338,746
+015,Chaffee,2005,Estimate,2274,749
+015,Chaffee,2006,Estimate,2230,742
+015,Chaffee,2007,Estimate,2236,746
+015,Chaffee,2008,Estimate,2221,746
+015,Chaffee,2009,Estimate,2185,741
+015,Chaffee,2010,Estimate,2222,755
+015,Chaffee,2011,Estimate,2159,758
+015,Chaffee,2012,Estimate,2106,772
+015,Chaffee,2013,Estimate,2100,751
+015,Chaffee,2014,Estimate,2101,736
+015,Chaffee,2015,Estimate,2102,732
+015,Chaffee,2016,Estimate,2179,742
+015,Chaffee,2017,Estimate,2254,743
+015,Chaffee,2018,Estimate,2259,777
+015,Chaffee,2019,Estimate,2269,757
+015,Chaffee,2020,Estimate,2226,744
+015,Chaffee,2021,Estimate,2226,739
+015,Chaffee,2022,Estimate,2224,749
+015,Chaffee,2023,Estimate,2240,765
+015,Chaffee,2024,Estimate,2221,779
+015,Chaffee,2025,Forecast,2227,777
+015,Chaffee,2026,Forecast,2233,763
+015,Chaffee,2027,Forecast,2239,754
+015,Chaffee,2028,Forecast,2276,721
+015,Chaffee,2029,Forecast,2281,707
+015,Chaffee,2030,Forecast,2248,701
+015,Chaffee,2031,Forecast,2266,695
+015,Chaffee,2032,Forecast,2259,687
+015,Chaffee,2033,Forecast,2243,680
+015,Chaffee,2034,Forecast,2220,670
+015,Chaffee,2035,Forecast,2204,661
+015,Chaffee,2036,Forecast,2179,653
+015,Chaffee,2037,Forecast,2169,645
+015,Chaffee,2038,Forecast,2154,639
+015,Chaffee,2039,Forecast,2124,635
+015,Chaffee,2040,Forecast,2100,629
+015,Chaffee,2041,Forecast,2055,627
+015,Chaffee,2042,Forecast,2027,624
+015,Chaffee,2043,Forecast,2009,622
+015,Chaffee,2044,Forecast,1989,620
+015,Chaffee,2045,Forecast,1974,618
+015,Chaffee,2046,Forecast,1956,616
+015,Chaffee,2047,Forecast,1939,612
+015,Chaffee,2048,Forecast,1924,612
+015,Chaffee,2049,Forecast,1908,607
+015,Chaffee,2050,Forecast,1895,602
+015,Chaffee,2051,Forecast,1884,602
+015,Chaffee,2052,Forecast,1874,597
+015,Chaffee,2053,Forecast,1864,592
+015,Chaffee,2054,Forecast,1856,592
+015,Chaffee,2055,Forecast,1849,587
+015,Chaffee,2056,Forecast,1839,582
+015,Chaffee,2057,Forecast,1829,581
+015,Chaffee,2058,Forecast,1825,577
+015,Chaffee,2059,Forecast,1815,572
+015,Chaffee,2060,Forecast,1812,571
+017,Cheyenne,1990,Estimate,532,223
+017,Cheyenne,1991,Estimate,551,221
+017,Cheyenne,1992,Estimate,535,207
+017,Cheyenne,1993,Estimate,512,192
+017,Cheyenne,1994,Estimate,511,186
+017,Cheyenne,1995,Estimate,505,179
+017,Cheyenne,1996,Estimate,509,170
+017,Cheyenne,1997,Estimate,512,166
+017,Cheyenne,1998,Estimate,524,161
+017,Cheyenne,1999,Estimate,511,150
+017,Cheyenne,2000,Estimate,500,142
+017,Cheyenne,2001,Estimate,479,129
+017,Cheyenne,2002,Estimate,460,121
+017,Cheyenne,2003,Estimate,428,119
+017,Cheyenne,2004,Estimate,401,112
+017,Cheyenne,2005,Estimate,396,111
+017,Cheyenne,2006,Estimate,386,103
+017,Cheyenne,2007,Estimate,355,104
+017,Cheyenne,2008,Estimate,324,108
+017,Cheyenne,2009,Estimate,305,110
+017,Cheyenne,2010,Estimate,315,129
+017,Cheyenne,2011,Estimate,318,119
+017,Cheyenne,2012,Estimate,318,131
+017,Cheyenne,2013,Estimate,310,132
+017,Cheyenne,2014,Estimate,315,133
+017,Cheyenne,2015,Estimate,315,138
+017,Cheyenne,2016,Estimate,316,143
+017,Cheyenne,2017,Estimate,326,125
+017,Cheyenne,2018,Estimate,336,112
+017,Cheyenne,2019,Estimate,343,91
+017,Cheyenne,2020,Estimate,332,84
+017,Cheyenne,2021,Estimate,329,80
+017,Cheyenne,2022,Estimate,347,80
+017,Cheyenne,2023,Estimate,349,79
+017,Cheyenne,2024,Estimate,336,91
+017,Cheyenne,2025,Forecast,321,92
+017,Cheyenne,2026,Forecast,313,88
+017,Cheyenne,2027,Forecast,312,90
+017,Cheyenne,2028,Forecast,304,94
+017,Cheyenne,2029,Forecast,311,90
+017,Cheyenne,2030,Forecast,297,87
+017,Cheyenne,2031,Forecast,288,85
+017,Cheyenne,2032,Forecast,282,84
+017,Cheyenne,2033,Forecast,274,83
+017,Cheyenne,2034,Forecast,269,82
+017,Cheyenne,2035,Forecast,261,82
+017,Cheyenne,2036,Forecast,264,82
+017,Cheyenne,2037,Forecast,267,85
+017,Cheyenne,2038,Forecast,263,85
+017,Cheyenne,2039,Forecast,257,85
+017,Cheyenne,2040,Forecast,257,85
+017,Cheyenne,2041,Forecast,258,86
+017,Cheyenne,2042,Forecast,251,87
+017,Cheyenne,2043,Forecast,248,87
+017,Cheyenne,2044,Forecast,246,87
+017,Cheyenne,2045,Forecast,245,87
+017,Cheyenne,2046,Forecast,242,85
+017,Cheyenne,2047,Forecast,241,84
+017,Cheyenne,2048,Forecast,239,82
+017,Cheyenne,2049,Forecast,238,81
+017,Cheyenne,2050,Forecast,238,79
+017,Cheyenne,2051,Forecast,237,76
+017,Cheyenne,2052,Forecast,235,74
+017,Cheyenne,2053,Forecast,233,74
+017,Cheyenne,2054,Forecast,231,71
+017,Cheyenne,2055,Forecast,228,70
+017,Cheyenne,2056,Forecast,226,69
+017,Cheyenne,2057,Forecast,223,67
+017,Cheyenne,2058,Forecast,219,66
+017,Cheyenne,2059,Forecast,213,64
+017,Cheyenne,2060,Forecast,212,63
+019,Clear Creek,1990,Estimate,1446,540
+019,Clear Creek,1991,Estimate,1434,528
+019,Clear Creek,1992,Estimate,1451,532
+019,Clear Creek,1993,Estimate,1470,533
+019,Clear Creek,1994,Estimate,1529,551
+019,Clear Creek,1995,Estimate,1552,554
+019,Clear Creek,1996,Estimate,1539,544
+019,Clear Creek,1997,Estimate,1546,541
+019,Clear Creek,1998,Estimate,1549,538
+019,Clear Creek,1999,Estimate,1561,536
+019,Clear Creek,2000,Estimate,1571,533
+019,Clear Creek,2001,Estimate,1527,538
+019,Clear Creek,2002,Estimate,1459,534
+019,Clear Creek,2003,Estimate,1386,557
+019,Clear Creek,2004,Estimate,1355,522
+019,Clear Creek,2005,Estimate,1347,500
+019,Clear Creek,2006,Estimate,1249,463
+019,Clear Creek,2007,Estimate,1227,464
+019,Clear Creek,2008,Estimate,1202,451
+019,Clear Creek,2009,Estimate,1141,439
+019,Clear Creek,2010,Estimate,1118,441
+019,Clear Creek,2011,Estimate,1077,410
+019,Clear Creek,2012,Estimate,1064,383
+019,Clear Creek,2013,Estimate,1052,362
+019,Clear Creek,2014,Estimate,1054,361
+019,Clear Creek,2015,Estimate,1066,355
+019,Clear Creek,2016,Estimate,1064,362
+019,Clear Creek,2017,Estimate,1066,387
+019,Clear Creek,2018,Estimate,1048,392
+019,Clear Creek,2019,Estimate,1046,388
+019,Clear Creek,2020,Estimate,1052,401
+019,Clear Creek,2021,Estimate,1100,403
+019,Clear Creek,2022,Estimate,1152,390
+019,Clear Creek,2023,Estimate,1155,365
+019,Clear Creek,2024,Estimate,1201,356
+019,Clear Creek,2025,Forecast,1222,355
+019,Clear Creek,2026,Forecast,1257,355
+019,Clear Creek,2027,Forecast,1277,365
+019,Clear Creek,2028,Forecast,1317,366
+019,Clear Creek,2029,Forecast,1353,373
+019,Clear Creek,2030,Forecast,1405,375
+019,Clear Creek,2031,Forecast,1449,379
+019,Clear Creek,2032,Forecast,1465,380
+019,Clear Creek,2033,Forecast,1499,384
+019,Clear Creek,2034,Forecast,1513,386
+019,Clear Creek,2035,Forecast,1520,388
+019,Clear Creek,2036,Forecast,1521,392
+019,Clear Creek,2037,Forecast,1521,394
+019,Clear Creek,2038,Forecast,1528,400
+019,Clear Creek,2039,Forecast,1526,404
+019,Clear Creek,2040,Forecast,1538,409
+019,Clear Creek,2041,Forecast,1538,414
+019,Clear Creek,2042,Forecast,1543,419
+019,Clear Creek,2043,Forecast,1540,423
+019,Clear Creek,2044,Forecast,1539,428
+019,Clear Creek,2045,Forecast,1537,432
+019,Clear Creek,2046,Forecast,1532,436
+019,Clear Creek,2047,Forecast,1529,441
+019,Clear Creek,2048,Forecast,1527,443
+019,Clear Creek,2049,Forecast,1525,446
+019,Clear Creek,2050,Forecast,1521,451
+019,Clear Creek,2051,Forecast,1519,451
+019,Clear Creek,2052,Forecast,1520,453
+019,Clear Creek,2053,Forecast,1522,456
+019,Clear Creek,2054,Forecast,1523,457
+019,Clear Creek,2055,Forecast,1526,459
+019,Clear Creek,2056,Forecast,1527,461
+019,Clear Creek,2057,Forecast,1535,463
+019,Clear Creek,2058,Forecast,1540,463
+019,Clear Creek,2059,Forecast,1545,463
+019,Clear Creek,2060,Forecast,1550,464
+021,Conejos,1990,Estimate,1940,641
+021,Conejos,1991,Estimate,1944,641
+021,Conejos,1992,Estimate,1926,635
+021,Conejos,1993,Estimate,1946,637
+021,Conejos,1994,Estimate,1958,642
+021,Conejos,1995,Estimate,1982,649
+021,Conejos,1996,Estimate,1999,653
+021,Conejos,1997,Estimate,2005,654
+021,Conejos,1998,Estimate,2013,655
+021,Conejos,1999,Estimate,2028,659
+021,Conejos,2000,Estimate,2038,658
+021,Conejos,2001,Estimate,1979,655
+021,Conejos,2002,Estimate,1954,656
+021,Conejos,2003,Estimate,1894,656
+021,Conejos,2004,Estimate,1878,658
+021,Conejos,2005,Estimate,1877,643
+021,Conejos,2006,Estimate,1844,628
+021,Conejos,2007,Estimate,1825,618
+021,Conejos,2008,Estimate,1772,624
+021,Conejos,2009,Estimate,1695,626
+021,Conejos,2010,Estimate,1690,651
+021,Conejos,2011,Estimate,1664,617
+021,Conejos,2012,Estimate,1632,613
+021,Conejos,2013,Estimate,1622,588
+021,Conejos,2014,Estimate,1595,590
+021,Conejos,2015,Estimate,1595,568
+021,Conejos,2016,Estimate,1554,559
+021,Conejos,2017,Estimate,1544,528
+021,Conejos,2018,Estimate,1508,502
+021,Conejos,2019,Estimate,1495,481
+021,Conejos,2020,Estimate,1482,454
+021,Conejos,2021,Estimate,1516,476
+021,Conejos,2022,Estimate,1527,492
+021,Conejos,2023,Estimate,1498,496
+021,Conejos,2024,Estimate,1502,493
+021,Conejos,2025,Forecast,1507,491
+021,Conejos,2026,Forecast,1503,478
+021,Conejos,2027,Forecast,1523,459
+021,Conejos,2028,Forecast,1493,454
+021,Conejos,2029,Forecast,1504,446
+021,Conejos,2030,Forecast,1480,447
+021,Conejos,2031,Forecast,1474,449
+021,Conejos,2032,Forecast,1452,450
+021,Conejos,2033,Forecast,1435,451
+021,Conejos,2034,Forecast,1431,451
+021,Conejos,2035,Forecast,1429,450
+021,Conejos,2036,Forecast,1435,450
+021,Conejos,2037,Forecast,1420,446
+021,Conejos,2038,Forecast,1416,446
+021,Conejos,2039,Forecast,1402,442
+021,Conejos,2040,Forecast,1386,441
+021,Conejos,2041,Forecast,1377,436
+021,Conejos,2042,Forecast,1368,434
+021,Conejos,2043,Forecast,1363,431
+021,Conejos,2044,Forecast,1357,426
+021,Conejos,2045,Forecast,1349,421
+021,Conejos,2046,Forecast,1340,416
+021,Conejos,2047,Forecast,1330,412
+021,Conejos,2048,Forecast,1318,407
+021,Conejos,2049,Forecast,1308,402
+021,Conejos,2050,Forecast,1295,397
+021,Conejos,2051,Forecast,1281,392
+021,Conejos,2052,Forecast,1269,386
+021,Conejos,2053,Forecast,1256,383
+021,Conejos,2054,Forecast,1242,380
+021,Conejos,2055,Forecast,1229,376
+021,Conejos,2056,Forecast,1214,373
+021,Conejos,2057,Forecast,1202,371
+021,Conejos,2058,Forecast,1189,367
+021,Conejos,2059,Forecast,1177,366
+021,Conejos,2060,Forecast,1167,362
+023,Costilla,1990,Estimate,679,228
+023,Costilla,1991,Estimate,687,228
+023,Costilla,1992,Estimate,666,218
+023,Costilla,1993,Estimate,693,223
+023,Costilla,1994,Estimate,691,221
+023,Costilla,1995,Estimate,716,225
+023,Costilla,1996,Estimate,720,223
+023,Costilla,1997,Estimate,722,221
+023,Costilla,1998,Estimate,732,218
+023,Costilla,1999,Estimate,717,212
+023,Costilla,2000,Estimate,707,207
+023,Costilla,2001,Estimate,700,213
+023,Costilla,2002,Estimate,677,215
+023,Costilla,2003,Estimate,663,238
+023,Costilla,2004,Estimate,665,236
+023,Costilla,2005,Estimate,641,215
+023,Costilla,2006,Estimate,612,204
+023,Costilla,2007,Estimate,602,198
+023,Costilla,2008,Estimate,573,181
+023,Costilla,2009,Estimate,552,163
+023,Costilla,2010,Estimate,562,172
+023,Costilla,2011,Estimate,556,168
+023,Costilla,2012,Estimate,538,168
+023,Costilla,2013,Estimate,515,166
+023,Costilla,2014,Estimate,510,160
+023,Costilla,2015,Estimate,507,156
+023,Costilla,2016,Estimate,515,153
+023,Costilla,2017,Estimate,511,165
+023,Costilla,2018,Estimate,507,164
+023,Costilla,2019,Estimate,510,166
+023,Costilla,2020,Estimate,501,166
+023,Costilla,2021,Estimate,488,178
+023,Costilla,2022,Estimate,502,166
+023,Costilla,2023,Estimate,502,170
+023,Costilla,2024,Estimate,493,182
+023,Costilla,2025,Forecast,491,181
+023,Costilla,2026,Forecast,503,168
+023,Costilla,2027,Forecast,502,162
+023,Costilla,2028,Forecast,504,152
+023,Costilla,2029,Forecast,504,139
+023,Costilla,2030,Forecast,501,137
+023,Costilla,2031,Forecast,496,135
+023,Costilla,2032,Forecast,496,133
+023,Costilla,2033,Forecast,488,130
+023,Costilla,2034,Forecast,478,127
+023,Costilla,2035,Forecast,462,125
+023,Costilla,2036,Forecast,449,122
+023,Costilla,2037,Forecast,442,121
+023,Costilla,2038,Forecast,432,118
+023,Costilla,2039,Forecast,418,117
+023,Costilla,2040,Forecast,408,117
+023,Costilla,2041,Forecast,397,115
+023,Costilla,2042,Forecast,380,114
+023,Costilla,2043,Forecast,375,114
+023,Costilla,2044,Forecast,370,114
+023,Costilla,2045,Forecast,364,113
+023,Costilla,2046,Forecast,359,112
+023,Costilla,2047,Forecast,353,110
+023,Costilla,2048,Forecast,351,109
+023,Costilla,2049,Forecast,345,108
+023,Costilla,2050,Forecast,343,107
+023,Costilla,2051,Forecast,337,106
+023,Costilla,2052,Forecast,333,104
+023,Costilla,2053,Forecast,332,102
+023,Costilla,2054,Forecast,328,101
+023,Costilla,2055,Forecast,324,99
+023,Costilla,2056,Forecast,322,97
+023,Costilla,2057,Forecast,319,96
+023,Costilla,2058,Forecast,315,94
+023,Costilla,2059,Forecast,312,92
+023,Costilla,2060,Forecast,307,92
+025,Crowley,1990,Estimate,609,223
+025,Crowley,1991,Estimate,607,217
+025,Crowley,1992,Estimate,630,223
+025,Crowley,1993,Estimate,625,218
+025,Crowley,1994,Estimate,634,216
+025,Crowley,1995,Estimate,631,210
+025,Crowley,1996,Estimate,631,207
+025,Crowley,1997,Estimate,633,204
+025,Crowley,1998,Estimate,626,198
+025,Crowley,1999,Estimate,725,223
+025,Crowley,2000,Estimate,738,224
+025,Crowley,2001,Estimate,717,234
+025,Crowley,2002,Estimate,692,233
+025,Crowley,2003,Estimate,630,213
+025,Crowley,2004,Estimate,662,227
+025,Crowley,2005,Estimate,635,225
+025,Crowley,2006,Estimate,635,245
+025,Crowley,2007,Estimate,648,255
+025,Crowley,2008,Estimate,617,224
+025,Crowley,2009,Estimate,599,195
+025,Crowley,2010,Estimate,613,187
+025,Crowley,2011,Estimate,570,190
+025,Crowley,2012,Estimate,546,194
+025,Crowley,2013,Estimate,535,195
+025,Crowley,2014,Estimate,526,192
+025,Crowley,2015,Estimate,506,197
+025,Crowley,2016,Estimate,497,196
+025,Crowley,2017,Estimate,519,196
+025,Crowley,2018,Estimate,515,179
+025,Crowley,2019,Estimate,504,168
+025,Crowley,2020,Estimate,487,155
+025,Crowley,2021,Estimate,505,168
+025,Crowley,2022,Estimate,493,165
+025,Crowley,2023,Estimate,516,162
+025,Crowley,2024,Estimate,535,160
+025,Crowley,2025,Forecast,539,160
+025,Crowley,2026,Forecast,540,156
+025,Crowley,2027,Forecast,531,159
+025,Crowley,2028,Forecast,526,157
+025,Crowley,2029,Forecast,528,156
+025,Crowley,2030,Forecast,528,155
+025,Crowley,2031,Forecast,515,155
+025,Crowley,2032,Forecast,513,158
+025,Crowley,2033,Forecast,496,159
+025,Crowley,2034,Forecast,493,162
+025,Crowley,2035,Forecast,490,166
+025,Crowley,2036,Forecast,487,168
+025,Crowley,2037,Forecast,484,172
+025,Crowley,2038,Forecast,487,176
+025,Crowley,2039,Forecast,489,178
+025,Crowley,2040,Forecast,495,181
+025,Crowley,2041,Forecast,500,184
+025,Crowley,2042,Forecast,505,186
+025,Crowley,2043,Forecast,508,187
+025,Crowley,2044,Forecast,516,188
+025,Crowley,2045,Forecast,525,191
+025,Crowley,2046,Forecast,533,191
+025,Crowley,2047,Forecast,539,192
+025,Crowley,2048,Forecast,547,193
+025,Crowley,2049,Forecast,555,195
+025,Crowley,2050,Forecast,561,195
+025,Crowley,2051,Forecast,569,195
+025,Crowley,2052,Forecast,574,195
+025,Crowley,2053,Forecast,579,195
+025,Crowley,2054,Forecast,581,195
+025,Crowley,2055,Forecast,586,195
+025,Crowley,2056,Forecast,589,196
+025,Crowley,2057,Forecast,590,196
+025,Crowley,2058,Forecast,592,198
+025,Crowley,2059,Forecast,597,200
+025,Crowley,2060,Forecast,599,200
+027,Custer,1990,Estimate,402,116
+027,Custer,1991,Estimate,413,120
+027,Custer,1992,Estimate,429,126
+027,Custer,1993,Estimate,453,137
+027,Custer,1994,Estimate,463,142
+027,Custer,1995,Estimate,494,152
+027,Custer,1996,Estimate,526,165
+027,Custer,1997,Estimate,552,173
+027,Custer,1998,Estimate,561,178
+027,Custer,1999,Estimate,580,186
+027,Custer,2000,Estimate,594,194
+027,Custer,2001,Estimate,622,204
+027,Custer,2002,Estimate,623,199
+027,Custer,2003,Estimate,630,196
+027,Custer,2004,Estimate,636,181
+027,Custer,2005,Estimate,641,174
+027,Custer,2006,Estimate,617,152
+027,Custer,2007,Estimate,633,151
+027,Custer,2008,Estimate,599,133
+027,Custer,2009,Estimate,575,131
+027,Custer,2010,Estimate,580,136
+027,Custer,2011,Estimate,565,138
+027,Custer,2012,Estimate,553,140
+027,Custer,2013,Estimate,544,134
+027,Custer,2014,Estimate,529,131
+027,Custer,2015,Estimate,514,135
+027,Custer,2016,Estimate,519,138
+027,Custer,2017,Estimate,526,152
+027,Custer,2018,Estimate,514,163
+027,Custer,2019,Estimate,508,168
+027,Custer,2020,Estimate,512,168
+027,Custer,2021,Estimate,524,196
+027,Custer,2022,Estimate,565,204
+027,Custer,2023,Estimate,590,214
+027,Custer,2024,Estimate,599,235
+027,Custer,2025,Forecast,608,241
+027,Custer,2026,Forecast,616,246
+027,Custer,2027,Forecast,636,248
+027,Custer,2028,Forecast,661,252
+027,Custer,2029,Forecast,697,246
+027,Custer,2030,Forecast,716,252
+027,Custer,2031,Forecast,737,254
+027,Custer,2032,Forecast,761,255
+027,Custer,2033,Forecast,771,254
+027,Custer,2034,Forecast,789,252
+027,Custer,2035,Forecast,794,249
+027,Custer,2036,Forecast,801,247
+027,Custer,2037,Forecast,818,244
+027,Custer,2038,Forecast,823,239
+027,Custer,2039,Forecast,825,238
+027,Custer,2040,Forecast,825,236
+027,Custer,2041,Forecast,826,235
+027,Custer,2042,Forecast,819,234
+027,Custer,2043,Forecast,820,235
+027,Custer,2044,Forecast,818,236
+027,Custer,2045,Forecast,820,239
+027,Custer,2046,Forecast,817,243
+027,Custer,2047,Forecast,815,246
+027,Custer,2048,Forecast,815,248
+027,Custer,2049,Forecast,815,252
+027,Custer,2050,Forecast,816,257
+027,Custer,2051,Forecast,817,261
+027,Custer,2052,Forecast,820,265
+027,Custer,2053,Forecast,824,268
+027,Custer,2054,Forecast,829,272
+027,Custer,2055,Forecast,836,274
+027,Custer,2056,Forecast,842,279
+027,Custer,2057,Forecast,851,280
+027,Custer,2058,Forecast,859,284
+027,Custer,2059,Forecast,871,285
+027,Custer,2060,Forecast,878,288
+029,Delta,1990,Estimate,3900,1250
+029,Delta,1991,Estimate,3937,1259
+029,Delta,1992,Estimate,4048,1293
+029,Delta,1993,Estimate,4294,1370
+029,Delta,1994,Estimate,4489,1432
+029,Delta,1995,Estimate,4637,1475
+029,Delta,1996,Estimate,4726,1503
+029,Delta,1997,Estimate,4769,1514
+029,Delta,1998,Estimate,4913,1556
+029,Delta,1999,Estimate,5008,1586
+029,Delta,2000,Estimate,5091,1609
+029,Delta,2001,Estimate,5124,1591
+029,Delta,2002,Estimate,5160,1577
+029,Delta,2003,Estimate,5134,1594
+029,Delta,2004,Estimate,5135,1620
+029,Delta,2005,Estimate,5050,1629
+029,Delta,2006,Estimate,5040,1657
+029,Delta,2007,Estimate,5009,1666
+029,Delta,2008,Estimate,5026,1707
+029,Delta,2009,Estimate,5039,1715
+029,Delta,2010,Estimate,5075,1731
+029,Delta,2011,Estimate,4931,1655
+029,Delta,2012,Estimate,4890,1642
+029,Delta,2013,Estimate,4835,1592
+029,Delta,2014,Estimate,4743,1527
+029,Delta,2015,Estimate,4723,1475
+029,Delta,2016,Estimate,4787,1475
+029,Delta,2017,Estimate,4821,1447
+029,Delta,2018,Estimate,4839,1437
+029,Delta,2019,Estimate,4831,1429
+029,Delta,2020,Estimate,4723,1421
+029,Delta,2021,Estimate,4657,1451
+029,Delta,2022,Estimate,4602,1434
+029,Delta,2023,Estimate,4555,1417
+029,Delta,2024,Estimate,4509,1432
+029,Delta,2025,Forecast,4514,1438
+029,Delta,2026,Forecast,4528,1427
+029,Delta,2027,Forecast,4466,1446
+029,Delta,2028,Forecast,4440,1466
+029,Delta,2029,Forecast,4432,1472
+029,Delta,2030,Forecast,4435,1478
+029,Delta,2031,Forecast,4431,1479
+029,Delta,2032,Forecast,4439,1475
+029,Delta,2033,Forecast,4458,1470
+029,Delta,2034,Forecast,4472,1465
+029,Delta,2035,Forecast,4480,1458
+029,Delta,2036,Forecast,4486,1450
+029,Delta,2037,Forecast,4494,1443
+029,Delta,2038,Forecast,4498,1436
+029,Delta,2039,Forecast,4485,1428
+029,Delta,2040,Forecast,4501,1422
+029,Delta,2041,Forecast,4514,1416
+029,Delta,2042,Forecast,4517,1411
+029,Delta,2043,Forecast,4516,1405
+029,Delta,2044,Forecast,4507,1400
+029,Delta,2045,Forecast,4497,1394
+029,Delta,2046,Forecast,4482,1388
+029,Delta,2047,Forecast,4468,1383
+029,Delta,2048,Forecast,4456,1378
+029,Delta,2049,Forecast,4442,1374
+029,Delta,2050,Forecast,4431,1370
+029,Delta,2051,Forecast,4421,1366
+029,Delta,2052,Forecast,4407,1364
+029,Delta,2053,Forecast,4397,1363
+029,Delta,2054,Forecast,4387,1363
+029,Delta,2055,Forecast,4380,1363
+029,Delta,2056,Forecast,4368,1364
+029,Delta,2057,Forecast,4360,1365
+029,Delta,2058,Forecast,4354,1365
+029,Delta,2059,Forecast,4348,1366
+029,Delta,2060,Forecast,4342,1366
+031,Denver,1990,Estimate,67974,35492
+031,Denver,1991,Estimate,69413,35591
+031,Denver,1992,Estimate,71624,36193
+031,Denver,1993,Estimate,73850,36770
+031,Denver,1994,Estimate,74591,36593
+031,Denver,1995,Estimate,75412,36449
+031,Denver,1996,Estimate,77294,36805
+031,Denver,1997,Estimate,78990,37044
+031,Denver,1998,Estimate,80210,37049
+031,Denver,1999,Estimate,82367,37466
+031,Denver,2000,Estimate,84399,37804
+031,Denver,2001,Estimate,83051,39503
+031,Denver,2002,Estimate,80467,40822
+031,Denver,2003,Estimate,79314,42576
+031,Denver,2004,Estimate,78092,43844
+031,Denver,2005,Estimate,77335,44691
+031,Denver,2006,Estimate,78249,44839
+031,Denver,2007,Estimate,80079,45005
+031,Denver,2008,Estimate,82122,44869
+031,Denver,2009,Estimate,84225,44659
+031,Denver,2010,Estimate,86257,44060
+031,Denver,2011,Estimate,88234,44178
+031,Denver,2012,Estimate,89843,43620
+031,Denver,2013,Estimate,91505,43303
+031,Denver,2014,Estimate,93151,43267
+031,Denver,2015,Estimate,95253,43740
+031,Denver,2016,Estimate,96625,43375
+031,Denver,2017,Estimate,95544,43351
+031,Denver,2018,Estimate,95732,42498
+031,Denver,2019,Estimate,95695,41414
+031,Denver,2020,Estimate,95260,41175
+031,Denver,2021,Estimate,93618,39322
+031,Denver,2022,Estimate,92203,38664
+031,Denver,2023,Estimate,91092,38321
+031,Denver,2024,Estimate,89918,38346
+031,Denver,2025,Forecast,88164,38068
+031,Denver,2026,Forecast,86443,37742
+031,Denver,2027,Forecast,84678,37894
+031,Denver,2028,Forecast,83582,38248
+031,Denver,2029,Forecast,82391,38537
+031,Denver,2030,Forecast,82056,38869
+031,Denver,2031,Forecast,81802,39148
+031,Denver,2032,Forecast,81652,39410
+031,Denver,2033,Forecast,81591,39620
+031,Denver,2034,Forecast,81281,39795
+031,Denver,2035,Forecast,81570,39939
+031,Denver,2036,Forecast,81856,40055
+031,Denver,2037,Forecast,82241,40143
+031,Denver,2038,Forecast,82627,40194
+031,Denver,2039,Forecast,82940,40208
+031,Denver,2040,Forecast,83447,40169
+031,Denver,2041,Forecast,84010,40073
+031,Denver,2042,Forecast,84446,39923
+031,Denver,2043,Forecast,84845,39720
+031,Denver,2044,Forecast,85129,39468
+031,Denver,2045,Forecast,85323,39184
+031,Denver,2046,Forecast,85420,38881
+031,Denver,2047,Forecast,85428,38570
+031,Denver,2048,Forecast,85351,38261
+031,Denver,2049,Forecast,85197,37962
+031,Denver,2050,Forecast,84972,37682
+031,Denver,2051,Forecast,84676,37428
+031,Denver,2052,Forecast,84320,37198
+031,Denver,2053,Forecast,83906,36992
+031,Denver,2054,Forecast,83449,36818
+031,Denver,2055,Forecast,82961,36668
+031,Denver,2056,Forecast,82447,36548
+031,Denver,2057,Forecast,81923,36456
+031,Denver,2058,Forecast,81400,36389
+031,Denver,2059,Forecast,80895,36344
+031,Denver,2060,Forecast,80421,36313
+033,Dolores,1990,Estimate,311,105
+033,Dolores,1991,Estimate,289,95
+033,Dolores,1992,Estimate,277,91
+033,Dolores,1993,Estimate,276,90
+033,Dolores,1994,Estimate,288,90
+033,Dolores,1995,Estimate,294,91
+033,Dolores,1996,Estimate,302,94
+033,Dolores,1997,Estimate,300,93
+033,Dolores,1998,Estimate,311,93
+033,Dolores,1999,Estimate,311,94
+033,Dolores,2000,Estimate,312,92
+033,Dolores,2001,Estimate,308,94
+033,Dolores,2002,Estimate,303,101
+033,Dolores,2003,Estimate,296,106
+033,Dolores,2004,Estimate,288,105
+033,Dolores,2005,Estimate,292,108
+033,Dolores,2006,Estimate,297,114
+033,Dolores,2007,Estimate,305,113
+033,Dolores,2008,Estimate,316,124
+033,Dolores,2009,Estimate,303,122
+033,Dolores,2010,Estimate,328,134
+033,Dolores,2011,Estimate,332,124
+033,Dolores,2012,Estimate,336,121
+033,Dolores,2013,Estimate,339,112
+033,Dolores,2014,Estimate,341,96
+033,Dolores,2015,Estimate,328,95
+033,Dolores,2016,Estimate,325,91
+033,Dolores,2017,Estimate,328,83
+033,Dolores,2018,Estimate,322,78
+033,Dolores,2019,Estimate,315,70
+033,Dolores,2020,Estimate,313,65
+033,Dolores,2021,Estimate,327,73
+033,Dolores,2022,Estimate,348,91
+033,Dolores,2023,Estimate,366,101
+033,Dolores,2024,Estimate,343,99
+033,Dolores,2025,Forecast,327,100
+033,Dolores,2026,Forecast,320,100
+033,Dolores,2027,Forecast,320,94
+033,Dolores,2028,Forecast,326,89
+033,Dolores,2029,Forecast,320,95
+033,Dolores,2030,Forecast,316,95
+033,Dolores,2031,Forecast,312,95
+033,Dolores,2032,Forecast,315,92
+033,Dolores,2033,Forecast,310,90
+033,Dolores,2034,Forecast,312,90
+033,Dolores,2035,Forecast,314,90
+033,Dolores,2036,Forecast,312,86
+033,Dolores,2037,Forecast,317,86
+033,Dolores,2038,Forecast,317,85
+033,Dolores,2039,Forecast,314,83
+033,Dolores,2040,Forecast,310,83
+033,Dolores,2041,Forecast,304,82
+033,Dolores,2042,Forecast,306,82
+033,Dolores,2043,Forecast,304,84
+033,Dolores,2044,Forecast,301,84
+033,Dolores,2045,Forecast,300,84
+033,Dolores,2046,Forecast,298,84
+033,Dolores,2047,Forecast,295,84
+033,Dolores,2048,Forecast,293,84
+033,Dolores,2049,Forecast,291,84
+033,Dolores,2050,Forecast,291,84
+033,Dolores,2051,Forecast,291,84
+033,Dolores,2052,Forecast,290,84
+033,Dolores,2053,Forecast,290,84
+033,Dolores,2054,Forecast,290,84
+033,Dolores,2055,Forecast,290,84
+033,Dolores,2056,Forecast,290,84
+033,Dolores,2057,Forecast,290,84
+033,Dolores,2058,Forecast,290,85
+033,Dolores,2059,Forecast,292,85
+033,Dolores,2060,Forecast,292,85
+035,Douglas,1990,Estimate,13152,5952
+035,Douglas,1991,Estimate,14295,6445
+035,Douglas,1992,Estimate,16197,7280
+035,Douglas,1993,Estimate,17913,8032
+035,Douglas,1994,Estimate,19987,8937
+035,Douglas,1995,Estimate,22485,10026
+035,Douglas,1996,Estimate,24904,11073
+035,Douglas,1997,Estimate,28152,12482
+035,Douglas,1998,Estimate,31502,13927
+035,Douglas,1999,Estimate,35513,15656
+035,Douglas,2000,Estimate,39593,17405
+035,Douglas,2001,Estimate,44147,18458
+035,Douglas,2002,Estimate,46895,18868
+035,Douglas,2003,Estimate,49773,19586
+035,Douglas,2004,Estimate,52866,20288
+035,Douglas,2005,Estimate,55482,20902
+035,Douglas,2006,Estimate,58462,21890
+035,Douglas,2007,Estimate,61174,22550
+035,Douglas,2008,Estimate,63182,22642
+035,Douglas,2009,Estimate,64505,22223
+035,Douglas,2010,Estimate,65439,21631
+035,Douglas,2011,Estimate,66808,20729
+035,Douglas,2012,Estimate,68343,19901
+035,Douglas,2013,Estimate,69579,19543
+035,Douglas,2014,Estimate,70788,19444
+035,Douglas,2015,Estimate,71539,19340
+035,Douglas,2016,Estimate,71793,19382
+035,Douglas,2017,Estimate,72127,19556
+035,Douglas,2018,Estimate,72034,19565
+035,Douglas,2019,Estimate,72033,19587
+035,Douglas,2020,Estimate,72818,19729
+035,Douglas,2021,Estimate,73648,19876
+035,Douglas,2022,Estimate,73625,20112
+035,Douglas,2023,Estimate,74177,20599
+035,Douglas,2024,Estimate,74682,21079
+035,Douglas,2025,Forecast,74548,21205
+035,Douglas,2026,Forecast,74524,21465
+035,Douglas,2027,Forecast,74737,21482
+035,Douglas,2028,Forecast,75145,21504
+035,Douglas,2029,Forecast,75521,21544
+035,Douglas,2030,Forecast,75691,21716
+035,Douglas,2031,Forecast,75839,21894
+035,Douglas,2032,Forecast,75821,22086
+035,Douglas,2033,Forecast,76043,22269
+035,Douglas,2034,Forecast,76321,22437
+035,Douglas,2035,Forecast,76620,22600
+035,Douglas,2036,Forecast,77039,22747
+035,Douglas,2037,Forecast,77443,22886
+035,Douglas,2038,Forecast,77836,23011
+035,Douglas,2039,Forecast,78311,23120
+035,Douglas,2040,Forecast,78540,23203
+035,Douglas,2041,Forecast,78742,23259
+035,Douglas,2042,Forecast,78951,23288
+035,Douglas,2043,Forecast,79269,23295
+035,Douglas,2044,Forecast,79564,23280
+035,Douglas,2045,Forecast,79814,23245
+035,Douglas,2046,Forecast,80019,23191
+035,Douglas,2047,Forecast,80183,23121
+035,Douglas,2048,Forecast,80300,23036
+035,Douglas,2049,Forecast,80370,22940
+035,Douglas,2050,Forecast,80397,22837
+035,Douglas,2051,Forecast,80376,22729
+035,Douglas,2052,Forecast,80308,22620
+035,Douglas,2053,Forecast,80186,22514
+035,Douglas,2054,Forecast,80016,22413
+035,Douglas,2055,Forecast,79796,22315
+035,Douglas,2056,Forecast,79541,22223
+035,Douglas,2057,Forecast,79254,22128
+035,Douglas,2058,Forecast,78939,22034
+035,Douglas,2059,Forecast,78605,21937
+035,Douglas,2060,Forecast,78248,21838
+037,Eagle,1990,Estimate,3652,2025
+037,Eagle,1991,Estimate,3872,2085
+037,Eagle,1992,Estimate,4114,2167
+037,Eagle,1993,Estimate,4419,2274
+037,Eagle,1994,Estimate,4778,2402
+037,Eagle,1995,Estimate,5082,2494
+037,Eagle,1996,Estimate,5413,2592
+037,Eagle,1997,Estimate,5781,2700
+037,Eagle,1998,Estimate,6173,2806
+037,Eagle,1999,Estimate,6546,2897
+037,Eagle,2000,Estimate,7094,3054
+037,Eagle,2001,Estimate,7132,3245
+037,Eagle,2002,Estimate,7188,3414
+037,Eagle,2003,Estimate,7263,3535
+037,Eagle,2004,Estimate,7349,3697
+037,Eagle,2005,Estimate,7629,3701
+037,Eagle,2006,Estimate,7844,3730
+037,Eagle,2007,Estimate,8154,3784
+037,Eagle,2008,Estimate,8421,3846
+037,Eagle,2009,Estimate,8710,3884
+037,Eagle,2010,Estimate,8886,3876
+037,Eagle,2011,Estimate,8957,3724
+037,Eagle,2012,Estimate,9024,3627
+037,Eagle,2013,Estimate,9124,3456
+037,Eagle,2014,Estimate,9182,3333
+037,Eagle,2015,Estimate,9282,3249
+037,Eagle,2016,Estimate,9246,3254
+037,Eagle,2017,Estimate,9243,3179
+037,Eagle,2018,Estimate,9193,3157
+037,Eagle,2019,Estimate,9227,3075
+037,Eagle,2020,Estimate,9191,3004
+037,Eagle,2021,Estimate,9098,2838
+037,Eagle,2022,Estimate,8994,2740
+037,Eagle,2023,Estimate,8824,2653
+037,Eagle,2024,Estimate,8606,2545
+037,Eagle,2025,Forecast,8380,2468
+037,Eagle,2026,Forecast,8166,2419
+037,Eagle,2027,Forecast,7974,2368
+037,Eagle,2028,Forecast,7764,2341
+037,Eagle,2029,Forecast,7637,2372
+037,Eagle,2030,Forecast,7445,2412
+037,Eagle,2031,Forecast,7379,2462
+037,Eagle,2032,Forecast,7240,2523
+037,Eagle,2033,Forecast,7125,2590
+037,Eagle,2034,Forecast,6944,2662
+037,Eagle,2035,Forecast,6833,2738
+037,Eagle,2036,Forecast,6773,2810
+037,Eagle,2037,Forecast,6747,2879
+037,Eagle,2038,Forecast,6773,2944
+037,Eagle,2039,Forecast,6820,3001
+037,Eagle,2040,Forecast,6878,3052
+037,Eagle,2041,Forecast,6960,3095
+037,Eagle,2042,Forecast,7106,3128
+037,Eagle,2043,Forecast,7260,3153
+037,Eagle,2044,Forecast,7410,3168
+037,Eagle,2045,Forecast,7567,3174
+037,Eagle,2046,Forecast,7715,3175
+037,Eagle,2047,Forecast,7860,3169
+037,Eagle,2048,Forecast,7994,3158
+037,Eagle,2049,Forecast,8111,3144
+037,Eagle,2050,Forecast,8213,3126
+037,Eagle,2051,Forecast,8296,3106
+037,Eagle,2052,Forecast,8362,3087
+037,Eagle,2053,Forecast,8410,3069
+037,Eagle,2054,Forecast,8443,3054
+037,Eagle,2055,Forecast,8460,3040
+037,Eagle,2056,Forecast,8463,3033
+037,Eagle,2057,Forecast,8453,3029
+037,Eagle,2058,Forecast,8433,3029
+037,Eagle,2059,Forecast,8411,3034
+037,Eagle,2060,Forecast,8383,3044
+039,Elbert,1990,Estimate,2291,719
+039,Elbert,1991,Estimate,2412,746
+039,Elbert,1992,Estimate,2532,771
+039,Elbert,1993,Estimate,2717,819
+039,Elbert,1994,Estimate,3026,901
+039,Elbert,1995,Estimate,3376,995
+039,Elbert,1996,Estimate,3728,1085
+039,Elbert,1997,Estimate,4010,1153
+039,Elbert,1998,Estimate,4259,1208
+039,Elbert,1999,Estimate,4512,1264
+039,Elbert,2000,Estimate,4752,1318
+039,Elbert,2001,Estimate,4946,1337
+039,Elbert,2002,Estimate,4933,1318
+039,Elbert,2003,Estimate,4930,1296
+039,Elbert,2004,Estimate,4929,1270
+039,Elbert,2005,Estimate,4908,1255
+039,Elbert,2006,Estimate,4854,1226
+039,Elbert,2007,Estimate,4784,1181
+039,Elbert,2008,Estimate,4758,1158
+039,Elbert,2009,Estimate,4727,1130
+039,Elbert,2010,Estimate,4676,1128
+039,Elbert,2011,Estimate,4579,1040
+039,Elbert,2012,Estimate,4474,982
+039,Elbert,2013,Estimate,4375,946
+039,Elbert,2014,Estimate,4334,923
+039,Elbert,2015,Estimate,4321,976
+039,Elbert,2016,Estimate,4292,1063
+039,Elbert,2017,Estimate,4260,1158
+039,Elbert,2018,Estimate,4270,1219
+039,Elbert,2019,Estimate,4301,1232
+039,Elbert,2020,Estimate,4339,1271
+039,Elbert,2021,Estimate,4522,1323
+039,Elbert,2022,Estimate,4674,1368
+039,Elbert,2023,Estimate,4904,1457
+039,Elbert,2024,Estimate,5020,1502
+039,Elbert,2025,Forecast,5166,1539
+039,Elbert,2026,Forecast,5306,1597
+039,Elbert,2027,Forecast,5352,1633
+039,Elbert,2028,Forecast,5464,1667
+039,Elbert,2029,Forecast,5573,1698
+039,Elbert,2030,Forecast,5705,1702
+039,Elbert,2031,Forecast,5859,1700
+039,Elbert,2032,Forecast,6005,1689
+039,Elbert,2033,Forecast,6101,1670
+039,Elbert,2034,Forecast,6167,1647
+039,Elbert,2035,Forecast,6202,1616
+039,Elbert,2036,Forecast,6236,1583
+039,Elbert,2037,Forecast,6252,1546
+039,Elbert,2038,Forecast,6226,1508
+039,Elbert,2039,Forecast,6192,1469
+039,Elbert,2040,Forecast,6111,1432
+039,Elbert,2041,Forecast,6012,1396
+039,Elbert,2042,Forecast,5909,1369
+039,Elbert,2043,Forecast,5784,1349
+039,Elbert,2044,Forecast,5657,1337
+039,Elbert,2045,Forecast,5526,1331
+039,Elbert,2046,Forecast,5405,1331
+039,Elbert,2047,Forecast,5292,1336
+039,Elbert,2048,Forecast,5190,1344
+039,Elbert,2049,Forecast,5101,1353
+039,Elbert,2050,Forecast,5025,1364
+039,Elbert,2051,Forecast,4962,1375
+039,Elbert,2052,Forecast,4910,1382
+039,Elbert,2053,Forecast,4869,1387
+039,Elbert,2054,Forecast,4835,1393
+039,Elbert,2055,Forecast,4809,1394
+039,Elbert,2056,Forecast,4789,1393
+039,Elbert,2057,Forecast,4773,1390
+039,Elbert,2058,Forecast,4761,1384
+039,Elbert,2059,Forecast,4752,1379
+039,Elbert,2060,Forecast,4744,1371
+041,El Paso,1990,Estimate,75651,34263
+041,El Paso,1991,Estimate,77694,34423
+041,El Paso,1992,Estimate,81347,35404
+041,El Paso,1993,Estimate,84536,36141
+041,El Paso,1994,Estimate,88733,37258
+041,El Paso,1995,Estimate,91767,37836
+041,El Paso,1996,Estimate,93669,37918
+041,El Paso,1997,Estimate,96080,38183
+041,El Paso,1998,Estimate,98790,38534
+041,El Paso,1999,Estimate,101436,38830
+041,El Paso,2000,Estimate,104146,39119
+041,El Paso,2001,Estimate,107410,40158
+041,El Paso,2002,Estimate,108613,40641
+041,El Paso,2003,Estimate,108816,41161
+041,El Paso,2004,Estimate,109097,41287
+041,El Paso,2005,Estimate,109916,41927
+041,El Paso,2006,Estimate,112184,42786
+041,El Paso,2007,Estimate,113129,43010
+041,El Paso,2008,Estimate,114228,43523
+041,El Paso,2009,Estimate,115014,44033
+041,El Paso,2010,Estimate,118126,45338
+041,El Paso,2011,Estimate,119598,45600
+041,El Paso,2012,Estimate,120351,45509
+041,El Paso,2013,Estimate,121102,45436
+041,El Paso,2014,Estimate,121088,45646
+041,El Paso,2015,Estimate,121758,46325
+041,El Paso,2016,Estimate,123245,46640
+041,El Paso,2017,Estimate,124204,46794
+041,El Paso,2018,Estimate,125671,46924
+041,El Paso,2019,Estimate,126199,46405
+041,El Paso,2020,Estimate,126429,45943
+041,El Paso,2021,Estimate,125361,45776
+041,El Paso,2022,Estimate,123038,45644
+041,El Paso,2023,Estimate,122062,45404
+041,El Paso,2024,Estimate,119980,45275
+041,El Paso,2025,Forecast,116696,45280
+041,El Paso,2026,Forecast,113142,45231
+041,El Paso,2027,Forecast,111448,45403
+041,El Paso,2028,Forecast,111448,46026
+041,El Paso,2029,Forecast,112309,46949
+041,El Paso,2030,Forecast,111186,47955
+041,El Paso,2031,Forecast,110586,48899
+041,El Paso,2032,Forecast,112738,49717
+041,El Paso,2033,Forecast,115229,50400
+041,El Paso,2034,Forecast,117088,50939
+041,El Paso,2035,Forecast,118995,51330
+041,El Paso,2036,Forecast,120828,51570
+041,El Paso,2037,Forecast,122565,51713
+041,El Paso,2038,Forecast,124072,51761
+041,El Paso,2039,Forecast,125125,51713
+041,El Paso,2040,Forecast,126180,51582
+041,El Paso,2041,Forecast,127418,51380
+041,El Paso,2042,Forecast,128799,51124
+041,El Paso,2043,Forecast,130054,50814
+041,El Paso,2044,Forecast,131084,50464
+041,El Paso,2045,Forecast,131888,50080
+041,El Paso,2046,Forecast,132454,49663
+041,El Paso,2047,Forecast,132804,49225
+041,El Paso,2048,Forecast,132923,48799
+041,El Paso,2049,Forecast,132746,48401
+041,El Paso,2050,Forecast,132392,48036
+041,El Paso,2051,Forecast,131917,47717
+041,El Paso,2052,Forecast,131357,47477
+041,El Paso,2053,Forecast,130755,47303
+041,El Paso,2054,Forecast,130103,47194
+041,El Paso,2055,Forecast,129423,47153
+041,El Paso,2056,Forecast,128723,47174
+041,El Paso,2057,Forecast,128094,47219
+041,El Paso,2058,Forecast,127462,47287
+041,El Paso,2059,Forecast,126839,47373
+041,El Paso,2060,Forecast,126228,47470
+043,Fremont,1990,Estimate,5473,1824
+043,Fremont,1991,Estimate,5430,1789
+043,Fremont,1992,Estimate,5655,1851
+043,Fremont,1993,Estimate,6059,1969
+043,Fremont,1994,Estimate,6377,2055
+043,Fremont,1995,Estimate,6625,2121
+043,Fremont,1996,Estimate,6784,2155
+043,Fremont,1997,Estimate,6895,2173
+043,Fremont,1998,Estimate,6996,2185
+043,Fremont,1999,Estimate,7154,2216
+043,Fremont,2000,Estimate,7289,2237
+043,Fremont,2001,Estimate,7309,2208
+043,Fremont,2002,Estimate,7247,2202
+043,Fremont,2003,Estimate,7031,2196
+043,Fremont,2004,Estimate,6808,2172
+043,Fremont,2005,Estimate,6650,2114
+043,Fremont,2006,Estimate,6583,2087
+043,Fremont,2007,Estimate,6456,2067
+043,Fremont,2008,Estimate,6319,2066
+043,Fremont,2009,Estimate,6162,2077
+043,Fremont,2010,Estimate,6101,2105
+043,Fremont,2011,Estimate,6089,2066
+043,Fremont,2012,Estimate,6041,2006
+043,Fremont,2013,Estimate,6011,1909
+043,Fremont,2014,Estimate,5936,1882
+043,Fremont,2015,Estimate,5874,1912
+043,Fremont,2016,Estimate,5877,1923
+043,Fremont,2017,Estimate,5885,1925
+043,Fremont,2018,Estimate,5824,1972
+043,Fremont,2019,Estimate,5804,1974
+043,Fremont,2020,Estimate,5750,2026
+043,Fremont,2021,Estimate,5747,2024
+043,Fremont,2022,Estimate,5773,1972
+043,Fremont,2023,Estimate,5859,1994
+043,Fremont,2024,Estimate,5855,1908
+043,Fremont,2025,Forecast,5866,1822
+043,Fremont,2026,Forecast,5835,1775
+043,Fremont,2027,Forecast,5777,1774
+043,Fremont,2028,Forecast,5817,1710
+043,Fremont,2029,Forecast,5785,1709
+043,Fremont,2030,Forecast,5714,1694
+043,Fremont,2031,Forecast,5718,1681
+043,Fremont,2032,Forecast,5679,1668
+043,Fremont,2033,Forecast,5632,1656
+043,Fremont,2034,Forecast,5569,1645
+043,Fremont,2035,Forecast,5508,1635
+043,Fremont,2036,Forecast,5449,1626
+043,Fremont,2037,Forecast,5397,1622
+043,Fremont,2038,Forecast,5329,1618
+043,Fremont,2039,Forecast,5291,1615
+043,Fremont,2040,Forecast,5291,1614
+043,Fremont,2041,Forecast,5240,1610
+043,Fremont,2042,Forecast,5238,1607
+043,Fremont,2043,Forecast,5224,1604
+043,Fremont,2044,Forecast,5212,1600
+043,Fremont,2045,Forecast,5201,1593
+043,Fremont,2046,Forecast,5194,1587
+043,Fremont,2047,Forecast,5186,1580
+043,Fremont,2048,Forecast,5181,1574
+043,Fremont,2049,Forecast,5180,1569
+043,Fremont,2050,Forecast,5176,1564
+043,Fremont,2051,Forecast,5175,1558
+043,Fremont,2052,Forecast,5176,1555
+043,Fremont,2053,Forecast,5175,1552
+043,Fremont,2054,Forecast,5171,1548
+043,Fremont,2055,Forecast,5168,1546
+043,Fremont,2056,Forecast,5162,1545
+043,Fremont,2057,Forecast,5159,1545
+043,Fremont,2058,Forecast,5154,1543
+043,Fremont,2059,Forecast,5150,1542
+043,Fremont,2060,Forecast,5147,1541
+045,Garfield,1990,Estimate,5869,2478
+045,Garfield,1991,Estimate,6089,2539
+045,Garfield,1992,Estimate,6121,2525
+045,Garfield,1993,Estimate,6368,2597
+045,Garfield,1994,Estimate,6750,2725
+045,Garfield,1995,Estimate,7132,2850
+045,Garfield,1996,Estimate,7386,2917
+045,Garfield,1997,Estimate,7630,2982
+045,Garfield,1998,Estimate,8098,3130
+045,Garfield,1999,Estimate,8396,3208
+045,Garfield,2000,Estimate,8709,3289
+045,Garfield,2001,Estimate,8985,3441
+045,Garfield,2002,Estimate,9074,3543
+045,Garfield,2003,Estimate,9054,3682
+045,Garfield,2004,Estimate,9033,3838
+045,Garfield,2005,Estimate,9162,3964
+045,Garfield,2006,Estimate,9526,4121
+045,Garfield,2007,Estimate,9916,4248
+045,Garfield,2008,Estimate,10219,4352
+045,Garfield,2009,Estimate,10506,4416
+045,Garfield,2010,Estimate,10666,4457
+045,Garfield,2011,Estimate,10717,4378
+045,Garfield,2012,Estimate,10836,4223
+045,Garfield,2013,Estimate,10966,4128
+045,Garfield,2014,Estimate,11133,3993
+045,Garfield,2015,Estimate,11198,3886
+045,Garfield,2016,Estimate,11321,3877
+045,Garfield,2017,Estimate,11366,3927
+045,Garfield,2018,Estimate,11468,3919
+045,Garfield,2019,Estimate,11465,3916
+045,Garfield,2020,Estimate,11468,3953
+045,Garfield,2021,Estimate,11413,3859
+045,Garfield,2022,Estimate,11415,3786
+045,Garfield,2023,Estimate,11388,3720
+045,Garfield,2024,Estimate,11289,3705
+045,Garfield,2025,Forecast,11172,3657
+045,Garfield,2026,Forecast,11037,3633
+045,Garfield,2027,Forecast,10918,3622
+045,Garfield,2028,Forecast,10799,3644
+045,Garfield,2029,Forecast,10719,3635
+045,Garfield,2030,Forecast,10708,3684
+045,Garfield,2031,Forecast,10615,3745
+045,Garfield,2032,Forecast,10566,3816
+045,Garfield,2033,Forecast,10607,3888
+045,Garfield,2034,Forecast,10574,3962
+045,Garfield,2035,Forecast,10558,4038
+045,Garfield,2036,Forecast,10589,4110
+045,Garfield,2037,Forecast,10650,4182
+045,Garfield,2038,Forecast,10724,4249
+045,Garfield,2039,Forecast,10827,4312
+045,Garfield,2040,Forecast,10945,4368
+045,Garfield,2041,Forecast,11086,4419
+045,Garfield,2042,Forecast,11193,4459
+045,Garfield,2043,Forecast,11349,4485
+045,Garfield,2044,Forecast,11506,4503
+045,Garfield,2045,Forecast,11661,4507
+045,Garfield,2046,Forecast,11805,4499
+045,Garfield,2047,Forecast,11936,4481
+045,Garfield,2048,Forecast,12050,4454
+045,Garfield,2049,Forecast,12144,4419
+045,Garfield,2050,Forecast,12217,4375
+045,Garfield,2051,Forecast,12263,4325
+045,Garfield,2052,Forecast,12294,4273
+045,Garfield,2053,Forecast,12297,4227
+045,Garfield,2054,Forecast,12285,4183
+045,Garfield,2055,Forecast,12249,4147
+045,Garfield,2056,Forecast,12195,4119
+045,Garfield,2057,Forecast,12128,4098
+045,Garfield,2058,Forecast,12049,4083
+045,Garfield,2059,Forecast,11963,4074
+045,Garfield,2060,Forecast,11871,4071
+047,Gilpin,1990,Estimate,541,200
+047,Gilpin,1991,Estimate,537,198
+047,Gilpin,1992,Estimate,557,205
+047,Gilpin,1993,Estimate,571,210
+047,Gilpin,1994,Estimate,586,215
+047,Gilpin,1995,Estimate,603,222
+047,Gilpin,1996,Estimate,617,226
+047,Gilpin,1997,Estimate,648,237
+047,Gilpin,1998,Estimate,673,246
+047,Gilpin,1999,Estimate,711,261
+047,Gilpin,2000,Estimate,739,271
+047,Gilpin,2001,Estimate,723,276
+047,Gilpin,2002,Estimate,692,289
+047,Gilpin,2003,Estimate,667,294
+047,Gilpin,2004,Estimate,640,300
+047,Gilpin,2005,Estimate,656,282
+047,Gilpin,2006,Estimate,625,265
+047,Gilpin,2007,Estimate,620,270
+047,Gilpin,2008,Estimate,625,272
+047,Gilpin,2009,Estimate,658,280
+047,Gilpin,2010,Estimate,681,281
+047,Gilpin,2011,Estimate,688,277
+047,Gilpin,2012,Estimate,698,261
+047,Gilpin,2013,Estimate,698,261
+047,Gilpin,2014,Estimate,723,245
+047,Gilpin,2015,Estimate,732,232
+047,Gilpin,2016,Estimate,735,231
+047,Gilpin,2017,Estimate,726,241
+047,Gilpin,2018,Estimate,715,240
+047,Gilpin,2019,Estimate,703,227
+047,Gilpin,2020,Estimate,727,248
+047,Gilpin,2021,Estimate,760,245
+047,Gilpin,2022,Estimate,763,253
+047,Gilpin,2023,Estimate,818,206
+047,Gilpin,2024,Estimate,810,241
+047,Gilpin,2025,Forecast,827,239
+047,Gilpin,2026,Forecast,849,248
+047,Gilpin,2027,Forecast,867,243
+047,Gilpin,2028,Forecast,881,247
+047,Gilpin,2029,Forecast,904,244
+047,Gilpin,2030,Forecast,933,247
+047,Gilpin,2031,Forecast,942,252
+047,Gilpin,2032,Forecast,957,257
+047,Gilpin,2033,Forecast,980,261
+047,Gilpin,2034,Forecast,996,265
+047,Gilpin,2035,Forecast,1013,271
+047,Gilpin,2036,Forecast,979,272
+047,Gilpin,2037,Forecast,1014,276
+047,Gilpin,2038,Forecast,1021,278
+047,Gilpin,2039,Forecast,1035,281
+047,Gilpin,2040,Forecast,1037,282
+047,Gilpin,2041,Forecast,1045,286
+047,Gilpin,2042,Forecast,1045,287
+047,Gilpin,2043,Forecast,1054,289
+047,Gilpin,2044,Forecast,1058,291
+047,Gilpin,2045,Forecast,1065,292
+047,Gilpin,2046,Forecast,1069,296
+047,Gilpin,2047,Forecast,1074,296
+047,Gilpin,2048,Forecast,1079,297
+047,Gilpin,2049,Forecast,1083,301
+047,Gilpin,2050,Forecast,1089,301
+047,Gilpin,2051,Forecast,1094,302
+047,Gilpin,2052,Forecast,1097,303
+047,Gilpin,2053,Forecast,1099,306
+047,Gilpin,2054,Forecast,1103,307
+047,Gilpin,2055,Forecast,1105,307
+047,Gilpin,2056,Forecast,1108,309
+047,Gilpin,2057,Forecast,1109,310
+047,Gilpin,2058,Forecast,1110,312
+047,Gilpin,2059,Forecast,1110,312
+047,Gilpin,2060,Forecast,1110,314
+049,Grand,1990,Estimate,1485,537
+049,Grand,1991,Estimate,1536,554
+049,Grand,1992,Estimate,1553,562
+049,Grand,1993,Estimate,1592,573
+049,Grand,1994,Estimate,1640,592
+049,Grand,1995,Estimate,1717,619
+049,Grand,1996,Estimate,1787,643
+049,Grand,1997,Estimate,1837,661
+049,Grand,1998,Estimate,1882,678
+049,Grand,1999,Estimate,1944,700
+049,Grand,2000,Estimate,2051,738
+049,Grand,2001,Estimate,2090,787
+049,Grand,2002,Estimate,2061,818
+049,Grand,2003,Estimate,2066,838
+049,Grand,2004,Estimate,2094,839
+049,Grand,2005,Estimate,2094,806
+049,Grand,2006,Estimate,2097,808
+049,Grand,2007,Estimate,2109,806
+049,Grand,2008,Estimate,2141,814
+049,Grand,2009,Estimate,2139,810
+049,Grand,2010,Estimate,2174,821
+049,Grand,2011,Estimate,2174,770
+049,Grand,2012,Estimate,2175,722
+049,Grand,2013,Estimate,2166,664
+049,Grand,2014,Estimate,2174,616
+049,Grand,2015,Estimate,2168,590
+049,Grand,2016,Estimate,2133,623
+049,Grand,2017,Estimate,2069,647
+049,Grand,2018,Estimate,2018,642
+049,Grand,2019,Estimate,1999,634
+049,Grand,2020,Estimate,1979,650
+049,Grand,2021,Estimate,1968,622
+049,Grand,2022,Estimate,1944,610
+049,Grand,2023,Estimate,1907,622
+049,Grand,2024,Estimate,1862,646
+049,Grand,2025,Forecast,1854,653
+049,Grand,2026,Forecast,1805,685
+049,Grand,2027,Forecast,1764,707
+049,Grand,2028,Forecast,1739,733
+049,Grand,2029,Forecast,1753,755
+049,Grand,2030,Forecast,1764,774
+049,Grand,2031,Forecast,1788,792
+049,Grand,2032,Forecast,1803,805
+049,Grand,2033,Forecast,1835,817
+049,Grand,2034,Forecast,1853,827
+049,Grand,2035,Forecast,1872,832
+049,Grand,2036,Forecast,1917,838
+049,Grand,2037,Forecast,1971,840
+049,Grand,2038,Forecast,2001,841
+049,Grand,2039,Forecast,2053,840
+049,Grand,2040,Forecast,2094,840
+049,Grand,2041,Forecast,2132,836
+049,Grand,2042,Forecast,2163,833
+049,Grand,2043,Forecast,2190,828
+049,Grand,2044,Forecast,2206,824
+049,Grand,2045,Forecast,2223,819
+049,Grand,2046,Forecast,2234,814
+049,Grand,2047,Forecast,2239,809
+049,Grand,2048,Forecast,2241,804
+049,Grand,2049,Forecast,2239,800
+049,Grand,2050,Forecast,2234,796
+049,Grand,2051,Forecast,2229,795
+049,Grand,2052,Forecast,2220,791
+049,Grand,2053,Forecast,2210,791
+049,Grand,2054,Forecast,2202,789
+049,Grand,2055,Forecast,2190,791
+049,Grand,2056,Forecast,2182,793
+049,Grand,2057,Forecast,2172,795
+049,Grand,2058,Forecast,2163,800
+049,Grand,2059,Forecast,2157,804
+049,Grand,2060,Forecast,2151,809
+051,Gunnison,1990,Estimate,1473,687
+051,Gunnison,1991,Estimate,1479,669
+051,Gunnison,1992,Estimate,1519,669
+051,Gunnison,1993,Estimate,1584,679
+051,Gunnison,1994,Estimate,1623,677
+051,Gunnison,1995,Estimate,1653,670
+051,Gunnison,1996,Estimate,1677,659
+051,Gunnison,1997,Estimate,1683,640
+051,Gunnison,1998,Estimate,1812,668
+051,Gunnison,1999,Estimate,1841,654
+051,Gunnison,2000,Estimate,1860,636
+051,Gunnison,2001,Estimate,2025,673
+051,Gunnison,2002,Estimate,1987,704
+051,Gunnison,2003,Estimate,1897,738
+051,Gunnison,2004,Estimate,1831,766
+051,Gunnison,2005,Estimate,1828,811
+051,Gunnison,2006,Estimate,1819,807
+051,Gunnison,2007,Estimate,1873,805
+051,Gunnison,2008,Estimate,1924,789
+051,Gunnison,2009,Estimate,1963,779
+051,Gunnison,2010,Estimate,2003,774
+051,Gunnison,2011,Estimate,2072,763
+051,Gunnison,2012,Estimate,2048,780
+051,Gunnison,2013,Estimate,2054,782
+051,Gunnison,2014,Estimate,2060,767
+051,Gunnison,2015,Estimate,2106,765
+051,Gunnison,2016,Estimate,2142,780
+051,Gunnison,2017,Estimate,2212,768
+051,Gunnison,2018,Estimate,2232,746
+051,Gunnison,2019,Estimate,2225,737
+051,Gunnison,2020,Estimate,2188,733
+051,Gunnison,2021,Estimate,2276,725
+051,Gunnison,2022,Estimate,2292,724
+051,Gunnison,2023,Estimate,2294,725
+051,Gunnison,2024,Estimate,2251,726
+051,Gunnison,2025,Forecast,2283,730
+051,Gunnison,2026,Forecast,2288,728
+051,Gunnison,2027,Forecast,2301,730
+051,Gunnison,2028,Forecast,2323,725
+051,Gunnison,2029,Forecast,2364,711
+051,Gunnison,2030,Forecast,2371,699
+051,Gunnison,2031,Forecast,2373,689
+051,Gunnison,2032,Forecast,2378,683
+051,Gunnison,2033,Forecast,2388,678
+051,Gunnison,2034,Forecast,2363,677
+051,Gunnison,2035,Forecast,2358,678
+051,Gunnison,2036,Forecast,2366,684
+051,Gunnison,2037,Forecast,2366,690
+051,Gunnison,2038,Forecast,2363,700
+051,Gunnison,2039,Forecast,2359,711
+051,Gunnison,2040,Forecast,2360,721
+051,Gunnison,2041,Forecast,2356,732
+051,Gunnison,2042,Forecast,2343,741
+051,Gunnison,2043,Forecast,2337,750
+051,Gunnison,2044,Forecast,2333,757
+051,Gunnison,2045,Forecast,2334,762
+051,Gunnison,2046,Forecast,2343,769
+051,Gunnison,2047,Forecast,2350,774
+051,Gunnison,2048,Forecast,2364,779
+051,Gunnison,2049,Forecast,2380,785
+051,Gunnison,2050,Forecast,2396,790
+051,Gunnison,2051,Forecast,2414,793
+051,Gunnison,2052,Forecast,2432,796
+051,Gunnison,2053,Forecast,2449,798
+051,Gunnison,2054,Forecast,2462,800
+051,Gunnison,2055,Forecast,2481,801
+051,Gunnison,2056,Forecast,2496,803
+051,Gunnison,2057,Forecast,2508,806
+051,Gunnison,2058,Forecast,2521,807
+051,Gunnison,2059,Forecast,2534,807
+051,Gunnison,2060,Forecast,2545,809
+053,Hinsdale,1990,Estimate,69,17
+053,Hinsdale,1991,Estimate,65,17
+053,Hinsdale,1992,Estimate,72,21
+053,Hinsdale,1993,Estimate,75,23
+053,Hinsdale,1994,Estimate,86,29
+053,Hinsdale,1995,Estimate,92,32
+053,Hinsdale,1996,Estimate,96,37
+053,Hinsdale,1997,Estimate,103,39
+053,Hinsdale,1998,Estimate,106,44
+053,Hinsdale,1999,Estimate,106,48
+053,Hinsdale,2000,Estimate,106,48
+053,Hinsdale,2001,Estimate,109,47
+053,Hinsdale,2002,Estimate,104,51
+053,Hinsdale,2003,Estimate,97,53
+053,Hinsdale,2004,Estimate,106,49
+053,Hinsdale,2005,Estimate,104,47
+053,Hinsdale,2006,Estimate,105,46
+053,Hinsdale,2007,Estimate,112,47
+053,Hinsdale,2008,Estimate,113,48
+053,Hinsdale,2009,Estimate,106,48
+053,Hinsdale,2010,Estimate,109,57
+053,Hinsdale,2011,Estimate,117,51
+053,Hinsdale,2012,Estimate,124,46
+053,Hinsdale,2013,Estimate,128,44
+053,Hinsdale,2014,Estimate,121,41
+053,Hinsdale,2015,Estimate,124,37
+053,Hinsdale,2016,Estimate,119,35
+053,Hinsdale,2017,Estimate,111,35
+053,Hinsdale,2018,Estimate,115,26
+053,Hinsdale,2019,Estimate,111,27
+053,Hinsdale,2020,Estimate,120,19
+053,Hinsdale,2021,Estimate,117,20
+053,Hinsdale,2022,Estimate,113,20
+053,Hinsdale,2023,Estimate,111,22
+053,Hinsdale,2024,Estimate,105,21
+053,Hinsdale,2025,Forecast,96,20
+053,Hinsdale,2026,Forecast,81,22
+053,Hinsdale,2027,Forecast,77,23
+053,Hinsdale,2028,Forecast,65,23
+053,Hinsdale,2029,Forecast,63,26
+053,Hinsdale,2030,Forecast,65,28
+053,Hinsdale,2031,Forecast,62,30
+053,Hinsdale,2032,Forecast,64,32
+053,Hinsdale,2033,Forecast,56,33
+053,Hinsdale,2034,Forecast,62,34
+053,Hinsdale,2035,Forecast,65,35
+053,Hinsdale,2036,Forecast,69,36
+053,Hinsdale,2037,Forecast,71,37
+053,Hinsdale,2038,Forecast,73,38
+053,Hinsdale,2039,Forecast,78,40
+053,Hinsdale,2040,Forecast,81,40
+053,Hinsdale,2041,Forecast,82,39
+053,Hinsdale,2042,Forecast,87,38
+053,Hinsdale,2043,Forecast,91,37
+053,Hinsdale,2044,Forecast,94,36
+053,Hinsdale,2045,Forecast,96,36
+053,Hinsdale,2046,Forecast,98,35
+053,Hinsdale,2047,Forecast,99,35
+053,Hinsdale,2048,Forecast,99,34
+053,Hinsdale,2049,Forecast,99,33
+053,Hinsdale,2050,Forecast,99,32
+053,Hinsdale,2051,Forecast,99,31
+053,Hinsdale,2052,Forecast,98,30
+053,Hinsdale,2053,Forecast,96,29
+053,Hinsdale,2054,Forecast,94,28
+053,Hinsdale,2055,Forecast,92,26
+053,Hinsdale,2056,Forecast,90,25
+053,Hinsdale,2057,Forecast,87,24
+053,Hinsdale,2058,Forecast,84,23
+053,Hinsdale,2059,Forecast,81,22
+053,Hinsdale,2060,Forecast,79,21
+055,Huerfano,1990,Estimate,1199,359
+055,Huerfano,1991,Estimate,1184,350
+055,Huerfano,1992,Estimate,1186,347
+055,Huerfano,1993,Estimate,1214,352
+055,Huerfano,1994,Estimate,1280,366
+055,Huerfano,1995,Estimate,1301,368
+055,Huerfano,1996,Estimate,1318,366
+055,Huerfano,1997,Estimate,1341,370
+055,Huerfano,1998,Estimate,1335,362
+055,Huerfano,1999,Estimate,1318,353
+055,Huerfano,2000,Estimate,1293,339
+055,Huerfano,2001,Estimate,1272,349
+055,Huerfano,2002,Estimate,1255,351
+055,Huerfano,2003,Estimate,1218,385
+055,Huerfano,2004,Estimate,1132,367
+055,Huerfano,2005,Estimate,1115,385
+055,Huerfano,2006,Estimate,1062,367
+055,Huerfano,2007,Estimate,1057,346
+055,Huerfano,2008,Estimate,1046,332
+055,Huerfano,2009,Estimate,920,279
+055,Huerfano,2010,Estimate,894,273
+055,Huerfano,2011,Estimate,843,274
+055,Huerfano,2012,Estimate,820,282
+055,Huerfano,2013,Estimate,819,271
+055,Huerfano,2014,Estimate,820,257
+055,Huerfano,2015,Estimate,827,263
+055,Huerfano,2016,Estimate,831,262
+055,Huerfano,2017,Estimate,852,249
+055,Huerfano,2018,Estimate,868,249
+055,Huerfano,2019,Estimate,859,246
+055,Huerfano,2020,Estimate,843,243
+055,Huerfano,2021,Estimate,832,242
+055,Huerfano,2022,Estimate,833,242
+055,Huerfano,2023,Estimate,824,230
+055,Huerfano,2024,Estimate,832,234
+055,Huerfano,2025,Forecast,830,239
+055,Huerfano,2026,Forecast,822,246
+055,Huerfano,2027,Forecast,814,250
+055,Huerfano,2028,Forecast,796,259
+055,Huerfano,2029,Forecast,795,256
+055,Huerfano,2030,Forecast,780,251
+055,Huerfano,2031,Forecast,768,244
+055,Huerfano,2032,Forecast,777,235
+055,Huerfano,2033,Forecast,759,230
+055,Huerfano,2034,Forecast,745,224
+055,Huerfano,2035,Forecast,730,218
+055,Huerfano,2036,Forecast,717,212
+055,Huerfano,2037,Forecast,712,207
+055,Huerfano,2038,Forecast,703,203
+055,Huerfano,2039,Forecast,697,199
+055,Huerfano,2040,Forecast,688,197
+055,Huerfano,2041,Forecast,686,196
+055,Huerfano,2042,Forecast,672,194
+055,Huerfano,2043,Forecast,660,192
+055,Huerfano,2044,Forecast,649,192
+055,Huerfano,2045,Forecast,637,192
+055,Huerfano,2046,Forecast,627,190
+055,Huerfano,2047,Forecast,619,189
+055,Huerfano,2048,Forecast,610,187
+055,Huerfano,2049,Forecast,604,186
+055,Huerfano,2050,Forecast,597,186
+055,Huerfano,2051,Forecast,592,183
+055,Huerfano,2052,Forecast,588,181
+055,Huerfano,2053,Forecast,584,181
+055,Huerfano,2054,Forecast,582,177
+055,Huerfano,2055,Forecast,578,176
+055,Huerfano,2056,Forecast,574,173
+055,Huerfano,2057,Forecast,570,171
+055,Huerfano,2058,Forecast,567,171
+055,Huerfano,2059,Forecast,565,168
+055,Huerfano,2060,Forecast,560,166
+057,Jackson,1990,Estimate,300,115
+057,Jackson,1991,Estimate,294,109
+057,Jackson,1992,Estimate,299,108
+057,Jackson,1993,Estimate,312,110
+057,Jackson,1994,Estimate,315,107
+057,Jackson,1995,Estimate,313,103
+057,Jackson,1996,Estimate,309,99
+057,Jackson,1997,Estimate,312,96
+057,Jackson,1998,Estimate,315,93
+057,Jackson,1999,Estimate,314,90
+057,Jackson,2000,Estimate,314,89
+057,Jackson,2001,Estimate,309,90
+057,Jackson,2002,Estimate,295,85
+057,Jackson,2003,Estimate,288,81
+057,Jackson,2004,Estimate,267,74
+057,Jackson,2005,Estimate,243,67
+057,Jackson,2006,Estimate,238,60
+057,Jackson,2007,Estimate,211,55
+057,Jackson,2008,Estimate,206,49
+057,Jackson,2009,Estimate,214,54
+057,Jackson,2010,Estimate,200,65
+057,Jackson,2011,Estimate,200,63
+057,Jackson,2012,Estimate,208,54
+057,Jackson,2013,Estimate,212,48
+057,Jackson,2014,Estimate,207,55
+057,Jackson,2015,Estimate,201,57
+057,Jackson,2016,Estimate,202,59
+057,Jackson,2017,Estimate,192,63
+057,Jackson,2018,Estimate,187,66
+057,Jackson,2019,Estimate,192,56
+057,Jackson,2020,Estimate,185,54
+057,Jackson,2021,Estimate,186,50
+057,Jackson,2022,Estimate,175,41
+057,Jackson,2023,Estimate,176,39
+057,Jackson,2024,Estimate,166,41
+057,Jackson,2025,Forecast,152,43
+057,Jackson,2026,Forecast,141,47
+057,Jackson,2027,Forecast,138,50
+057,Jackson,2028,Forecast,145,48
+057,Jackson,2029,Forecast,147,49
+057,Jackson,2030,Forecast,145,47
+057,Jackson,2031,Forecast,149,45
+057,Jackson,2032,Forecast,148,45
+057,Jackson,2033,Forecast,151,46
+057,Jackson,2034,Forecast,148,46
+057,Jackson,2035,Forecast,145,46
+057,Jackson,2036,Forecast,146,47
+057,Jackson,2037,Forecast,151,47
+057,Jackson,2038,Forecast,154,47
+057,Jackson,2039,Forecast,157,48
+057,Jackson,2040,Forecast,160,48
+057,Jackson,2041,Forecast,159,48
+057,Jackson,2042,Forecast,160,48
+057,Jackson,2043,Forecast,160,48
+057,Jackson,2044,Forecast,160,48
+057,Jackson,2045,Forecast,160,48
+057,Jackson,2046,Forecast,160,47
+057,Jackson,2047,Forecast,160,47
+057,Jackson,2048,Forecast,160,47
+057,Jackson,2049,Forecast,160,47
+057,Jackson,2050,Forecast,159,46
+057,Jackson,2051,Forecast,157,45
+057,Jackson,2052,Forecast,157,45
+057,Jackson,2053,Forecast,157,44
+057,Jackson,2054,Forecast,155,44
+057,Jackson,2055,Forecast,155,44
+057,Jackson,2056,Forecast,155,43
+057,Jackson,2057,Forecast,152,43
+057,Jackson,2058,Forecast,152,43
+057,Jackson,2059,Forecast,152,42
+057,Jackson,2060,Forecast,150,42
+059,Jefferson,1990,Estimate,83005,33854
+059,Jefferson,1991,Estimate,84934,33834
+059,Jefferson,1992,Estimate,87620,34237
+059,Jefferson,1993,Estimate,90083,34513
+059,Jefferson,1994,Estimate,91520,34369
+059,Jefferson,1995,Estimate,93080,34248
+059,Jefferson,1996,Estimate,94427,34030
+059,Jefferson,1997,Estimate,95671,33757
+059,Jefferson,1998,Estimate,97308,33600
+059,Jefferson,1999,Estimate,98962,33426
+059,Jefferson,2000,Estimate,100162,33078
+059,Jefferson,2001,Estimate,99324,32581
+059,Jefferson,2002,Estimate,97822,32058
+059,Jefferson,2003,Estimate,95777,31713
+059,Jefferson,2004,Estimate,94011,31546
+059,Jefferson,2005,Estimate,92208,31135
+059,Jefferson,2006,Estimate,91010,31007
+059,Jefferson,2007,Estimate,90401,30945
+059,Jefferson,2008,Estimate,89877,30938
+059,Jefferson,2009,Estimate,89040,30585
+059,Jefferson,2010,Estimate,88516,30261
+059,Jefferson,2011,Estimate,88119,29842
+059,Jefferson,2012,Estimate,87825,29466
+059,Jefferson,2013,Estimate,87578,29221
+059,Jefferson,2014,Estimate,87512,29414
+059,Jefferson,2015,Estimate,87318,29597
+059,Jefferson,2016,Estimate,87060,30006
+059,Jefferson,2017,Estimate,86225,30174
+059,Jefferson,2018,Estimate,85757,30026
+059,Jefferson,2019,Estimate,85512,29627
+059,Jefferson,2020,Estimate,85139,29333
+059,Jefferson,2021,Estimate,84749,28681
+059,Jefferson,2022,Estimate,84031,28061
+059,Jefferson,2023,Estimate,83299,27828
+059,Jefferson,2024,Estimate,82580,27604
+059,Jefferson,2025,Forecast,81768,27212
+059,Jefferson,2026,Forecast,80813,27106
+059,Jefferson,2027,Forecast,80370,26880
+059,Jefferson,2028,Forecast,79868,26744
+059,Jefferson,2029,Forecast,79745,26508
+059,Jefferson,2030,Forecast,79617,26265
+059,Jefferson,2031,Forecast,79601,26092
+059,Jefferson,2032,Forecast,79227,25982
+059,Jefferson,2033,Forecast,78927,25942
+059,Jefferson,2034,Forecast,78487,25981
+059,Jefferson,2035,Forecast,77983,26094
+059,Jefferson,2036,Forecast,77833,26275
+059,Jefferson,2037,Forecast,77633,26515
+059,Jefferson,2038,Forecast,77318,26788
+059,Jefferson,2039,Forecast,77320,27071
+059,Jefferson,2040,Forecast,77171,27347
+059,Jefferson,2041,Forecast,77192,27600
+059,Jefferson,2042,Forecast,77216,27815
+059,Jefferson,2043,Forecast,77297,27982
+059,Jefferson,2044,Forecast,77488,28098
+059,Jefferson,2045,Forecast,77765,28166
+059,Jefferson,2046,Forecast,78128,28184
+059,Jefferson,2047,Forecast,78501,28150
+059,Jefferson,2048,Forecast,78871,28064
+059,Jefferson,2049,Forecast,79253,27953
+059,Jefferson,2050,Forecast,79627,27816
+059,Jefferson,2051,Forecast,79973,27655
+059,Jefferson,2052,Forecast,80261,27499
+059,Jefferson,2053,Forecast,80475,27355
+059,Jefferson,2054,Forecast,80606,27224
+059,Jefferson,2055,Forecast,80649,27113
+059,Jefferson,2056,Forecast,80605,27021
+059,Jefferson,2057,Forecast,80497,26937
+059,Jefferson,2058,Forecast,80330,26859
+059,Jefferson,2059,Forecast,80117,26787
+059,Jefferson,2060,Forecast,79876,26722
+061,Kiowa,1990,Estimate,382,102
+061,Kiowa,1991,Estimate,377,101
+061,Kiowa,1992,Estimate,375,103
+061,Kiowa,1993,Estimate,371,102
+061,Kiowa,1994,Estimate,365,102
+061,Kiowa,1995,Estimate,346,98
+061,Kiowa,1996,Estimate,347,98
+061,Kiowa,1997,Estimate,341,99
+061,Kiowa,1998,Estimate,336,99
+061,Kiowa,1999,Estimate,327,97
+061,Kiowa,2000,Estimate,323,97
+061,Kiowa,2001,Estimate,317,86
+061,Kiowa,2002,Estimate,294,80
+061,Kiowa,2003,Estimate,283,76
+061,Kiowa,2004,Estimate,270,75
+061,Kiowa,2005,Estimate,278,76
+061,Kiowa,2006,Estimate,262,73
+061,Kiowa,2007,Estimate,252,69
+061,Kiowa,2008,Estimate,244,65
+061,Kiowa,2009,Estimate,237,61
+061,Kiowa,2010,Estimate,249,70
+061,Kiowa,2011,Estimate,238,79
+061,Kiowa,2012,Estimate,234,73
+061,Kiowa,2013,Estimate,230,73
+061,Kiowa,2014,Estimate,232,76
+061,Kiowa,2015,Estimate,229,83
+061,Kiowa,2016,Estimate,244,82
+061,Kiowa,2017,Estimate,241,92
+061,Kiowa,2018,Estimate,245,95
+061,Kiowa,2019,Estimate,264,84
+061,Kiowa,2020,Estimate,255,79
+061,Kiowa,2021,Estimate,256,78
+061,Kiowa,2022,Estimate,263,71
+061,Kiowa,2023,Estimate,253,74
+061,Kiowa,2024,Estimate,264,91
+061,Kiowa,2025,Forecast,272,92
+061,Kiowa,2026,Forecast,279,86
+061,Kiowa,2027,Forecast,263,88
+061,Kiowa,2028,Forecast,276,81
+061,Kiowa,2029,Forecast,270,76
+061,Kiowa,2030,Forecast,273,74
+061,Kiowa,2031,Forecast,270,73
+061,Kiowa,2032,Forecast,259,72
+061,Kiowa,2033,Forecast,253,70
+061,Kiowa,2034,Forecast,244,71
+061,Kiowa,2035,Forecast,240,71
+061,Kiowa,2036,Forecast,238,71
+061,Kiowa,2037,Forecast,239,71
+061,Kiowa,2038,Forecast,235,71
+061,Kiowa,2039,Forecast,230,72
+061,Kiowa,2040,Forecast,232,73
+061,Kiowa,2041,Forecast,224,74
+061,Kiowa,2042,Forecast,219,74
+061,Kiowa,2043,Forecast,216,75
+061,Kiowa,2044,Forecast,216,75
+061,Kiowa,2045,Forecast,215,75
+061,Kiowa,2046,Forecast,214,74
+061,Kiowa,2047,Forecast,214,74
+061,Kiowa,2048,Forecast,214,74
+061,Kiowa,2049,Forecast,214,73
+061,Kiowa,2050,Forecast,214,73
+061,Kiowa,2051,Forecast,215,73
+061,Kiowa,2052,Forecast,216,72
+061,Kiowa,2053,Forecast,215,72
+061,Kiowa,2054,Forecast,216,70
+061,Kiowa,2055,Forecast,216,70
+061,Kiowa,2056,Forecast,214,69
+061,Kiowa,2057,Forecast,214,68
+061,Kiowa,2058,Forecast,214,67
+061,Kiowa,2059,Forecast,213,67
+061,Kiowa,2060,Forecast,209,66
+063,Kit Carson,1990,Estimate,1524,561
+063,Kit Carson,1991,Estimate,1522,546
+063,Kit Carson,1992,Estimate,1533,540
+063,Kit Carson,1993,Estimate,1531,530
+063,Kit Carson,1994,Estimate,1544,523
+063,Kit Carson,1995,Estimate,1555,514
+063,Kit Carson,1996,Estimate,1561,507
+063,Kit Carson,1997,Estimate,1581,502
+063,Kit Carson,1998,Estimate,1609,500
+063,Kit Carson,1999,Estimate,1631,495
+063,Kit Carson,2000,Estimate,1641,485
+063,Kit Carson,2001,Estimate,1612,504
+063,Kit Carson,2002,Estimate,1601,526
+063,Kit Carson,2003,Estimate,1540,511
+063,Kit Carson,2004,Estimate,1519,491
+063,Kit Carson,2005,Estimate,1463,458
+063,Kit Carson,2006,Estimate,1403,450
+063,Kit Carson,2007,Estimate,1345,443
+063,Kit Carson,2008,Estimate,1343,476
+063,Kit Carson,2009,Estimate,1296,513
+063,Kit Carson,2010,Estimate,1284,543
+063,Kit Carson,2011,Estimate,1279,526
+063,Kit Carson,2012,Estimate,1285,502
+063,Kit Carson,2013,Estimate,1311,482
+063,Kit Carson,2014,Estimate,1268,456
+063,Kit Carson,2015,Estimate,1292,473
+063,Kit Carson,2016,Estimate,1290,459
+063,Kit Carson,2017,Estimate,1347,478
+063,Kit Carson,2018,Estimate,1336,471
+063,Kit Carson,2019,Estimate,1319,468
+063,Kit Carson,2020,Estimate,1342,442
+063,Kit Carson,2021,Estimate,1353,433
+063,Kit Carson,2022,Estimate,1369,458
+063,Kit Carson,2023,Estimate,1366,462
+063,Kit Carson,2024,Estimate,1370,447
+063,Kit Carson,2025,Forecast,1359,418
+063,Kit Carson,2026,Forecast,1341,401
+063,Kit Carson,2027,Forecast,1353,362
+063,Kit Carson,2028,Forecast,1329,348
+063,Kit Carson,2029,Forecast,1304,335
+063,Kit Carson,2030,Forecast,1271,337
+063,Kit Carson,2031,Forecast,1257,342
+063,Kit Carson,2032,Forecast,1245,346
+063,Kit Carson,2033,Forecast,1195,350
+063,Kit Carson,2034,Forecast,1168,357
+063,Kit Carson,2035,Forecast,1148,363
+063,Kit Carson,2036,Forecast,1137,369
+063,Kit Carson,2037,Forecast,1109,374
+063,Kit Carson,2038,Forecast,1083,379
+063,Kit Carson,2039,Forecast,1073,385
+063,Kit Carson,2040,Forecast,1040,386
+063,Kit Carson,2041,Forecast,1034,389
+063,Kit Carson,2042,Forecast,1032,390
+063,Kit Carson,2043,Forecast,1040,390
+063,Kit Carson,2044,Forecast,1052,390
+063,Kit Carson,2045,Forecast,1063,388
+063,Kit Carson,2046,Forecast,1075,386
+063,Kit Carson,2047,Forecast,1085,383
+063,Kit Carson,2048,Forecast,1095,379
+063,Kit Carson,2049,Forecast,1105,377
+063,Kit Carson,2050,Forecast,1111,373
+063,Kit Carson,2051,Forecast,1117,368
+063,Kit Carson,2052,Forecast,1121,365
+063,Kit Carson,2053,Forecast,1122,360
+063,Kit Carson,2054,Forecast,1123,355
+063,Kit Carson,2055,Forecast,1120,350
+063,Kit Carson,2056,Forecast,1117,345
+063,Kit Carson,2057,Forecast,1113,341
+063,Kit Carson,2058,Forecast,1106,336
+063,Kit Carson,2059,Forecast,1096,333
+063,Kit Carson,2060,Forecast,1088,329
+065,Lake,1990,Estimate,1174,510
+065,Lake,1991,Estimate,1196,515
+065,Lake,1992,Estimate,1207,518
+065,Lake,1993,Estimate,1214,520
+065,Lake,1994,Estimate,1234,524
+065,Lake,1995,Estimate,1377,583
+065,Lake,1996,Estimate,1452,611
+065,Lake,1997,Estimate,1506,631
+065,Lake,1998,Estimate,1499,623
+065,Lake,1999,Estimate,1493,617
+065,Lake,2000,Estimate,1510,622
+065,Lake,2001,Estimate,1462,633
+065,Lake,2002,Estimate,1445,607
+065,Lake,2003,Estimate,1369,610
+065,Lake,2004,Estimate,1329,607
+065,Lake,2005,Estimate,1308,575
+065,Lake,2006,Estimate,1298,552
+065,Lake,2007,Estimate,1298,541
+065,Lake,2008,Estimate,1269,536
+065,Lake,2009,Estimate,1241,534
+065,Lake,2010,Estimate,1254,550
+065,Lake,2011,Estimate,1234,548
+065,Lake,2012,Estimate,1207,498
+065,Lake,2013,Estimate,1211,460
+065,Lake,2014,Estimate,1205,448
+065,Lake,2015,Estimate,1202,436
+065,Lake,2016,Estimate,1214,403
+065,Lake,2017,Estimate,1181,423
+065,Lake,2018,Estimate,1145,422
+065,Lake,2019,Estimate,1166,457
+065,Lake,2020,Estimate,1192,422
+065,Lake,2021,Estimate,1178,425
+065,Lake,2022,Estimate,1173,418
+065,Lake,2023,Estimate,1166,425
+065,Lake,2024,Estimate,1178,399
+065,Lake,2025,Forecast,1162,406
+065,Lake,2026,Forecast,1127,419
+065,Lake,2027,Forecast,1134,424
+065,Lake,2028,Forecast,1144,421
+065,Lake,2029,Forecast,1112,437
+065,Lake,2030,Forecast,1121,449
+065,Lake,2031,Forecast,1133,462
+065,Lake,2032,Forecast,1141,475
+065,Lake,2033,Forecast,1120,486
+065,Lake,2034,Forecast,1143,495
+065,Lake,2035,Forecast,1148,504
+065,Lake,2036,Forecast,1163,510
+065,Lake,2037,Forecast,1159,515
+065,Lake,2038,Forecast,1184,518
+065,Lake,2039,Forecast,1214,522
+065,Lake,2040,Forecast,1235,523
+065,Lake,2041,Forecast,1245,523
+065,Lake,2042,Forecast,1271,521
+065,Lake,2043,Forecast,1291,518
+065,Lake,2044,Forecast,1312,515
+065,Lake,2045,Forecast,1331,510
+065,Lake,2046,Forecast,1344,505
+065,Lake,2047,Forecast,1351,500
+065,Lake,2048,Forecast,1357,495
+065,Lake,2049,Forecast,1363,490
+065,Lake,2050,Forecast,1363,486
+065,Lake,2051,Forecast,1360,482
+065,Lake,2052,Forecast,1355,479
+065,Lake,2053,Forecast,1350,478
+065,Lake,2054,Forecast,1344,476
+065,Lake,2055,Forecast,1333,477
+065,Lake,2056,Forecast,1323,478
+065,Lake,2057,Forecast,1313,481
+065,Lake,2058,Forecast,1307,482
+065,Lake,2059,Forecast,1298,484
+065,Lake,2060,Forecast,1289,489
+067,La Plata,1990,Estimate,6042,2268
+067,La Plata,1991,Estimate,6181,2257
+067,La Plata,1992,Estimate,6336,2260
+067,La Plata,1993,Estimate,6513,2270
+067,La Plata,1994,Estimate,6712,2282
+067,La Plata,1995,Estimate,7010,2323
+067,La Plata,1996,Estimate,7137,2304
+067,La Plata,1997,Estimate,7210,2262
+067,La Plata,1998,Estimate,7316,2233
+067,La Plata,1999,Estimate,7555,2237
+067,La Plata,2000,Estimate,7834,2247
+067,La Plata,2001,Estimate,7798,2302
+067,La Plata,2002,Estimate,7723,2289
+067,La Plata,2003,Estimate,7611,2318
+067,La Plata,2004,Estimate,7529,2367
+067,La Plata,2005,Estimate,7563,2446
+067,La Plata,2006,Estimate,7494,2503
+067,La Plata,2007,Estimate,7537,2598
+067,La Plata,2008,Estimate,7634,2730
+067,La Plata,2009,Estimate,7569,2818
+067,La Plata,2010,Estimate,7600,2900
+067,La Plata,2011,Estimate,7602,2894
+067,La Plata,2012,Estimate,7660,2856
+067,La Plata,2013,Estimate,7827,2752
+067,La Plata,2014,Estimate,7899,2736
+067,La Plata,2015,Estimate,7983,2752
+067,La Plata,2016,Estimate,8062,2729
+067,La Plata,2017,Estimate,8087,2627
+067,La Plata,2018,Estimate,8112,2581
+067,La Plata,2019,Estimate,7989,2411
+067,La Plata,2020,Estimate,8063,2330
+067,La Plata,2021,Estimate,8212,2237
+067,La Plata,2022,Estimate,8230,2186
+067,La Plata,2023,Estimate,8027,2167
+067,La Plata,2024,Estimate,7935,2164
+067,La Plata,2025,Forecast,7946,2097
+067,La Plata,2026,Forecast,7819,2065
+067,La Plata,2027,Forecast,7740,2040
+067,La Plata,2028,Forecast,7622,2002
+067,La Plata,2029,Forecast,7517,1972
+067,La Plata,2030,Forecast,7378,1925
+067,La Plata,2031,Forecast,7312,1885
+067,La Plata,2032,Forecast,7183,1853
+067,La Plata,2033,Forecast,7028,1835
+067,La Plata,2034,Forecast,6898,1830
+067,La Plata,2035,Forecast,6815,1835
+067,La Plata,2036,Forecast,6745,1849
+067,La Plata,2037,Forecast,6702,1870
+067,La Plata,2038,Forecast,6592,1893
+067,La Plata,2039,Forecast,6530,1919
+067,La Plata,2040,Forecast,6487,1947
+067,La Plata,2041,Forecast,6449,1975
+067,La Plata,2042,Forecast,6432,2002
+067,La Plata,2043,Forecast,6410,2029
+067,La Plata,2044,Forecast,6403,2053
+067,La Plata,2045,Forecast,6409,2076
+067,La Plata,2046,Forecast,6433,2097
+067,La Plata,2047,Forecast,6468,2117
+067,La Plata,2048,Forecast,6515,2133
+067,La Plata,2049,Forecast,6567,2146
+067,La Plata,2050,Forecast,6627,2155
+067,La Plata,2051,Forecast,6686,2163
+067,La Plata,2052,Forecast,6731,2170
+067,La Plata,2053,Forecast,6777,2176
+067,La Plata,2054,Forecast,6823,2183
+067,La Plata,2055,Forecast,6866,2188
+067,La Plata,2056,Forecast,6903,2194
+067,La Plata,2057,Forecast,6935,2200
+067,La Plata,2058,Forecast,6966,2206
+067,La Plata,2059,Forecast,6995,2211
+067,La Plata,2060,Forecast,7022,2216
+069,Larimer,1990,Estimate,33639,13802
+069,Larimer,1991,Estimate,34736,13964
+069,Larimer,1992,Estimate,35774,14144
+069,Larimer,1993,Estimate,37000,14380
+069,Larimer,1994,Estimate,38386,14662
+069,Larimer,1995,Estimate,39518,14826
+069,Larimer,1996,Estimate,40455,14907
+069,Larimer,1997,Estimate,41371,14966
+069,Larimer,1998,Estimate,42420,15058
+069,Larimer,1999,Estimate,43602,15180
+069,Larimer,2000,Estimate,44758,15275
+069,Larimer,2001,Estimate,45710,15751
+069,Larimer,2002,Estimate,46027,16129
+069,Larimer,2003,Estimate,45533,16264
+069,Larimer,2004,Estimate,45638,16591
+069,Larimer,2005,Estimate,45242,16764
+069,Larimer,2006,Estimate,45426,16997
+069,Larimer,2007,Estimate,45801,17281
+069,Larimer,2008,Estimate,46103,17542
+069,Larimer,2009,Estimate,46464,17584
+069,Larimer,2010,Estimate,46579,17493
+069,Larimer,2011,Estimate,47252,17392
+069,Larimer,2012,Estimate,47959,17401
+069,Larimer,2013,Estimate,48634,17480
+069,Larimer,2014,Estimate,49532,17745
+069,Larimer,2015,Estimate,50772,18030
+069,Larimer,2016,Estimate,51300,18094
+069,Larimer,2017,Estimate,51885,17931
+069,Larimer,2018,Estimate,52608,17838
+069,Larimer,2019,Estimate,53323,17490
+069,Larimer,2020,Estimate,53235,17159
+069,Larimer,2021,Estimate,53723,16818
+069,Larimer,2022,Estimate,54220,16825
+069,Larimer,2023,Estimate,54330,16481
+069,Larimer,2024,Estimate,54087,16283
+069,Larimer,2025,Forecast,53780,16309
+069,Larimer,2026,Forecast,53639,16391
+069,Larimer,2027,Forecast,53711,16384
+069,Larimer,2028,Forecast,53539,16530
+069,Larimer,2029,Forecast,53520,16563
+069,Larimer,2030,Forecast,53413,16489
+069,Larimer,2031,Forecast,53349,16459
+069,Larimer,2032,Forecast,53068,16487
+069,Larimer,2033,Forecast,52860,16594
+069,Larimer,2034,Forecast,52593,16756
+069,Larimer,2035,Forecast,52395,16951
+069,Larimer,2036,Forecast,52241,17155
+069,Larimer,2037,Forecast,52221,17353
+069,Larimer,2038,Forecast,52291,17529
+069,Larimer,2039,Forecast,52434,17679
+069,Larimer,2040,Forecast,52509,17804
+069,Larimer,2041,Forecast,52799,17900
+069,Larimer,2042,Forecast,53029,17966
+069,Larimer,2043,Forecast,53178,18011
+069,Larimer,2044,Forecast,53366,18035
+069,Larimer,2045,Forecast,53599,18044
+069,Larimer,2046,Forecast,53865,18042
+069,Larimer,2047,Forecast,54143,18030
+069,Larimer,2048,Forecast,54415,18009
+069,Larimer,2049,Forecast,54656,17978
+069,Larimer,2050,Forecast,54855,17939
+069,Larimer,2051,Forecast,54992,17888
+069,Larimer,2052,Forecast,55066,17823
+069,Larimer,2053,Forecast,55099,17757
+069,Larimer,2054,Forecast,55090,17687
+069,Larimer,2055,Forecast,55050,17615
+069,Larimer,2056,Forecast,54976,17539
+069,Larimer,2057,Forecast,54876,17465
+069,Larimer,2058,Forecast,54756,17383
+069,Larimer,2059,Forecast,54618,17298
+069,Larimer,2060,Forecast,54474,17212
+071,Las Animas,1990,Estimate,2628,894
+071,Las Animas,1991,Estimate,2630,883
+071,Las Animas,1992,Estimate,2665,883
+071,Las Animas,1993,Estimate,2693,882
+071,Las Animas,1994,Estimate,2791,901
+071,Las Animas,1995,Estimate,2813,898
+071,Las Animas,1996,Estimate,2817,888
+071,Las Animas,1997,Estimate,2827,878
+071,Las Animas,1998,Estimate,2820,864
+071,Las Animas,1999,Estimate,2831,855
+071,Las Animas,2000,Estimate,2852,850
+071,Las Animas,2001,Estimate,2742,858
+071,Las Animas,2002,Estimate,2735,903
+071,Las Animas,2003,Estimate,2800,921
+071,Las Animas,2004,Estimate,2666,874
+071,Las Animas,2005,Estimate,2602,847
+071,Las Animas,2006,Estimate,2569,832
+071,Las Animas,2007,Estimate,2534,828
+071,Las Animas,2008,Estimate,2462,826
+071,Las Animas,2009,Estimate,2403,844
+071,Las Animas,2010,Estimate,2349,849
+071,Las Animas,2011,Estimate,2288,815
+071,Las Animas,2012,Estimate,2221,796
+071,Las Animas,2013,Estimate,2181,761
+071,Las Animas,2014,Estimate,2142,715
+071,Las Animas,2015,Estimate,2124,696
+071,Las Animas,2016,Estimate,2105,682
+071,Las Animas,2017,Estimate,2069,678
+071,Las Animas,2018,Estimate,2040,638
+071,Las Animas,2019,Estimate,1972,650
+071,Las Animas,2020,Estimate,1933,624
+071,Las Animas,2021,Estimate,1912,621
+071,Las Animas,2022,Estimate,1907,592
+071,Las Animas,2023,Estimate,1892,610
+071,Las Animas,2024,Estimate,1898,594
+071,Las Animas,2025,Forecast,1894,604
+071,Las Animas,2026,Forecast,1892,590
+071,Las Animas,2027,Forecast,1871,589
+071,Las Animas,2028,Forecast,1875,581
+071,Las Animas,2029,Forecast,1865,576
+071,Las Animas,2030,Forecast,1850,569
+071,Las Animas,2031,Forecast,1819,560
+071,Las Animas,2032,Forecast,1805,546
+071,Las Animas,2033,Forecast,1781,530
+071,Las Animas,2034,Forecast,1749,515
+071,Las Animas,2035,Forecast,1702,499
+071,Las Animas,2036,Forecast,1685,483
+071,Las Animas,2037,Forecast,1639,468
+071,Las Animas,2038,Forecast,1612,455
+071,Las Animas,2039,Forecast,1565,443
+071,Las Animas,2040,Forecast,1538,432
+071,Las Animas,2041,Forecast,1498,423
+071,Las Animas,2042,Forecast,1463,413
+071,Las Animas,2043,Forecast,1426,404
+071,Las Animas,2044,Forecast,1387,396
+071,Las Animas,2045,Forecast,1346,388
+071,Las Animas,2046,Forecast,1306,382
+071,Las Animas,2047,Forecast,1265,374
+071,Las Animas,2048,Forecast,1229,366
+071,Las Animas,2049,Forecast,1191,360
+071,Las Animas,2050,Forecast,1158,351
+071,Las Animas,2051,Forecast,1127,346
+071,Las Animas,2052,Forecast,1098,337
+071,Las Animas,2053,Forecast,1070,331
+071,Las Animas,2054,Forecast,1044,322
+071,Las Animas,2055,Forecast,1021,316
+071,Las Animas,2056,Forecast,1000,311
+071,Las Animas,2057,Forecast,975,302
+071,Las Animas,2058,Forecast,957,296
+071,Las Animas,2059,Forecast,937,291
+071,Las Animas,2060,Forecast,919,282
+073,Lincoln,1990,Estimate,888,361
+073,Lincoln,1991,Estimate,1026,397
+073,Lincoln,1992,Estimate,1128,423
+073,Lincoln,1993,Estimate,1110,400
+073,Lincoln,1994,Estimate,1119,388
+073,Lincoln,1995,Estimate,1130,375
+073,Lincoln,1996,Estimate,1155,368
+073,Lincoln,1997,Estimate,1151,349
+073,Lincoln,1998,Estimate,1153,334
+073,Lincoln,1999,Estimate,1151,317
+073,Lincoln,2000,Estimate,1164,306
+073,Lincoln,2001,Estimate,1044,267
+073,Lincoln,2002,Estimate,1016,253
+073,Lincoln,2003,Estimate,995,248
+073,Lincoln,2004,Estimate,918,255
+073,Lincoln,2005,Estimate,875,259
+073,Lincoln,2006,Estimate,820,263
+073,Lincoln,2007,Estimate,788,276
+073,Lincoln,2008,Estimate,787,286
+073,Lincoln,2009,Estimate,756,282
+073,Lincoln,2010,Estimate,808,305
+073,Lincoln,2011,Estimate,772,316
+073,Lincoln,2012,Estimate,769,304
+073,Lincoln,2013,Estimate,763,312
+073,Lincoln,2014,Estimate,769,307
+073,Lincoln,2015,Estimate,778,320
+073,Lincoln,2016,Estimate,782,309
+073,Lincoln,2017,Estimate,791,313
+073,Lincoln,2018,Estimate,822,300
+073,Lincoln,2019,Estimate,823,320
+073,Lincoln,2020,Estimate,848,296
+073,Lincoln,2021,Estimate,810,287
+073,Lincoln,2022,Estimate,825,306
+073,Lincoln,2023,Estimate,855,295
+073,Lincoln,2024,Estimate,907,272
+073,Lincoln,2025,Forecast,911,262
+073,Lincoln,2026,Forecast,904,259
+073,Lincoln,2027,Forecast,909,245
+073,Lincoln,2028,Forecast,911,226
+073,Lincoln,2029,Forecast,890,223
+073,Lincoln,2030,Forecast,888,218
+073,Lincoln,2031,Forecast,858,215
+073,Lincoln,2032,Forecast,852,211
+073,Lincoln,2033,Forecast,815,206
+073,Lincoln,2034,Forecast,796,204
+073,Lincoln,2035,Forecast,776,202
+073,Lincoln,2036,Forecast,748,201
+073,Lincoln,2037,Forecast,716,201
+073,Lincoln,2038,Forecast,695,202
+073,Lincoln,2039,Forecast,685,204
+073,Lincoln,2040,Forecast,664,207
+073,Lincoln,2041,Forecast,642,209
+073,Lincoln,2042,Forecast,639,213
+073,Lincoln,2043,Forecast,635,217
+073,Lincoln,2044,Forecast,630,224
+073,Lincoln,2045,Forecast,631,228
+073,Lincoln,2046,Forecast,634,231
+073,Lincoln,2047,Forecast,640,233
+073,Lincoln,2048,Forecast,648,234
+073,Lincoln,2049,Forecast,656,234
+073,Lincoln,2050,Forecast,666,233
+073,Lincoln,2051,Forecast,677,230
+073,Lincoln,2052,Forecast,687,228
+073,Lincoln,2053,Forecast,694,223
+073,Lincoln,2054,Forecast,704,219
+073,Lincoln,2055,Forecast,709,214
+073,Lincoln,2056,Forecast,712,209
+073,Lincoln,2057,Forecast,714,203
+073,Lincoln,2058,Forecast,714,200
+073,Lincoln,2059,Forecast,709,195
+073,Lincoln,2060,Forecast,705,191
+075,Logan,1990,Estimate,3441,1223
+075,Logan,1991,Estimate,3423,1211
+075,Logan,1992,Estimate,3413,1204
+075,Logan,1993,Estimate,3464,1217
+075,Logan,1994,Estimate,3606,1262
+075,Logan,1995,Estimate,3682,1285
+075,Logan,1996,Estimate,3712,1291
+075,Logan,1997,Estimate,3751,1298
+075,Logan,1998,Estimate,3724,1285
+075,Logan,1999,Estimate,3748,1290
+075,Logan,2000,Estimate,3786,1298
+075,Logan,2001,Estimate,3957,1415
+075,Logan,2002,Estimate,3785,1378
+075,Logan,2003,Estimate,3763,1379
+075,Logan,2004,Estimate,3666,1336
+075,Logan,2005,Estimate,3564,1294
+075,Logan,2006,Estimate,3539,1258
+075,Logan,2007,Estimate,3474,1242
+075,Logan,2008,Estimate,3394,1193
+075,Logan,2009,Estimate,3374,1168
+075,Logan,2010,Estimate,3286,1145
+075,Logan,2011,Estimate,3249,1104
+075,Logan,2012,Estimate,3235,1087
+075,Logan,2013,Estimate,3202,1101
+075,Logan,2014,Estimate,3183,1102
+075,Logan,2015,Estimate,3147,1100
+075,Logan,2016,Estimate,3085,1110
+075,Logan,2017,Estimate,3022,1135
+075,Logan,2018,Estimate,3005,1113
+075,Logan,2019,Estimate,2994,1081
+075,Logan,2020,Estimate,3001,1100
+075,Logan,2021,Estimate,3035,1079
+075,Logan,2022,Estimate,3101,1065
+075,Logan,2023,Estimate,3083,1002
+075,Logan,2024,Estimate,3088,989
+075,Logan,2025,Forecast,3101,913
+075,Logan,2026,Forecast,3082,884
+075,Logan,2027,Forecast,3037,830
+075,Logan,2028,Forecast,2965,818
+075,Logan,2029,Forecast,2936,779
+075,Logan,2030,Forecast,2884,771
+075,Logan,2031,Forecast,2802,767
+075,Logan,2032,Forecast,2707,767
+075,Logan,2033,Forecast,2630,769
+075,Logan,2034,Forecast,2566,775
+075,Logan,2035,Forecast,2487,782
+075,Logan,2036,Forecast,2411,791
+075,Logan,2037,Forecast,2361,799
+075,Logan,2038,Forecast,2280,807
+075,Logan,2039,Forecast,2250,815
+075,Logan,2040,Forecast,2200,822
+075,Logan,2041,Forecast,2197,828
+075,Logan,2042,Forecast,2170,833
+075,Logan,2043,Forecast,2175,836
+075,Logan,2044,Forecast,2185,836
+075,Logan,2045,Forecast,2195,833
+075,Logan,2046,Forecast,2210,829
+075,Logan,2047,Forecast,2224,821
+075,Logan,2048,Forecast,2239,810
+075,Logan,2049,Forecast,2251,795
+075,Logan,2050,Forecast,2261,780
+075,Logan,2051,Forecast,2263,763
+075,Logan,2052,Forecast,2263,747
+075,Logan,2053,Forecast,2256,730
+075,Logan,2054,Forecast,2245,714
+075,Logan,2055,Forecast,2228,700
+075,Logan,2056,Forecast,2204,688
+075,Logan,2057,Forecast,2181,677
+075,Logan,2058,Forecast,2149,668
+075,Logan,2059,Forecast,2117,661
+075,Logan,2060,Forecast,2083,656
+077,Mesa,1990,Estimate,18474,6748
+077,Mesa,1991,Estimate,18835,6807
+077,Mesa,1992,Estimate,19019,6814
+077,Mesa,1993,Estimate,19404,6893
+077,Mesa,1994,Estimate,19857,6990
+077,Mesa,1995,Estimate,20266,7072
+077,Mesa,1996,Estimate,20564,7112
+077,Mesa,1997,Estimate,20885,7154
+077,Mesa,1998,Estimate,21257,7211
+077,Mesa,1999,Estimate,21568,7247
+077,Mesa,2000,Estimate,22030,7328
+077,Mesa,2001,Estimate,22175,7352
+077,Mesa,2002,Estimate,22056,7501
+077,Mesa,2003,Estimate,22135,7689
+077,Mesa,2004,Estimate,22280,7817
+077,Mesa,2005,Estimate,22361,8050
+077,Mesa,2006,Estimate,22838,8466
+077,Mesa,2007,Estimate,23427,8915
+077,Mesa,2008,Estimate,23749,9308
+077,Mesa,2009,Estimate,24238,9730
+077,Mesa,2010,Estimate,24600,9951
+077,Mesa,2011,Estimate,24544,9895
+077,Mesa,2012,Estimate,24484,9613
+077,Mesa,2013,Estimate,24486,9392
+077,Mesa,2014,Estimate,24358,9162
+077,Mesa,2015,Estimate,24514,9074
+077,Mesa,2016,Estimate,24730,8918
+077,Mesa,2017,Estimate,24823,8791
+077,Mesa,2018,Estimate,24929,8611
+077,Mesa,2019,Estimate,24831,8427
+077,Mesa,2020,Estimate,24804,8208
+077,Mesa,2021,Estimate,24824,8064
+077,Mesa,2022,Estimate,24738,7868
+077,Mesa,2023,Estimate,24629,7641
+077,Mesa,2024,Estimate,24488,7524
+077,Mesa,2025,Forecast,24225,7424
+077,Mesa,2026,Forecast,23858,7369
+077,Mesa,2027,Forecast,23510,7396
+077,Mesa,2028,Forecast,23133,7447
+077,Mesa,2029,Forecast,22820,7474
+077,Mesa,2030,Forecast,22658,7524
+077,Mesa,2031,Forecast,22418,7577
+077,Mesa,2032,Forecast,22397,7616
+077,Mesa,2033,Forecast,22219,7655
+077,Mesa,2034,Forecast,22129,7692
+077,Mesa,2035,Forecast,22096,7727
+077,Mesa,2036,Forecast,22055,7760
+077,Mesa,2037,Forecast,22069,7789
+077,Mesa,2038,Forecast,22113,7812
+077,Mesa,2039,Forecast,22198,7828
+077,Mesa,2040,Forecast,22367,7833
+077,Mesa,2041,Forecast,22543,7829
+077,Mesa,2042,Forecast,22675,7819
+077,Mesa,2043,Forecast,22800,7798
+077,Mesa,2044,Forecast,22907,7771
+077,Mesa,2045,Forecast,22981,7738
+077,Mesa,2046,Forecast,23047,7702
+077,Mesa,2047,Forecast,23103,7665
+077,Mesa,2048,Forecast,23151,7625
+077,Mesa,2049,Forecast,23187,7587
+077,Mesa,2050,Forecast,23210,7549
+077,Mesa,2051,Forecast,23218,7510
+077,Mesa,2052,Forecast,23207,7478
+077,Mesa,2053,Forecast,23182,7452
+077,Mesa,2054,Forecast,23140,7432
+077,Mesa,2055,Forecast,23087,7418
+077,Mesa,2056,Forecast,23021,7414
+077,Mesa,2057,Forecast,22950,7413
+077,Mesa,2058,Forecast,22875,7417
+077,Mesa,2059,Forecast,22803,7423
+077,Mesa,2060,Forecast,22735,7431
+079,Mineral,1990,Estimate,74,49
+079,Mineral,1991,Estimate,77,49
+079,Mineral,1992,Estimate,82,47
+079,Mineral,1993,Estimate,85,45
+079,Mineral,1994,Estimate,95,46
+079,Mineral,1995,Estimate,99,44
+079,Mineral,1996,Estimate,110,44
+079,Mineral,1997,Estimate,112,42
+079,Mineral,1998,Estimate,120,41
+079,Mineral,1999,Estimate,128,37
+079,Mineral,2000,Estimate,133,37
+079,Mineral,2001,Estimate,135,32
+079,Mineral,2002,Estimate,120,23
+079,Mineral,2003,Estimate,120,27
+079,Mineral,2004,Estimate,130,31
+079,Mineral,2005,Estimate,103,24
+079,Mineral,2006,Estimate,98,21
+079,Mineral,2007,Estimate,96,18
+079,Mineral,2008,Estimate,80,15
+079,Mineral,2009,Estimate,74,15
+079,Mineral,2010,Estimate,84,22
+079,Mineral,2011,Estimate,81,25
+079,Mineral,2012,Estimate,72,30
+079,Mineral,2013,Estimate,66,30
+079,Mineral,2014,Estimate,62,29
+079,Mineral,2015,Estimate,70,27
+079,Mineral,2016,Estimate,80,29
+079,Mineral,2017,Estimate,62,25
+079,Mineral,2018,Estimate,77,33
+079,Mineral,2019,Estimate,75,34
+079,Mineral,2020,Estimate,82,42
+079,Mineral,2021,Estimate,95,43
+079,Mineral,2022,Estimate,101,41
+079,Mineral,2023,Estimate,109,37
+079,Mineral,2024,Estimate,115,37
+079,Mineral,2025,Forecast,121,34
+079,Mineral,2026,Forecast,122,36
+079,Mineral,2027,Forecast,126,33
+079,Mineral,2028,Forecast,126,31
+079,Mineral,2029,Forecast,131,29
+079,Mineral,2030,Forecast,127,27
+079,Mineral,2031,Forecast,125,26
+079,Mineral,2032,Forecast,126,24
+079,Mineral,2033,Forecast,125,24
+079,Mineral,2034,Forecast,119,23
+079,Mineral,2035,Forecast,114,23
+079,Mineral,2036,Forecast,107,23
+079,Mineral,2037,Forecast,105,23
+079,Mineral,2038,Forecast,102,23
+079,Mineral,2039,Forecast,98,24
+079,Mineral,2040,Forecast,94,24
+079,Mineral,2041,Forecast,96,24
+079,Mineral,2042,Forecast,94,25
+079,Mineral,2043,Forecast,94,24
+079,Mineral,2044,Forecast,92,24
+079,Mineral,2045,Forecast,92,23
+079,Mineral,2046,Forecast,92,23
+079,Mineral,2047,Forecast,90,23
+079,Mineral,2048,Forecast,88,23
+079,Mineral,2049,Forecast,88,23
+079,Mineral,2050,Forecast,86,23
+079,Mineral,2051,Forecast,86,23
+079,Mineral,2052,Forecast,85,23
+079,Mineral,2053,Forecast,85,23
+079,Mineral,2054,Forecast,84,23
+079,Mineral,2055,Forecast,84,23
+079,Mineral,2056,Forecast,82,23
+079,Mineral,2057,Forecast,82,23
+079,Mineral,2058,Forecast,82,23
+079,Mineral,2059,Forecast,81,23
+079,Mineral,2060,Forecast,82,23
+081,Moffat,1990,Estimate,2699,992
+081,Moffat,1991,Estimate,2692,972
+081,Moffat,1992,Estimate,2726,969
+081,Moffat,1993,Estimate,2723,955
+081,Moffat,1994,Estimate,2741,949
+081,Moffat,1995,Estimate,2762,942
+081,Moffat,1996,Estimate,2758,924
+081,Moffat,1997,Estimate,2796,921
+081,Moffat,1998,Estimate,2823,915
+081,Moffat,1999,Estimate,2841,905
+081,Moffat,2000,Estimate,2846,890
+081,Moffat,2001,Estimate,2777,868
+081,Moffat,2002,Estimate,2738,906
+081,Moffat,2003,Estimate,2687,922
+081,Moffat,2004,Estimate,2618,933
+081,Moffat,2005,Estimate,2548,932
+081,Moffat,2006,Estimate,2554,959
+081,Moffat,2007,Estimate,2579,974
+081,Moffat,2008,Estimate,2581,996
+081,Moffat,2009,Estimate,2596,1020
+081,Moffat,2010,Estimate,2656,1072
+081,Moffat,2011,Estimate,2602,1002
+081,Moffat,2012,Estimate,2579,925
+081,Moffat,2013,Estimate,2599,906
+081,Moffat,2014,Estimate,2573,876
+081,Moffat,2015,Estimate,2572,882
+081,Moffat,2016,Estimate,2597,904
+081,Moffat,2017,Estimate,2563,917
+081,Moffat,2018,Estimate,2557,892
+081,Moffat,2019,Estimate,2515,883
+081,Moffat,2020,Estimate,2514,825
+081,Moffat,2021,Estimate,2525,788
+081,Moffat,2022,Estimate,2558,740
+081,Moffat,2023,Estimate,2586,742
+081,Moffat,2024,Estimate,2525,714
+081,Moffat,2025,Forecast,2459,722
+081,Moffat,2026,Forecast,2416,720
+081,Moffat,2027,Forecast,2359,749
+081,Moffat,2028,Forecast,2325,751
+081,Moffat,2029,Forecast,2290,753
+081,Moffat,2030,Forecast,2293,752
+081,Moffat,2031,Forecast,2236,751
+081,Moffat,2032,Forecast,2210,753
+081,Moffat,2033,Forecast,2163,754
+081,Moffat,2034,Forecast,2129,756
+081,Moffat,2035,Forecast,2099,758
+081,Moffat,2036,Forecast,2088,762
+081,Moffat,2037,Forecast,2079,763
+081,Moffat,2038,Forecast,2089,766
+081,Moffat,2039,Forecast,2090,765
+081,Moffat,2040,Forecast,2119,766
+081,Moffat,2041,Forecast,2124,764
+081,Moffat,2042,Forecast,2126,760
+081,Moffat,2043,Forecast,2130,755
+081,Moffat,2044,Forecast,2131,749
+081,Moffat,2045,Forecast,2135,742
+081,Moffat,2046,Forecast,2136,735
+081,Moffat,2047,Forecast,2137,726
+081,Moffat,2048,Forecast,2136,717
+081,Moffat,2049,Forecast,2130,710
+081,Moffat,2050,Forecast,2125,701
+081,Moffat,2051,Forecast,2119,692
+081,Moffat,2052,Forecast,2108,685
+081,Moffat,2053,Forecast,2096,679
+081,Moffat,2054,Forecast,2081,672
+081,Moffat,2055,Forecast,2066,668
+081,Moffat,2056,Forecast,2050,666
+081,Moffat,2057,Forecast,2029,661
+081,Moffat,2058,Forecast,2014,658
+081,Moffat,2059,Forecast,1995,658
+081,Moffat,2060,Forecast,1981,654
+083,Montezuma,1990,Estimate,4264,1592
+083,Montezuma,1991,Estimate,4301,1587
+083,Montezuma,1992,Estimate,4388,1603
+083,Montezuma,1993,Estimate,4565,1648
+083,Montezuma,1994,Estimate,4684,1678
+083,Montezuma,1995,Estimate,4802,1702
+083,Montezuma,1996,Estimate,4858,1701
+083,Montezuma,1997,Estimate,4874,1689
+083,Montezuma,1998,Estimate,4854,1661
+083,Montezuma,1999,Estimate,4886,1652
+083,Montezuma,2000,Estimate,4903,1636
+083,Montezuma,2001,Estimate,4805,1613
+083,Montezuma,2002,Estimate,4789,1619
+083,Montezuma,2003,Estimate,4686,1651
+083,Montezuma,2004,Estimate,4676,1626
+083,Montezuma,2005,Estimate,4619,1591
+083,Montezuma,2006,Estimate,4581,1607
+083,Montezuma,2007,Estimate,4514,1603
+083,Montezuma,2008,Estimate,4400,1592
+083,Montezuma,2009,Estimate,4377,1601
+083,Montezuma,2010,Estimate,4349,1614
+083,Montezuma,2011,Estimate,4275,1613
+083,Montezuma,2012,Estimate,4286,1549
+083,Montezuma,2013,Estimate,4279,1527
+083,Montezuma,2014,Estimate,4266,1531
+083,Montezuma,2015,Estimate,4247,1543
+083,Montezuma,2016,Estimate,4211,1532
+083,Montezuma,2017,Estimate,4198,1493
+083,Montezuma,2018,Estimate,4158,1483
+083,Montezuma,2019,Estimate,4153,1404
+083,Montezuma,2020,Estimate,4106,1358
+083,Montezuma,2021,Estimate,4124,1331
+083,Montezuma,2022,Estimate,4129,1321
+083,Montezuma,2023,Estimate,4154,1267
+083,Montezuma,2024,Estimate,4160,1252
+083,Montezuma,2025,Forecast,4108,1217
+083,Montezuma,2026,Forecast,4096,1173
+083,Montezuma,2027,Forecast,4049,1142
+083,Montezuma,2028,Forecast,4010,1116
+083,Montezuma,2029,Forecast,3958,1095
+083,Montezuma,2030,Forecast,3899,1082
+083,Montezuma,2031,Forecast,3857,1070
+083,Montezuma,2032,Forecast,3793,1055
+083,Montezuma,2033,Forecast,3713,1041
+083,Montezuma,2034,Forecast,3624,1026
+083,Montezuma,2035,Forecast,3562,1012
+083,Montezuma,2036,Forecast,3476,1001
+083,Montezuma,2037,Forecast,3422,988
+083,Montezuma,2038,Forecast,3362,979
+083,Montezuma,2039,Forecast,3298,970
+083,Montezuma,2040,Forecast,3246,960
+083,Montezuma,2041,Forecast,3197,953
+083,Montezuma,2042,Forecast,3155,944
+083,Montezuma,2043,Forecast,3123,935
+083,Montezuma,2044,Forecast,3091,927
+083,Montezuma,2045,Forecast,3059,919
+083,Montezuma,2046,Forecast,3029,909
+083,Montezuma,2047,Forecast,3003,900
+083,Montezuma,2048,Forecast,2976,890
+083,Montezuma,2049,Forecast,2949,882
+083,Montezuma,2050,Forecast,2931,873
+083,Montezuma,2051,Forecast,2909,863
+083,Montezuma,2052,Forecast,2889,855
+083,Montezuma,2053,Forecast,2868,846
+083,Montezuma,2054,Forecast,2850,840
+083,Montezuma,2055,Forecast,2832,830
+083,Montezuma,2056,Forecast,2812,825
+083,Montezuma,2057,Forecast,2794,815
+083,Montezuma,2058,Forecast,2775,810
+083,Montezuma,2059,Forecast,2758,802
+083,Montezuma,2060,Forecast,2738,795
+085,Montrose,1990,Estimate,5123,1640
+085,Montrose,1991,Estimate,5245,1690
+085,Montrose,1992,Estimate,5417,1756
+085,Montrose,1993,Estimate,5615,1831
+085,Montrose,1994,Estimate,5841,1916
+085,Montrose,1995,Estimate,6052,1997
+085,Montrose,1996,Estimate,6190,2056
+085,Montrose,1997,Estimate,6319,2110
+085,Montrose,1998,Estimate,6408,2154
+085,Montrose,1999,Estimate,6561,2220
+085,Montrose,2000,Estimate,6698,2280
+085,Montrose,2001,Estimate,6734,2306
+085,Montrose,2002,Estimate,6764,2307
+085,Montrose,2003,Estimate,6816,2337
+085,Montrose,2004,Estimate,6841,2354
+085,Montrose,2005,Estimate,6926,2406
+085,Montrose,2006,Estimate,7056,2466
+085,Montrose,2007,Estimate,7249,2521
+085,Montrose,2008,Estimate,7372,2535
+085,Montrose,2009,Estimate,7442,2581
+085,Montrose,2010,Estimate,7515,2609
+085,Montrose,2011,Estimate,7489,2565
+085,Montrose,2012,Estimate,7454,2428
+085,Montrose,2013,Estimate,7394,2353
+085,Montrose,2014,Estimate,7319,2346
+085,Montrose,2015,Estimate,7233,2333
+085,Montrose,2016,Estimate,7181,2237
+085,Montrose,2017,Estimate,7065,2289
+085,Montrose,2018,Estimate,7006,2287
+085,Montrose,2019,Estimate,6984,2178
+085,Montrose,2020,Estimate,6989,2092
+085,Montrose,2021,Estimate,6945,2081
+085,Montrose,2022,Estimate,6950,2046
+085,Montrose,2023,Estimate,6956,2002
+085,Montrose,2024,Estimate,6874,2053
+085,Montrose,2025,Forecast,6792,2075
+085,Montrose,2026,Forecast,6682,2127
+085,Montrose,2027,Forecast,6619,2159
+085,Montrose,2028,Forecast,6581,2188
+085,Montrose,2029,Forecast,6475,2206
+085,Montrose,2030,Forecast,6523,2198
+085,Montrose,2031,Forecast,6530,2188
+085,Montrose,2032,Forecast,6489,2174
+085,Montrose,2033,Forecast,6439,2163
+085,Montrose,2034,Forecast,6478,2155
+085,Montrose,2035,Forecast,6459,2149
+085,Montrose,2036,Forecast,6442,2144
+085,Montrose,2037,Forecast,6505,2140
+085,Montrose,2038,Forecast,6520,2135
+085,Montrose,2039,Forecast,6559,2130
+085,Montrose,2040,Forecast,6575,2125
+085,Montrose,2041,Forecast,6588,2118
+085,Montrose,2042,Forecast,6590,2111
+085,Montrose,2043,Forecast,6568,2105
+085,Montrose,2044,Forecast,6545,2098
+085,Montrose,2045,Forecast,6520,2091
+085,Montrose,2046,Forecast,6498,2083
+085,Montrose,2047,Forecast,6475,2078
+085,Montrose,2048,Forecast,6457,2072
+085,Montrose,2049,Forecast,6436,2067
+085,Montrose,2050,Forecast,6417,2061
+085,Montrose,2051,Forecast,6397,2055
+085,Montrose,2052,Forecast,6380,2050
+085,Montrose,2053,Forecast,6359,2045
+085,Montrose,2054,Forecast,6338,2043
+085,Montrose,2055,Forecast,6321,2043
+085,Montrose,2056,Forecast,6300,2041
+085,Montrose,2057,Forecast,6282,2040
+085,Montrose,2058,Forecast,6266,2038
+085,Montrose,2059,Forecast,6254,2036
+085,Montrose,2060,Forecast,6242,2034
+087,Morgan,1990,Estimate,4689,1873
+087,Morgan,1991,Estimate,4844,1927
+087,Morgan,1992,Estimate,5024,1993
+087,Morgan,1993,Estimate,5201,2057
+087,Morgan,1994,Estimate,5397,2130
+087,Morgan,1995,Estimate,5477,2152
+087,Morgan,1996,Estimate,5642,2208
+087,Morgan,1997,Estimate,5789,2260
+087,Morgan,1998,Estimate,5808,2260
+087,Morgan,1999,Estimate,5889,2285
+087,Morgan,2000,Estimate,5973,2308
+087,Morgan,2001,Estimate,5858,2339
+087,Morgan,2002,Estimate,5828,2362
+087,Morgan,2003,Estimate,5781,2400
+087,Morgan,2004,Estimate,5715,2407
+087,Morgan,2005,Estimate,5744,2371
+087,Morgan,2006,Estimate,5748,2306
+087,Morgan,2007,Estimate,5757,2234
+087,Morgan,2008,Estimate,5695,2163
+087,Morgan,2009,Estimate,5707,2147
+087,Morgan,2010,Estimate,5684,2164
+087,Morgan,2011,Estimate,5659,2228
+087,Morgan,2012,Estimate,5552,2212
+087,Morgan,2013,Estimate,5554,2168
+087,Morgan,2014,Estimate,5538,2124
+087,Morgan,2015,Estimate,5544,2145
+087,Morgan,2016,Estimate,5538,2103
+087,Morgan,2017,Estimate,5485,2109
+087,Morgan,2018,Estimate,5541,2196
+087,Morgan,2019,Estimate,5559,2175
+087,Morgan,2020,Estimate,5619,2145
+087,Morgan,2021,Estimate,5642,2097
+087,Morgan,2022,Estimate,5714,2133
+087,Morgan,2023,Estimate,5832,2087
+087,Morgan,2024,Estimate,5934,2108
+087,Morgan,2025,Forecast,6047,2062
+087,Morgan,2026,Forecast,6050,2062
+087,Morgan,2027,Forecast,6053,2016
+087,Morgan,2028,Forecast,6071,1979
+087,Morgan,2029,Forecast,6052,1943
+087,Morgan,2030,Forecast,6047,1923
+087,Morgan,2031,Forecast,6054,1906
+087,Morgan,2032,Forecast,6043,1889
+087,Morgan,2033,Forecast,5974,1877
+087,Morgan,2034,Forecast,5929,1865
+087,Morgan,2035,Forecast,5894,1857
+087,Morgan,2036,Forecast,5790,1853
+087,Morgan,2037,Forecast,5742,1852
+087,Morgan,2038,Forecast,5670,1857
+087,Morgan,2039,Forecast,5649,1862
+087,Morgan,2040,Forecast,5582,1868
+087,Morgan,2041,Forecast,5531,1876
+087,Morgan,2042,Forecast,5480,1883
+087,Morgan,2043,Forecast,5451,1890
+087,Morgan,2044,Forecast,5429,1896
+087,Morgan,2045,Forecast,5416,1902
+087,Morgan,2046,Forecast,5407,1903
+087,Morgan,2047,Forecast,5402,1905
+087,Morgan,2048,Forecast,5405,1905
+087,Morgan,2049,Forecast,5412,1902
+087,Morgan,2050,Forecast,5423,1897
+087,Morgan,2051,Forecast,5438,1892
+087,Morgan,2052,Forecast,5452,1885
+087,Morgan,2053,Forecast,5464,1876
+087,Morgan,2054,Forecast,5472,1869
+087,Morgan,2055,Forecast,5475,1859
+087,Morgan,2056,Forecast,5477,1850
+087,Morgan,2057,Forecast,5472,1840
+087,Morgan,2058,Forecast,5464,1833
+087,Morgan,2059,Forecast,5457,1826
+087,Morgan,2060,Forecast,5441,1819
+089,Otero,1990,Estimate,4326,1513
+089,Otero,1991,Estimate,4340,1502
+089,Otero,1992,Estimate,4299,1476
+089,Otero,1993,Estimate,4311,1464
+089,Otero,1994,Estimate,4299,1446
+089,Otero,1995,Estimate,4321,1441
+089,Otero,1996,Estimate,4310,1422
+089,Otero,1997,Estimate,4295,1404
+089,Otero,1998,Estimate,4218,1365
+089,Otero,1999,Estimate,4176,1339
+089,Otero,2000,Estimate,4122,1307
+089,Otero,2001,Estimate,3917,1296
+089,Otero,2002,Estimate,3762,1290
+089,Otero,2003,Estimate,3655,1362
+089,Otero,2004,Estimate,3601,1376
+089,Otero,2005,Estimate,3491,1393
+089,Otero,2006,Estimate,3457,1378
+089,Otero,2007,Estimate,3436,1313
+089,Otero,2008,Estimate,3409,1255
+089,Otero,2009,Estimate,3433,1213
+089,Otero,2010,Estimate,3472,1177
+089,Otero,2011,Estimate,3399,1198
+089,Otero,2012,Estimate,3352,1228
+089,Otero,2013,Estimate,3356,1171
+089,Otero,2014,Estimate,3368,1165
+089,Otero,2015,Estimate,3363,1136
+089,Otero,2016,Estimate,3391,1118
+089,Otero,2017,Estimate,3435,1061
+089,Otero,2018,Estimate,3400,1094
+089,Otero,2019,Estimate,3394,1079
+089,Otero,2020,Estimate,3313,1114
+089,Otero,2021,Estimate,3292,1091
+089,Otero,2022,Estimate,3260,1066
+089,Otero,2023,Estimate,3230,1027
+089,Otero,2024,Estimate,3210,1013
+089,Otero,2025,Forecast,3187,1002
+089,Otero,2026,Forecast,3137,988
+089,Otero,2027,Forecast,3124,989
+089,Otero,2028,Forecast,3130,979
+089,Otero,2029,Forecast,3125,964
+089,Otero,2030,Forecast,3035,947
+089,Otero,2031,Forecast,3031,932
+089,Otero,2032,Forecast,2990,917
+089,Otero,2033,Forecast,2981,905
+089,Otero,2034,Forecast,2931,892
+089,Otero,2035,Forecast,2890,880
+089,Otero,2036,Forecast,2836,870
+089,Otero,2037,Forecast,2805,860
+089,Otero,2038,Forecast,2764,852
+089,Otero,2039,Forecast,2724,844
+089,Otero,2040,Forecast,2696,836
+089,Otero,2041,Forecast,2661,828
+089,Otero,2042,Forecast,2619,819
+089,Otero,2043,Forecast,2580,808
+089,Otero,2044,Forecast,2545,799
+089,Otero,2045,Forecast,2512,787
+089,Otero,2046,Forecast,2481,777
+089,Otero,2047,Forecast,2448,767
+089,Otero,2048,Forecast,2415,756
+089,Otero,2049,Forecast,2385,745
+089,Otero,2050,Forecast,2356,733
+089,Otero,2051,Forecast,2327,722
+089,Otero,2052,Forecast,2295,712
+089,Otero,2053,Forecast,2267,701
+089,Otero,2054,Forecast,2237,690
+089,Otero,2055,Forecast,2207,680
+089,Otero,2056,Forecast,2175,673
+089,Otero,2057,Forecast,2144,663
+089,Otero,2058,Forecast,2114,653
+089,Otero,2059,Forecast,2086,643
+089,Otero,2060,Forecast,2054,636
+091,Ouray,1990,Estimate,436,134
+091,Ouray,1991,Estimate,454,137
+091,Ouray,1992,Estimate,474,143
+091,Ouray,1993,Estimate,492,146
+091,Ouray,1994,Estimate,535,156
+091,Ouray,1995,Estimate,565,163
+091,Ouray,1996,Estimate,590,170
+091,Ouray,1997,Estimate,600,169
+091,Ouray,1998,Estimate,619,173
+091,Ouray,1999,Estimate,646,178
+091,Ouray,2000,Estimate,663,180
+091,Ouray,2001,Estimate,663,168
+091,Ouray,2002,Estimate,662,171
+091,Ouray,2003,Estimate,646,175
+091,Ouray,2004,Estimate,655,173
+091,Ouray,2005,Estimate,660,172
+091,Ouray,2006,Estimate,623,170
+091,Ouray,2007,Estimate,625,175
+091,Ouray,2008,Estimate,631,184
+091,Ouray,2009,Estimate,589,177
+091,Ouray,2010,Estimate,619,183
+091,Ouray,2011,Estimate,604,167
+091,Ouray,2012,Estimate,597,171
+091,Ouray,2013,Estimate,587,169
+091,Ouray,2014,Estimate,580,167
+091,Ouray,2015,Estimate,583,157
+091,Ouray,2016,Estimate,596,174
+091,Ouray,2017,Estimate,591,169
+091,Ouray,2018,Estimate,576,158
+091,Ouray,2019,Estimate,603,147
+091,Ouray,2020,Estimate,558,152
+091,Ouray,2021,Estimate,566,155
+091,Ouray,2022,Estimate,556,149
+091,Ouray,2023,Estimate,560,159
+091,Ouray,2024,Estimate,543,166
+091,Ouray,2025,Forecast,541,174
+091,Ouray,2026,Forecast,548,171
+091,Ouray,2027,Forecast,550,176
+091,Ouray,2028,Forecast,541,178
+091,Ouray,2029,Forecast,540,180
+091,Ouray,2030,Forecast,536,181
+091,Ouray,2031,Forecast,543,181
+091,Ouray,2032,Forecast,540,182
+091,Ouray,2033,Forecast,553,182
+091,Ouray,2034,Forecast,549,182
+091,Ouray,2035,Forecast,553,182
+091,Ouray,2036,Forecast,562,185
+091,Ouray,2037,Forecast,577,187
+091,Ouray,2038,Forecast,587,187
+091,Ouray,2039,Forecast,590,189
+091,Ouray,2040,Forecast,597,192
+091,Ouray,2041,Forecast,604,192
+091,Ouray,2042,Forecast,613,193
+091,Ouray,2043,Forecast,617,194
+091,Ouray,2044,Forecast,623,194
+091,Ouray,2045,Forecast,628,196
+091,Ouray,2046,Forecast,631,197
+091,Ouray,2047,Forecast,642,197
+091,Ouray,2048,Forecast,646,199
+091,Ouray,2049,Forecast,652,199
+091,Ouray,2050,Forecast,659,202
+091,Ouray,2051,Forecast,664,203
+091,Ouray,2052,Forecast,669,205
+091,Ouray,2053,Forecast,674,207
+091,Ouray,2054,Forecast,681,209
+091,Ouray,2055,Forecast,684,211
+091,Ouray,2056,Forecast,691,213
+091,Ouray,2057,Forecast,697,214
+091,Ouray,2058,Forecast,701,216
+091,Ouray,2059,Forecast,707,219
+091,Ouray,2060,Forecast,712,219
+093,Park,1990,Estimate,1496,499
+093,Park,1991,Estimate,1553,515
+093,Park,1992,Estimate,1609,532
+093,Park,1993,Estimate,1681,556
+093,Park,1994,Estimate,1843,606
+093,Park,1995,Estimate,2018,662
+093,Park,1996,Estimate,2142,701
+093,Park,1997,Estimate,2292,745
+093,Park,1998,Estimate,2385,776
+093,Park,1999,Estimate,2500,811
+093,Park,2000,Estimate,2611,841
+093,Park,2001,Estimate,2639,848
+093,Park,2002,Estimate,2615,844
+093,Park,2003,Estimate,2608,885
+093,Park,2004,Estimate,2591,873
+093,Park,2005,Estimate,2546,871
+093,Park,2006,Estimate,2481,846
+093,Park,2007,Estimate,2474,842
+093,Park,2008,Estimate,2413,802
+093,Park,2009,Estimate,2291,764
+093,Park,2010,Estimate,2316,782
+093,Park,2011,Estimate,2201,714
+093,Park,2012,Estimate,2140,657
+093,Park,2013,Estimate,2089,623
+093,Park,2014,Estimate,2065,574
+093,Park,2015,Estimate,2069,570
+093,Park,2016,Estimate,2111,609
+093,Park,2017,Estimate,2129,636
+093,Park,2018,Estimate,2138,678
+093,Park,2019,Estimate,2116,708
+093,Park,2020,Estimate,2079,709
+093,Park,2021,Estimate,2173,728
+093,Park,2022,Estimate,2225,749
+093,Park,2023,Estimate,2309,776
+093,Park,2024,Estimate,2381,785
+093,Park,2025,Forecast,2448,770
+093,Park,2026,Forecast,2525,767
+093,Park,2027,Forecast,2589,754
+093,Park,2028,Forecast,2663,727
+093,Park,2029,Forecast,2738,709
+093,Park,2030,Forecast,2775,711
+093,Park,2031,Forecast,2808,714
+093,Park,2032,Forecast,2838,715
+093,Park,2033,Forecast,2854,718
+093,Park,2034,Forecast,2856,718
+093,Park,2035,Forecast,2867,721
+093,Park,2036,Forecast,2867,723
+093,Park,2037,Forecast,2861,726
+093,Park,2038,Forecast,2852,731
+093,Park,2039,Forecast,2851,735
+093,Park,2040,Forecast,2842,739
+093,Park,2041,Forecast,2823,747
+093,Park,2042,Forecast,2814,752
+093,Park,2043,Forecast,2818,758
+093,Park,2044,Forecast,2825,764
+093,Park,2045,Forecast,2830,771
+093,Park,2046,Forecast,2835,776
+093,Park,2047,Forecast,2841,779
+093,Park,2048,Forecast,2849,784
+093,Park,2049,Forecast,2853,788
+093,Park,2050,Forecast,2859,790
+093,Park,2051,Forecast,2866,793
+093,Park,2052,Forecast,2875,795
+093,Park,2053,Forecast,2879,796
+093,Park,2054,Forecast,2886,797
+093,Park,2055,Forecast,2891,798
+093,Park,2056,Forecast,2896,797
+093,Park,2057,Forecast,2900,796
+093,Park,2058,Forecast,2905,795
+093,Park,2059,Forecast,2907,795
+093,Park,2060,Forecast,2908,793
+095,Phillips,1990,Estimate,824,278
+095,Phillips,1991,Estimate,828,278
+095,Phillips,1992,Estimate,837,283
+095,Phillips,1993,Estimate,864,292
+095,Phillips,1994,Estimate,872,298
+095,Phillips,1995,Estimate,889,301
+095,Phillips,1996,Estimate,897,305
+095,Phillips,1997,Estimate,911,311
+095,Phillips,1998,Estimate,911,311
+095,Phillips,1999,Estimate,904,310
+095,Phillips,2000,Estimate,896,306
+095,Phillips,2001,Estimate,878,311
+095,Phillips,2002,Estimate,850,309
+095,Phillips,2003,Estimate,858,294
+095,Phillips,2004,Estimate,871,299
+095,Phillips,2005,Estimate,865,290
+095,Phillips,2006,Estimate,856,289
+095,Phillips,2007,Estimate,852,290
+095,Phillips,2008,Estimate,824,291
+095,Phillips,2009,Estimate,822,286
+095,Phillips,2010,Estimate,844,281
+095,Phillips,2011,Estimate,840,272
+095,Phillips,2012,Estimate,841,270
+095,Phillips,2013,Estimate,847,258
+095,Phillips,2014,Estimate,851,271
+095,Phillips,2015,Estimate,837,276
+095,Phillips,2016,Estimate,841,293
+095,Phillips,2017,Estimate,851,292
+095,Phillips,2018,Estimate,843,292
+095,Phillips,2019,Estimate,861,277
+095,Phillips,2020,Estimate,853,273
+095,Phillips,2021,Estimate,860,263
+095,Phillips,2022,Estimate,839,256
+095,Phillips,2023,Estimate,828,272
+095,Phillips,2024,Estimate,834,270
+095,Phillips,2025,Forecast,817,271
+095,Phillips,2026,Forecast,823,264
+095,Phillips,2027,Forecast,819,267
+095,Phillips,2028,Forecast,829,263
+095,Phillips,2029,Forecast,831,260
+095,Phillips,2030,Forecast,824,257
+095,Phillips,2031,Forecast,835,257
+095,Phillips,2032,Forecast,814,255
+095,Phillips,2033,Forecast,806,255
+095,Phillips,2034,Forecast,787,255
+095,Phillips,2035,Forecast,781,255
+095,Phillips,2036,Forecast,782,255
+095,Phillips,2037,Forecast,776,255
+095,Phillips,2038,Forecast,775,255
+095,Phillips,2039,Forecast,765,254
+095,Phillips,2040,Forecast,766,253
+095,Phillips,2041,Forecast,758,252
+095,Phillips,2042,Forecast,753,251
+095,Phillips,2043,Forecast,751,250
+095,Phillips,2044,Forecast,747,250
+095,Phillips,2045,Forecast,746,248
+095,Phillips,2046,Forecast,744,246
+095,Phillips,2047,Forecast,743,245
+095,Phillips,2048,Forecast,740,241
+095,Phillips,2049,Forecast,737,241
+095,Phillips,2050,Forecast,735,237
+095,Phillips,2051,Forecast,732,236
+095,Phillips,2052,Forecast,730,233
+095,Phillips,2053,Forecast,728,231
+095,Phillips,2054,Forecast,726,230
+095,Phillips,2055,Forecast,721,227
+095,Phillips,2056,Forecast,716,226
+095,Phillips,2057,Forecast,713,225
+095,Phillips,2058,Forecast,708,225
+095,Phillips,2059,Forecast,702,222
+095,Phillips,2060,Forecast,698,220
+097,Pitkin,1990,Estimate,1419,729
+097,Pitkin,1991,Estimate,1477,721
+097,Pitkin,1992,Estimate,1538,720
+097,Pitkin,1993,Estimate,1637,736
+097,Pitkin,1994,Estimate,1711,737
+097,Pitkin,1995,Estimate,1743,719
+097,Pitkin,1996,Estimate,1751,690
+097,Pitkin,1997,Estimate,1803,678
+097,Pitkin,1998,Estimate,1818,654
+097,Pitkin,1999,Estimate,1845,632
+097,Pitkin,2000,Estimate,1982,645
+097,Pitkin,2001,Estimate,2027,703
+097,Pitkin,2002,Estimate,1992,705
+097,Pitkin,2003,Estimate,2017,738
+097,Pitkin,2004,Estimate,1929,753
+097,Pitkin,2005,Estimate,1939,749
+097,Pitkin,2006,Estimate,1903,719
+097,Pitkin,2007,Estimate,1979,725
+097,Pitkin,2008,Estimate,2079,741
+097,Pitkin,2009,Estimate,2144,746
+097,Pitkin,2010,Estimate,2233,751
+097,Pitkin,2011,Estimate,2213,764
+097,Pitkin,2012,Estimate,2207,746
+097,Pitkin,2013,Estimate,2229,728
+097,Pitkin,2014,Estimate,2253,724
+097,Pitkin,2015,Estimate,2262,710
+097,Pitkin,2016,Estimate,2276,670
+097,Pitkin,2017,Estimate,2231,691
+097,Pitkin,2018,Estimate,2190,677
+097,Pitkin,2019,Estimate,2123,677
+097,Pitkin,2020,Estimate,2083,697
+097,Pitkin,2021,Estimate,2048,689
+097,Pitkin,2022,Estimate,2016,657
+097,Pitkin,2023,Estimate,1968,674
+097,Pitkin,2024,Estimate,1946,630
+097,Pitkin,2025,Forecast,1923,594
+097,Pitkin,2026,Forecast,1882,574
+097,Pitkin,2027,Forecast,1848,563
+097,Pitkin,2028,Forecast,1850,539
+097,Pitkin,2029,Forecast,1752,550
+097,Pitkin,2030,Forecast,1733,554
+097,Pitkin,2031,Forecast,1727,558
+097,Pitkin,2032,Forecast,1690,562
+097,Pitkin,2033,Forecast,1677,565
+097,Pitkin,2034,Forecast,1650,567
+097,Pitkin,2035,Forecast,1611,570
+097,Pitkin,2036,Forecast,1609,570
+097,Pitkin,2037,Forecast,1580,572
+097,Pitkin,2038,Forecast,1544,573
+097,Pitkin,2039,Forecast,1533,573
+097,Pitkin,2040,Forecast,1523,573
+097,Pitkin,2041,Forecast,1507,574
+097,Pitkin,2042,Forecast,1518,573
+097,Pitkin,2043,Forecast,1526,573
+097,Pitkin,2044,Forecast,1531,572
+097,Pitkin,2045,Forecast,1537,571
+097,Pitkin,2046,Forecast,1541,569
+097,Pitkin,2047,Forecast,1544,568
+097,Pitkin,2048,Forecast,1546,567
+097,Pitkin,2049,Forecast,1540,564
+097,Pitkin,2050,Forecast,1541,561
+097,Pitkin,2051,Forecast,1542,559
+097,Pitkin,2052,Forecast,1543,556
+097,Pitkin,2053,Forecast,1542,552
+097,Pitkin,2054,Forecast,1541,550
+097,Pitkin,2055,Forecast,1538,547
+097,Pitkin,2056,Forecast,1535,546
+097,Pitkin,2057,Forecast,1532,546
+097,Pitkin,2058,Forecast,1527,545
+097,Pitkin,2059,Forecast,1523,545
+097,Pitkin,2060,Forecast,1516,547
+099,Prowers,1990,Estimate,3036,1111
+099,Prowers,1991,Estimate,2958,1080
+099,Prowers,1992,Estimate,2982,1083
+099,Prowers,1993,Estimate,3046,1103
+099,Prowers,1994,Estimate,3095,1118
+099,Prowers,1995,Estimate,3114,1120
+099,Prowers,1996,Estimate,3144,1129
+099,Prowers,1997,Estimate,3159,1128
+099,Prowers,1998,Estimate,3171,1131
+099,Prowers,1999,Estimate,3192,1135
+099,Prowers,2000,Estimate,3197,1133
+099,Prowers,2001,Estimate,3019,1132
+099,Prowers,2002,Estimate,2907,1164
+099,Prowers,2003,Estimate,2814,1175
+099,Prowers,2004,Estimate,2724,1189
+099,Prowers,2005,Estimate,2669,1163
+099,Prowers,2006,Estimate,2595,1126
+099,Prowers,2007,Estimate,2519,1047
+099,Prowers,2008,Estimate,2508,997
+099,Prowers,2009,Estimate,2458,968
+099,Prowers,2010,Estimate,2437,962
+099,Prowers,2011,Estimate,2437,914
+099,Prowers,2012,Estimate,2413,903
+099,Prowers,2013,Estimate,2376,878
+099,Prowers,2014,Estimate,2348,805
+099,Prowers,2015,Estimate,2335,781
+099,Prowers,2016,Estimate,2304,827
+099,Prowers,2017,Estimate,2310,810
+099,Prowers,2018,Estimate,2306,814
+099,Prowers,2019,Estimate,2286,824
+099,Prowers,2020,Estimate,2265,840
+099,Prowers,2021,Estimate,2289,800
+099,Prowers,2022,Estimate,2267,780
+099,Prowers,2023,Estimate,2276,767
+099,Prowers,2024,Estimate,2334,772
+099,Prowers,2025,Forecast,2376,741
+099,Prowers,2026,Forecast,2412,725
+099,Prowers,2027,Forecast,2395,702
+099,Prowers,2028,Forecast,2368,663
+099,Prowers,2029,Forecast,2385,640
+099,Prowers,2030,Forecast,2336,633
+099,Prowers,2031,Forecast,2294,626
+099,Prowers,2032,Forecast,2273,618
+099,Prowers,2033,Forecast,2236,612
+099,Prowers,2034,Forecast,2169,607
+099,Prowers,2035,Forecast,2119,602
+099,Prowers,2036,Forecast,2065,599
+099,Prowers,2037,Forecast,2021,596
+099,Prowers,2038,Forecast,1971,594
+099,Prowers,2039,Forecast,1933,593
+099,Prowers,2040,Forecast,1903,591
+099,Prowers,2041,Forecast,1857,591
+099,Prowers,2042,Forecast,1830,589
+099,Prowers,2043,Forecast,1816,587
+099,Prowers,2044,Forecast,1805,582
+099,Prowers,2045,Forecast,1793,578
+099,Prowers,2046,Forecast,1782,571
+099,Prowers,2047,Forecast,1772,566
+099,Prowers,2048,Forecast,1761,558
+099,Prowers,2049,Forecast,1752,549
+099,Prowers,2050,Forecast,1740,543
+099,Prowers,2051,Forecast,1731,533
+099,Prowers,2052,Forecast,1718,524
+099,Prowers,2053,Forecast,1708,517
+099,Prowers,2054,Forecast,1693,509
+099,Prowers,2055,Forecast,1677,501
+099,Prowers,2056,Forecast,1660,496
+099,Prowers,2057,Forecast,1643,487
+099,Prowers,2058,Forecast,1626,482
+099,Prowers,2059,Forecast,1608,475
+099,Prowers,2060,Forecast,1586,470
+101,Pueblo,1990,Estimate,23908,8649
+101,Pueblo,1991,Estimate,23966,8645
+101,Pueblo,1992,Estimate,24101,8673
+101,Pueblo,1993,Estimate,24431,8770
+101,Pueblo,1994,Estimate,24843,8895
+101,Pueblo,1995,Estimate,25204,9004
+101,Pueblo,1996,Estimate,25476,9081
+101,Pueblo,1997,Estimate,25866,9197
+101,Pueblo,1998,Estimate,26316,9333
+101,Pueblo,1999,Estimate,26711,9450
+101,Pueblo,2000,Estimate,27069,9552
+101,Pueblo,2001,Estimate,27220,9640
+101,Pueblo,2002,Estimate,27414,9891
+101,Pueblo,2003,Estimate,27349,10001
+101,Pueblo,2004,Estimate,27233,10030
+101,Pueblo,2005,Estimate,27326,10027
+101,Pueblo,2006,Estimate,27606,10136
+101,Pueblo,2007,Estimate,28135,10292
+101,Pueblo,2008,Estimate,28241,10369
+101,Pueblo,2009,Estimate,28219,10425
+101,Pueblo,2010,Estimate,28361,10539
+101,Pueblo,2011,Estimate,28419,10255
+101,Pueblo,2012,Estimate,28545,9913
+101,Pueblo,2013,Estimate,28615,9587
+101,Pueblo,2014,Estimate,28597,9397
+101,Pueblo,2015,Estimate,28876,9328
+101,Pueblo,2016,Estimate,28920,9390
+101,Pueblo,2017,Estimate,28859,9338
+101,Pueblo,2018,Estimate,28657,9338
+101,Pueblo,2019,Estimate,28454,9229
+101,Pueblo,2020,Estimate,28014,9022
+101,Pueblo,2021,Estimate,27704,8862
+101,Pueblo,2022,Estimate,27362,8769
+101,Pueblo,2023,Estimate,27094,8633
+101,Pueblo,2024,Estimate,26836,8498
+101,Pueblo,2025,Forecast,26190,8419
+101,Pueblo,2026,Forecast,25213,8377
+101,Pueblo,2027,Forecast,24634,8274
+101,Pueblo,2028,Forecast,24205,8149
+101,Pueblo,2029,Forecast,24067,7992
+101,Pueblo,2030,Forecast,23983,7835
+101,Pueblo,2031,Forecast,24006,7649
+101,Pueblo,2032,Forecast,23988,7450
+101,Pueblo,2033,Forecast,23879,7245
+101,Pueblo,2034,Forecast,23705,7037
+101,Pueblo,2035,Forecast,23400,6834
+101,Pueblo,2036,Forecast,22892,6631
+101,Pueblo,2037,Forecast,22431,6439
+101,Pueblo,2038,Forecast,22050,6251
+101,Pueblo,2039,Forecast,21694,6070
+101,Pueblo,2040,Forecast,21319,5892
+101,Pueblo,2041,Forecast,20944,5715
+101,Pueblo,2042,Forecast,20565,5545
+101,Pueblo,2043,Forecast,20179,5384
+101,Pueblo,2044,Forecast,19781,5232
+101,Pueblo,2045,Forecast,19381,5090
+101,Pueblo,2046,Forecast,18974,4963
+101,Pueblo,2047,Forecast,18579,4853
+101,Pueblo,2048,Forecast,18191,4759
+101,Pueblo,2049,Forecast,17816,4680
+101,Pueblo,2050,Forecast,17464,4615
+101,Pueblo,2051,Forecast,17134,4562
+101,Pueblo,2052,Forecast,16860,4522
+101,Pueblo,2053,Forecast,16596,4498
+101,Pueblo,2054,Forecast,16317,4486
+101,Pueblo,2055,Forecast,16042,4487
+101,Pueblo,2056,Forecast,15777,4501
+101,Pueblo,2057,Forecast,15539,4517
+101,Pueblo,2058,Forecast,15334,4537
+101,Pueblo,2059,Forecast,15164,4560
+101,Pueblo,2060,Forecast,15028,4583
+103,Rio Blanco,1990,Estimate,1377,463
+103,Rio Blanco,1991,Estimate,1349,443
+103,Rio Blanco,1992,Estimate,1372,440
+103,Rio Blanco,1993,Estimate,1381,436
+103,Rio Blanco,1994,Estimate,1380,428
+103,Rio Blanco,1995,Estimate,1388,421
+103,Rio Blanco,1996,Estimate,1364,405
+103,Rio Blanco,1997,Estimate,1346,393
+103,Rio Blanco,1998,Estimate,1318,374
+103,Rio Blanco,1999,Estimate,1277,354
+103,Rio Blanco,2000,Estimate,1241,339
+103,Rio Blanco,2001,Estimate,1197,319
+103,Rio Blanco,2002,Estimate,1169,322
+103,Rio Blanco,2003,Estimate,1119,312
+103,Rio Blanco,2004,Estimate,1093,332
+103,Rio Blanco,2005,Estimate,1029,332
+103,Rio Blanco,2006,Estimate,1009,354
+103,Rio Blanco,2007,Estimate,1007,379
+103,Rio Blanco,2008,Estimate,989,405
+103,Rio Blanco,2009,Estimate,1040,443
+103,Rio Blanco,2010,Estimate,1127,484
+103,Rio Blanco,2011,Estimate,1188,506
+103,Rio Blanco,2012,Estimate,1247,482
+103,Rio Blanco,2013,Estimate,1261,468
+103,Rio Blanco,2014,Estimate,1257,441
+103,Rio Blanco,2015,Estimate,1265,428
+103,Rio Blanco,2016,Estimate,1291,393
+103,Rio Blanco,2017,Estimate,1281,385
+103,Rio Blanco,2018,Estimate,1292,388
+103,Rio Blanco,2019,Estimate,1264,365
+103,Rio Blanco,2020,Estimate,1276,333
+103,Rio Blanco,2021,Estimate,1282,316
+103,Rio Blanco,2022,Estimate,1300,329
+103,Rio Blanco,2023,Estimate,1320,301
+103,Rio Blanco,2024,Estimate,1293,294
+103,Rio Blanco,2025,Forecast,1253,276
+103,Rio Blanco,2026,Forecast,1220,258
+103,Rio Blanco,2027,Forecast,1200,229
+103,Rio Blanco,2028,Forecast,1177,215
+103,Rio Blanco,2029,Forecast,1110,209
+103,Rio Blanco,2030,Forecast,1078,208
+103,Rio Blanco,2031,Forecast,1022,205
+103,Rio Blanco,2032,Forecast,986,202
+103,Rio Blanco,2033,Forecast,927,201
+103,Rio Blanco,2034,Forecast,885,197
+103,Rio Blanco,2035,Forecast,848,196
+103,Rio Blanco,2036,Forecast,792,195
+103,Rio Blanco,2037,Forecast,768,195
+103,Rio Blanco,2038,Forecast,740,192
+103,Rio Blanco,2039,Forecast,710,190
+103,Rio Blanco,2040,Forecast,673,190
+103,Rio Blanco,2041,Forecast,654,190
+103,Rio Blanco,2042,Forecast,640,186
+103,Rio Blanco,2043,Forecast,634,185
+103,Rio Blanco,2044,Forecast,625,183
+103,Rio Blanco,2045,Forecast,617,180
+103,Rio Blanco,2046,Forecast,611,177
+103,Rio Blanco,2047,Forecast,604,172
+103,Rio Blanco,2048,Forecast,594,169
+103,Rio Blanco,2049,Forecast,590,164
+103,Rio Blanco,2050,Forecast,580,159
+103,Rio Blanco,2051,Forecast,574,154
+103,Rio Blanco,2052,Forecast,564,149
+103,Rio Blanco,2053,Forecast,558,144
+103,Rio Blanco,2054,Forecast,549,139
+103,Rio Blanco,2055,Forecast,541,134
+103,Rio Blanco,2056,Forecast,529,130
+103,Rio Blanco,2057,Forecast,521,127
+103,Rio Blanco,2058,Forecast,510,122
+103,Rio Blanco,2059,Forecast,498,119
+103,Rio Blanco,2060,Forecast,487,116
+105,Rio Grande,1990,Estimate,2420,856
+105,Rio Grande,1991,Estimate,2419,849
+105,Rio Grande,1992,Estimate,2427,847
+105,Rio Grande,1993,Estimate,2470,856
+105,Rio Grande,1994,Estimate,2512,865
+105,Rio Grande,1995,Estimate,2547,870
+105,Rio Grande,1996,Estimate,2559,870
+105,Rio Grande,1997,Estimate,2574,870
+105,Rio Grande,1998,Estimate,2593,867
+105,Rio Grande,1999,Estimate,2613,867
+105,Rio Grande,2000,Estimate,2626,866
+105,Rio Grande,2001,Estimate,2536,875
+105,Rio Grande,2002,Estimate,2476,881
+105,Rio Grande,2003,Estimate,2439,927
+105,Rio Grande,2004,Estimate,2458,921
+105,Rio Grande,2005,Estimate,2419,883
+105,Rio Grande,2006,Estimate,2318,840
+105,Rio Grande,2007,Estimate,2269,818
+105,Rio Grande,2008,Estimate,2251,803
+105,Rio Grande,2009,Estimate,2234,780
+105,Rio Grande,2010,Estimate,2233,795
+105,Rio Grande,2011,Estimate,2183,777
+105,Rio Grande,2012,Estimate,2149,750
+105,Rio Grande,2013,Estimate,2116,759
+105,Rio Grande,2014,Estimate,2097,753
+105,Rio Grande,2015,Estimate,2107,710
+105,Rio Grande,2016,Estimate,2093,698
+105,Rio Grande,2017,Estimate,2064,684
+105,Rio Grande,2018,Estimate,2032,657
+105,Rio Grande,2019,Estimate,2011,638
+105,Rio Grande,2020,Estimate,1985,636
+105,Rio Grande,2021,Estimate,1954,620
+105,Rio Grande,2022,Estimate,1921,615
+105,Rio Grande,2023,Estimate,1901,603
+105,Rio Grande,2024,Estimate,1890,590
+105,Rio Grande,2025,Forecast,1872,585
+105,Rio Grande,2026,Forecast,1896,569
+105,Rio Grande,2027,Forecast,1910,553
+105,Rio Grande,2028,Forecast,1900,513
+105,Rio Grande,2029,Forecast,1875,497
+105,Rio Grande,2030,Forecast,1863,491
+105,Rio Grande,2031,Forecast,1823,488
+105,Rio Grande,2032,Forecast,1773,486
+105,Rio Grande,2033,Forecast,1753,484
+105,Rio Grande,2034,Forecast,1718,480
+105,Rio Grande,2035,Forecast,1698,477
+105,Rio Grande,2036,Forecast,1668,472
+105,Rio Grande,2037,Forecast,1638,467
+105,Rio Grande,2038,Forecast,1615,463
+105,Rio Grande,2039,Forecast,1582,458
+105,Rio Grande,2040,Forecast,1552,453
+105,Rio Grande,2041,Forecast,1520,447
+105,Rio Grande,2042,Forecast,1488,442
+105,Rio Grande,2043,Forecast,1467,436
+105,Rio Grande,2044,Forecast,1444,428
+105,Rio Grande,2045,Forecast,1421,421
+105,Rio Grande,2046,Forecast,1400,411
+105,Rio Grande,2047,Forecast,1372,402
+105,Rio Grande,2048,Forecast,1344,393
+105,Rio Grande,2049,Forecast,1314,383
+105,Rio Grande,2050,Forecast,1285,372
+105,Rio Grande,2051,Forecast,1254,362
+105,Rio Grande,2052,Forecast,1223,353
+105,Rio Grande,2053,Forecast,1193,343
+105,Rio Grande,2054,Forecast,1161,333
+105,Rio Grande,2055,Forecast,1131,324
+105,Rio Grande,2056,Forecast,1098,316
+105,Rio Grande,2057,Forecast,1071,306
+105,Rio Grande,2058,Forecast,1042,300
+105,Rio Grande,2059,Forecast,1011,291
+105,Rio Grande,2060,Forecast,984,285
+107,Routt,1990,Estimate,2558,1032
+107,Routt,1991,Estimate,2639,1036
+107,Routt,1992,Estimate,2702,1039
+107,Routt,1993,Estimate,2823,1064
+107,Routt,1994,Estimate,2935,1079
+107,Routt,1995,Estimate,3030,1091
+107,Routt,1996,Estimate,3098,1087
+107,Routt,1997,Estimate,3151,1079
+107,Routt,1998,Estimate,3219,1076
+107,Routt,1999,Estimate,3309,1075
+107,Routt,2000,Estimate,3446,1089
+107,Routt,2001,Estimate,3442,1120
+107,Routt,2002,Estimate,3491,1140
+107,Routt,2003,Estimate,3465,1159
+107,Routt,2004,Estimate,3453,1154
+107,Routt,2005,Estimate,3465,1131
+107,Routt,2006,Estimate,3496,1160
+107,Routt,2007,Estimate,3535,1210
+107,Routt,2008,Estimate,3552,1253
+107,Routt,2009,Estimate,3560,1279
+107,Routt,2010,Estimate,3576,1291
+107,Routt,2011,Estimate,3582,1271
+107,Routt,2012,Estimate,3601,1225
+107,Routt,2013,Estimate,3621,1180
+107,Routt,2014,Estimate,3641,1141
+107,Routt,2015,Estimate,3646,1122
+107,Routt,2016,Estimate,3670,1140
+107,Routt,2017,Estimate,3680,1153
+107,Routt,2018,Estimate,3663,1141
+107,Routt,2019,Estimate,3654,1138
+107,Routt,2020,Estimate,3627,1137
+107,Routt,2021,Estimate,3665,1065
+107,Routt,2022,Estimate,3654,1051
+107,Routt,2023,Estimate,3582,1035
+107,Routt,2024,Estimate,3518,1017
+107,Routt,2025,Forecast,3429,1022
+107,Routt,2026,Forecast,3335,1041
+107,Routt,2027,Forecast,3289,1028
+107,Routt,2028,Forecast,3222,1043
+107,Routt,2029,Forecast,3188,1050
+107,Routt,2030,Forecast,3163,1057
+107,Routt,2031,Forecast,3158,1066
+107,Routt,2032,Forecast,3150,1074
+107,Routt,2033,Forecast,3157,1082
+107,Routt,2034,Forecast,3114,1090
+107,Routt,2035,Forecast,3088,1097
+107,Routt,2036,Forecast,3103,1107
+107,Routt,2037,Forecast,3106,1116
+107,Routt,2038,Forecast,3127,1123
+107,Routt,2039,Forecast,3159,1131
+107,Routt,2040,Forecast,3154,1137
+107,Routt,2041,Forecast,3178,1146
+107,Routt,2042,Forecast,3196,1152
+107,Routt,2043,Forecast,3211,1156
+107,Routt,2044,Forecast,3225,1160
+107,Routt,2045,Forecast,3240,1163
+107,Routt,2046,Forecast,3254,1162
+107,Routt,2047,Forecast,3267,1161
+107,Routt,2048,Forecast,3278,1157
+107,Routt,2049,Forecast,3288,1149
+107,Routt,2050,Forecast,3297,1142
+107,Routt,2051,Forecast,3302,1132
+107,Routt,2052,Forecast,3304,1120
+107,Routt,2053,Forecast,3307,1109
+107,Routt,2054,Forecast,3300,1098
+107,Routt,2055,Forecast,3295,1086
+107,Routt,2056,Forecast,3286,1076
+107,Routt,2057,Forecast,3271,1066
+107,Routt,2058,Forecast,3256,1058
+107,Routt,2059,Forecast,3234,1050
+107,Routt,2060,Forecast,3212,1043
+109,Saguache,1990,Estimate,1084,382
+109,Saguache,1991,Estimate,1100,383
+109,Saguache,1992,Estimate,1103,381
+109,Saguache,1993,Estimate,1106,376
+109,Saguache,1994,Estimate,1122,377
+109,Saguache,1995,Estimate,1183,396
+109,Saguache,1996,Estimate,1210,399
+109,Saguache,1997,Estimate,1213,395
+109,Saguache,1998,Estimate,1221,392
+109,Saguache,1999,Estimate,1254,398
+109,Saguache,2000,Estimate,1289,403
+109,Saguache,2001,Estimate,1238,433
+109,Saguache,2002,Estimate,1216,449
+109,Saguache,2003,Estimate,1185,455
+109,Saguache,2004,Estimate,1147,450
+109,Saguache,2005,Estimate,1118,464
+109,Saguache,2006,Estimate,1084,459
+109,Saguache,2007,Estimate,1059,461
+109,Saguache,2008,Estimate,1030,450
+109,Saguache,2009,Estimate,995,422
+109,Saguache,2010,Estimate,991,415
+109,Saguache,2011,Estimate,979,408
+109,Saguache,2012,Estimate,983,389
+109,Saguache,2013,Estimate,984,376
+109,Saguache,2014,Estimate,992,352
+109,Saguache,2015,Estimate,987,357
+109,Saguache,2016,Estimate,989,363
+109,Saguache,2017,Estimate,985,357
+109,Saguache,2018,Estimate,994,363
+109,Saguache,2019,Estimate,972,348
+109,Saguache,2020,Estimate,959,319
+109,Saguache,2021,Estimate,956,306
+109,Saguache,2022,Estimate,965,311
+109,Saguache,2023,Estimate,983,290
+109,Saguache,2024,Estimate,958,302
+109,Saguache,2025,Forecast,919,315
+109,Saguache,2026,Forecast,914,306
+109,Saguache,2027,Forecast,936,290
+109,Saguache,2028,Forecast,940,285
+109,Saguache,2029,Forecast,950,279
+109,Saguache,2030,Forecast,946,277
+109,Saguache,2031,Forecast,925,276
+109,Saguache,2032,Forecast,929,276
+109,Saguache,2033,Forecast,911,275
+109,Saguache,2034,Forecast,889,273
+109,Saguache,2035,Forecast,875,273
+109,Saguache,2036,Forecast,853,269
+109,Saguache,2037,Forecast,859,269
+109,Saguache,2038,Forecast,867,268
+109,Saguache,2039,Forecast,859,266
+109,Saguache,2040,Forecast,844,266
+109,Saguache,2041,Forecast,839,265
+109,Saguache,2042,Forecast,829,264
+109,Saguache,2043,Forecast,826,263
+109,Saguache,2044,Forecast,825,263
+109,Saguache,2045,Forecast,821,258
+109,Saguache,2046,Forecast,818,258
+109,Saguache,2047,Forecast,816,256
+109,Saguache,2048,Forecast,814,253
+109,Saguache,2049,Forecast,812,253
+109,Saguache,2050,Forecast,807,250
+109,Saguache,2051,Forecast,805,248
+109,Saguache,2052,Forecast,802,248
+109,Saguache,2053,Forecast,799,246
+109,Saguache,2054,Forecast,796,244
+109,Saguache,2055,Forecast,794,243
+109,Saguache,2056,Forecast,790,243
+109,Saguache,2057,Forecast,787,241
+109,Saguache,2058,Forecast,784,239
+109,Saguache,2059,Forecast,781,239
+109,Saguache,2060,Forecast,778,238
+111,San Juan,1990,Estimate,182,45
+111,San Juan,1991,Estimate,165,40
+111,San Juan,1992,Estimate,130,32
+111,San Juan,1993,Estimate,115,29
+111,San Juan,1994,Estimate,113,30
+111,San Juan,1995,Estimate,113,30
+111,San Juan,1996,Estimate,108,31
+111,San Juan,1997,Estimate,103,30
+111,San Juan,1998,Estimate,93,27
+111,San Juan,1999,Estimate,86,26
+111,San Juan,2000,Estimate,86,26
+111,San Juan,2001,Estimate,76,26
+111,San Juan,2002,Estimate,77,28
+111,San Juan,2003,Estimate,66,31
+111,San Juan,2004,Estimate,74,34
+111,San Juan,2005,Estimate,74,28
+111,San Juan,2006,Estimate,80,29
+111,San Juan,2007,Estimate,82,29
+111,San Juan,2008,Estimate,86,33
+111,San Juan,2009,Estimate,82,30
+111,San Juan,2010,Estimate,96,36
+111,San Juan,2011,Estimate,94,36
+111,San Juan,2012,Estimate,95,32
+111,San Juan,2013,Estimate,96,28
+111,San Juan,2014,Estimate,90,27
+111,San Juan,2015,Estimate,88,24
+111,San Juan,2016,Estimate,88,21
+111,San Juan,2017,Estimate,85,25
+111,San Juan,2018,Estimate,85,24
+111,San Juan,2019,Estimate,79,20
+111,San Juan,2020,Estimate,76,19
+111,San Juan,2021,Estimate,75,20
+111,San Juan,2022,Estimate,75,16
+111,San Juan,2023,Estimate,73,23
+111,San Juan,2024,Estimate,70,22
+111,San Juan,2025,Forecast,70,27
+111,San Juan,2026,Forecast,74,29
+111,San Juan,2027,Forecast,71,32
+111,San Juan,2028,Forecast,75,29
+111,San Juan,2029,Forecast,59,35
+111,San Juan,2030,Forecast,61,36
+111,San Juan,2031,Forecast,66,36
+111,San Juan,2032,Forecast,72,37
+111,San Juan,2033,Forecast,76,36
+111,San Juan,2034,Forecast,79,35
+111,San Juan,2035,Forecast,78,34
+111,San Juan,2036,Forecast,81,33
+111,San Juan,2037,Forecast,85,32
+111,San Juan,2038,Forecast,89,30
+111,San Juan,2039,Forecast,91,28
+111,San Juan,2040,Forecast,92,28
+111,San Juan,2041,Forecast,89,27
+111,San Juan,2042,Forecast,94,26
+111,San Juan,2043,Forecast,93,25
+111,San Juan,2044,Forecast,91,25
+111,San Juan,2045,Forecast,88,25
+111,San Juan,2046,Forecast,85,25
+111,San Juan,2047,Forecast,83,25
+111,San Juan,2048,Forecast,81,25
+111,San Juan,2049,Forecast,78,25
+111,San Juan,2050,Forecast,75,25
+111,San Juan,2051,Forecast,73,25
+111,San Juan,2052,Forecast,71,25
+111,San Juan,2053,Forecast,71,25
+111,San Juan,2054,Forecast,69,25
+111,San Juan,2055,Forecast,68,25
+111,San Juan,2056,Forecast,67,26
+111,San Juan,2057,Forecast,66,28
+111,San Juan,2058,Forecast,65,29
+111,San Juan,2059,Forecast,66,30
+111,San Juan,2060,Forecast,68,30
+113,San Miguel,1990,Estimate,580,264
+113,San Miguel,1991,Estimate,627,278
+113,San Miguel,1992,Estimate,683,295
+113,San Miguel,1993,Estimate,716,304
+113,San Miguel,1994,Estimate,770,317
+113,San Miguel,1995,Estimate,784,314
+113,San Miguel,1996,Estimate,810,319
+113,San Miguel,1997,Estimate,821,310
+113,San Miguel,1998,Estimate,871,320
+113,San Miguel,1999,Estimate,869,309
+113,San Miguel,2000,Estimate,862,295
+113,San Miguel,2001,Estimate,901,315
+113,San Miguel,2002,Estimate,899,340
+113,San Miguel,2003,Estimate,875,347
+113,San Miguel,2004,Estimate,882,353
+113,San Miguel,2005,Estimate,891,351
+113,San Miguel,2006,Estimate,906,361
+113,San Miguel,2007,Estimate,937,397
+113,San Miguel,2008,Estimate,954,419
+113,San Miguel,2009,Estimate,954,433
+113,San Miguel,2010,Estimate,997,455
+113,San Miguel,2011,Estimate,1041,458
+113,San Miguel,2012,Estimate,1092,432
+113,San Miguel,2013,Estimate,1114,405
+113,San Miguel,2014,Estimate,1142,385
+113,San Miguel,2015,Estimate,1158,383
+113,San Miguel,2016,Estimate,1185,380
+113,San Miguel,2017,Estimate,1177,368
+113,San Miguel,2018,Estimate,1190,351
+113,San Miguel,2019,Estimate,1179,335
+113,San Miguel,2020,Estimate,1157,322
+113,San Miguel,2021,Estimate,1147,298
+113,San Miguel,2022,Estimate,1136,280
+113,San Miguel,2023,Estimate,1101,270
+113,San Miguel,2024,Estimate,1071,252
+113,San Miguel,2025,Forecast,1012,261
+113,San Miguel,2026,Forecast,973,275
+113,San Miguel,2027,Forecast,922,291
+113,San Miguel,2028,Forecast,902,314
+113,San Miguel,2029,Forecast,860,342
+113,San Miguel,2030,Forecast,842,352
+113,San Miguel,2031,Forecast,835,365
+113,San Miguel,2032,Forecast,826,376
+113,San Miguel,2033,Forecast,837,390
+113,San Miguel,2034,Forecast,830,400
+113,San Miguel,2035,Forecast,837,413
+113,San Miguel,2036,Forecast,859,423
+113,San Miguel,2037,Forecast,873,432
+113,San Miguel,2038,Forecast,906,439
+113,San Miguel,2039,Forecast,933,446
+113,San Miguel,2040,Forecast,969,451
+113,San Miguel,2041,Forecast,1011,454
+113,San Miguel,2042,Forecast,1052,454
+113,San Miguel,2043,Forecast,1078,456
+113,San Miguel,2044,Forecast,1102,454
+113,San Miguel,2045,Forecast,1122,450
+113,San Miguel,2046,Forecast,1146,445
+113,San Miguel,2047,Forecast,1162,441
+113,San Miguel,2048,Forecast,1174,434
+113,San Miguel,2049,Forecast,1185,428
+113,San Miguel,2050,Forecast,1193,422
+113,San Miguel,2051,Forecast,1196,414
+113,San Miguel,2052,Forecast,1198,407
+113,San Miguel,2053,Forecast,1194,401
+113,San Miguel,2054,Forecast,1188,396
+113,San Miguel,2055,Forecast,1179,391
+113,San Miguel,2056,Forecast,1170,388
+113,San Miguel,2057,Forecast,1158,386
+113,San Miguel,2058,Forecast,1144,384
+113,San Miguel,2059,Forecast,1130,385
+113,San Miguel,2060,Forecast,1118,385
+115,Sedgwick,1990,Estimate,516,135
+115,Sedgwick,1991,Estimate,507,136
+115,Sedgwick,1992,Estimate,492,137
+115,Sedgwick,1993,Estimate,489,138
+115,Sedgwick,1994,Estimate,484,141
+115,Sedgwick,1995,Estimate,475,143
+115,Sedgwick,1996,Estimate,480,144
+115,Sedgwick,1997,Estimate,481,150
+115,Sedgwick,1998,Estimate,468,149
+115,Sedgwick,1999,Estimate,469,153
+115,Sedgwick,2000,Estimate,470,155
+115,Sedgwick,2001,Estimate,445,162
+115,Sedgwick,2002,Estimate,432,159
+115,Sedgwick,2003,Estimate,429,159
+115,Sedgwick,2004,Estimate,399,146
+115,Sedgwick,2005,Estimate,398,146
+115,Sedgwick,2006,Estimate,376,141
+115,Sedgwick,2007,Estimate,354,128
+115,Sedgwick,2008,Estimate,358,124
+115,Sedgwick,2009,Estimate,343,123
+115,Sedgwick,2010,Estimate,341,123
+115,Sedgwick,2011,Estimate,340,128
+115,Sedgwick,2012,Estimate,345,131
+115,Sedgwick,2013,Estimate,347,133
+115,Sedgwick,2014,Estimate,352,129
+115,Sedgwick,2015,Estimate,356,132
+115,Sedgwick,2016,Estimate,360,131
+115,Sedgwick,2017,Estimate,355,125
+115,Sedgwick,2018,Estimate,358,115
+115,Sedgwick,2019,Estimate,371,109
+115,Sedgwick,2020,Estimate,367,110
+115,Sedgwick,2021,Estimate,357,96
+115,Sedgwick,2022,Estimate,359,89
+115,Sedgwick,2023,Estimate,370,89
+115,Sedgwick,2024,Estimate,363,95
+115,Sedgwick,2025,Forecast,353,101
+115,Sedgwick,2026,Forecast,351,110
+115,Sedgwick,2027,Forecast,344,115
+115,Sedgwick,2028,Forecast,346,117
+115,Sedgwick,2029,Forecast,342,112
+115,Sedgwick,2030,Forecast,347,108
+115,Sedgwick,2031,Forecast,347,106
+115,Sedgwick,2032,Forecast,341,106
+115,Sedgwick,2033,Forecast,339,104
+115,Sedgwick,2034,Forecast,333,104
+115,Sedgwick,2035,Forecast,334,104
+115,Sedgwick,2036,Forecast,334,104
+115,Sedgwick,2037,Forecast,332,104
+115,Sedgwick,2038,Forecast,334,105
+115,Sedgwick,2039,Forecast,339,105
+115,Sedgwick,2040,Forecast,345,105
+115,Sedgwick,2041,Forecast,345,106
+115,Sedgwick,2042,Forecast,344,106
+115,Sedgwick,2043,Forecast,341,106
+115,Sedgwick,2044,Forecast,340,107
+115,Sedgwick,2045,Forecast,341,107
+115,Sedgwick,2046,Forecast,342,107
+115,Sedgwick,2047,Forecast,341,107
+115,Sedgwick,2048,Forecast,342,107
+115,Sedgwick,2049,Forecast,344,107
+115,Sedgwick,2050,Forecast,343,107
+115,Sedgwick,2051,Forecast,345,106
+115,Sedgwick,2052,Forecast,346,105
+115,Sedgwick,2053,Forecast,347,105
+115,Sedgwick,2054,Forecast,348,104
+115,Sedgwick,2055,Forecast,348,104
+115,Sedgwick,2056,Forecast,347,104
+115,Sedgwick,2057,Forecast,347,104
+115,Sedgwick,2058,Forecast,347,104
+115,Sedgwick,2059,Forecast,347,104
+115,Sedgwick,2060,Forecast,346,104
+117,Summit,1990,Estimate,1691,960
+117,Summit,1991,Estimate,1750,967
+117,Summit,1992,Estimate,1785,965
+117,Summit,1993,Estimate,1940,1023
+117,Summit,1994,Estimate,2168,1118
+117,Summit,1995,Estimate,2297,1155
+117,Summit,1996,Estimate,2414,1187
+117,Summit,1997,Estimate,2511,1202
+117,Summit,1998,Estimate,2603,1212
+117,Summit,1999,Estimate,2734,1236
+117,Summit,2000,Estimate,3089,1355
+117,Summit,2001,Estimate,3128,1329
+117,Summit,2002,Estimate,3052,1382
+117,Summit,2003,Estimate,2977,1443
+117,Summit,2004,Estimate,2988,1444
+117,Summit,2005,Estimate,2994,1444
+117,Summit,2006,Estimate,3008,1485
+117,Summit,2007,Estimate,3114,1517
+117,Summit,2008,Estimate,3221,1525
+117,Summit,2009,Estimate,3295,1528
+117,Summit,2010,Estimate,3357,1540
+117,Summit,2011,Estimate,3388,1508
+117,Summit,2012,Estimate,3464,1492
+117,Summit,2013,Estimate,3609,1400
+117,Summit,2014,Estimate,3738,1362
+117,Summit,2015,Estimate,3856,1377
+117,Summit,2016,Estimate,3954,1373
+117,Summit,2017,Estimate,4010,1326
+117,Summit,2018,Estimate,3968,1345
+117,Summit,2019,Estimate,3969,1323
+117,Summit,2020,Estimate,3922,1331
+117,Summit,2021,Estimate,3914,1303
+117,Summit,2022,Estimate,3918,1287
+117,Summit,2023,Estimate,3878,1255
+117,Summit,2024,Estimate,3805,1283
+117,Summit,2025,Forecast,3762,1257
+117,Summit,2026,Forecast,3668,1245
+117,Summit,2027,Forecast,3590,1232
+117,Summit,2028,Forecast,3561,1230
+117,Summit,2029,Forecast,3550,1203
+117,Summit,2030,Forecast,3462,1207
+117,Summit,2031,Forecast,3467,1211
+117,Summit,2032,Forecast,3437,1218
+117,Summit,2033,Forecast,3426,1226
+117,Summit,2034,Forecast,3386,1235
+117,Summit,2035,Forecast,3355,1246
+117,Summit,2036,Forecast,3330,1255
+117,Summit,2037,Forecast,3337,1268
+117,Summit,2038,Forecast,3323,1281
+117,Summit,2039,Forecast,3321,1294
+117,Summit,2040,Forecast,3319,1307
+117,Summit,2041,Forecast,3332,1319
+117,Summit,2042,Forecast,3323,1328
+117,Summit,2043,Forecast,3345,1334
+117,Summit,2044,Forecast,3369,1337
+117,Summit,2045,Forecast,3395,1339
+117,Summit,2046,Forecast,3421,1339
+117,Summit,2047,Forecast,3447,1337
+117,Summit,2048,Forecast,3472,1334
+117,Summit,2049,Forecast,3495,1330
+117,Summit,2050,Forecast,3516,1325
+117,Summit,2051,Forecast,3534,1320
+117,Summit,2052,Forecast,3549,1315
+117,Summit,2053,Forecast,3562,1311
+117,Summit,2054,Forecast,3570,1306
+117,Summit,2055,Forecast,3574,1302
+117,Summit,2056,Forecast,3574,1299
+117,Summit,2057,Forecast,3572,1298
+117,Summit,2058,Forecast,3567,1296
+117,Summit,2059,Forecast,3559,1295
+117,Summit,2060,Forecast,3551,1295
+119,Teller,1990,Estimate,2639,967
+119,Teller,1991,Estimate,2675,955
+119,Teller,1992,Estimate,2863,998
+119,Teller,1993,Estimate,3071,1045
+119,Teller,1994,Estimate,3272,1090
+119,Teller,1995,Estimate,3502,1136
+119,Teller,1996,Estimate,3726,1176
+119,Teller,1997,Estimate,3898,1200
+119,Teller,1998,Estimate,4000,1199
+119,Teller,1999,Estimate,4084,1189
+119,Teller,2000,Estimate,4244,1199
+119,Teller,2001,Estimate,4283,1210
+119,Teller,2002,Estimate,4257,1187
+119,Teller,2003,Estimate,4211,1155
+119,Teller,2004,Estimate,4078,1145
+119,Teller,2005,Estimate,4040,1159
+119,Teller,2006,Estimate,3965,1161
+119,Teller,2007,Estimate,3942,1169
+119,Teller,2008,Estimate,3793,1129
+119,Teller,2009,Estimate,3719,1092
+119,Teller,2010,Estimate,3676,1086
+119,Teller,2011,Estimate,3597,1068
+119,Teller,2012,Estimate,3527,1003
+119,Teller,2013,Estimate,3415,959
+119,Teller,2014,Estimate,3342,951
+119,Teller,2015,Estimate,3250,941
+119,Teller,2016,Estimate,3318,945
+119,Teller,2017,Estimate,3320,986
+119,Teller,2018,Estimate,3298,991
+119,Teller,2019,Estimate,3290,946
+119,Teller,2020,Estimate,3222,948
+119,Teller,2021,Estimate,3192,912
+119,Teller,2022,Estimate,3119,902
+119,Teller,2023,Estimate,3058,897
+119,Teller,2024,Estimate,2988,921
+119,Teller,2025,Forecast,2943,910
+119,Teller,2026,Forecast,2894,920
+119,Teller,2027,Forecast,2873,923
+119,Teller,2028,Forecast,2873,917
+119,Teller,2029,Forecast,2834,915
+119,Teller,2030,Forecast,2847,914
+119,Teller,2031,Forecast,2872,915
+119,Teller,2032,Forecast,2875,911
+119,Teller,2033,Forecast,2874,905
+119,Teller,2034,Forecast,2858,900
+119,Teller,2035,Forecast,2853,893
+119,Teller,2036,Forecast,2861,886
+119,Teller,2037,Forecast,2879,878
+119,Teller,2038,Forecast,2862,871
+119,Teller,2039,Forecast,2865,865
+119,Teller,2040,Forecast,2857,860
+119,Teller,2041,Forecast,2846,856
+119,Teller,2042,Forecast,2838,851
+119,Teller,2043,Forecast,2831,848
+119,Teller,2044,Forecast,2824,846
+119,Teller,2045,Forecast,2813,845
+119,Teller,2046,Forecast,2804,844
+119,Teller,2047,Forecast,2799,845
+119,Teller,2048,Forecast,2792,846
+119,Teller,2049,Forecast,2787,848
+119,Teller,2050,Forecast,2783,851
+119,Teller,2051,Forecast,2782,852
+119,Teller,2052,Forecast,2780,856
+119,Teller,2053,Forecast,2781,858
+119,Teller,2054,Forecast,2781,861
+119,Teller,2055,Forecast,2781,863
+119,Teller,2056,Forecast,2787,866
+119,Teller,2057,Forecast,2790,869
+119,Teller,2058,Forecast,2793,871
+119,Teller,2059,Forecast,2799,873
+119,Teller,2060,Forecast,2807,875
+121,Washington,1990,Estimate,974,328
+121,Washington,1991,Estimate,971,323
+121,Washington,1992,Estimate,991,327
+121,Washington,1993,Estimate,1039,341
+121,Washington,1994,Estimate,1058,341
+121,Washington,1995,Estimate,1058,339
+121,Washington,1996,Estimate,1057,337
+121,Washington,1997,Estimate,1056,332
+121,Washington,1998,Estimate,1045,323
+121,Washington,1999,Estimate,1017,314
+121,Washington,2000,Estimate,998,305
+121,Washington,2001,Estimate,959,306
+121,Washington,2002,Estimate,1020,318
+121,Washington,2003,Estimate,975,310
+121,Washington,2004,Estimate,958,284
+121,Washington,2005,Estimate,951,263
+121,Washington,2006,Estimate,931,255
+121,Washington,2007,Estimate,916,253
+121,Washington,2008,Estimate,854,252
+121,Washington,2009,Estimate,863,255
+121,Washington,2010,Estimate,844,277
+121,Washington,2011,Estimate,781,253
+121,Washington,2012,Estimate,774,243
+121,Washington,2013,Estimate,783,236
+121,Washington,2014,Estimate,799,228
+121,Washington,2015,Estimate,826,225
+121,Washington,2016,Estimate,823,247
+121,Washington,2017,Estimate,835,254
+121,Washington,2018,Estimate,806,270
+121,Washington,2019,Estimate,812,266
+121,Washington,2020,Estimate,821,263
+121,Washington,2021,Estimate,853,261
+121,Washington,2022,Estimate,843,266
+121,Washington,2023,Estimate,868,252
+121,Washington,2024,Estimate,849,256
+121,Washington,2025,Forecast,815,258
+121,Washington,2026,Forecast,799,251
+121,Washington,2027,Forecast,807,244
+121,Washington,2028,Forecast,796,239
+121,Washington,2029,Forecast,814,219
+121,Washington,2030,Forecast,812,213
+121,Washington,2031,Forecast,812,206
+121,Washington,2032,Forecast,792,203
+121,Washington,2033,Forecast,779,199
+121,Washington,2034,Forecast,754,195
+121,Washington,2035,Forecast,737,192
+121,Washington,2036,Forecast,713,190
+121,Washington,2037,Forecast,697,187
+121,Washington,2038,Forecast,681,186
+121,Washington,2039,Forecast,661,186
+121,Washington,2040,Forecast,640,184
+121,Washington,2041,Forecast,624,184
+121,Washington,2042,Forecast,596,184
+121,Washington,2043,Forecast,580,184
+121,Washington,2044,Forecast,566,184
+121,Washington,2045,Forecast,558,182
+121,Washington,2046,Forecast,548,182
+121,Washington,2047,Forecast,543,180
+121,Washington,2048,Forecast,533,178
+121,Washington,2049,Forecast,529,175
+121,Washington,2050,Forecast,523,175
+121,Washington,2051,Forecast,520,170
+121,Washington,2052,Forecast,516,167
+121,Washington,2053,Forecast,512,165
+121,Washington,2054,Forecast,510,160
+121,Washington,2055,Forecast,506,157
+121,Washington,2056,Forecast,501,154
+121,Washington,2057,Forecast,496,150
+121,Washington,2058,Forecast,489,146
+121,Washington,2059,Forecast,485,142
+121,Washington,2060,Forecast,478,140
+123,Weld,1990,Estimate,26644,10584
+123,Weld,1991,Estimate,27450,10844
+123,Weld,1992,Estimate,28372,11159
+123,Weld,1993,Estimate,29554,11572
+123,Weld,1994,Estimate,30728,11976
+123,Weld,1995,Estimate,31944,12394
+123,Weld,1996,Estimate,32923,12718
+123,Weld,1997,Estimate,33992,13071
+123,Weld,1998,Estimate,35165,13460
+123,Weld,1999,Estimate,36202,13797
+123,Weld,2000,Estimate,37436,14202
+123,Weld,2001,Estimate,38815,15123
+123,Weld,2002,Estimate,39853,15721
+123,Weld,2003,Estimate,41364,16527
+123,Weld,2004,Estimate,42470,17235
+123,Weld,2005,Estimate,44192,18255
+123,Weld,2006,Estimate,45519,18971
+123,Weld,2007,Estimate,46958,19590
+123,Weld,2008,Estimate,48277,19961
+123,Weld,2009,Estimate,49391,20021
+123,Weld,2010,Estimate,50677,19935
+123,Weld,2011,Estimate,51757,19816
+123,Weld,2012,Estimate,52825,19775
+123,Weld,2013,Estimate,54096,19878
+123,Weld,2014,Estimate,55419,20195
+123,Weld,2015,Estimate,57119,20793
+123,Weld,2016,Estimate,58807,21542
+123,Weld,2017,Estimate,60380,22232
+123,Weld,2018,Estimate,61682,22730
+123,Weld,2019,Estimate,63183,23061
+123,Weld,2020,Estimate,64550,23286
+123,Weld,2021,Estimate,66001,23273
+123,Weld,2022,Estimate,67663,23589
+123,Weld,2023,Estimate,68781,24081
+123,Weld,2024,Estimate,69769,24634
+123,Weld,2025,Forecast,70609,25117
+123,Weld,2026,Forecast,71405,25692
+123,Weld,2027,Forecast,71890,25952
+123,Weld,2028,Forecast,72415,26046
+123,Weld,2029,Forecast,72943,26223
+123,Weld,2030,Forecast,73492,26374
+123,Weld,2031,Forecast,74175,26547
+123,Weld,2032,Forecast,74870,26667
+123,Weld,2033,Forecast,75483,26773
+123,Weld,2034,Forecast,75948,26883
+123,Weld,2035,Forecast,76449,26979
+123,Weld,2036,Forecast,77096,27062
+123,Weld,2037,Forecast,77864,27149
+123,Weld,2038,Forecast,78582,27229
+123,Weld,2039,Forecast,79347,27300
+123,Weld,2040,Forecast,79993,27363
+123,Weld,2041,Forecast,80437,27419
+123,Weld,2042,Forecast,80933,27490
+123,Weld,2043,Forecast,81325,27559
+123,Weld,2044,Forecast,81671,27633
+123,Weld,2045,Forecast,81952,27712
+123,Weld,2046,Forecast,82229,27790
+123,Weld,2047,Forecast,82520,27865
+123,Weld,2048,Forecast,82819,27937
+123,Weld,2049,Forecast,83133,28007
+123,Weld,2050,Forecast,83452,28062
+123,Weld,2051,Forecast,83761,28108
+123,Weld,2052,Forecast,84060,28156
+123,Weld,2053,Forecast,84347,28211
+123,Weld,2054,Forecast,84613,28273
+123,Weld,2055,Forecast,84863,28337
+123,Weld,2056,Forecast,85092,28408
+123,Weld,2057,Forecast,85312,28471
+123,Weld,2058,Forecast,85524,28522
+123,Weld,2059,Forecast,85733,28565
+123,Weld,2060,Forecast,85930,28595
+125,Yuma,1990,Estimate,1978,612
+125,Yuma,1991,Estimate,1988,614
+125,Yuma,1992,Estimate,1980,612
+125,Yuma,1993,Estimate,2014,620
+125,Yuma,1994,Estimate,2031,627
+125,Yuma,1995,Estimate,2068,635
+125,Yuma,1996,Estimate,2082,638
+125,Yuma,1997,Estimate,2105,646
+125,Yuma,1998,Estimate,2132,653
+125,Yuma,1999,Estimate,2133,654
+125,Yuma,2000,Estimate,2126,650
+125,Yuma,2001,Estimate,2070,640
+125,Yuma,2002,Estimate,2058,630
+125,Yuma,2003,Estimate,2060,640
+125,Yuma,2004,Estimate,1996,628
+125,Yuma,2005,Estimate,1948,666
+125,Yuma,2006,Estimate,1894,694
+125,Yuma,2007,Estimate,1858,713
+125,Yuma,2008,Estimate,1880,730
+125,Yuma,2009,Estimate,1854,749
+125,Yuma,2010,Estimate,1870,766
+125,Yuma,2011,Estimate,1863,782
+125,Yuma,2012,Estimate,1872,772
+125,Yuma,2013,Estimate,1917,743
+125,Yuma,2014,Estimate,1942,736
+125,Yuma,2015,Estimate,1899,739
+125,Yuma,2016,Estimate,1939,731
+125,Yuma,2017,Estimate,1957,711
+125,Yuma,2018,Estimate,1973,704
+125,Yuma,2019,Estimate,1977,717
+125,Yuma,2020,Estimate,1981,695
+125,Yuma,2021,Estimate,1974,686
+125,Yuma,2022,Estimate,1991,693
+125,Yuma,2023,Estimate,1995,681
+125,Yuma,2024,Estimate,2039,669
+125,Yuma,2025,Forecast,1995,682
+125,Yuma,2026,Forecast,1961,675
+125,Yuma,2027,Forecast,1988,654
+125,Yuma,2028,Forecast,2021,652
+125,Yuma,2029,Forecast,2033,636
+125,Yuma,2030,Forecast,2031,615
+125,Yuma,2031,Forecast,2030,602
+125,Yuma,2032,Forecast,2006,593
+125,Yuma,2033,Forecast,1987,585
+125,Yuma,2034,Forecast,1957,582
+125,Yuma,2035,Forecast,1927,581
+125,Yuma,2036,Forecast,1903,579
+125,Yuma,2037,Forecast,1869,581
+125,Yuma,2038,Forecast,1856,582
+125,Yuma,2039,Forecast,1832,586
+125,Yuma,2040,Forecast,1800,588
+125,Yuma,2041,Forecast,1784,592
+125,Yuma,2042,Forecast,1762,594
+125,Yuma,2043,Forecast,1745,596
+125,Yuma,2044,Forecast,1727,597
+125,Yuma,2045,Forecast,1715,597
+125,Yuma,2046,Forecast,1705,597
+125,Yuma,2047,Forecast,1699,595
+125,Yuma,2048,Forecast,1693,590
+125,Yuma,2049,Forecast,1688,586
+125,Yuma,2050,Forecast,1681,579
+125,Yuma,2051,Forecast,1678,573
+125,Yuma,2052,Forecast,1675,566
+125,Yuma,2053,Forecast,1669,558
+125,Yuma,2054,Forecast,1662,550
+125,Yuma,2055,Forecast,1653,543
+125,Yuma,2056,Forecast,1640,534
+125,Yuma,2057,Forecast,1629,528
+125,Yuma,2058,Forecast,1615,521
+125,Yuma,2059,Forecast,1599,513
+125,Yuma,2060,Forecast,1581,506
