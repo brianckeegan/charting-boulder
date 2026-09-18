@@ -133,3 +133,19 @@ A row read as district grain is kept only if its code and name appear together a
 **Why.** Grain was decided by counting codes: two codes meant district plus school, one meant district alone. A school row whose school code merged into its name leaves one code behind and passes that test, and that is the whole of how `district-teacher-fte-cde.csv` came to be seventeen rows of schools. The file that prints a school also prints its district beside it, so the file itself says which codes are districts — no list has to be maintained here.
 
 **What it costs.** A real district that appears in no school row would be dropped. None does, and the count of rows this rejects is reported per file in `audit/teacher-fte-parse.json`.
+
+## D18 — A figure is filed under the year it measures, not the volume it appears in — 2026-09-18
+
+The 1999 yearbook's classroom teacher FTE is stored under **1998**. Its school counts and membership stay under 1999.
+
+**Why.** That volume prints Fall 1999 membership beside Fall 1998 teachers, in the same row, under two different "FALL" headings. Filing the staff by the volume would put a whole year of Colorado's teaching staff one year out, and nothing downstream would notice: the numbers are the right size and the series would still look continuous. The heading states which autumn the column measures, so the heading decides.
+
+**How it was caught, and what it costs.** The row's own arithmetic stopped agreeing — students over teachers no longer matched the printed ratio, because the ratio is also the 1998 one. That check is therefore switched off for those rows, which leaves the 1998 staffing with no internal check; it rests instead on NCES, where it lands within 1.3%. The consequence is a real hole: no volume publishes 1999 staffing and CDE's staff serial starts in 2000, so **the CDE teacher series has no 1999**.
+
+## D19 — The yearbook era joins the district table rather than getting its own — 2026-09-18
+
+`district-teacher-fte-cde.csv` holds 1986–2024 in one file, with `source` naming the era each row came from, rather than a separate table for the fourteen scanned volumes.
+
+**Why.** It is one measure of one thing — how many teachers a Colorado district employs — and splitting it by how it happened to be printed would make the ordinary question, how staffing changed over forty years, a join. The archive already mixes eras inside one table wherever the measure is the same: `district-year.csv` runs from 1977 on the same basis.
+
+**What it costs, and the guard.** A scanned 1991 figure and a 2023 spreadsheet figure sit in the same column, distinguished only by `source`. That is a real hazard, so the columns that exist in only one era are kept separate rather than merged into a single "staff" column: `staff_certificated_fte` and `schools_published` are yearbook-era, `teacher_fte_school_sum` and `schools_in_sum` are modern, and a row that carries the first pair and not the second is obviously from the scans without reading `source` at all.

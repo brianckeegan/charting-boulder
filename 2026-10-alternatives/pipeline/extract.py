@@ -426,6 +426,322 @@ def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dic
     }
 
 
+# 1999 drops "SELECTED" from the title. Requiring it lost that volume whole.
+SUMMARY_HEADING = re.compile(r"SUMMARY OF (SELECTED )?SCHOOL DISTRICT DATA", re.I)
+
+# The summary table's columns, matched against the whole stack of header rows
+# joined together. Order is load-bearing twice over: a column is claimed by the
+# first pattern that matches it and then taken out of the running, so the
+# specific names have to come before the general ones. "TOTAL CERTIFICATED" and
+# "TOTAL NONCERTIFICATED" both contain TOTAL, and "PUPIL/SELECTED TEACHER
+# RATIO" contains "TEACHER RATIO"; putting the school total and the plain ratio
+# last is what stops them taking the wrong column.
+SUMMARY_COLUMNS = [
+    ("staff_noncertificated_fte", r"NONCERTIFICATED"),
+    ("staff_certificated_fte", r"TOTAL CERTIFICATED"),
+    ("teacher_fte", r"CLASSROOM TEACHER"),
+    ("pupil_selected_teacher_ratio", r"SELECTED"),
+    ("pupil_teacher_ratio", r"PUPIL/ ?TEACHER\s*RATIO"),
+    ("enrollment", r"\bSTUDENTS\b|PUPIL\s*MEMBERSHIP"),
+    ("schools_elementary", r"\bELEMENTARY\b"),
+    ("schools_middle", r"\bMIDDLE\b"),
+    ("schools_senior", r"\bSENIOR\b"),
+    ("schools_other", r"\bOTHER\b"),
+    ("schools_total", r"\bTOTAL\b"),
+    ("dropout_rate", r"DROPOUT"),
+    ("graduation_rate", r"GRADUATION"),
+]
+SCHOOL_COUNTS = ("schools_elementary", "schools_middle", "schools_senior", "schools_other")
+SUMMARY_REQUIRED = {"enrollment", "schools_total", "schools_elementary"}
+FALL_YEAR = re.compile(r"FALL\s*(\d{4})")
+
+
+def _summary_header(text: str) -> str:
+    """One header cell, with the print layout taken back out of it.
+
+    The column names are set over two or three lines and hyphenated across
+    them, so the OCR returns "ELEMEN-<br>TARY" and "TOTAL NONCER-<br>TIFICATED".
+    Undoing the break first means the patterns can match the word rather than
+    the typesetting.
+    """
+    flat = re.sub(r"<br\s*/?>", " ", text or "")
+    flat = re.sub(r"<[^>]+>", " ", flat)
+    flat = re.sub(r"-\s+", "", flat)
+    return re.sub(r"\s+", " ", flat).strip().upper()
+
+
+def _summary_map(rows: list[list[str]]) -> tuple[dict[str, int], int, int | None, str]:
+    """Find the column map, reading the header rows as one stacked block.
+
+    The heading is set over two, three or four lines, and which line carries
+    which word moves between volumes: 1992 puts every column name on one row,
+    1998 splits "ELEMEN-" and "TARY" across two, and both hang those under a
+    group name ("NUMBER OF SCHOOLS") on the row above. Joining the rows down
+    each column and matching against the join reads all three layouts without
+    knowing which one it is looking at.
+    """
+    best: tuple[dict[str, int], int, int | None, str] = ({}, 0, None, "")
+    width = max((len(r) for r in rows[:6]), default=0)
+    for last in range(min(6, len(rows))):
+        # Stop before the first row of figures, so a district never joins the
+        # header.
+        numeric = sum(1 for c in rows[last]
+                      if re.fullmatch(r"[\d,]+(\.\d+)?%?", (c or "").strip()))
+        if numeric >= 3:
+            break
+        joined = []
+        for j in range(width):
+            parts = [rows[i][j] for i in range(last + 1) if j < len(rows[i])]
+            joined.append(_summary_header(" ".join(parts)))
+        merge = next((j for j, name in enumerate(joined)
+                      if re.search(r"\bOTHER TOTAL\b", name)), None)
+        if merge is not None:
+            joined = joined[:merge] + ["OTHER", "TOTAL"] + joined[merge + 1:]
+        found: dict[str, int] = {}
+        for key, pattern in SUMMARY_COLUMNS:
+            for j, name in enumerate(joined):
+                if j in found.values() or key in found or not name:
+                    continue
+                if re.search(pattern, name):
+                    found[key] = j
+                    break
+        # Take the fullest reading, not the first adequate one. The 1999
+        # volume sets "FALL 1998" on the first header row and "CLASSROOM
+        # TEACHER F.T.E." two rows below it, so a map built from the first
+        # three rows satisfies every requirement and still has no teacher
+        # column - which is how 49 districts came back with school counts and
+        # no staff at all.
+        if SUMMARY_REQUIRED <= set(found) and len(found) > len(best[0]):
+            staff_header = joined[found["teacher_fte"]] if "teacher_fte" in found else ""
+            best = (found, last + 1, merge, staff_header)
+    return best
+
+
+def _summary_unmerge(cells: list[str], index: int | None) -> list[str]:
+    """Undo one cell that holds two columns' worth of a row.
+
+    Where the OCR ran the OTHER and TOTAL headings together it sometimes did
+    the same to the figures beneath them, so a row reads "0 2" in one cell.
+    Where it did not, the row already has them apart and nothing needs doing.
+    """
+    if index is None or index >= len(cells):
+        return cells
+    parts = cells[index].split()
+    if len(parts) != 2:
+        return cells
+    return cells[:index] + parts + cells[index + 1:]
+
+
+def _summary_row_holds(cells, columns, offset) -> tuple[bool, bool]:
+    """Does this reading of the row satisfy the row's own two checks?"""
+    def value(key, caster):
+        j = columns.get(key)
+        if j is None or j == offset:
+            return None
+        if j > offset:
+            j -= 1
+        return caster(cells[j]) if j < len(cells) else None
+
+    parts = [value(k, parse_count) for k in SCHOOL_COUNTS]
+    total = value("schools_total", parse_count)
+    schools_ok = (total is not None and all(p is not None for p in parts)
+                  and sum(parts) == total)
+
+    teachers = value("teacher_fte", parse_decimal)
+    students = value("enrollment", parse_count)
+    ratio = value("pupil_teacher_ratio", parse_decimal)
+    ratio_ok = bool(students is not None and teachers and ratio
+                    and abs(students / teachers - ratio) <= max(0.06, ratio * 0.02))
+    return schools_ok, ratio_ok
+
+
+def _summary_offset(cells, columns) -> tuple[int, int]:
+    """Where, if anywhere, this row lost a cell - and so where it shifted.
+
+    A row that drops one cell in the middle pulls everything after it one
+    place left, and the result is not obviously wrong: Denver's 1994 row lost
+    its school total and came back with 62,773 teachers and 17 pupils, while
+    Colorado Springs lost its non-certificated staff in 1996 and came back
+    with 33,175 teachers. Both are the state's largest districts, so dropping
+    them would be visible, and both are recoverable - because the row prints
+    the ratio between two of its own columns, and the shift only divides
+    correctly in one position.
+
+    Every possible loss point is tried and one is accepted only if the row
+    then satisfies both of its checks, having satisfied neither or only one
+    before. Returns the column index that was lost (or a sentinel past the
+    end, meaning the row is whole) and 1 when a shift was applied.
+    """
+    whole = len(cells) + 1
+    if _summary_row_holds(cells, columns, whole)[1]:
+        return whole, 0
+    first = min(columns.values())
+    for offset in range(first, max(columns.values()) + 1):
+        schools_ok, ratio_ok = _summary_row_holds(cells, columns, offset)
+        if ratio_ok and (schools_ok or columns.get("schools_total", -1) == offset):
+            return offset, 1
+    return whole, 0
+
+
+def parse_yearbook_district_summary(volume_dir: Path, year: int) -> tuple[list[dict], dict]:
+    """The yearbook's summary table: district staff and school counts.
+
+    Printed as Table 1 in some volumes and Table 2 in others, under a heading
+    that does not change: "SUMMARY OF SELECTED SCHOOL DISTRICT DATA". Thirteen
+    columns, of which the archive takes the schools, the staff and the two
+    figures that check them:
+
+        |            |     | ELEM | MID | SEN | OTH | TOT | NONCERT | CERT |
+        |            |     | CLASSROOM TEACHERS | STUDENTS | RATIO | ... |
+        | COUNTY: ADAMS    |                                                |
+        | MAPLETON   | 1   | 6 | 2 | 1 | 1 | 10 | 181.5 | 274.8 | 226.8 |
+        |            |     | 4,941 | 21.8 | 29.4 | 3.3 |
+
+    Two checks come from the row itself, and both are recorded rather than
+    used to silently drop rows: the four school counts must add to the printed
+    total, and students divided by classroom teachers must be the printed
+    ratio. A row failing either is kept and flagged, because unlike the modern
+    ratio reports there is no second file to fall back on for these years.
+    """
+    index_path = volume_dir / "index.json"
+    if not index_path.exists():
+        return [], {"error": "volume not finished - no index.json"}
+    index = json.loads(index_path.read_text())
+
+    records: list[dict] = []
+    checks = {"schools_pass": 0, "schools_fail": 0, "ratio_pass": 0, "ratio_fail": 0}
+    aggregates = repaired = 0
+
+    # The table's span, not only the pages whose running head the OCR could
+    # read. Two pages - 1996's p025 and 1997's p031 - came back with an empty
+    # heading, and taking only the flagged pages dropped both, with each
+    # volume quietly losing about thirty districts. This is the same fault the
+    # page selection in datalab-ocr.py had, one layer further down: a page
+    # that is never read cannot fail a check. A page inside the span that
+    # holds something else has no header to find and is skipped anyway.
+    flagged = [int(page) for page, record in index["pages"].items()
+               if SUMMARY_HEADING.search(record.get("heading") or "")]
+    if not flagged:
+        return [], {"error": "no summary pages in this volume"}
+    span = range(min(flagged), max(flagged) + 1)
+
+    for page in span:
+        page_file = volume_dir / f"p{page:03d}.md"
+        if not page_file.exists():
+            continue
+        rows = _markdown_rows(page_file.read_text())
+
+        columns, start, merged_at, staff_header = _summary_map(rows)
+        if not columns:
+            continue
+        # 1999 prints Fall 1999 membership beside Fall 1998 teachers, in one
+        # row, under two different "FALL" headings. Filing those teachers
+        # under 1999 would put a year's staffing one year out - and the row's
+        # own ratio is the 1998 one, so the arithmetic check fails on every
+        # row rather than passing quietly. The heading says which year the
+        # staff belong to, so the heading is what decides.
+        stated = FALL_YEAR.search(staff_header)
+        staff_year = int(stated.group(1)) if stated else year
+
+        # Everything left of the first measure is the district's name and its
+        # number within the county, which some pages split and some do not.
+        first = min(columns.values())
+        county = ""
+        for cells in rows[start:]:
+            cells = _summary_unmerge(cells, merged_at)
+            label = re.sub(r"<[^>]+>", "", cells[0]).strip() if cells else ""
+            # A county heading is written "COUNTY: ADAMS" in the earlier
+            # volumes and "ADAMS COUNTY" on its own row, underlined, from 1998.
+            if label.upper().startswith("COUNTY:"):
+                county = label.split(":", 1)[1].strip()
+                continue
+            if (label.upper().endswith(" COUNTY")
+                    and not any(c.strip() for c in cells[1:])):
+                county = label[: -len(" COUNTY")].strip()
+                continue
+            name = " ".join(re.sub(r"<[^>]+>", "", c).strip()
+                            for c in cells[:first] if c.strip())
+            name = name.strip()
+            if not name:
+                continue
+            if AGGREGATE_ROW.search(name) or name.upper().startswith("TOTAL"):
+                aggregates += 1
+                continue
+
+            offset, shifted = _summary_offset(cells, columns)
+
+            def cell(key: str, offset=offset):
+                j = columns.get(key)
+                if j is None:
+                    return ""
+                if j == offset:
+                    return ""          # the cell the row lost
+                if j > offset:
+                    j -= 1
+                return cells[j] if j < len(cells) else ""
+
+            teacher_fte = parse_decimal(cell("teacher_fte"))
+            enrollment = parse_count(cell("enrollment"))
+            if teacher_fte is None and enrollment is None:
+                continue
+            repaired += shifted
+
+            row = {
+                "year": year,
+                "staff_year": staff_year,
+                "county_name": county,
+                "district_name": name,
+                "source": f"yearbook-{year}-summary",
+            }
+            for key in ("schools_elementary", "schools_middle", "schools_senior",
+                        "schools_other", "schools_total"):
+                row[key] = parse_count(cell(key))
+            for key in ("staff_noncertificated_fte", "staff_certificated_fte"):
+                row[key] = parse_decimal(cell(key))
+            row["teacher_fte"] = teacher_fte
+            row["enrollment"] = enrollment
+            row["pupil_teacher_ratio"] = parse_decimal(cell("pupil_teacher_ratio"))
+            row["dropout_rate"] = parse_decimal(cell("dropout_rate"))
+            row["graduation_rate"] = parse_decimal(cell("graduation_rate"))
+
+            parts = [row[k] for k in SCHOOL_COUNTS]
+            if row["schools_total"] is not None and all(p is not None for p in parts):
+                ok = sum(parts) == row["schools_total"]
+                checks["schools_pass" if ok else "schools_fail"] += 1
+                row["schools_check"] = "pass" if ok else "fail"
+            else:
+                row["schools_check"] = ""
+
+            ratio = row["pupil_teacher_ratio"]
+            # The check only means anything where the two figures are from the
+            # same autumn. In the 1999 volume they are not, and its ratio is
+            # the one the file prints for 1998 - so there is nothing here to
+            # check the 1998 staffing against except NCES.
+            if staff_year != year:
+                ratio = None
+            if enrollment is not None and teacher_fte and ratio:
+                # The ratio is printed to one decimal, so a correct row can be
+                # out by half of that plus the rounding of the figures it came
+                # from. Anything past 2% is a misread column, not rounding.
+                ok = abs(enrollment / teacher_fte - ratio) <= max(0.06, ratio * 0.02)
+                checks["ratio_pass" if ok else "ratio_fail"] += 1
+                row["ratio_check"] = "pass" if ok else "fail"
+            else:
+                row["ratio_check"] = ""
+            records.append(row)
+
+    info = {
+        "districts": len(records),
+        "aggregate_rows_skipped": aggregates,
+        "rows_realigned": repaired,
+        **checks,
+        "staff_year": records[0]["staff_year"] if records else year,
+        "total_teacher_fte": round(sum(r["teacher_fte"] or 0 for r in records), 1),
+        "total_schools": sum(r["schools_total"] or 0 for r in records),
+    }
+    return records, info
+
+
 def parse_yearbook_trends(volume_dir: Path, year: int) -> tuple[list[dict], dict]:
     """Table 4: ten years of district membership on four measures.
 

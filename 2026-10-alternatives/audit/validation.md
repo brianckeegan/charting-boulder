@@ -168,8 +168,12 @@ honest part of this table.
   2017 is absent because CDE's file for it duplicates 2016 byte for
   byte, and no ratio report was published for 2020 or 2021. CCD
   carries school FTE from 1986 and district FTE from 1987.
-- The 1986–1999 tier is district grain: those yearbooks contain no
-  school-level table at all.
+- The 1986-1999 tier is district grain: those yearbooks contain no
+  school-level table at all. They do carry district staffing and
+  school counts, which is where district-teacher-fte-cde.csv starts.
+- No volume publishes 1999 teacher FTE. The 1999 yearbook prints Fall
+  1998 teachers beside Fall 1999 pupils, so that staffing is filed
+  under 1998 and the CDE teacher series has no 1999.
 - CCD ends before the last CDE year, so the most recent years have no
   second source and no reconciliation row.
 - Coordinates are carried backward from a recent directory, so a

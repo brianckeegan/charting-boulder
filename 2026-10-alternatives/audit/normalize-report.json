@@ -1323,6 +1323,18 @@
             1979,
             "..."
           ]
+        },
+        "summary": {
+          "districts": 177,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 177,
+          "schools_fail": 0,
+          "ratio_pass": 177,
+          "ratio_fail": 0,
+          "staff_year": 1986,
+          "total_teacher_fte": 30451.3,
+          "total_schools": 1304
         }
       },
       "1987": {
@@ -1344,6 +1356,18 @@
             1980,
             "..."
           ]
+        },
+        "summary": {
+          "districts": 196,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 196,
+          "schools_fail": 0,
+          "ratio_pass": 177,
+          "ratio_fail": 0,
+          "staff_year": 1987,
+          "total_teacher_fte": 31167.7,
+          "total_schools": 1309
         }
       },
       "1988": {
@@ -1360,6 +1384,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 195,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 175,
+          "schools_fail": 6,
+          "ratio_pass": 180,
+          "ratio_fail": 0,
+          "staff_year": 1988,
+          "total_teacher_fte": 31397.8,
+          "total_schools": 1342
         }
       },
       "1989": {
@@ -1376,6 +1412,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 185,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 185,
+          "schools_fail": 0,
+          "ratio_pass": 171,
+          "ratio_fail": 0,
+          "staff_year": 1989,
+          "total_teacher_fte": 31473.7,
+          "total_schools": 1310
         }
       },
       "1990": {
@@ -1392,6 +1440,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 191,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 191,
+          "schools_fail": 0,
+          "ratio_pass": 176,
+          "ratio_fail": 2,
+          "staff_year": 1990,
+          "total_teacher_fte": 32028.4,
+          "total_schools": 1332
         }
       },
       "1991": {
@@ -1408,6 +1468,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 194,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 194,
+          "schools_fail": 0,
+          "ratio_pass": 180,
+          "ratio_fail": 0,
+          "staff_year": 1991,
+          "total_teacher_fte": 33092.8,
+          "total_schools": 1367
         }
       },
       "1992": {
@@ -1424,6 +1496,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 193,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 193,
+          "schools_fail": 0,
+          "ratio_pass": 182,
+          "ratio_fail": 0,
+          "staff_year": 1992,
+          "total_teacher_fte": 33418.9,
+          "total_schools": 1360
         }
       },
       "1993": {
@@ -1440,6 +1524,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 193,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 193,
+          "schools_fail": 0,
+          "ratio_pass": 184,
+          "ratio_fail": 0,
+          "staff_year": 1993,
+          "total_teacher_fte": 33660.8,
+          "total_schools": 1369
         }
       },
       "1994": {
@@ -1456,6 +1552,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 193,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 1,
+          "schools_pass": 192,
+          "schools_fail": 0,
+          "ratio_pass": 184,
+          "ratio_fail": 0,
+          "staff_year": 1994,
+          "total_teacher_fte": 34894.3,
+          "total_schools": 1291
         }
       },
       "1995": {
@@ -1472,6 +1580,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 193,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 193,
+          "schools_fail": 0,
+          "ratio_pass": 182,
+          "ratio_fail": 0,
+          "staff_year": 1995,
+          "total_teacher_fte": 35387.9,
+          "total_schools": 1419
         }
       },
       "1996": {
@@ -1488,6 +1608,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 193,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 1,
+          "schools_pass": 192,
+          "schools_fail": 0,
+          "ratio_pass": 184,
+          "ratio_fail": 0,
+          "staff_year": 1996,
+          "total_teacher_fte": 36397.8,
+          "total_schools": 1395
         }
       },
       "1997": {
@@ -1504,6 +1636,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 189,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 189,
+          "schools_fail": 0,
+          "ratio_pass": 180,
+          "ratio_fail": 0,
+          "staff_year": 1997,
+          "total_teacher_fte": 37464.1,
+          "total_schools": 1475
         }
       },
       "1998": {
@@ -1520,6 +1664,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 181,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 181,
+          "schools_fail": 0,
+          "ratio_pass": 0,
+          "ratio_fail": 0,
+          "staff_year": 1998,
+          "total_teacher_fte": 0,
+          "total_schools": 1555
         }
       },
       "1999": {
@@ -1536,6 +1692,18 @@
           "districts": 0,
           "records": 0,
           "years": []
+        },
+        "summary": {
+          "districts": 182,
+          "aggregate_rows_skipped": 1,
+          "rows_realigned": 0,
+          "schools_pass": 181,
+          "schools_fail": 1,
+          "ratio_pass": 0,
+          "ratio_fail": 0,
+          "staff_year": 1998,
+          "total_teacher_fte": 38838.3,
+          "total_schools": 1578
         }
       }
     }
