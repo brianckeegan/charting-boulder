@@ -1,6 +1,6 @@
 # 2026-10-alternatives
 
-A cleaned archive of Colorado public-school enrollment and teaching staff, built from four sources spanning 1977 to 2024.
+A cleaned archive of Colorado public-school enrollment and teaching staff, built from five published sources spanning 1977 to 2024.
 
 ## Question
 
@@ -28,7 +28,7 @@ All in `data/processed/`, long format, UTF-8. `DATA-DICTIONARY.md` documents eve
 
 ## How good is it
 
-Two checks, both against sources collected independently of the documents being read.
+Five checks. Four compare the archive against a source collected independently of the documents being read; the fifth is the archive reading the same printed figures twice.
 
 **The scanned 1986–1999 yearbooks, against NCES.** Each volume's numbered grades summed and compared:
 
@@ -48,7 +48,7 @@ Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the 
 
 **The modern CDE spreadsheets, against NCES**, school by school. From 2005 to 2020 the two agree to within a few hundred pupils out of 850,000, several years exactly. From 2021 they diverge by 6,000 to 16,000, concentrated in multi-district online and charter schools that CDE reports centrally and NCES attributes differently — a real difference in attribution, not a parse fault.
 
-**A third check, internal.** Each yearbook reprints the previous nine years, so most district-years are read twice. **1,267 of 1,269 agree exactly (99.8%)** — two OCR passes over the same printed figures. `district-year-overlap.csv` carries every comparison.
+**And the yearbooks against themselves.** Each yearbook reprints the previous nine years, so most district-years are read twice. **1,267 of 1,269 agree exactly (99.8%)** — two OCR passes over the same printed figures. `district-year-overlap.csv` carries every comparison.
 
 ## Sources
 
@@ -84,6 +84,20 @@ schools.csv                      the registry, one row per school
 district-year.csv                the longest series, 1977 onward
   year, school_year, district_code, district_name, county_name, unit_type,
   fall_membership, closing_day_membership, average_daily_membership, adae, source
+
+school-teacher-fte.csv           CDE's own staff reports, as published
+  year, district_code, district_name, school_code, school_name, county_name,
+  teacher_fte, enrollment_reported, pupil_teacher_ratio, source
+
+district-teacher-fte-cde.csv     two readings of the same district, side by side
+  year, district_code, district_name, county_name,
+  teacher_fte_published, teacher_fte_school_sum, teacher_fte_difference,
+  schools, enrollment_published, enrollment_school_sum, source
+
+district-teacher-fte-ccd.csv     NCES, and the only staffing series before 2000
+  year, leaid, district_code, district_name, teacher_fte,
+  teacher_fte_prek, teacher_fte_kindergarten, teacher_fte_elementary,
+  teacher_fte_secondary, staff_total_fte, enrollment_reported, source
 ```
 
 Three conventions worth knowing before you join anything:
@@ -106,7 +120,7 @@ Three conventions worth knowing before you join anything:
 | District fall membership | **1977–2024**, except 2000–2003 |
 | Coordinates | 64,744 of 65,841 school-years |
 
-Two gaps are deliberate and one is not:
+Four things are missing or thin, and each is here for its own reason:
 
 - **2000–2003 has no district row, and 2001–2003 no CDE school data.** 2001 and 2002 publish school-by-grade as PDF only; 2003 uses an indented panel layout the parser does not read. NCES covers those years at school grain, so the school panel has no hole — it has one source instead of two.
 - **2017 teacher FTE does not exist.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs, but the files are byte-identical. The later duplicate is dropped rather than presented as a second year. 2020 and 2021 CDE published no ratio report at all.
@@ -151,7 +165,9 @@ Two gaps are deliberate and one is not:
 │   ├── validation.md       the report the pipeline writes about itself
 │   ├── proof-run.md        the sixteen findings the task was designed against
 │   ├── check-row-totals.py the yearbook checksum, as a reusable check
-│   └── row-totals.json     its results per volume
+│   ├── row-totals.json     its results per volume
+│   ├── teacher-fte-parse.json  rows kept, rows dropped and why, per staff file
+│   └── teacher-fte.log     the transcript of the staff run
 └── data/
     ├── raw/cde/            56 CDE originals with manifest.json (sha256, URL, date)
     ├── raw/fte/            36 CDE staff reports, likewise
@@ -194,13 +210,19 @@ Every step is resumable: a file already downloaded, or a page already converted,
 - **Coordinates are carried backward** from a recent NCES directory, so a school that moved buildings carries its later location.
 - **BOCES are not districts.** Boards of Cooperative Educational Services appear alongside districts in the yearbooks and are flagged `unit_type = 'boces'`, not removed — NCES counts their pupils too, and dropping them breaks four exact reconciliations. Filter to count districts; leave them in to total pupils.
 - **71 yearbook rows are short by exactly the ungraded column**, which the OCR drops on some pages. The numbered grades are unaffected.
+- **A teacher is not the same thing in both sources.** CDE's staff reports run 0.7% to 4.4% below the NCES state total in every one of the twenty-two years, always in the same direction. That is a definitional difference, not a parse fault, and it means the two teacher columns should not be differenced.
+- **A district's teachers can be counted two ways**, and `district-teacher-fte-cde.csv` keeps both rather than choosing: what CDE states the district holds, where it says so, and what its schools add up to. They agree exactly in 396 of the 551 district-years where both exist. Where they differ the published figure is usually larger, because online and charter schools are reported centrally in some years and to the school in others.
 - County is not district, and district is not attendance area. None of these boundaries nest.
 
 ## A note on checking
 
-Ten bugs surfaced building this, and every one produced plausible output. A header read as `1.0` filed first-graders as grade 10. A `STATE TOTALS` row doubled the state in the 2010 CDE file and again in three yearbook volumes. Page selection skipped continuation pages, losing half the districts in a volume. Two columns headed `District Code` collapsed 2006 to a single district. A district code column headed `LEA` rather than `LEA Code` went unmatched, so every district in two years collapsed onto one key and the whole table came out as a single row holding the state total.
+Every bug that surfaced building this produced plausible output. A header read as `1.0` filed first-graders as grade 10. A `STATE TOTALS` row doubled the state in the 2010 CDE file and again in three yearbook volumes. Page selection skipped continuation pages, losing half the districts in a volume. Two columns headed `District Code` collapsed 2006 to a single district. A district code column headed `LEA` rather than `LEA Code` went unmatched, so every district in two years collapsed onto one key and the table came out as a single row holding the state total. None of these announced itself.
 
 **Row-total checksums caught none of the worst four.** An aggregate row sums correctly against itself, and a page never converted cannot fail a test it is never given. Only comparison against an independently collected source exposed them — which is why `district-reconciliation.csv` and `source-reconciliation.csv` are pipeline outputs rather than something done once by hand.
+
+**Twice, a bug was written down as a property of the source.** Eight years of teacher FTE were recorded here as unparseable, needing a paid OCR pass, on the strength of what the extractor returned. The text was in the files all along, behind a rotated page and an unhandled line operator. And a district table of seventeen rows — thirteen of them schools — was described as thin coverage, because seventeen rows over nine years looks like a source that publishes little rather than like a parser that dropped almost everything.
+
+Both were found by asking whether a number was the size it ought to be, which is a question a checksum cannot ask. **A stated limitation deserves the same scepticism as a stated figure.**
 
 ## Column
 
