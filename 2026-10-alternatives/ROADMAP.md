@@ -6,12 +6,12 @@ What is deliberately not being built now, why, and what would bring it forward. 
 
 | Item | Why deferred | What brings it forward | Blocking? |
 |---|---|---|---|
-| **The steady-state model** — school size and distribution for every Colorado district against SDO county forecasts to 2050 and 2060 | This task ends at a cleaned archive. Fitting a model while the cleaning rules are still moving tends to bend the rules toward the model | The archive passing its acceptance tests in `TASK.md` | No |
+| ~~**The steady-state model**~~ | **Done.** `alternatives-analysis.ipynb` fits staffing and school counts on county 5-17 population across 178 districts and carries Boulder Valley to 2060. What remains deferred is the *statewide* version — every district's steady state, not just one | A question that needs the whole state rather than Boulder | No |
 | **Current use of closed buildings** | Exists in no education dataset. Needs county assessor records, district property lists and local news, with a hand check and a citation per row | A decision that the column needs it, and a bounded geography — Boulder County alone is perhaps forty buildings, statewide is thousands | No |
 | **Hand-verified closures** | Larger than the rest of the task combined. See `decision-log.md`, D6 | A finding that rests on a specific building, rather than on the shape of the distribution | No |
 | **Attendance-area boundaries** | Would let enrollment be tied to where pupils live rather than where they are taught. CDE does not publish historical boundaries; districts publish them inconsistently | The column needing a residence-side question | No |
 | **L2: pipeline-as-code, pinned environment, CI** | The cleaning rules are not settled. A Snakefile written now would be rewritten during Phase C | Phase C finishing. At that point the retrieval and cleaning should become the repository's usual notebook pair | No |
-| **Notebook pair** (`alternatives-retrieval.ipynb` and `alternatives-analysis.ipynb`) | Every other folder in this repository splits fetch-and-tidy from read-and-argue. This one has no argument yet | A column question firm enough to write an analysis notebook against | No |
+| ~~**Notebook pair**~~ | **Done.** `alternatives-retrieval.ipynb` and `alternatives-analysis.ipynb`, following the repository's split | — | No |
 | **Non-public and home-based education** | CDE publishes both, and both bear on where pupils went when a school closed | The closure analysis showing an unexplained outflow | No |
 | **Deposit for a DOI** | Premature for an archive that does not exist | The archive being finished and cited by the column | No |
 
@@ -48,3 +48,11 @@ From `TASK.md`. These are the assignable pieces of the work this folder proposes
 - [ ] **Graduation and dropout rates, 1986–1999** — parsed and carried in `district-teacher-fte-cde.csv`, but **unchecked**: no second source in this archive holds them. CDE publishes dropout and graduation series separately, which would give them the same treatment every other column here gets.
 - [ ] **The 384 unmatched yearbook district-years** — no CDE district code, because 172 are BOCES and the rest renamed before 2000 (Northglenn-Thornton 12 is Adams 12 Five Star Schools now). A hand-built rename crosswalk would close most of it; the names and counties are already carried, so nothing is lost meanwhile.
 - [ ] **2001–2003 on the CDE side** — 2001 and 2002 are PDF-only, 2003 uses an indented panel layout. NCES covers those years, so this buys a second source rather than filling a hole.
+
+## Added after the analysis — 2026-09-18
+
+- [ ] **BVSD capacity by school** — the Resilient Schools presentation is on BoardDocs, which refuses automated fetching (HTTP 403). Without it, utilisation cannot be computed and the levers are scored in pupils rather than against the district's own 68%-to-75% target.
+- [ ] **City of Boulder neighbourhood boundaries** — the open-data portal returned HTTP 522 throughout and the city's ArcGIS server publishes no neighbourhood layer. Census block groups and municipalities stand in, which is a real substitution: block groups are drawn for population balance, not for how Boulder thinks about itself.
+- [ ] **Open enrollment in the catchments** — catchments here are straight-line nearest-school. BVSD's own Enrollment Pattern Matrices, already committed in `2026-09-bvsd/data/raw/open-enrollment/`, would say how far that is from where children actually go.
+- [ ] **A statewide steady state** — the model is fitted on 178 districts but applied to one. Running it for every district would say which Colorado districts are furthest from the distribution their demography supports, and whether Boulder is unusual.
+- [ ] **Closure impacts** — the archive can support an event study on what happened to enrollment and staffing in districts after a closure round. It is not in the notebook yet; section 1 establishes the predictors, not the consequences.

@@ -117,3 +117,8 @@ census_api.json
 2026-10-alternatives/data/raw/ccd-*.json
 2026-10-alternatives/data/raw/ccd/
 2026-10-alternatives/data/raw/indexes/
+
+# 2026-10-alternatives: census downloads for the closure analysis. Large and
+# re-downloadable; data/raw/geo/manifest.json keeps the URL, size and sha256
+# of each, which is what reproducibility needs (decision-log.md, D10).
+2026-10-alternatives/data/raw/geo/*.zip

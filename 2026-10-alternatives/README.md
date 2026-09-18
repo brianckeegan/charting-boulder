@@ -169,6 +169,8 @@ Four things are missing or thin, and each is here for its own reason:
 │   ├── normalize.py        harmonize, join, build the registry, reconcile
 │   ├── teacher_fte.py      the staff reports, both grains -> three FTE tables
 │   └── audit.py            write audit/validation.md from the pipeline's output
+├── alternatives-retrieval.ipynb  fetch + tidy  -> data/analysis/
+├── alternatives-analysis.ipynb   read + argue  -> output/
 ├── datalab-ocr.py          re-OCR the scanned yearbooks through the Datalab API
 ├── proof-run.py            the original three-year probe, kept as the audit's evidence
 ├── audit/
@@ -184,9 +186,65 @@ Four things are missing or thin, and each is here for its own reason:
     ├── raw/ccd/            NCES API responses (not committed; re-downloadable)
     ├── raw/yearbooks/      scanned volumes (not committed; 110 MB each)
     ├── interim/yearbooks/  the OCR markdown, one file per converted page
-    ├── lookups/            inventory, coverage map, district crosswalk
+    ├── raw/geo/            census TIGER and PL 94-171, with manifest.json
+    ├── lookups/            inventory, coverage map, district and county crosswalks
+    ├── analysis/           the working set the notebooks build on
     └── processed/          the archive
 ```
+
+## The analysis
+
+Two notebooks, following the split every other folder in this repository uses.
+`alternatives-retrieval.ipynb` may fetch, reshape, join and check; it may not
+compute a measure the analysis reports. `alternatives-analysis.ipynb` reads
+`data/analysis/`, makes no network call, and does everything else.
+
+They ask three questions about Boulder Valley's Resilient Schools proposal,
+and ignore its finances entirely — the question here is whether there are
+enough children.
+
+**1. Has this happened before?** Colorado opened 1,397 schools and closed 651
+between 1987 and 2023; closure is a rate, not an event. A school that closes
+is already half the size of a typical school five years out, and a third the
+size a year out. Halving a school's enrollment roughly doubles the odds it is
+gone within two years, while its recent trend adds nothing once size is known.
+**Boulder Valley has done this before**: it ran 60 schools in 2000 and 53 by
+2004.
+
+**2. How many schools does the demography support?** Fitted across 178
+Colorado districts over 35 years rather than Boulder's own history, with
+district fixed effects. A district that loses 10% of its school-age population
+ends up with **7.4% fewer teachers and 4.2% fewer schools** — Colorado
+districts have consistently chosen smaller schools over fewer schools. Boulder
+County's 5-to-17 population falls to about 2030 and is then flat for thirty
+years, which puts Boulder Valley near 53 schools in 2060 against 56 today.
+**The decline is front-loaded, not continuing.**
+
+**3. What are the options?** Five levers, each judged on what it is trying to
+do rather than against one scorecard: close, reconfigure grades, redraw
+boundaries, shrink in place, do nothing. Two viability bars are carried
+throughout — BVSD's own two-classes-a-grade standard, and the size at which
+Colorado districts actually close schools.
+
+The finding that most bears on the proposal: **16 of Boulder Valley's 31
+elementary schools are already below both bars, and redrawing boundaries alone
+clears the district's own bar without closing a single building** — at the
+cost of moving about a quarter of elementary pupils. Closing four, as
+proposed, leaves ten schools below the bar. Clearing it by closure alone takes
+thirteen.
+
+The district has enough elementary-age children for 35 schools at its own
+standard and runs 31. Its problem is not the number of buildings. It is where
+they are.
+
+### What the analysis is missing
+
+BVSD's own capacity figures are not in the repository, so utilisation — the
+68% and 75% the proposal turns on — cannot be computed and every bar is stated
+in pupils instead. The City of Boulder's neighbourhood boundaries were
+unreachable throughout (HTTP 522), so census block groups and municipalities
+stand in. Catchments are straight-line nearest-school, which open enrollment
+makes an approximation. `data/analysis/known-gaps.csv` carries the list.
 
 ## Reproduce
 
@@ -199,6 +257,15 @@ python3 -m pipeline.fetch        # download it  -> data/raw/cde/ + manifest
 python3 -m pipeline.teacher_fte  # staffing     -> the three FTE tables
 python3 -m pipeline.normalize    # harmonize    -> data/processed/
 python3 -m pipeline.audit        # check it     -> audit/validation.md
+```
+
+The analysis runs on top of it, and needs `geopandas`, `matplotlib` and
+`statsmodels` as well:
+
+```
+pip install geopandas matplotlib statsmodels
+jupyter execute alternatives-retrieval.ipynb   # -> data/analysis/
+jupyter execute alternatives-analysis.ipynb    # -> output/
 ```
 
 The order of the last three matters. `teacher_fte` writes the district staffing table for 2000 onward; `normalize` extends it back to 1986 from the yearbooks, where the district name crosswalk lives. Running `normalize` alone leaves the yearbook era in place but stale; running `teacher_fte` alone truncates the table to 2000.

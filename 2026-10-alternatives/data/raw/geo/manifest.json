@@ -1,0 +1,32 @@
+{
+  "co2020.pl.zip": {
+    "bytes": 24215854,
+    "sha256": "fce76008aedd10681bf0e57fa366ca788d280264edfe91e7d80a9b33ae86ab2c",
+    "url": "https://www2.census.gov/programs-surveys/decennial/2020/data/01-Redistricting_File--PL_94-171/Colorado/co2020.pl.zip"
+  },
+  "tl_2020_08_tabblock20.zip": {
+    "bytes": 218525462,
+    "sha256": "708f5ecde530a9e8d6ed10be4cfbf6d9bac3fcdf26498b7546973503de38d4b4",
+    "url": "https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_08_tabblock20.zip"
+  },
+  "tl_2023_08_bg.zip": {
+    "bytes": 13546059,
+    "sha256": "27010696c85d8495ed4d06297070c64192c19cf9ac88a946ad564fe1474c68a4",
+    "url": "https://www2.census.gov/geo/tiger/TIGER2023/BG/tl_2023_08_bg.zip"
+  },
+  "tl_2023_08_place.zip": {
+    "bytes": 2791967,
+    "sha256": "0c7484a8e63982becf3923693184354e364b0ce78ad2e8a67ce061faaac452b1",
+    "url": "https://www2.census.gov/geo/tiger/TIGER2023/PLACE/tl_2023_08_place.zip"
+  },
+  "tl_2023_08_tract.zip": {
+    "bytes": 8366552,
+    "sha256": "fdaa86dbfdd93f751e677f317874d5dc1db8f7a917b83c74cccd65f909384dd0",
+    "url": "https://www2.census.gov/geo/tiger/TIGER2023/TRACT/tl_2023_08_tract.zip"
+  },
+  "tl_2023_08_unsd.zip": {
+    "bytes": 2106296,
+    "sha256": "88aa2e844b6c5970776363317a9f0a3ef80db66aca9ded043cc149c9427ca168",
+    "url": "https://www2.census.gov/geo/tiger/TIGER2023/UNSD/tl_2023_08_unsd.zip"
+  }
+}
