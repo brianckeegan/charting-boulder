@@ -195,3 +195,19 @@ Section 7's event study fires on a district-year where at least two schools clos
 **Why the first round only.** A district that runs two rounds four years apart would otherwise contribute a post-period for the first that is the pre-period for the second, and the coefficients would mix the two. Twelve of the thirty-three districts have more than one round, so this is not hypothetical.
 
 **What it costs.** Sixty rounds become thirty-three events, one per district, which is most of the loss of precision in the enrolment path: the intervals rule out a fall of more than about five per cent and no more than that. The threshold is a judgement and a different one would give different districts; `alt-closure-rounds.csv` carries every round that met it, so the choice can be inspected rather than taken on trust.
+
+## D25 — A year that repeats another is not a year — 2026-09-18
+
+Where a district-grain staffing file carries the same districts and the same figures as an earlier year, the later one is dropped and named rather than published.
+
+**Why.** CDE reissues. The 2016 pupil-teacher ratio report appears again at the 2017 URL byte for byte, which a checksum catches and the pipeline already dropped. The 2016 average-salary report appears again at the 2017 URL as a *different file* — 117,266 bytes against 114,656, a different SHA-256 — carrying the same 197 districts and the same 52,079.2 FTE to the decimal. A checksum cannot catch that, and publishing it would invent a year of Colorado's teaching staff out of a filing error. So the figures are compared, not only the bytes.
+
+**What it costs, and the guard beside it.** A district that genuinely did not change its staffing at all between two years would be dropped, which is why the test is every district at once rather than any of them: 197 districts agreeing to the decimal is not a year that did not change. The second guard is the opposite failure — a file that reads *partially*. 2019's salary volume extracts with its cells merged, the parts-must-add check correctly throws those rows out, and what survives is 154 districts holding 10,132 FTE where the state has 185 and 53,454. A district-grain file covering far fewer districts than the state has is a bad reading, not a small year, and is dropped too.
+
+## D26 — A name is resolved to a code only where the code is unambiguous — 2026-09-18
+
+The 2001 and 2002 membership PDFs print no codes at all. A district or school name is given the code the coded years use for it, but only where that name maps to exactly one code across every coded year.
+
+**Why.** Without a code those rows reach neither the district tier nor the school registry, so the 1,630 schools they carry would sit in the archive attached to nothing, and the district table would keep the hole this work exists to close. The years either side print codes and the names are the same names.
+
+**What it costs.** A district renamed between 2000 and 2004, or a school name two buildings shared, resolves to nothing rather than to a guess — 45,892 rows get a district code and 36,204 a school code, and what is left keeps its printed name. The check is downstream and it is exact: against NCES, CDE's 741,683 pupils for 2001 less its 19,334 pre-kindergarteners is 722,349, which is CCD's count for the year to the pupil.

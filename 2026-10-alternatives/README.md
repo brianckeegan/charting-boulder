@@ -61,6 +61,8 @@ Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the 
 | [CDE staff statistics](https://ed.cde.state.co.us/cdereval/staffstatistics) and [Artemis ED2.88](https://spl.cde.state.co.us/artemis/edserials/ed288internet/) | Teacher FTE by school | 2000–2024, twenty-two years | Spine |
 | [CDE Artemis ED2/79.19](https://spl.cde.state.co.us/artemis/edserials/ed27919internet/) | District enrollment by grade; district staff and school counts; district trends | 1986–1999, and 1977–1985 via the 1986 volume | District tier |
 | [NCES CCD](https://nces.ed.gov/ccd/), via the [Urban Institute API](https://educationdata.urban.org/) | School enrollment by grade, teacher FTE, coordinates, charter flag, status | 1986–2024 | Secondary, harmonized and compared |
+| [CDE Artemis ED5/90.17](https://spl.cde.state.co.us/artemis/edserials/ed59017internet/) | Non-public school membership by school and grade | 2003–2014 | The private side of the same count |
+| [Colorado State Demography Office](https://demography.dola.colorado.gov/) | County and municipal population, annual and decennial | 1870–2024 | Context and denominators |
 
 CDE is the count of record wherever it publishes. NCES is carried alongside it in its own columns and compared, never silently substituted. The `source` column on every row says which contributed.
 
@@ -116,7 +118,7 @@ Three conventions worth knowing before you join anything:
 
 | | |
 |---|---|
-| School enrollment, CDE | 2004–2024 |
+| School enrollment, CDE | **2001–2024**, except 2000 |
 | School enrollment, NCES | 1986–2024 |
 | Teacher FTE by school, CDE | **2000–2024**, every year but 2017, 2020 and 2021 |
 | Teacher FTE by school, NCES | 1986–2024 |
@@ -124,15 +126,18 @@ Three conventions worth knowing before you join anything:
 | Teacher FTE by district, CDE | **1986–2024**, except 1999, 181–196 districts a year |
 | Schools per district, CDE | **1986–1999**, by level |
 | District enrollment by grade | 1986–2024 |
-| District fall membership | **1977–2024**, except 2000–2003 |
+| District fall membership | **1977–2024**, except 2000 |
+| **Non-public school enrollment, CDE** | **2003–2014**, by school and grade |
+| **County population** | **1980–2024** annually, 1870–2020 decennially |
+| **Municipal population** | 1980–2024, 361 municipalities |
 | Coordinates | 64,744 of 65,841 school-years |
 | Graduation and dropout rates by district | 1986–1999, from the same table, **unchecked** |
 
 Four things are missing or thin, and each is here for its own reason:
 
-- **2000–2003 has no district row, and 2001–2003 no CDE school data.** 2001 and 2002 publish school-by-grade as PDF only; 2003 uses an indented panel layout the parser does not read. NCES covers those years at school grain, so the school panel has no hole — it has one source instead of two.
-- **2017 teacher FTE does not exist.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs, but the files are byte-identical. The later duplicate is dropped rather than presented as a second year. 2020 and 2021 CDE published no ratio report at all.
-- **The 2000–2002 and 2004 membership PDFs still read as nothing**, and 2003's and 2012's ratio reports lose about 200 rows each to layouts the parser does not recover. The staff serial covers every one of those years, so no year is missing — but each is one file's reading rather than two.
+- **Fall 2000 has no CDE school file at all**, and so no district row. CDE published 1,065 membership files for that year and none of them is the count by school and grade. 2001 and 2002 publish it as PDF and 2003 as an indented panel, and all three are read now (`pipeline/membership.py`), so the hole that ran 2000–2003 is one year wide. NCES covers it.
+- **2017 teacher FTE does not exist, in either serial.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs and the files are byte-identical. It also publishes an average-salary report carrying a district Total FTE, and the 2017 edition is *not* byte-identical to 2016's — it is a different file carrying the same 197 districts and the same 52,079.2 FTE to the decimal. A year can repeat another without repeating its bytes, so both the checksum and the figures are checked now. 2020 and 2021 CDE published nothing at all.
+- **The 2000–2002 and 2004 membership *ratio* PDFs still read as nothing**, and 2003's and 2012's ratio reports lose about 200 rows each to layouts the parser does not recover. The staff serial covers every one of those years, so no year is missing — but each is one file's reading rather than two.
 - **1999 has school counts but no staff.** The 1999 volume prints Fall 1998 teachers beside Fall 1999 pupils, so its staffing belongs to 1998 and is filed there. No volume publishes 1999 staffing, and CDE's own staff serial starts in 2000, so the CDE teacher series has a one-year hole at 1999. NCES covers it.
 - **Fourteen per cent of the yearbook district-years carry no CDE district code.** Names are matched to codes and 2,275 of 2,659 match; the residue is 172 BOCES, which have no district code, and about 210 district-years whose names changed before 2000 — Northglenn-Thornton 12 is Adams 12 Five Star Schools now. Those rows keep their printed name and county and are usable; only the code is missing.
 
@@ -157,7 +162,7 @@ Four things are missing or thin, and each is here for its own reason:
 ├── README.md               this file
 ├── TASK.md                 the task this folder carries out
 ├── DATA-DICTIONARY.md      every column, its units and its missingness
-├── decision-log.md         twenty-four dated decisions and why
+├── decision-log.md         twenty-six dated decisions and why
 ├── ROADMAP.md              what is deferred, and to when
 ├── CHANGELOG.md            what changed, and what broke on the way
 ├── pipeline/
@@ -167,7 +172,12 @@ Four things are missing or thin, and each is here for its own reason:
 │   ├── extract.py          one parser per source shape, including the
 │   │                    yearbooks' district summary table
 │   ├── normalize.py        harmonize, join, build the registry, reconcile
-│   ├── teacher_fte.py      the staff reports, both grains -> three FTE tables
+│   ├── teacher_fte.py      the staff reports and the salary volumes, both
+│   │                    grains -> three FTE tables
+│   ├── membership.py       the three CDE files the sheet reader cannot take:
+│   │                    two PDFs read from character positions, and 2003's
+│   │                    indented panel
+│   ├── nonpublic.py        non-public school membership, 2003-2014
 │   ├── oe_matrix.py        BVSD's Enrollment Pattern Matrices, ten years of
 │   │                    them, read by searching for the arrangement that
 │   │                    satisfies each matrix's own arithmetic
@@ -185,7 +195,9 @@ Four things are missing or thin, and each is here for its own reason:
 │   └── teacher-fte.log     the transcript of the staff run
 └── data/
     ├── raw/cde/            56 CDE originals with manifest.json (sha256, URL, date)
-    ├── raw/fte/            36 CDE staff reports, likewise
+    ├── raw/fte/            CDE staff reports and salary volumes, likewise
+    ├── raw/nonpublic/      CDE non-public membership, likewise
+    ├── raw/sdo/            county and municipal population, likewise
     ├── raw/ccd/            NCES API responses (not committed; re-downloadable)
     ├── raw/yearbooks/      scanned volumes (not committed; 110 MB each)
     ├── interim/yearbooks/  the OCR markdown, one file per converted page
@@ -397,6 +409,7 @@ pip install pandas openpyxl xlrd
 python3 -m pipeline.sources      # what exists  -> data/lookups/inventory.csv
 python3 -m pipeline.fetch        # download it  -> data/raw/cde/ + manifest
 python3 -m pipeline.teacher_fte  # staffing     -> the three FTE tables
+python3 -m pipeline.nonpublic    # the private side -> two more tables
 python3 -m pipeline.normalize    # harmonize    -> data/processed/
 python3 -m pipeline.audit        # check it     -> audit/validation.md
 ```

@@ -256,3 +256,37 @@ Section 7, and the last of the roadmap's analysis items. Section 1 asked what pr
 
 Stated in the notebook and repeated here: the comparison group includes districts that ran a round in a different year, which biases the average where the effect differs across districts; the window is five years; and an interval that rules out a fall of more than five per cent does not rule out four.
 
+## 2026-09-18 — the years and the files that were not being read
+
+Six things, five of them holes in the archive and one of them a hole in the roadmap.
+
+### The district tier's four-year hole is one year wide
+
+`district-year` ran 1977–1999 and then 2004–2024. `pipeline/membership.py` reads the three files that caused it:
+
+- **2001 and 2002** are PDFs whose grade columns run together as text — "ALTERNATIVE SCHOOL000000000051655938213" is sixteen figures with nothing between them. Read from character positions instead: a column is about twenty-eight points wide and a digit about five. The two are not even the same shape as each other, and which it is comes from counting the names on the lines that carry a full row of figures rather than from the header, whose labels are set to the right of the columns they head.
+- **2003** is a spreadsheet laid out as an indented panel, where a school's identity is whatever county and district were last seen above it.
+
+Checked twice over: every row's grades add to its printed total (1,630/1,630, 1,662/1,662, 1,664/1,664) and every district's schools add to its printed district total (178/178, 178/178, 180/181). **Against NCES the two PDF years agree to the pupil** once pre-kindergarten is excluded. Only Fall 2000 remains, and CDE published no school file for it.
+
+### 2017 teacher FTE does not exist, in either serial
+
+The Artemis average-salary volumes carry a district Total FTE, so they are read now: 2016 gives 197 districts and 52,079 FTE against the archive's 51,461 from the school sums, and 2018 gives 195 with every row checked against the two categories that must add to it. The 2017 volume gives the same 197 districts and the same 52,079.2 to the decimal. CDE published 2016 again at the 2017 URL, as it did with the ratio report — except this file is not byte-identical, so the checksum could not catch it (D25).
+
+Two guards came of it: a year whose district figures repeat an earlier year exactly is dropped, and so is a district-grain file covering far fewer districts than the state has. The second is why 2019's salary reading is not published: its cells extract merged, the parts-must-add check throws those rows out, and what survives is 154 districts holding 10,132 FTE where the state has 185 and 53,454.
+
+### The private side of the count
+
+`pipeline/nonpublic.py` reads CDE's non-public school membership by school and grade, **2003 to 2014**: 64,286 rows, 297 to 494 schools a year, 56,832 pupils in 2003 falling to 40,830 in 2014. Every row's grades add to its printed total in every year. Charter schools were already carried — `is_charter` from NCES, 1998 onward, 69 schools in 1999 and 266 in 2024 — so what was missing was the private side, and it is the other half of "where did the pupils go" when a school closes.
+
+### County and municipal population, back to 1980 and 1870
+
+Two State Demography Office files: annual county and municipal population from 1980, and the decennial census from 1870. `data/analysis/county-population.csv` and `municipal-population.csv`. This is **total population, not by age** — the single-year-of-age file still starts in 1990 and the district panel still starts with it — so what it adds is the denominator either side, and the district's own towns, which the panel never carried.
+
+The two SDO products agree to a **median 0.015%**, with 97% of county-years within half a per cent. They do not agree exactly and should not: the age file distributes a county across ninety-odd single years and its ages sum to a little off the headline estimate.
+
+### The roadmap
+
+- **Historical and statewide attendance-area boundaries are removed**, not deferred. They are not obtainable.
+- Two stale entries fixed: the statewide steady state has been done since section 6, and the non-public row now says what is read and what is not.
+
