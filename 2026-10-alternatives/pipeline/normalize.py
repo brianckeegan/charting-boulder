@@ -176,6 +176,40 @@ def load_cde_school() -> tuple[list[dict], dict]:
 
 
 def load_cde_teacher() -> tuple[list[dict], dict]:
+    """Teacher FTE by school, preferring the eleven-year table.
+
+    pipeline/teacher_fte.py reads every staff report CDE publishes in either
+    serial and writes data/processed/school-teacher-fte.csv. That table is a
+    superset of the three spreadsheet years this module used to read on its
+    own, so it is the source when it exists. The glob is kept as the fallback
+    for a checkout where the staff step has not been run.
+    """
+    table = PROCESSED / "school-teacher-fte.csv"
+    if table.exists():
+        records, by_year = [], defaultdict(lambda: {"schools_with_fte": 0, "total_fte": 0.0})
+        with table.open(encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                year = int(row["year"])
+                fte = float(row["teacher_fte"]) if row["teacher_fte"] else None
+                records.append({
+                    "year": year,
+                    "school_code": normalize_code(row["school_code"], 4),
+                    "district_code": normalize_code(row["district_code"], 4),
+                    "teacher_fte": row["teacher_fte"],
+                    "enrollment_reported": row["enrollment_reported"],
+                    "source": row["source"],
+                })
+                if fte is not None:
+                    by_year[year]["schools_with_fte"] += 1
+                    by_year[year]["total_fte"] += fte
+        meta = dict(sorted(by_year.items()))
+        for year, info in meta.items():
+            print(f"  CDE teacher FTE {year}: {info['schools_with_fte']:,} schools, "
+                  f"{info['total_fte']:,.1f} FTE")
+        return records, meta
+
+    print("  CDE teacher FTE: school-teacher-fte.csv absent; "
+          "reading the spreadsheet years only (run pipeline.teacher_fte first)")
     records, meta = [], {}
     for path in sorted(RAW_CDE.glob("teacher_fte-school-*.xls*")):
         year = int(re.search(r"(\d{4})", path.name).group(1))

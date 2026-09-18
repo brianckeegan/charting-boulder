@@ -21,9 +21,9 @@ The archive exists to serve three questions the column is heading toward: which 
 |---|---|---|---|
 | CDE Artemis ED5/90.17 | School enrollment by grade | 2000–2024 | Spine |
 | CDE pupil-membership archives | School enrollment by grade | 2019–2025 | Spine, current era |
-| CDE staff statistics (Artemis ED2.88 + current) | Teacher FTE by school | ~2013–2025 | Spine |
+| CDE staff statistics (Artemis ED2.88 + current) | Teacher FTE by school | 2000–2024 | Spine |
 | CDE Artemis ED2/79.19 yearbooks | District enrollment by grade; district staff and ratios | 1986–1999, and 1977–1986 via the 1986 volume's Table 4 | District tier |
-| NCES CCD, via the Urban Institute API | School enrollment by grade, teacher FTE, coordinates, charter flag, open/closed status | 1986–2023 | Secondary, harmonized and compared |
+| NCES CCD, via the Urban Institute API | School enrollment by grade, teacher FTE by school and by district, coordinates, charter flag, open/closed status | 1986–2024 | Secondary, harmonized and compared |
 
 CDE is the count of record wherever it publishes. CCD is carried alongside it, never silently substituted, and the two are compared school by school every year they overlap.
 
