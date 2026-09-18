@@ -185,3 +185,13 @@ Wherever a count of elementary-age children is used, ages 5-10 and ages 5-11 are
 **What it buys.** The difference is large — 86% of the district's elementary-age children against 73% — and the ranking is not: Spearman 0.98 between the two. So the spread across areas is reportable and the level is not, and saying which is which is the point of carrying both.
 
 **What it costs.** Two columns everywhere one would do, and a reader who wants a single number does not get one.
+
+## D24 — A closure round is two schools and a twentieth of the district — 2026-09-18
+
+Section 7's event study fires on a district-year where at least two schools closed and they were at least 5% and at most 50% of the district's schools. A district's first such round is the event; later ones are not separate events.
+
+**Why each part.** Single closures happen constantly — 275 of the 392 district-years with any closure have exactly one — and a district losing one of forty schools is not doing the thing the proposal proposes. The share floor keeps a large district's routine attrition out; the count floor keeps a two-school district's single closure out, which the share alone would admit at 50%. The 50% ceiling removes the handful of district-years where every school changes code at once: Alamosa RE-11J closes 4 of 4 in 2012 and carries on, which is a reorganisation in the records rather than a closure round.
+
+**Why the first round only.** A district that runs two rounds four years apart would otherwise contribute a post-period for the first that is the pre-period for the second, and the coefficients would mix the two. Twelve of the thirty-three districts have more than one round, so this is not hypothetical.
+
+**What it costs.** Sixty rounds become thirty-three events, one per district, which is most of the loss of precision in the enrolment path: the intervals rule out a fall of more than about five per cent and no more than that. The threshold is a judgement and a different one would give different districts; `alt-closure-rounds.csv` carries every round that met it, so the choice can be inspected rather than taken on trust.

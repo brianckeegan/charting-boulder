@@ -157,7 +157,7 @@ Four things are missing or thin, and each is here for its own reason:
 ├── README.md               this file
 ├── TASK.md                 the task this folder carries out
 ├── DATA-DICTIONARY.md      every column, its units and its missingness
-├── decision-log.md         twenty-one dated decisions and why
+├── decision-log.md         twenty-four dated decisions and why
 ├── ROADMAP.md              what is deferred, and to when
 ├── CHANGELOG.md            what changed, and what broke on the way
 ├── pipeline/
@@ -323,6 +323,34 @@ the state, and that a district of its size cannot run schools of the size it
 has. What it does not settle is whether it *should* — a peer median describes
 what districts do, not what is right, and the bar the levers are scored against
 remains BVSD's own.
+
+**7. What happened after?** Question 1 asked what predicts a closure; it did
+not ask what a closure does, and the proposal's case rests on an answer.
+Thirty-three Colorado districts have run a closure round since 1992 — two or
+more schools at once, amounting to between a twentieth and a half of the
+district — and
+**Boulder Valley's own 2004 round, five schools of fifty-eight, is one of
+them.** An event study with district and year fixed effects says:
+
+| | at the round | five years later |
+|---|---:|---:|
+| Schools | **−17%** | **−14%** |
+| Enrolment | −2% (n.s.) | +4% (n.s.) |
+| Staff | +2% (n.s.) | +7% (n.s.) |
+
+**A closure round changes the number of buildings, not the number of pupils or
+the number of teachers.** The closures hold — districts do not quietly reopen
+what they shut — but no horizon shows enrolment or staffing differing from the
+year before the round, and the intervals rule out an enrolment fall of more
+than about five per cent. Whatever case there is for closing schools is a case
+about buildings.
+
+Boulder Valley's own round says the same in one district. It closed five
+schools in 2004 and by 2012 was **back to fifty-six schools with two thousand
+more pupils** than it had at the round; fifty-seven by 2013, where it had been
+in 1999. That is not a prediction — the SDO says Boulder County's children do
+not come back this time — but it is what a closure round settled last time,
+which is less than the proposal implies.
 
 **How many children the district has at all.** The census counts children and
 the matrices count pupils, and the 2020 census and the 2019-20 matrix describe

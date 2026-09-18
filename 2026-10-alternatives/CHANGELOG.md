@@ -238,3 +238,21 @@ Section 6. The panel model was fitted on 178 districts and applied to one; it is
 - The within-district reading uses the panel model's elasticity directly: with district fixed effects the level cancels in a ratio, so each district needs only its own county's path.
 - **The cross-sectional reading uses no fitted form at all.** A log-log line across a range from 25 pupils to 90,450 puts Denver 60% above its own norm, which is a statement about the functional form rather than about Denver. Average school size by district-size band, and then Boulder Valley against its actual peers, needs no such assumption.
 
+## 2026-09-18 — what a closure round does
+
+Section 7, and the last of the roadmap's analysis items. Section 1 asked what predicts a closure; this asks what one does.
+
+### What it found
+
+- **A closure round changes the number of buildings, and nothing else this can measure.** The school count falls about 17% at the round and is still 14% down five years later, so the closures hold. Enrolment and staffing differ from the year before the round at no horizon, and the intervals rule out an enrolment fall of more than about five per cent.
+- Thirty-three Colorado districts have run sixty rounds since 1992 — two or more schools at once amounting to between a twentieth and a half of the district — and **Boulder Valley's own 2004 round, five schools of fifty-eight, is one of them.**
+- Boulder Valley closed five schools in 2004 and by 2012 was back to fifty-six with two thousand more pupils than at the round, and fifty-seven by 2013 — where it had been in 1999. Its county's children had come back. The SDO says they do not this time, which is the basis of section 2, so this is not a forecast; it is what the last round settled.
+
+### Fixed
+
+- **Every district reported zero pupils in 2000, 2001, 2002 and 2003.** The district panel summed its schools' CDE enrollment, and a pandas sum over a group whose every value is missing returns zero rather than missing. Those years are NCES-only, so all 166 districts came out at zero — 664 district-years of a false count, in a column with no missing values anywhere to suggest something was wrong. The aggregation now uses `min_count=1` and those years read as absent, which is what they are.
+
+### What it cannot tell you
+
+Stated in the notebook and repeated here: the comparison group includes districts that ran a round in a different year, which biases the average where the effect differs across districts; the window is five years; and an interval that rules out a fall of more than five per cent does not rule out four.
+
