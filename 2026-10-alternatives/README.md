@@ -168,8 +168,9 @@ Four things are missing or thin, and each is here for its own reason:
 │   │                    yearbooks' district summary table
 │   ├── normalize.py        harmonize, join, build the registry, reconcile
 │   ├── teacher_fte.py      the staff reports, both grains -> three FTE tables
-│   ├── oe_matrix.py        BVSD's Enrollment Pattern Matrices, read from the
-│   │                    characters up: the headings are printed sideways
+│   ├── oe_matrix.py        BVSD's Enrollment Pattern Matrices, ten years of
+│   │                    them, read by searching for the arrangement that
+│   │                    satisfies each matrix's own arithmetic
 │   └── audit.py            write audit/validation.md from the pipeline's output
 ├── alternatives-retrieval.ipynb  fetch + tidy  -> data/analysis/
 ├── alternatives-analysis.ipynb   read + argue  -> output/
@@ -284,6 +285,23 @@ elsewhere: the largest single pool of pupils the district is not capturing, in
 a school below the bar that is not on the list. Across every elementary area,
 2,915 children open-enrol out against 7,223 places filled.
 
+**5. Has this been going on long?** The district has published the same matrix
+every year since 2016-17, and all ten are read here, so the question the
+proposal turns on can be answered rather than assumed. The share of Boulder
+Valley's elementary children attending their own neighbourhood school **sat
+flat at about 70% from 2017 to 2020**, fell four points in 2021, recovered
+half of that in 2022, and has fallen every year since — to **62.6%**. The
+proposal did not start it; neither is it a decade of steady decline.
+
+What that costs is arithmetic. Between 2017 and 2026 the children living in an
+elementary attendance area fell 22%, from 12,296 to 9,645. The roll of the
+neighbourhood schools fell **30%**, from 8,570 to 6,040. Had the 2017 share
+held, today's children would fill 6,722 places instead of 6,040, so of the
+2,530 pupils lost, **1,848 are demography and 682 are families leaving** —
+about a quarter. **16 of 30 areas have lost more than five points of their
+catchment**; the three worst are Monarch K-8 (−25), Whittier (−23) and
+Eldorado K-8 (−15), and none of them is closing.
+
 ### What the analysis is missing
 
 **Capacity is February 2026; enrollment is not.** The attendance-area layer's
@@ -297,13 +315,12 @@ is the archive's.
 it establishes is a ceiling — what the existing buildings could hold — not a
 map. An actual redraw is constrained by geography this model does not see.
 
-**Open enrollment is measured, not modelled.** Section 4 reads where pupils
-actually go, but the five levers in section 3 are still resident-based: they
-move catchment lines, not the choices families make inside them. The matrices
-are one year, 2025-26, and every year back to 2016-17 sits in `2026-09-bvsd/`,
-so the trend is available and unused. **Focus schools have no catchment** and
-the proposal moves three of them. `data/analysis/known-gaps.csv` carries the
-rest.
+**Open enrollment is measured, not modelled.** Sections 4 and 5 read where
+pupils actually go, for ten years, but the five levers in section 3 are still
+resident-based: they move catchment lines, not the choices families make
+inside them, and nothing here says how families would choose again under
+different schools. **Focus schools have no catchment** and the proposal moves
+three of them. `data/analysis/known-gaps.csv` carries the rest.
 
 ## Reproduce
 

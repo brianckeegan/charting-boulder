@@ -179,3 +179,28 @@ Two notebooks on top of the archive, asking whether Boulder Valley's Resilient S
 - **Redrawing is modelled as proportional to capacity, not as real lines.** It establishes a ceiling, not a map.
 - **Open enrollment is measured but not modelled.** The levers move catchment lines; they do not move the choices families make inside them. Only 2025-26 is read, though `2026-09-bvsd/` holds every year back to 2016-17.
 - **The child-to-pupil ratio is flat district-wide.** PL 94-171 publishes under-18 by block and single years of age no finer than the tract.
+
+## 2026-09-18 — ten years of open enrollment
+
+`pipeline/oe_matrix.py` now reads all thirty Enrollment Pattern Matrices, 2016-17 to 2025-26, rather than the three current ones, and reads them by arithmetic rather than by their labels (D22).
+
+### What it found
+
+- The share of Boulder Valley's elementary children attending their own neighbourhood school **held at about 70% from 2017 to 2020**, fell four points in 2021, recovered half of that in 2022, and has fallen in every year since — to **62.6%**. Neither answer the proposal's framing offered is right: this did not start with the proposal, and it is not a decade of steady decline either.
+- Between 2017 and 2026 the children living in an elementary attendance area fell 22%; the roll of the neighbourhood schools fell **30%**. Of the 2,530 pupils lost, **1,848 are demography and 682 are families leaving**.
+- **16 of 30 areas have lost more than five points of their catchment.** The three worst — Monarch K-8 at −25 points, Whittier at −23, Eldorado K-8 at −15 — are all staying open.
+
+### How it is checked
+
+Three independent tests, reported per file in `data/analysis/oe-checks.csv`:
+
+- **685 of 686 school rows** rebuild to their printed enrollment exactly, from the areas they draw plus open enrolment in, placements and unmatched addresses. The one failure is Halcyon in 2020, a three-pupil school, off by one.
+- **497 of 498 areas** balance exactly: the flows in an area's column come to the children living there less those placed out. The one failure is Nederland's high-school column in 2016-17, off by one.
+- **The computed share agrees with the printed percentage** to within half a point for **491 of 497** areas. Meadowlark's is printed as 0% in its opening years.
+- The areas' open enrolment out equals the schools' open enrolment in **exactly at middle and high level in every year**. At elementary the two differ by between one and seven pupils, which is in the published figures rather than the reading.
+
+### Fixed
+
+- **The district's totals column was carried as an attendance area**, and the middle schools' areas were not carried at all. Both came of matching the printed captions, which in these files do not survive extraction: three different footer labels match the same run-together text box.
+- **Columns were taken from the right-hand edge of each cell**, but the figures are centred, not right-aligned. A percentage under its counts was enough to split one column into two.
+
