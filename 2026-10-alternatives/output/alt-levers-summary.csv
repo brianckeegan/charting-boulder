@@ -1,6 +1,6 @@
 lever,schools_open,mean_miles_to_school,pupils_median,pupils_min,schools_under_bvsd_bar,schools_under_colorado_bar,what it gives up
-"today, every building open",31,0.7849653230589735,268.9019311789202,39.44828677885201,16,16,"nothing, and nothing changes"
-"1. Close four, as proposed",27,0.9378850025946331,383.0451988408056,127.6817329469352,10,10,four buildings; the longest added distance of any option here
-1. Close to BVSD's bar,18,0.9950584038424244,485.28395392445753,305.31573435939896,0,0,the fewest buildings that reach the district's own bar
-1. Close to Colorado's bar,18,0.9950584038424244,485.28395392445753,305.31573435939896,0,0,the fewest buildings that reach Colorado's observed bar
-3. Redraw to an even split,30,0.7849653230589735,319.5,319.5,0,0,no buildings; a third of elementary pupils change school
+"today, every building open",31,0.7849653230589735,268.9019311789202,39.44828677885201,16,16,nothing; sixteen schools stay below the bar
+"1. Close, as the proposal does",26,0.8514424047236354,390.51469692910894,39.44828677885201,8,8,"5 buildings, and about 0.07 of a mile on the average journey; eight schools stay below the bar"
+1. Close to BVSD's bar,18,0.9950584038424244,485.28395392445753,305.31573435939896,0,0,13 buildings - what it takes to clear the district's own bar by closing alone
+1. Close to Colorado's bar,18,0.9950584038424244,485.28395392445753,305.31573435939896,0,0,"13 buildings - the same, on Colorado's observed bar"
+3. Redraw to an even split,30,0.7849653230589735,319.5,319.5,0,0,no buildings; 25% of elementary pupils change school

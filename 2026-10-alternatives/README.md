@@ -187,6 +187,8 @@ Four things are missing or thin, and each is here for its own reason:
     ├── raw/yearbooks/      scanned volumes (not committed; 110 MB each)
     ├── interim/yearbooks/  the OCR markdown, one file per converted page
     ├── raw/geo/            census TIGER and PL 94-171, with manifest.json
+    ├── raw/proposal/       resolution 26-27, the work session deck, and
+    │                       Boulder's subcommunity boundaries, with checksums
     ├── lookups/            inventory, coverage map, district and county crosswalks
     ├── analysis/           the working set the notebooks build on
     └── processed/          the archive
@@ -223,15 +225,23 @@ years, which puts Boulder Valley near 53 schools in 2060 against 56 today.
 **3. What are the options?** Five levers, each judged on what it is trying to
 do rather than against one scorecard: close, reconfigure grades, redraw
 boundaries, shrink in place, do nothing. Two viability bars are carried
-throughout — BVSD's own two-classes-a-grade standard, and the size at which
-Colorado districts actually close schools.
+throughout, and **they land in the same place** — BVSD's two-classes-a-grade
+standard is about 300 pupils, which is also where Colorado's observed closure
+rate flattens. The district's standard is not unusual.
 
-The finding that most bears on the proposal: **16 of Boulder Valley's 31
-elementary schools are already below both bars, and redrawing boundaries alone
-clears the district's own bar without closing a single building** — at the
-cost of moving about a quarter of elementary pupils. Closing four, as
-proposed, leaves ten schools below the bar. Clearing it by closure alone takes
-thirteen.
+Resolution 26-27 and the 15 September 2026 work session are in
+`data/raw/proposal/`, and the analysis is scored against the district's own
+figures wherever it has them.
+
+**16 of Boulder Valley's 31 elementary schools are already below the bar**;
+BVSD's own count, from different data, is 14. The proposal's closures leave
+eight. Clearing the bar by closing alone would take thirteen. **Redrawing
+boundaries across the buildings that already exist clears the district's own
+standard without closing any** — moving about a quarter of elementary pupils.
+
+That option is not on the list of six the board was given (work session, slide
+7). Boundary redrawing appears six times in the resolution, always as a
+consequence of a closure, never as an alternative to one.
 
 The district has enough elementary-age children for 35 schools at its own
 standard and runs 31. Its problem is not the number of buildings. It is where
@@ -239,12 +249,21 @@ they are.
 
 ### What the analysis is missing
 
-BVSD's own capacity figures are not in the repository, so utilisation — the
-68% and 75% the proposal turns on — cannot be computed and every bar is stated
-in pupils instead. The City of Boulder's neighbourhood boundaries were
-unreachable throughout (HTTP 522), so census block groups and municipalities
-stand in. Catchments are straight-line nearest-school, which open enrollment
-makes an approximation. `data/analysis/known-gaps.csv` carries the list.
+**Capacity for 29 of the 31 elementary schools.** The work session gives
+capacity and utilisation for Mesa and Bear Creek only — the worked example on
+slide 20. Every other school's is a chart, not a table. So utilisation, the
+district's second metric and the one the 68%-to-75% target is stated in,
+cannot be computed here. A capacity-by-school table is the single most useful
+thing still missing.
+
+**The catchment model matches one of its two available checks** — Mesa within
+6% of the district's resident count, Bear Creek at 45%. It is used only to
+compare levers, which share the bias, never to describe one school.
+
+Catchments are straight-line nearest-school, and BVSD says 67–70% of students
+attend their neighbourhood school, so about a third of the real assignment is
+choice this model does not see. The child geography is the 2020 census.
+`data/analysis/known-gaps.csv` carries the rest.
 
 ## Reproduce
 

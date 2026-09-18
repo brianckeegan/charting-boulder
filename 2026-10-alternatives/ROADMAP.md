@@ -51,8 +51,10 @@ From `TASK.md`. These are the assignable pieces of the work this folder proposes
 
 ## Added after the analysis — 2026-09-18
 
-- [ ] **BVSD capacity by school** — the Resilient Schools presentation is on BoardDocs, which refuses automated fetching (HTTP 403). Without it, utilisation cannot be computed and the levers are scored in pupils rather than against the district's own 68%-to-75% target.
-- [ ] **City of Boulder neighbourhood boundaries** — the open-data portal returned HTTP 522 throughout and the city's ArcGIS server publishes no neighbourhood layer. Census block groups and municipalities stand in, which is a real substitution: block groups are drawn for population balance, not for how Boulder thinks about itself.
+- [x] **The Resilient Schools proposal** — supplied by hand and committed to `data/raw/proposal/`: resolution 26-27, the 15 September 2026 work session deck, and the district's own metrics.
+- [ ] **BVSD capacity by school** — the deck gives capacity for two schools, Mesa and Bear Creek. The other 29 are charts rather than tables, so utilisation cannot be computed for them and the levers are scored in pupils instead. A capacity-by-school table would close it.
+- [x] **City of Boulder neighbourhood boundaries** — supplied by hand as the ten city subcommunities. 16,195 of the district's 41,063 children live inside them; the rest are in Louisville, Lafayette, Superior, Broomfield and the mountains, where the places layer carries the geography.
+- [ ] **A catchment model that matches both its checks** — straight-line nearest-school gets Mesa within 6% of the district's resident count and Bear Creek at 45%. A flat district-wide child-to-pupil ratio is the likely cause. Block-level age detail, or the district's own resident-student counts, would fix it.
 - [ ] **Open enrollment in the catchments** — catchments here are straight-line nearest-school. BVSD's own Enrollment Pattern Matrices, already committed in `2026-09-bvsd/data/raw/open-enrollment/`, would say how far that is from where children actually go.
 - [ ] **A statewide steady state** — the model is fitted on 178 districts but applied to one. Running it for every district would say which Colorado districts are furthest from the distribution their demography supports, and whether Boulder is unusual.
 - [ ] **Closure impacts** — the archive can support an event study on what happened to enrollment and staffing in districts after a closure round. It is not in the notebook yet; section 1 establishes the predictors, not the consequences.
