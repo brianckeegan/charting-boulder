@@ -211,3 +211,21 @@ The 2001 and 2002 membership PDFs print no codes at all. A district or school na
 **Why.** Without a code those rows reach neither the district tier nor the school registry, so the 1,630 schools they carry would sit in the archive attached to nothing, and the district table would keep the hole this work exists to close. The years either side print codes and the names are the same names.
 
 **What it costs.** A district renamed between 2000 and 2004, or a school name two buildings shared, resolves to nothing rather than to a guess — 45,892 rows get a district code and 36,204 a school code, and what is left keeps its printed name. The check is downstream and it is exact: against NCES, CDE's 741,683 pupils for 2001 less its 19,334 pre-kindergarteners is 722,349, which is CCD's count for the year to the pupil.
+
+## D27 — Two districts sharing a name is settled by their codes, not by their suffixes — 2026-09-18
+
+A base name is treated as ambiguous where two distinct district *codes* answer to it. A name that is ambiguous is never resolved by that base alone: a row printing it without a distinguishing suffix is left uncoded.
+
+**Why.** The previous test counted printed suffixes — a base was ambiguous if the volumes ever wrote it two ways. That is a different and much commoner thing. Durango is "DURANGO 9-R" in one volume and "DURANGO 9R" in the next and there is no second Durango; Moffat, Ignacio, Center, Crowley County and about thirty others are the same. Meanwhile the test missed the two cases that mattered, because it never asked whether two districts existed.
+
+**What it caught.** Weld County has RE-1 (Gilcrest) and RE-8 (Fort Lupton); CDE writes the second "WELD COUNTY S/D RE-8", so with the boilerplate kept the two had different base names and the clash was invisible. The yearbooks' unsuffixed "WELD COUNTY" was handed whichever code was seen last, putting four years of Fort Lupton's roughly 2,650 pupils under Gilcrest's code. Garfield has RE-2 (Rifle, about 3,000) and 16 (Parachute, about 700), and nine years of Rifle's pupils sat under Parachute's code.
+
+**What it costs.** Plain "GARFIELD" means Rifle in 1987–95 and Parachute in 1996–99, and nothing in the name says which, so thirteen district-years that used to carry a code now carry none. That is the intended outcome: an uncoded row keeps its printed name and can be read, whereas the coded ones were being read as another district's history.
+
+## D28 — A damaged name is repaired from the same volume, or not at all — 2026-09-18
+
+Page 63 of the 1986 yearbook lost the first character of every district name — Summit read as "UMMIT", Telluride as "ELLURIDE", Julesburg as "ULESBURG" — while the figures beside them and the county in the next cell read cleanly. It is a left-edge crop on one page. Those names are repaired against the grade and summary tables of the *same volume*, which the crop did not touch, and a repair is accepted only where exactly one name in that roster fits: either by having lost up to three leading characters, or by differing in at most two characters at the same length and the same organisational suffix.
+
+**Why inside one volume.** The roster is then the same printer, the same year and the same districts, so a match is a lookup rather than a guess. Matching against every name the archive has ever held would make "ORWOOD" a choice between Norwood and any other name ending that way, in any year.
+
+**What it costs, and what is left over.** Nine repairs in 1986 and three in 1987, each printed by name when the pipeline runs so it can be disputed. Two names the rule cannot reach — the 1986 volume's other tables do not carry Dolores at all, and Genoa-Hugo is misread in 1988 only — sit in `district-aliases.csv` with the membership either side that identifies them. Anything matching two roster names, or none, is left exactly as the OCR read it.

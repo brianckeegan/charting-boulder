@@ -1,9 +1,13 @@
 {
+  "27J": {
+    "district_code": "0040",
+    "district_name": "School District 27J"
+  },
   "ACADEMY": {
     "district_code": "1040",
     "district_name": "Academy 20"
   },
-  "ADAMS12FIVESTARSCHOOLS": {
+  "ADAMS12FIVESTAR": {
     "district_code": "0020",
     "district_name": "Adams 12 Five Star Schools"
   },
@@ -95,11 +99,11 @@
     "district_code": "0123",
     "district_name": "SHERIDAN 2"
   },
-  "ARCHULETACOUNTY50JT": {
+  "ARCHULETACOUNTY": {
     "district_code": "0220",
     "district_name": "Archuleta County 50 Jt"
   },
-  "ARCHULETA|ARCHULETACOUNTY50JT": {
+  "ARCHULETA|ARCHULETACOUNTY": {
     "district_code": "0220",
     "district_name": "ARCHULETA COUNTY 50 JT"
   },
@@ -139,7 +143,7 @@
     "district_code": "0230",
     "district_name": "WALSH RE-1"
   },
-  "BAYFIELD10JTR": {
+  "BAYFIELD": {
     "district_code": "1530",
     "district_name": "Bayfield 10 Jt-R"
   },
@@ -187,7 +191,7 @@
     "district_code": "0040",
     "district_name": "BRIGHTON 27J"
   },
-  "BRUSHRE2J": {
+  "BRUSH": {
     "district_code": "2395",
     "district_name": "Brush RE-2(J)"
   },
@@ -227,7 +231,7 @@
     "district_code": "9035",
     "district_name": "Centennial BOCES"
   },
-  "CENTER26JT": {
+  "CENTER": {
     "district_code": "2810",
     "district_name": "Center 26 JT"
   },
@@ -339,31 +343,36 @@
     "district_code": "1160",
     "district_name": "Cotopaxi RE-3"
   },
+  "CREEDE": {
+    "district_code": "2010",
+    "district_name": "Creede School District"
+  },
   "CREEDECONSOLIDATED": {
     "district_code": "2010",
     "district_name": "CREEDE CONSOLIDATED 1"
-  },
-  "CREEDESCHOOLDISTRICT": {
-    "district_code": "2010",
-    "district_name": "Creede School District"
   },
   "CRIPPLECREEKVICTOR": {
     "district_code": "3010",
     "district_name": "Cripple Creek-Victor RE-1"
   },
-  "CROWLEYCOUNTYRE1J": {
+  "CROWLEYCOUNTY": {
     "district_code": "0770",
     "district_name": "Crowley County RE-1-J"
   },
-  "CROWLEY|CROWLEYCOUNTYRE1J": {
+  "CROWLEY|CROWLEYCOUNTY": {
     "district_code": "0770",
     "district_name": "CROWLEY COUNTY RE-1-J"
   },
-  "CUSTERCOUNTYSCHOOLDISTRICT": {
+  "CUSTERCOUNTY": {
     "district_code": "0860",
     "district_name": "Custer County School District C-1"
   },
-  "CUSTER|CUSTERCOUNTYSCHOOLDISTRICT": {
+  "CUSTER|CONSOLIDATED": {
+    "district_code": "0860",
+    "district_name": "CONSOLIDATED C-1",
+    "via": "alias (renamed)"
+  },
+  "CUSTER|CUSTERCOUNTY": {
     "district_code": "0860",
     "district_name": "CUSTER COUNTY SCHOOL DISTRICT C-1"
   },
@@ -379,11 +388,11 @@
     "district_code": "2730",
     "district_name": "DEL NORTE C-7"
   },
-  "DELTACOUNTY50J": {
+  "DELTACOUNTY": {
     "district_code": "0870",
     "district_name": "Delta County 50(J)"
   },
-  "DELTA|DELTACOUNTY50J": {
+  "DELTA|DELTACOUNTY": {
     "district_code": "0870",
     "district_name": "DELTA COUNTY 50(J)"
   },
@@ -403,11 +412,11 @@
     "district_code": "2055",
     "district_name": "Dolores RE-4A"
   },
-  "DOLORESCOUNTYRENO": {
+  "DOLORESCOUNTY": {
     "district_code": "0890",
     "district_name": "Dolores County RE No.2"
   },
-  "DOLORES|DOLORESCOUNTYRENO": {
+  "DOLORES|DOLORESCOUNTY": {
     "district_code": "0890",
     "district_name": "DOLORES COUNTY RE NO.2"
   },
@@ -419,7 +428,7 @@
     "district_code": "0900",
     "district_name": "DOUGLAS COUNTY RE 1"
   },
-  "DURANGO9R": {
+  "DURANGO": {
     "district_code": "1520",
     "district_name": "Durango 9-R"
   },
@@ -447,7 +456,7 @@
     "district_code": "3085",
     "district_name": "Eaton RE-2"
   },
-  "EDISON54JT": {
+  "EDISON": {
     "district_code": "1120",
     "district_name": "Edison 54 JT"
   },
@@ -481,10 +490,6 @@
   },
   "ELIZABETH": {
     "district_code": "0920",
-    "district_name": "ELIZABETH C-1"
-  },
-  "ELIZABETHSCHOOLDISTRICT": {
-    "district_code": "0920",
     "district_name": "Elizabeth School District"
   },
   "ELLICOTT": {
@@ -507,7 +512,7 @@
     "district_code": "1010",
     "district_name": "COLORADO SPRINGS 11"
   },
-  "ELPASO|EDISON54JT": {
+  "ELPASO|EDISON": {
     "district_code": "1120",
     "district_name": "EDISON 54 JT"
   },
@@ -539,11 +544,11 @@
     "district_code": "1030",
     "district_name": "MANITOU SPRINGS 14"
   },
-  "ELPASO|MIAMIYODER60JT": {
+  "ELPASO|MIAMIYODER": {
     "district_code": "1130",
     "district_name": "MIAMI/YODER 60 JT"
   },
-  "ELPASO|PEYTON23JT": {
+  "ELPASO|PEYTON": {
     "district_code": "1060",
     "district_name": "PEYTON 23 JT"
   },
@@ -615,13 +620,21 @@
     "district_code": "1850",
     "district_name": "Frenchman RE-3"
   },
-  "GARFIELD": {
+  "GARFIELD#16": {
     "district_code": "1220",
     "district_name": "Garfield 16"
   },
-  "GARFIELD|GARFIELD": {
+  "GARFIELD#RE2": {
+    "district_code": "1195",
+    "district_name": "Garfield Re-2"
+  },
+  "GARFIELD|GARFIELD#16": {
     "district_code": "1220",
     "district_name": "GARFIELD 16"
+  },
+  "GARFIELD|GARFIELD#RE2": {
+    "district_code": "1195",
+    "district_name": "GARFIELD RE-2"
   },
   "GARFIELD|ROARINGFORK": {
     "district_code": "1180",
@@ -647,7 +660,7 @@
     "district_code": "1350",
     "district_name": "EAST GRAND 2"
   },
-  "GRAND|WESTGRAND1JT": {
+  "GRAND|WESTGRAND": {
     "district_code": "1340",
     "district_name": "WEST GRAND 1-JT."
   },
@@ -719,7 +732,7 @@
     "district_code": "3220",
     "district_name": "Idalia RJ-3"
   },
-  "IGNACIO11JT": {
+  "IGNACIO": {
     "district_code": "1540",
     "district_name": "Ignacio 11 JT"
   },
@@ -751,7 +764,7 @@
     "district_code": "1810",
     "district_name": "Karval RE-23"
   },
-  "KEENESBURGRE3J": {
+  "KEENESBURG": {
     "district_code": "3090",
     "district_name": "KEENESBURG RE-3(J)"
   },
@@ -807,19 +820,19 @@
     "district_code": "2660",
     "district_name": "Lamar Re-2"
   },
-  "LAPLATA|BAYFIELD10JTR": {
+  "LAPLATA|BAYFIELD": {
     "district_code": "1530",
     "district_name": "BAYFIELD 10 JT-R"
   },
-  "LAPLATA|DURANGO9R": {
+  "LAPLATA|DURANGO": {
     "district_code": "1520",
     "district_name": "DURANGO 9-R"
   },
-  "LAPLATA|IGNACIO11JT": {
+  "LAPLATA|IGNACIO": {
     "district_code": "1540",
     "district_name": "IGNACIO 11 JT"
   },
-  "LARIMER|PARKESTESPARK": {
+  "LARIMER|PARK": {
     "district_code": "1570",
     "district_name": "PARK (ESTES PARK) R-3"
   },
@@ -874,6 +887,11 @@
   "LIMON": {
     "district_code": "1790",
     "district_name": "Limon RE-4J"
+  },
+  "LINCOLN|GENDAHUGO": {
+    "district_code": "1780",
+    "district_name": "GENDA-HUGO",
+    "via": "alias (ocr)"
   },
   "LINCOLN|GENOAHUGO": {
     "district_code": "1780",
@@ -951,7 +969,7 @@
     "district_code": "1990",
     "district_name": "PLATEAU VALLEY 50"
   },
-  "MIAMIYODER60JT": {
+  "MIAMIYODER": {
     "district_code": "1130",
     "district_name": "Miami/Yoder 60 JT"
   },
@@ -963,11 +981,11 @@
     "district_code": "2800",
     "district_name": "Moffat 2"
   },
-  "MOFFATCOUNTYRENO": {
+  "MOFFATCOUNTY": {
     "district_code": "2020",
     "district_name": "Moffat County RE: No 1"
   },
-  "MOFFAT|MOFFATCOUNTYRENO": {
+  "MOFFAT|MOFFATCOUNTY": {
     "district_code": "2020",
     "district_name": "MOFFAT COUNTY RE:NO 1"
   },
@@ -982,6 +1000,16 @@
   "MONTEZUMA|DOLORES": {
     "district_code": "2055",
     "district_name": "DOLORES RE-4A"
+  },
+  "MONTEZUMA|DOLOROS": {
+    "district_code": "2055",
+    "district_name": "DOLOROS",
+    "via": "alias (ocr)"
+  },
+  "MONTEZUMA|DOLORRES": {
+    "district_code": "2055",
+    "district_name": "DOLORRES RE-4A",
+    "via": "alias (ocr)"
   },
   "MONTEZUMA|MANCOS": {
     "district_code": "2070",
@@ -1003,7 +1031,7 @@
     "district_code": "2190",
     "district_name": "WEST END RE-2"
   },
-  "MORGAN|BRUSHRE2J": {
+  "MORGAN|BRUSH": {
     "district_code": "2395",
     "district_name": "BRUSH RE-2(J)"
   },
@@ -1011,11 +1039,11 @@
     "district_code": "2405",
     "district_name": "FORT MORGAN RE-3"
   },
-  "MORGAN|WELDONVALLEYRE20J": {
+  "MORGAN|WELDONVALLEY": {
     "district_code": "2505",
     "district_name": "WELDON VALLEY RE-20(J)"
   },
-  "MORGAN|WIGGINSRE50J": {
+  "MORGAN|WIGGINS": {
     "district_code": "2515",
     "district_name": "WIGGINS RE-50(J)"
   },
@@ -1087,13 +1115,13 @@
     "district_code": "2590",
     "district_name": "RIDGWAY R-2"
   },
+  "PARK": {
+    "district_code": "1570",
+    "district_name": "PARK (ESTES PARK) R-3"
+  },
   "PARKCOUNTY": {
     "district_code": "2610",
     "district_name": "Park County RE-2"
-  },
-  "PARKESTESPARK": {
-    "district_code": "1570",
-    "district_name": "PARK (ESTES PARK) R-3"
   },
   "PARK|PARKCOUNTY": {
     "district_code": "2610",
@@ -1107,7 +1135,7 @@
     "district_code": "3148",
     "district_name": "Pawnee RE-12"
   },
-  "PEYTON23JT": {
+  "PEYTON": {
     "district_code": "1060",
     "district_name": "Peyton 23 Jt"
   },
@@ -1147,7 +1175,11 @@
     "district_code": "2600",
     "district_name": "Platte Canyon 1"
   },
-  "PLATTEVALLEY": {
+  "PLATTEVALLEY#RE3": {
+    "district_code": "2865",
+    "district_name": "PLATTE VALLEY RE-3"
+  },
+  "PLATTEVALLEY#RE7": {
     "district_code": "3130",
     "district_name": "Platte Valley RE-7"
   },
@@ -1179,7 +1211,7 @@
     "district_code": "2660",
     "district_name": "LAMAR RE-2"
   },
-  "PROWERS|WILEYRE13JT": {
+  "PROWERS|WILEY": {
     "district_code": "2680",
     "district_name": "WILEY RE-13 JT"
   },
@@ -1207,7 +1239,7 @@
     "district_code": "2720",
     "district_name": "Rangely RE-4"
   },
-  "REVERESCHOOLDISTRICT": {
+  "REVERE": {
     "district_code": "2865",
     "district_name": "Revere School District"
   },
@@ -1255,7 +1287,7 @@
     "district_code": "2770",
     "district_name": "STEAMBOAT SPRINGS RE-2"
   },
-  "SAGUACHE|CENTER26JT": {
+  "SAGUACHE|CENTER": {
     "district_code": "2810",
     "district_name": "CENTER 26 JT"
   },
@@ -1298,10 +1330,6 @@
   "SARGENT": {
     "district_code": "2750",
     "district_name": "Sargent RE-33J"
-  },
-  "SCHOOLDISTRICT": {
-    "district_code": "0040",
-    "district_name": "School District 27J"
   },
   "SEDGWICK|JULESBURG": {
     "district_code": "2862",
@@ -1367,6 +1395,11 @@
     "district_code": "3010",
     "district_name": "CRIPPLE CREEK-VICTOR RE-1"
   },
+  "TELLER|CRIPPLECREEKVICTORRE1": {
+    "district_code": "3010",
+    "district_name": "CRIPPLE CREEK-VICTORRE-1",
+    "via": "alias (ocr)"
+  },
   "TELLER|WOODLANDPARK": {
     "district_code": "3020",
     "district_name": "WOODLAND PARK RE-2"
@@ -1377,17 +1410,13 @@
   },
   "THOMPSON": {
     "district_code": "1560",
-    "district_name": "THOMPSON R-2J"
-  },
-  "THOMPSONR2J": {
-    "district_code": "1560",
     "district_name": "Thompson R2-J"
   },
   "TRINIDAD": {
     "district_code": "1580",
     "district_name": "Trinidad 1"
   },
-  "UPPERRIOGRANDESCHOOLDISTRICT": {
+  "UPPERRIOGRANDE": {
     "district_code": "2730",
     "district_name": "Upper Rio Grande School District C-7"
   },
@@ -1423,29 +1452,29 @@
     "district_code": "3070",
     "district_name": "WOODLIN R-104"
   },
-  "WELD": {
+  "WELD#RE4": {
     "district_code": "3100",
     "district_name": "Weld RE-4"
   },
-  "WELDCOUNTY": {
+  "WELD#RE8": {
+    "district_code": "3140",
+    "district_name": "Weld Re-8 Schools"
+  },
+  "WELDCOUNTY#RE1": {
     "district_code": "3080",
     "district_name": "Weld County RE-1"
   },
-  "WELDCOUNTYSCHOOLDISTRICT": {
+  "WELDCOUNTY#RE3": {
     "district_code": "3090",
     "district_name": "Weld County School District RE-3J"
   },
-  "WELDCOUNTYSD": {
+  "WELDCOUNTY#RE8": {
     "district_code": "3140",
     "district_name": "WELD COUNTY S/D RE-8"
   },
-  "WELDONVALLEYRE20J": {
+  "WELDONVALLEY": {
     "district_code": "2505",
     "district_name": "Weldon Valley RE-20(J)"
-  },
-  "WELDRE8SCHOOLS": {
-    "district_code": "3140",
-    "district_name": "Weld Re-8 Schools"
   },
   "WELD|AULTHIGHLAND": {
     "district_code": "3145",
@@ -1459,6 +1488,16 @@
     "district_code": "3085",
     "district_name": "EATON RE-2"
   },
+  "WELD|FORTLUPTON": {
+    "district_code": "3140",
+    "district_name": "FORT LUPTON RE-8",
+    "via": "alias (renamed)"
+  },
+  "WELD|GILCREST": {
+    "district_code": "3080",
+    "district_name": "GILCREST RE-1",
+    "via": "alias (renamed)"
+  },
   "WELD|GREELEY": {
     "district_code": "3120",
     "district_name": "GREELEY 6"
@@ -1467,7 +1506,7 @@
     "district_code": "3110",
     "district_name": "JOHNSTOWN-MILLIKEN RE-5J"
   },
-  "WELD|KEENESBURGRE3J": {
+  "WELD|KEENESBURG": {
     "district_code": "3090",
     "district_name": "KEENESBURG RE-3(J)"
   },
@@ -1484,10 +1523,15 @@
     "district_name": "PRAIRIE RE-11"
   },
   "WELD|WELDCOUNTY": {
+    "district_code": "3140",
+    "district_name": "WELD COUNTY",
+    "via": "alias (ambiguous name)"
+  },
+  "WELD|WELDCOUNTY#RE1": {
     "district_code": "3080",
     "district_name": "WELD COUNTY RE-1"
   },
-  "WELD|WELDCOUNTYSD": {
+  "WELD|WELDCOUNTY#RE8": {
     "district_code": "3140",
     "district_name": "WELD COUNTY S/D RE-8"
   },
@@ -1499,7 +1543,7 @@
     "district_code": "2190",
     "district_name": "West End RE-2"
   },
-  "WESTGRAND1JT": {
+  "WESTGRAND": {
     "district_code": "1340",
     "district_name": "West Grand 1-JT"
   },
@@ -1507,7 +1551,7 @@
     "district_code": "0070",
     "district_name": "WESTMINSTER 50"
   },
-  "WESTMINSTERPUBLICSCHOOLS": {
+  "WESTMINSTERPUBLIC": {
     "district_code": "0070",
     "district_name": "Westminster Public Schools"
   },
@@ -1515,11 +1559,11 @@
     "district_code": "0990",
     "district_name": "Widefield 3"
   },
-  "WIGGINSRE50J": {
+  "WIGGINS": {
     "district_code": "2515",
     "district_name": "Wiggins RE-50(J)"
   },
-  "WILEYRE13JT": {
+  "WILEY": {
     "district_code": "2680",
     "district_name": "Wiley RE-13 Jt"
   },

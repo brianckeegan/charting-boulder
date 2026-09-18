@@ -78,7 +78,7 @@ The longest series in the archive, and **the only one reaching before 1986**. Bu
 |---|---|---|
 | `year` | integer | Fall of the school year |
 | `school_year` | string | As printed, e.g. `1977-78` |
-| `district_code` | string | Matched by name; empty where no modern district carries that name |
+| `district_code` | string | Matched by name, and empty where the name cannot decide: no modern district carries it, or two do. 98.3% of rows across the archive carry one — 97.2% in 1977–85, 96.0% in 1986–99, 100% from 2000. The eight districts whose old and modern names have nothing in common are listed in `data/lookups/district-aliases.csv` with the membership either side of the change that identifies them |
 | `district_name`, `county_name` | string | As printed in the yearbook |
 | `fall_membership` | integer | The October count, comparable to the rest of the archive |
 | `closing_day_membership` | integer | Empty for each volume's own final year, which had not happened when it was printed |
@@ -87,6 +87,10 @@ The longest series in the archive, and **the only one reaching before 1986**. Bu
 | `source` | string | Which volume and table the row came from |
 
 The yearbooks' Table 1 (school counts, staff, pupil/teacher ratio, dropout rate) is converted and sits in `data/interim/yearbooks/`, but is **not yet parsed into this table**. See `ROADMAP.md`.
+
+**What stays uncoded, and why.** Ninety-two non-BOCES district-years. "GARFIELD" covers Rifle in 1987–95 and Parachute in 1996–99, and "EAST"/"WEST YUMA COUNTY" cover two districts each in every yearbook year against four from 2001 — one printed name, two districts, and nothing in the name to separate them. Five small districts — Vona R-3, Egnar 18, Genoa RE-13, Arriba RE-31, Arapahoe R-3 — merged into successors before 2000; a predecessor is not given its successor's code, because that would merge two districts' histories into one series. Every such row keeps its printed name and county.
+
+BVSD and the seven Front Range districts it is compared against — St Vrain, Poudre, Jeffco, Denver, Cherry Creek, Adams 12, Douglas — each run 1977 to 2024 unbroken but for Fall 2000, which CDE never published.
 
 ## `school-teacher-fte.csv`
 

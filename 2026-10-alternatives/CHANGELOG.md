@@ -290,3 +290,35 @@ The two SDO products agree to a **median 0.015%**, with 97% of county-years with
 - **Historical and statewide attendance-area boundaries are removed**, not deferred. They are not obtainable.
 - Two stale entries fixed: the statewide steady state has been done since section 6, and the non-public row now says what is read and what is not.
 
+
+## 2026-09-18 — reading the district names
+
+Two districts' pupils were filed under other districts' codes, and 1977–85 could not be joined to anything. Both came from the same place: a name-matching layer that read Colorado's district names more narrowly than Colorado prints them.
+
+### Two mis-attributions, found and fixed
+
+- **Fort Lupton's pupils under Gilcrest's code.** Weld County has two districts called Weld County — RE-1 (Gilcrest) and RE-8 (Fort Lupton). CDE writes the second as "WELD COUNTY S/D RE-8", and with the "S/D" kept the two had different base names, so nothing noticed the clash. The yearbooks' unsuffixed "WELD COUNTY" went to whichever code was seen last, putting **four years of Fort Lupton's roughly 2,650 pupils under 3080**, which is Gilcrest.
+- **Rifle's pupils under Parachute's code.** Garfield County has Garfield RE-2 (Rifle) and Garfield 16 (Parachute). Volumes that print plain "GARFIELD" were handed 1220, so **nine years of Rifle's 2,193 rising to 3,787 sat under Parachute's code**, a district of about 700 at the time. Plain "GARFIELD" means Rifle in 1987–95 and Parachute in 1996–99, so it is now left uncoded rather than coded either way.
+
+The fix beneath both: a base name that two district *codes* answer to is never resolved by that base alone. Ambiguity is now read off the codes rather than off how the suffix happened to be printed — counting printed suffixes flags Durango, which is "9-R" in one volume and "9R" in the next and has no second district.
+
+### 1977–85 joins to the rest of the archive
+
+Those nine years carried names but no codes, so BVSD's series began in 1986. Four faults, in order of what they cost:
+
+- **`split_district_name` could not separate a parenthesised designator.** "BOULDER VALLEY RE 2(J)" kept "RE 2 J" in its base name and so never matched "BOULDER VALLEY". This alone stranded every joint district in the state.
+- **A page of the 1986 volume lost the first character of every district name** — "SUMMIT RE-1" read as "UMMIT RE-1", Telluride as "ELLURIDE" — while the figures beside them read cleanly. Repaired against the same volume's other tables, which the crop did not touch: a damaged name is accepted only where exactly one name in that volume's own roster fits it. Nine repairs in 1986, three in 1987, each printed by name when the pipeline runs.
+- **County headings read as districts.** Where the OCR split "| GILCREST RE-1 | COUNTY: WELD |" across two lines, the parser took the county line as the district: five counties became districts, "COUNTY: WELD" was filed with Gilcrest's 1,800 pupils, and Gilcrest was lost. The 1986 volume now reads **176 districts, Colorado's own count**, against 165 before.
+- **Designators printed every way a typewriter allows** — "9-R", "26 JT", "RE-1-J", "R2-J", "RE NO. 1", and NCES's legal "SCHOOL DISTRICT NO. 1 IN THE COUNTY OF DENVER AND STATE OF COLORADO". The legal clause is turned around rather than struck out, because it is the only part of that name saying which district it is.
+
+**Coverage: 98.3% of district-years now carry a code**, from 97.2% in 1977–85 and 96.0% in 1986–99 to 100% from 2000. BVSD and the seven Front Range districts it is compared against — St Vrain, Poudre, Jeffco, Denver, Cherry Creek, Adams 12, Douglas — each run **1977 to 2024 unbroken**, missing only Fall 2000, which CDE never published.
+
+Every yearbook total still reconciles to NCES exactly where it did before: 0.00% in nine of the fourteen years.
+
+### `data/lookups/district-aliases.csv`
+
+Eight districts no rule can reach, because the yearbook name and the modern name have nothing in common — Fort Lupton RE-8 is now Weld County S/D RE-8, Custer County's only district was called Consolidated C-1 for twenty-three years. Each row records the membership either side of the change that identifies it, so the claim can be checked rather than believed.
+
+### What is still uncoded, and why
+
+Ninety-two non-BOCES district-years, all named in the table and all for stated reasons: Garfield and Yuma, where one printed name covers two districts; and five small districts — Vona, Egnar, Genoa RE-13, Arriba RE-31, Arapahoe R-3 — that merged into successors before 2000. A predecessor is not given its successor's code, because that would silently merge two districts' histories.
