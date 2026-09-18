@@ -1,0 +1,14 @@
+{
+  "county-muni-timeseries.csv": {
+    "bytes": 942328,
+    "fetched_at": "2026-09-18T14:39:49+00:00",
+    "sha256": "7fcbf946fb1e47784682167475248a00466ca78056d6067077a3af9e15a93396",
+    "url": "https://storage.googleapis.com/co-publicdata/county-muni-timeseries.csv"
+  },
+  "historical-census.csv": {
+    "bytes": 1635271,
+    "fetched_at": "2026-09-18T14:39:49+00:00",
+    "sha256": "fc0c79883297b99fd1b00e5972f7ac4bf80522fd04e6f2c19f877e3f1084a738",
+    "url": "https://storage.googleapis.com/co-publicdata/historical-census.csv"
+  }
+}

@@ -170,6 +170,35 @@ The 1999 volume prints **Fall 1999 membership beside Fall 1998 teachers**, under
 
 Summed and compared against the NCES state total, **every year from 1987 to 1998 lands within 1.3%**, five within 0.2%, and 1991 agrees to a fifth of one FTE out of 33,093. 1986 has nothing to check it against: NCES district staffing starts in 1987. On the modern side, the 2010 subtotals sum to 48,449.1 against 48,450.
 
+## `nonpublic-enrollment-by-grade.csv`
+
+CDE's count of the schools this archive is otherwise not about. One row per non-public school, year and grade, 2003 to 2014.
+
+| Column | Type | Notes |
+|---|---|---|
+| `year` | integer | The autumn of the count, as everywhere else here |
+| `county_name` | string | As printed |
+| `district_code`, `district_name` | string | The public district whose boundary the school sits in. It does not attend that district; this is geography |
+| `school_code` | string | CDE's non-public code, `P` and three digits. Not a public school code and not comparable with one |
+| `school_name` | string | As printed |
+| `grade` | string | The canonical grades, PK to 12 |
+| `enrollment` | integer | Pupils in that grade |
+| `source` | string | The file it was read from |
+
+A row is kept only where its grades add to the total the file prints. Every year passes on every row; the district totals also agree in nine years of twelve, and `audit/nonpublic-parse.json` says which.
+
+**This is not the same count as the public tables.** Non-public schools report to CDE under a different statute and the school codes do not join to anything else here. 2007 carries 494 schools against 380 either side, which is the source rather than the reading - its row and district totals both reconcile.
+
+## `nonpublic-year.csv`
+
+The same thing summed: one row per year, with schools, districts and enrollment.
+
+## `county-population.csv` and `municipal-population.csv`
+
+Total population from the State Demography Office, written by the retrieval notebook rather than the pipeline. Counties run 1870 to 2024 and municipalities 1980 to 2024, and `basis` says whether a county row is an annual estimate or a decennial census count.
+
+**Total population, not by age.** The single-year-of-age file starts in 1990 and the district panel starts with it; these do not extend the school-age series, they give the denominator either side of it. A municipality that crosses a county line is printed once per county, marked `(Part)`.
+
 ## `source-reconciliation.csv`
 
 One row **per year**, not per school: the two sources compared across the whole state. `cde_schools`, `ccd_schools`, `matched`, `exact_agreement`, `median_abs_diff`, `cde_total`, `ccd_total`, `cde_prek`, `ccd_prek`, `gap_excluding_prek`.

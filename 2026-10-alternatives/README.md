@@ -61,6 +61,8 @@ Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the 
 | [CDE staff statistics](https://ed.cde.state.co.us/cdereval/staffstatistics) and [Artemis ED2.88](https://spl.cde.state.co.us/artemis/edserials/ed288internet/) | Teacher FTE by school | 2000–2024, twenty-two years | Spine |
 | [CDE Artemis ED2/79.19](https://spl.cde.state.co.us/artemis/edserials/ed27919internet/) | District enrollment by grade; district staff and school counts; district trends | 1986–1999, and 1977–1985 via the 1986 volume | District tier |
 | [NCES CCD](https://nces.ed.gov/ccd/), via the [Urban Institute API](https://educationdata.urban.org/) | School enrollment by grade, teacher FTE, coordinates, charter flag, status | 1986–2024 | Secondary, harmonized and compared |
+| [CDE Artemis ED5/90.17](https://spl.cde.state.co.us/artemis/edserials/ed59017internet/) | Non-public school membership by school and grade | 2003–2014 | The private side of the same count |
+| [Colorado State Demography Office](https://demography.dola.colorado.gov/) | County and municipal population, annual and decennial | 1870–2024 | Context and denominators |
 
 CDE is the count of record wherever it publishes. NCES is carried alongside it in its own columns and compared, never silently substituted. The `source` column on every row says which contributed.
 
@@ -116,7 +118,7 @@ Three conventions worth knowing before you join anything:
 
 | | |
 |---|---|
-| School enrollment, CDE | 2004–2024 |
+| School enrollment, CDE | **2001–2024**, except 2000 |
 | School enrollment, NCES | 1986–2024 |
 | Teacher FTE by school, CDE | **2000–2024**, every year but 2017, 2020 and 2021 |
 | Teacher FTE by school, NCES | 1986–2024 |
@@ -124,15 +126,18 @@ Three conventions worth knowing before you join anything:
 | Teacher FTE by district, CDE | **1986–2024**, except 1999, 181–196 districts a year |
 | Schools per district, CDE | **1986–1999**, by level |
 | District enrollment by grade | 1986–2024 |
-| District fall membership | **1977–2024**, except 2000–2003 |
+| District fall membership | **1977–2024**, except 2000 |
+| **Non-public school enrollment, CDE** | **2003–2014**, by school and grade |
+| **County population** | **1980–2024** annually, 1870–2020 decennially |
+| **Municipal population** | 1980–2024, 361 municipalities |
 | Coordinates | 64,744 of 65,841 school-years |
 | Graduation and dropout rates by district | 1986–1999, from the same table, **unchecked** |
 
 Four things are missing or thin, and each is here for its own reason:
 
-- **2000–2003 has no district row, and 2001–2003 no CDE school data.** 2001 and 2002 publish school-by-grade as PDF only; 2003 uses an indented panel layout the parser does not read. NCES covers those years at school grain, so the school panel has no hole — it has one source instead of two.
-- **2017 teacher FTE does not exist.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs, but the files are byte-identical. The later duplicate is dropped rather than presented as a second year. 2020 and 2021 CDE published no ratio report at all.
-- **The 2000–2002 and 2004 membership PDFs still read as nothing**, and 2003's and 2012's ratio reports lose about 200 rows each to layouts the parser does not recover. The staff serial covers every one of those years, so no year is missing — but each is one file's reading rather than two.
+- **Fall 2000 has no CDE school file at all**, and so no district row. CDE published 1,065 membership files for that year and none of them is the count by school and grade. 2001 and 2002 publish it as PDF and 2003 as an indented panel, and all three are read now (`pipeline/membership.py`), so the hole that ran 2000–2003 is one year wide. NCES covers it.
+- **2017 teacher FTE does not exist, in either serial.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs and the files are byte-identical. It also publishes an average-salary report carrying a district Total FTE, and the 2017 edition is *not* byte-identical to 2016's — it is a different file carrying the same 197 districts and the same 52,079.2 FTE to the decimal. A year can repeat another without repeating its bytes, so both the checksum and the figures are checked now. 2020 and 2021 CDE published nothing at all.
+- **The 2000–2002 and 2004 membership *ratio* PDFs still read as nothing**, and 2003's and 2012's ratio reports lose about 200 rows each to layouts the parser does not recover. The staff serial covers every one of those years, so no year is missing — but each is one file's reading rather than two.
 - **1999 has school counts but no staff.** The 1999 volume prints Fall 1998 teachers beside Fall 1999 pupils, so its staffing belongs to 1998 and is filed there. No volume publishes 1999 staffing, and CDE's own staff serial starts in 2000, so the CDE teacher series has a one-year hole at 1999. NCES covers it.
 - **Fourteen per cent of the yearbook district-years carry no CDE district code.** Names are matched to codes and 2,275 of 2,659 match; the residue is 172 BOCES, which have no district code, and about 210 district-years whose names changed before 2000 — Northglenn-Thornton 12 is Adams 12 Five Star Schools now. Those rows keep their printed name and county and are usable; only the code is missing.
 
@@ -157,7 +162,7 @@ Four things are missing or thin, and each is here for its own reason:
 ├── README.md               this file
 ├── TASK.md                 the task this folder carries out
 ├── DATA-DICTIONARY.md      every column, its units and its missingness
-├── decision-log.md         twenty-one dated decisions and why
+├── decision-log.md         twenty-six dated decisions and why
 ├── ROADMAP.md              what is deferred, and to when
 ├── CHANGELOG.md            what changed, and what broke on the way
 ├── pipeline/
@@ -167,9 +172,15 @@ Four things are missing or thin, and each is here for its own reason:
 │   ├── extract.py          one parser per source shape, including the
 │   │                    yearbooks' district summary table
 │   ├── normalize.py        harmonize, join, build the registry, reconcile
-│   ├── teacher_fte.py      the staff reports, both grains -> three FTE tables
-│   ├── oe_matrix.py        BVSD's Enrollment Pattern Matrices, read from the
-│   │                    characters up: the headings are printed sideways
+│   ├── teacher_fte.py      the staff reports and the salary volumes, both
+│   │                    grains -> three FTE tables
+│   ├── membership.py       the three CDE files the sheet reader cannot take:
+│   │                    two PDFs read from character positions, and 2003's
+│   │                    indented panel
+│   ├── nonpublic.py        non-public school membership, 2003-2014
+│   ├── oe_matrix.py        BVSD's Enrollment Pattern Matrices, ten years of
+│   │                    them, read by searching for the arrangement that
+│   │                    satisfies each matrix's own arithmetic
 │   └── audit.py            write audit/validation.md from the pipeline's output
 ├── alternatives-retrieval.ipynb  fetch + tidy  -> data/analysis/
 ├── alternatives-analysis.ipynb   read + argue  -> output/
@@ -184,11 +195,14 @@ Four things are missing or thin, and each is here for its own reason:
 │   └── teacher-fte.log     the transcript of the staff run
 └── data/
     ├── raw/cde/            56 CDE originals with manifest.json (sha256, URL, date)
-    ├── raw/fte/            36 CDE staff reports, likewise
+    ├── raw/fte/            CDE staff reports and salary volumes, likewise
+    ├── raw/nonpublic/      CDE non-public membership, likewise
+    ├── raw/sdo/            county and municipal population, likewise
     ├── raw/ccd/            NCES API responses (not committed; re-downloadable)
     ├── raw/yearbooks/      scanned volumes (not committed; 110 MB each)
     ├── interim/yearbooks/  the OCR markdown, one file per converted page
-    ├── raw/geo/            census TIGER and PL 94-171, with manifest.json
+    ├── raw/geo/            census TIGER, PL 94-171 and the 2020 DHC, with
+    │                       manifest.json (not committed; re-downloadable)
     ├── raw/proposal/       resolution 26-27, the work session deck, the
     │                       2025-26 school profiles, and Boulder's
     │                       subcommunity boundaries, with checksums
@@ -284,6 +298,83 @@ elsewhere: the largest single pool of pupils the district is not capturing, in
 a school below the bar that is not on the list. Across every elementary area,
 2,915 children open-enrol out against 7,223 places filled.
 
+**5. Has this been going on long?** The district has published the same matrix
+every year since 2016-17, and all ten are read here, so the question the
+proposal turns on can be answered rather than assumed. The share of Boulder
+Valley's elementary children attending their own neighbourhood school **sat
+flat at about 70% from 2017 to 2020**, fell four points in 2021, recovered
+half of that in 2022, and has fallen every year since — to **62.6%**. The
+proposal did not start it; neither is it a decade of steady decline.
+
+What that costs is arithmetic. Between 2017 and 2026 the children living in an
+elementary attendance area fell 22%, from 12,296 to 9,645. The roll of the
+neighbourhood schools fell **30%**, from 8,570 to 6,040. Had the 2017 share
+held, today's children would fill 6,722 places instead of 6,040, so of the
+2,530 pupils lost, **1,848 are demography and 682 are families leaving** —
+about a quarter. **16 of 30 areas have lost more than five points of their
+catchment**; the three worst are Monarch K-8 (−25), Whittier (−23) and
+Eldorado K-8 (−15), and none of them is closing.
+
+**6. Is Boulder unusual?** The model in question 2 is fitted on 178 districts
+and was applied to one; here it is applied to all of them, on each district's
+own county forecast. **Boulder Valley ranks 69th of 166 by the contraction its
+demography implies — 68 Colorado districts face a larger one.** Its county's
+5-to-17 population falls 13% to 2060 against a statewide median of 9%, and its
+own school count comes out 2% lower.
+
+The second reading is cross-sectional, and it needs no model: among the **19
+Colorado districts with 10,000 pupils or more**, Boulder Valley's average
+school of 500 pupils is the **8th smallest**, against a peer median of 557.
+Seven large districts run smaller schools, Denver (459) and Colorado Springs 11
+(377) among them. Colorado Springs runs fifty-nine schools at an average
+seventy-seven pupils *below* Boulder Valley's viability bar.
+
+Neither reading makes Boulder Valley an outlier. That cuts against two things
+the proposal leans on: that the district faces a decline out of proportion to
+the state, and that a district of its size cannot run schools of the size it
+has. What it does not settle is whether it *should* — a peer median describes
+what districts do, not what is right, and the bar the levers are scored against
+remains BVSD's own.
+
+**7. What happened after?** Question 1 asked what predicts a closure; it did
+not ask what a closure does, and the proposal's case rests on an answer.
+Thirty-three Colorado districts have run a closure round since 1992 — two or
+more schools at once, amounting to between a twentieth and a half of the
+district — and
+**Boulder Valley's own 2004 round, five schools of fifty-eight, is one of
+them.** An event study with district and year fixed effects says:
+
+| | at the round | five years later |
+|---|---:|---:|
+| Schools | **−17%** | **−14%** |
+| Enrolment | −2% (n.s.) | +4% (n.s.) |
+| Staff | +2% (n.s.) | +7% (n.s.) |
+
+**A closure round changes the number of buildings, not the number of pupils or
+the number of teachers.** The closures hold — districts do not quietly reopen
+what they shut — but no horizon shows enrolment or staffing differing from the
+year before the round, and the intervals rule out an enrolment fall of more
+than about five per cent. Whatever case there is for closing schools is a case
+about buildings.
+
+Boulder Valley's own round says the same in one district. It closed five
+schools in 2004 and by 2012 was **back to fifty-six schools with two thousand
+more pupils** than it had at the round; fifty-seven by 2013, where it had been
+in 1999. That is not a prediction — the SDO says Boulder County's children do
+not come back this time — but it is what a closure round settled last time,
+which is less than the proposal implies.
+
+**How many children the district has at all.** The census counts children and
+the matrices count pupils, and the 2020 census and the 2019-20 matrix describe
+the same months, so the two can be compared without extrapolating. Across the
+22 areas with both, **BVSD enrolled 9,560 of the children living in them**
+against 11,166 aged 5 to 10 or 13,178 aged 5 to 11 — 86% or 73%, depending
+where the elementary band is drawn. The level moves with the band and the
+ranking does not (Spearman 0.98), so what this measures is the spread:
+Flatirons and Heatherwood sit near the bottom on either reading, and their
+children are not in the district's schools at all rather than in a different
+one of them.
+
 ### What the analysis is missing
 
 **Capacity is February 2026; enrollment is not.** The attendance-area layer's
@@ -297,13 +388,17 @@ is the archive's.
 it establishes is a ceiling — what the existing buildings could hold — not a
 map. An actual redraw is constrained by geography this model does not see.
 
-**Open enrollment is measured, not modelled.** Section 4 reads where pupils
-actually go, but the five levers in section 3 are still resident-based: they
-move catchment lines, not the choices families make inside them. The matrices
-are one year, 2025-26, and every year back to 2016-17 sits in `2026-09-bvsd/`,
-so the trend is available and unused. **Focus schools have no catchment** and
-the proposal moves three of them. `data/analysis/known-gaps.csv` carries the
-rest.
+**Open enrollment is measured, not modelled.** Sections 4 and 5 read where
+pupils actually go, for ten years, but the five levers in section 3 are still
+resident-based: they move catchment lines, not the choices families make
+inside them, and nothing here says how families would choose again under
+different schools. **The elementary age band is approximate.** 5-to-17 is exact per block from
+the 2020 DHC, but single years of age stop at the tract, so the elementary
+split is a tract profile carried onto its blocks — and K-5 spans ages 5 to 11
+with the ends only partly in it. Both bands are carried throughout.
+
+**Focus schools have no catchment** and the proposal moves
+three of them. `data/analysis/known-gaps.csv` carries the rest.
 
 ## Reproduce
 
@@ -314,6 +409,7 @@ pip install pandas openpyxl xlrd
 python3 -m pipeline.sources      # what exists  -> data/lookups/inventory.csv
 python3 -m pipeline.fetch        # download it  -> data/raw/cde/ + manifest
 python3 -m pipeline.teacher_fte  # staffing     -> the three FTE tables
+python3 -m pipeline.nonpublic    # the private side -> two more tables
 python3 -m pipeline.normalize    # harmonize    -> data/processed/
 python3 -m pipeline.audit        # check it     -> audit/validation.md
 ```

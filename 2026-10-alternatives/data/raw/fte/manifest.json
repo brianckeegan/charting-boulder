@@ -199,6 +199,16 @@
     "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2012/ed288201222internet.pdf",
     "year": 2012
   },
+  "staff-2013-ed288201301internet.pdf": {
+    "bytes": 351626,
+    "fetched_at": "2026-09-18T14:31:44+00:00",
+    "format": "pdf",
+    "label": "Average teacher salary report (PDF)",
+    "series": "staff",
+    "sha256": "458bb8f26569301d05d52e1582e255282b2f7affde20394ffc5f4954ab40e252",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2013/ed288201301internet.pdf",
+    "year": 2013
+  },
   "staff-2013-ed288201308internet.pdf": {
     "bytes": 1735435,
     "fetched_at": "2026-09-17T22:09:48+00:00",
@@ -229,6 +239,16 @@
     "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2015/ed288201507internet.pdf",
     "year": 2015
   },
+  "staff-2016-ed288201601internet.pdf": {
+    "bytes": 114656,
+    "fetched_at": "2026-09-18T14:31:45+00:00",
+    "format": "pdf",
+    "label": "Average teacher salary (PDF)",
+    "series": "staff",
+    "sha256": "2979bd515a9a21ceb5978f046634f4f9e5627eb6897b68dd7fbd8a8e571acce8",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2016/ed288201601internet.pdf",
+    "year": 2016
+  },
   "staff-2016-ed288201607internet.pdf": {
     "bytes": 583100,
     "fetched_at": "2026-09-17T22:09:48+00:00",
@@ -238,6 +258,16 @@
     "sha256": "9ce51d91b2d42296962d0d5fe56bedf691f7bc22e92d50dfbaaddf06d168ede9",
     "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2016/ed288201607internet.pdf",
     "year": 2016
+  },
+  "staff-2017-ed288201701internet.pdf": {
+    "bytes": 117266,
+    "fetched_at": "2026-09-18T14:31:46+00:00",
+    "format": "pdf",
+    "label": "Average teacher salary (PDF)",
+    "series": "staff",
+    "sha256": "5871c10117b3647e46ee955a11dd646ddd9a0b57a85d27db64cf86b35b2c598f",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2017/ed288201701internet.pdf",
+    "year": 2017
   },
   "staff-2017-ed288201707internet.pdf": {
     "bytes": 583100,
@@ -249,6 +279,16 @@
     "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2017/ed288201707internet.pdf",
     "year": 2017
   },
+  "staff-2018-ed288201801internet.pdf": {
+    "bytes": 132654,
+    "fetched_at": "2026-09-18T14:31:47+00:00",
+    "format": "pdf",
+    "label": "Average teacher salary (PDF)",
+    "series": "staff",
+    "sha256": "2b5d929699238f9a865bc1b3250dcf7d242374f55adf89c720309f37c1350a19",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2018/ed288201801internet.pdf",
+    "year": 2018
+  },
   "staff-2018-ed288201807internet.pdf": {
     "bytes": 598238,
     "fetched_at": "2026-09-17T22:09:48+00:00",
@@ -258,6 +298,16 @@
     "sha256": "47eac92daf8b6a66c70db5bc60a48a38e073892d773fcace21c47243fcd05010",
     "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2018/ed288201807internet.pdf",
     "year": 2018
+  },
+  "staff-2019-ed288201901internet.pdf": {
+    "bytes": 143528,
+    "fetched_at": "2026-09-18T14:31:47+00:00",
+    "format": "pdf",
+    "label": "Average teacher salary (PDF)",
+    "series": "staff",
+    "sha256": "0f838f200eaf3ad601c6c596b3ee6c196ef3e1b4202600d19466ced6c56ce53c",
+    "url": "https://spl.cde.state.co.us/artemis/edserials/ed288internet/2019/ed288201901internet.pdf",
+    "year": 2019
   },
   "staff-2019-ed288201907internet.pdf": {
     "bytes": 659696,
@@ -327,6 +377,16 @@
     "series": "staff",
     "sha256": "f9f11b2f1a2267748068d01bfc1a25903aa01efbc99c4439a06ae54f7eba788b",
     "url": "https://ed.cde.state.co.us/fs/resource-manager/view/95e52b1d-f4b7-4be9-9b65-199f3f9cac11",
+    "year": 2023
+  },
+  "staff-2023-2023-2024_Average_Teacher_Salary_accessible_04242025.xlsx": {
+    "bytes": 34140,
+    "fetched_at": "2026-09-18T14:31:48+00:00",
+    "format": "xlsx",
+    "label": "Average Teacher Salary (XLSX)",
+    "series": "staff",
+    "sha256": "4e5332a0d501c6a4e74acb9f6ffa13c9d653a6320bb859e5f24ca931fc89ee64",
+    "url": "https://ed.cde.state.co.us/fs/resource-manager/view/df3c73b4-7833-4ef3-9467-ab84d3d729bb",
     "year": 2023
   },
   "staff-2024-2024-2025AverageTeacherSalaryandFTE33125.xlsx": {

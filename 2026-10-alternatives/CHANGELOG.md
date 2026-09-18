@@ -179,3 +179,114 @@ Two notebooks on top of the archive, asking whether Boulder Valley's Resilient S
 - **Redrawing is modelled as proportional to capacity, not as real lines.** It establishes a ceiling, not a map.
 - **Open enrollment is measured but not modelled.** The levers move catchment lines; they do not move the choices families make inside them. Only 2025-26 is read, though `2026-09-bvsd/` holds every year back to 2016-17.
 - **The child-to-pupil ratio is flat district-wide.** PL 94-171 publishes under-18 by block and single years of age no finer than the tract.
+
+## 2026-09-18 — ten years of open enrollment
+
+`pipeline/oe_matrix.py` now reads all thirty Enrollment Pattern Matrices, 2016-17 to 2025-26, rather than the three current ones, and reads them by arithmetic rather than by their labels (D22).
+
+### What it found
+
+- The share of Boulder Valley's elementary children attending their own neighbourhood school **held at about 70% from 2017 to 2020**, fell four points in 2021, recovered half of that in 2022, and has fallen in every year since — to **62.6%**. Neither answer the proposal's framing offered is right: this did not start with the proposal, and it is not a decade of steady decline either.
+- Between 2017 and 2026 the children living in an elementary attendance area fell 22%; the roll of the neighbourhood schools fell **30%**. Of the 2,530 pupils lost, **1,848 are demography and 682 are families leaving**.
+- **16 of 30 areas have lost more than five points of their catchment.** The three worst — Monarch K-8 at −25 points, Whittier at −23, Eldorado K-8 at −15 — are all staying open.
+
+### How it is checked
+
+Three independent tests, reported per file in `data/analysis/oe-checks.csv`:
+
+- **685 of 686 school rows** rebuild to their printed enrollment exactly, from the areas they draw plus open enrolment in, placements and unmatched addresses. The one failure is Halcyon in 2020, a three-pupil school, off by one.
+- **497 of 498 areas** balance exactly: the flows in an area's column come to the children living there less those placed out. The one failure is Nederland's high-school column in 2016-17, off by one.
+- **The computed share agrees with the printed percentage** to within half a point for **491 of 497** areas. Meadowlark's is printed as 0% in its opening years.
+- The areas' open enrolment out equals the schools' open enrolment in **exactly at middle and high level in every year**. At elementary the two differ by between one and seven pupils, which is in the published figures rather than the reading.
+
+### Fixed
+
+- **The district's totals column was carried as an attendance area**, and the middle schools' areas were not carried at all. Both came of matching the printed captions, which in these files do not survive extraction: three different footer labels match the same run-together text box.
+- **Columns were taken from the right-hand edge of each cell**, but the figures are centred, not right-aligned. A percentage under its counts was enough to split one column into two.
+
+## 2026-09-18 — how old the children are
+
+The analysis had been counting everyone under eighteen, which is three school systems wide. The 2020 **Demographic and Housing Characteristics file** gives age for the same blocks of the same census, so the school-age count is now measured rather than inferred.
+
+### Added
+
+- `data/raw/geo/co2020.dhc.zip` — 198 MB, fetched and checksummed like the other census downloads, not committed.
+- **P12, sex by age in bands, is published down to the block.** Its 5-9, 10-14 and 15-17 bands give an exact 5-to-17 count per block — the same band the State Demography Office forecasts and the staffing model is fitted on. The district holds **31,937 children aged 5 to 17** against 41,063 under 18.
+- **PCT12, single years of age, stops at the tract.** Its profile splits each tract's 5-to-17 into the elementary years and the rest, and that split is carried onto the tract's blocks. Both a 5-to-10 and a 5-to-11 band are kept (D23): **13,720 and 16,184** children.
+- `children_5_17`, `children_5_10` and `children_5_11` on `bvsd-blocks.geojson` and on every attendance-area table.
+- **How many of an area's children the district has at all** — the 2020 census and the 2019-20 matrix describe the same months, so the two can be compared directly. Across the 22 areas with both, BVSD enrolled 9,560 of the children living in them: 86% of those aged 5 to 10, 73% of those aged 5 to 11.
+
+### How it is checked
+
+- **All 7,193 blocks agree exactly** between PL 94-171 and the DHC, on total population and on the under-18 count. The two files are tabulations of the same enumeration, so this is the test of the segment offsets, and it is exact rather than approximate.
+- The 5-to-10 and 5-to-11 readings rank the attendance areas the same way (**Spearman 0.98**) while differing by thirteen points on the level, so the spread is reportable and the level is not.
+- The share of the district's children in an area that loses its school is **11% on all three age bands**, so that figure does not depend on the choice.
+
+## 2026-09-18 — the statewide steady state
+
+Section 6. The panel model was fitted on 178 districts and applied to one; it is now applied to all of them, which answers a question the proposal keeps implying and never tests.
+
+### What it found
+
+- **Boulder Valley ranks 69th of 166** by the contraction its demography implies to 2060. Sixty-eight Colorado districts face a larger one. Its county's 5-to-17 population falls 13% against a statewide median of 9%, and its own school count comes out 2% lower — 4% on demography alone, before the fitted time trend.
+- **Its schools are ordinary too.** Among the 19 Colorado districts with 10,000 pupils or more, Boulder Valley's average school of 500 pupils is the 8th smallest against a peer median of 557. Denver runs 459, Colorado Springs 11 runs 377 across fifty-nine schools — seventy-seven pupils below BVSD's own viability bar.
+- 110 of the 166 districts sit in a county whose school-age population falls, but only 71 shed schools on the model, because districts have historically absorbed most of a decline in school size rather than in school count.
+
+### How it is built
+
+- `data/analysis/county-school-age.csv` — the SDO forecast for all 65 counties, 1990-2060, written out by the retrieval notebook. Section 2's Boulder projection now reads it too, instead of reaching into the raw file.
+- The within-district reading uses the panel model's elasticity directly: with district fixed effects the level cancels in a ratio, so each district needs only its own county's path.
+- **The cross-sectional reading uses no fitted form at all.** A log-log line across a range from 25 pupils to 90,450 puts Denver 60% above its own norm, which is a statement about the functional form rather than about Denver. Average school size by district-size band, and then Boulder Valley against its actual peers, needs no such assumption.
+
+## 2026-09-18 — what a closure round does
+
+Section 7, and the last of the roadmap's analysis items. Section 1 asked what predicts a closure; this asks what one does.
+
+### What it found
+
+- **A closure round changes the number of buildings, and nothing else this can measure.** The school count falls about 17% at the round and is still 14% down five years later, so the closures hold. Enrolment and staffing differ from the year before the round at no horizon, and the intervals rule out an enrolment fall of more than about five per cent.
+- Thirty-three Colorado districts have run sixty rounds since 1992 — two or more schools at once amounting to between a twentieth and a half of the district — and **Boulder Valley's own 2004 round, five schools of fifty-eight, is one of them.**
+- Boulder Valley closed five schools in 2004 and by 2012 was back to fifty-six with two thousand more pupils than at the round, and fifty-seven by 2013 — where it had been in 1999. Its county's children had come back. The SDO says they do not this time, which is the basis of section 2, so this is not a forecast; it is what the last round settled.
+
+### Fixed
+
+- **Every district reported zero pupils in 2000, 2001, 2002 and 2003.** The district panel summed its schools' CDE enrollment, and a pandas sum over a group whose every value is missing returns zero rather than missing. Those years are NCES-only, so all 166 districts came out at zero — 664 district-years of a false count, in a column with no missing values anywhere to suggest something was wrong. The aggregation now uses `min_count=1` and those years read as absent, which is what they are.
+
+### What it cannot tell you
+
+Stated in the notebook and repeated here: the comparison group includes districts that ran a round in a different year, which biases the average where the effect differs across districts; the window is five years; and an interval that rules out a fall of more than five per cent does not rule out four.
+
+## 2026-09-18 — the years and the files that were not being read
+
+Six things, five of them holes in the archive and one of them a hole in the roadmap.
+
+### The district tier's four-year hole is one year wide
+
+`district-year` ran 1977–1999 and then 2004–2024. `pipeline/membership.py` reads the three files that caused it:
+
+- **2001 and 2002** are PDFs whose grade columns run together as text — "ALTERNATIVE SCHOOL000000000051655938213" is sixteen figures with nothing between them. Read from character positions instead: a column is about twenty-eight points wide and a digit about five. The two are not even the same shape as each other, and which it is comes from counting the names on the lines that carry a full row of figures rather than from the header, whose labels are set to the right of the columns they head.
+- **2003** is a spreadsheet laid out as an indented panel, where a school's identity is whatever county and district were last seen above it.
+
+Checked twice over: every row's grades add to its printed total (1,630/1,630, 1,662/1,662, 1,664/1,664) and every district's schools add to its printed district total (178/178, 178/178, 180/181). **Against NCES the two PDF years agree to the pupil** once pre-kindergarten is excluded. Only Fall 2000 remains, and CDE published no school file for it.
+
+### 2017 teacher FTE does not exist, in either serial
+
+The Artemis average-salary volumes carry a district Total FTE, so they are read now: 2016 gives 197 districts and 52,079 FTE against the archive's 51,461 from the school sums, and 2018 gives 195 with every row checked against the two categories that must add to it. The 2017 volume gives the same 197 districts and the same 52,079.2 to the decimal. CDE published 2016 again at the 2017 URL, as it did with the ratio report — except this file is not byte-identical, so the checksum could not catch it (D25).
+
+Two guards came of it: a year whose district figures repeat an earlier year exactly is dropped, and so is a district-grain file covering far fewer districts than the state has. The second is why 2019's salary reading is not published: its cells extract merged, the parts-must-add check throws those rows out, and what survives is 154 districts holding 10,132 FTE where the state has 185 and 53,454.
+
+### The private side of the count
+
+`pipeline/nonpublic.py` reads CDE's non-public school membership by school and grade, **2003 to 2014**: 64,286 rows, 297 to 494 schools a year, 56,832 pupils in 2003 falling to 40,830 in 2014. Every row's grades add to its printed total in every year. Charter schools were already carried — `is_charter` from NCES, 1998 onward, 69 schools in 1999 and 266 in 2024 — so what was missing was the private side, and it is the other half of "where did the pupils go" when a school closes.
+
+### County and municipal population, back to 1980 and 1870
+
+Two State Demography Office files: annual county and municipal population from 1980, and the decennial census from 1870. `data/analysis/county-population.csv` and `municipal-population.csv`. This is **total population, not by age** — the single-year-of-age file still starts in 1990 and the district panel still starts with it — so what it adds is the denominator either side, and the district's own towns, which the panel never carried.
+
+The two SDO products agree to a **median 0.015%**, with 97% of county-years within half a per cent. They do not agree exactly and should not: the age file distributes a county across ninety-odd single years and its ages sum to a little off the headline estimate.
+
+### The roadmap
+
+- **Historical and statewide attendance-area boundaries are removed**, not deferred. They are not obtainable.
+- Two stale entries fixed: the statewide steady state has been done since section 6, and the non-public row now says what is read and what is not.
+

@@ -36,6 +36,10 @@ from .extract import (
     parse_yearbook_district_summary,
     parse_yearbook_trends,
 )
+from .membership import (
+    parse_indented_sheet,
+    parse_membership_pdf,
+)
 from .schema import normalize_code
 
 HERE = Path(__file__).resolve().parent.parent
@@ -164,16 +168,81 @@ def build_district_crosswalk(cde_school_records: list[dict]) -> dict[str, dict]:
 # --------------------------------------------------------------------------
 
 def load_cde_school() -> tuple[list[dict], dict]:
-    """Every CDE school-by-grade spreadsheet the fetch step landed."""
+    """Every CDE school-by-grade file the fetch step landed.
+
+    Three of them are not the ordinary shape. 2003 is a spreadsheet laid out
+    as an indented panel with no header a column finder can use; 2001 and 2002
+    are PDFs whose grade columns run together as text. Each is tried with the
+    ordinary reader first and falls through to the one that fits, so a file
+    that changes shape again is picked up rather than dropped.
+    """
     records, meta = [], {}
-    for path in sorted(RAW_CDE.glob("enrollment-school-*.xls*")):
+    paths = (sorted(RAW_CDE.glob("enrollment-school-*.xls*"))
+             + sorted(RAW_CDE.glob("enrollment-school-*.pdf")))
+    for path in sorted(paths, key=lambda p: (int(re.search(r"(\d{4})", p.name).group(1)), p.suffix)):
         year = int(re.search(r"(\d{4})", path.name).group(1))
-        rows, info = parse_cde_school_sheet(path, year, path.name)
+        if path.suffix.lower() == ".pdf":
+            rows, info = parse_membership_pdf(path, year, path.name)
+        else:
+            rows, info = parse_cde_school_sheet(path, year, path.name)
+            if info.get("error"):
+                rows, info = parse_indented_sheet(path, year, path.name)
+        if info.get("error") or not rows:
+            meta[year] = info
+            print(f"  CDE enrollment {year}: {info.get('error', 'no rows')}")
+            continue
         records.extend(rows)
         meta[year] = info
-        note = info.get("error") or f"{info['schools']:,} schools, totals {info['row_total_pass']}/{info['row_total_pass'] + info['row_total_fail']}"
+        totals = info["row_total_pass"] + info["row_total_fail"]
+        note = (f"{info['schools']:,} schools, "
+                f"row totals {info['row_total_pass']}/{totals}")
+        if info.get("district_total_pass") is not None:
+            districts = info["district_total_pass"] + info["district_total_fail"]
+            note += f", district totals {info['district_total_pass']}/{districts}"
         print(f"  CDE enrollment {year}: {note}")
+    filled = resolve_school_codes(records)
+    if filled:
+        print(f"  {filled['districts']:,} rows given a district code by name, "
+              f"{filled['schools']:,} a school code, from the years that print them")
     return records, meta
+
+
+def resolve_school_codes(records: list[dict]) -> dict:
+    """Give the code-less years the codes the coded years use.
+
+    The 2001 and 2002 PDFs print no codes at all - the county, district and
+    school are named and nothing else. Without a code those rows cannot reach
+    the district tier or the school registry, so the 1,630 schools they carry
+    would sit in the archive attached to nothing.
+
+    The years either side do print codes, and the names are the same names.
+    A name is only used where it maps to exactly one code across the coded
+    years, so a district that was renamed or a school name that two buildings
+    shared resolves to nothing rather than to a guess.
+    """
+    district_of: dict[str, set] = defaultdict(set)
+    school_of: dict[tuple, set] = defaultdict(set)
+    for row in records:
+        name = (row["district_name"] or "").strip().upper()
+        if name and row["district_code"]:
+            district_of[name].add(row["district_code"])
+        if name and row.get("school_code") and row["school_name"]:
+            school_of[(name, row["school_name"].strip().upper())].add(row["school_code"])
+
+    districts = schools = 0
+    for row in records:
+        name = (row["district_name"] or "").strip().upper()
+        if not row["district_code"]:
+            codes = district_of.get(name, set())
+            if len(codes) == 1:
+                row["district_code"] = next(iter(codes))
+                districts += 1
+        if not row.get("school_code"):
+            codes = school_of.get((name, (row["school_name"] or "").strip().upper()), set())
+            if len(codes) == 1:
+                row["school_code"] = next(iter(codes))
+                schools += 1
+    return {"districts": districts, "schools": schools}
 
 
 def load_cde_teacher() -> tuple[list[dict], dict]:

@@ -165,3 +165,49 @@ Section 4 measures where Boulder Valley's pupils actually go. The five levers in
 **Why.** The matrices say what families chose under today's schools and today's boundaries. Closing a school or redrawing a line changes what they are choosing between, and nothing here says how they would choose again. Carrying a 2025-26 departure rate through to 2060 would dress an assumption as a measurement, and the departure rates are the largest numbers in the analysis: Sanchez keeps 35% of the children living in its area.
 
 **What it costs.** The levers answer "if every child attended their own area's school", which no lever achieves and today's district misses by a third. Section 4 is therefore the honest limit on sections 2 and 3 rather than an extension of them, and it is where the reader is sent: a school small because its area emptied and a school small because its families left are the same number and different problems.
+
+## D22 — The matrices are read by arithmetic, not by their labels — 2026-09-18
+
+`pipeline/oe_matrix.py` identifies which row and column is which by searching every arrangement of the page and keeping the one that satisfies the matrix's own totals, rather than by matching the printed captions.
+
+**Why.** The captions cannot carry it. The column headings are set at ninety degrees and come back interleaved with their second copy; the footer captions run together into one text box, so three different labels match the same row; the district's TOTAL row shares a line with a footer row; the 2016-17 files are set tighter than the rest and two of their lines merge at the spacing the others need; and the extractor runs whole columns of figures into single boxes, so a box's own text describes none of the figures in it. Reading such a page by its labels is how `oe-areas.csv` came to hold a column of district totals as though it were an attendance area, and the middle schools not at all.
+
+**What it rests on.** Two identities, both exact integer arithmetic: the flows in an area's column come to the children living there less those placed out, and the areas' open enrolment out equals the schools' open enrolment in. The first names the footer rows; the second confirms them. A third, that the computed share matches the printed percentage to within half a point, is a check rather than a constraint.
+
+**What it costs.** The search can fail, and where it does the file is reported unread rather than half-read. It also needs slack: one area in one file may miss by a pupil or two, so the accepted reading is the one with the most exact areas rather than only a perfect one, and `oe-checks.csv` carries the count for every file. Four exceptions survive across thirty matrices, each named in the retrieval notebook and each a property of BVSD's published figures — among them Meadowlark, whose share is printed as 0% in its opening year.
+
+## D23 — Two elementary age bands, both carried — 2026-09-18
+
+Wherever a count of elementary-age children is used, ages 5-10 and ages 5-11 are both computed and both reported, rather than one being chosen.
+
+**Why.** A Colorado child is five by the October kindergarten starts, so by the April a census is taken the K-5 roll spans ages five to eleven with the years at each end only partly in it. 5-to-10 is the planner's convention and understates the roll; 5-to-11 brackets it and overstates. Choosing one would put a number on the page that looks exact and is not, and choosing the one that made the answer tidiest would be fitting the band to the result: against 5-to-10 two attendance areas enrol more than 100% of their children, which is not a finding about those areas but about the band.
+
+**What it buys.** The difference is large — 86% of the district's elementary-age children against 73% — and the ranking is not: Spearman 0.98 between the two. So the spread across areas is reportable and the level is not, and saying which is which is the point of carrying both.
+
+**What it costs.** Two columns everywhere one would do, and a reader who wants a single number does not get one.
+
+## D24 — A closure round is two schools and a twentieth of the district — 2026-09-18
+
+Section 7's event study fires on a district-year where at least two schools closed and they were at least 5% and at most 50% of the district's schools. A district's first such round is the event; later ones are not separate events.
+
+**Why each part.** Single closures happen constantly — 275 of the 392 district-years with any closure have exactly one — and a district losing one of forty schools is not doing the thing the proposal proposes. The share floor keeps a large district's routine attrition out; the count floor keeps a two-school district's single closure out, which the share alone would admit at 50%. The 50% ceiling removes the handful of district-years where every school changes code at once: Alamosa RE-11J closes 4 of 4 in 2012 and carries on, which is a reorganisation in the records rather than a closure round.
+
+**Why the first round only.** A district that runs two rounds four years apart would otherwise contribute a post-period for the first that is the pre-period for the second, and the coefficients would mix the two. Twelve of the thirty-three districts have more than one round, so this is not hypothetical.
+
+**What it costs.** Sixty rounds become thirty-three events, one per district, which is most of the loss of precision in the enrolment path: the intervals rule out a fall of more than about five per cent and no more than that. The threshold is a judgement and a different one would give different districts; `alt-closure-rounds.csv` carries every round that met it, so the choice can be inspected rather than taken on trust.
+
+## D25 — A year that repeats another is not a year — 2026-09-18
+
+Where a district-grain staffing file carries the same districts and the same figures as an earlier year, the later one is dropped and named rather than published.
+
+**Why.** CDE reissues. The 2016 pupil-teacher ratio report appears again at the 2017 URL byte for byte, which a checksum catches and the pipeline already dropped. The 2016 average-salary report appears again at the 2017 URL as a *different file* — 117,266 bytes against 114,656, a different SHA-256 — carrying the same 197 districts and the same 52,079.2 FTE to the decimal. A checksum cannot catch that, and publishing it would invent a year of Colorado's teaching staff out of a filing error. So the figures are compared, not only the bytes.
+
+**What it costs, and the guard beside it.** A district that genuinely did not change its staffing at all between two years would be dropped, which is why the test is every district at once rather than any of them: 197 districts agreeing to the decimal is not a year that did not change. The second guard is the opposite failure — a file that reads *partially*. 2019's salary volume extracts with its cells merged, the parts-must-add check correctly throws those rows out, and what survives is 154 districts holding 10,132 FTE where the state has 185 and 53,454. A district-grain file covering far fewer districts than the state has is a bad reading, not a small year, and is dropped too.
+
+## D26 — A name is resolved to a code only where the code is unambiguous — 2026-09-18
+
+The 2001 and 2002 membership PDFs print no codes at all. A district or school name is given the code the coded years use for it, but only where that name maps to exactly one code across every coded year.
+
+**Why.** Without a code those rows reach neither the district tier nor the school registry, so the 1,630 schools they carry would sit in the archive attached to nothing, and the district table would keep the hole this work exists to close. The years either side print codes and the names are the same names.
+
+**What it costs.** A district renamed between 2000 and 2004, or a school name two buildings shared, resolves to nothing rather than to a guess — 45,892 rows get a district code and 36,204 a school code, and what is left keeps its printed name. The check is downstream and it is exact: against NCES, CDE's 741,683 pupils for 2001 less its 19,334 pre-kindergarteners is 722,349, which is CCD's count for the year to the pupil.

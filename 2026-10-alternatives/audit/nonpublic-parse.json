@@ -1,0 +1,125 @@
+{
+  "nonpublic-2003-ed59017200346internet.xls": {
+    "district_total_fail": 0,
+    "district_total_pass": 54,
+    "records": 5670,
+    "row_total_fail": 0,
+    "row_total_pass": 405,
+    "rows_aggregate_excluded": 55,
+    "rows_skipped": 0,
+    "schools": 399
+  },
+  "nonpublic-2004-ed59017200426internet.xls": {
+    "district_total_fail": 10,
+    "district_total_pass": 40,
+    "records": 5376,
+    "row_total_fail": 0,
+    "row_total_pass": 384,
+    "rows_aggregate_excluded": 51,
+    "rows_skipped": 11,
+    "schools": 380
+  },
+  "nonpublic-2005-ed59017200548internet.xls": {
+    "district_total_fail": 16,
+    "district_total_pass": 35,
+    "records": 4984,
+    "row_total_fail": 0,
+    "row_total_pass": 356,
+    "rows_aggregate_excluded": 52,
+    "rows_skipped": 24,
+    "schools": 351
+  },
+  "nonpublic-2006-ed59017200652internet.xls": {
+    "district_total_fail": 19,
+    "district_total_pass": 34,
+    "records": 4662,
+    "row_total_fail": 0,
+    "row_total_pass": 333,
+    "rows_aggregate_excluded": 54,
+    "rows_skipped": 42,
+    "schools": 328
+  },
+  "nonpublic-2007-ed59017200726internet.xls": {
+    "district_total_fail": 1,
+    "district_total_pass": 62,
+    "records": 6986,
+    "row_total_fail": 0,
+    "row_total_pass": 499,
+    "rows_aggregate_excluded": 64,
+    "rows_skipped": 2,
+    "schools": 494
+  },
+  "nonpublic-2008-ed59017200811internet.xls": {
+    "district_total_fail": 7,
+    "district_total_pass": 46,
+    "records": 5768,
+    "row_total_fail": 0,
+    "row_total_pass": 412,
+    "rows_aggregate_excluded": 54,
+    "rows_skipped": 10,
+    "schools": 408
+  },
+  "nonpublic-2009-ed59017200910internet.xls": {
+    "district_total_fail": 0,
+    "district_total_pass": 52,
+    "records": 5362,
+    "row_total_fail": 0,
+    "row_total_pass": 383,
+    "rows_aggregate_excluded": 53,
+    "rows_skipped": 0,
+    "schools": 381
+  },
+  "nonpublic-2010-ed590172010050internet.xls": {
+    "district_total_fail": 1,
+    "district_total_pass": 54,
+    "records": 5404,
+    "row_total_fail": 0,
+    "row_total_pass": 386,
+    "rows_aggregate_excluded": 56,
+    "rows_skipped": 3,
+    "schools": 384
+  },
+  "nonpublic-2011-ed59017043internet.xls": {
+    "district_total_fail": 0,
+    "district_total_pass": 60,
+    "records": 5488,
+    "row_total_fail": 0,
+    "row_total_pass": 392,
+    "rows_aggregate_excluded": 61,
+    "rows_skipped": 1,
+    "schools": 390
+  },
+  "nonpublic-2012-ed590172012041internet.xls": {
+    "district_total_fail": 0,
+    "district_total_pass": 55,
+    "records": 5530,
+    "row_total_fail": 0,
+    "row_total_pass": 395,
+    "rows_aggregate_excluded": 56,
+    "rows_skipped": 1,
+    "schools": 393
+  },
+  "nonpublic-2013-ed590172013041internet.xls": {
+    "district_total_fail": 0,
+    "district_total_pass": 58,
+    "records": 4885,
+    "row_total_fail": 0,
+    "row_total_pass": 349,
+    "rows_aggregate_excluded": 59,
+    "rows_skipped": 1,
+    "schools": 347
+  },
+  "nonpublic-2014-ed590172014041internet.xls": {
+    "district_total_fail": 2,
+    "district_total_pass": 46,
+    "records": 4171,
+    "row_total_fail": 0,
+    "row_total_pass": 298,
+    "rows_aggregate_excluded": 49,
+    "rows_skipped": 1,
+    "schools": 297
+  },
+  "nonpublic-2015-ed590172015038internet.xls": {
+    "error": "no header row carrying PK and TOTAL"
+  }
+}
