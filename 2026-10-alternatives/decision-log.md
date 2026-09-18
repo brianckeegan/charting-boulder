@@ -241,3 +241,25 @@ Section 8 re-estimates the closure effect with the Callaway–Sant'Anna estimato
 **Why a cohort of one district is kept.** A single-district cohort is still a clean two-by-two — that district's change less the comparisons'. Requiring two would discard 29 of the 33 treated districts and rest the pre-trend on three. The uncertainty comes from the bootstrap, not from counting districts within a cohort.
 
 **What it does not fix.** The staffing path still shows about 5% too much staff four years before a round, only just excluding zero, so districts do drift into rounds differently staffed than their comparisons. That is stated in the section rather than left for a reader to find. The window is still five years.
+
+## D30 — Both census years are built on 2000 tract geometry — 2026-09-18
+
+The 2000-to-2020 change in children is measured on **2000 tract boundaries**: the 2000 counts are read from Summary File 1 as published, and each 2020 block is assigned to whichever 2000 tract contains it.
+
+**Why not the published crosswalks.** The Census Bureau publishes tract relationship files, but there is none from 2000 straight to 2020, so it would mean chaining 2000→2010 onto 2010→2020. A crosswalk is least reliable where tracts were redrawn, tracts are redrawn where population moved most, and population movement is the measurement. The chained error would land exactly on the tracts the argument is about. Assigning blocks is one step, not two, and a block is small enough that which tract holds it is rarely in doubt.
+
+**Why four counties.** Broomfield County was created in 2001 out of Boulder, Adams, Jefferson and Weld, so the ground BVSD covers had no single county in 2000. All four are read.
+
+**How coverage is tested, and how it was tested wrongly first.** A 2000 tract is kept only where the district's 2020 blocks cover at least 90% of its **area**. The first version compared the two population totals instead and dropped a tract when they diverged — which systematically removed the tracts whose population had fallen, the exact ones the question is about. It reported a 6.6% fall in children where the geometric test reports a 1.3% rise. The filter was wrong, not the tracts.
+
+**What it establishes.** 28,409 children aged 5 to 17 in 2000 and 28,780 in 2020, across 45 tracts. Nineteen tracts gained and twenty-six lost, and the two sides nearly cancel. The district's enrollment fell over those twenty years; the children on its ground did not.
+
+## D31 — A step that appends to its own output is a bug, not a design — 2026-09-18
+
+`pipeline.normalize` writes the yearbook staffing years into `district-teacher-fte-cde.csv`, which `pipeline.teacher_fte` has already written the modern years into. It read the file and appended without dropping what it was replacing.
+
+**What that cost.** Every run of the pipeline added a further copy of every 1986–1999 district-year. The committed file carried nine copies — 23,931 rows where 2,659 exist — and the district panel built from it came out at 19,784 rows against 6,190. Nothing failed loudly: the totals a reader would check are per-district-year, and each duplicate carried the same values, so the numbers looked right and only the row counts were wrong.
+
+**The fix.** The existing rows are filtered on `source` before the new ones are added, because `source` records which step owns a row. Two consecutive runs now give 6,732 rows both times.
+
+**The rule it stands for.** A step that cannot be run twice without changing its answer is not finished. Everything else in this folder is written to be re-runnable from the raw files; this one was not, and the archive's own reconciliation checks did not catch it because they compare sums against NCES rather than counting rows.

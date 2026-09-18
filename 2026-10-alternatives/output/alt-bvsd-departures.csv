@@ -1,11 +1,12 @@
 ncessch,name,first_year,last_year,last_anywhere,enrollment_last,enrollment_3_before,seen_after_elsewhere,what_the_data_shows
-080249000137,VOCATIONAL TECHNICAL CENTER,1989,1995,1995,,,False,leaves the panel entirely
-080249000097,AURORA 7 ELEMENTARY SCHOOL,1989,2000,2000,,256.0,False,leaves the panel entirely
-080249000126,MAJESTIC HEIGHTS ELEM SCHOOL,1989,2000,2000,,256.0,False,leaves the panel entirely
-080249000098,BASE LINE MIDDLE SCHOOL-ARTS FOCUS,1989,2003,2003,,487.0,False,leaves the panel entirely
-080249000127,MAPLETON ELEMENTARY SCHOOL,1989,2003,2003,,154.0,False,leaves the panel entirely
+080249001308,BURKE SCHOOL,1986,1986,1986,43.0,,False,leaves the panel entirely
+080249000137,VOCATIONAL TECHNICAL CENTER,1986,1995,1995,,,False,leaves the panel entirely
+080249000097,AURORA 7 ELEMENTARY SCHOOL,1986,2000,2000,,256.0,False,leaves the panel entirely
+080249000126,MAJESTIC HEIGHTS ELEM SCHOOL,1986,2000,2000,,256.0,False,leaves the panel entirely
+080249000127,MAPLETON ELEMENTARY SCHOOL,1986,2003,2003,,154.0,False,leaves the panel entirely
+080249000098,BASE LINE MIDDLE SCHOOL-ARTS FOCUS,1986,2003,2003,,487.0,False,leaves the panel entirely
 080249001676,SOJOURNER CHARTER SCHOOL,1999,2003,2003,,61.0,False,leaves the panel entirely
 080249001677,BOULDER TECHNICAL EDUCATION CENTER,1999,2003,2003,,,False,leaves the panel entirely
 080249006201,WASHINGTON BILINGUAL ELEMENTARY SCHOOL,1991,2003,2003,,299.0,False,leaves the panel entirely
 080249006557,BOULDER EXPLORE,2012,2016,2017,11.0,31.0,True,"kept its NCES id outside BVSD - a transfer or a recode, not a closure"
-080249001467,HALCYON SCHOOL (SPECIAL EDUCATION),1989,2017,2018,13.0,21.0,True,"kept its NCES id outside BVSD - a transfer or a recode, not a closure"
+080249001467,HALCYON SCHOOL (SPECIAL EDUCATION),1988,2017,2018,13.0,21.0,True,"kept its NCES id outside BVSD - a transfer or a recode, not a closure"

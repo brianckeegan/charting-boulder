@@ -22,7 +22,7 @@ Boulder Valley's Resilient Schools proposal treats four closures as a local prob
 | `district-year-overlap.csv` | 1,531 | 1978–1987 | district × year |
 | `school-teacher-fte.csv` | 38,777 | 2000–2024 | school × year |
 | `district-teacher-fte-ccd.csv` | 7,879 | **1987–2024** | district × year |
-| `district-teacher-fte-cde.csv` | 28,004 | **1986–2024** | district × year |
+| `district-teacher-fte-cde.csv` | 6,732 | **1986–2024** | district × year |
 | `nonpublic-enrollment-by-grade.csv` | 64,286 | 2003–2014 | school × year × grade |
 | `nonpublic-year.csv` | 12 | 2003–2014 | year |
 

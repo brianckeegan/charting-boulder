@@ -331,14 +331,58 @@ Section 7 compares a district closing schools against every district not closing
 
 Section 8 builds only the clean comparisons: each cohort against districts not yet treated, averaged by cohort size (Callaway–Sant'Anna), with intervals from 1,000 draws resampling whole districts. 18 cohorts covering 33 districts, against 145 that never ran a round.
 
-**The finding holds and the buildings part gets stronger.** Schools fall 16.9% at the round — the same as section 7 — but where section 7 had the effect fading to 10.1% by the fifth year with an interval covering zero, the clean estimate is still **15.6% down and excludes zero**. The fade was the comparison group: a district five years past its own round was serving as a yardstick for a district at its round, which closes the gap between them whether or not anything reopened. Nothing reopened.
+**The finding holds and the buildings part gets stronger.** Schools fall 17.3% at the round against section 7's 17.5% — the same answer — but where section 7 has the effect fading to 10.5% by the fifth year with an interval covering zero, the clean estimate is still **16.3% down and excludes zero**. The fade was the comparison group: a district five years past its own round was serving as a yardstick for a district at its round, which closes the gap between them whether or not anything reopened. Nothing reopened.
 
-The pre-period straightens out too. Section 7's school count was already 10.0% down four years before a round with the interval excluding zero — a pre-trend that undermines the design. On clean comparisons it is 7.2% down and covers zero.
+The pre-period straightens out too. Section 7's school count was already 10.6% down four years before a round with the interval excluding zero — a pre-trend that undermines the design. On clean comparisons it is 8.4% down and covers zero.
 
-**Enrolment and staffing still do not move.** Enrolment five years out is −0.2% [−6.4%, +6.8%]. Staffing is +2.2% [−3.5%, +8.9%], so section 7's apparent upward drift to +5.9% does not survive either. One crack is named rather than hidden: four years *before* a round staffing sits 5.2% high and that interval only just excludes zero, so the staff null rests on less than the enrolment null does.
+**Enrolment and staffing still do not move.** Enrolment five years out is −0.2% [−6.4%, +6.7%]. Staffing is +2.2% [−3.5%, +8.9%], so section 7's apparent upward drift to +5.7% does not survive either. One crack is named rather than hidden: four years *before* a round staffing sits 5.2% high and that interval only just excludes zero, so the staff null rests on less than the enrolment null does.
 
 `output/alt-closure-impacts-staggered.csv` and `alt-fig10-closure-impacts-staggered.png`.
 
 ### A stale number in section 7
 
 Section 7's prose said the school count was "still 14% down five years later". Its own output file said 10.1%, with an interval covering zero. The prose was wrong when it was written and is corrected, along with the staffing sentence.
+
+## 2026-09-18 — the sixth lever, the children twenty years ago, and a pipeline that can be run twice
+
+### A lever nobody has costed
+
+Sections 3 and 4 set out five responses to fewer children, all of which adjust the buildings. **Lever 6 goes the other way: raise the number of children in the buildings.**
+
+It is not hypothetical. BVSD already draws pupils from outside its boundary through open enrollment and counts them. Between 2017 and 2026 its elementary roll fell 19.8% — and over the same nine years the pupils it draws from outside **rose 11.2%**, from 5.3% of the roll to 7.3%. That is the one line in the district's accounts going the other way, and no version of the proposal mentions it.
+
+The size of the gap is the surprise. Lifting every school that can reach 300 to 300, filling each only as far as its own building allows, takes **666 more elementary pupils**. The district already draws **765** from outside. The gap is smaller than a flow it is already running.
+
+It is still not quick: at the nine-a-year the district has actually managed, 666 takes seventy-eight years. So it is a lever and not a plan — and it is the only one that *adds* children rather than rearranging them, which makes it the only one that combines with the others instead of competing with them.
+
+### Section 9: the children did not leave, they moved
+
+Every count of children in this folder was 2020, which can say where they are and not whether they went anywhere. The 2000 census counted the same ground.
+
+Both years are put on **2000 tract geometry**: the 2000 counts as published, the 2020 blocks assigned to whichever 2000 tract holds them. Chaining the Census Bureau's 2000→2010→2020 relationship files would have put its largest errors exactly where tracts were redrawn, which is where population changed most, which is the thing being measured. Broomfield County did not exist in 2000, so all four counties the district's ground then sat in are read.
+
+**Boulder Valley has 1.3% more school-age children than it had in 2000** — 28,409 then, 28,780 now. Over the same twenty years its enrollment fell. Nineteen of forty-five tracts gained children and twenty-six lost them; the gainers gained 3,612 and the losers lost 3,241. The movement is large and it very nearly cancels.
+
+So the two facts the proposal runs together are separate. The district is losing pupils; the ground it sits on is not losing children.
+
+### Density is not the explanation
+
+1,091 Front Range tracts across ten counties, from the 2020 blocks aggregated to their own tracts — no crosswalk needed, because blocks nest inside tracts.
+
+The rank correlation between density and the share of residents under eighteen is **−0.12**. By band it is nearly flat: 22.2%, 24.5%, 23.0%, 22.2%, 22.4% from under a hundred people a square mile up to ten thousand. Only above ten thousand does it fall, to 15.2%, in eighty tracts holding 7% of the Front Range's people.
+
+The sign is not consistent. Split each county at 3,000 a square mile and Denver and Boulder run the expected way; **Douglas, Broomfield and Weld run the other way**. And Boulder County's *sparse* tracts, at 20.3%, still hold a smaller share of children than Adams County's *dense* ones at 25.1%. Boulder is low at every density, so density is not what makes it different.
+
+Inside BVSD the correlation between a tract's 2000 density and its change in children is **+0.03**.
+
+### A pipeline that could not be run twice
+
+`pipeline.normalize` adds the yearbook staffing years to a table `pipeline.teacher_fte` has already written the modern years into. It read that file and appended to it without first dropping the rows it was replacing, so **every run of the pipeline added another copy of every 1986–1999 district-year**. The committed file held nine copies: 23,931 rows where there are 2,659.
+
+Everything downstream multiplied to match — the district panel came out at 19,784 rows against its true 6,190. The fix is a guard on `source`, which says which step owns each row, and the step is now idempotent: two consecutive runs give 6,732 rows both times.
+
+The previously published README row count for `district-teacher-fte-cde.csv` was a faithful record of a corrupted file. It now says 6,732.
+
+### A note on the section 8 figures
+
+The numbers in the section 8 entry above were first published against the district panel as it stood before two fixes landed in the same day's work: the district-name crosswalk, which gave 38 more district-years a code, and the duplicate-row bug below. They moved by a few tenths of a percentage point — 16.9% to 17.3% at the round, 15.6% to 16.3% at five years — and the entry now carries the figures the notebook actually produces. Nothing about the finding changed.

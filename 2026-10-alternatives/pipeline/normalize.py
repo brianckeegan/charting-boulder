@@ -976,11 +976,20 @@ def main() -> None:
     print(f"  {len(staffing):,} district-years 1986-1999; "
           f"{matched:,} matched to a CDE district code ({matched / len(staffing):.1%})")
 
+    # This step adds the yearbook years to a table pipeline.teacher_fte has
+    # already written the modern years into, so it has to read that file
+    # before rewriting it - and it must drop the rows it is about to replace
+    # first. Without that the step appends to its own output: nine runs of the
+    # pipeline had put nine identical copies of every 1986-1999 district-year
+    # in the file, 23,931 rows where there are 2,659, and every reader of it
+    # multiplied to match. A pipeline that cannot be run twice is not a
+    # pipeline, so the guard is on the source, which says who owns each row.
     existing_path = PROCESSED / "district-teacher-fte-cde.csv"
     existing = []
     if existing_path.exists():
         with existing_path.open(encoding="utf-8") as handle:
-            existing = [dict(r) for r in csv.DictReader(handle)]
+            existing = [dict(r) for r in csv.DictReader(handle)
+                        if not str(r.get("source", "")).startswith("yearbook-")]
             for row in existing:
                 row["unit_type"] = unit_type(row.get("district_name", ""))
     columns = ["year", "district_code", "district_name", "county_name", "unit_type",
