@@ -111,3 +111,71 @@ The 2005–2012 reports were described as needing OCR. They did not: the text wa
 - 551 district-years carry both a published CDE total and a school sum; **396 agree to the hundredth of an FTE**, including all 185 districts in 2023.
 - The membership serial's 2000–2002 and 2004 ratio PDFs still extract no text; 2003 and 2012 lose about 200 rows each. All are covered by the staff serial.
 - CDE's average-salary reports are still unparsed. See `ROADMAP.md`.
+
+## 2026-09-18 — district staffing back to 1986
+
+`district-teacher-fte-cde.csv` goes from 4,037 rows over 2000–2024 to **6,695 over 1986–2024**. Colorado district staffing is now a thirty-nine-year series on the CDE side, and the archive has school counts by level for the first time.
+
+### Added
+
+- **The yearbooks' summary table**, 1986–1999. The roadmap called it Table 1; it is Table 1 in some volumes and Table 2 in others, under a heading that does not change. `pipeline/extract.py` gains `parse_yearbook_district_summary`.
+- Classroom teacher FTE, certificated and non-certificated staff, schools by level, pupil/teacher ratio, graduation rate and dropout rate, by district, for fourteen volumes — 2,659 district-years.
+- `unit_type` on the district staffing table, so BOCES can be filtered as they can elsewhere.
+
+### How it is checked
+
+- Against NCES, **every year from 1987 to 1998 lands within 1.3%**, five within 0.2%. 1991 agrees to a fifth of one FTE out of 33,093. 1986 has nothing to check it against: NCES district staffing starts in 1987.
+- Each row checks itself twice — the four school counts must add to the printed total, and students over classroom teachers must be the printed ratio.
+
+### Fixed during the build
+
+Four faults, each of which lost districts without failing anything:
+
+- **Two pages whose running head the OCR could not read were skipped**, costing 1996 and 1997 about thirty districts each. This is the same page-selection fault `datalab-ocr.py` was fixed for, one layer further down, and the same answer applies: take the table's whole span, not only the pages that announce themselves.
+- **1999 renames the table**, dropping "SELECTED" from the title, and was lost whole.
+- **The OCR ran the OTHER and TOTAL headings into one cell** on about one page in eight. The page then had no total column, failed the header test and was dropped entire — 39 districts in 1986, 16 in 1993.
+- **The header is set over as many as four rows**, and stopping at the first that looked sufficient left 49 of 1999's districts with school counts and no staff at all.
+
+And two rows that had lost a cell were realigned. A row that drops one cell pulls everything after it one place left: Denver's 1994 row came back with **62,773 teachers and 17 pupils**, Colorado Springs' 1996 row with 33,175 teachers. Both are among the largest districts in the state. Every loss point is tried and one is accepted only where the row then satisfies both of its checks.
+
+### Known
+
+- **1999 staffing does not exist.** The 1999 volume prints Fall 1998 teachers beside Fall 1999 pupils, so its staffing is filed under 1998 — and confirmed there, at 38,838 against the NCES 1998 total of 39,360. No volume publishes 1999 staff, and CDE's staff serial starts in 2000.
+- **384 of the 2,659 yearbook district-years carry no CDE district code**: 172 BOCES, which have none, and about 210 district-years that renamed before 2000. The printed name and county are kept.
+- **Graduation and dropout rates are unchecked.** Nothing else in this archive carries them.
+- A stray district row in 2006 carrying 9 FTE is gone: a district-grain publication covers the state, so a year with one district row is not one.
+
+## 2026-09-18 — the alternatives analysis
+
+Two notebooks on top of the archive, asking whether Boulder Valley's Resilient Schools proposal is the only shape the demography supports. The finances are ignored throughout; the question is whether there are enough children.
+
+### Added
+
+- `alternatives-retrieval.ipynb` — builds the working set in `data/analysis/`: a statewide district panel of 5,989 district-years over 1990–2024 across 180 districts, a school panel of 66,828 school-years, a registry of 2,723 schools, and the geography under them. Census TIGER and PL 94-171 downloads are cached in `data/raw/geo/` with checksums and are not committed.
+- `alternatives-analysis.ipynb` — closure history, the steady-state model, five levers, and why a school is small. It makes no network call.
+- `data/raw/proposal/` — resolution 26-27, the 15 September 2026 board work session, the 2025-26 school profiles and Boulder's ten subcommunities, all supplied by hand and checksummed.
+- `data/raw/geo/bvsd/` — the district's attendance areas, capacities and school locations, read from its three ArcGIS web maps at their February 2026 vintage: the same vintage the proposal was drawn against.
+- `pipeline/oe_matrix.py` — the Enrollment Pattern Matrices. Their column headings are printed at ninety degrees and every extractor breaks them into individually reversed fragments, so "Boulder" comes back as "B o u d e r" with the l missing. This works from the characters and their positions instead.
+- `data/lookups/district-county.csv` — 169 districts to counties, which is what joins the archive to the State Demography Office.
+
+### What it found
+
+- Colorado opened 1,397 schools and closed 651 between 1987 and 2023. A school that closes is half the size of a typical school five years out and a third the size a year out; halving a school's enrollment roughly doubles the odds it is gone within two years.
+- Fitted across 178 districts with district fixed effects, a district that loses 10% of its school-age population ends up with **7.6% fewer teachers and 4.4% fewer schools**. Colorado districts have consistently chosen smaller schools over fewer schools.
+- BVSD's own two-classes-a-grade standard is about 300 pupils, which is also where Colorado's observed closure rate flattens.
+- The archive counts 14 BVSD elementary schools below that bar. So does BVSD, from different data.
+- Redrawing boundaries and closing nothing gets 9 schools over the bar against the proposal's 8, and moves 258 fewer children. Redrawing on its own is not among the six options the board was given.
+- A third of BVSD's pupils do not attend their neighbourhood school. The four closing elementary areas have materially fewer children in them — a median of 228 against 324 — but the five areas whose families leave most are all staying open, with 1,246 children living in them and enrolled elsewhere.
+
+### How it is checked
+
+- All 69 school rows in the three 2025-26 Enrollment Pattern Matrices rebuild to their printed totals exactly, from the areas they draw plus open enrollment in, placements and unmatched addresses.
+- The steady-state model is fitted statewide and applied to one district, so Boulder's own history is not what sets its own forecast.
+- The proposal's own figures — buildings closed, pupils moved, capacity — are parsed from the resolution and the work session and compared against the archive rather than restated.
+
+### Known
+
+- **Capacity is February 2026 and enrollment is not.** The layer's own enrollment gives 86% district utilisation, the work session says 68%, the archive's K–5 enrollment over the same capacity gives 62%. Capacity moves slowly, so it is taken from the layer and the enrollment on top of it is the archive's.
+- **Redrawing is modelled as proportional to capacity, not as real lines.** It establishes a ceiling, not a map.
+- **Open enrollment is measured but not modelled.** The levers move catchment lines; they do not move the choices families make inside them. Only 2025-26 is read, though `2026-09-bvsd/` holds every year back to 2016-17.
+- **The child-to-pupil ratio is flat district-wide.** PL 94-171 publishes under-18 by block and single years of age no finer than the tract.

@@ -22,13 +22,13 @@ Boulder Valley's Resilient Schools proposal treats four closures as a local prob
 | `district-year-overlap.csv` | 1,269 | 1977–1987 | district × year |
 | `school-teacher-fte.csv` | 38,777 | 2000–2024 | school × year |
 | `district-teacher-fte-ccd.csv` | 7,879 | **1987–2024** | district × year |
-| `district-teacher-fte-cde.csv` | 4,037 | 2000–2024 | district × year |
+| `district-teacher-fte-cde.csv` | 6,695 | **1986–2024** | district × year |
 
 All in `data/processed/`, long format, UTF-8. `DATA-DICTIONARY.md` documents every column; `audit/validation.md` is the report the pipeline writes about itself and is regenerated from the data rather than maintained by hand.
 
 ## How good is it
 
-Five checks. Four compare the archive against a source collected independently of the documents being read; the fifth is the archive reading the same printed figures twice.
+Six checks. Five compare the archive against a source collected independently of the documents being read; the sixth is the archive reading the same printed figures twice.
 
 **The scanned 1986–1999 yearbooks, against NCES.** Each volume's numbered grades summed and compared:
 
@@ -44,7 +44,9 @@ Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the 
 
 **Teacher FTE, against NCES**, year by year. Every one of the twenty-two CDE years lands between 0.7% and 4.4% below the NCES state total, and sixteen of them within 2%. The gap is in the same direction throughout, which is what a consistent difference in what counts as a teacher looks like rather than a parse that comes and goes.
 
-**And CDE against itself.** In 2010, 2023 and 2024 CDE publishes district totals as well as school rows, so the schools can be summed and compared with what CDE says the district holds: **551 district-years carry both, and 396 agree to the hundredth of an FTE — all 185 of them in 2023.**
+**The yearbooks' district staffing, against NCES.** The summary table in each volume prints classroom teacher FTE by district. Summed and compared with the NCES state total: **every year from 1987 to 1998 lands within 1.3%**, five of them within 0.2%, and 1991 agrees to a fifth of one FTE out of 33,093. 1986 is the one year with nothing to check it against, because NCES district staffing starts in 1987.
+
+**And CDE against itself.** In 2010, 2023 and 2024 CDE publishes district totals as well as school rows, so the schools can be summed and compared with what CDE says the district holds: **551 district-years carry both, and 396 agree to the hundredth of an FTE — all 185 of them in 2023.** The 2010 subtotals also sum to 48,449.1 against the NCES state total of 48,450.
 
 **The modern CDE spreadsheets, against NCES**, school by school. From 2005 to 2020 the two agree to within a few hundred pupils out of 850,000, several years exactly. From 2021 they diverge by 6,000 to 16,000, concentrated in multi-district online and charter schools that CDE reports centrally and NCES attributes differently — a real difference in attribution, not a parse fault.
 
@@ -57,7 +59,7 @@ Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the 
 | [CDE Artemis ED5/90.17](https://spl.cde.state.co.us/artemis/edserials/ed59017internet/) | School enrollment by grade | 2004–2018 | Spine |
 | [CDE pupil-membership archives](https://ed.cde.state.co.us/cdereval/pupilmembership-statistics/data-insights-resources-archives) | School enrollment by grade | 2019–2024 | Spine |
 | [CDE staff statistics](https://ed.cde.state.co.us/cdereval/staffstatistics) and [Artemis ED2.88](https://spl.cde.state.co.us/artemis/edserials/ed288internet/) | Teacher FTE by school | 2000–2024, twenty-two years | Spine |
-| [CDE Artemis ED2/79.19](https://spl.cde.state.co.us/artemis/edserials/ed27919internet/) | District enrollment by grade; district trends | 1986–1999, and 1977–1985 via the 1986 volume | District tier |
+| [CDE Artemis ED2/79.19](https://spl.cde.state.co.us/artemis/edserials/ed27919internet/) | District enrollment by grade; district staff and school counts; district trends | 1986–1999, and 1977–1985 via the 1986 volume | District tier |
 | [NCES CCD](https://nces.ed.gov/ccd/), via the [Urban Institute API](https://educationdata.urban.org/) | School enrollment by grade, teacher FTE, coordinates, charter flag, status | 1986–2024 | Secondary, harmonized and compared |
 
 CDE is the count of record wherever it publishes. NCES is carried alongside it in its own columns and compared, never silently substituted. The `source` column on every row says which contributed.
@@ -89,10 +91,14 @@ school-teacher-fte.csv           CDE's own staff reports, as published
   year, district_code, district_name, school_code, school_name, county_name,
   teacher_fte, enrollment_reported, pupil_teacher_ratio, source
 
-district-teacher-fte-cde.csv     two readings of the same district, side by side
-  year, district_code, district_name, county_name,
+district-teacher-fte-cde.csv     the district panel, 1986 onward
+  year, district_code, district_name, county_name, unit_type,
   teacher_fte_published, teacher_fte_school_sum, teacher_fte_difference,
-  schools, enrollment_published, enrollment_school_sum, source
+  staff_certificated_fte, staff_noncertificated_fte, pupil_teacher_ratio,
+  schools_published, schools_elementary, schools_middle, schools_senior,
+  schools_other, schools_in_sum,
+  enrollment_published, enrollment_school_sum,
+  graduation_rate, dropout_rate, source
 
 district-teacher-fte-ccd.csv     NCES, and the only staffing series before 2000
   year, leaid, district_code, district_name, teacher_fte,
@@ -115,17 +121,20 @@ Three conventions worth knowing before you join anything:
 | Teacher FTE by school, CDE | **2000–2024**, every year but 2017, 2020 and 2021 |
 | Teacher FTE by school, NCES | 1986–2024 |
 | **Teacher FTE by district, NCES** | **1987–2024**, with a level breakdown |
-| Teacher FTE by district, CDE | **2000–2024**, 181–186 districts a year |
+| Teacher FTE by district, CDE | **1986–2024**, except 1999, 181–196 districts a year |
+| Schools per district, CDE | **1986–1999**, by level |
 | District enrollment by grade | 1986–2024 |
 | District fall membership | **1977–2024**, except 2000–2003 |
 | Coordinates | 64,744 of 65,841 school-years |
+| Graduation and dropout rates by district | 1986–1999, from the same table, **unchecked** |
 
 Four things are missing or thin, and each is here for its own reason:
 
 - **2000–2003 has no district row, and 2001–2003 no CDE school data.** 2001 and 2002 publish school-by-grade as PDF only; 2003 uses an indented panel layout the parser does not read. NCES covers those years at school grain, so the school panel has no hole — it has one source instead of two.
 - **2017 teacher FTE does not exist.** CDE publishes the 2016 and 2017 pupil-teacher ratio reports at different URLs, but the files are byte-identical. The later duplicate is dropped rather than presented as a second year. 2020 and 2021 CDE published no ratio report at all.
 - **The 2000–2002 and 2004 membership PDFs still read as nothing**, and 2003's and 2012's ratio reports lose about 200 rows each to layouts the parser does not recover. The staff serial covers every one of those years, so no year is missing — but each is one file's reading rather than two.
-- **The yearbooks' Table 1** — school counts, staff, pupil/teacher ratio, dropout rate — is converted and sits in `data/interim/yearbooks/` but is not yet parsed into any table.
+- **1999 has school counts but no staff.** The 1999 volume prints Fall 1998 teachers beside Fall 1999 pupils, so its staffing belongs to 1998 and is filed there. No volume publishes 1999 staffing, and CDE's own staff serial starts in 2000, so the CDE teacher series has a one-year hole at 1999. NCES covers it.
+- **Fourteen per cent of the yearbook district-years carry no CDE district code.** Names are matched to codes and 2,275 of 2,659 match; the residue is 172 BOCES, which have no district code, and about 210 district-years whose names changed before 2000 — Northglenn-Thornton 12 is Adams 12 Five Star Schools now. Those rows keep their printed name and county and are usable; only the code is missing.
 
 ## Closures
 
@@ -148,17 +157,22 @@ Four things are missing or thin, and each is here for its own reason:
 ├── README.md               this file
 ├── TASK.md                 the task this folder carries out
 ├── DATA-DICTIONARY.md      every column, its units and its missingness
-├── decision-log.md         seventeen dated decisions and why
+├── decision-log.md         twenty-one dated decisions and why
 ├── ROADMAP.md              what is deferred, and to when
 ├── CHANGELOG.md            what changed, and what broke on the way
 ├── pipeline/
 │   ├── sources.py          discover what exists  -> data/lookups/inventory.csv
 │   ├── fetch.py            download what is needed, with a checksummed manifest
 │   ├── schema.py           canonical grades, code padding, missing-value rules
-│   ├── extract.py          one parser per source shape
+│   ├── extract.py          one parser per source shape, including the
+│   │                    yearbooks' district summary table
 │   ├── normalize.py        harmonize, join, build the registry, reconcile
 │   ├── teacher_fte.py      the staff reports, both grains -> three FTE tables
+│   ├── oe_matrix.py        BVSD's Enrollment Pattern Matrices, read from the
+│   │                    characters up: the headings are printed sideways
 │   └── audit.py            write audit/validation.md from the pipeline's output
+├── alternatives-retrieval.ipynb  fetch + tidy  -> data/analysis/
+├── alternatives-analysis.ipynb   read + argue  -> output/
 ├── datalab-ocr.py          re-OCR the scanned yearbooks through the Datalab API
 ├── proof-run.py            the original three-year probe, kept as the audit's evidence
 ├── audit/
@@ -174,9 +188,122 @@ Four things are missing or thin, and each is here for its own reason:
     ├── raw/ccd/            NCES API responses (not committed; re-downloadable)
     ├── raw/yearbooks/      scanned volumes (not committed; 110 MB each)
     ├── interim/yearbooks/  the OCR markdown, one file per converted page
-    ├── lookups/            inventory, coverage map, district crosswalk
+    ├── raw/geo/            census TIGER and PL 94-171, with manifest.json
+    ├── raw/proposal/       resolution 26-27, the work session deck, the
+    │                       2025-26 school profiles, and Boulder's
+    │                       subcommunity boundaries, with checksums
+    ├── raw/geo/bvsd/       the district's attendance areas, capacities and
+    │                       school locations, from its ArcGIS services
+    ├── lookups/            inventory, coverage map, district and county crosswalks
+    ├── analysis/           the working set the notebooks build on
     └── processed/          the archive
 ```
+
+## The analysis
+
+Two notebooks, following the split every other folder in this repository uses.
+`alternatives-retrieval.ipynb` may fetch, reshape, join and check; it may not
+compute a measure the analysis reports. `alternatives-analysis.ipynb` reads
+`data/analysis/`, makes no network call, and does everything else.
+
+They ask three questions about Boulder Valley's Resilient Schools proposal,
+and ignore its finances entirely — the question here is whether there are
+enough children.
+
+**1. Has this happened before?** Colorado opened 1,397 schools and closed 651
+between 1987 and 2023; closure is a rate, not an event. A school that closes
+is already half the size of a typical school five years out, and a third the
+size a year out. Halving a school's enrollment roughly doubles the odds it is
+gone within two years, while its recent trend adds nothing once size is known.
+**Boulder Valley has done this before**: it ran 60 schools in 2000 and 53 by
+2004.
+
+**2. How many schools does the demography support?** Fitted across 178
+Colorado districts over 35 years rather than Boulder's own history, with
+district fixed effects. A district that loses 10% of its school-age population
+ends up with **7.6% fewer teachers and 4.4% fewer schools** — Colorado
+districts have consistently chosen smaller schools over fewer schools. Boulder
+County's 5-to-17 population falls to about 2030 and is then flat for thirty
+years, which puts Boulder Valley near 53 schools in 2060 against 56 today.
+**The decline is front-loaded, not continuing.**
+
+**3. What are the options?** Five levers, each judged on what it is trying to
+do rather than against one scorecard: close, reconfigure grades, redraw
+boundaries, shrink in place, do nothing. Two viability bars are carried
+throughout, and **they land in the same place** — BVSD's two-classes-a-grade
+standard is about 300 pupils, which is also where Colorado's observed closure
+rate flattens. The district's standard is not unusual.
+
+Built on the district's own attendance areas and capacities, taken from the
+three BVSD ArcGIS web maps (last edited 20 February 2026 — the vintage the
+proposal was drawn against), and scored against the resolution and the
+15 September 2026 work session in `data/raw/proposal/`.
+
+**The archive counts 14 elementary schools below the bar. So does BVSD.** Two
+readings of the same district from different data, landing on the same number.
+
+| | buildings | below the bar | pupils moved |
+|---|---:|---:|---:|
+| Today | 26 | 14 | — |
+| The proposal | 22 | 8 | 952 |
+| Redraw to capacity, close nothing | 26 | 9 | 694 |
+
+Those two rows are the same answer by different means. The proposal gets one
+more school over the bar; redrawing moves 258 fewer children and closes
+nothing.
+
+Neither reaches the standard, because **nothing does**. Closing until every
+school clears 300 pupils takes twelve closures and leaves the district at
+**104% of its own capacity** with eight schools overfull. The bar cannot be
+met by closing.
+
+Redrawing attendance boundaries on its own is not among the six options the
+board was given (work session, slide 7). It appears six times in the
+resolution, always as a consequence of a closure, never as an alternative to
+one.
+
+Eleven per cent of the district's children live in an area that loses its
+school — concentrated outside the City of Boulder and on University Hill.
+
+**4. Why is a school small?** Every catchment model above assumes a child
+attends the school whose area they live in. A third of Boulder Valley's pupils
+do not, and the district publishes exactly who: an Enrollment Pattern Matrix
+per level, every attendance area against every school. All 69 school rows in
+the three 2025-26 matrices rebuild to their printed totals exactly, so this is
+the district's own arithmetic rather than an inference from it.
+
+It draws a distinction the proposal does not. **A school can be small because
+few children live in its area, or because the children who live there go
+elsewhere.** Only the first is demographic, and only the first is fixed by
+closing a building. The four closing elementary areas are on the demographic
+side — a median of 228 children against 324 for those staying open — and that
+case holds. But **the five areas whose families leave most are all staying
+open**, and 1,246 children live in them and attend school somewhere else.
+Sanchez has 642 children in its area, 276 in its school and 378 going
+elsewhere: the largest single pool of pupils the district is not capturing, in
+a school below the bar that is not on the list. Across every elementary area,
+2,915 children open-enrol out against 7,223 places filled.
+
+### What the analysis is missing
+
+**Capacity is February 2026; enrollment is not.** The attendance-area layer's
+own enrollment field gives a district utilisation of 86%, the work session
+says 68%, and the archive's K–5 enrollment over that capacity gives 62%. The
+three disagree school by school. Capacity is a building's size and moves
+slowly, so it is the field taken from the layer; the enrollment on top of it
+is the archive's.
+
+**Redrawing is modelled as proportional to capacity, not as real lines.** What
+it establishes is a ceiling — what the existing buildings could hold — not a
+map. An actual redraw is constrained by geography this model does not see.
+
+**Open enrollment is measured, not modelled.** Section 4 reads where pupils
+actually go, but the five levers in section 3 are still resident-based: they
+move catchment lines, not the choices families make inside them. The matrices
+are one year, 2025-26, and every year back to 2016-17 sits in `2026-09-bvsd/`,
+so the trend is available and unused. **Focus schools have no catchment** and
+the proposal moves three of them. `data/analysis/known-gaps.csv` carries the
+rest.
 
 ## Reproduce
 
@@ -190,6 +317,23 @@ python3 -m pipeline.teacher_fte  # staffing     -> the three FTE tables
 python3 -m pipeline.normalize    # harmonize    -> data/processed/
 python3 -m pipeline.audit        # check it     -> audit/validation.md
 ```
+
+The analysis runs on top of it, and needs `geopandas`, `matplotlib` and
+`statsmodels` as well:
+
+```
+pip install geopandas matplotlib statsmodels
+jupyter execute alternatives-retrieval.ipynb   # -> data/analysis/
+jupyter execute alternatives-analysis.ipynb    # -> output/
+```
+
+The retrieval notebook reads two files from the folder next door rather than
+copying them: the State Demography Office's single-year-of-age county file in
+`2026-09-bvsd/data/raw/sdo/`, and the 2025-26 Enrollment Pattern Matrices in
+`2026-09-bvsd/data/raw/open-enrollment/`. Both are committed there with their
+URLs and checksums. It needs the whole repository, not this folder alone.
+
+The order of the last three matters. `teacher_fte` writes the district staffing table for 2000 onward; `normalize` extends it back to 1986 from the yearbooks, where the district name crosswalk lives. Running `normalize` alone leaves the yearbook era in place but stale; running `teacher_fte` alone truncates the table to 2000.
 
 The yearbook re-OCR needs a [Datalab](https://www.datalab.to/) key and costs about 0.75 cents a page — roughly $6 for all fourteen volumes:
 
@@ -220,9 +364,11 @@ Every bug that surfaced building this produced plausible output. A header read a
 
 **Row-total checksums caught none of the worst four.** An aggregate row sums correctly against itself, and a page never converted cannot fail a test it is never given. Only comparison against an independently collected source exposed them — which is why `district-reconciliation.csv` and `source-reconciliation.csv` are pipeline outputs rather than something done once by hand.
 
-**Twice, a bug was written down as a property of the source.** Eight years of teacher FTE were recorded here as unparseable, needing a paid OCR pass, on the strength of what the extractor returned. The text was in the files all along, behind a rotated page and an unhandled line operator. And a district table of seventeen rows — thirteen of them schools — was described as thin coverage, because seventeen rows over nine years looks like a source that publishes little rather than like a parser that dropped almost everything.
+**Three times, a bug was written down as a property of the source.** Eight years of teacher FTE were recorded here as unparseable, needing a paid OCR pass, on the strength of what the extractor returned. The text was in the files all along, behind a rotated page and an unhandled line operator. And a district table of seventeen rows — thirteen of them schools — was described as thin coverage, because seventeen rows over nine years looks like a source that publishes little rather than like a parser that dropped almost everything.
 
-Both were found by asking whether a number was the size it ought to be, which is a question a checksum cannot ask. **A stated limitation deserves the same scepticism as a stated figure.**
+And the yearbooks' staff table was recorded as unparsed for want of a parser, which was true — but writing one turned up the same page-selection fault the OCR step had already been fixed for, one layer further down: two pages whose running head the OCR could not read were skipped, costing two volumes thirty districts each, and a volume that renames the table was lost whole.
+
+All three were found by asking whether a number was the size it ought to be, which is a question a checksum cannot ask. **A stated limitation deserves the same scepticism as a stated figure.**
 
 ## Column
 

@@ -131,25 +131,44 @@ Statewide it runs 30,887 FTE in 1987 to 53,388 in 2024.
 
 ## `district-teacher-fte-cde.csv`
 
-Teacher FTE by district on the CDE side. **4,037 rows, 2000–2024**, 181 to 186 districts a year.
+The district panel on the CDE side: staffing, school counts and the figures that check them. **6,695 rows, 1986–2024**, 181 to 196 districts a year.
 
-CDE publishes a district total in only three of those years, so the table carries two figures in their own columns and never substitutes one for the other — the rule the school panel follows with CDE and NCES.
+Two eras meet in this table, and the `source` column says which a row came from.
+
+**1986–1999** comes from the yearbooks' summary table — printed as Table 1 in some volumes and Table 2 in others, under a heading that does not change. It is the only CDE source for district staffing before 2000, and it carries the school counts and the rates that no other table in this archive has.
+
+**2000–2024** comes from the modern staff reports. CDE publishes a district total in three of those years only — 2010, where the ratio report prints a `<district> TOTALS*` row after each district's schools, and 2023 and 2024, where there is a by-district spreadsheet. Everywhere else the district total is the sum of its schools.
 
 | Column | Type | Notes |
 |---|---|---|
-| `year` | integer | |
-| `district_code` | string | Zero-padded CDE code |
+| `year` | integer | Fall of the school year |
+| `district_code` | string | Zero-padded CDE code. **Empty for 384 of the 2,659 yearbook district-years**: 172 are BOCES, which have no district code, and the rest are districts that renamed before 2000 |
 | `district_name`, `county_name` | string | As printed that year |
-| `teacher_fte_published` | decimal | What CDE states the district holds. Present in **2010** (the ratio report's `<district> TOTALS*` rows), **2023** and **2024** (the by-district spreadsheets); empty in every other year |
-| `teacher_fte_school_sum` | decimal | The district's schools in `school-teacher-fte.csv`, added up |
-| `teacher_fte_difference` | decimal | `published` minus `school_sum`, where both exist. **This is a comparison, not a correction** |
-| `schools` | integer | How many schools the sum covers |
+| `unit_type` | string | `district` or `boces` |
+| `teacher_fte_published` | decimal | What CDE states the district holds. Classroom teacher FTE in the yearbook era; 2010, 2023 and 2024 after it |
+| `teacher_fte_school_sum` | decimal | The district's schools in `school-teacher-fte.csv`, added up. 2000–2024 only |
+| `teacher_fte_difference` | decimal | `published` minus `school_sum`, where both exist. **A comparison, not a correction** |
+| `staff_certificated_fte`, `staff_noncertificated_fte` | decimal | All certificated and non-certificated staff, not only teachers. Yearbook era only, and 1998–1999 do not print them |
+| `pupil_teacher_ratio` | decimal | As published, not recomputed |
+| `schools_published` | integer | How many schools CDE says the district ran. Yearbook era only |
+| `schools_elementary`, `schools_middle`, `schools_senior`, `schools_other` | integer | The split behind that total. They sum to it — that is one of the row's two checks |
+| `schools_in_sum` | integer | How many schools the FTE sum covers, 2000–2024 |
 | `enrollment_published`, `enrollment_school_sum` | integer | The same pair for enrollment |
-| `source` | string | Which of the two contributed, by file |
+| `graduation_rate`, `dropout_rate` | decimal | Per cent, as printed. **Yearbook era only, and unchecked** — no second source carries them, so unlike every other column here they rest on the OCR alone |
 
-**551 district-years carry both figures and 396 agree to the hundredth of an FTE** — all 185 districts in 2023, 115 of 181 in 2010, 96 of 185 in 2024. Where they differ, the published total is usually the larger: a district's own online and charter schools are reported centrally in some years and to the school in others.
+### The two checks the yearbook rows carry
 
-A district's teachers can therefore be counted two ways, and the table says which is which. Prefer `teacher_fte_published` where it exists and you want CDE's own statement; prefer `teacher_fte_school_sum` where you want a figure built the same way in every year.
+Each row states enough to test itself twice: the four school counts must add to the printed total, and students divided by classroom teachers must be the printed ratio. Both are recorded per volume in `audit/normalize-report.json`.
+
+They also repair. A row that drops one cell pulls everything after it one place left, and the result is not obviously wrong — Denver's 1994 row lost its school total and came back with **62,773 teachers and 17 pupils**; Colorado Springs lost its non-certificated staff in 1996 and came back with 33,175 teachers. Both are among the state's largest districts. Every possible loss point is tried and one is accepted only where the row then satisfies both checks; two rows in fourteen volumes needed it.
+
+### 1999 staffing does not exist
+
+The 1999 volume prints **Fall 1999 membership beside Fall 1998 teachers**, under two different "FALL" headings in the same row. Its staffing is therefore filed under 1998, which is where it belongs, and confirmed there: 38,838 FTE against the NCES 1998 total of 39,360. The 1998 volume prints no staff column at all. So the CDE teacher series has one missing year, 1999, between the yearbook era and the staff serial that starts in 2000. NCES covers it.
+
+### How well it reconciles
+
+Summed and compared against the NCES state total, **every year from 1987 to 1998 lands within 1.3%**, five within 0.2%, and 1991 agrees to a fifth of one FTE out of 33,093. 1986 has nothing to check it against: NCES district staffing starts in 1987. On the modern side, the 2010 subtotals sum to 48,449.1 against 48,450.
 
 ## `source-reconciliation.csv`
 

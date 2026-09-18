@@ -1,0 +1,19 @@
+region,school_name,action,detail,school_code
+Broomfield,Birch Elementary School,close,merge into Kohl; ICAN program relocates to Kohl,0872
+Broomfield,Kohl Elementary School,receive,one attendance area with Birch,4792
+Louisville and Superior,Monarch K-8 School,reconfigure,elementary programme closes; becomes a 6-8 middle school,6000
+Louisville and Superior,Eldorado K-8 School,reconfigure,middle programme closes; becomes a PK-5 elementary school,2589
+Louisville and Superior,Fireside Elementary School,receive,takes part of Monarch K-5's attendance area,2940
+Louisville and Superior,Superior Elementary School,receive,takes part of Monarch K-5's attendance area,8418
+Boulder,Douglass Elementary School,close,closes as a neighbourhood school; High Peaks moves into the building,2240
+Boulder,High Peaks Elementary School,relocate,moves into the Douglass building,3940
+Boulder,Community Montessori School,close,building closes; programme co-locates with BCSIS in the Aurora 7 building,1883
+Boulder,Boulder Community School/Integrated Studies,receive,Community Montessori co-locates,0919
+Boulder,Coal Creek Elementary School,receive,takes part of Douglass's area,1725
+Boulder,Eisenhower Elementary School,receive,takes part of Douglass's area,2552
+Boulder,Heatherwood Elementary School,receive,takes part of Douglass's area; receives the ICAN programme,3882
+Boulder,Mesa Elementary School,close,merges into Bear Creek; RISE programme relocates to Bear Creek,5838
+Boulder,Bear Creek Elementary School,receive,one attendance area with Mesa,0652
+Boulder,Flatirons Elementary School,close,attendance area splits at Boulder Canyon Drive between Foothill and Whittier,2970
+Boulder,Foothill Elementary School,receive,takes north of Boulder Canyon Dr,3022
+Boulder,Whittier Elementary School,receive,takes south of Boulder Canyon Dr; receives RISE; bell schedule adjusted,9544

@@ -95,16 +95,22 @@ def fetch_all() -> list[dict]:
         name = f"{row['series']}-{row['year']}-{row['filename']}"
         name = re.sub(r"[^A-Za-z0-9._-]", "_", name)
         dest = RAW / name
+        already = dest.exists() and dest.stat().st_size > 0
         try:
             data = fetch(row["url"], dest)
         except Exception as exc:  # noqa: BLE001
             print(f"  FAILED {name}: {exc}")
             continue
+        # A file already on disk was not fetched again, so it keeps the date it
+        # was actually retrieved. Stamping today's date on every rerun would
+        # make the manifest claim a retrieval that never happened, and quietly
+        # destroy the one thing it exists to record.
+        retrieved = (manifest.get(name, {}).get("fetched_at") if already else None)
         manifest[name] = {
             "url": row["url"], "label": row["label"], "series": row["series"],
             "year": int(row["year"]), "format": row["fmt"],
             "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(),
-            "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "fetched_at": retrieved or datetime.now(timezone.utc).isoformat(timespec="seconds"),
         }
         landed.append({**row, "path": dest, "sha256": manifest[name]["sha256"]})
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
@@ -467,6 +473,13 @@ DISTRICT_SUBTOTAL = re.compile(r"^(?P<name>.+?)\s+TOTALS?\s*\*?$", re.I)
 NOT_A_DISTRICT = re.compile(r"^(STATE|COUNTY|GRAND|SCHOOL|DISTRICT|ALL)$", re.I)
 
 
+NAME_NOISE = re.compile(r"[^A-Z0-9]+")
+
+
+def name_key(text: str) -> str:
+    return NAME_NOISE.sub(" ", (text or "").upper()).strip()
+
+
 def _as_number(text: str) -> float | None:
     """A printed figure, or None if this is not one.
 
@@ -641,12 +654,22 @@ def parse_row(fields: list[str]) -> dict | None:
     else:
         district_name = subtotal.group("name") if subtotal else names[-1]
         school_name = ""
+    # A county is never the district repeated. The 2010 report writes its
+    # subtotal rows as "0010 | MAPLETON 1 | MAPLETON 1 TOTALS*", which put the
+    # district's own name in the county column for all 181 of them - a value
+    # that looks like data, joins to nothing, and would have quietly dropped
+    # every 2010 district out of any analysis keyed on county.
+    county_name = names[0] if len(names) > (2 if grain == "school" else 1) else ""
+    if (name_key(county_name) == name_key(district_name)
+            or re.search(r"\d", county_name)
+            or name_key(county_name) in ("NONE", "N A")):
+        county_name = ""
     return {
         "grain": grain,
         "county_code": county_code,
         "district_code": normalize_code(codes[0]) if codes else "",
         "school_code": normalize_code(codes[1]) if len(codes) >= 2 else "",
-        "county_name": names[0] if len(names) > (2 if grain == "school" else 1) else "",
+        "county_name": county_name,
         "district_name": district_name,
         "school_name": school_name,
         "enrollment_reported": enrollment,
@@ -827,13 +850,6 @@ def ccd_district_fte(year: int, cache: Path) -> list[dict]:
     return out
 
 
-NAME_NOISE = re.compile(r"[^A-Z0-9]+")
-
-
-def name_key(text: str) -> str:
-    return NAME_NOISE.sub(" ", (text or "").upper()).strip()
-
-
 def keep_district_rows(records: list[dict]) -> tuple[list[dict], int]:
     """Drop rows that look like districts only because a code went missing.
 
@@ -971,8 +987,27 @@ def main() -> None:
     if filled:
         print(f"  {filled:,} schools taken from a year's second published file")
 
+    # A district-grain publication covers the state, not one district. Where a
+    # year leaves only a handful of district rows standing, they are not a
+    # district table - they are school rows that lost a code and happened to
+    # match a real district's name. 2006 kept exactly one, carrying 9 FTE, and
+    # 2022 one carrying 13.4; both would have read as a district's whole
+    # teaching staff.
+    by_year: dict[int, list[dict]] = defaultdict(list)
     for record in parsed:
         if record["grain"] == "district":
+            by_year[record["year"]].append(record)
+    districts_in_year = {year: len({r["district_code"] for r in rows
+                                    if r["grain"] == "school" and r["district_code"]})
+                         for year, rows in
+                         [(y, [r for r in parsed if r["year"] == y]) for y in by_year]}
+    for year, rows in sorted(by_year.items()):
+        expected = districts_in_year.get(year) or 0
+        if expected and len(rows) < expected / 2:
+            print(f"  {year}: {len(rows)} district rows against {expected} districts "
+                  f"- not a district table, dropped")
+            continue
+        for record in rows:
             key = (record["year"], record["district_code"])
             if key not in district_records or record["enrollment_reported"]:
                 district_records[key] = record

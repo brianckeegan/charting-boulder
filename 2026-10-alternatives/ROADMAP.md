@@ -6,29 +6,29 @@ What is deliberately not being built now, why, and what would bring it forward. 
 
 | Item | Why deferred | What brings it forward | Blocking? |
 |---|---|---|---|
-| **The steady-state model** — school size and distribution for every Colorado district against SDO county forecasts to 2050 and 2060 | This task ends at a cleaned archive. Fitting a model while the cleaning rules are still moving tends to bend the rules toward the model | The archive passing its acceptance tests in `TASK.md` | No |
+| ~~**The steady-state model**~~ | **Done.** `alternatives-analysis.ipynb` fits staffing and school counts on county 5-17 population across 178 districts and carries Boulder Valley to 2060. What remains deferred is the *statewide* version — every district's steady state, not just one | A question that needs the whole state rather than Boulder | No |
 | **Current use of closed buildings** | Exists in no education dataset. Needs county assessor records, district property lists and local news, with a hand check and a citation per row | A decision that the column needs it, and a bounded geography — Boulder County alone is perhaps forty buildings, statewide is thousands | No |
 | **Hand-verified closures** | Larger than the rest of the task combined. See `decision-log.md`, D6 | A finding that rests on a specific building, rather than on the shape of the distribution | No |
 | **Attendance-area boundaries** | Would let enrollment be tied to where pupils live rather than where they are taught. CDE does not publish historical boundaries; districts publish them inconsistently | The column needing a residence-side question | No |
 | **L2: pipeline-as-code, pinned environment, CI** | The cleaning rules are not settled. A Snakefile written now would be rewritten during Phase C | Phase C finishing. At that point the retrieval and cleaning should become the repository's usual notebook pair | No |
-| **Notebook pair** (`alternatives-retrieval.ipynb` and `alternatives-analysis.ipynb`) | Every other folder in this repository splits fetch-and-tidy from read-and-argue. This one has no argument yet | A column question firm enough to write an analysis notebook against | No |
+| ~~**Notebook pair**~~ | **Done.** `alternatives-retrieval.ipynb` and `alternatives-analysis.ipynb`, following the repository's split | — | No |
 | **Non-public and home-based education** | CDE publishes both, and both bear on where pupils went when a school closed | The closure analysis showing an unexplained outflow | No |
 | **Deposit for a DOI** | Premature for an archive that does not exist | The archive being finished and cited by the column | No |
 
 ## Tracking — the current task
 
-From `TASK.md`. These are the assignable pieces of the work this folder proposes.
+From `TASK.md`. These are the assignable pieces of the work this folder proposes. Ticked once the built thing exists and has been checked, not once it was attempted.
 
-- [ ] **A** — audit all 26 Artemis year indexes, both CDE archive pages, the staff series and CCD; produce `audit/inventory.csv` and `audit/coverage.md`
-- [ ] **A2** — open every staff ratio report and record whether it is school grain or district grain; the titles are not reliable
-- [ ] **R** — retrieval with URL discovery, checksummed manifest, and backoff on the Artemis host
+- [x] **A** — audit the Artemis year indexes, both CDE archive pages, the staff series and CCD; 1,511 published files in `data/lookups/inventory.csv`
+- [x] **A2** — open every staff ratio report and record whether it is school grain or district grain; the titles were not reliable, and reading the files instead took the CDE teacher series from three years to twenty-two
+- [x] **R** — retrieval with URL discovery, a checksummed manifest and backoff
 - [x] **O (1986)** — re-OCR the 1986 yearbook; 48 pages, 35.25 cents, row totals verified
-- [ ] **O (1987–1999)** — running; `audit/ocr-run.log` has the transcript
-- [ ] **C** — the eleven cleaning rules in `TASK.md`, each traceable to an audit finding
-- [ ] **C9** — extract the 2000–2002 born-digital PDFs by character position; this is the hardest single piece
-- [ ] **S** — school registry and auto-labelled closures
-- [ ] **V** — reconciliation, reproducing the 2013 benchmark, and `audit/validation.md`
-- [ ] **DATA-DICTIONARY** — replace the planned schema with the built one
+- [x] **O (1987–1999)** — all fourteen volumes converted; `audit/ocr-run.log` has the transcript
+- [x] **C** — the cleaning rules, each traceable to an audit finding
+- [x] **C9** — extract the born-digital PDFs by character position. Done for the staff serial, 2000–2019. The membership serial's 2000–2002 and 2004 ratio PDFs still extract no text
+- [x] **S** — school registry and auto-labelled closures
+- [x] **V** — reconciliation and `audit/validation.md`, regenerated from the data
+- [x] **DATA-DICTIONARY** — the built schema, not the planned one
 
 ## Open questions
 
@@ -43,6 +43,20 @@ From `TASK.md`. These are the assignable pieces of the work this folder proposes
 - [x] **District-grain teacher FTE from CDE** — done. `district-teacher-fte-cde.csv` is 4,037 rows over 2000–2024, carrying CDE's own district total where it publishes one and the sum of the district's schools everywhere.
 - [ ] **The average-salary reports** — CDE publishes an average teacher salary by district every year from 2000, and the 2016–2019 editions carry a district Total FTE beside it, which would be a third reading of district staffing. They are not parsed: the rows split across two lines with the figures drawn before the district they belong to, and unlike the ratio reports there is no third printed number to check a pairing against. The 2022 and 2024 spreadsheets are the easy ones — a two-row header over `All Schools: Total FTE` and `Average Salary`.
 - [ ] **The membership-serial ratio PDFs for 2000–2002 and 2004** — still extract no text at all, and 2003's and 2012's staff reports lose about 200 rows each. Every one of those years is covered by the other serial, so this buys a second reading rather than a year.
-- [ ] **The yearbooks' Table 1** — school counts, staff, pupil/teacher ratio and dropout rate by district. Already converted and sitting in `data/interim/yearbooks/`; nothing parses it yet. It would add a district-level staff series for 1986–1999, where the archive currently has none.
-- [ ] **1988** — the one yearbook volume that does not reconcile against NCES, at −0.70%, with three genuine row-total failures. Every other volume is within 0.16%.
+- [x] **The yearbooks' summary table** — done. Printed as Table 1 in some volumes and Table 2 in others, which is why the roadmap had the number wrong. It gives district staffing and school counts for 1986–1999 and takes `district-teacher-fte-cde.csv` from 4,037 rows to 6,695, spanning 1986–2024. Every year from 1987 to 1998 reconciles to NCES within 1.3%.
+- [ ] **1988** — the one yearbook volume whose *enrollment* does not reconcile against NCES, at −0.70%, with three genuine row-total failures. Every other volume is within 0.16%. Its staffing, read from a different table in the same volume, reconciles at +0.7%, so whatever is wrong is in the by-grade table rather than the scan.
+- [ ] **Graduation and dropout rates, 1986–1999** — parsed and carried in `district-teacher-fte-cde.csv`, but **unchecked**: no second source in this archive holds them. CDE publishes dropout and graduation series separately, which would give them the same treatment every other column here gets.
+- [ ] **The 384 unmatched yearbook district-years** — no CDE district code, because 172 are BOCES and the rest renamed before 2000 (Northglenn-Thornton 12 is Adams 12 Five Star Schools now). A hand-built rename crosswalk would close most of it; the names and counties are already carried, so nothing is lost meanwhile.
 - [ ] **2001–2003 on the CDE side** — 2001 and 2002 are PDF-only, 2003 uses an indented panel layout. NCES covers those years, so this buys a second source rather than filling a hole.
+
+## Added after the analysis — 2026-09-18
+
+- [x] **The Resilient Schools proposal** — supplied by hand and committed to `data/raw/proposal/`: resolution 26-27, the 15 September 2026 work session deck, and the district's own metrics.
+- [x] **BVSD capacity by school** — done, from the district's own ArcGIS attendance-area layer rather than the deck, which charts capacity for two schools and tables it for none. The layer carries it for all 31 buildings, at its February 2026 vintage, and the levers are scored against it.
+- [x] **City of Boulder neighbourhood boundaries** — supplied by hand as the ten city subcommunities. 16,195 of the district's 41,063 children live inside them; the rest are in Louisville, Lafayette, Superior, Broomfield and the mountains, where the places layer carries the geography.
+- [x] **A catchment model that matches both its checks** — closed by dropping the model. Straight-line nearest-school got Mesa within 6% of the district's resident count and Bear Creek at 45%; the district's real attendance-area polygons replaced it, so there is nothing left to check. What remains is the child-to-pupil ratio, still flat district-wide because PL 94-171 gives under-18 by block and no finer.
+- [ ] **Resident children by single year of age, by block** — the census publishes under-18 at block level and single years only at tract level and above. Apportioning the tract age profile onto blocks would give a 5-to-17 count per attendance area instead of a district-wide ratio applied to under-18s.
+- [x] **Open enrollment in the catchments** — done. `pipeline/oe_matrix.py` reads the three 2025-26 Enrollment Pattern Matrices from `2026-09-bvsd/data/raw/open-enrollment/`, where they were already committed, and all 69 school rows rebuild to their printed totals exactly. Section 4 of the analysis separates a school that is small because its area emptied from one that is small because its families left.
+- [ ] **Open enrollment as a trend** — only 2025-26 is read. The same folder holds every year back to 2016-17, which would say whether the areas losing their families have been losing them for a decade or since the proposal.
+- [ ] **A statewide steady state** — the model is fitted on 178 districts but applied to one. Running it for every district would say which Colorado districts are furthest from the distribution their demography supports, and whether Boulder is unusual.
+- [ ] **Closure impacts** — the archive can support an event study on what happened to enrollment and staffing in districts after a closure round. It is not in the notebook yet; section 1 establishes the predictors, not the consequences.

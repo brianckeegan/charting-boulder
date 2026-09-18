@@ -25,7 +25,7 @@ from __future__ import annotations
 import csv
 import json
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 from .extract import (
@@ -33,6 +33,7 @@ from .extract import (
     parse_cde_school_sheet,
     parse_cde_teacher_sheet,
     parse_yearbook_district_grade,
+    parse_yearbook_district_summary,
     parse_yearbook_trends,
 )
 from .schema import normalize_code
@@ -238,24 +239,31 @@ def load_ccd() -> tuple[list[dict], list[dict], dict]:
     return enrollment, school_years, meta
 
 
-def load_yearbooks() -> tuple[list[dict], list[dict], dict]:
-    grade_records, trend_records, meta = [], [], {}
+def load_yearbooks() -> tuple[list[dict], list[dict], list[dict], dict]:
+    grade_records, trend_records, summary_records, meta = [], [], [], {}
     for volume in sorted(YEARBOOKS.iterdir()):
         if not volume.is_dir() or not volume.name.isdigit():
             continue
         year = int(volume.name)
         grades, ginfo = parse_yearbook_district_grade(volume, year)
         trends, tinfo = parse_yearbook_trends(volume, year)
+        summary, sinfo = parse_yearbook_district_summary(volume, year)
         grade_records.extend(grades)
         trend_records.extend(trends)
-        meta[year] = {"district_by_grade": ginfo, "trends": tinfo}
+        summary_records.extend(summary)
+        meta[year] = {"district_by_grade": ginfo, "trends": tinfo, "summary": sinfo}
         if "error" in ginfo:
             print(f"  yearbook {year}: {ginfo['error']}")
         else:
+            staff = ("" if sinfo.get("error") else
+                     f"; summary {sinfo['districts']} districts, "
+                     f"{sinfo['total_teacher_fte']:,.0f} FTE"
+                     + (f" (staff {sinfo['staff_year']})"
+                        if sinfo.get("staff_year") != year else ""))
             print(f"  yearbook {year}: {ginfo['districts']} districts, "
                   f"totals {ginfo['row_total_pass']}/{ginfo['row_total_pass'] + ginfo['row_total_fail']}; "
-                  f"trends {tinfo.get('districts', 0)} districts")
-    return grade_records, trend_records, meta
+                  f"trends {tinfo.get('districts', 0)} districts{staff}")
+    return grade_records, trend_records, summary_records, meta
 
 
 # --------------------------------------------------------------------------
@@ -272,7 +280,7 @@ def main() -> None:
     print("Reading NCES CCD")
     ccd_enrollment, ccd_schools, ccd_meta = load_ccd()
     print("Reading re-OCR'd yearbooks")
-    yb_grades, yb_trends, yb_meta = load_yearbooks()
+    yb_grades, yb_trends, yb_summary, yb_meta = load_yearbooks()
 
     # ---- school identity -------------------------------------------------
     # CCD carries the NCES id and the CDE school code together, so it is the
@@ -614,6 +622,143 @@ def main() -> None:
         write_csv(PROCESSED / "district-year-overlap.csv",
                   sorted(overlap_rows, key=lambda r: (-r["spread"], r["year"])),
                   list(overlap_rows[0].keys()))
+
+    # ---- district to county -----------------------------------------------
+    #
+    # Every analysis that joins a district to a population has to get from a
+    # district code to a county, and no single source states it in every year:
+    # the yearbooks print a county heading over each block of districts, CDE's
+    # school files carry a county column in some years and not others, and the
+    # by-district spreadsheets carry none at all. The statements are gathered
+    # from wherever they appear and written out once, so the join is made in
+    # one place and can be checked.
+    #
+    # A district can genuinely sit in more than one county. The crosswalk keeps
+    # the county stated most often and records the rest rather than choosing
+    # silently.
+    county_claims: dict[str, Counter] = defaultdict(Counter)
+    for row in cde_school + yb_summary:
+        code = row.get("district_code") or ""
+        county = (row.get("county_name") or "").strip()
+        if code and county and not county.upper().startswith("COLORADO BOC"):
+            county_claims[code][county.upper()] += 1
+    for row in yb_summary:
+        # The yearbook rows carry a county but no code; match by name.
+        if row.get("county_name") and not row.get("county_name", "").upper().startswith("COLORADO BOC"):
+            hit = (crosswalk.get(district_key(row["district_name"], row["county_name"]))
+                   or crosswalk.get(district_key(row["district_name"])))
+            if hit:
+                county_claims[hit["district_code"]][row["county_name"].strip().upper()] += 1
+
+    district_county = {}
+    for code, claims in county_claims.items():
+        (best, count), = claims.most_common(1)
+        district_county[code] = {
+            "district_code": code,
+            "county_name": best.title(),
+            "statements": sum(claims.values()),
+            "agreement": round(count / sum(claims.values()), 4),
+            "also_stated": ";".join(sorted(n.title() for n in claims if n != best)),
+        }
+    write_csv(LOOKUPS / "district-county.csv", sorted(district_county.values(),
+              key=lambda r: r["district_code"]),
+              ["district_code", "county_name", "statements", "agreement", "also_stated"])
+    split = sum(1 for r in district_county.values() if r["also_stated"])
+    print(f"\nDistrict to county")
+    print(f"  {len(district_county):,} districts placed in a county; "
+          f"{split} are stated in more than one")
+
+    # ---- the yearbook era of the district staffing table ------------------
+    #
+    # district-teacher-fte-cde.csv is written by pipeline.teacher_fte and
+    # covers 2000 onward. The yearbooks carry the same measures for the
+    # fourteen years before that, in a table CDE printed as Table 1 in some
+    # volumes and Table 2 in others, so they are merged in here - where the
+    # district name crosswalk already exists - rather than in a module that
+    # knows nothing about yearbooks.
+    #
+    # One parsed row can land in two different years. The 1999 volume prints
+    # Fall 1999 membership beside Fall 1998 teachers, so its school counts
+    # belong to 1999 and its staff to 1998; the 1998 volume prints no staff
+    # column at all. Each row is therefore split into what it says about its
+    # own year and what it says about the staff year, and the two are merged
+    # by district.
+    index_district_names(yb_trends + yb_grades + yb_summary + cde_school)
+    staffing: dict[tuple, dict] = {}
+
+    def staffing_row(year: int, row: dict) -> dict:
+        hit = (crosswalk.get(district_key(row["district_name"], row["county_name"]))
+               or crosswalk.get(district_key(row["district_name"])))
+        code = hit["district_code"] if hit else ""
+        key = (year, code or f"name:{district_key(row['district_name'])}")
+        return staffing.setdefault(key, {
+            "year": year,
+            "district_code": code,
+            "district_name": row["district_name"],
+            "county_name": row["county_name"],
+            "unit_type": unit_type(row["district_name"]),
+            "source": row["source"],
+        })
+
+    for row in yb_summary:
+        own = staffing_row(row["year"], row)
+        for key in ("schools_elementary", "schools_middle", "schools_senior",
+                    "schools_other", "graduation_rate", "dropout_rate"):
+            if row.get(key) is not None:
+                own[key] = row[key]
+        if row.get("schools_total") is not None:
+            own["schools_published"] = row["schools_total"]
+        if row.get("enrollment") is not None:
+            own["enrollment_published"] = row["enrollment"]
+
+        staff = staffing_row(row["staff_year"], row) if row["staff_year"] != row["year"] else own
+        if row.get("teacher_fte") is not None:
+            staff["teacher_fte_published"] = row["teacher_fte"]
+        for key in ("staff_certificated_fte", "staff_noncertificated_fte",
+                    "pupil_teacher_ratio"):
+            value = row.get({"staff_certificated_fte": "staff_certificated_fte",
+                             "staff_noncertificated_fte": "staff_noncertificated_fte",
+                             "pupil_teacher_ratio": "pupil_teacher_ratio"}[key])
+            if value is not None:
+                staff[key] = value
+
+    matched = sum(1 for r in staffing.values() if r["district_code"])
+    print(f"\nDistrict staffing, the yearbook era")
+    print(f"  {len(staffing):,} district-years 1986-1999; "
+          f"{matched:,} matched to a CDE district code ({matched / len(staffing):.1%})")
+
+    existing_path = PROCESSED / "district-teacher-fte-cde.csv"
+    existing = []
+    if existing_path.exists():
+        with existing_path.open(encoding="utf-8") as handle:
+            existing = [dict(r) for r in csv.DictReader(handle)]
+            for row in existing:
+                row["unit_type"] = unit_type(row.get("district_name", ""))
+    columns = ["year", "district_code", "district_name", "county_name", "unit_type",
+               "teacher_fte_published", "teacher_fte_school_sum", "teacher_fte_difference",
+               "staff_certificated_fte", "staff_noncertificated_fte",
+               "pupil_teacher_ratio",
+               "schools_published", "schools_elementary", "schools_middle",
+               "schools_senior", "schools_other", "schools_in_sum",
+               "enrollment_published", "enrollment_school_sum",
+               "graduation_rate", "dropout_rate", "source"]
+    for row in existing:
+        row["schools_in_sum"] = row.pop("schools", "")
+    combined = sorted(list(staffing.values()) + existing,
+                      key=lambda r: (int(r["year"]), str(r["district_code"]),
+                                     str(r["district_name"])))
+    filled = 0
+    for row in combined:
+        stated = (row.get("county_name") or "").strip()
+        known = district_county.get(str(row.get("district_code") or ""))
+        if not stated and known:
+            row["county_name"] = known["county_name"]
+            filled += 1
+    if filled:
+        print(f"  {filled:,} district-years given a county from the crosswalk")
+    write_csv(existing_path, combined, columns)
+    years = sorted({int(r["year"]) for r in combined})
+    print(f"  the table now spans {years[0]}-{years[-1]}")
 
     # ---- reconciliation --------------------------------------------------
     print("\nReconciling CDE against CCD")

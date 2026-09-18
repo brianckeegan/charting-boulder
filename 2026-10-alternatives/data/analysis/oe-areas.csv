@@ -1,0 +1,40 @@
+level,attendance_area,oe_out_of_area,pct_staying_in_neighborhood_school,placed_out_of_area,students_living_in_area
+elementary,Aspen Creek K-8,68.0,0.76,8.0,320.0
+elementary,Attending Neighborhood Attending Neighborhood,3325.0,,280.0,9645.0
+elementary,Bear Creek*,29.0,0.81,2.0,162.0
+elementary,Birch,78.0,0.69,5.0,266.0
+elementary,Coal Creek,94.0,0.69,7.0,324.0
+elementary,Columbine,252.0,0.44,28.0,501.0
+elementary,Creekside*,192.0,0.55,7.0,439.0
+elementary,Crest View,337.0,0.46,17.0,657.0
+elementary,Douglass,92.0,0.63,4.0,260.0
+elementary,Eisenhower,139.0,0.57,16.0,361.0
+elementary,Eldorado K-8,71.0,0.69,6.0,246.0
+elementary,Emerald,74.0,0.74,11.0,328.0
+elementary,Fireside,36.0,0.87,3.0,298.0
+elementary,Flatirons,72.0,0.59,7.0,195.0
+elementary,Foothill,80.0,0.79,3.0,387.0
+elementary,Gold Hill,3.0,0.64,1.0,11.0
+elementary,Heatherwood,81.0,0.68,10.0,281.0
+elementary,Jamestown,3.0,0.55,2.0,11.0
+elementary,Kohl,70.0,0.69,14.0,271.0
+elementary,Lafayette,260.0,0.55,10.0,601.0
+elementary,Louisville,87.0,0.77,9.0,413.0
+elementary,Meadowlark,174.0,0.69,8.0,588.0
+elementary,Mesa*,55.0,0.67,3.0,176.0
+elementary,Monarch K-8,152.0,0.48,9.0,310.0
+elementary,Nederland,32.0,0.83,2.0,197.0
+elementary,Optional Bear Creek/CreeksideOptional CBreeaerk Csirdeeek/,7.0,0.74,0.0,27.0
+elementary,Optional Bear Creek/Mesa,24.0,0.79,5.0,137.0
+elementary,Ryan,219.0,0.58,28.0,589.0
+elementary,Sanchez,378.0,0.35,39.0,642.0
+elementary,Superior,39.0,0.87,8.0,360.0
+elementary,Whittier,127.0,0.53,8.0,287.0
+high,Attending Neighborhood Attending Neighborhood,2306.0,,2306.0,2306.0
+high,Boulder*,528.0,,528.0,528.0
+high,Boulder/Fairview Optional,29.0,0.86,29.0,29.0
+high,Broomfield,180.0,0.8,180.0,180.0
+high,Centaurus,670.0,0.63,670.0,670.0
+high,Fairview*,230.0,,230.0,230.0
+high,Monarch,604.0,,604.0,604.0
+high,Nederland,65.0,,65.0,65.0

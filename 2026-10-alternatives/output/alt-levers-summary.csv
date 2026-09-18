@@ -1,0 +1,11 @@
+lever,buildings,pupils_median,pupils_smallest,below_bar,over_capacity,utilisation,pupils_moved,what it gives up
+0. Today,26,282.5,10.0,14,0,0.6324146441793501,0.0,nothing; the bar is not met
+"1a. Close, as the proposal does",22,368.5,10.0,8,4,0.7387084374399385,952.0,4 buildings
+1b. Close until every school clears the bar,14,532.0,343.0,0,8,1.0442874609428068,2439.0,12 buildings
+"3. Redraw, in proportion to capacity",26,306.4048951048951,12.015878239407652,9,0,0.6324146441793501,693.9348416289592,no buildings; children change school
+"4. Shrink in place, 2030",26,269.4109454538461,10.565135115837103,19,0,0.5560597429387949,769.7712331401526,"school size, shared evenly"
+"5. Do nothing, 2030",26,248.39221992408574,8.792644953064983,16,0,0.5560597429387949,0.0,control over which schools get small
+"4. Shrink in place, 2040",26,266.5207931373579,10.451795809308154,19,0,0.5500945162793764,785.6238229875571,"school size, shared evenly"
+"5. Do nothing, 2040",26,245.72754960565493,8.698320340023184,17,0,0.5500945162793766,0.0,control over which schools get small
+"4. Shrink in place, 2060",26,266.08204712304763,10.43459008325677,19,0,0.5491889517503563,788.030360723428,"school size, shared evenly"
+"5. Do nothing, 2060",26,245.32303338864014,8.684001181898767,17,0,0.5491889517503563,0.0,control over which schools get small

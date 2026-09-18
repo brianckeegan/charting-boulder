@@ -1,0 +1,662 @@
+level,school,attendance_area,students
+elementary,Peak to Peak,Creekside*,1.0
+elementary,Peak to Peak,Crest View,3.0
+elementary,Peak to Peak,Douglass,9.0
+elementary,Peak to Peak,Heatherwood,2.0
+elementary,Peak to Peak,Aspen Creek K-8,17.0
+elementary,Peak to Peak,Birch,10.0
+elementary,Peak to Peak,Emerald,2.0
+elementary,Peak to Peak,Kohl,9.0
+elementary,Peak to Peak,Lafayette,55.0
+elementary,Peak to Peak,Ryan,68.0
+elementary,Peak to Peak,Sanchez,84.0
+elementary,Peak to Peak,Meadowlark,83.0
+elementary,Peak to Peak,Coal Creek,18.0
+elementary,Peak to Peak,Fireside,5.0
+elementary,Peak to Peak,Louisville,12.0
+elementary,Peak to Peak,Monarch K-8,10.0
+elementary,Peak to Peak,Eldorado K-8,2.0
+elementary,Peak to Peak,Superior,8.0
+elementary,Horizons,Columbine,17.0
+elementary,Horizons,Creekside*,15.0
+elementary,Horizons,Crest View,16.0
+elementary,Horizons,Douglass,15.0
+elementary,Horizons,Eisenhower,49.0
+elementary,Horizons,Flatirons,4.0
+elementary,Horizons,Foothill,6.0
+elementary,Horizons,Heatherwood,9.0
+elementary,Horizons,Mesa*,3.0
+elementary,Horizons,Whittier,9.0
+elementary,Horizons,Optional Bear Creek/CreeksideOptional CBreeaerk Csirdeeek/,1.0
+elementary,Horizons,Aspen Creek K-8,1.0
+elementary,Horizons,Birch,1.0
+elementary,Horizons,Emerald,1.0
+elementary,Horizons,Kohl,1.0
+elementary,Horizons,Lafayette,9.0
+elementary,Horizons,Ryan,8.0
+elementary,Horizons,Sanchez,9.0
+elementary,Horizons,Meadowlark,4.0
+elementary,Horizons,Coal Creek,13.0
+elementary,Horizons,Fireside,8.0
+elementary,Horizons,Louisville,5.0
+elementary,Horizons,Monarch K-8,2.0
+elementary,Horizons,Eldorado K-8,2.0
+elementary,Horizons,Jamestown,2.0
+elementary,Horizons,Nederland,2.0
+elementary,Pioneer,Creekside*,1.0
+elementary,Pioneer,Crest View,1.0
+elementary,Pioneer,Douglass,6.0
+elementary,Pioneer,Eisenhower,1.0
+elementary,Pioneer,Aspen Creek K-8,4.0
+elementary,Pioneer,Birch,2.0
+elementary,Pioneer,Emerald,3.0
+elementary,Pioneer,Kohl,12.0
+elementary,Pioneer,Lafayette,55.0
+elementary,Pioneer,Ryan,44.0
+elementary,Pioneer,Sanchez,114.0
+elementary,Pioneer,Meadowlark,30.0
+elementary,Pioneer,Coal Creek,6.0
+elementary,Pioneer,Fireside,2.0
+elementary,Pioneer,Louisville,6.0
+elementary,Pioneer,Monarch K-8,2.0
+elementary,Uni-Hill Int.,Bear Creek*,5.0
+elementary,Uni-Hill Int.,Columbine,58.0
+elementary,Uni-Hill Int.,Creekside*,41.0
+elementary,Uni-Hill Int.,Crest View,98.0
+elementary,Uni-Hill Int.,Douglass,9.0
+elementary,Uni-Hill Int.,Eisenhower,13.0
+elementary,Uni-Hill Int.,Flatirons,15.0
+elementary,Uni-Hill Int.,Foothill,20.0
+elementary,Uni-Hill Int.,Heatherwood,3.0
+elementary,Uni-Hill Int.,Mesa*,5.0
+elementary,Uni-Hill Int.,Whittier,42.0
+elementary,Uni-Hill Int.,Optional Bear Creek/CreeksideOptional CBreeaerk Csirdeeek/,1.0
+elementary,Uni-Hill Int.,Optional Bear Creek/Mesa,2.0
+elementary,Uni-Hill Int.,Emerald,2.0
+elementary,Uni-Hill Int.,Kohl,3.0
+elementary,Uni-Hill Int.,Lafayette,5.0
+elementary,Uni-Hill Int.,Ryan,1.0
+elementary,Uni-Hill Int.,Sanchez,1.0
+elementary,Uni-Hill Int.,Coal Creek,2.0
+elementary,Uni-Hill Int.,Fireside,2.0
+elementary,Uni-Hill Int.,Louisville,4.0
+elementary,Uni-Hill Int.,Monarch K-8,2.0
+elementary,Uni-Hill Int.,Gold Hill,1.0
+elementary,Uni-Hill Int.,Nederland,1.0
+elementary,Comm. Montessori,Columbine,13.0
+elementary,Comm. Montessori,Creekside*,24.0
+elementary,Comm. Montessori,Crest View,12.0
+elementary,Comm. Montessori,Douglass,6.0
+elementary,Comm. Montessori,Eisenhower,9.0
+elementary,Comm. Montessori,Flatirons,4.0
+elementary,Comm. Montessori,Foothill,2.0
+elementary,Comm. Montessori,Mesa*,8.0
+elementary,Comm. Montessori,Whittier,5.0
+elementary,Comm. Montessori,Optional Bear Creek/CreeksideOptional CBreeaerk Csirdeeek/,4.0
+elementary,Comm. Montessori,Optional Bear Creek/Mesa,15.0
+elementary,Comm. Montessori,Aspen Creek K-8,2.0
+elementary,Comm. Montessori,Emerald,1.0
+elementary,Comm. Montessori,Kohl,1.0
+elementary,Comm. Montessori,Lafayette,7.0
+elementary,Comm. Montessori,Ryan,7.0
+elementary,Comm. Montessori,Sanchez,7.0
+elementary,Comm. Montessori,Meadowlark,4.0
+elementary,Comm. Montessori,Coal Creek,11.0
+elementary,Comm. Montessori,Fireside,1.0
+elementary,Comm. Montessori,Louisville,7.0
+elementary,Comm. Montessori,Monarch K-8,12.0
+elementary,Comm. Montessori,Eldorado K-8,3.0
+elementary,High Peaks,Bear Creek*,5.0
+elementary,High Peaks,Columbine,10.0
+elementary,High Peaks,Creekside*,33.0
+elementary,High Peaks,Crest View,43.0
+elementary,High Peaks,Douglass,8.0
+elementary,High Peaks,Eisenhower,25.0
+elementary,High Peaks,Flatirons,10.0
+elementary,High Peaks,Foothill,20.0
+elementary,High Peaks,Heatherwood,9.0
+elementary,High Peaks,Mesa*,3.0
+elementary,High Peaks,Whittier,12.0
+elementary,High Peaks,Optional Bear Creek/CreeksideOptional CBreeaerk Csirdeeek/,1.0
+elementary,High Peaks,Optional Bear Creek/Mesa,3.0
+elementary,High Peaks,Aspen Creek K-8,2.0
+elementary,High Peaks,Kohl,1.0
+elementary,High Peaks,Lafayette,10.0
+elementary,High Peaks,Ryan,4.0
+elementary,High Peaks,Sanchez,5.0
+elementary,High Peaks,Meadowlark,12.0
+elementary,High Peaks,Coal Creek,5.0
+elementary,High Peaks,Fireside,2.0
+elementary,High Peaks,Louisville,6.0
+elementary,High Peaks,Monarch K-8,4.0
+elementary,High Peaks,Eldorado K-8,7.0
+elementary,High Peaks,Superior,9.0
+elementary,High Peaks,Nederland,3.0
+elementary,Halcyon,Birch,1.0
+elementary,Boulder Universal,Crest View,1.0
+elementary,Boulder Universal,Flatirons,1.0
+elementary,Boulder Universal,Foothill,1.0
+elementary,Boulder Universal,Aspen Creek K-8,1.0
+elementary,Boulder Universal,Kohl,1.0
+elementary,Boulder Universal,Ryan,1.0
+elementary,Boulder Universal,Sanchez,2.0
+elementary,Boulder Universal,Meadowlark,1.0
+elementary,Boulder Universal,Fireside,1.0
+elementary,Boulder Universal,Monarch K-8,2.0
+elementary,Boulder Universal,Superior,1.0
+elementary,Boulder Universal,Nederland,2.0
+elementary,BCSIS,Bear Creek*,2.0
+elementary,BCSIS,Columbine,19.0
+elementary,BCSIS,Creekside*,40.0
+elementary,BCSIS,Crest View,39.0
+elementary,BCSIS,Douglass,10.0
+elementary,BCSIS,Eisenhower,17.0
+elementary,BCSIS,Flatirons,15.0
+elementary,BCSIS,Foothill,7.0
+elementary,BCSIS,Heatherwood,17.0
+elementary,BCSIS,Mesa*,4.0
+elementary,BCSIS,Whittier,19.0
+elementary,BCSIS,Optional Bear Creek/Mesa,1.0
+elementary,BCSIS,Lafayette,18.0
+elementary,BCSIS,Ryan,3.0
+elementary,BCSIS,Sanchez,3.0
+elementary,BCSIS,Meadowlark,3.0
+elementary,BCSIS,Coal Creek,4.0
+elementary,BCSIS,Louisville,6.0
+elementary,BCSIS,Eldorado K-8,1.0
+elementary,BCSIS,Nederland,3.0
+elementary,Nederland Elem.,Flatirons,1.0
+elementary,Nederland Elem.,Louisville,1.0
+elementary,Nederland Elem.,Nederland,163.0
+elementary,Jamestown,Jamestown,6.0
+elementary,Jamestown,Nederland,11.0
+elementary,Gold Hill,Columbine,1.0
+elementary,Gold Hill,Flatirons,1.0
+elementary,Gold Hill,Foothill,1.0
+elementary,Gold Hill,Whittier,1.0
+elementary,Gold Hill,Gold Hill,7.0
+elementary,Superior,Creekside*,1.0
+elementary,Superior,Douglass,2.0
+elementary,Superior,Aspen Creek K-8,3.0
+elementary,Superior,Birch,1.0
+elementary,Superior,Emerald,4.0
+elementary,Superior,Kohl,1.0
+elementary,Superior,Ryan,3.0
+elementary,Superior,Sanchez,3.0
+elementary,Superior,Fireside,3.0
+elementary,Superior,Louisville,3.0
+elementary,Superior,Monarch K-8,33.0
+elementary,Superior,Eldorado K-8,39.0
+elementary,Superior,Superior,313.0
+elementary,Superior,Nederland,1.0
+elementary,Eldorado K-8,Mesa*,2.0
+elementary,Eldorado K-8,Aspen Creek K-8,3.0
+elementary,Eldorado K-8,Emerald,14.0
+elementary,Eldorado K-8,Kohl,1.0
+elementary,Eldorado K-8,Ryan,1.0
+elementary,Eldorado K-8,Meadowlark,2.0
+elementary,Eldorado K-8,Monarch K-8,14.0
+elementary,Eldorado K-8,Eldorado K-8,169.0
+elementary,Eldorado K-8,Superior,10.0
+elementary,Monarch K-8,Mesa*,1.0
+elementary,Monarch K-8,Aspen Creek K-8,4.0
+elementary,Monarch K-8,Birch,2.0
+elementary,Monarch K-8,Emerald,6.0
+elementary,Monarch K-8,Kohl,2.0
+elementary,Monarch K-8,Lafayette,2.0
+elementary,Monarch K-8,Ryan,12.0
+elementary,Monarch K-8,Sanchez,7.0
+elementary,Monarch K-8,Meadowlark,3.0
+elementary,Monarch K-8,Coal Creek,2.0
+elementary,Monarch K-8,Louisville,4.0
+elementary,Monarch K-8,Monarch K-8,149.0
+elementary,Monarch K-8,Eldorado K-8,11.0
+elementary,Monarch K-8,Superior,9.0
+elementary,Louisville Elem.,Douglass,3.0
+elementary,Louisville Elem.,Lafayette,15.0
+elementary,Louisville Elem.,Ryan,3.0
+elementary,Louisville Elem.,Sanchez,3.0
+elementary,Louisville Elem.,Meadowlark,7.0
+elementary,Louisville Elem.,Coal Creek,7.0
+elementary,Louisville Elem.,Fireside,4.0
+elementary,Louisville Elem.,Louisville,317.0
+elementary,Louisville Elem.,Monarch K-8,4.0
+elementary,Fireside,Columbine,1.0
+elementary,Fireside,Douglass,3.0
+elementary,Fireside,Aspen Creek K-8,2.0
+elementary,Fireside,Birch,1.0
+elementary,Fireside,Emerald,1.0
+elementary,Fireside,Lafayette,12.0
+elementary,Fireside,Ryan,10.0
+elementary,Fireside,Sanchez,4.0
+elementary,Fireside,Meadowlark,2.0
+elementary,Fireside,Coal Creek,13.0
+elementary,Fireside,Fireside,259.0
+elementary,Fireside,Louisville,13.0
+elementary,Fireside,Monarch K-8,54.0
+elementary,Fireside,Superior,1.0
+elementary,Coal Creek,Foothill,1.0
+elementary,Coal Creek,Lafayette,3.0
+elementary,Coal Creek,Ryan,1.0
+elementary,Coal Creek,Sanchez,4.0
+elementary,Coal Creek,Meadowlark,1.0
+elementary,Coal Creek,Coal Creek,223.0
+elementary,Coal Creek,Fireside,4.0
+elementary,Coal Creek,Louisville,10.0
+elementary,Coal Creek,Monarch K-8,5.0
+elementary,Coal Creek,Eldorado K-8,1.0
+elementary,Meadowlark,Columbine,2.0
+elementary,Meadowlark,Emerald,1.0
+elementary,Meadowlark,Lafayette,2.0
+elementary,Meadowlark,Ryan,3.0
+elementary,Meadowlark,Sanchez,20.0
+elementary,Meadowlark,Meadowlark,406.0
+elementary,Meadowlark,Monarch K-8,2.0
+elementary,Sanchez,Lafayette,10.0
+elementary,Sanchez,Ryan,24.0
+elementary,Sanchez,Sanchez,225.0
+elementary,Sanchez,Coal Creek,1.0
+elementary,Sanchez,Louisville,3.0
+elementary,Sanchez,Nederland,1.0
+elementary,Ryan,Emerald,1.0
+elementary,Ryan,Kohl,1.0
+elementary,Ryan,Lafayette,10.0
+elementary,Ryan,Ryan,342.0
+elementary,Ryan,Sanchez,16.0
+elementary,Ryan,Fireside,1.0
+elementary,Ryan,Louisville,1.0
+elementary,Lafayette Elem.,Columbine,1.0
+elementary,Lafayette Elem.,Aspen Creek K-8,1.0
+elementary,Lafayette Elem.,Birch,1.0
+elementary,Lafayette Elem.,Lafayette,331.0
+elementary,Lafayette Elem.,Ryan,14.0
+elementary,Lafayette Elem.,Sanchez,72.0
+elementary,Lafayette Elem.,Meadowlark,12.0
+elementary,Lafayette Elem.,Coal Creek,1.0
+elementary,Lafayette Elem.,Louisville,1.0
+elementary,Kohl,Aspen Creek K-8,13.0
+elementary,Kohl,Birch,8.0
+elementary,Kohl,Emerald,5.0
+elementary,Kohl,Kohl,187.0
+elementary,Kohl,Ryan,1.0
+elementary,Kohl,Monarch K-8,1.0
+elementary,Emerald,Aspen Creek K-8,12.0
+elementary,Emerald,Birch,6.0
+elementary,Emerald,Emerald,243.0
+elementary,Emerald,Kohl,17.0
+elementary,Emerald,Lafayette,1.0
+elementary,Emerald,Ryan,3.0
+elementary,Emerald,Sanchez,1.0
+elementary,Emerald,Monarch K-8,2.0
+elementary,Birch,Flatirons,2.0
+elementary,Birch,Aspen Creek K-8,3.0
+elementary,Birch,Birch,183.0
+elementary,Birch,Emerald,11.0
+elementary,Birch,Kohl,5.0
+elementary,Birch,Sanchez,2.0
+elementary,Aspen Creek K-8,Creekside*,1.0
+elementary,Aspen Creek K-8,Douglass,1.0
+elementary,Aspen Creek K-8,Aspen Creek K-8,244.0
+elementary,Aspen Creek K-8,Birch,44.0
+elementary,Aspen Creek K-8,Emerald,20.0
+elementary,Aspen Creek K-8,Kohl,11.0
+elementary,Aspen Creek K-8,Ryan,3.0
+elementary,Aspen Creek K-8,Sanchez,5.0
+elementary,Aspen Creek K-8,Eldorado K-8,2.0
+elementary,Whittier,Columbine,52.0
+elementary,Whittier,Creekside*,4.0
+elementary,Whittier,Crest View,8.0
+elementary,Whittier,Douglass,2.0
+elementary,Whittier,Eisenhower,4.0
+elementary,Whittier,Flatirons,9.0
+elementary,Whittier,Foothill,8.0
+elementary,Whittier,Heatherwood,4.0
+elementary,Whittier,Whittier,152.0
+elementary,Whittier,Ryan,1.0
+elementary,Whittier,Sanchez,1.0
+elementary,Whittier,Gold Hill,1.0
+elementary,Mesa *,Bear Creek*,16.0
+elementary,Mesa *,Columbine,1.0
+elementary,Mesa *,Creekside*,13.0
+elementary,Mesa *,Crest View,3.0
+elementary,Mesa *,Douglass,1.0
+elementary,Mesa *,Eisenhower,1.0
+elementary,Mesa *,Flatirons,1.0
+elementary,Mesa *,Heatherwood,1.0
+elementary,Mesa *,Mesa*,118.0
+elementary,Mesa *,Whittier,1.0
+elementary,Mesa *,Optional Bear Creek/Mesa,38.0
+elementary,Mesa *,Lafayette,3.0
+elementary,Mesa *,Meadowlark,1.0
+elementary,Mesa *,Fireside,1.0
+elementary,Mesa *,Eldorado K-8,2.0
+elementary,Mesa *,Nederland,3.0
+elementary,Heatherwood,Creekside*,1.0
+elementary,Heatherwood,Crest View,12.0
+elementary,Heatherwood,Douglass,1.0
+elementary,Heatherwood,Eisenhower,1.0
+elementary,Heatherwood,Heatherwood,190.0
+elementary,Heatherwood,Ryan,1.0
+elementary,Heatherwood,Meadowlark,1.0
+elementary,Foothill,Columbine,44.0
+elementary,Foothill,Crest View,49.0
+elementary,Foothill,Flatirons,4.0
+elementary,Foothill,Foothill,304.0
+elementary,Foothill,Heatherwood,2.0
+elementary,Foothill,Whittier,10.0
+elementary,Foothill,Kohl,1.0
+elementary,Foothill,Lafayette,2.0
+elementary,Foothill,Monarch K-8,3.0
+elementary,Flatirons,Columbine,8.0
+elementary,Flatirons,Creekside*,3.0
+elementary,Flatirons,Flatirons,116.0
+elementary,Flatirons,Foothill,5.0
+elementary,Flatirons,Whittier,6.0
+elementary,Flatirons,Emerald,1.0
+elementary,Flatirons,Gold Hill,1.0
+elementary,Eisenhower,Columbine,12.0
+elementary,Eisenhower,Creekside*,4.0
+elementary,Eisenhower,Crest View,4.0
+elementary,Eisenhower,Douglass,11.0
+elementary,Eisenhower,Eisenhower,206.0
+elementary,Eisenhower,Heatherwood,3.0
+elementary,Eisenhower,Whittier,3.0
+elementary,Eisenhower,Kohl,2.0
+elementary,Eisenhower,Ryan,2.0
+elementary,Eisenhower,Sanchez,1.0
+elementary,Eisenhower,Meadowlark,1.0
+elementary,Eisenhower,Jamestown,1.0
+elementary,Eisenhower,Nederland,1.0
+elementary,Douglass,Columbine,1.0
+elementary,Douglass,Crest View,2.0
+elementary,Douglass,Douglass,164.0
+elementary,Douglass,Eisenhower,2.0
+elementary,Douglass,Heatherwood,23.0
+elementary,Douglass,Birch,1.0
+elementary,Douglass,Lafayette,39.0
+elementary,Douglass,Sanchez,11.0
+elementary,Douglass,Meadowlark,5.0
+elementary,Douglass,Coal Creek,7.0
+elementary,Douglass,Louisville,3.0
+elementary,Douglass,Eldorado K-8,1.0
+elementary,Crest View,Columbine,6.0
+elementary,Crest View,Creekside*,1.0
+elementary,Crest View,Crest View,303.0
+elementary,Crest View,Flatirons,1.0
+elementary,Crest View,Foothill,2.0
+elementary,Crest View,Heatherwood,2.0
+elementary,Crest View,Whittier,2.0
+elementary,Crest View,Nederland,2.0
+elementary,Creekside *,Bear Creek*,1.0
+elementary,Creekside *,Columbine,4.0
+elementary,Creekside *,Creekside*,235.0
+elementary,Creekside *,Crest View,4.0
+elementary,Creekside *,Douglass,1.0
+elementary,Creekside *,Eisenhower,11.0
+elementary,Creekside *,Heatherwood,1.0
+elementary,Creekside *,Mesa*,1.0
+elementary,Creekside *,Whittier,5.0
+elementary,Creekside *,Optional Bear Creek/CreeksideOptional CBreeaerk Csirdeeek/,5.0
+elementary,Creekside *,Optional Bear Creek/Mesa,3.0
+elementary,Creekside *,Emerald,1.0
+elementary,Creekside *,Sanchez,2.0
+elementary,Creekside *,Meadowlark,1.0
+elementary,Creekside *,Nederland,2.0
+elementary,Columbine,Columbine,221.0
+elementary,Columbine,Creekside*,1.0
+elementary,Columbine,Crest View,38.0
+elementary,Columbine,Eisenhower,4.0
+elementary,Columbine,Foothill,7.0
+elementary,Columbine,Heatherwood,5.0
+elementary,Columbine,Mesa*,1.0
+elementary,Columbine,Whittier,10.0
+elementary,Columbine,Kohl,1.0
+elementary,Columbine,Meadowlark,1.0
+elementary,Columbine,Louisville,1.0
+elementary,Bear Creek *,Bear Creek*,131.0
+elementary,Bear Creek *,Columbine,2.0
+elementary,Bear Creek *,Creekside*,13.0
+elementary,Bear Creek *,Crest View,4.0
+elementary,Bear Creek *,Douglass,4.0
+elementary,Bear Creek *,Eisenhower,2.0
+elementary,Bear Creek *,Flatirons,4.0
+elementary,Bear Creek *,Mesa*,27.0
+elementary,Bear Creek *,Whittier,2.0
+elementary,Bear Creek *,Optional Bear Creek/CreeksideOptional CBreeaerk Csirdeeek/,15.0
+elementary,Bear Creek *,Optional Bear Creek/Mesa,70.0
+elementary,Bear Creek *,Lafayette,2.0
+elementary,Bear Creek *,Ryan,1.0
+elementary,Bear Creek *,Sanchez,1.0
+elementary,Bear Creek *,Coal Creek,4.0
+elementary,Bear Creek *,Fireside,2.0
+elementary,Bear Creek *,Louisville,1.0
+elementary,Bear Creek *,Superior,1.0
+middle,Peak to Peak,Manhattan,2.0
+middle,Peak to Peak,Casey,1.0
+middle,Peak to Peak,Centennial,6.0
+middle,Peak to Peak,Platt,8.0
+middle,Peak to Peak,Southern Hills,1.0
+middle,Peak to Peak,Aspen Creek K-8,23.0
+middle,Peak to Peak,Broomfield Heights,14.0
+middle,Peak to Peak,Angevine,160.0
+middle,Peak to Peak,Meadowlark,69.0
+middle,Peak to Peak,Louisville Middle,27.0
+middle,Peak to Peak,Monarch K-8,11.0
+middle,Peak to Peak,Eldorado K-8,10.0
+middle,Justice High,Angevine,2.0
+middle,Summit,Manhattan,61.0
+middle,Summit,Casey,50.0
+middle,Summit,Centennial,63.0
+middle,Summit,Platt,17.0
+middle,Summit,Southern Hills,85.0
+middle,Summit,Aspen Creek K-8,1.0
+middle,Summit,Broomfield Heights,1.0
+middle,Summit,Angevine,14.0
+middle,Summit,Meadowlark,6.0
+middle,Summit,Louisville Middle,9.0
+middle,Summit,Monarch K-8,12.0
+middle,Summit,Eldorado K-8,38.0
+middle,Summit,Nederland,1.0
+middle,Horizons,Manhattan,26.0
+middle,Horizons,Casey,10.0
+middle,Horizons,Centennial,22.0
+middle,Horizons,Platt,18.0
+middle,Horizons,Southern Hills,6.0
+middle,Horizons,Aspen Creek K-8,1.0
+middle,Horizons,Angevine,15.0
+middle,Horizons,Meadowlark,1.0
+middle,Horizons,Louisville Middle,5.0
+middle,Horizons,Monarch K-8,7.0
+middle,Horizons,Eldorado K-8,1.0
+middle,Horizons,Nederland,3.0
+middle,Halcyon,Manhattan,1.0
+middle,Halcyon,Centennial,1.0
+middle,Halcyon,Angevine,1.0
+middle,Halcyon,Nederland,1.0
+middle,Boulder Universal,Casey,3.0
+middle,Boulder Universal,Centennial,4.0
+middle,Boulder Universal,Platt,1.0
+middle,Boulder Universal,Broomfield Heights,1.0
+middle,Boulder Universal,Angevine,3.0
+middle,Boulder Universal,Meadowlark,2.0
+middle,Boulder Universal,Louisville Middle,2.0
+middle,Boulder Universal,Eldorado K-8,2.0
+middle,Boulder Universal,Nederland,1.0
+middle,Nederland,Nederland,86.0
+middle,Eldorado K-8,Aspen Creek K-8,2.0
+middle,Eldorado K-8,Broomfield Heights,8.0
+middle,Eldorado K-8,Angevine,1.0
+middle,Eldorado K-8,Meadowlark,1.0
+middle,Eldorado K-8,Louisville Middle,1.0
+middle,Eldorado K-8,Monarch K-8,4.0
+middle,Eldorado K-8,Eldorado K-8,136.0
+middle,Monarch K-8,Manhattan,1.0
+middle,Monarch K-8,Casey,1.0
+middle,Monarch K-8,Centennial,1.0
+middle,Monarch K-8,Platt,1.0
+middle,Monarch K-8,Aspen Creek K-8,7.0
+middle,Monarch K-8,Broomfield Heights,7.0
+middle,Monarch K-8,Angevine,29.0
+middle,Monarch K-8,Meadowlark,2.0
+middle,Monarch K-8,Louisville Middle,6.0
+middle,Monarch K-8,Monarch K-8,169.0
+middle,Monarch K-8,Eldorado K-8,151.0
+middle,Louisville Middle,Manhattan,2.0
+middle,Louisville Middle,Casey,1.0
+middle,Louisville Middle,Centennial,2.0
+middle,Louisville Middle,Platt,19.0
+middle,Louisville Middle,Southern Hills,1.0
+middle,Louisville Middle,Aspen Creek K-8,1.0
+middle,Louisville Middle,Broomfield Heights,1.0
+middle,Louisville Middle,Angevine,88.0
+middle,Louisville Middle,Meadowlark,10.0
+middle,Louisville Middle,Louisville Middle,399.0
+middle,Louisville Middle,Monarch K-8,72.0
+middle,Louisville Middle,Eldorado K-8,11.0
+middle,Meadowlark,Platt,1.0
+middle,Meadowlark,Angevine,16.0
+middle,Meadowlark,Meadowlark,208.0
+middle,Angevine,Manhattan,2.0
+middle,Angevine,Casey,2.0
+middle,Angevine,Platt,1.0
+middle,Angevine,Aspen Creek K-8,1.0
+middle,Angevine,Broomfield Heights,1.0
+middle,Angevine,Angevine,551.0
+middle,Angevine,Meadowlark,7.0
+middle,Angevine,Louisville Middle,4.0
+middle,Broomfield Heights,Aspen Creek K-8,62.0
+middle,Broomfield Heights,Broomfield Heights,250.0
+middle,Broomfield Heights,Angevine,5.0
+middle,Broomfield Heights,Meadowlark,1.0
+middle,Broomfield Heights,Monarch K-8,1.0
+middle,Aspen Creek K-8,Centennial,1.0
+middle,Aspen Creek K-8,Aspen Creek K-8,235.0
+middle,Aspen Creek K-8,Broomfield Heights,30.0
+middle,Aspen Creek K-8,Angevine,4.0
+middle,Southern Hills,Manhattan,110.0
+middle,Southern Hills,Casey,17.0
+middle,Southern Hills,Centennial,25.0
+middle,Southern Hills,Platt,19.0
+middle,Southern Hills,Southern Hills,317.0
+middle,Southern Hills,Aspen Creek K-8,1.0
+middle,Southern Hills,Broomfield Heights,2.0
+middle,Southern Hills,Angevine,11.0
+middle,Southern Hills,Louisville Middle,9.0
+middle,Southern Hills,Monarch K-8,9.0
+middle,Southern Hills,Eldorado K-8,15.0
+middle,Southern Hills,Nederland,1.0
+middle,Platt,Manhattan,64.0
+middle,Platt,Casey,17.0
+middle,Platt,Centennial,17.0
+middle,Platt,Platt,266.0
+middle,Platt,Southern Hills,4.0
+middle,Platt,Aspen Creek K-8,3.0
+middle,Platt,Angevine,55.0
+middle,Platt,Meadowlark,8.0
+middle,Platt,Louisville Middle,20.0
+middle,Platt,Monarch K-8,9.0
+middle,Platt,Eldorado K-8,2.0
+middle,Platt,Nederland,2.0
+middle,Centennial,Manhattan,9.0
+middle,Centennial,Casey,96.0
+middle,Centennial,Centennial,432.0
+middle,Centennial,Platt,8.0
+middle,Centennial,Southern Hills,2.0
+middle,Centennial,Louisville Middle,2.0
+middle,Centennial,Monarch K-8,1.0
+middle,Centennial,Nederland,1.0
+middle,Casey,Manhattan,7.0
+middle,Casey,Casey,254.0
+middle,Casey,Centennial,41.0
+middle,Casey,Platt,3.0
+middle,Casey,Louisville Middle,1.0
+middle,Casey,Monarch K-8,1.0
+middle,Casey,Nederland,1.0
+middle,Manhattan,Manhattan,178.0
+middle,Manhattan,Casey,53.0
+middle,Manhattan,Centennial,29.0
+middle,Manhattan,Platt,16.0
+middle,Manhattan,Southern Hills,31.0
+middle,Manhattan,Aspen Creek K-8,4.0
+middle,Manhattan,Broomfield Heights,4.0
+middle,Manhattan,Angevine,43.0
+middle,Manhattan,Meadowlark,8.0
+middle,Manhattan,Louisville Middle,13.0
+middle,Manhattan,Monarch K-8,3.0
+middle,Manhattan,Eldorado K-8,4.0
+middle,Manhattan,Nederland,7.0
+high,Justice High,Boulder*,7.0
+high,Justice High,Fairview*,1.0
+high,Justice High,Broomfield,4.0
+high,Justice High,Centaurus,27.0
+high,Justice High,Monarch,7.0
+high,Peak-to-Peak,Boulder*,10.0
+high,Peak-to-Peak,Fairview*,11.0
+high,Peak-to-Peak,Boulder/Fairview Optional,2.0
+high,Peak-to-Peak,Broomfield,54.0
+high,Peak-to-Peak,Centaurus,301.0
+high,Peak-to-Peak,Monarch,98.0
+high,Boulder Prep,Boulder*,17.0
+high,Boulder Prep,Fairview*,3.0
+high,Boulder Prep,Boulder/Fairview Optional,5.0
+high,Boulder Prep,Broomfield,5.0
+high,Boulder Prep,Centaurus,13.0
+high,Boulder Prep,Monarch,4.0
+high,New Vista,Boulder*,110.0
+high,New Vista,Fairview*,65.0
+high,New Vista,Boulder/Fairview Optional,11.0
+high,New Vista,Broomfield,12.0
+high,New Vista,Centaurus,22.0
+high,New Vista,Monarch,29.0
+high,New Vista,Nederland,16.0
+high,Halcyon,Boulder*,3.0
+high,Halcyon,Fairview*,2.0
+high,Halcyon,Centaurus,2.0
+high,Halcyon,Monarch,1.0
+high,Halcyon,Nederland,1.0
+high,Boulder Universal,Boulder*,23.0
+high,Boulder Universal,Fairview*,8.0
+high,Boulder Universal,Boulder/Fairview Optional,2.0
+high,Boulder Universal,Broomfield,19.0
+high,Boulder Universal,Centaurus,14.0
+high,Boulder Universal,Monarch,23.0
+high,Boulder Universal,Nederland,3.0
+high,Arapahoe Ridge,Boulder*,40.0
+high,Arapahoe Ridge,Fairview*,8.0
+high,Arapahoe Ridge,Boulder/Fairview Optional,2.0
+high,Arapahoe Ridge,Broomfield,21.0
+high,Arapahoe Ridge,Centaurus,38.0
+high,Arapahoe Ridge,Monarch,12.0
+high,Nederland,Boulder*,1.0
+high,Nederland,Nederland,93.0
+high,Monarch,Boulder*,3.0
+high,Monarch,Fairview*,15.0
+high,Monarch,Broomfield,30.0
+high,Monarch,Centaurus,112.0
+high,Monarch,Monarch,1188.0
+high,Monarch,Nederland,1.0
+high,Centaurus,Boulder*,13.0
+high,Centaurus,Fairview*,23.0
+high,Centaurus,Boulder/Fairview Optional,7.0
+high,Centaurus,Broomfield,18.0
+high,Centaurus,Centaurus,1198.0
+high,Centaurus,Monarch,207.0
+high,Broomfield,Boulder*,1.0
+high,Broomfield,Fairview*,2.0
+high,Broomfield,Broomfield,797.0
+high,Broomfield,Centaurus,11.0
+high,Broomfield,Monarch,8.0
+high,Fairview,Boulder*,300.0
+high,Fairview,Fairview*,1022.0
+high,Fairview,Boulder/Fairview Optional,131.0
+high,Fairview,Broomfield,16.0
+high,Fairview,Centaurus,89.0
+high,Fairview,Monarch,194.0
+high,Fairview,Nederland,15.0
+high,Boulder,Boulder*,1482.0
+high,Boulder,Fairview*,92.0
+high,Boulder,Boulder/Fairview Optional,65.0
+high,Boulder,Broomfield,1.0
+high,Boulder,Centaurus,41.0
+high,Boulder,Monarch,21.0
+high,Boulder,Nederland,29.0
