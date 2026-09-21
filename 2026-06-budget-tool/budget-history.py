@@ -92,6 +92,14 @@ SOURCES = {
         "retrieved": "2026-09-21",
         "notes": "2027 year-over-year percentages; position adds/freezes.",
     },
+    "snapshot2023": {
+        "title": "2023 Budget — Sources & Uses Citywide, Types (OpenGov dataset 65843, CSV export)",
+        "publisher": "City of Boulder",
+        "date": "2023-01-01",
+        "url": "https://cityofboulderco.opengov.com/transparency/#/65843/accountType=revenuesVersusExpenses&breakdown=types&year=2023",
+        "retrieved": "2026-09-21",
+        "notes": "Citywide gross sources & uses, 2021 actual / 2022 adopted / 2023 total budget. Different basis from the budget_* headline totals — see the data dictionary.",
+    },
     "brl2027": {
         "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and reduce pool hours",
         "publisher": "Boulder Reporting Lab",
@@ -221,6 +229,71 @@ add(2027, "yoy_general_fund_pct", "recommended", 3.09, "pct", "brl2027")
 # --- Reserve policy --------------------------------------------------------
 add(2026, "reserve_policy_pct_of_operating", "policy", 16.7, "pct", "forecast2026")
 
+# --------------------------------------------------------------------------
+# Citywide Sources & Uses (OpenGov export, dataset 65843) — 2021-2023
+#
+# This is a DIFFERENT ACCOUNTING BASIS from the budget_* headline totals above
+# and the two must never be charted as one series. For 2023 the snapshot puts
+# citywide expenses at $598.79M against the city's published $515.4M adopted
+# total — an $83.4M gap. Two reasons, both structural:
+#
+#   1. The 2023 column is "Total Budget" (adopted plus amendments and
+#      carryforward), not "Adopted Budget". The 2022 column IS adopted, and
+#      the 2021 column is actuals — three bases in one file.
+#   2. It is gross rather than net: interfund flows are left in on both sides
+#      (Transfers In, Intragovernmental Charges, Cost Allocation on the
+#      revenue side; Transfers and Internal Services on the expense side), so
+#      money moving between city funds is counted more than once.
+#
+# Kept under its own `sources_`/`uses_` prefixes for exactly that reason. The
+# value it adds is real: a full expense composition (personnel, capital,
+# operating, debt service) that the headline totals never break out, and one
+# extra year of history at the front.
+# --------------------------------------------------------------------------
+SNAPSHOT_YEARS = [(2021, "actual"), (2022, "adopted"), (2023, "total_budget")]
+
+SNAPSHOT_REVENUE = {
+    "sales_use_tax":               (152231769, 141001909, 173348612),
+    "utility":                     ( 74307851,  78394200,  83183592),
+    "investment_earnings_bonds":   (  8444586,  96474638,  52894429),
+    "property_tax":                ( 49756122,  53009200,  53051677),
+    "intragovernmental_charges":   ( 22709384,  40718659,  46625767),
+    "other":                       ( 33539525,  33150725,  26704205),
+    "transfers_in":                ( 30151267,  22124637,  19312048),
+    "intergovernmental":           ( 16527977,  15285634,  24646751),
+    "development_impact_fees":     ( 20139445,  14831983,  19255139),
+    "licenses_permits_fines":      ( 12927754,  14722525,  14921153),
+    "cost_allocation":             ( 11455827,  11048774,  12741197),
+    "leases_rents_royalties":      (  9242514,   8588875,   9471736),
+    "accommodation_admission_tax": (  7795783,   8838844,  10292147),
+    "charges_for_services":        (  5427693,   6607609,   8330373),
+    "misc_sales_materials_goods":  (  9145467,   1560516,   5421235),
+    "grants":                      (  4819318,   3067473,   6757248),
+    "specific_ownership_tobacco":  (  2788293,   2993454,   3046498),
+    "franchise_fees":              (   919275,   1033332,   5541814),
+}
+SNAPSHOT_REVENUE_TOTAL = (472329850, 553452986, 575545620)
+
+SNAPSHOT_EXPENSE = {
+    "personnel":         (151929858, 173338936, 194047344),
+    "capital":           ( 56518750, 161968657, 172540892),
+    "operating":         (114992085, 104930558, 123858331),
+    "transfers":         ( 41607094,  33173414,  32145582),
+    "internal_services": ( 20016651,  36803136,  42444015),
+    "debt_service":      ( 28616988,  31413300,  33755478),
+}
+SNAPSHOT_EXPENSE_TOTAL = (413681426, 541628000, 598791642)
+SNAPSHOT_NET = (58648425, 11824986, -23246022)
+
+for i, (yr, basis) in enumerate(SNAPSHOT_YEARS):
+    for name, vals in SNAPSHOT_REVENUE.items():
+        add(yr, f"sources_revenue_{name}", basis, round(vals[i] / 1e6, 6), "musd", "snapshot2023")
+    add(yr, "sources_revenue_total", basis, round(SNAPSHOT_REVENUE_TOTAL[i] / 1e6, 6), "musd", "snapshot2023")
+    for name, vals in SNAPSHOT_EXPENSE.items():
+        add(yr, f"uses_expense_{name}", basis, round(vals[i] / 1e6, 6), "musd", "snapshot2023")
+    add(yr, "uses_expense_total", basis, round(SNAPSHOT_EXPENSE_TOTAL[i] / 1e6, 6), "musd", "snapshot2023")
+    add(yr, "net_revenues_less_expenses", basis, round(SNAPSHOT_NET[i] / 1e6, 6), "musd", "snapshot2023")
+
 
 # --------------------------------------------------------------------------
 # Reconciliation — fail loudly rather than publish an internally broken series
@@ -261,6 +334,22 @@ def reconcile():
     tot = idx.get((2026, "revenue_total", "recommended"))
     if tot and abs(rev - tot) > 0.02:
         problems.append(f"2026 revenue components={rev:.3f} != total={tot:.2f}")
+
+    # Sources & Uses snapshot: components vs totals, and the stated net.
+    # Published to the dollar, so this is a tight check ($10 tolerance).
+    for i, (yr, basis) in enumerate(SNAPSHOT_YEARS):
+        for label, parts, total in (
+            ("revenue", SNAPSHOT_REVENUE, SNAPSHOT_REVENUE_TOTAL),
+            ("expense", SNAPSHOT_EXPENSE, SNAPSHOT_EXPENSE_TOTAL),
+        ):
+            s = sum(v[i] for v in parts.values())
+            if abs(s - total[i]) > 10:
+                problems.append(
+                    f"{yr} snapshot {label} components={s:,.0f} != total={total[i]:,.0f}")
+        net = SNAPSHOT_REVENUE_TOTAL[i] - SNAPSHOT_EXPENSE_TOTAL[i]
+        if abs(net - SNAPSHOT_NET[i]) > 10:
+            problems.append(
+                f"{yr} snapshot net={net:,.0f} != stated={SNAPSHOT_NET[i]:,.0f}")
 
     return problems, residuals
 
