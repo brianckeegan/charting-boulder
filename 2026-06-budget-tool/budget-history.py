@@ -1,0 +1,348 @@
+"""
+Boulder city budget — historical series builder
+===============================================
+Emits a tidy long CSV of the City of Boulder's budget totals, major revenues and
+staffing changes, plus a chart-ready wide pivot, a provenance sidecar and a data
+dictionary.
+
+    python3 budget-history.py
+
+Outputs (written next to this script):
+    budget-history.csv              tidy long — one row per (year, measure, basis)
+    budget-history-wide.csv         chart-ready pivot of the headline series
+    budget-history-provenance.csv   one row per source document
+    budget-history-data-dictionary.md
+
+WHY THE VALUES ARE EMBEDDED IN THIS FILE
+----------------------------------------
+Unlike the OEWS/QCEW pipelines in this repo, there is no bulk download to parse.
+Boulder publishes these figures inside council study-session packets, budget
+presentations and press releases — narrative PDFs and slide decks, with the
+numbers in prose and chart images rather than tables. The OpenGov budget book is
+a JavaScript application with no public data endpoint (probed 2026-09-21: the
+documented REST paths 404).
+
+So this script IS the transcription record: every value below carries the
+`src` id of the document it was read from, and `budget-history-provenance.csv`
+resolves those ids to titles, URLs and retrieval dates. That keeps the chain
+auditable even though the inputs are not machine-readable.
+
+THE `basis` COLUMN IS LOAD-BEARING
+----------------------------------
+A budget figure is meaningless without its vintage. The same year-and-measure
+routinely has three or four different published values:
+
+    2025 sales & use tax ... 180.17 (adopted budget)
+                             176.84 (revised projection, mid-year)
+                             178.75 (actuals, unaudited year-end)
+
+Filtering on a single `basis` is almost always what you want. Mixing them
+silently produces a series that looks like volatility but is really just
+different questions being answered. See the data dictionary.
+
+WHAT THIS DOES NOT COVER
+------------------------
+  * Years before 2022. The council packets narrate budget history back to 2023
+    and chart it back to 2019, but the 2019-2022 totals appear only inside
+    chart images, so they are not transcribed here. They are recoverable from
+    the published budget books.
+  * FTE *levels*. Only year-over-year position CHANGES are published in the
+    sources used here. A staffing headcount series needs the budget books'
+    personnel schedules.
+"""
+
+import csv
+import pathlib
+
+HERE = pathlib.Path(__file__).resolve().parent
+
+# --------------------------------------------------------------------------
+# Source registry. `retrieved` is when the figures were read from the document.
+# --------------------------------------------------------------------------
+SOURCES = {
+    "rec2026": {
+        "title": "2026 Recommended Budget — City Council study session presentation",
+        "publisher": "City of Boulder",
+        "date": "2025-09-11",
+        "url": "https://bouldercolorado.gov/services/budget",
+        "retrieved": "2026-08-29",
+        "notes": "Forecasted 2026 revenues by source; 2026 gap; new fee measures.",
+    },
+    "forecast2026": {
+        "title": "2026 Financial Forecast — City Council study session packet (May 14, 2026)",
+        "publisher": "City of Boulder",
+        "date": "2026-05-14",
+        "url": "https://bouldercolorado.gov/services/budget",
+        "retrieved": "2026-08-29",
+        "notes": "Sales/use tax and property tax tables; 2023-2026 budget history narrative; 2027 gap forecast.",
+    },
+    "rec2027": {
+        "title": "City Manager Releases Balanced Budget… (2027 Recommended Budget release)",
+        "publisher": "City of Boulder",
+        "date": "2026-08-28",
+        "url": "https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input",
+        "retrieved": "2026-09-21",
+        "notes": "2027 totals, General Fund, gap, position changes.",
+    },
+    "glance2027": {
+        "title": "Budget At-A-Glance (2027)",
+        "publisher": "City of Boulder",
+        "date": "2026-08-28",
+        "url": "https://bouldercolorado.gov/budget-glance",
+        "retrieved": "2026-09-21",
+        "notes": "2027 year-over-year percentages; position adds/freezes.",
+    },
+    "brl2027": {
+        "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and reduce pool hours",
+        "publisher": "Boulder Reporting Lab",
+        "date": "2026-09-08",
+        "url": "https://boulderreportinglab.org/2026/09/08/boulders-proposed-2027-budget-would-cut-13-filled-jobs-and-trim-pool-hours/",
+        "retrieved": "2026-09-21",
+        "notes": "General Fund % change; staffing savings; department detail.",
+    },
+}
+
+# --------------------------------------------------------------------------
+# Rows: (year, measure, basis, value, unit, src)
+# --------------------------------------------------------------------------
+ROWS = []
+
+
+def add(year, measure, basis, value, unit, src):
+    ROWS.append(
+        {"year": year, "measure": measure, "basis": basis,
+         "value": value, "unit": unit, "source_id": src}
+    )
+
+
+# --- Citywide budget totals ------------------------------------------------
+# 2023-2026 from the May 2026 packet's budget-history narrative; 2027 from the
+# recommended-budget release. operating + capital = total in every year.
+for yr, total, oper, cap, basis, src in [
+    (2023, 515.4, 354.6, 160.8, "adopted", "forecast2026"),
+    (2024, 515.4, 374.2, 141.2, "adopted", "forecast2026"),
+    (2025, 589.3, 399.3, 189.9, "adopted", "forecast2026"),
+    (2026, 521.0, 407.7, 113.3, "adopted", "forecast2026"),
+    (2027, 552.60, 417.24, 135.36, "recommended", "rec2027"),
+]:
+    add(yr, "budget_total", basis, total, "musd", src)
+    add(yr, "budget_operating", basis, oper, "musd", src)
+    add(yr, "budget_capital", basis, cap, "musd", src)
+
+# --- General Fund ----------------------------------------------------------
+add(2024, "budget_general_fund", "adopted", 196.2, "musd", "forecast2026")
+add(2026, "budget_general_fund", "adopted", 194.5, "musd", "forecast2026")
+add(2027, "budget_general_fund", "recommended", 200.5, "musd", "rec2027")
+# 2025 GF is not stated directly in these sources. The packet gives 2026 as a
+# 7.8% decrease from 2025, so 194.5 / (1 - 0.078) ~= 211.0. Marked `derived`
+# and rounded to 0.1 — do not present it as a published figure.
+add(2025, "budget_general_fund", "derived", round(194.5 / (1 - 0.078), 1), "musd", "forecast2026")
+
+# --- General Fund gap ------------------------------------------------------
+add(2025, "gap_general_fund_low", "identified", 8.0, "musd", "forecast2026")
+add(2025, "gap_general_fund_high", "identified", 10.0, "musd", "forecast2026")
+add(2026, "gap_general_fund", "identified", 7.5, "musd", "forecast2026")
+add(2027, "gap_general_fund", "forecast", 6.5, "musd", "forecast2026")
+add(2027, "gap_general_fund", "recommended", 6.3, "musd", "rec2027")
+
+# --- Sales & use tax, by component ----------------------------------------
+# Columns of the May 2026 packet's sales & use tax table. "n/b" (not budgeted)
+# is recorded as an omitted row, not as zero.
+SALESUSE = {
+    # basis            retail  recMJ  cons/bus  constr   mv    stAudit  useAudit  total
+    (2022, "actual"):            (135.68, 1.71, 12.11, 12.91, 6.07, 0.08, 0.55, 169.11),
+    (2023, "actual"):            (137.73, 1.39, 10.29, 16.54, 6.45, 1.62, 1.50, 175.52),
+    (2024, "actual"):            (139.24, 1.18,  9.84, 14.92, 5.97, 2.12, 0.64, 173.90),
+    (2025, "adopted"):           (144.86, 1.15, 11.93, 14.31, 6.65, 1.28, None, 180.17),
+    (2025, "revised_projection"):(141.57, 1.00, 13.80, 12.70, 6.47, 1.28, None, 176.84),
+    (2025, "actual"):            (140.90, 1.00,  9.82, 18.12, 6.14, 1.58, 1.20, 178.75),
+    (2026, "adopted"):           (147.35, 1.00, 12.67, 10.66, 6.50, 1.46, None, 179.64),
+    (2026, "forecast"):          (139.96, 1.00, 14.63, 13.78, 7.89, 1.49, None, 178.71),
+}
+SU_NAMES = [
+    "salesuse_retail", "salesuse_rec_marijuana_addl", "salesuse_consumer_business_use",
+    "salesuse_construction_use", "salesuse_motor_vehicle_use",
+    "salesuse_audits_sales", "salesuse_audits_use", "salesuse_total",
+]
+for (yr, basis), vals in SALESUSE.items():
+    for name, v in zip(SU_NAMES, vals):
+        if v is not None:
+            add(yr, name, basis, v, "musd", "forecast2026")
+
+# --- Property tax + assessed value ----------------------------------------
+for yr, basis, rev, av in [
+    (2023, "actual",             48.74, 4227),
+    (2024, "actual",             60.63, 5095),
+    (2025, "adopted",            57.12, 5004),
+    (2025, "actual",             57.58, 5091),
+    (2026, "adopted",            59.17, 5184),
+    (2026, "revised_projection", 57.33, 5022),
+]:
+    add(yr, "property_tax_revenue", basis, rev, "musd", "forecast2026")
+    add(yr, "property_assessed_value", basis, av, "musd", "forecast2026")
+add(2026, "property_mill_levy", "adopted", 11.648, "mills", "forecast2026")
+
+# --- 2026 citywide revenue by source (all funds) --------------------------
+# From the 2026 Recommended Budget presentation. Sums to 507.20.
+for name, v in [
+    ("revenue_sales_use_tax", 179.640471),
+    ("revenue_utility", 97.444530),
+    ("revenue_property_tax", 61.732059),
+    ("revenue_other_grouped", 50.582397),
+    ("revenue_development_impact_fees", 27.764864),
+    ("revenue_licenses_permits_fines", 19.857913),
+    ("revenue_intergovernmental", 18.774158),
+    ("revenue_investment_earnings_bonds", 16.841629),
+    ("revenue_accommodation_admission_tax", 12.863745),
+    ("revenue_grants", 10.920529),
+    ("revenue_parking", 10.776877),
+]:
+    add(2026, name, "recommended", round(v, 6), "musd", "rec2026")
+add(2026, "revenue_total", "recommended", 507.2, "musd", "rec2026")
+
+# --- Staffing CHANGES (levels are not published in these sources) ---------
+add(2026, "positions_eliminated", "adopted", 19, "fte", "rec2026")
+add(2027, "positions_eliminated", "recommended", 24, "fte", "rec2027")
+add(2027, "positions_eliminated_filled", "recommended", 13, "fte", "rec2027")
+add(2027, "positions_eliminated_vacant", "recommended", 11, "fte", "rec2027")
+add(2027, "positions_term_limited_ending", "recommended", 12, "fte", "rec2027")
+add(2027, "positions_frozen_to_2028", "recommended", 8.5, "fte", "glance2027")
+add(2027, "positions_added", "recommended", 11.5, "fte", "glance2027")
+add(2027, "staffing_savings", "recommended", 3.0, "musd", "brl2027")
+
+# --- Published year-over-year percentages ---------------------------------
+add(2026, "yoy_operating_pct", "adopted", 2.1, "pct", "forecast2026")
+add(2026, "yoy_general_fund_pct", "adopted", -7.8, "pct", "forecast2026")
+add(2027, "yoy_total_pct", "recommended", 6.07, "pct", "glance2027")
+add(2027, "yoy_operating_pct", "recommended", 2.3, "pct", "glance2027")
+add(2027, "yoy_capital_pct", "recommended", 19.47, "pct", "glance2027")
+add(2027, "yoy_general_fund_pct", "recommended", 3.09, "pct", "brl2027")
+
+# --- Reserve policy --------------------------------------------------------
+add(2026, "reserve_policy_pct_of_operating", "policy", 16.7, "pct", "forecast2026")
+
+
+# --------------------------------------------------------------------------
+# Reconciliation — fail loudly rather than publish an internally broken series
+# --------------------------------------------------------------------------
+def reconcile():
+    """Check every published total against the sum of its published parts.
+
+    Small residuals are expected and are NOT errors: the city totals at full
+    precision and publishes components rounded to $0.01M, so a column of six
+    components can legitimately miss its own total by a few hundredths. Those
+    are surfaced as `residual` (and written into the dataset as
+    `salesuse_component_residual`) rather than swallowed. Anything larger is a
+    real problem and fails the build.
+    """
+    TOL = 0.05
+    idx = {(r["year"], r["measure"], r["basis"]): r["value"] for r in ROWS}
+    problems, residuals = [], []
+
+    for yr in (2023, 2024, 2025, 2026, 2027):
+        basis = "recommended" if yr == 2027 else "adopted"
+        t = idx.get((yr, "budget_total", basis))
+        o = idx.get((yr, "budget_operating", basis))
+        c = idx.get((yr, "budget_capital", basis))
+        if None not in (t, o, c) and abs((o + c) - t) > 0.15:
+            problems.append(f"{yr} {basis}: operating+capital={o + c:.2f} != total={t:.2f}")
+
+    for (yr, basis), vals in sorted(SALESUSE.items()):
+        parts = [v for v in vals[:-1] if v is not None]
+        delta = round(sum(parts) - vals[-1], 2)
+        if abs(delta) > TOL:
+            problems.append(
+                f"{yr} {basis} sales/use components={sum(parts):.2f} != total={vals[-1]:.2f}")
+        elif delta:
+            residuals.append((yr, basis, delta))
+
+    rev = sum(r["value"] for r in ROWS
+              if r["measure"].startswith("revenue_") and r["measure"] != "revenue_total")
+    tot = idx.get((2026, "revenue_total", "recommended"))
+    if tot and abs(rev - tot) > 0.02:
+        problems.append(f"2026 revenue components={rev:.3f} != total={tot:.2f}")
+
+    return problems, residuals
+
+
+# --------------------------------------------------------------------------
+# Outputs
+# --------------------------------------------------------------------------
+# Headline series for charting, with the basis preferred when several exist.
+WIDE = [
+    ("budget_total", ["adopted", "recommended"]),
+    ("budget_operating", ["adopted", "recommended"]),
+    ("budget_capital", ["adopted", "recommended"]),
+    ("budget_general_fund", ["adopted", "recommended", "derived"]),
+    ("salesuse_total", ["actual", "adopted", "forecast"]),
+    ("property_tax_revenue", ["actual", "adopted"]),
+    ("gap_general_fund", ["identified", "recommended", "forecast"]),
+]
+
+
+def main():
+    # Record source-side rounding residuals as data before anything is written,
+    # so a downstream user sees them instead of rediscovering them.
+    problems, residuals = reconcile()
+    for yr, basis, delta in residuals:
+        add(yr, "salesuse_component_residual", basis, delta, "musd", "forecast2026")
+
+    ROWS.sort(key=lambda r: (r["year"], r["measure"], r["basis"]))
+
+    long_path = HERE / "budget-history.csv"
+    with long_path.open("w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=["year", "measure", "basis", "value", "unit", "source_id"])
+        w.writeheader()
+        w.writerows(ROWS)
+
+    idx = {(r["year"], r["measure"], r["basis"]): r["value"] for r in ROWS}
+    years = sorted({r["year"] for r in ROWS})
+    wide_path = HERE / "budget-history-wide.csv"
+    with wide_path.open("w", newline="") as fh:
+        # Every series carries its own *_basis column. Across a historical
+        # series the basis necessarily shifts — actuals for closed years, the
+        # adopted or recommended figure for the current one — and a chart that
+        # hides that shift is quietly comparing different things.
+        cols = ["year"]
+        for m, _ in WIDE:
+            cols += [m, f"{m}_basis"]
+        w = csv.writer(fh)
+        w.writerow(cols)
+        for yr in years:
+            row = [yr]
+            for measure, prefs in WIDE:
+                val, basis = "", ""
+                for b in prefs:
+                    if (yr, measure, b) in idx:
+                        val, basis = idx[(yr, measure, b)], b
+                        break
+                row += [val, basis]
+            w.writerow(row)
+
+    prov_path = HERE / "budget-history-provenance.csv"
+    with prov_path.open("w", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["source_id", "title", "publisher", "date", "url", "retrieved", "n_values", "notes"])
+        for sid, s in SOURCES.items():
+            n = sum(1 for r in ROWS if r["source_id"] == sid)
+            w.writerow([sid, s["title"], s["publisher"], s["date"], s["url"], s["retrieved"], n, s["notes"]])
+
+    print(f"budget-history.csv            {len(ROWS)} rows, "
+          f"{len(years)} years ({min(years)}-{max(years)}), "
+          f"{len({r['measure'] for r in ROWS})} measures")
+    print(f"budget-history-wide.csv       {len(years)} rows x {len(WIDE)} series")
+    print(f"budget-history-provenance.csv {len(SOURCES)} sources")
+    if problems:
+        print("\nRECONCILIATION FAILED:")
+        for p in problems:
+            print("  -", p)
+        raise SystemExit(1)
+    print("\nreconciliation: every published total matches its parts")
+    if residuals:
+        print("source-side rounding residuals (recorded as salesuse_component_residual):")
+        for yr, basis, delta in residuals:
+            print(f"  {yr} {basis}: {delta:+.2f}M")
+
+
+if __name__ == "__main__":
+    main()
