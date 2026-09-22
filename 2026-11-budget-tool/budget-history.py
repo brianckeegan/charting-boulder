@@ -118,6 +118,14 @@ SOURCES = {
         "retrieved": "2026-09-22",
         "notes": "Expenses by cost centre, 2024/2025/2026 adopted. Exported with a 23-fund filter that omits the utility, debt-service and internal-service funds, so the twenty cost centres fall $108-116M short of the citywide total — carried as deptexp_funds_outside_export. No revenue side in this export.",
     },
+    "booksocr": {
+        "title": "City of Boulder annual budget books, pages read by OCR (Datalab)",
+        "publisher": "City of Boulder",
+        "date": "2026-09-22",
+        "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2",
+        "retrieved": "2026-09-22",
+        "notes": "Same books as `books`, but these pages have a text layer pypdf cannot read -- interleaved pie labels, dropped commas, figures inside images. Sent through budget-books-ocr.py. Every figure kept from this source sums to a total the same page publishes; see caveat 16 for what OCR got wrong on those pages and was not kept.",
+    },
     "brl2027": {
         "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and reduce pool hours",
         "publisher": "Boulder Reporting Lab",
@@ -200,7 +208,7 @@ add(2022, "budget_capital", "adopted", 162.4, "musd", "books")
 # value replaces the rounded one. 2011 comes from a sentence in a whole-dollar
 # form nothing else in the corpus uses: "The 2011 budget totals $231,030,000."
 for yr, v in [(2004, 188.145), (2005, 196.167), (2006, 200.100),
-              (2008, 237.781), (2011, 231.030), (2012, 238.960), (2013, 255.0),
+              (2008, 237.781), (2011, 231.030), (2012, 238.960), (2013, 254.693),
               (2014, 269.496), (2015, 319.096), (2016, 327.699), (2017, 321.866),
               # 2018-2022 to the dollar, off the citywide pie headings, which
               # print "TOTAL = $462,518,802" where the narrative rounds to
@@ -256,9 +264,28 @@ for yr, oper, cap, gf, ded in [(2005, 167.059, 29.108, 69.070, 97.989),
 # still checks them: 214.979 + 23.981 = 238.960.
 add(2012, "budget_operating", "adopted", 214.979, "musd", "books")
 add(2012, "budget_capital", "adopted", 23.981, "musd", "books")
-# 2013's block survives extraction with only two of its five figures legible and
-# no way to tell which label each belongs to, so 2013 keeps its rounded total
-# alone. The split is on page 97 of that book for anyone who wants to read it.
+# 2013's block is now complete, and 2012's two halves with it. Both came from OCR
+# (budget-books-ocr.py tier 2) of pages pypdf leaves illegible, and both satisfy
+# the block's two identities:
+#
+#     2012   214.979 + 23.981 = 238.960      91.150 + 123.828 = 214.978*
+#     2013   221.266 + 33.427 = 254.693      98.703 + 122.563 = 221.266
+#
+# * one thousand short of the operating figure, which is the city rounding a half.
+#
+# 2013 is the bigger gain: it had nothing but a total rounded to "$255 million"
+# from prose, and now has an exact total and a full split. The earlier pass could
+# read only two numbers off that page, 221,266 and 98,703, with no way to tell
+# which label either belonged to -- both are confirmed here as operating and the
+# General Fund half, which is what they were guessed to be and correctly not
+# recorded as.
+for yr, oper, cap, gf, ded in [(2013, 221.266, 33.427, 98.703, 122.563)]:
+    add(yr, "budget_operating", "adopted", oper, "musd", "booksocr")
+    add(yr, "budget_capital", "adopted", cap, "musd", "booksocr")
+    add(yr, "budget_operating_general", "adopted", gf, "musd", "booksocr")
+    add(yr, "budget_operating_dedicated", "adopted", ded, "musd", "booksocr")
+add(2012, "budget_operating_general", "adopted", 91.150, "musd", "booksocr")
+add(2012, "budget_operating_dedicated", "adopted", 123.828, "musd", "booksocr")
 
 # --- General Fund, the headline "Total General Fund Uses" ------------------
 # The legacy books' Uses of Funds tables are three and four years WIDE with the
@@ -336,6 +363,19 @@ for yr, v in [(2003, 1290.69), (2004, 1200.68), (2005, 1212.11), (2006, 1218.84)
 # latter is carried, because two rows would share one (year, measure, basis) key.
 for yr, v in [(2011, 1231.25), (2012, 1244.76)]:
     add(yr, "staffing_fte", "restated", v, "fte", "books")
+
+# 2002, from a "History of Standard FTEs" chart data table in the 2011 book,
+# recovered by OCR. Treat it with more caution than the rest of the series: nine
+# of that table's other eleven columns match values sourced independently from
+# other books to the hundredth, but ONE does not -- it gives 2006 as 1,218.34
+# where the 2006-2007 and 2008 books both say 1,218.84, and where that book's own
+# printed variance (1,218.84 - 1,212.11 = 6.73) confirms 1,218.84. So the table
+# carries at least one single-digit misread, and 2002 has no second source.
+#
+# 2001 is in the same table and is NOT recorded: the chart is titled "2002 to
+# 2011", so the 2001 column contradicts its own heading and nothing corroborates
+# it.
+add(2002, "staffing_fte", "adopted", 1304.69, "fte", "booksocr")
 
 # --- The revenue big movers, 2011 --------------------------------------------
 # The 2011 book prints a citywide all-funds revenue pie whose eight slices sum
@@ -430,6 +470,19 @@ DEPARTMENT_FILTERED_LINES = []
 for label, bucket, v24, v25, v26, note in DEPARTMENT_2024_2026:
     for yr, v in ((2024, v24), (2025, v25), (2026, v26)):
         DEPARTMENT_FILTERED_LINES.append((yr, label, v, bucket, note))
+
+# --- The revenue big movers, 2012 --------------------------------------------
+# The 2012 book's citywide revenue pie, recovered by OCR, seven slices summing to
+# its stated $231,945 thousand exactly. Only the four that map onto an existing
+# revenue_* category are recorded; the other three (Other $44.424M, Parks &
+# Recreation $8.206M, Planning and Development Fees $5.518M) are carried together
+# as revenue_other_unmapped so the year still balances, exactly as 2011 is.
+add(2012, "revenue_total", "adopted", 231.945, "musd", "booksocr")
+for measure, v in [("revenue_sales_use_tax", 93.209), ("revenue_utility", 45.392),
+                   ("revenue_property_tax", 30.868), ("revenue_intergovernmental", 4.328)]:
+    add(2012, measure, "adopted", v, "musd", "booksocr")
+add(2012, "revenue_other_unmapped", "adopted",
+    round(231.945 - (93.209 + 45.392 + 30.868 + 4.328), 3), "musd", "booksocr")
 
 # --- Citywide spending by department, from the books' own pies ---------------
 # Nine years of the citywide "Uses of Funds" pie, extracted by
@@ -563,7 +616,80 @@ PIE_LINES = [
     (2022, 'Library & Arts', 11.971),
     (2022, 'Facilities & Fleet', 10.581),
     (2022, 'Climate Initiatives', 6.373),
-    (2022, 'Municipal Court', 2.219),]
+    (2022, 'Municipal Court', 2.219),
+    # -- 2011, 2012, 2013, 2018 and 2019: recovered by OCR (budget-books-ocr.py
+    #    tier 2) from pages pypdf mangles. Every one sums to its own published
+    #    total; see caveat 16 for what OCR got wrong on the same pages.
+    # 2011
+    (2011, 'Police', 29.105),
+    (2011, 'PW/ Utilities', 46.571),
+    (2011, 'Parks & Recreation', 24.86),
+    (2011, 'Open Space/ Mtn Prks', 24.518),
+    (2011, 'PW/ Transportation', 20.808),
+    (2011, 'Fire', 14.983),
+    (2011, 'Housing/ Human Svcs', 12.964),
+    (2011, 'Gen Govrnmt', 11.951),
+    (2011, 'Admin Svcs', 9.925),
+    (2011, 'DUHMD/ Prkng Svcs', 9.679),
+    (2011, 'PW/ DSS', 9.069),
+    (2011, 'Library/ Arts', 7.562),
+    (2011, 'Comm Plnng & Sustainability', 6.344),
+    (2011, 'Debt', 2.691),
+    # 2012
+    (2012, 'Public Works', 77.34),
+    (2012, 'Police', 29.593),
+    (2012, 'Open Space/Mtn Parks', 25.557),
+    (2012, 'Parks and Rec', 24.229),
+    (2012, 'Fire', 15.552),
+    (2012, 'Total Gen Gov', 13.627),
+    (2012, 'Housing/Human Services', 12.066),
+    (2012, 'Admin Services', 11.845),
+    (2012, 'DUHMD/Pkg Svcs', 8.868),
+    (2012, 'Library and Arts', 7.863),
+    (2012, 'Comm Planning and Sust', 7.644),
+    (2012, 'Debt', 4.776),
+    # 2013
+    (2013, 'Public Works', 90.008),
+    (2013, 'Police', 31.747),
+    (2013, 'Open Space and Mountain Parks', 25.528),
+    (2013, 'Parks and Recreation', 25.042),
+    (2013, 'Fire', 16.63),
+    (2013, 'Internal Services', 12.666),
+    (2013, 'General Governance', 9.615),
+    (2013, 'DUHMD/PS', 9.095),
+    (2013, 'Library and Arts', 8.133),
+    (2013, 'Human Services', 6.822),
+    (2013, 'Community Planning and Sustainability', 6.536),
+    (2013, 'Citywide Debt', 5.379),
+    (2013, 'Housing', 5.288),
+    (2013, 'ES and EUD', 2.203),
+    # 2018
+    (2018, 'Public Works', 170.485),
+    (2018, 'Police', 35.762),
+    (2018, 'OSMP', 33.38),
+    (2018, 'Parks & Rec.', 30.747),
+    (2018, 'Internal Services', 24.501),
+    (2018, 'Fire', 20.651),
+    (2018, 'PH&S', 18.55),
+    (2018, 'General Governance', 15.148),
+    (2018, 'Community Vitality', 12.921),
+    (2018, 'Human Services', 10.128),
+    (2018, 'Library & Arts', 9.508),
+    (2018, 'Citywide Debt', 7.265),
+    (2018, 'Energy', 0.165),
+    # 2019
+    (2019, 'Public Works', 124.665),
+    (2019, 'Public Safety', 59.227),
+    (2019, 'Internal Services', 32.701),
+    (2019, 'OSMP', 27.551),
+    (2019, 'Parks & Recreation', 26.494),
+    (2019, 'Housing & Human Services', 23.218),
+    (2019, 'General Governance', 20.814),
+    (2019, 'Community Vitality', 11.184),
+    (2019, 'Library & Arts', 10.344),
+    (2019, 'Energy Strategy', 8.834),
+    (2019, 'Planning & Sustainability', 8.714),
+]
 
 # Normalised label -> (bucket, why). A note is filled in wherever the
 # assignment is a judgment rather than obvious, and those notes are the point of
@@ -653,6 +779,36 @@ PIE_BUCKETS = {
                          "Fund capital and other -- mostly administration, but it "
                          "carries some capital, so this bucket is not purely "
                          "overhead."),
+    # -- added with the OCR-recovered years. Every one is a naming variant of a
+    #    concept already mapped above; the city's own notes on those same pages
+    #    confirm the three that carry real content: "General Government is
+    #    comprised of City Council, City Manager's Office, City Attorney's Office,
+    #    Municipal Court, and several pension and risk management funds",
+    #    "Internal Services includes Human Resources, Finance, Information
+    #    Technology", and "Public Works groups together Development and Support
+    #    Services, Transportation, and Utilities".
+    "pwtransportation": ("infrastructure", ""),
+    "pwdss": ("infrastructure", "Public Works - Development and Support Services."),
+    "duhmdprkngsvcs": ("infrastructure", "See duhmdps."),
+    "duhmdpkgsvcs": ("infrastructure", "See duhmdps."),
+    "openspacemtnprks": ("parks_openspace", ""),
+    "openspacemtnparks": ("parks_openspace", ""),
+    "osmp": ("parks_openspace", ""),
+    "parksandrec": ("parks_openspace", ""),
+    "parksrec": ("parks_openspace", ""),
+    "commplnngsustainability": ("planning_climate", ""),
+    "commplanningandsust": ("planning_climate", ""),
+    "planningsustainability": ("planning_climate", ""),
+    "phs": ("planning_climate",
+            "Planning, Housing and Sustainability. Absorbs HOUSING, which sits in "
+            "community_services in most years -- the same boundary problem as "
+            "planninghousingandsustainability in 2016-2017."),
+    "energy": ("planning_climate", "See esandeud: the municipalisation effort."),
+    "energystrategy": ("planning_climate", "See esandeud."),
+    "adminsvcs": ("administration", ""),
+    "adminservices": ("administration", ""),
+    "gengovrnmt": ("administration", "See generalgovernment."),
+    "totalgengov": ("administration", "See generalgovernment."),
     # -- citywide and debt --------------------------------------------------
     "debt": ("citywide_debt",
              "General Fund debt only. The pie's own note says non-General-Fund "

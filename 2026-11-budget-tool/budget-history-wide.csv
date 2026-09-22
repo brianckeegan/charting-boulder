@@ -1,4 +1,5 @@
 year,budget_total,budget_total_basis,budget_operating,budget_operating_basis,budget_capital,budget_capital_basis,budget_general_fund,budget_general_fund_basis,budget_general_fund_revenue,budget_general_fund_revenue_basis,staffing_fte,staffing_fte_basis,revenue_total,revenue_total_basis,revenue_sales_use_tax,revenue_sales_use_tax_basis,revenue_property_tax,revenue_property_tax_basis,revenue_utility,revenue_utility_basis,salesuse_total,salesuse_total_basis,property_tax_revenue,property_tax_revenue_basis,gap_general_fund,gap_general_fund_basis
+2002,,,,,,,,,,,1304.69,adopted,,,,,,,,,,,,,,
 2003,,,,,,,,,87.252,actual,1290.69,adopted,,,,,,,,,,,,,,
 2004,188.145,adopted,,,,,,,77.962,adopted,1200.68,adopted,,,,,,,,,,,,,,
 2005,196.167,adopted,167.059,adopted,29.108,adopted,,,80.091,adopted,1212.11,adopted,,,,,,,,,,,,,,
@@ -8,8 +9,8 @@ year,budget_total,budget_total_basis,budget_operating,budget_operating_basis,bud
 2009,,,,,,,,,104.02,actual,1288.52,adopted,,,,,,,,,,,,,,
 2010,,,,,,,96.713,adopted,96.746,adopted,1248.24,adopted,224.3,derived,,,,,,,,,,,,
 2011,231.03,adopted,,,,,100.449,adopted,99.761,adopted,1228.5,adopted,224.912,adopted,86.57,adopted,28.563,adopted,44.905,adopted,,,,,,
-2012,238.96,adopted,214.979,adopted,23.981,adopted,104.234,adopted,104.299,adopted,1243.2,adopted,,,,,,,,,,,,,,
-2013,255.0,adopted,,,,,,,109.752,adopted,1260.62,adopted,,,,,,,,,,,,,,
+2012,238.96,adopted,214.979,adopted,23.981,adopted,104.234,adopted,104.299,adopted,1243.2,adopted,231.945,adopted,93.209,adopted,30.868,adopted,45.392,adopted,,,,,,
+2013,254.693,adopted,221.266,adopted,33.427,adopted,,,109.752,adopted,1260.62,adopted,,,,,,,,,,,,,,
 2014,269.496,adopted,227.45,adopted,42.046,adopted,115.684,adopted,,,,,,,,,,,,,,,,,,
 2015,319.096,adopted,250.444,adopted,68.652,adopted,128.483,adopted,,,,,,,,,,,,,,,,,,
 2016,327.699,adopted,254.395,adopted,73.304,adopted,132.268,adopted,,,1419.0,adopted,,,,,,,,,,,,,,
