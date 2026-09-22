@@ -10,8 +10,8 @@ Third stage of the budget-book pipeline, and the only one that costs money:
 Run it on your local copy of the books, with a Datalab key in the environment:
 
     export DATALAB_API_KEY=...
-    python3 budget-books-ocr.py ~/budget-books --estimate     # what it will cost
-    python3 budget-books-ocr.py ~/budget-books --yes          # actually spend it
+    python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --estimate   # what it will cost
+    python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --yes        # actually spend it
 
 The output is JSONL in exactly the shape `budget-books-inventory.py --dump-text`
 writes, so `budget-books-extract.py` reads OCR'd and born-digital pages through
@@ -63,7 +63,8 @@ until `--yes`.
 
 Resumable and cached
 --------------------
-Each page's markdown is written to `<out>/cache/<book>/p<NNN>.md` and a page
+Each page's markdown is written to `<out stem>-cache/<book>/p<NNN>.md` — so
+`budget-books-ocr.jsonl` caches into `budget-books-ocr-cache/` — and a page
 whose file already exists is never re-sent. An interrupted run continues where
 it stopped, re-running is free, and the JSONL can be rebuilt from cache alone
 with `--rebuild`.

@@ -409,7 +409,7 @@ Expenditures for 2013". `budget-books-inventory.py` now carries a `categories`
 target group for exactly those headings. Re-running the dump is free and local:
 
 ```
-python3 budget-books-inventory.py ~/budget-books --dump-text dump.jsonl
+python3 budget-books-inventory.py ~/Downloads/ExportedContents/ --dump-text dump.jsonl
 python3 budget-books-extract.py dump.jsonl -o budget-books-extracted.csv
 ```
 

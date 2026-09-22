@@ -16,11 +16,11 @@ anything. It answers the three questions that decide the cheapest route:
 Usage
 -----
     pip install pypdf
-    python3 budget-books-inventory.py /path/to/budget-books
+    python3 budget-books-inventory.py ~/Downloads/ExportedContents/
 
     # then, once the inventory looks right, pull just the pages that matter
     # into one small PDF per year (typically a few MB in total):
-    python3 budget-books-inventory.py /path/to/budget-books --extract out/
+    python3 budget-books-inventory.py ~/Downloads/ExportedContents/ --extract out/
 
 Outputs
 -------
