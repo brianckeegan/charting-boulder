@@ -1,31 +1,36 @@
 """
-Boulder city budget — historical series builder
-===============================================
-Emits a tidy long CSV of the City of Boulder's budget totals, major revenues and
-staffing changes, plus a chart-ready wide pivot, a provenance sidecar and a data
-dictionary.
+Boulder city budget history -- the series builder
+=================================================
+Builds the City of Boulder's budget history, 2002-2027: citywide totals, the
+General Fund, staffing, the revenue mix, sales and use tax, property tax, and
+spending by department. The last of four stages. The other three read the PDF
+budget books and feed this one; README.md has the whole pipeline.
 
     python3 budget-history.py
 
-Outputs (written next to this script):
-    budget-history.csv              tidy long — one row per (year, measure, basis)
-    budget-history-wide.csv         chart-ready pivot of the headline series
-    budget-history-provenance.csv   one row per source document
-    budget-history-data-dictionary.md
+Takes no arguments and reads no files. Writes, next to this script:
 
-WHY THE VALUES ARE EMBEDDED IN THIS FILE
-----------------------------------------
-Unlike the OEWS/QCEW pipelines in this repo, there is no bulk download to parse.
-Boulder publishes these figures inside council study-session packets, budget
-presentations and press releases — narrative PDFs and slide decks, with the
-numbers in prose and chart images rather than tables. The OpenGov budget book is
-a JavaScript application with no public data endpoint (probed 2026-09-21: the
-documented REST paths 404).
+    budget-history.csv                        tidy long, one row per (year, measure, basis)
+    budget-history-wide.csv                   the headline series, one row per year
+    budget-history-provenance.csv             one row per source, joined on source_id
+    budget-history-department-crosswalk.csv   every department line and its bucket
+    budget-history-validation.md              coverage and every check, rebuilt each run
 
-So this script IS the transcription record: every value below carries the
-`src` id of the document it was read from, and `budget-history-provenance.csv`
-resolves those ids to titles, URLs and retrieval dates. That keeps the chain
-auditable even though the inputs are not machine-readable.
+Nothing is written unless every reconciliation check passes.
+
+WHY THE VALUES ARE TYPED INTO THIS FILE
+---------------------------------------
+There is no bulk download to parse. Boulder publishes these figures in council
+study-session packets, budget presentations, press releases and twenty-two years
+of budget books -- PDFs with the numbers in prose, summary blocks, pie charts and
+multi-year tables. The OpenGov budget book is a JavaScript application with no
+public data endpoint (probed 2026-09-21: the documented REST paths return 404).
+
+So this script IS the transcription record. Every value carries the id of the
+document it was read from, and budget-history-provenance.csv resolves each id to
+a title, URL and retrieval date. Book figures are located by
+budget-books-extract.py and typed in here once checked: the extractor's CSV is a
+list of candidates, not an input this script reads.
 
 THE `basis` COLUMN IS LOAD-BEARING
 ----------------------------------
@@ -38,17 +43,10 @@ routinely has three or four different published values:
 
 Filtering on a single `basis` is almost always what you want. Mixing them
 silently produces a series that looks like volatility but is really just
-different questions being answered. See the data dictionary.
+different questions being answered.
 
-WHAT THIS DOES NOT COVER
-------------------------
-  * Years before 2022. The council packets narrate budget history back to 2023
-    and chart it back to 2019, but the 2019-2022 totals appear only inside
-    chart images, so they are not transcribed here. They are recoverable from
-    the published budget books.
-  * FTE *levels*. Only year-over-year position CHANGES are published in the
-    sources used here. A staffing headcount series needs the budget books'
-    personnel schedules.
+budget-history-data-dictionary.md documents every column, the basis vocabulary,
+the measure catalog and the caveats.
 """
 
 import collections
@@ -59,11 +57,13 @@ import re
 HERE = pathlib.Path(__file__).resolve().parent
 
 # --------------------------------------------------------------------------
-# Source registry. `retrieved` is when the figures were read from the document.
+# Source registry. `date` is the document's own publication date, left empty for
+# a data export or a multi-volume corpus, which have none. `retrieved` is when
+# the figures were read from it.
 # --------------------------------------------------------------------------
 SOURCES = {
     "rec2026": {
-        "title": "2026 Recommended Budget — City Council study session presentation",
+        "title": "2026 Recommended Budget: City Council study session presentation",
         "publisher": "City of Boulder",
         "date": "2025-09-11",
         "url": "https://bouldercolorado.gov/services/budget",
@@ -71,7 +71,7 @@ SOURCES = {
         "notes": "Forecasted 2026 revenues by source; 2026 gap; new fee measures.",
     },
     "forecast2026": {
-        "title": "2026 Financial Forecast — City Council study session packet (May 14, 2026)",
+        "title": "2026 Financial Forecast: City Council study session packet (May 14, 2026)",
         "publisher": "City of Boulder",
         "date": "2026-05-14",
         "url": "https://bouldercolorado.gov/services/budget",
@@ -79,60 +79,60 @@ SOURCES = {
         "notes": "Sales/use tax and property tax tables; 2023-2026 budget history narrative; 2027 gap forecast.",
     },
     "rec2027": {
-        "title": "City Manager Releases Balanced Budget… (2027 Recommended Budget release)",
+        "title": "City Manager Releases Balanced Budget With Focus on Critically Vital Services and Community Input About Priorities",
         "publisher": "City of Boulder",
         "date": "2026-08-28",
         "url": "https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input",
         "retrieved": "2026-09-21",
-        "notes": "2027 totals, General Fund, gap, position changes.",
+        "notes": "The 2027 Recommended Budget news release. 2027 totals, General Fund, gap, position changes.",
     },
     "glance2027": {
         "title": "Budget At-A-Glance (2027)",
         "publisher": "City of Boulder",
-        "date": "2026-08-28",
+        "date": "",
         "url": "https://bouldercolorado.gov/budget-glance",
         "retrieved": "2026-09-21",
-        "notes": "2027 year-over-year percentages; position adds/freezes.",
+        "notes": "2027 year-over-year percentages, General Fund included; position adds and freezes. A web page with no date of its own, published with the 2027 Recommended Budget on 2026-08-28.",
     },
     "snapshot2023": {
-        "title": "2023 Budget — Sources & Uses Citywide, Types (OpenGov dataset 65843, CSV export)",
+        "title": "2023 Budget: Sources & Uses Citywide, Types (OpenGov dataset 65843, CSV export)",
         "publisher": "City of Boulder",
-        "date": "2023-01-01",
+        "date": "",
         "url": "https://cityofboulderco.opengov.com/transparency/#/65843/accountType=revenuesVersusExpenses&breakdown=types&year=2023",
         "retrieved": "2026-09-21",
-        "notes": "Citywide gross sources & uses, 2021 actual / 2022 adopted / 2023 total budget. Different basis from the budget_* headline totals — see the data dictionary.",
+        "notes": "Citywide gross sources & uses, 2021 actual / 2022 adopted / 2023 total budget. Different basis from the budget_* headline totals -- see the data dictionary.",
     },
     "books": {
         "title": "City of Boulder annual budget books, 2005-2026 (summary pages)",
         "publisher": "City of Boulder",
-        "date": "2026-09-22",
+        "date": "",
         "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2",
         "retrieved": "2026-09-22",
-        "notes": "Extracted by budget-books-extract.py from the page-text dump. Three shapes: prose from 2017 on, a self-checking citywide summary block 2005-2017, and three- and four-year-wide Sources/Uses/FTE tables before 2012. Verified: 10 of 12 values overlapping the council packets match exactly.",
+        "notes": "The 34 PDF volumes of the 2005-2026 annual budgets, located by budget-books-extract.py in the text pypdf extracts. Four shapes: prose (2017 on), a self-checking citywide summary block (2005-2017), three- and four-year-wide Sources/Uses/FTE tables (before 2012), and the citywide spending pie. Where these overlap the council packets, 10 of 12 values match exactly.",
     },
     "deptsnapshot2026": {
-        "title": "2026 Budget — Sources and Uses, Cost Centers (OpenGov transparency view, CSV export)",
+        "title": "2026 Budget: Sources and Uses, Cost Centers (OpenGov transparency view, CSV export)",
         "publisher": "City of Boulder",
-        "date": "2026-01-01",
+        "date": "",
         "url": "https://cityofboulderco.opengov.com/transparency",
         "retrieved": "2026-09-22",
-        "notes": "Expenses by cost centre, 2024/2025/2026 adopted. Exported with a 23-fund filter that omits the utility, debt-service and internal-service funds, so the twenty cost centres fall $108-116M short of the citywide total — carried as deptexp_funds_outside_export. No revenue side in this export.",
+        "notes": "Expenses by cost center, 2024/2025/2026 adopted. Exported with a 23-fund filter that omits the utility, debt-service and internal-service funds, so the twenty cost centers fall $108-116M short of the citywide total -- carried as deptexpfiltered_funds_outside_export. No revenue side in this export.",
     },
     "booksocr": {
         "title": "City of Boulder annual budget books, pages read by OCR (Datalab)",
         "publisher": "City of Boulder",
-        "date": "2026-09-22",
+        "date": "",
         "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2",
         "retrieved": "2026-09-22",
-        "notes": "Same books as `books`, but these pages have a text layer pypdf cannot read -- interleaved pie labels, dropped commas, figures inside images. Sent through budget-books-ocr.py. Every figure kept from this source sums to a total the same page publishes; see caveat 16 for what OCR got wrong on those pages and was not kept.",
+        "notes": "Same books as `books`, but pages whose text pypdf cannot use -- interleaved pie labels, dropped commas, figures inside images -- read by Datalab through budget-books-ocr.py. A pie or summary block is kept only when it sums to a total the same page prints; the two single figures, 2002 and 2017 staffing, are kept on their wording and context. The data dictionary's caveat on OCR lists what was read wrong and not kept.",
     },
     "brl2027": {
-        "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and reduce pool hours",
+        "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and trim pool hours",
         "publisher": "Boulder Reporting Lab",
         "date": "2026-09-08",
         "url": "https://boulderreportinglab.org/2026/09/08/boulders-proposed-2027-budget-would-cut-13-filled-jobs-and-trim-pool-hours/",
         "retrieved": "2026-09-21",
-        "notes": "General Fund % change; staffing savings; department detail.",
+        "notes": "Staffing savings: \"about $3 million, according to a city official.\"",
     },
 }
 
@@ -191,22 +191,22 @@ for yr, v in [(2018, 277.6), (2019, 283.2),
 add(2022, "budget_capital", "adopted", 162.4, "musd", "books")
 
 # --- Citywide totals from the budget books, 2004-2022 ---------------------
-# Earlier I expected a basis break here, because the 2016 book publishes its
-# total as "$327 million (excluding transfers)" against $515.4M for 2023. The
-# intervening years disprove it: 327, 322, 389, 354, 370, 342, 462, 515 is a
-# continuous run, so the books report one consistent NET measure throughout and
-# the 2016 note is a scope description, not a different series. (The OpenGov
-# Sources & Uses family below is the gross counterpart — see the dictionary.)
+# One NET measure throughout, with no basis break. The 2016 book publishes its
+# total as "$327 million (excluding transfers)" against $515.4M for 2023, which
+# looks like two different measures, but the intervening years run 327, 322,
+# 389, 354, 370, 342, 462, 515 without a step, so the 2016 note is a scope
+# description rather than a different series. (The OpenGov Sources & Uses
+# family below is the gross counterpart -- see the data dictionary.)
 #
 # Two independent checks fell out of the extraction:
 #   * 2022 operating 300.1 + capital 162.4 = 462.5, exactly the stated total;
 #   * the 2005 and 2006-2007 books both state 2005 = $196,167,000, so that
 #     figure is confirmed by two separately published books.
-# 2012 and 2014-2017 were previously carried at the rounded figure the City
-# Manager's message gives ("totals $270 million"); the summary block on each
-# book's citywide-summaries page states them to the thousand, so the exact
-# value replaces the rounded one. 2011 comes from a sentence in a whole-dollar
-# form nothing else in the corpus uses: "The 2011 budget totals $231,030,000."
+# For 2012 and 2014-2017 the City Manager's message rounds the total ("totals
+# $270 million") and the summary block on the citywide-summaries page states it
+# to the thousand; the exact figure is the one kept. 2011 comes from a sentence
+# in a whole-dollar form nothing else in the corpus uses: "The 2011 budget
+# totals $231,030,000."
 for yr, v in [(2004, 188.145), (2005, 196.167), (2006, 200.100),
               (2008, 237.781), (2011, 231.030), (2012, 238.960), (2013, 254.693),
               (2014, 269.496), (2015, 319.096), (2016, 327.699), (2017, 321.866),
@@ -237,8 +237,8 @@ add(2010, "budget_total", "derived", round(231.030 / 1.0038, 1), "musd", "books"
 #   capital + operating        = total
 #   general fund + dedicated  = operating
 #
-# Both identities hold to the thousand in all seven years, which is why these
-# figures need no cross-checking against another document.
+# Both identities hold to the thousand in all seven of these years, which is
+# why these figures need no cross-checking against another document.
 #
 # The operating figure INCLUDES debt service, which the modern operating series
 # does not separate out either but only these books say so explicitly.
@@ -264,21 +264,20 @@ for yr, oper, cap, gf, ded in [(2005, 167.059, 29.108, 69.070, 97.989),
 # still checks them: 214.979 + 23.981 = 238.960.
 add(2012, "budget_operating", "adopted", 214.979, "musd", "books")
 add(2012, "budget_capital", "adopted", 23.981, "musd", "books")
-# 2013's block is now complete, and 2012's two halves with it. Both came from OCR
-# (budget-books-ocr.py tier 2) of pages pypdf leaves illegible, and both satisfy
-# the block's two identities:
+# 2013's whole block and 2012's two halves come from OCR (budget-books-ocr.py
+# tier 2) of pages pypdf leaves illegible, and both satisfy the block's two
+# identities:
 #
 #     2012   214.979 + 23.981 = 238.960      91.150 + 123.828 = 214.978*
 #     2013   221.266 + 33.427 = 254.693      98.703 + 122.563 = 221.266
 #
 # * one thousand short of the operating figure, which is the city rounding a half.
 #
-# 2013 is the bigger gain: it had nothing but a total rounded to "$255 million"
-# from prose, and now has an exact total and a full split. The earlier pass could
-# read only two numbers off that page, 221,266 and 98,703, with no way to tell
-# which label either belonged to -- both are confirmed here as operating and the
-# General Fund half, which is what they were guessed to be and correctly not
-# recorded as.
+# Without OCR, 2013 would have only a total rounded to "$255 million" in prose.
+# pypdf reads just two numbers off that page, 221,266 and 98,703, with no way to
+# tell which label either belongs to; OCR confirms them as operating and the
+# General Fund half, which is what they looked like and why they were not
+# recorded on a guess.
 # 2011's block is on page 65 of its book, which the born-digital page dump never
 # contained -- it held page 67 -- so 2011 had a total and nothing else. Tier 4 of
 # the OCR pass reached it. Its total is $231,030 thousand, which is exactly the
@@ -333,14 +332,14 @@ for yr, basis, v in [(2003, "actual", 87.252), (2004, "actual", 80.270),
 add(2011, "revenue_total", "adopted", 224.912, "musd", "books")
 add(2010, "revenue_total", "derived", round(224.912 / 1.0029, 1), "musd", "books")
 
-# --- Citywide staffing levels, 2003-2026 -----------------------------------
-# ONE series. This was previously split in two -- staffing_fte from 2016 and
-# staffing_fte_standard before 2012 -- on the grounds that the early books count
-# "standard FTEs" with an explicit scope footnote while the later ones say
-# "citywide staffing level", and that no book published both so the offset could
-# not be measured.
+# --- Citywide staffing levels, 2002-2026 -----------------------------------
+# ONE series, not two. The early books count "standard FTEs" with an explicit
+# scope footnote while the later ones say "citywide staffing level", which makes
+# them look like different measures whose offset no book lets you measure -- and
+# this dataset once split them on that ground, as staffing_fte_standard before
+# 2012 and staffing_fte after.
 #
-# Three books disprove that, by printing both labels for the same number:
+# Three books settle it, by printing both labels for the same number:
 #
 #   2016 p120  "...includes a citywide staffing level of 1,419 FTE."
 #              Figure 5-09: Staffing Levels: Standard FTEs 2002-2016 ... 1,419 FTE
@@ -350,8 +349,8 @@ add(2010, "revenue_total", "derived", round(224.912 / 1.0029, 1), "musd", "books
 #
 # The headline number IS the endpoint of a chart the book itself titles "Standard
 # FTEs", and the city charts that series continuously from 2002. So the two are
-# the same measure, the split was wrong, and the old caveat was discouraging a
-# comparison the city makes itself.
+# the same measure, and splitting them would discourage a comparison the city
+# makes itself.
 #
 # 2012 and 2013 come from the same books' "Staffing Levels in Standard FTEs by
 # Department" tables, which closes the gap to 2016 down to 2014-2015.
@@ -436,10 +435,10 @@ add(2011, "revenue_other_unmapped", "adopted",
 #
 # (year, label as printed, $M, bucket, note)
 DEPARTMENT_LINES = [
-    # 2005, 2006 and 2014-2022 are NOT listed here. They come from the books'
-    # own pies, in PIE_LINES below, which is the same data this block used to
-    # carry by hand -- keeping both would double-count those years, and the
-    # reconciliation check against budget_total would catch it.
+    # Empty on purpose. Every pie year -- 2005, 2006 and 2011-2022 -- comes from
+    # PIE_LINES below and is folded in from there; a year typed here as well
+    # would be counted twice, which the reconciliation against budget_total
+    # would catch.
 ]
 
 # -- 2024-2026: the OpenGov cost-center export. Same twenty cost centers in all
@@ -473,8 +472,10 @@ DEPARTMENT_2024_2026 = [
     ("Municipal Court", "administration", 2.650, 2.768, 2.710, ""),
     ("City Council", "administration", 0.480, 0.466, 0.544, ""),
     ("Fundwide / Citywide", "citywide_debt", 39.801, 40.931, 30.904,
-     "Citywide allocations and contingency. Partly the counterpart of 2005's "
-     "General Government -- see that line's note."),
+     "Citywide allocations and contingency. Partly the counterpart of the "
+     "General Government line of 2005-2012, which likely holds the same kind "
+     "of non-departmental items -- so administration and citywide_debt trade "
+     "content across the series."),
 ]
 # These go into a SEPARATE measure family from the pie years -- see the
 # aggregation below for why.
@@ -497,12 +498,12 @@ add(2012, "revenue_other_unmapped", "adopted",
     round(231.945 - (93.209 + 45.392 + 30.868 + 4.328), 3), "musd", "booksocr")
 
 # --- Citywide spending by department, from the books' own pies ---------------
-# Nine years of the citywide "Uses of Funds" pie, extracted by
-# budget-books-extract.py and validated by construction: each year's slices sum
-# to the citywide total that same book publishes, to the thousand. See the
-# extractor for how the citywide pie is told apart from the General Fund and
-# excluding-utilities pies that share its heading, and for why 2011, 2012, 2018
-# and 2019 are absent rather than guessed.
+# Fourteen years of the citywide "Uses of Funds" pie, validated by construction:
+# each year's slices sum to the citywide total that same book publishes, to the
+# thousand. budget-books-extract.py reads nine of them from pypdf's text; the
+# other five need OCR (see the block below). See the extractor for how the
+# citywide pie is told apart from the General Fund and excluding-utilities pies
+# that share its heading.
 #
 # Labels are reproduced exactly as each document prints them, letter-spacing
 # damage and all ("Fir e", "Parks & Re cr e ation"), because that string is what
@@ -630,8 +631,9 @@ PIE_LINES = [
     (2022, 'Climate Initiatives', 6.373),
     (2022, 'Municipal Court', 2.219),
     # -- 2011, 2012, 2013, 2018 and 2019: recovered by OCR (budget-books-ocr.py
-    #    tier 2) from pages pypdf mangles. Every one sums to its own published
-    #    total; see caveat 16 for what OCR got wrong on the same pages.
+    #    tier 2) from pages pypdf mangles, so their source is booksocr
+    #    (PIE_OCR_YEARS). Every one sums to its own published total; the data
+    #    dictionary's caveat on OCR lists what OCR got wrong on the same pages.
     # 2011
     (2011, 'Police', 29.105),
     (2011, 'PW/ Utilities', 46.571),
@@ -702,20 +704,38 @@ PIE_LINES = [
     (2019, 'Energy Strategy', 8.834),
     (2019, 'Planning & Sustainability', 8.714),
 ]
+# The pie years read by OCR. Their rows cite `booksocr` rather than `books`, in
+# the dataset and in the crosswalk alike, so a reader can tell a figure pypdf
+# read from one Datalab read.
+PIE_OCR_YEARS = {2011, 2012, 2013, 2018, 2019}
+if not PIE_OCR_YEARS <= {y for y, _l, _v in PIE_LINES}:
+    raise SystemExit("PIE_OCR_YEARS names a year PIE_LINES does not have: "
+                     f"{sorted(PIE_OCR_YEARS - {y for y, _l, _v in PIE_LINES})}")
 
-# Normalised label -> (bucket, why). A note is filled in wherever the
+
+def dept_source(family, year):
+    """The source_id for a departmental row: which document, and which reading."""
+    if family == "deptexpfiltered":
+        return "deptsnapshot2026"
+    return "booksocr" if year in PIE_OCR_YEARS else "books"
+
+
+# Normalized label -> (bucket, why). A note is filled in wherever the
 # assignment is a judgment rather than obvious, and those notes are the point of
-# this table: seven buckets cannot absorb twenty years of reorganisation without
+# this table: seven buckets cannot absorb twenty years of reorganization without
 # choices, and a choice nobody can see is indistinguishable from an error.
+#
+# A note of the form "see:<label>" repeats that label's note, so every row of the
+# crosswalk CSV explains itself without sending the reader to another row.
 PIE_BUCKETS = {
     # -- public safety ------------------------------------------------------
     "police": ("public_safety", ""),
     "fire": ("public_safety", ""),
     "firerescue": ("public_safety", ""),
     "publicsafety": ("public_safety",
-                     "2020 is the one year that does not separate police from fire; "
-                     "its single $62.3M slice covers both. 2021 splits them again "
-                     "at $36.9M and $21.3M."),
+                     "2019 and 2020 do not separate police from fire; their single "
+                     "slices, $59.2M and $62.3M, cover both. 2021 splits them "
+                     "again at $36.9M and $21.3M."),
     # -- infrastructure -----------------------------------------------------
     "publicworks": ("infrastructure",
                     "One undivided slice, and the reason the buckets are this "
@@ -749,9 +769,11 @@ PIE_BUCKETS = {
     "housinghumansvcs": ("community_services", ""),
     "housinghumanservices": ("community_services", ""),
     "humanservices": ("community_services",
-                      "2014-2017 report human services and housing as two "
-                      "slices; every other year combines them."),
-    "housing": ("community_services", "See humanservices."),
+                      "Human services without housing. 2013-2015 print housing "
+                      "as a slice of its own, also community_services; 2016-2018 "
+                      "fold it into Planning, Housing and Sustainability, in "
+                      "planning_climate. The other years combine the two."),
+    "housing": ("community_services", "see:humanservices"),
     "library": ("community_services", ""),
     "arts": ("community_services", ""),
     "libraryandarts": ("community_services", ""),
@@ -766,23 +788,26 @@ PIE_BUCKETS = {
                                     "department."),
     "communityplanningandsustainability": ("planning_climate", ""),
     "planninghousingandsustainability": ("planning_climate",
-                                         "The 2016-2017 name, and it absorbs "
-                                         "HOUSING, which sits in "
-                                         "community_services in every other "
-                                         "year. Those two buckets therefore "
-                                         "trade roughly $5M across 2016-2017."),
+                                         "Absorbs HOUSING, which sits in "
+                                         "community_services in the other "
+                                         "years, so across 2016-2018 those two "
+                                         "buckets trade housing's budget -- "
+                                         "about $5M a year when 2013-2015 "
+                                         "print it separately."),
     "climateinitiatives": ("planning_climate", ""),
     "esandeud": ("planning_climate",
                  "Energy Strategy and Electric Utility Development -- the "
-                 "municipalisation effort. Bucketed as climate and energy policy "
+                 "municipalization effort. Bucketed as climate and energy policy "
                  "rather than as a utility operation, because the city never "
-                 "owned the utility. The line ends after 2015."),
+                 "owned the utility. Printed as ES and EUD in 2013-2015, Energy "
+                 "in 2018 and Energy Strategy in 2019, with no line of its own in "
+                 "2016-2017."),
     # -- administration -----------------------------------------------------
     "generalgovernment": ("administration",
                           "The least comparable line in the crosswalk. It likely "
-                          "holds non-departmental items that 2020 onward books to "
-                          "Fundwide/Citywide, so administration and citywide_debt "
-                          "trade content across the series."),
+                          "holds non-departmental items that the 2024-2026 export "
+                          "books to Fundwide / Citywide, so administration and "
+                          "citywide_debt trade content across the series."),
     "generalgovernance": ("administration", ""),
     "administrativesvcs": ("administration", ""),
     "municipalcourt": ("administration", ""),
@@ -801,8 +826,8 @@ PIE_BUCKETS = {
     #    Services, Transportation, and Utilities".
     "pwtransportation": ("infrastructure", ""),
     "pwdss": ("infrastructure", "Public Works - Development and Support Services."),
-    "duhmdprkngsvcs": ("infrastructure", "See duhmdps."),
-    "duhmdpkgsvcs": ("infrastructure", "See duhmdps."),
+    "duhmdprkngsvcs": ("infrastructure", "see:duhmdps"),
+    "duhmdpkgsvcs": ("infrastructure", "see:duhmdps"),
     "openspacemtnprks": ("parks_openspace", ""),
     "openspacemtnparks": ("parks_openspace", ""),
     "osmp": ("parks_openspace", ""),
@@ -812,22 +837,23 @@ PIE_BUCKETS = {
     "commplanningandsust": ("planning_climate", ""),
     "planningsustainability": ("planning_climate", ""),
     "phs": ("planning_climate",
-            "Planning, Housing and Sustainability. Absorbs HOUSING, which sits in "
-            "community_services in most years -- the same boundary problem as "
-            "planninghousingandsustainability in 2016-2017."),
-    "energy": ("planning_climate", "See esandeud: the municipalisation effort."),
-    "energystrategy": ("planning_climate", "See esandeud."),
+            "PH&S is Planning, Housing and Sustainability, abbreviated. Absorbs "
+            "HOUSING, which sits in community_services in the other years, so "
+            "across 2016-2018 those two buckets trade housing's budget -- about "
+            "$5M a year when 2013-2015 print it separately."),
+    "energy": ("planning_climate", "see:esandeud"),
+    "energystrategy": ("planning_climate", "see:esandeud"),
     "adminsvcs": ("administration", ""),
     "adminservices": ("administration", ""),
-    "gengovrnmt": ("administration", "See generalgovernment."),
-    "totalgengov": ("administration", "See generalgovernment."),
+    "gengovrnmt": ("administration", "see:generalgovernment"),
+    "totalgengov": ("administration", "see:generalgovernment"),
     # -- citywide and debt --------------------------------------------------
     "debt": ("citywide_debt",
              "General Fund debt only. The pie's own note says non-General-Fund "
              "debt service sits inside the departments, which is true in 2011 "
              "too, so the bucket is consistent -- but it is not all of the "
              "city's debt service."),
-    "citywidedebt": ("citywide_debt", "See debt."),
+    "citywidedebt": ("citywide_debt", "see:debt"),
 }
 
 
@@ -836,7 +862,7 @@ def _slug(label):
 
 
 # Fold the pies into the same (year, label, value, bucket, note) shape the
-# OpenGov cost-centre rows use, so one aggregation and one crosswalk cover both.
+# OpenGov cost-center rows use, so one aggregation and one crosswalk cover both.
 _unmapped = sorted({_slug(l) for _y, l, _v in PIE_LINES if _slug(l) not in PIE_BUCKETS})
 if _unmapped:
     # A new year's pie will bring labels this table has never seen, and a bare
@@ -846,9 +872,22 @@ if _unmapped:
     raise SystemExit(
         "PIE_BUCKETS has no bucket for: " + ", ".join(_unmapped)
         + "\nAdd each one, with a note if the choice is a judgment call.")
+
+
+def _bucket_note(slug, via=()):
+    """A label's note, following "see:<label>" so each crosswalk row stands alone."""
+    note = PIE_BUCKETS[slug][1]
+    if not note.startswith("see:"):
+        return note
+    ref = note[len("see:"):]
+    if ref in via or ref not in PIE_BUCKETS or not PIE_BUCKETS[ref][1]:
+        raise SystemExit(f"PIE_BUCKETS[{slug!r}] points at {ref!r}, which has no note to repeat")
+    return _bucket_note(ref, via + (slug,))
+
+
 for _yr, _label, _v in PIE_LINES:
-    _bucket, _note = PIE_BUCKETS[_slug(_label)]
-    DEPARTMENT_LINES.append((_yr, _label, _v, _bucket, _note))
+    DEPARTMENT_LINES.append((_yr, _label, _v, PIE_BUCKETS[_slug(_label)][0],
+                             _bucket_note(_slug(_label))))
 
 BUCKET_ORDER = ["public_safety", "infrastructure", "parks_openspace",
                 "community_services", "planning_climate", "administration",
@@ -858,7 +897,7 @@ BUCKET_ORDER = ["public_safety", "infrastructure", "parks_openspace",
 #
 # deptexp_*          the books' citywide pies, 2005-2022. Every fund, comparable
 #                    year to year.
-# deptexpfiltered_*  the OpenGov cost-centre export, 2024-2026, taken with a
+# deptexpfiltered_*  the OpenGov cost-center export, 2024-2026, taken with a
 #                    23-fund filter that omits the utility, debt-service and
 #                    internal-service funds.
 #
@@ -881,10 +920,10 @@ for family, lines in (("deptexp", DEPARTMENT_LINES),
         for bucket in BUCKET_ORDER:
             if bucket in by_bucket:
                 add(yr, f"{family}_{bucket}", "adopted", round(by_bucket[bucket], 3),
-                    "musd", "books" if family == "deptexp" else "deptsnapshot2026")
+                    "musd", dept_source(family, yr))
 
 # The 2024-2026 export was taken with a fund filter that leaves out the utility,
-# debt-service and internal-service funds, so its twenty cost centres add up to
+# debt-service and internal-service funds, so its twenty cost centers add up to
 # $108-116M less than the citywide budget. Rather than let the departmental
 # series quietly not add up, the shortfall is carried as its own explicit line,
 # computed against the published total:
@@ -965,7 +1004,9 @@ for name, v in [
     add(2026, name, "recommended", round(v, 6), "musd", "rec2026")
 add(2026, "revenue_total", "recommended", 507.2, "musd", "rec2026")
 
-# --- Staffing CHANGES (levels are not published in these sources) ---------
+# --- Staffing CHANGES, 2026-2027 --------------------------------------------
+# Year-over-year changes from the packets and releases. The level series is
+# staffing_fte above; the two do not reconcile (see the data dictionary).
 add(2026, "positions_eliminated", "adopted", 19, "fte", "rec2026")
 add(2027, "positions_eliminated", "recommended", 24, "fte", "rec2027")
 add(2027, "positions_eliminated_filled", "recommended", 13, "fte", "rec2027")
@@ -981,7 +1022,7 @@ add(2026, "yoy_general_fund_pct", "adopted", -7.8, "pct", "forecast2026")
 add(2027, "yoy_total_pct", "recommended", 6.07, "pct", "glance2027")
 add(2027, "yoy_operating_pct", "recommended", 2.3, "pct", "glance2027")
 add(2027, "yoy_capital_pct", "recommended", 19.47, "pct", "glance2027")
-add(2027, "yoy_general_fund_pct", "recommended", 3.09, "pct", "brl2027")
+add(2027, "yoy_general_fund_pct", "recommended", 3.09, "pct", "glance2027")
 
 # --- Reserve policy --------------------------------------------------------
 add(2026, "reserve_policy_pct_of_operating", "policy", 16.7, "pct", "forecast2026")
@@ -1053,10 +1094,26 @@ for i, (yr, basis) in enumerate(SNAPSHOT_YEARS):
 
 
 # --------------------------------------------------------------------------
-# Reconciliation — fail loudly rather than publish an internally broken series
+# Reconciliation -- fail loudly rather than publish an internally broken series
 # --------------------------------------------------------------------------
+# What each check is called in budget-history-validation.md, and its tolerance.
+CHECKS = {
+    "keys": ("One row per (year, measure, basis)", "exact"),
+    "dept": ("Department buckets, plus any balancing line, sum to `budget_total`", "$0.05M"),
+    "bucket": ("A department label keeps its bucket from year to year, or a note says why", "exact"),
+    "halves": ("General Fund half + dedicated half = `budget_operating`", "$0.2M"),
+    "opcap": ("`budget_operating` + `budget_capital` = `budget_total`", "$0.2M"),
+    "salesuse": ("Sales and use tax components sum to `salesuse_total`", "$0.05M"),
+    "revenue": ("Revenue components sum to that year's `revenue_total`", "$0.02M"),
+    "snapshot": ("OpenGov snapshot components sum to their totals, and net = revenue - expense", "$10"),
+}
+
+
 def reconcile():
     """Check every published total against the sum of its published parts.
+
+    Returns (problems, residuals, checked). `checked` maps each CHECKS key to
+    [cases checked, largest miss, where] for the validation report.
 
     Small residuals are expected and are NOT errors: the city totals at full
     precision and publishes components rounded to $0.01M, so a column of six
@@ -1068,6 +1125,13 @@ def reconcile():
     TOL = 0.05
     idx = {(r["year"], r["measure"], r["basis"]): r["value"] for r in ROWS}
     problems, residuals = [], []
+    checked = {k: [0, 0.0, ""] for k in CHECKS}
+
+    def tally(check, miss, where):
+        c = checked[check]
+        c[0] += 1
+        if abs(miss) > c[1] + 1e-9:
+            c[1], c[2] = abs(miss), where
 
     # One row per (year, measure, basis). Two rows with the same key are not a
     # tidy-data violation to shrug at: `idx` keeps only the last of them, so a
@@ -1077,29 +1141,35 @@ def reconcile():
     # the summary block.
     seen = collections.Counter((r["year"], r["measure"], r["basis"]) for r in ROWS)
     for (yr, measure, basis), n in sorted(seen.items()):
+        tally("keys", 0, "")
         if n > 1:
             vals = sorted({r["value"] for r in ROWS
                            if (r["year"], r["measure"], r["basis"]) == (yr, measure, basis)})
             problems.append(f"{yr} {measure} [{basis}] appears {n} times: {vals}")
 
     # The departmental buckets, plus the balancing line where there is one, must
-    # add up to the published citywide total. For 2005 and 2006 this is exact by
-    # construction (the pie sums to its own total); for 2024-2026 it holds only
+    # add up to the published citywide total. For the pie years this is exact by
+    # construction (each pie sums to its own total); for 2024-2026 it holds only
     # because the balancing line is defined as the difference, so what this
-    # really guards is a mistyped cost centre.
+    # really guards is a mistyped cost center. A year with no total to check
+    # against is itself a problem, not a pass.
     for family, lines in (("deptexp_", DEPARTMENT_LINES),
                           ("deptexpfiltered_", DEPARTMENT_FILTERED_LINES)):
         for yr in sorted({y for y, *_ in lines}):
             parts = sum(v for (y, m, b), v in idx.items()
                         if y == yr and m.startswith(family))
             total = idx.get((yr, "budget_total", "adopted"))
-            if total and abs(parts - total) > TOL:
+            if total is None:
+                problems.append(f"{yr}: {family}* has no adopted budget_total to sum to")
+                continue
+            tally("dept", parts - total, f"{yr} {family}*")
+            if abs(parts - total) > TOL:
                 problems.append(
                     f"{yr}: {family}* buckets sum {parts:,.3f} != "
                     f"budget_total {total:,.3f}")
 
     # The same department label must land in the same bucket every year it
-    # appears, unless the line says why not. Without this, a relabelled
+    # appears, unless the line says why not. Without this, a relabeled
     # department could drift between buckets and the series would show a
     # transfer of money that never happened.
     seen_bucket = {}
@@ -1109,6 +1179,8 @@ def reconcile():
             problems.append(
                 f"{label!r} is {bucket} in {yr} but {seen_bucket[key][0]} in "
                 f"{seen_bucket[key][1]} with no note explaining the change")
+        if key not in seen_bucket:
+            tally("bucket", 0, "")
         seen_bucket.setdefault(key, (bucket, yr))
 
     # operating + capital = total, for every year where all three are known,
@@ -1124,38 +1196,45 @@ def reconcile():
             g = idx.get((yr, "budget_operating_general", basis))
             d = idx.get((yr, "budget_operating_dedicated", basis))
             o_ = idx.get((yr, "budget_operating", basis))
-            if None not in (g, d, o_) and abs((g + d) - o_) > 0.2:
-                problems.append(
-                    f"{yr} {basis}: general {g} + dedicated {d} = {g + d:.3f} "
-                    f"!= operating {o_}")
+            if None not in (g, d, o_):
+                tally("halves", (g + d) - o_, f"{yr} {basis}")
+                if abs((g + d) - o_) > 0.2:
+                    problems.append(
+                        f"{yr} {basis}: general {g} + dedicated {d} = {g + d:.3f} "
+                        f"!= operating {o_}")
             t = idx.get((yr, "budget_total", basis))
             o = idx.get((yr, "budget_operating", basis))
             c = idx.get((yr, "budget_capital", basis))
-            if None not in (t, o, c) and abs((o + c) - t) > 0.2:
-                problems.append(
-                    f"{yr} {basis}: operating+capital={o + c:.2f} != total={t:.2f}")
+            if None not in (t, o, c):
+                tally("opcap", (o + c) - t, f"{yr} {basis}")
+                if abs((o + c) - t) > 0.2:
+                    problems.append(
+                        f"{yr} {basis}: operating+capital={o + c:.2f} != total={t:.2f}")
 
     for (yr, basis), vals in sorted(SALESUSE.items()):
         parts = [v for v in vals[:-1] if v is not None]
         delta = round(sum(parts) - vals[-1], 2)
+        tally("salesuse", delta, f"{yr} {basis}")
         if abs(delta) > TOL:
             problems.append(
                 f"{yr} {basis} sales/use components={sum(parts):.2f} != total={vals[-1]:.2f}")
         elif delta:
             residuals.append((yr, basis, delta))
 
-    # Revenue components against their own year's total. This check used to sum
-    # every revenue_* row in the dataset regardless of year and compare the lot
-    # to 2026's total -- correct only for as long as 2026 was the only year with
-    # a revenue mix, and wrong the moment 2011 was added. Keyed on (year, basis)
-    # now, so each year is checked against itself.
+    # Revenue components against their own year's total, keyed on (year, basis)
+    # so each year is checked against itself. (Summing every revenue_* row in the
+    # dataset against one total was right only while one year had a revenue mix.)
     rev_years = collections.defaultdict(float)
     for r in ROWS:
         if r["measure"].startswith("revenue_") and r["measure"] != "revenue_total":
             rev_years[(r["year"], r["basis"])] += r["value"]
     for (yr, basis), parts in sorted(rev_years.items()):
         tot = idx.get((yr, "revenue_total", basis))
-        if tot and abs(parts - tot) > 0.02:
+        if tot is None:
+            problems.append(f"{yr} {basis}: revenue components with no revenue_total")
+            continue
+        tally("revenue", parts - tot, f"{yr} {basis}")
+        if abs(parts - tot) > 0.02:
             problems.append(
                 f"{yr} {basis} revenue components={parts:.3f} != total={tot:.2f}")
 
@@ -1167,116 +1246,225 @@ def reconcile():
             ("expense", SNAPSHOT_EXPENSE, SNAPSHOT_EXPENSE_TOTAL),
         ):
             s = sum(v[i] for v in parts.values())
+            tally("snapshot", (s - total[i]) / 1e6, f"{yr} {label}")
             if abs(s - total[i]) > 10:
                 problems.append(
                     f"{yr} snapshot {label} components={s:,.0f} != total={total[i]:,.0f}")
         net = SNAPSHOT_REVENUE_TOTAL[i] - SNAPSHOT_EXPENSE_TOTAL[i]
+        tally("snapshot", (net - SNAPSHOT_NET[i]) / 1e6, f"{yr} net")
         if abs(net - SNAPSHOT_NET[i]) > 10:
             problems.append(
                 f"{yr} snapshot net={net:,.0f} != stated={SNAPSHOT_NET[i]:,.0f}")
 
-    return problems, residuals
+    return problems, residuals, checked
 
 
 # --------------------------------------------------------------------------
 # Outputs
 # --------------------------------------------------------------------------
-# Headline series for charting, with the basis preferred when several exist.
+# The headline series, one row per year, and the order of preference when a
+# year carries several bases. One rule throughout. A budget series takes what
+# council adopted, or what the manager recommended for the year not yet
+# adopted, and falls back to `derived` only where the data dictionary documents
+# the derivation. A revenue-collection series takes actuals for closed years
+# and the adopted or forecast figure for open ones. `actual` is deliberately not
+# a fallback for a budget series: an actual among adopted neighbours answers a
+# different question, and a chart drawn from this file would show the
+# difference as a jump.
 WIDE = [
     ("budget_total", ["adopted", "recommended"]),
     ("budget_operating", ["adopted", "recommended"]),
     ("budget_capital", ["adopted", "recommended"]),
     ("budget_general_fund", ["adopted", "recommended", "derived"]),
-    ("budget_general_fund_revenue", ["adopted", "actual"]),
+    ("budget_general_fund_revenue", ["adopted", "recommended"]),
     ("staffing_fte", ["adopted"]),
     ("revenue_total", ["adopted", "recommended", "derived"]),
     ("revenue_sales_use_tax", ["adopted", "recommended"]),
     ("revenue_property_tax", ["adopted", "recommended"]),
     ("revenue_utility", ["adopted", "recommended"]),
     ("salesuse_total", ["actual", "adopted", "forecast"]),
-    ("property_tax_revenue", ["actual", "adopted"]),
+    ("property_tax_revenue", ["actual", "adopted", "forecast"]),
     ("gap_general_fund", ["identified", "recommended", "forecast"]),
 ]
 
+LONG_COLUMNS = ["year", "measure", "basis", "value", "unit", "source_id"]
+CROSSWALK_COLUMNS = ["year", "measure_family", "source_label", "bucket",
+                     "value_musd", "pct_of_year_departmental", "source_id", "note"]
+PROVENANCE_COLUMNS = ["source_id", "title", "publisher", "date", "url",
+                      "retrieved", "n_values", "notes"]
+
+# Typographic punctuation, spelled in ASCII on the way out. The CSVs are UTF-8,
+# but Excel opens a CSV that has no byte-order mark in the system's legacy
+# encoding and turns an em dash into "â€”" -- and Excel is where most readers of
+# a city budget will open these.
+_ASCII = str.maketrans({"—": "--", "–": "-", "‑": "-", "−": "-",
+                        "‘": "'", "’": "'", "“": '"', "”": '"',
+                        "…": "...", " ": " ", "×": "x"})
+
+
+def write_csv(path, header, rows):
+    """One output CSV: UTF-8, LF line endings, typographic punctuation as ASCII."""
+    with path.open("w", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh, lineterminator="\n")
+        w.writerow(header)
+        for row in rows:
+            w.writerow([c.translate(_ASCII) if isinstance(c, str) else c for c in row])
+
+
+def span(years):
+    """[2004, 2005, 2006, 2008] -> '2004–2006, 2008'."""
+    years, runs = sorted(set(years)), []
+    for y in years:
+        if runs and y == runs[-1][1] + 1:
+            runs[-1][1] = y
+        else:
+            runs.append([y, y])
+    return ", ".join(str(a) if a == b else f"{a}–{b}" for a, b in runs)
+
+
+def write_validation(path, checked, residuals, cross_rows, wide_rows):
+    """budget-history-validation.md: counts, coverage and checks, from the data.
+
+    Everything a hand-maintained document would let drift -- row counts, the
+    years each measure covers, how many cases each check saw -- is written here
+    on every run instead, and the data dictionary points to it.
+    """
+    years = [r["year"] for r in ROWS]
+    cross_years = [r[0] for r in cross_rows]
+    L = ["# Budget history: validation report", "",
+         "Written by `budget-history.py` every time it runs, from the rows it has",
+         "just built. Nothing here is typed by hand, so where this file and the",
+         "data dictionary disagree about a count or a year, this file is right.", "",
+         "## Files", "",
+         "| File | Rows | Years |", "|---|---:|---|",
+         f"| `budget-history.csv` | {len(ROWS)} | {span(years)} |",
+         f"| `budget-history-wide.csv` | {len(wide_rows)} | {span(r[0] for r in wide_rows)} |",
+         f"| `budget-history-department-crosswalk.csv` | {len(cross_rows)} | {span(cross_years)} |",
+         f"| `budget-history-provenance.csv` | {len(SOURCES)} | not applicable |", "",
+         "## Checks", "",
+         "Every check below ran on this build and passed. A failing check stops the",
+         "build before any file is written, so a published file has passed all of them.", "",
+         "| Check | Cases | Tolerance | Largest miss |", "|---|---:|---|---|"]
+    for key, (label, tol) in CHECKS.items():
+        n, miss, where = checked[key]
+        if tol == "exact":
+            worst = "none"
+        elif key == "snapshot":
+            worst = f"${miss * 1e6:,.0f} ({where})"
+        else:
+            worst = f"${miss:.3f}M ({where})"
+        L.append(f"| {label} | {n} | {tol} | {worst} |")
+    L += ["", "## Rounding residuals", "",
+          "The city totals sales and use tax at full precision and prints components",
+          "rounded to $0.01M, so a column can miss its own total by a few hundredths.",
+          "Each miss is kept in the data as `salesuse_component_residual`:", "",
+          "| Year | Basis | Residual |", "|---|---|---:|"]
+    L += [f"| {yr} | `{basis}` | {'+' if delta > 0 else '-'}${abs(delta):.2f}M |"
+          for yr, basis, delta in residuals]
+    L += ["", "## Rows by source", "",
+          "| `source_id` | Rows | Years |", "|---|---:|---|"]
+    for sid in SOURCES:
+        ys = [r["year"] for r in ROWS if r["source_id"] == sid]
+        L.append(f"| `{sid}` | {len(ys)} | {span(ys)} |")
+    L += ["", "## Rows by basis", "", "| `basis` | Rows | Years |", "|---|---:|---|"]
+    for basis in sorted({r["basis"] for r in ROWS}):
+        ys = [r["year"] for r in ROWS if r["basis"] == basis]
+        L.append(f"| `{basis}` | {len(ys)} | {span(ys)} |")
+    L += ["", "## Coverage by measure", "",
+          "Years with at least one row, on any basis. A year that is missing is",
+          "absent from the data, never zero.", "",
+          "| Measure | Unit | Years | Bases |", "|---|---|---|---|"]
+    for m in sorted({r["measure"] for r in ROWS}):
+        rs = [r for r in ROWS if r["measure"] == m]
+        L.append(f"| `{m}` | {rs[0]['unit']} | {span(r['year'] for r in rs)} | "
+                 + ", ".join(f"`{b}`" for b in sorted({r['basis'] for r in rs})) + " |")
+    L += ["", "## Department crosswalk", "",
+          "| Family | Years | Rows | Distinct printed labels | Rows with a note |",
+          "|---|---|---:|---:|---:|"]
+    for fam in ("deptexp", "deptexpfiltered"):
+        rs = [r for r in cross_rows if r[1] == fam]
+        L.append(f"| `{fam}` | {span(r[0] for r in rs)} | {len(rs)} | "
+                 f"{len({r[2] for r in rs})} | {sum(1 for r in rs if r[7])} |")
+    L += ["", "Years in which each bucket has a line:", "",
+          "| Bucket | `deptexp` | `deptexpfiltered` |", "|---|---|---|"]
+    for bucket in BUCKET_ORDER:
+        cells = [span(r[0] for r in cross_rows if r[1] == fam and r[3] == bucket) or "none"
+                 for fam in ("deptexp", "deptexpfiltered")]
+        L.append(f"| `{bucket}` | {cells[0]} | {cells[1]} |")
+    path.write_text("\n".join(L) + "\n", encoding="utf-8")
+
 
 def main():
-    # Record source-side rounding residuals as data before anything is written,
-    # so a downstream user sees them instead of rediscovering them.
-    problems, residuals = reconcile()
+    # Source-side rounding residuals are recorded as data, so a downstream user
+    # sees them instead of rediscovering them -- then everything is checked
+    # again with those rows in place, and nothing is written unless it all
+    # passes. Writing first and checking after would leave a failed build's
+    # half-finished CSVs looking like a finished one.
+    _, residuals, _ = reconcile()
     for yr, basis, delta in residuals:
         add(yr, "salesuse_component_residual", basis, delta, "musd", "forecast2026")
+    problems, _, checked = reconcile()
+    if problems:
+        print("RECONCILIATION FAILED -- nothing written:")
+        for p in problems:
+            print("  -", p)
+        raise SystemExit(1)
 
     ROWS.sort(key=lambda r: (r["year"], r["measure"], r["basis"]))
 
     # The department crosswalk, generated from DEPARTMENT_LINES rather than
     # written alongside it, so what is documented is exactly what was used. One
     # row per department line item per year: the label as its document printed
-    # it, the bucket it went into, its share of that year's citywide total, and
-    # the reason wherever the assignment was a judgment call.
-    cross_path = HERE / "budget-history-department-crosswalk.csv"
+    # it, the bucket it went into, its share of that year's departmental total,
+    # and the reason wherever the assignment was a judgment call.
     all_dept = ([("deptexp", r) for r in DEPARTMENT_LINES]
                 + [("deptexpfiltered", r) for r in DEPARTMENT_FILTERED_LINES])
     dept_totals = collections.defaultdict(float)
     for fam, (y, _l, v, _b, _n) in all_dept:
         dept_totals[(fam, y)] += v
-    with cross_path.open("w", newline="") as fh:
-        w = csv.writer(fh)
-        w.writerow(["year", "measure_family", "source_label", "bucket",
-                    "value_musd", "pct_of_year_departmental", "source_id", "note"])
+    cross_rows = [
+        [yr, fam, label, bucket, v, round(100 * v / dept_totals[(fam, yr)], 2),
+         dept_source(fam, yr), note]
         for fam, (yr, label, v, bucket, note) in sorted(
-                all_dept, key=lambda t: (t[1][0], BUCKET_ORDER.index(t[1][3]), -t[1][2])):
-            w.writerow([yr, fam, label, bucket, v,
-                        round(100 * v / dept_totals[(fam, yr)], 2),
-                        "books" if fam == "deptexp" else "deptsnapshot2026", note])
+            all_dept, key=lambda t: (t[1][0], BUCKET_ORDER.index(t[1][3]), -t[1][2]))]
+    write_csv(HERE / "budget-history-department-crosswalk.csv", CROSSWALK_COLUMNS, cross_rows)
 
-    long_path = HERE / "budget-history.csv"
-    with long_path.open("w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=["year", "measure", "basis", "value", "unit", "source_id"])
-        w.writeheader()
-        w.writerows(ROWS)
+    write_csv(HERE / "budget-history.csv", LONG_COLUMNS,
+              [[r[c] for c in LONG_COLUMNS] for r in ROWS])
 
+    # Every wide series carries its own *_basis column. Across a historical
+    # series the basis necessarily shifts -- actuals for closed years, the
+    # adopted or recommended figure for the current one -- and a chart that
+    # hides that shift is quietly comparing different things.
     idx = {(r["year"], r["measure"], r["basis"]): r["value"] for r in ROWS}
     years = sorted({r["year"] for r in ROWS})
-    wide_path = HERE / "budget-history-wide.csv"
-    with wide_path.open("w", newline="") as fh:
-        # Every series carries its own *_basis column. Across a historical
-        # series the basis necessarily shifts — actuals for closed years, the
-        # adopted or recommended figure for the current one — and a chart that
-        # hides that shift is quietly comparing different things.
-        cols = ["year"]
-        for m, _ in WIDE:
-            cols += [m, f"{m}_basis"]
-        w = csv.writer(fh)
-        w.writerow(cols)
-        for yr in years:
-            row = [yr]
-            for measure, prefs in WIDE:
-                val, basis = "", ""
-                for b in prefs:
-                    if (yr, measure, b) in idx:
-                        val, basis = idx[(yr, measure, b)], b
-                        break
-                row += [val, basis]
-            w.writerow(row)
+    wide_cols = ["year"]
+    for m, _ in WIDE:
+        wide_cols += [m, f"{m}_basis"]
+    wide_rows = []
+    for yr in years:
+        row = [yr]
+        for measure, prefs in WIDE:
+            basis = next((b for b in prefs if (yr, measure, b) in idx), "")
+            row += [idx[(yr, measure, basis)] if basis else "", basis]
+        wide_rows.append(row)
+    write_csv(HERE / "budget-history-wide.csv", wide_cols, wide_rows)
 
-    prov_path = HERE / "budget-history-provenance.csv"
-    with prov_path.open("w", newline="") as fh:
-        w = csv.writer(fh)
-        w.writerow(["source_id", "title", "publisher", "date", "url", "retrieved", "n_values", "notes"])
-        for sid, s in SOURCES.items():
-            n = sum(1 for r in ROWS if r["source_id"] == sid)
-            w.writerow([sid, s["title"], s["publisher"], s["date"], s["url"], s["retrieved"], n, s["notes"]])
+    write_csv(HERE / "budget-history-provenance.csv", PROVENANCE_COLUMNS,
+              [[sid, s["title"], s["publisher"], s["date"], s["url"], s["retrieved"],
+                sum(1 for r in ROWS if r["source_id"] == sid), s["notes"]]
+               for sid, s in SOURCES.items()])
 
-    print(f"budget-history.csv            {len(ROWS)} rows, "
+    write_validation(HERE / "budget-history-validation.md", checked, residuals,
+                     cross_rows, wide_rows)
+
+    print(f"budget-history.csv                       {len(ROWS)} rows, "
           f"{len(years)} years ({min(years)}-{max(years)}), "
           f"{len({r['measure'] for r in ROWS})} measures")
-    print(f"budget-history-wide.csv       {len(years)} rows x {len(WIDE)} series")
-    print(f"budget-history-provenance.csv {len(SOURCES)} sources")
-    if problems:
-        print("\nRECONCILIATION FAILED:")
-        for p in problems:
-            print("  -", p)
-        raise SystemExit(1)
+    print(f"budget-history-wide.csv                  {len(years)} rows x {len(WIDE)} series")
+    print(f"budget-history-department-crosswalk.csv  {len(cross_rows)} rows")
+    print(f"budget-history-provenance.csv            {len(SOURCES)} sources")
+    print("budget-history-validation.md             coverage and checks")
     print("\nreconciliation: every published total matches its parts")
     if residuals:
         print("source-side rounding residuals (recorded as salesuse_component_residual):")

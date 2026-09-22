@@ -1,39 +1,51 @@
 """
-Boulder budget books — inventory & triage
-=========================================
-Run this on your LOCAL copy of the historical budget books before converting
-anything. It answers the three questions that decide the cheapest route:
+Boulder budget books -- inventory, triage and page-text dump
+============================================================
+First of the four stages; README.md has the whole pipeline. Run it on your
+LOCAL copy of the historical budget books before converting anything. It
+answers the three questions that decide the cheapest route:
 
     1. What is actually in the corpus?   (year, pages, size)
     2. Which books are born-digital and which are scanned?
        Born-digital parses locally for free. Scanned needs OCR, which costs money
        and time, so you want to know exactly how many pages that is.
     3. Which PAGES carry the numbers?
-       A budget book runs 400-600 pages, and the series needs about twenty
-       numbers per year off a handful of summary tables. Converting the whole
-       book to reach them is the expensive mistake.
+       A budget book runs 250-500 pages, and the series needs a few dozen
+       numbers per year off a handful of summary pages, pies and tables.
+       Converting the whole book to reach them is the expensive mistake.
 
 Usage
 -----
     pip install pypdf
     python3 budget-books-inventory.py ~/Downloads/ExportedContents/
 
-    # then, once the inventory looks right, pull just the pages that matter
-    # into one small PDF per year (typically a few MB in total):
+    # the text of every matched page in the born-digital books, as JSONL --
+    # what budget-books-extract.py reads:
+    python3 budget-books-inventory.py ~/Downloads/ExportedContents/ --dump-text dump.jsonl
+
+    # or just the matched pages, as one small PDF per year:
     python3 budget-books-inventory.py ~/Downloads/ExportedContents/ --extract out/
+
+A page matches when it carries a keyword from one of four TARGETS groups:
+citywide totals, staffing, the General Fund, and the revenue and spending
+categories (the pies).
 
 Outputs
 -------
-    budget-books-inventory.csv   one row per PDF: year, pages, size, text/scanned,
-                                 and the page numbers matching each target
+    budget-books-inventory.csv   one row per PDF: year, pages, size, born-digital
+                                 or scanned, and the page numbers matching each
+                                 target group
+    FILE.jsonl                   (--dump-text) one line per matched page:
+                                 file, year, page, targets, text
     out/<year>-excerpt.pdf       (--extract) just the matched pages
 
 What to do with the result
 --------------------------
-  * Born-digital matched pages  -> parse locally, no upload, no OCR bill.
-  * Scanned matched pages       -> send only those to DataLab. This is usually
-                                   a few hundred pages instead of many thousand.
-  * Either way you end up sending a small CSV rather than gigabytes of PDF.
+  * Born-digital matched pages  -> dump them and run the extractor: no upload,
+                                   no OCR bill.
+  * Scanned pages, and pages whose text comes out mangled
+                                -> budget-books-ocr.py sends just those to
+                                   Datalab.
 """
 
 import argparse
@@ -165,8 +177,20 @@ def main():
     ap.add_argument("--max-pages-per-book", type=int, default=0,
                     help="with --dump-text, keep only the first N matched pages per book "
                          "(the citywide summary tables sit near the front)")
-    ap.add_argument("--out", default="budget-books-inventory.csv")
+    ap.add_argument("--out", default="budget-books-inventory.csv",
+                    help="CSV to write (default %(default)s)")
     args = ap.parse_args()
+
+    # Line-buffer stdout. Redirected to a file -- `nohup ... > run.log &`, which is
+    # how a long run gets started -- Python block-buffers output in ~8KB, so
+    # the log stays EMPTY until enough books have been scanned to fill it.
+    # It looks like a hung process. This was invisible in testing because the
+    # environment used there set PYTHONUNBUFFERED=1; a default Python reproduces it
+    # exactly (0 of 3 progress lines visible mid-run, 3 of 3 with this line).
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except AttributeError:        # Python < 3.7
+        pass
 
     root = pathlib.Path(args.root).expanduser()
     if not root.exists():
@@ -180,7 +204,7 @@ def main():
     if args.dump_text:
         # Opened per book in append mode below, so start clean or a re-run
         # silently doubles every page.
-        pathlib.Path(args.dump_text).write_text("")
+        pathlib.Path(args.dump_text).write_text("", encoding="utf-8")
     rows = []
     for i, p in enumerate(pdfs, 1):
         print(f"  [{i}/{len(pdfs)}] {p.name[:70]}", end="", flush=True)
@@ -206,7 +230,7 @@ def main():
                 dump_pages = dump_pages[: args.max_pages_per_book]
             if dump_pages:
                 reader = PdfReader(str(p))
-                with open(args.dump_text, "a") as fh:
+                with open(args.dump_text, "a", encoding="utf-8") as fh:
                     for pg in dump_pages:
                         fh.write(json.dumps({
                             "file": p.name,
@@ -233,8 +257,8 @@ def main():
     cols = ["file", "year", "pages", "size_mb", "kind", "text_share_sampled", "max_chars_sampled"]
     for k in TARGETS:
         cols += [f"n_{k}", f"pages_{k}"]
-    with open(args.out, "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+    with open(args.out, "w", encoding="utf-8", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
 

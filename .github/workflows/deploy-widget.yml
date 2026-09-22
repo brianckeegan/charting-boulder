@@ -9,8 +9,8 @@ on:
   push:
     branches: [main]
     paths:
-      - "2026-06-budget-tool/boulder-budget-widget.html"
-      - "2026-06-budget-tool/pages-redirect.html"
+      - "2026-11-budget-tool/embed/index.html"
+      - "2026-11-budget-tool/embed/pages-redirect.html"
       - ".github/workflows/deploy-widget.yml"
   workflow_dispatch:
 
@@ -35,9 +35,9 @@ jobs:
       - name: Assemble the Pages site (widget at /boulder-budget-2026/)
         run: |
           mkdir -p _site/boulder-budget-2026
-          cp "2026-06-budget-tool/boulder-budget-widget.html" _site/boulder-budget-2026/index.html
+          cp "2026-11-budget-tool/embed/index.html" _site/boulder-budget-2026/index.html
           # Repo-root URL was shared earlier — redirect it to the widget.
-          cp "2026-06-budget-tool/pages-redirect.html" _site/index.html
+          cp "2026-11-budget-tool/embed/pages-redirect.html" _site/index.html
 
       # enablement: true turns Pages on automatically on the first run.
       - uses: actions/configure-pages@v5
