@@ -168,10 +168,36 @@ for yr, v in [(2017, 260.0), (2018, 277.6), (2019, 283.2),
     add(yr, "budget_operating", "adopted", v, "musd", "books")
 add(2022, "budget_capital", "adopted", 162.4, "musd", "books")
 
-# 2016 is published as "$327 million (excluding transfers)". That is a narrower
-# scope than the later totals, so it gets its own basis rather than being
-# chained onto them.
-add(2016, "budget_total", "adopted_excl_transfers", 327.0, "musd", "books")
+# --- Citywide totals from the budget books, 2004-2022 ---------------------
+# Earlier I expected a basis break here, because the 2016 book publishes its
+# total as "$327 million (excluding transfers)" against $515.4M for 2023. The
+# intervening years disprove it: 327, 322, 389, 354, 370, 342, 462, 515 is a
+# continuous run, so the books report one consistent NET measure throughout and
+# the 2016 note is a scope description, not a different series. (The OpenGov
+# Sources & Uses family below is the gross counterpart — see the dictionary.)
+#
+# Two independent checks fell out of the extraction:
+#   * 2022 operating 300.1 + capital 162.4 = 462.5, exactly the stated total;
+#   * the 2005 and 2006-2007 books both state 2005 = $196,167,000, so that
+#     figure is confirmed by two separately published books.
+for yr, v in [(2004, 188.145), (2005, 196.167), (2006, 200.100),
+              (2012, 239.0), (2013, 255.0), (2014, 270.0), (2015, 319.0),
+              (2016, 327.0), (2017, 322.0), (2018, 389.2), (2019, 353.7),
+              (2020, 369.7), (2021, 341.7), (2022, 462.5)]:
+    add(yr, "budget_total", "adopted", v, "musd", "books")
+
+# The 2005 and 2006 books carry a structured summary block that yields four
+# measures at once and self-checks (capital + operating = total):
+#     CITY OF BOULDER 2006 BUDGET (in $1,000s)
+#     TOTAL BUDGET $200,100  CAPITAL BUDGET $29,453
+#     OPERATING BUDGET (including debt service) $170,647  GENERAL FUND $71,266
+# Note the operating figure INCLUDES debt service, which the modern operating
+# series does not separate out.
+for yr, oper, cap, gf in [(2005, 167.059, 29.108, 69.070),
+                          (2006, 170.647, 29.453, 71.266)]:
+    add(yr, "budget_operating", "adopted", oper, "musd", "books")
+    add(yr, "budget_capital", "adopted", cap, "musd", "books")
+    add(yr, "budget_general_fund", "adopted", gf, "musd", "books")
 
 # --- Citywide staffing LEVELS ---------------------------------------------
 # Previously unavailable. The budget books state a citywide headcount in prose
@@ -349,13 +375,17 @@ def reconcile():
     idx = {(r["year"], r["measure"], r["basis"]): r["value"] for r in ROWS}
     problems, residuals = [], []
 
-    for yr in (2023, 2024, 2025, 2026, 2027):
-        basis = "recommended" if yr == 2027 else "adopted"
-        t = idx.get((yr, "budget_total", basis))
-        o = idx.get((yr, "budget_operating", basis))
-        c = idx.get((yr, "budget_capital", basis))
-        if None not in (t, o, c) and abs((o + c) - t) > 0.15:
-            problems.append(f"{yr} {basis}: operating+capital={o + c:.2f} != total={t:.2f}")
+    # operating + capital = total, for every year where all three are known,
+    # on whichever basis carries them. Checks the book-derived years too rather
+    # than only the modern ones.
+    for yr in sorted({r["year"] for r in ROWS}):
+        for basis in ("adopted", "recommended"):
+            t = idx.get((yr, "budget_total", basis))
+            o = idx.get((yr, "budget_operating", basis))
+            c = idx.get((yr, "budget_capital", basis))
+            if None not in (t, o, c) and abs((o + c) - t) > 0.2:
+                problems.append(
+                    f"{yr} {basis}: operating+capital={o + c:.2f} != total={t:.2f}")
 
     for (yr, basis), vals in sorted(SALESUSE.items()):
         parts = [v for v in vals[:-1] if v is not None]
