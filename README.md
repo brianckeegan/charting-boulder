@@ -17,13 +17,3 @@ listed.
 | 2026-03-31 | [What 822,505 words reveal about how Boulder’s comprehensive plan has changed since 1977](https://boulderreportinglab.org/2026/03/31/brian-keegan-what-822505-words-reveal-about-how-boulders-comprehensive-plan-has-changed-since-1977/) | [🗄️](/2026-03-bvcp/bvcp-corpus-analysis.ipynb) · [🗄️](/2026-03-bvcp/bvcp-embeddings.ipynb) |
 | 2026-05-10 | [Boulder’s tipped wage debate rests on a myth about what restaurant workers earn](https://boulderreportinglab.org/2026/05/10/brian-keegan-boulders-tipped-wage-debate-rests-on-a-myth-about-what-restaurant-workers-earn/) | [🗄️](/2026-04-minimum-wage/tipped-wages.ipynb) |
 | 2026-09-16 | [Boulder’s school closures were decades in the making](https://boulderreportinglab.org/2026/09/16/brian-keegan-boulders-school-closures-were-decades-in-the-making/) | [🗄️](/2026-09-bvsd/bvsd-retrieval.ipynb) · [🗄️](/2026-09-bvsd/bvsd-analysis.ipynb) |
-
-## Not yet published
-
-Three project directories have no column yet:
-
-| Directory | Question |
-|---|---|
-| [`2026-10-alternatives`](/2026-10-alternatives) | Which Colorado schools have closed, when and where — and what a steady-state distribution would look like under the state's forecasts to 2060 |
-| [`2026-10-donations`](/2026-10-donations) | Who funds and who vouches for Boulder's council candidates, and how divided those two networks are |
-| [`2026-11-budget-tool`](/2026-11-budget-tool) | An interactive budget-balancing widget, plus a 2003–2027 history of city revenue, spending and staffing built from the annual budget books |
