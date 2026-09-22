@@ -54,6 +54,7 @@ WHAT THIS DOES NOT COVER
 import collections
 import csv
 import pathlib
+import re
 
 HERE = pathlib.Path(__file__).resolve().parent
 
@@ -108,6 +109,14 @@ SOURCES = {
         "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2",
         "retrieved": "2026-09-22",
         "notes": "Extracted by budget-books-extract.py from the page-text dump. Three shapes: prose from 2017 on, a self-checking citywide summary block 2005-2017, and three- and four-year-wide Sources/Uses/FTE tables before 2012. Verified: 10 of 12 values overlapping the council packets match exactly.",
+    },
+    "deptsnapshot2026": {
+        "title": "2026 Budget — Sources and Uses, Cost Centers (OpenGov transparency view, CSV export)",
+        "publisher": "City of Boulder",
+        "date": "2026-01-01",
+        "url": "https://cityofboulderco.opengov.com/transparency",
+        "retrieved": "2026-09-22",
+        "notes": "Expenses by cost centre, 2024/2025/2026 adopted. Exported with a 23-fund filter that omits the utility, debt-service and internal-service funds, so the twenty cost centres fall $108-116M short of the citywide total — carried as deptexp_funds_outside_export. No revenue side in this export.",
     },
     "brl2027": {
         "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and reduce pool hours",
@@ -311,6 +320,169 @@ for yr, v in [(2003, 1290.69), (2004, 1200.68), (2005, 1212.11), (2006, 1218.84)
               (2011, 1228.50)]:
     add(yr, "staffing_fte_standard", "adopted", v, "fte", "books")
 
+# --- The revenue big movers, 2011 --------------------------------------------
+# The 2011 book prints a citywide all-funds revenue pie whose eight slices sum
+# to $224,912 thousand exactly -- the same total the narrative states -- so the
+# label-to-value pairing is confirmed by construction and not by reading a
+# figure off a garbled line. Each slice's share also matches its printed
+# percentage, which is what pins the two 4% slices to the right labels.
+#
+# Only the slices that map onto an existing `revenue_*` category are recorded.
+# Four do not (Other Taxes $16.071M, Parks & Recreation Fees $8.479M, Planning &
+# Development Fees $4.994M, Other $25.331M) and inventing categories for them
+# would create a third revenue taxonomy for the sake of one year. They are on
+# page 68 of `2011 Annual Budget.pdf` if anyone wants them.
+#
+# The slice is labelled "Sales Tax", but the same page calls the city's largest
+# sources "sales/use taxes", so it is the sales-and-use aggregate rather than
+# sales tax alone.
+for measure, v in [("revenue_sales_use_tax", 86.570), ("revenue_utility", 44.905),
+                   ("revenue_property_tax", 28.563), ("revenue_intergovernmental", 9.999)]:
+    add(2011, measure, "adopted", v, "musd", "books")
+# What the four unmapped slices are worth, so the year still adds up to its own
+# published total and the gap is a number rather than an absence.
+add(2011, "revenue_other_unmapped", "adopted",
+    round(224.912 - (86.570 + 44.905 + 28.563 + 9.999), 3), "musd", "books")
+
+# --- Citywide spending by department, mapped into functional buckets -------
+# The expense breakdown that actually reaches back to 2005. The
+# Personnel/Capital/Operating/Debt-Service split people reach for first is an
+# OpenGov construct that appears in exactly two books in this corpus; the
+# citywide spending pie, by department, is in all of them.
+#
+# Departments were reorganized repeatedly over twenty years, so raw labels do
+# not form a series. In 2005, "Public Works" is a single $67.4M slice; by 2024
+# that same money is spread across Transportation and Mobility, Utilities,
+# Facilities and Fleet, and development review. The 2005 pie does not separate
+# them and the split is not recoverable -- the 2005 book splits Public Works
+# three ways in its STAFFING table but not in its SPENDING pie. The buckets are
+# therefore coarse on purpose: coarse enough that the coarsest year still maps.
+#
+# Every line below carries the label exactly as its document prints it, the year
+# it was printed in, and the bucket it was assigned to. That is the record, not a
+# summary of it: budget-history-department-crosswalk.csv is generated from these
+# rows, so the documented crosswalk cannot drift from the one actually used, and
+# any single assignment can be challenged or re-bucketed without re-reading the
+# PDFs. `note` is filled in wherever the call was a judgment rather than obvious.
+#
+# (year, label as printed, $M, bucket, note)
+DEPARTMENT_LINES = [
+    # -- 2005 and 2006: the citywide "Uses of Funds" pie in each book. Both
+    #    years' twelve slices sum to the published citywide total to the dollar,
+    #    which is what makes them trustworthy. 2011's pie exists too but comes
+    #    out of the PDF with labels and values interleaved beyond repair, so it
+    #    is deliberately absent rather than guessed at.
+    (2005, "Police", 22.680, "public_safety", ""),
+    (2005, "Fire", 10.996, "public_safety", ""),
+    (2005, "Public Works", 67.430, "infrastructure",
+     "One slice covering what later becomes Transportation and Mobility, "
+     "Utilities, Facilities and Fleet and development review. Not separable "
+     "here, and the reason the buckets are this coarse."),
+    (2005, "Open Space/Real Estate", 20.658, "parks_openspace",
+     "Renamed Open Space/Mountain Parks from 2006. The 2005 label also carries "
+     "real-estate functions that later move elsewhere."),
+    (2005, "Parks & Recreation", 21.060, "parks_openspace", ""),
+    (2005, "Housing/Human Svcs", 12.753, "community_services", ""),
+    (2005, "Library", 5.740, "community_services", ""),
+    (2005, "Arts", 0.440, "community_services", ""),
+    (2005, "Planning & Development Services", 6.233, "planning_climate",
+     "The 2026 department of the same name is the development-review enterprise "
+     "and is four times the size. Same bucket, not the same thing."),
+    (2005, "Administrative Svcs", 8.225, "administration", ""),
+    (2005, "General Government", 17.284, "administration",
+     "The least comparable line in the crosswalk. It likely holds "
+     "non-departmental items that 2024-2026 books to Fundwide/Citywide, so the "
+     "administration and citywide buckets trade content across the series."),
+    (2005, "Debt", 2.668, "citywide_debt",
+     "General Fund debt only -- the pie's own note says non-General Fund debt "
+     "service sits inside the departments. True in 2011 as well, so the bucket "
+     "is consistent, but it is not all of the city's debt service."),
+    (2006, "Police", 23.415, "public_safety", ""),
+    (2006, "Fire", 11.258, "public_safety", ""),
+    (2006, "Public Works", 66.734, "infrastructure", "As 2005: one undivided slice."),
+    (2006, "Open Space/Mountain Parks", 22.188, "parks_openspace", ""),
+    (2006, "Parks & Recreation", 20.899, "parks_openspace", ""),
+    (2006, "Housing/Human Svcs", 13.339, "community_services", ""),
+    (2006, "Library", 5.977, "community_services", ""),
+    (2006, "Arts", 0.451, "community_services", ""),
+    (2006, "Planning & Development Services", 6.465, "planning_climate", ""),
+    (2006, "Administrative Svcs", 9.849, "administration", ""),
+    (2006, "General Government", 17.208, "administration", "As 2005."),
+    (2006, "Debt", 2.317, "citywide_debt", "As 2005."),
+]
+
+# -- 2024-2026: the OpenGov cost-center export. Same twenty cost centers in all
+#    three years, so the table is written once and the values zipped in.
+DEPARTMENT_2024_2026 = [
+    # (label as printed, bucket, 2024, 2025, 2026, note)
+    ("Transportation and Mobility", "infrastructure", 56.207, 63.331, 56.772, ""),
+    ("Facilities and Fleet", "infrastructure", 36.554, 70.932, 25.218, ""),
+    ("Utilities", "infrastructure", 0.648, 0.625, 0.338,
+     "Under a million dollars because the export's fund filter leaves out the "
+     "utility enterprise funds. The real utility spending is in the balancing "
+     "line, not here. The clearest symptom of that filter."),
+    ("Police", "public_safety", 43.679, 46.426, 50.204, ""),
+    ("Fire-Rescue", "public_safety", 27.573, 33.952, 31.503, ""),
+    ("Police/Fire Pensions", "public_safety", 0.414, 0.414, 0.490,
+     "A pension obligation rather than operations, bucketed with the "
+     "departments it belongs to. Small enough not to matter either way."),
+    ("Open Space and Mountain Parks", "parks_openspace", 40.366, 41.384, 41.873, ""),
+    ("Parks and Recreation", "parks_openspace", 40.493, 38.142, 38.655, ""),
+    ("Housing and Human Services", "community_services", 43.949, 53.819, 52.883, ""),
+    ("Planning and Development Services", "planning_climate", 16.433, 17.539, 20.003, ""),
+    ("Climate Initiatives", "planning_climate", 10.950, 11.292, 9.604,
+     "No 2005 equivalent as a department; its predecessor was Environmental "
+     "Affairs inside Community Planning and Sustainability."),
+    ("City Manager's Office", "administration", 17.145, 20.139, 18.733, ""),
+    ("Innovation and Technology", "administration", 9.792, 10.714, 10.834, ""),
+    ("Finance", "administration", 7.081, 7.229, 7.241, ""),
+    ("City Attorney's Office", "administration", 4.513, 4.882, 5.067, ""),
+    ("Human Resources", "administration", 4.510, 4.613, 4.456, ""),
+    ("Communications and Engagement", "administration", 4.556, 3.849, 3.877, ""),
+    ("Municipal Court", "administration", 2.650, 2.768, 2.710, ""),
+    ("City Council", "administration", 0.480, 0.466, 0.544, ""),
+    ("Fundwide / Citywide", "citywide_debt", 39.801, 40.931, 30.904,
+     "Citywide allocations and contingency. Partly the counterpart of 2005's "
+     "General Government -- see that line's note."),
+]
+for label, bucket, v24, v25, v26, note in DEPARTMENT_2024_2026:
+    for yr, v in ((2024, v24), (2025, v25), (2026, v26)):
+        DEPARTMENT_LINES.append((yr, label, v, bucket, note))
+
+BUCKET_ORDER = ["public_safety", "infrastructure", "parks_openspace",
+                "community_services", "planning_climate", "administration",
+                "citywide_debt"]
+
+for yr in sorted({y for y, *_ in DEPARTMENT_LINES}):
+    by_bucket = collections.defaultdict(float)
+    for y, _label, v, bucket, _note in DEPARTMENT_LINES:
+        if y == yr:
+            by_bucket[bucket] += v
+    for bucket in BUCKET_ORDER:
+        if bucket in by_bucket:
+            add(yr, f"deptexp_{bucket}", "adopted", round(by_bucket[bucket], 3),
+                "musd", "books" if yr <= 2006 else "deptsnapshot2026")
+
+# The 2024-2026 export was taken with a fund filter that leaves out the utility,
+# debt-service and internal-service funds, so its twenty cost centres add up to
+# $108-116M less than the citywide budget. Rather than let the departmental
+# series quietly not add up, the shortfall is carried as its own explicit line,
+# computed against the published total:
+#
+#     2024   515.4 - 407.8 = 107.6      2026   521.0 - 411.9 = 109.1
+#     2025   589.3 - 473.4 = 115.9
+#
+# It is a real number -- what the excluded funds spend -- but it is a residual,
+# not a reported figure, so it is `derived`. One re-export of the same view with
+# no fund filter replaces it with actual departmental detail, and is the single
+# highest-value download left in this dataset.
+DEPARTMENT_EXPORT_TOTAL = {2024: 407.794, 2025: 473.447, 2026: 411.907}
+for yr, export_total in DEPARTMENT_EXPORT_TOTAL.items():
+    published = next(r["value"] for r in ROWS
+                     if (r["year"], r["measure"], r["basis"]) == (yr, "budget_total", "adopted"))
+    add(yr, "deptexp_funds_outside_export", "derived",
+        round(published - export_total, 3), "musd", "deptsnapshot2026")
+
 # --- General Fund gap ------------------------------------------------------
 add(2025, "gap_general_fund_low", "identified", 8.0, "musd", "forecast2026")
 add(2025, "gap_general_fund_high", "identified", 10.0, "musd", "forecast2026")
@@ -490,6 +662,32 @@ def reconcile():
                            if (r["year"], r["measure"], r["basis"]) == (yr, measure, basis)})
             problems.append(f"{yr} {measure} [{basis}] appears {n} times: {vals}")
 
+    # The departmental buckets, plus the balancing line where there is one, must
+    # add up to the published citywide total. For 2005 and 2006 this is exact by
+    # construction (the pie sums to its own total); for 2024-2026 it holds only
+    # because the balancing line is defined as the difference, so what this
+    # really guards is a mistyped cost centre.
+    for yr in sorted({y for y, *_ in DEPARTMENT_LINES}):
+        parts = sum(v for (y, m, b), v in idx.items()
+                    if y == yr and m.startswith("deptexp_"))
+        total = idx.get((yr, "budget_total", "adopted"))
+        if total and abs(parts - total) > TOL:
+            problems.append(
+                f"{yr}: departmental buckets sum {parts:,.3f} != budget_total {total:,.3f}")
+
+    # The same department label must land in the same bucket every year it
+    # appears, unless the line says why not. Without this, a relabelled
+    # department could drift between buckets and the series would show a
+    # transfer of money that never happened.
+    seen_bucket = {}
+    for yr, label, _v, bucket, note in DEPARTMENT_LINES:
+        key = re.sub(r'[^a-z0-9]', '', label.lower())
+        if key in seen_bucket and seen_bucket[key][0] != bucket and not note:
+            problems.append(
+                f"{label!r} is {bucket} in {yr} but {seen_bucket[key][0]} in "
+                f"{seen_bucket[key][1]} with no note explaining the change")
+        seen_bucket.setdefault(key, (bucket, yr))
+
     # operating + capital = total, for every year where all three are known,
     # on whichever basis carries them. Checks the book-derived years too rather
     # than only the modern ones.
@@ -523,11 +721,20 @@ def reconcile():
         elif delta:
             residuals.append((yr, basis, delta))
 
-    rev = sum(r["value"] for r in ROWS
-              if r["measure"].startswith("revenue_") and r["measure"] != "revenue_total")
-    tot = idx.get((2026, "revenue_total", "recommended"))
-    if tot and abs(rev - tot) > 0.02:
-        problems.append(f"2026 revenue components={rev:.3f} != total={tot:.2f}")
+    # Revenue components against their own year's total. This check used to sum
+    # every revenue_* row in the dataset regardless of year and compare the lot
+    # to 2026's total -- correct only for as long as 2026 was the only year with
+    # a revenue mix, and wrong the moment 2011 was added. Keyed on (year, basis)
+    # now, so each year is checked against itself.
+    rev_years = collections.defaultdict(float)
+    for r in ROWS:
+        if r["measure"].startswith("revenue_") and r["measure"] != "revenue_total":
+            rev_years[(r["year"], r["basis"])] += r["value"]
+    for (yr, basis), parts in sorted(rev_years.items()):
+        tot = idx.get((yr, "revenue_total", basis))
+        if tot and abs(parts - tot) > 0.02:
+            problems.append(
+                f"{yr} {basis} revenue components={parts:.3f} != total={tot:.2f}")
 
     # Sources & Uses snapshot: components vs totals, and the stated net.
     # Published to the dollar, so this is a tight check ($10 tolerance).
@@ -559,6 +766,10 @@ WIDE = [
     ("budget_general_fund", ["adopted", "recommended", "derived"]),
     ("budget_general_fund_revenue", ["adopted", "actual"]),
     ("staffing_fte", ["adopted"]),
+    ("revenue_total", ["adopted", "recommended", "derived"]),
+    ("revenue_sales_use_tax", ["adopted", "recommended"]),
+    ("revenue_property_tax", ["adopted", "recommended"]),
+    ("revenue_utility", ["adopted", "recommended"]),
     ("staffing_fte_standard", ["adopted"]),
     ("salesuse_total", ["actual", "adopted", "forecast"]),
     ("property_tax_revenue", ["actual", "adopted"]),
@@ -574,6 +785,24 @@ def main():
         add(yr, "salesuse_component_residual", basis, delta, "musd", "forecast2026")
 
     ROWS.sort(key=lambda r: (r["year"], r["measure"], r["basis"]))
+
+    # The department crosswalk, generated from DEPARTMENT_LINES rather than
+    # written alongside it, so what is documented is exactly what was used. One
+    # row per department line item per year: the label as its document printed
+    # it, the bucket it went into, its share of that year's citywide total, and
+    # the reason wherever the assignment was a judgment call.
+    cross_path = HERE / "budget-history-department-crosswalk.csv"
+    dept_totals = {yr: sum(v for y, _l, v, _b, _n in DEPARTMENT_LINES if y == yr)
+                   for yr in {y for y, *_ in DEPARTMENT_LINES}}
+    with cross_path.open("w", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["year", "source_label", "bucket", "value_musd",
+                    "pct_of_year_departmental", "source_id", "note"])
+        for yr, label, v, bucket, note in sorted(
+                DEPARTMENT_LINES, key=lambda r: (r[0], BUCKET_ORDER.index(r[3]), -r[2])):
+            w.writerow([yr, label, bucket, v,
+                        round(100 * v / dept_totals[yr], 2),
+                        "books" if yr <= 2006 else "deptsnapshot2026", note])
 
     long_path = HERE / "budget-history.csv"
     with long_path.open("w", newline="") as fh:

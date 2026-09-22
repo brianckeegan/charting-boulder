@@ -65,6 +65,19 @@ TARGETS = {
     "general_fund": [
         "general fund summary", "general fund revenue", "general fund expenditure",
     ],
+    # Where the revenue and expense CATEGORY breakdowns live. These are pie
+    # figures, not tables, and none of the keywords above reaches them: the
+    # 2012-2017 books head them "Figure 4-2: Citywide Revenues (Sources) for
+    # 2012" and "Figure 5-06: Citywide Expenditures for 2013", while the 2005
+    # and 2006 books use the bare "2005 Uses of Funds". Without these, the
+    # citywide revenue mix and the departmental spending split are invisible for
+    # every middle year.
+    "categories": [
+        "uses of funds", "sources of funds", "citywide revenues", "citywide expenditures",
+        "revenues (sources)", "expenditures (uses)", "overview of", "composition of",
+        "revenues by fund", "expenditures by fund", "budget by department",
+        "expenditures by department", "revenue by source",
+    ],
 }
 
 # A page with fewer than this many extractable characters is treated as an image.

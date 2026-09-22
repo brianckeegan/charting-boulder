@@ -386,6 +386,73 @@ def extract_multiyear(rows):
     return out
 
 
+# --------------------------------------------------------------------------
+# The citywide spending pie. Every book states where the money went by
+# DEPARTMENT, as a pie with the dollars and the share printed on each slice:
+#
+#     2005 Uses of Funds  Total = $196,167 (in $1,000s)
+#     Police $22,680 12%   Public Works $67,430 33%   De bt $2,668 1% ...
+#
+# This is the only expense breakdown that reaches back to 2005. The
+# Personnel/Capital/Operating/Debt-Service split people usually reach for is an
+# OpenGov construct that appears in exactly two books in this corpus.
+#
+# It is also the one extraction here that is checked by construction rather than
+# by a plausibility range: the slices must add up to the total printed above
+# them. In 2005 and 2006 they do, to the dollar. In 2011 they cannot -- that
+# book's pie comes out of the PDF with its labels and values interleaved beyond
+# repair ("DUHMD/ Housing/ Open Space/Prkng Svcs Human Svcs 9, 679 Mtn Prks
+# Police 46 12, 964 24, 518 ..."), and the visible values fall $46.6M short of
+# the total. Pairing those labels to those values would be guessing, and a wrong
+# guess here does not look wrong: it just moves Police's budget to Open Space.
+# So the sum gate rejects the year instead.
+# --------------------------------------------------------------------------
+DEPT_PIE = re.compile(
+    r'(20\d\d)\s*(?:Uses of Funds|Expenditures)[^$]{0,60}?Total\s*=\s*\$?\s*'
+    r'([\d][\d,\.\s]{4,11}\d)\s*\(?\s*in\s*\$?\s*1,?\s?000s?\)(.{0,1000})',
+    re.I | re.S)
+# The slice value must not be allowed to run past its own digits. A tolerant
+# "[\d,.\s]+" class reads "$22,680 12%" as the single number 22,68012, because
+# the space and the share's digits are both inside the class -- which is how both
+# readable years came out seven times too large and were rejected by the sum
+# gate. So: commas and periods separate thousands here, whitespace never does.
+DEPT_SLICE = re.compile(
+    r"([A-Za-z][A-Za-z&/\.' ]{2,44}?)\s*\$\s*(\d{1,3}(?:[,\.]\s?\d{3})*)"
+    r"\s*(<?\s*\d{1,2})\s*%")
+# PDF extraction inserts spaces inside words -- the 2005 pie prints "De bt",
+# "Fir e", "General Governm ent", "Planning & De ve lopm e nt Services". Any
+# label matching has to happen on the letters alone.
+def slug(label):
+    return re.sub(r'[^a-z0-9]', '', label.lower())
+
+
+def extract_dept_pie(rows):
+    out, rejected = [], []
+    for r in rows:
+        flat = re.sub(r'\s+', ' ', r['text'])
+        for m in DEPT_PIE.finditer(flat):
+            yr = int(m.group(1))
+            total = to_number(re.sub(r'[^\d]', '', m.group(2)))
+            slices = [(lab.strip(), to_number(re.sub(r'[^\d]', '', val)))
+                      for lab, val, _pct in DEPT_SLICE.findall(m.group(3))]
+            slices = [(lab, v) for lab, v in slices if v and v > 0]
+            if not slices or not total:
+                continue
+            got = sum(v for _lab, v in slices)
+            # Half a percent of the total, which in practice means "to the
+            # dollar or not at all" -- both years that pass land exactly.
+            if abs(got - total) > max(500, total * 0.005):
+                rejected.append((yr, r['file'], r['page'], len(slices), got, total))
+                continue
+            for lab, v in slices:
+                out.append({"year": yr, "measure": "dept_" + slug(lab),
+                            "value": round(v / 1000.0, 3), "unit": "musd",
+                            "file": r["file"], "page": r["page"],
+                            "context": f"pie slice as printed: {lab!r} "
+                                       f"({100 * v / total:.1f}% of {total:,.0f})"})
+    return out, rejected
+
+
 def extract(rows):
     out = []
     for r in rows:
@@ -426,7 +493,8 @@ def main():
     if not rows:
         sys.exit("no usable pages in the dump")
 
-    found = extract(rows) + extract_legacy(rows) + extract_multiyear(rows)
+    dept, dept_rejected = extract_dept_pie(rows)
+    found = extract(rows) + extract_legacy(rows) + extract_multiyear(rows) + dept
 
     # Collapse duplicates (the same sentence can appear in a summary and again
     # in a detail section), then flag any year where a measure disagrees.
@@ -459,6 +527,12 @@ def main():
         print(f"  {measure:<18} {len(got):>2} years  {got}")
         if miss:
             print(f"  {'':<18}    missing: {miss}")
+    dept_years = sorted({y for (y, mm, _b) in best if mm.startswith("dept_")})
+    print(f"  {'departmental pie':<18} {len(dept_years):>2} years  {dept_years}")
+    for yr, f, pg, n, got, total in dept_rejected:
+        print(f"  {'':<18}    REJECTED {yr} ({f[:28]} p{pg}): {n} slices sum "
+              f"{got / 1000:,.1f}M against a printed total of {total / 1000:,.1f}M")
+
     flagged = sorted({k[0] for k, v in conflicts.items() if len(v) > 1})
     if flagged:
         print(f"\n  years with conflicting values (check the CSV): {flagged}")

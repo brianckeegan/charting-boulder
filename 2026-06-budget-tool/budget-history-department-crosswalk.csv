@@ -1,0 +1,85 @@
+year,source_label,bucket,value_musd,pct_of_year_departmental,source_id,note
+2005,Police,public_safety,22.68,11.56,books,
+2005,Fire,public_safety,10.996,5.61,books,
+2005,Public Works,infrastructure,67.43,34.37,books,"One slice covering what later becomes Transportation and Mobility, Utilities, Facilities and Fleet and development review. Not separable here, and the reason the buckets are this coarse."
+2005,Parks & Recreation,parks_openspace,21.06,10.74,books,
+2005,Open Space/Real Estate,parks_openspace,20.658,10.53,books,Renamed Open Space/Mountain Parks from 2006. The 2005 label also carries real-estate functions that later move elsewhere.
+2005,Housing/Human Svcs,community_services,12.753,6.5,books,
+2005,Library,community_services,5.74,2.93,books,
+2005,Arts,community_services,0.44,0.22,books,
+2005,Planning & Development Services,planning_climate,6.233,3.18,books,"The 2026 department of the same name is the development-review enterprise and is four times the size. Same bucket, not the same thing."
+2005,General Government,administration,17.284,8.81,books,"The least comparable line in the crosswalk. It likely holds non-departmental items that 2024-2026 books to Fundwide/Citywide, so the administration and citywide buckets trade content across the series."
+2005,Administrative Svcs,administration,8.225,4.19,books,
+2005,Debt,citywide_debt,2.668,1.36,books,"General Fund debt only -- the pie's own note says non-General Fund debt service sits inside the departments. True in 2011 as well, so the bucket is consistent, but it is not all of the city's debt service."
+2006,Police,public_safety,23.415,11.7,books,
+2006,Fire,public_safety,11.258,5.63,books,
+2006,Public Works,infrastructure,66.734,33.35,books,As 2005: one undivided slice.
+2006,Open Space/Mountain Parks,parks_openspace,22.188,11.09,books,
+2006,Parks & Recreation,parks_openspace,20.899,10.44,books,
+2006,Housing/Human Svcs,community_services,13.339,6.67,books,
+2006,Library,community_services,5.977,2.99,books,
+2006,Arts,community_services,0.451,0.23,books,
+2006,Planning & Development Services,planning_climate,6.465,3.23,books,
+2006,General Government,administration,17.208,8.6,books,As 2005.
+2006,Administrative Svcs,administration,9.849,4.92,books,
+2006,Debt,citywide_debt,2.317,1.16,books,As 2005.
+2024,Police,public_safety,43.679,10.71,deptsnapshot2026,
+2024,Fire-Rescue,public_safety,27.573,6.76,deptsnapshot2026,
+2024,Police/Fire Pensions,public_safety,0.414,0.1,deptsnapshot2026,"A pension obligation rather than operations, bucketed with the departments it belongs to. Small enough not to matter either way."
+2024,Transportation and Mobility,infrastructure,56.207,13.78,deptsnapshot2026,
+2024,Facilities and Fleet,infrastructure,36.554,8.96,deptsnapshot2026,
+2024,Utilities,infrastructure,0.648,0.16,deptsnapshot2026,"Under a million dollars because the export's fund filter leaves out the utility enterprise funds. The real utility spending is in the balancing line, not here. The clearest symptom of that filter."
+2024,Parks and Recreation,parks_openspace,40.493,9.93,deptsnapshot2026,
+2024,Open Space and Mountain Parks,parks_openspace,40.366,9.9,deptsnapshot2026,
+2024,Housing and Human Services,community_services,43.949,10.78,deptsnapshot2026,
+2024,Planning and Development Services,planning_climate,16.433,4.03,deptsnapshot2026,
+2024,Climate Initiatives,planning_climate,10.95,2.69,deptsnapshot2026,No 2005 equivalent as a department; its predecessor was Environmental Affairs inside Community Planning and Sustainability.
+2024,City Manager's Office,administration,17.145,4.2,deptsnapshot2026,
+2024,Innovation and Technology,administration,9.792,2.4,deptsnapshot2026,
+2024,Finance,administration,7.081,1.74,deptsnapshot2026,
+2024,Communications and Engagement,administration,4.556,1.12,deptsnapshot2026,
+2024,City Attorney's Office,administration,4.513,1.11,deptsnapshot2026,
+2024,Human Resources,administration,4.51,1.11,deptsnapshot2026,
+2024,Municipal Court,administration,2.65,0.65,deptsnapshot2026,
+2024,City Council,administration,0.48,0.12,deptsnapshot2026,
+2024,Fundwide / Citywide,citywide_debt,39.801,9.76,deptsnapshot2026,Citywide allocations and contingency. Partly the counterpart of 2005's General Government -- see that line's note.
+2025,Police,public_safety,46.426,9.81,deptsnapshot2026,
+2025,Fire-Rescue,public_safety,33.952,7.17,deptsnapshot2026,
+2025,Police/Fire Pensions,public_safety,0.414,0.09,deptsnapshot2026,"A pension obligation rather than operations, bucketed with the departments it belongs to. Small enough not to matter either way."
+2025,Facilities and Fleet,infrastructure,70.932,14.98,deptsnapshot2026,
+2025,Transportation and Mobility,infrastructure,63.331,13.38,deptsnapshot2026,
+2025,Utilities,infrastructure,0.625,0.13,deptsnapshot2026,"Under a million dollars because the export's fund filter leaves out the utility enterprise funds. The real utility spending is in the balancing line, not here. The clearest symptom of that filter."
+2025,Open Space and Mountain Parks,parks_openspace,41.384,8.74,deptsnapshot2026,
+2025,Parks and Recreation,parks_openspace,38.142,8.06,deptsnapshot2026,
+2025,Housing and Human Services,community_services,53.819,11.37,deptsnapshot2026,
+2025,Planning and Development Services,planning_climate,17.539,3.7,deptsnapshot2026,
+2025,Climate Initiatives,planning_climate,11.292,2.39,deptsnapshot2026,No 2005 equivalent as a department; its predecessor was Environmental Affairs inside Community Planning and Sustainability.
+2025,City Manager's Office,administration,20.139,4.25,deptsnapshot2026,
+2025,Innovation and Technology,administration,10.714,2.26,deptsnapshot2026,
+2025,Finance,administration,7.229,1.53,deptsnapshot2026,
+2025,City Attorney's Office,administration,4.882,1.03,deptsnapshot2026,
+2025,Human Resources,administration,4.613,0.97,deptsnapshot2026,
+2025,Communications and Engagement,administration,3.849,0.81,deptsnapshot2026,
+2025,Municipal Court,administration,2.768,0.58,deptsnapshot2026,
+2025,City Council,administration,0.466,0.1,deptsnapshot2026,
+2025,Fundwide / Citywide,citywide_debt,40.931,8.65,deptsnapshot2026,Citywide allocations and contingency. Partly the counterpart of 2005's General Government -- see that line's note.
+2026,Police,public_safety,50.204,12.19,deptsnapshot2026,
+2026,Fire-Rescue,public_safety,31.503,7.65,deptsnapshot2026,
+2026,Police/Fire Pensions,public_safety,0.49,0.12,deptsnapshot2026,"A pension obligation rather than operations, bucketed with the departments it belongs to. Small enough not to matter either way."
+2026,Transportation and Mobility,infrastructure,56.772,13.78,deptsnapshot2026,
+2026,Facilities and Fleet,infrastructure,25.218,6.12,deptsnapshot2026,
+2026,Utilities,infrastructure,0.338,0.08,deptsnapshot2026,"Under a million dollars because the export's fund filter leaves out the utility enterprise funds. The real utility spending is in the balancing line, not here. The clearest symptom of that filter."
+2026,Open Space and Mountain Parks,parks_openspace,41.873,10.17,deptsnapshot2026,
+2026,Parks and Recreation,parks_openspace,38.655,9.38,deptsnapshot2026,
+2026,Housing and Human Services,community_services,52.883,12.84,deptsnapshot2026,
+2026,Planning and Development Services,planning_climate,20.003,4.86,deptsnapshot2026,
+2026,Climate Initiatives,planning_climate,9.604,2.33,deptsnapshot2026,No 2005 equivalent as a department; its predecessor was Environmental Affairs inside Community Planning and Sustainability.
+2026,City Manager's Office,administration,18.733,4.55,deptsnapshot2026,
+2026,Innovation and Technology,administration,10.834,2.63,deptsnapshot2026,
+2026,Finance,administration,7.241,1.76,deptsnapshot2026,
+2026,City Attorney's Office,administration,5.067,1.23,deptsnapshot2026,
+2026,Human Resources,administration,4.456,1.08,deptsnapshot2026,
+2026,Communications and Engagement,administration,3.877,0.94,deptsnapshot2026,
+2026,Municipal Court,administration,2.71,0.66,deptsnapshot2026,
+2026,City Council,administration,0.544,0.13,deptsnapshot2026,
+2026,Fundwide / Citywide,citywide_debt,30.904,7.5,deptsnapshot2026,Citywide allocations and contingency. Partly the counterpart of 2005's General Government -- see that line's note.
