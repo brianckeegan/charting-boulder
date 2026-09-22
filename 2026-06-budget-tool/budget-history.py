@@ -100,6 +100,14 @@ SOURCES = {
         "retrieved": "2026-09-21",
         "notes": "Citywide gross sources & uses, 2021 actual / 2022 adopted / 2023 total budget. Different basis from the budget_* headline totals — see the data dictionary.",
     },
+    "books": {
+        "title": "City of Boulder annual budget books, 2016-2026 (narrative summary pages)",
+        "publisher": "City of Boulder",
+        "date": "2026-09-22",
+        "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2",
+        "retrieved": "2026-09-22",
+        "notes": "Extracted by budget-books-extract.py from the page-text dump. Figures are stated in prose, not tables. Verified: 10 of 12 overlapping values match the council packets exactly.",
+    },
     "brl2027": {
         "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and reduce pool hours",
         "publisher": "Boulder Reporting Lab",
@@ -145,6 +153,35 @@ add(2027, "budget_general_fund", "recommended", 200.5, "musd", "rec2027")
 # 7.8% decrease from 2025, so 194.5 / (1 - 0.078) ~= 211.0. Marked `derived`
 # and rounded to 0.1 — do not present it as a published figure.
 add(2025, "budget_general_fund", "derived", round(194.5 / (1 - 0.078), 1), "musd", "forecast2026")
+
+# --- Operating budget, 2017-2022, from the budget books --------------------
+# Each book states its own year-over-year change, which lets the chain be
+# checked rather than trusted: 2019 +2.0%, 2020 +2.3%, 2021 -6.0%, 2022 +10%,
+# 2023 +18% as published, against +2.0/+2.0/-5.7/+10.2/+18.2 computed from
+# these values. The chain terminates at 2023 = 354.6, which matches the council
+# packet exactly, so the whole run shares that basis.
+#
+# The 18% step from 2022 to 2023 looks like an extraction error and is not —
+# the 2023 book states it outright.
+for yr, v in [(2017, 260.0), (2018, 277.6), (2019, 283.2),
+              (2020, 288.9), (2021, 272.3), (2022, 300.1)]:
+    add(yr, "budget_operating", "adopted", v, "musd", "books")
+add(2022, "budget_capital", "adopted", 162.4, "musd", "books")
+
+# 2016 is published as "$327 million (excluding transfers)". That is a narrower
+# scope than the later totals, so it gets its own basis rather than being
+# chained onto them.
+add(2016, "budget_total", "adopted_excl_transfers", 327.0, "musd", "books")
+
+# --- Citywide staffing LEVELS ---------------------------------------------
+# Previously unavailable. The budget books state a citywide headcount in prose
+# ("a total city staffing level of 1,540.09 full-time equivalents"), which the
+# council packets and press releases never do — they report only per-year
+# position changes. Years without a row are books that state no citywide figure
+# on the pages scanned, not zeros.
+for yr, v in [(2016, 1419.00), (2018, 1451.00), (2021, 1375.83), (2022, 1460.71),
+              (2023, 1540.09), (2025, 1539.10), (2026, 1548.28)]:
+    add(yr, "staffing_fte", "adopted", v, "fte", "books")
 
 # --- General Fund gap ------------------------------------------------------
 add(2025, "gap_general_fund_low", "identified", 8.0, "musd", "forecast2026")

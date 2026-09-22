@@ -1,4 +1,12 @@
 year,measure,basis,value,unit,source_id
+2016,budget_total,adopted_excl_transfers,327.0,musd,books
+2016,staffing_fte,adopted,1419.0,fte,books
+2017,budget_operating,adopted,260.0,musd,books
+2018,budget_operating,adopted,277.6,musd,books
+2018,staffing_fte,adopted,1451.0,fte,books
+2019,budget_operating,adopted,283.2,musd,books
+2020,budget_operating,adopted,288.9,musd,books
+2021,budget_operating,adopted,272.3,musd,books
 2021,net_revenues_less_expenses,actual,58.648425,musd,snapshot2023
 2021,sources_revenue_accommodation_admission_tax,actual,7.795783,musd,snapshot2023
 2021,sources_revenue_charges_for_services,actual,5.427693,musd,snapshot2023
@@ -19,6 +27,7 @@ year,measure,basis,value,unit,source_id
 2021,sources_revenue_total,actual,472.32985,musd,snapshot2023
 2021,sources_revenue_transfers_in,actual,30.151267,musd,snapshot2023
 2021,sources_revenue_utility,actual,74.307851,musd,snapshot2023
+2021,staffing_fte,adopted,1375.83,fte,books
 2021,uses_expense_capital,actual,56.51875,musd,snapshot2023
 2021,uses_expense_debt_service,actual,28.616988,musd,snapshot2023
 2021,uses_expense_internal_services,actual,20.016651,musd,snapshot2023
@@ -26,6 +35,8 @@ year,measure,basis,value,unit,source_id
 2021,uses_expense_personnel,actual,151.929858,musd,snapshot2023
 2021,uses_expense_total,actual,413.681426,musd,snapshot2023
 2021,uses_expense_transfers,actual,41.607094,musd,snapshot2023
+2022,budget_capital,adopted,162.4,musd,books
+2022,budget_operating,adopted,300.1,musd,books
 2022,net_revenues_less_expenses,adopted,11.824986,musd,snapshot2023
 2022,salesuse_audits_sales,actual,0.08,musd,forecast2026
 2022,salesuse_audits_use,actual,0.55,musd,forecast2026
@@ -54,6 +65,7 @@ year,measure,basis,value,unit,source_id
 2022,sources_revenue_total,adopted,553.452986,musd,snapshot2023
 2022,sources_revenue_transfers_in,adopted,22.124637,musd,snapshot2023
 2022,sources_revenue_utility,adopted,78.3942,musd,snapshot2023
+2022,staffing_fte,adopted,1460.71,fte,books
 2022,uses_expense_capital,adopted,161.968657,musd,snapshot2023
 2022,uses_expense_debt_service,adopted,31.4133,musd,snapshot2023
 2022,uses_expense_internal_services,adopted,36.803136,musd,snapshot2023
@@ -94,6 +106,7 @@ year,measure,basis,value,unit,source_id
 2023,sources_revenue_total,total_budget,575.54562,musd,snapshot2023
 2023,sources_revenue_transfers_in,total_budget,19.312048,musd,snapshot2023
 2023,sources_revenue_utility,total_budget,83.183592,musd,snapshot2023
+2023,staffing_fte,adopted,1540.09,fte,books
 2023,uses_expense_capital,total_budget,172.540892,musd,snapshot2023
 2023,uses_expense_debt_service,total_budget,33.755478,musd,snapshot2023
 2023,uses_expense_internal_services,total_budget,42.444015,musd,snapshot2023
@@ -151,6 +164,7 @@ year,measure,basis,value,unit,source_id
 2025,salesuse_total,actual,178.75,musd,forecast2026
 2025,salesuse_total,adopted,180.17,musd,forecast2026
 2025,salesuse_total,revised_projection,176.84,musd,forecast2026
+2025,staffing_fte,adopted,1539.1,fte,books
 2026,budget_capital,adopted,113.3,musd,forecast2026
 2026,budget_general_fund,adopted,194.5,musd,forecast2026
 2026,budget_operating,adopted,407.7,musd,forecast2026
@@ -190,6 +204,7 @@ year,measure,basis,value,unit,source_id
 2026,salesuse_retail,forecast,139.96,musd,forecast2026
 2026,salesuse_total,adopted,179.64,musd,forecast2026
 2026,salesuse_total,forecast,178.71,musd,forecast2026
+2026,staffing_fte,adopted,1548.28,fte,books
 2026,yoy_general_fund_pct,adopted,-7.8,pct,forecast2026
 2026,yoy_operating_pct,adopted,2.1,pct,forecast2026
 2027,budget_capital,recommended,135.36,musd,rec2027
