@@ -283,8 +283,12 @@ MULTIYEAR_TABLES = [
      "budget_general_fund_revenue", "thousands", plausible(40, 400)),
     (r'SUMMARY\s*OF\s*USES\s*OF\s*FUNDS', r'Total\s*General\s*Fund\s*Uses',
      "budget_general_fund", "thousands", plausible(40, 400)),
-    (r'SUMMARY\s*OF\s*STANDARD\s*FTEs?', r'TOTALS?',
-     "staffing_fte_standard", "fte", plausible(800, 2500)),
+    # Two headings for the same table. The pre-2012 books call it "SUMMARY OF
+    # STANDARD FTEs"; from 2012 it is "Table 4-6: Staffing Levels in Standard
+    # FTEs by Department". Gating on the narrower wording lost 2012 and 2013,
+    # which are the years that close the gap to 2016.
+    (r'STANDARD\s*FTEs?|STANDARD\s*FULL\s*TIME', r'TOTALS?|Total\b',
+     "staffing_fte", "fte", plausible(800, 2500)),
 ]
 # Years and basis words both arrive fused in the 2008 book ("2006200720082009",
 # "ACTUALAPPROVEDAPPROVEDPROJECTED"), so neither pattern can require whitespace.
@@ -313,7 +317,12 @@ BASIS_MAP = {"actual": "actual", "approved": "adopted", "projected": "projected"
 #     values). Allowing a period in the thousands group here would run one match
 #     across the whole line.
 NUM_THOUSANDS = re.compile(r'\d{1,3}(?:[,\.]\s?\d{3})+')
-NUM_FTE = re.compile(r'\d{1,3}(?:[,\s]\s?\d{3})*\.\s?\d{1,2}')
+# Four integer digits with no separator at all: the 2012 book's totals row is
+# "TOTAL 1248. 24 1230. 50 1243. 20", where extraction dropped the commas the
+# 2013 book keeps ("1, 231.25"). Requiring a separator read the 2012 table as
+# having no plausible totals row, so that book's own figures were replaced by
+# the 2013 book's later restatement of them.
+NUM_FTE = re.compile(r'\d{1,4}(?:[,\s]\s?\d{3})*\.\s?\d{1,2}')
 
 
 def read_numbers(text, kind):
@@ -388,66 +397,148 @@ def extract_multiyear(rows):
 
 # --------------------------------------------------------------------------
 # The citywide spending pie. Every book states where the money went by
-# DEPARTMENT, as a pie with the dollars and the share printed on each slice:
+# DEPARTMENT, as a pie with the dollars and the share printed on each slice.
+# This is the only expense breakdown that reaches back to 2005 -- the
+# Personnel/Capital/Operating/Debt-Service split is an OpenGov construct that
+# appears in two books in this whole corpus.
 #
-#     2005 Uses of Funds  Total = $196,167 (in $1,000s)
-#     Police $22,680 12%   Public Works $67,430 33%   De bt $2,668 1% ...
+# THREE PIES SHARE ONE HEADING, AND THAT IS THE TRAP
+# --------------------------------------------------
+# A book prints the same words, "2005 Uses of Funds Total = $NN (in $1,000s)",
+# over three different scopes:
 #
-# This is the only expense breakdown that reaches back to 2005. The
-# Personnel/Capital/Operating/Debt-Service split people usually reach for is an
-# OpenGov construct that appears in exactly two books in this corpus.
+#     citywide             total = that year's citywide budget  ($196,167 in 2005)
+#     citywide, no utils   says "without Utilities" / "excluding Utilities"
+#     General Fund         total = that year's General Fund     ($80,059 in 2005)
 #
-# It is also the one extraction here that is checked by construction rather than
-# by a plausibility range: the slices must add up to the total printed above
-# them. In 2005 and 2006 they do, to the dollar. In 2011 they cannot -- that
-# book's pie comes out of the PDF with its labels and values interleaved beyond
-# repair ("DUHMD/ Housing/ Open Space/Prkng Svcs Human Svcs 9, 679 Mtn Prks
-# Police 46 12, 964 24, 518 ..."), and the visible values fall $46.6M short of
-# the total. Pairing those labels to those values would be guessing, and a wrong
-# guess here does not look wrong: it just moves Police's budget to Open Space.
-# So the sum gate rejects the year instead.
+# Nothing in the heading separates them; the scope appears only in surrounding
+# prose, worded differently in every book. Reading them as one series is not a
+# subtle error: the 2005 CITYWIDE pie puts Parks & Recreation at $21.1M and the
+# 2005 GENERAL FUND pie puts Parks at $3.9M, because most of Parks is funded
+# outside the General Fund. An earlier version of this reader recorded both
+# under the same measure name.
+#
+# So scope is settled arithmetically, against the citywide total this same run
+# extracted for that year. A pie whose total matches is citywide; anything else
+# is REPORTED with its total instead of recorded, so an unrecognised pie shows
+# up as a line of output rather than as silently wrong data.
+#
+# ONE SLICE ORDER
+# ---------------
+# Every readable pie prints "Police $22,680 12%" -- label, value, share. The 2018
+# book prints "Public Works 44% 170,485" instead, which is why 2018 is among the
+# unreadable years below rather than a supported format; see _pie_slices.
+#
+# AND THREE PIES CANNOT BE READ AT ALL
+# ------------------------------------
+# 2011 and 2012 come out of the PDF interleaved beyond repair -- 2012's reads
+# "Pol ice 29, 593 Comm Planning Parks and Rec 12% and SUSt 24, 229 S/, 644
+# 10%", in which the 32% belongs to Public Works and "577,340" is $77,340 with a
+# stray digit. 2019 prints its total and leaves the slices in an image. The sum
+# gate rejects all three, which is the point: pairing those labels to those
+# values would be guessing, and a wrong guess does not look wrong -- it just
+# moves Police's budget to Open Space.
 # --------------------------------------------------------------------------
+# The "(in $1,000s)" that sits between the heading and the total contains a $,
+# so the gap here must not exclude one. Requiring no $ hid 2012 and 2019
+# entirely from an earlier pass.
+# The year is captured from BEFORE the heading ("2006 Uses of Funds"), not from
+# the filename. The 2006-2007 biennial book is named for 2007 but its pie is
+# 2006's, so a filename fallback files that pie under a year whose citywide total
+# does not exist -- and the scope test then discards a perfectly good pie. 2005
+# survived the same bug only because its filename happened to be right.
 DEPT_PIE = re.compile(
-    r'(20\d\d)\s*(?:Uses of Funds|Expenditures)[^$]{0,60}?Total\s*=\s*\$?\s*'
-    r'([\d][\d,\.\s]{4,11}\d)\s*\(?\s*in\s*\$?\s*1,?\s?000s?\)(.{0,1000})',
-    re.I | re.S)
-# The slice value must not be allowed to run past its own digits. A tolerant
-# "[\d,.\s]+" class reads "$22,680 12%" as the single number 22,68012, because
-# the space and the share's digits are both inside the class -- which is how both
-# readable years came out seven times too large and were rejected by the sum
-# gate. So: commas and periods separate thousands here, whitespace never does.
-DEPT_SLICE = re.compile(
-    r"([A-Za-z][A-Za-z&/\.' ]{2,44}?)\s*\$\s*(\d{1,3}(?:[,\.]\s?\d{3})*)"
-    r"\s*(<?\s*\d{1,2})\s*%")
-# PDF extraction inserts spaces inside words -- the 2005 pie prints "De bt",
-# "Fir e", "General Governm ent", "Planning & De ve lopm e nt Services". Any
-# label matching has to happen on the letters alone.
+    r'(?:(20\d\d)\s+)?(?:Citywide\s+)?(?:Expenses|Expenditures|Uses)(?:\s+of\s+Funds)?\b'
+    r'[^\n]{0,90}?TOTAL\s*=\s*\$?\s*([\d][\d,\.\s]{4,14}\d)', re.I)
+# The thousands group is optional, not required. Demanding one drops every
+# slice under $1,000 thousand -- Arts is $440 in 2005 and $451 in 2006 -- and
+# that loss is small enough to slip through a percentage-based sum gate, which
+# is exactly how it went unnoticed once already.
+DEPT_SLICE_VALUE_FIRST = re.compile(
+    r"([A-Za-z][A-Za-z&/\.,'\- ]{2,46}?)\s*\$?\s*(\d{1,3}(?:[,\.]\s?\d{3})*)"
+    r"\s*\(?\s*<?\s*\d{1,2}(?:\.\d)?\s*%")
+DEPT_EX_UTILITIES = re.compile(r'with(?:out)?\s+utilit|excluding\s+utilit', re.I)
+# A FLAT tolerance, not a percentage of the total. A percentage scales with the
+# pie and so grows past the size of the smallest slice: 0.5% of the 2005 pie is
+# $981 thousand, which quietly admitted a reading that had dropped the $440 Arts
+# slice entirely. Measured across the nine readable years, every pie lands within
+# $1 thousand of its printed total -- the city rounds slices to the thousand --
+# so anything past a few thousand means a slice is missing, whatever the pie's
+# size.
+TOL_ABS = 3_000
+
+
 def slug(label):
+    """Match on the letters alone. PDF extraction inserts spaces inside words:
+    the 2005 pie prints "De bt", "Fir e", "General Governm ent"."""
     return re.sub(r'[^a-z0-9]', '', label.lower())
 
 
-def extract_dept_pie(rows):
+def _pie_slices(seg, total):
+    """The pie's slices, or None if they do not add up to the printed total.
+
+    ONE slice order, "Police $22,680 12%". The 2018 book prints the reverse and a
+    pattern for it was tried here; it recovered no year this one misses, and it
+    broke 2020. After that pie's eleven real slices the book lists sub-components
+    with shares and NO values ("Electric Utility Development - 1% Sustainability
+    - 1% Police - 10%"), which the reversed pattern read as thirteen slices, two
+    worth nothing. They summed correctly and won on slice count, so 2020 gained
+    Transportation and Utilities at $0 -- printed next to 2021's $30.8M and
+    $84.9M, that reads as a collapse that never happened.
+    """
+    got = [(lab.strip(), to_number(re.sub(r'\D', '', val)))
+           for lab, val in DEPT_SLICE_VALUE_FIRST.findall(seg)]
+    # The floor is on the SHARE, not the dollars, because the early books print
+    # thousands and the later ones whole dollars. No real department line is a
+    # ten-thousandth of the city's spending; a match that small is a legend entry
+    # whose percentage was read as its value.
+    got = [(lab, v) for lab, v in got if v and v / total >= 0.0001]
+    # A pie is whole or it is not used. TOL_ABS covers the city rounding a slice
+    # to the nearest thousand; it does not cover a missing slice, which is the
+    # failure this gate exists to catch.
+    if got and abs(sum(v for _l, v in got) - total) <= TOL_ABS:
+        return got
+    return None
+
+
+def extract_dept_pie(rows, citywide_totals):
+    """Slices of the CITYWIDE pie only.
+
+    `citywide_totals` is {year: value in $M} taken from the totals this same run
+    extracted, and is what settles the scope of an otherwise ambiguous heading.
+    """
     out, rejected = [], []
     for r in rows:
         flat = re.sub(r'\s+', ' ', r['text'])
         for m in DEPT_PIE.finditer(flat):
-            yr = int(m.group(1))
             total = to_number(re.sub(r'[^\d]', '', m.group(2)))
-            slices = [(lab.strip(), to_number(re.sub(r'[^\d]', '', val)))
-                      for lab, val, _pct in DEPT_SLICE.findall(m.group(3))]
-            slices = [(lab, v) for lab, v in slices if v and v > 0]
-            if not slices or not total:
+            if not total or total < 50_000:
                 continue
-            got = sum(v for _lab, v in slices)
-            # Half a percent of the total, which in practice means "to the
-            # dollar or not at all" -- both years that pass land exactly.
-            if abs(got - total) > max(500, total * 0.005):
-                rejected.append((yr, r['file'], r['page'], len(slices), got, total))
+            # The early books print the pie in thousands, the later ones in
+            # whole dollars, and both appear with the same heading.
+            in_thousands = total < 1_000_000
+            musd = total / (1000.0 if in_thousands else 1e6)
+            ym = m.group(1) or (re.search(r'\b(20\d\d)\b', m.group()) or [None])
+            yr = int(m.group(1)) if m.group(1) else (
+                int(ym.group(1)) if hasattr(ym, 'group') else r['year'])
+            head = flat[max(0, m.start() - 260):m.end()]
+            known = citywide_totals.get(yr)
+            why = None
+            if DEPT_EX_UTILITIES.search(head):
+                why = "excludes utilities"
+            elif known is None:
+                why = "no citywide total known for this year"
+            elif abs(musd - known) > 1.5:
+                why = f"total {musd:,.1f}M is not the citywide {known:,.1f}M"
+            slices = None if why else _pie_slices(flat[m.end(): m.end() + 1400], total)
+            if why or not slices:
+                rejected.append((yr, r['file'], r['page'], round(musd, 1),
+                                 why or "slices do not sum to the printed total"))
                 continue
             for lab, v in slices:
                 out.append({"year": yr, "measure": "dept_" + slug(lab),
-                            "value": round(v / 1000.0, 3), "unit": "musd",
-                            "file": r["file"], "page": r["page"],
+                            "value": round(v / (1000.0 if in_thousands else 1e6), 3),
+                            "unit": "musd", "file": r["file"], "page": r["page"],
                             "context": f"pie slice as printed: {lab!r} "
                                        f"({100 * v / total:.1f}% of {total:,.0f})"})
     return out, rejected
@@ -493,8 +584,15 @@ def main():
     if not rows:
         sys.exit("no usable pages in the dump")
 
-    dept, dept_rejected = extract_dept_pie(rows)
-    found = extract(rows) + extract_legacy(rows) + extract_multiyear(rows) + dept
+    base = extract(rows) + extract_legacy(rows) + extract_multiyear(rows)
+    # The pie reader needs each year's citywide total to tell three
+    # identically-headed pies apart, so it runs last, on what the rest found.
+    citywide = {}
+    for f in base:
+        if f["measure"] == "budget_total":
+            citywide.setdefault(f["year"], f["value"])
+    dept, dept_rejected = extract_dept_pie(rows, citywide)
+    found = base + dept
 
     # Collapse duplicates (the same sentence can appear in a summary and again
     # in a detail section), then flag any year where a measure disagrees.
@@ -529,9 +627,8 @@ def main():
             print(f"  {'':<18}    missing: {miss}")
     dept_years = sorted({y for (y, mm, _b) in best if mm.startswith("dept_")})
     print(f"  {'departmental pie':<18} {len(dept_years):>2} years  {dept_years}")
-    for yr, f, pg, n, got, total in dept_rejected:
-        print(f"  {'':<18}    REJECTED {yr} ({f[:28]} p{pg}): {n} slices sum "
-              f"{got / 1000:,.1f}M against a printed total of {total / 1000:,.1f}M")
+    for yr, f, pg, musd, why in sorted(dept_rejected):
+        print(f"  {'':<18}    skipped {yr} pie ({f[:26]} p{pg}, {musd:,.1f}M): {why}")
 
     flagged = sorted({k[0] for k, v in conflicts.items() if len(v) > 1})
     if flagged:
