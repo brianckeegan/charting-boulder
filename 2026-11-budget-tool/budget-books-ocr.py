@@ -361,6 +361,18 @@ def main():
                     help="after writing, run budget-books-extract.py over the result")
     args = ap.parse_args()
 
+    # Line-buffer stdout. Redirected to a file -- `nohup ... > run.log &`, which is
+    # how a multi-hour run gets started -- Python block-buffers output in ~8KB, so
+    # the log stays EMPTY until roughly 130 pages have finished, about 14 minutes
+    # in, while the requests are visibly going through on the Datalab dashboard.
+    # It looks like a hung process. This was invisible in testing because the
+    # environment used there set PYTHONUNBUFFERED=1; a default Python reproduces it
+    # exactly (0 of 3 progress lines visible mid-run, 3 of 3 with this line).
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except AttributeError:        # Python < 3.7
+        pass
+
     root = Path(args.root).expanduser()
     if not root.exists():
         sys.exit(f"no such directory: {root}")
