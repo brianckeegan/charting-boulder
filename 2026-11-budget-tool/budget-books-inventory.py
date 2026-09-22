@@ -16,11 +16,11 @@ anything. It answers the three questions that decide the cheapest route:
 Usage
 -----
     pip install pypdf
-    python3 budget-books-inventory.py /path/to/budget-books
+    python3 budget-books-inventory.py ~/Downloads/ExportedContents/
 
     # then, once the inventory looks right, pull just the pages that matter
     # into one small PDF per year (typically a few MB in total):
-    python3 budget-books-inventory.py /path/to/budget-books --extract out/
+    python3 budget-books-inventory.py ~/Downloads/ExportedContents/ --extract out/
 
 Outputs
 -------
@@ -38,6 +38,7 @@ What to do with the result
 
 import argparse
 import csv
+import json
 import pathlib
 import re
 import sys
@@ -63,6 +64,19 @@ TARGETS = {
     ],
     "general_fund": [
         "general fund summary", "general fund revenue", "general fund expenditure",
+    ],
+    # Where the revenue and expense CATEGORY breakdowns live. These are pie
+    # figures, not tables, and none of the keywords above reaches them: the
+    # 2012-2017 books head them "Figure 4-2: Citywide Revenues (Sources) for
+    # 2012" and "Figure 5-06: Citywide Expenditures for 2013", while the 2005
+    # and 2006 books use the bare "2005 Uses of Funds". Without these, the
+    # citywide revenue mix and the departmental spending split are invisible for
+    # every middle year.
+    "categories": [
+        "uses of funds", "sources of funds", "citywide revenues", "citywide expenditures",
+        "revenues (sources)", "expenditures (uses)", "overview of", "composition of",
+        "revenues by fund", "expenditures by fund", "budget by department",
+        "expenditures by department", "revenue by source",
     ],
 }
 
@@ -144,6 +158,13 @@ def main():
                     help="also write one small PDF per book containing only the matched pages")
     ap.add_argument("--shallow", action="store_true",
                     help="skip the per-page keyword scan (much faster, no page numbers)")
+    ap.add_argument("--dump-text", metavar="FILE.jsonl",
+                    help="write the text of every matched page as JSONL. A couple of MB for "
+                         "the whole corpus, and the fastest way to hand the real table "
+                         "structure to whoever writes the parser without shipping any PDFs.")
+    ap.add_argument("--max-pages-per-book", type=int, default=0,
+                    help="with --dump-text, keep only the first N matched pages per book "
+                         "(the citywide summary tables sit near the front)")
     ap.add_argument("--out", default="budget-books-inventory.csv")
     args = ap.parse_args()
 
@@ -156,6 +177,10 @@ def main():
         sys.exit(f"no PDFs under {root} — unzip the archive first?")
 
     print(f"{len(pdfs)} PDFs under {root}\n")
+    if args.dump_text:
+        # Opened per book in append mode below, so start clean or a re-run
+        # silently doubles every page.
+        pathlib.Path(args.dump_text).write_text("")
     rows = []
     for i, p in enumerate(pdfs, 1):
         print(f"  [{i}/{len(pdfs)}] {p.name[:70]}", end="", flush=True)
@@ -170,6 +195,26 @@ def main():
         matched = sum(row.get(f"n_{k}", 0) for k in TARGETS)
         print(f"  -> {row['pages']}p {row['kind']}, {matched} matched pages")
         rows.append(row)
+
+        if args.dump_text and row["kind"] == "born_digital":
+            by_page = {}
+            for target in TARGETS:
+                for x in (row.get(f"pages_{target}") or "").split():
+                    by_page.setdefault(int(x), []).append(target)
+            dump_pages = sorted(by_page)
+            if args.max_pages_per_book:
+                dump_pages = dump_pages[: args.max_pages_per_book]
+            if dump_pages:
+                reader = PdfReader(str(p))
+                with open(args.dump_text, "a") as fh:
+                    for pg in dump_pages:
+                        fh.write(json.dumps({
+                            "file": p.name,
+                            "year": row["year"],
+                            "page": pg,
+                            "targets": by_page[pg],
+                            "text": page_text(reader.pages[pg - 1]),
+                        }) + "\n")
 
         if args.extract and row["kind"] == "born_digital":
             pages = sorted({int(x) for k in TARGETS
@@ -213,6 +258,9 @@ def main():
         print(f"  matched pages    {matched_pages:,}   <- what actually carries the numbers")
         if tot_pages:
             print(f"                   {matched_pages / tot_pages:.1%} of the corpus")
+    if args.dump_text:
+        mb = pathlib.Path(args.dump_text).stat().st_size / 1e6
+        print(f"  text dump        {args.dump_text}  ({mb:.1f} MB)  <- send this, not the PDFs")
 
 
 if __name__ == "__main__":

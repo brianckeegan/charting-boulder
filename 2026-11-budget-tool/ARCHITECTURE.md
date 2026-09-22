@@ -6,7 +6,7 @@ widget's comments point to.
 
 The whole pipeline lives in [`pipeline/`](./pipeline/): the Supabase schema and a
 one-file export script. The widget is
-[`boulder-budget-widget.jsx`](./boulder-budget-widget.jsx); the analysis is
+`boulder-budget-widget.jsx` (no longer in this repo — see `embed/README.md`); the analysis is
 [`budget-survey-analysis.ipynb`](./budget-survey-analysis.ipynb).
 
 ---
@@ -167,7 +167,7 @@ The project URL and the **publishable** key are baked into the JSX
 submissions directly. Build the self-contained production HTML with:
 
 ```bash
-BBW_PREVIEW=0 ./build-standalone.sh
+BBW_PREVIEW=0 ./build-standalone.sh    # build chain removed; see embed/README.md
 ```
 
 To rotate the key later, edit those two constants and rebuild.
@@ -184,7 +184,7 @@ root redirecting there). One-time setup: in the repo's **Settings → Pages**, s
 ## Newspack embedding
 
 Host `boulder-budget-widget.html` (build it with
-[`build-standalone.sh`](./build-standalone.sh)), then paste this into a Newspack
+`build-standalone.sh` (no longer in this repo — see `embed/README.md`)), then paste this into a Newspack
 **Custom HTML** block. The script makes the iframe grow to the widget's height
 using the `boulder-budget:height` message the widget already posts:
 

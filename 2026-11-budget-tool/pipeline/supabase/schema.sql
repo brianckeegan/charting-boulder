@@ -6,7 +6,7 @@
 -- https://iplcjxbazezpjdzdpjxx.supabase.co using the SQL Editor
 -- (Dashboard → SQL → New query → paste → Run), or via the Supabase CLI:
 --
---     supabase db execute --file 2026-06-budget-tool/pipeline/supabase/schema.sql
+--     supabase db execute --file 2026-11-budget-tool/pipeline/supabase/schema.sql
 --
 -- Re-running is safe: every statement is idempotent (IF NOT EXISTS / OR REPLACE).
 --
