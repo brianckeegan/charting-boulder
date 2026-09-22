@@ -12,6 +12,7 @@ Run it on your local copy of the books, with a Datalab key in the environment:
     export DATALAB_API_KEY=...
     python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --estimate   # what it will cost
     python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --yes        # actually spend it
+    python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --tier 2 --yes   # one tier only
 
 The output is JSONL in exactly the shape `budget-books-inventory.py --dump-text`
 writes, so `budget-books-extract.py` reads OCR'd and born-digital pages through
@@ -19,47 +20,46 @@ the same code path:
 
     python3 budget-books-extract.py dump.jsonl budget-books-ocr.jsonl -o facts.csv
 
-Why this sends 200 pages and not 1,651
---------------------------------------
-Six of the twenty-odd volumes are scans with no text layer at all — the
-inventory measures 0 extractable characters on every sampled page:
+Three tiers, three reasons to spend
+-----------------------------------
+`--tier 1,2,3` (the default) prices each separately, because a page bought for
+one reason is worth very different amounts:
 
-    2005 Annual Budget, Volume 2.pdf   151p    2009 Annual Budget, Volume 1.pdf   411p
-    2007 Annual Budget, Volume 1.pdf   377p    2009 Annual Budget, Volume 2.pdf   211p
-    2007 Annual Budget, Volume 2.pdf   152p    2010 Annual Budget, Volume 1.pdf   349p
+  1  ACQUISITION, scanned -- whole volumes with no text layer at all.
+     1,137 pages, $8.53. The only way to reach the last two missing citywide
+     totals, 2007 and 2009, plus confirmation of 2010's derived one.
 
-That is 1,651 pages, and sending all of them would be a waste of about $11 and
-several hours. Two cuts bring it to roughly 200, and both are measured off the
-born-digital books rather than guessed.
+  2  ACQUISITION, born-digital -- 24 pages, $0.18, and the best value here.
+     These pages HAVE text; it is mangled past what any regex reaches. The 2012
+     pie extracts as "Pol ice 29, 593 Comm Planning Parks and Rec 12% and SUSt
+     24, 229 S/, 644 10%", where the 32% belongs to Public Works. Datalab rebuilds
+     layout instead of streaming text by position, so it can read what pypdf
+     cannot -- potentially four more departmental pie years (2011, 2012, 2018,
+     2019), 2013's missing operating/capital split, and an independent check on
+     the only figures in the dataset typed by hand.
 
-**Skip every Volume 2.** In the books we CAN read, Volume 2 is the capital
-program and departmental detail and carries essentially no citywide summary
-pages: the 2006‑2007 Volume 2 matched one summary keyword in 149 pages, and the
-2008 Volume 2 matched none in 207. Volume 1 is where the citywide figures live.
-That also drops 2005 Volume 2 entirely, since 2005 Volume 1 is born-digital and
-already yielded that year in full.
+  3  VALIDATION -- 224 pages, $1.68. Every page a published figure came from,
+     plus two either side for a table continuing overleaf. Read from
+     budget-books-extracted.csv rather than hard-coded, so it tracks the dataset.
 
-**Send a window, not the whole volume.** Across every book in the corpus whose
-text we can read, the citywide summary block sits between page 58 and page 102:
+Total $10.39 for 1,385 pages, about 2.5 hours at the free tier's pacing (see
+--pace). `--estimate` prints the bill and exits; nothing is sent without --yes.
 
-    2006-2007 Vol 1   block p58, narrative p59, sources p64, uses p70, FTE p83
-    2008 Vol 1        block p71, uses p87, FTE p100
-    2011              total p67, sources p76, uses p84, FTE p96
-    2012 / 2013       overview p93 / p97
-    2014 / 2015 / 2016 / 2017   p96 / p100 / p100 / p102
+What is deliberately left out
+-----------------------------
+Six volumes are scans, 1,651 pages, but only three are in tier 1. The other
+three are the 2005, 2007 and 2009 VOLUME 2s -- 514 pages, $3.85 -- and in the
+books we can read, Volume 2 is the Capital Improvement Program and carries
+essentially no citywide summaries: the 2006-2007 Volume 2 matched one summary
+keyword in 149 pages, the 2008 Volume 2 matched none in 207. 2005 Volume 2 is
+redundant outright, since that year's Volume 1 is born-digital and already
+yielded the year in full. Add any of them with --book if the capital detail is
+ever wanted.
 
-DEFAULT_WINDOW spans that range with room on both sides. It is a default, not a
-fact about the 2009 book — if a run comes back with nothing, widen it rather
-than concluding the figures are absent. `--every 8` is the cheap way to look:
-it thins the window to every eighth page, so you can find the section for about
-six cents and then re-run tightly around it.
-
-What it costs
--------------
-Datalab bills per page (0.75 cents in accurate mode at the time of writing), so
-the three Volume 1 windows come to around $1.50. `--estimate` prints the page
-count and the arithmetic and exits without spending anything; nothing is sent
-until `--yes`.
+Tier 1 matches filenames from the START, not anywhere in them. "2007 Annual
+Budget, Volume 1" is a substring of "2006-2007 Annual Budget, Volume 1.pdf", and
+an unanchored match pulled that born-digital biennial book into a tier meant for
+scans. The scan test caught it, but only because that test exists.
 
 Resumable and cached
 --------------------
@@ -83,6 +83,7 @@ immediately instead of looking like a year with no data.
 from __future__ import annotations
 
 import argparse
+import collections
 import io
 import json
 import os
@@ -106,6 +107,43 @@ USER_AGENT = "charting-boulder/budget-books-ocr (+https://github.com/brianckeega
 DEFAULT_BOOKS = ["2007 Annual Budget, Volume 1",
                  "2009 Annual Budget, Volume 1",
                  "2010 Annual Budget, Volume 1"]
+
+# --------------------------------------------------------------------------
+# Tiers
+# --------------------------------------------------------------------------
+# Three different reasons to spend money, in descending order of how much each
+# page buys. `--tier 1,2,3` runs all three; each is priced separately so the
+# bill can be seen before any of it is committed.
+#
+#   1  ACQUISITION, scanned. Whole volumes with no text layer at all. The only
+#      way to reach the last two missing citywide totals, 2007 and 2009.
+#   2  ACQUISITION, born-digital. Pages that DO have text, mangled past what any
+#      regex reaches -- interleaved pie labels, dropped commas, values that live
+#      in an image. Datalab rebuilds layout instead of streaming text by
+#      position, so it can read what pypdf cannot. Twenty-odd pages, and the
+#      best value in the corpus.
+#   3  VALIDATION. Every page a published figure came from, plus a margin for a
+#      table continuing overleaf. Computed from budget-books-extracted.csv, not
+#      typed, so it tracks the dataset rather than drifting from it.
+#
+# Volume 2 of the scanned years is deliberately NOT in tier 1. In the books we
+# can read it is the Capital Improvement Program and carries essentially no
+# citywide summaries: the 2006-2007 Volume 2 matched one summary keyword in 149
+# pages and the 2008 Volume 2 matched none in 207. Add it with --book if the
+# capital detail is ever wanted.
+TIER1_BOOKS = DEFAULT_BOOKS          # all pages of each
+
+# Page numbers, as printed by budget-books-extract.py when it skips something.
+TIER2_PAGES = {
+    "2011 Annual Budget": [67],                       # pie interleaved beyond repair
+    "2012 Annual Budget, Volume 1": [39, 93, 112],    # pie, and the one hand-typed block
+    "2013 Annual Budget, Volume 1": [97, 115],        # block illegible; no operating/capital
+    "2018 Annual Budget - Volume 1": [66],            # pie double-counts its own subtotals
+    "2019 Approved Operating Budget": [57],           # pie values are an image
+}
+TIER2_MARGIN = 1
+TIER3_MARGIN = 2
+EXTRACTED_CSV = "budget-books-extracted.csv"
 # Pages 58-102 in every readable book, plus margin. See the module docstring.
 DEFAULT_WINDOW = (50, 115)
 CENTS_PER_PAGE = 0.75
@@ -121,6 +159,44 @@ def api_key() -> str:
     if not key:
         sys.exit("DATALAB_API_KEY is not set. export it and run again.")
     return key
+
+
+def tier3_pages(here: Path):
+    """{filename: [pages]} for every page a published figure came from.
+
+    Read from the extractor's own output rather than hard-coded, so this tracks
+    the dataset. If the CSV is missing, tier 3 is skipped with a warning instead
+    of silently validating nothing.
+    """
+    import csv as _csv
+    path = here / EXTRACTED_CSV
+    if not path.exists():
+        print(f"  ! {EXTRACTED_CSV} not found beside this script; skipping tier 3")
+        return {}
+    out = {}
+    with path.open() as fh:
+        for row in _csv.DictReader(fh):
+            if "excerpt" in row["file"].lower():
+                continue
+            out.setdefault(row["file"], set()).add(int(row["page"]))
+    return {k: sorted(v) for k, v in out.items()}
+
+
+def looks_scanned(pdf: Path) -> bool:
+    """No extractable text worth the name. Same test as budget-books-inventory.py:
+    a genuinely scanned page yields zero characters, while even a sparse
+    born-digital table page yields a few dozen."""
+    reader = PdfReader(str(pdf))
+    n = len(reader.pages)
+    idx = sorted(set(range(0, n, max(1, n // 12)))) or [0]
+    with_text = 0
+    for i in idx:
+        try:
+            if len((reader.pages[i].extract_text() or "").strip()) >= 25:
+                with_text += 1
+        except Exception:  # noqa: BLE001
+            pass
+    return (with_text / len(idx)) < 0.4
 
 
 def infer_year(name: str):
@@ -240,6 +316,11 @@ def main():
     ap.add_argument("root", help="directory holding the PDFs (searched recursively)")
     ap.add_argument("-o", "--out", default="budget-books-ocr.jsonl")
     ap.add_argument("--cache", default="", help="markdown cache dir (default: <out>-cache)")
+    ap.add_argument("--tier", default="1,2,3", metavar="1,2,3",
+                    help="which tiers to run (default %(default)s). 1 = whole scanned "
+                         "volumes, 2 = born-digital pages pypdf mangles, 3 = validate "
+                         "every page a published figure came from. --book or --pages "
+                         "switches to manual selection instead.")
     ap.add_argument("--book", action="append", default=[], metavar="SUBSTRING",
                     help="filename substring to include; repeatable. Defaults to the "
                          "three Volume 1 scans the born-digital books cannot cover.")
@@ -247,6 +328,10 @@ def main():
                     help="page range to send (default %(default)s)")
     ap.add_argument("--pages", default="", metavar="N,N,...",
                     help="exact pages to send, overriding --window")
+    ap.add_argument("--pace", type=float, default=PACE_SECONDS, metavar="SECONDS",
+                    help="seconds between requests (default %(default)s, sized for the "
+                         "free tier's 10/minute). Lower it on a paid plan to shorten a "
+                         "long run; a 429 is retried after a minute either way.")
     ap.add_argument("--every", type=int, default=1, metavar="N",
                     help="thin the window to every Nth page — the cheap way to "
                          "find which pages carry the summaries")
@@ -268,24 +353,96 @@ def main():
     out_path = Path(args.out)
     cache = Path(args.cache) if args.cache else out_path.with_name(out_path.stem + "-cache")
 
-    books = select(root, args.book or DEFAULT_BOOKS)
-    if not books:
-        sys.exit("nothing matched — check --book against the real filenames")
+    here = Path(__file__).resolve().parent
+    tiers = [int(t) for t in re.findall(r'\d', args.tier)] if args.tier else []
+    pdfs = sorted(root.rglob("*.pdf")) + sorted(root.rglob("*.PDF"))
+    # budget-books-inventory.py --extract writes "<year>-excerpt.pdf" beside the
+    # originals, holding pages that are already in them. Those are duplicates, and
+    # OCR is charged per page, so paying for one is pure waste. The extractor
+    # drops them from its dumps for the same reason.
+    pdfs = [q for q in pdfs if "excerpt" not in q.name.lower()]
+    if not pdfs:
+        sys.exit(f"no PDFs under {root} — unzip the archive first?")
 
-    plan = []
-    for pdf in books:
-        reader = PdfReader(str(pdf))
-        pages = page_list(len(reader.pages), window, args.every, explicit)
-        plan.append((pdf, reader, pages))
-        cached = sum(1 for p in pages if (cache / pdf.stem / f"p{p:03d}.md").exists())
-        print(f"  {pdf.name[:52]:<52} {len(reader.pages):>4}p total, "
-              f"{len(pages):>3} selected, {cached:>3} already cached")
+    # {resolved pdf: {page: tier}} -- a page wanted by two tiers is paid for once,
+    # and attributed to the cheaper-to-justify tier for the printout.
+    want = {}
+
+    def claim(pdf, pages, tier):
+        d = want.setdefault(pdf, {})
+        for pg in pages:
+            d.setdefault(pg, tier)
+
+    def match(substr, anchored=False):
+        """Filename substring match.
+
+        `anchored` requires the name to START with the pattern, which tier 1
+        needs: "2007 Annual Budget, Volume 1" is a substring of "2006-2007
+        Annual Budget, Volume 1.pdf", so an unanchored match pulled the
+        born-digital biennial book into a tier meant for scans. The scan test
+        caught it -- but only because that test exists, and had the biennial
+        book been a scan it would have quietly added 321 pages to the bill.
+        """
+        lo = substr.lower()
+        return [q for q in pdfs
+                if (q.name.lower().startswith(lo) if anchored else lo in q.name.lower())]
+
+    if args.book or args.pages or not tiers:
+        # Manual mode, unchanged: explicit books and an explicit window.
+        for pdf in select(root, args.book or DEFAULT_BOOKS):
+            claim(pdf, page_list(len(PdfReader(str(pdf)).pages), window,
+                                 args.every, explicit), 0)
+    else:
+        if 1 in tiers:
+            for substr in TIER1_BOOKS:
+                for pdf in match(substr, anchored=True):
+                    n = len(PdfReader(str(pdf)).pages)
+                    if not looks_scanned(pdf):
+                        print(f"  ! {pdf.name} has a text layer; tier 1 is for scans. Skipping.")
+                        continue
+                    claim(pdf, range(1, n + 1), 1)
+                if not match(substr, anchored=True):
+                    print(f"  ! no file starting with {substr!r}")
+        if 2 in tiers:
+            for substr, pages in TIER2_PAGES.items():
+                for pdf in match(substr):
+                    n = len(PdfReader(str(pdf)).pages)
+                    claim(pdf, [q for pg in pages
+                                for q in range(max(1, pg - TIER2_MARGIN),
+                                               min(n, pg + TIER2_MARGIN) + 1)], 2)
+        if 3 in tiers:
+            for fname, pages in tier3_pages(here).items():
+                for pdf in match(fname):
+                    n = len(PdfReader(str(pdf)).pages)
+                    claim(pdf, [q for pg in pages
+                                for q in range(max(1, pg - TIER3_MARGIN),
+                                               min(n, pg + TIER3_MARGIN) + 1)], 3)
+
+    if not want:
+        sys.exit("nothing selected — check --tier / --book against the real filenames")
+
+    plan, by_tier = [], collections.Counter()
+    for pdf in sorted(want):
+        pages = sorted(want[pdf])
+        plan.append((pdf, PdfReader(str(pdf)), pages))
+        for pg in pages:
+            by_tier[want[pdf][pg]] += 1
+        cached = sum(1 for pg in pages if (cache / pdf.stem / f"p{pg:03d}.md").exists())
+        tset = "".join(str(t) for t in sorted({want[pdf][pg] for pg in pages}))
+        print(f"  [t{tset}] {pdf.name[:46]:<46} {len(pages):>4} of "
+              f"{len(PdfReader(str(pdf)).pages):>4}p, {cached:>4} cached")
+    print()
+    for t in sorted(by_tier):
+        label = {1: "acquisition, scanned", 2: "acquisition, born-digital",
+                 3: "validation", 0: "manual selection"}[t]
+        print(f"  tier {t}  {label:<26} {by_tier[t]:>5}p = "
+              f"${by_tier[t] * CENTS_PER_PAGE / 100:>6,.2f}")
 
     todo = sum(1 for pdf, _, pages in plan
                for p in pages if not (cache / pdf.stem / f"p{p:03d}.md").exists())
     print(f"\n  {todo} pages to send x {CENTS_PER_PAGE}c = "
           f"${todo * CENTS_PER_PAGE / 100:.2f}"
-          f"   (~{todo * PACE_SECONDS / 60:.0f} min at {PACE_SECONDS}s/page)")
+          f"   (~{todo * args.pace / 60:.0f} min at {args.pace}s/page)")
 
     if args.estimate:
         print("\n  --estimate: nothing sent. Add --yes to spend it.")
@@ -314,7 +471,7 @@ def main():
                 cents = (answer.get("cost_breakdown") or {}).get("final_cost_cents")
                 print(f"    {pdf.stem[:34]:<34} p{p:>3}  {len(dest.read_text()):>5} chars"
                       f"  {cents if cents is not None else '?'}c")
-                time.sleep(PACE_SECONDS)
+                time.sleep(args.pace)
         print(f"\n  sent {sent} pages")
 
     # --- JSONL, in the same shape as --dump-text -------------------------
