@@ -430,6 +430,47 @@ here does not look wrong: it silently moves Police's budget to Open Space. The
 extractor's sum gate rejects the year instead. 2005 and 2006 pass the same gate
 exactly, to the dollar, which is what makes them trustworthy.
 
+**16. Five years come from OCR, and OCR got things wrong on those same pages.**
+`booksocr` in the provenance file marks figures read by Datalab from pages whose
+text layer pypdf cannot use. Everything kept from it sums to a total the same page
+publishes — the 2011 pie's fourteen slices come to $231,030 exactly, the 2012
+pie's twelve to $238,960 exactly — and two of those pies confirm figures already
+here rather than adding new ones. But the same pages produced three kinds of
+error, all rejected:
+
+**Values invented from percentages.** Where a chart prints shares and not dollars,
+OCR returns dollars anyway by multiplying. In the 2019 book that gave Police
+$35,370 against a printed 10% — which is 9.999% of the total, to the dollar. For
+contrast the 2018 book's real Police figure is $35,762 against a printed 9%, or
+9.188%. A real value misses `pct × total` by hundreds of thousands because the
+printed percentage is rounded; a fabricated one lands on it.
+
+This is the one error a sum check cannot catch, because fabricated slices add up
+to the total as neatly as real ones. `budget-books-extract.py` rejects a pie when
+more than half its slices land within 0.01% of `pct × total`.
+
+**A bar chart read as numbers.** The 2019 property-tax chart came back as
+$25,000 / $2,000 / $2,000 / $1,000 — round numbers read off bar heights. Not
+recorded.
+
+**A single-digit misread.** The 2011 book's FTE history table gives 2006 as
+1,218.34 where the 2006‑2007 and 2008 books both say 1,218.84, and where that
+book's own printed variance (1,218.84 − 1,212.11 = 6.73) confirms 1,218.84. Nine
+of that table's other columns match independently-sourced values to the hundredth.
+The published value stands; the OCR reading was discarded. This is the clearest
+argument for validating rather than replacing: OCR is a second witness, not a
+better one.
+
+**What it did settle.** 2013 had nothing but a total rounded to "$255 million";
+it now has an exact total and a full operating/capital/General-Fund split, both
+identities holding. The 2011 revenue pie confirmed all eight hand-transcribed
+slices, including the two 4% ones whose labels had been assigned by adjacency. And
+the city's own notes on those pages confirm three bucket assignments: "General
+Government is comprised of City Council, City Manager's Office, City Attorney's
+Office, Municipal Court"; "Internal Services includes Human Resources, Finance,
+Information Technology"; "Public Works groups together Development and Support
+Services, Transportation, and Utilities".
+
 ## The three-stage book pipeline
 
 The historical figures come out of the PDF budget books in three steps, and only

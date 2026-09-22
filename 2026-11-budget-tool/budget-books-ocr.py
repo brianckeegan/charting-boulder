@@ -144,6 +144,9 @@ TIER2_PAGES = {
 TIER2_MARGIN = 1
 TIER3_MARGIN = 2
 EXTRACTED_CSV = "budget-books-extracted.csv"
+# Written by budget-books-extract.py: every page holding a pie, a multi-year table
+# or a summary block, whether or not it could be read. Tier 4's target list.
+INTEREST_CSV = "budget-books-pages-of-interest.csv"
 # Pages 58-102 in every readable book, plus margin. See the module docstring.
 DEFAULT_WINDOW = (50, 115)
 CENTS_PER_PAGE = 0.75
@@ -242,6 +245,15 @@ def one_page_pdf(reader: PdfReader, page: int) -> bytes:
 def post_pdf(blob: bytes, name: str, key: str) -> str:
     boundary = "----charting-boulder-" + os.urandom(8).hex()
     parts = []
+    # output_format=markdown is load-bearing, not a preference. It is what makes
+    # Datalab render a pie chart's data as a markdown table:
+    #
+    #     | Police | \$29,105 | 13% |
+    #
+    # and that shape is why tier 2 recovered 2011, 2012 and 2013 -- three years
+    # whose pies pypdf returns as interleaved nonsense. budget-books-extract.py
+    # parses these as tables, keying on the cell containing a "%", so column order
+    # does not matter. Changing this to json or html breaks that reader.
     for field, value in (("output_format", "markdown"), ("mode", "accurate")):
         parts.append(
             f'--{boundary}\r\nContent-Disposition: form-data; name="{field}"\r\n\r\n{value}\r\n'.encode()
@@ -320,11 +332,12 @@ def main():
     ap.add_argument("root", help="directory holding the PDFs (searched recursively)")
     ap.add_argument("-o", "--out", default="budget-books-ocr.jsonl")
     ap.add_argument("--cache", default="", help="markdown cache dir (default: <out>-cache)")
-    ap.add_argument("--tier", default="1,2,3", metavar="1,2,3",
+    ap.add_argument("--tier", default="1,2,3,4", metavar="1,2,3,4",
                     help="which tiers to run (default %(default)s). 1 = whole scanned "
                          "volumes, 2 = born-digital pages pypdf mangles, 3 = validate "
-                         "every page a published figure came from. --book or --pages "
-                         "switches to manual selection instead.")
+                         "every page a published figure came from, 4 = every page "
+                         "holding a pie, table or summary block, read or not. "
+                         "--book or --pages switches to manual selection instead.")
     ap.add_argument("--book", action="append", default=[], metavar="SUBSTRING",
                     help="filename substring to include; repeatable. Defaults to the "
                          "three Volume 1 scans the born-digital books cannot cover.")
@@ -414,6 +427,24 @@ def main():
                     claim(pdf, [q for pg in pages
                                 for q in range(max(1, pg - TIER2_MARGIN),
                                                min(n, pg + TIER2_MARGIN) + 1)], 2)
+        if 4 in tiers:
+            import csv as _csv
+            ipath = next((c for c in (here / INTEREST_CSV, Path.cwd() / INTEREST_CSV)
+                          if c.exists()), None)
+            if ipath is None:
+                print(f"  ! {INTEREST_CSV} not found in {here} or {Path.cwd()};"
+                      f" skipping tier 4. It is written by budget-books-extract.py.")
+            else:
+                per = {}
+                with ipath.open() as fh:
+                    for row in _csv.DictReader(fh):
+                        if "excerpt" in row["file"].lower():
+                            continue
+                        per.setdefault(row["file"], []).append(int(row["page"]))
+                for fname, pages in per.items():
+                    for pdf in match(fname):
+                        n = len(PdfReader(str(pdf)).pages)
+                        claim(pdf, [q for q in pages if 1 <= q <= n], 4)
         if 3 in tiers:
             for fname, pages in tier3_pages(here).items():
                 for pdf in match(fname):
@@ -438,7 +469,8 @@ def main():
     print()
     for t in sorted(by_tier):
         label = {1: "acquisition, scanned", 2: "acquisition, born-digital",
-                 3: "validation", 0: "manual selection"}[t]
+                 3: "validation, published figures", 4: "validation, all pies & tables",
+                 0: "manual selection"}[t]
         print(f"  tier {t}  {label:<26} {by_tier[t]:>5}p = "
               f"${by_tier[t] * CENTS_PER_PAGE / 100:>6,.2f}")
 

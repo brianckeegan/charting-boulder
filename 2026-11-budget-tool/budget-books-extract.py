@@ -45,6 +45,7 @@ import argparse
 import collections
 import csv
 import json
+import pathlib
 import re
 import sys
 
@@ -447,16 +448,31 @@ def extract_multiyear(rows):
 # 2006's, so a filename fallback files that pie under a year whose citywide total
 # does not exist -- and the scope test then discards a perfectly good pie. 2005
 # survived the same bug only because its filename happened to be right.
+# The gap between the heading and the total has to be generous, and the dollar
+# sign optional-escaped, because OCR writes the page like this:
+#
+#     ### Citywide Expenses (Uses)
+#     ![A 3D pie chart showing the distribution of 2011 Citywide Expenses across
+#      various departments. The largest slice is PW/ Utilities at 20%...](img.jpg)
+#     **2011 Expenditures**  Total = \$231,030 (in \$1,000s)
+#
+# That image alt-text runs past 200 characters, so a 90-character gap matched
+# nothing in any OCR'd page -- the table beneath was parsed perfectly and then
+# thrown away because the heading above it never matched. The gap stays lazy so
+# it takes the nearest total, and a wrong one cannot survive the scope test or
+# the sum gate.
 DEPT_PIE = re.compile(
     r'(?:(20\d\d)\s+)?(?:Citywide\s+)?(?:Expenses|Expenditures|Uses)(?:\s+of\s+Funds)?\b'
-    r'[^\n]{0,90}?TOTAL\s*=\s*\$?\s*([\d][\d,\.\s]{4,14}\d)', re.I)
+    r'.{0,400}?TOTAL\s*=\s*\\?\$?\s*([\d][\d,\.\s]{4,14}\d)', re.I)
 # The thousands group is optional, not required. Demanding one drops every
 # slice under $1,000 thousand -- Arts is $440 in 2005 and $451 in 2006 -- and
 # that loss is small enough to slip through a percentage-based sum gate, which
 # is exactly how it went unnoticed once already.
+# The share is captured now, not just skipped, because it is what exposes a
+# fabricated value -- see _pie_slices.
 DEPT_SLICE_VALUE_FIRST = re.compile(
     r"([A-Za-z][A-Za-z&/\.,'\- ]{2,46}?)\s*\$?\s*(\d{1,3}(?:[,\.]\s?\d{3})*)"
-    r"\s*\(?\s*<?\s*\d{1,2}(?:\.\d)?\s*%")
+    r"\s*\(?\s*<?\s*(\d{1,2}(?:\.\d)?)\s*%")
 DEPT_EX_UTILITIES = re.compile(r'with(?:out)?\s+utilit|excluding\s+utilit', re.I)
 # A FLAT tolerance, not a percentage of the total. A percentage scales with the
 # pie and so grows past the size of the smallest slice: 0.5% of the 2005 pie is
@@ -474,7 +490,56 @@ def slug(label):
     return re.sub(r'[^a-z0-9]', '', label.lower())
 
 
-def _pie_slices(seg, total):
+# OCR returns a pie as a MARKDOWN TABLE, not as prose:
+#
+#     | Department           | Amount (\$1,000s) | Percentage |
+#     |----------------------|-------------------|------------|
+#     | Police               | \$29,105          | 13%        |
+#
+# The prose pattern cannot read that -- pipes and escaped dollars are not in its
+# gaps -- and column order is not fixed either: the 2018 book's table puts the
+# percentage before the amount. So parse it as a table rather than widening the
+# regex until it fits both.
+#
+# Which cell is which needs no header parsing, because the percentage cell is the
+# one containing a "%". That leaves the first cell with letters as the label and
+# the remaining numeric cell as the value, whatever order the columns are in.
+MD_ROW = re.compile(r'^\s*\|(.+)\|\s*$')
+
+
+def _md_table_slices(raw, total):
+    out, shares = [], []
+    for line in raw.splitlines():
+        m = MD_ROW.match(line)
+        if not m:
+            continue
+        cells = [c.strip() for c in m.group(1).split('|')]
+        if len(cells) < 2 or all(set(c) <= set('-: ') for c in cells):
+            continue          # separator row
+        # The header row has to be caught by looking at EVERY cell, not just the
+        # label: its label cell says "Department", which is innocent, while its
+        # amount cell says "Amount (\$1,000s)" -- and "1,000" parses as a value,
+        # so the header arrived as a fifteenth slice worth exactly $1,000.
+        if any(re.search(r'amount|percent', c, re.I) for c in cells):
+            continue
+        label = next((c for c in cells if re.search(r'[A-Za-z]{3}', c)), None)
+        # `total\s*$` is anchored on purpose: it drops a row labelled "TOTAL",
+        # which would double the pie, while keeping "Total Gen Gov", which is a
+        # real 2012 department.
+        if label is None or re.search(r'total\s*$', label, re.I):
+            continue
+        pct = next((to_number(re.sub(r'[^\d.]', '', c))
+                    for c in cells if '%' in c and re.search(r'\d', c)), None)
+        val = next((to_number(re.sub(r'\D', '', c)) for c in cells
+                    if c is not label and '%' not in c and re.search(r'\d{3}', c)), None)
+        if not val or val / total < 0.0001:
+            continue
+        out.append((re.sub(r'\s+', ' ', label).strip(' *'), val))
+        shares.append(pct)
+    return out, shares
+
+
+def _pie_slices(seg, total, raw=None):
     """The pie's slices, or None if they do not add up to the printed total.
 
     ONE slice order, "Police $22,680 12%". The 2018 book prints the reverse and a
@@ -486,13 +551,38 @@ def _pie_slices(seg, total):
     Transportation and Utilities at $0 -- printed next to 2021's $30.8M and
     $84.9M, that reads as a collapse that never happened.
     """
-    got = [(lab.strip(), to_number(re.sub(r'\D', '', val)))
-           for lab, val in DEPT_SLICE_VALUE_FIRST.findall(seg)]
+    got, shares = ([], [])
+    if raw and '|' in raw:
+        got, shares = _md_table_slices(raw, total)
+    if not got:
+        for lab, val, pct in DEPT_SLICE_VALUE_FIRST.findall(seg):
+            got.append((lab.strip(), to_number(re.sub(r'\D', '', val))))
+            shares.append(to_number(pct))
     # The floor is on the SHARE, not the dollars, because the early books print
     # thousands and the later ones whole dollars. No real department line is a
     # ten-thousandth of the city's spending; a match that small is a legend entry
     # whose percentage was read as its value.
-    got = [(lab, v) for lab, v in got if v and v / total >= 0.0001]
+    keep = [i for i, (_l, v) in enumerate(got) if v and v / total >= 0.0001]
+    got = [got[i] for i in keep]
+    shares = [shares[i] for i in keep]
+
+    # A VALUE COMPUTED FROM ITS OWN PERCENTAGE IS NOT A READING.
+    #
+    # OCR of a chart that prints shares but not dollars will happily return
+    # dollars anyway, by multiplying the share by the total. In the 2019 book that
+    # produced Police $35,370 against a printed 10% -- which is 9.999% of the
+    # total, to the dollar -- while the 2018 book's real Police figure is $35,762
+    # against a printed 9%, or 9.188%. A real value misses pct x total by
+    # hundreds of thousands, because the printed percentage is rounded; a
+    # fabricated one lands on it.
+    #
+    # The sum gate alone does not catch this. Fabricated slices sum to the total
+    # as neatly as real ones do, so a chart with no printed values can pass every
+    # other check while every figure in it is really just a rounded percentage.
+    derived = sum(1 for (_l, v), pct in zip(got, shares)
+                  if pct and abs(v - pct / 100.0 * total) / total < 1e-4)
+    if got and derived > len(got) / 2:
+        return None
     # A pie is whole or it is not used. TOL_ABS covers the city rounding a slice
     # to the nearest thousand; it does not cover a missing slice, which is the
     # failure this gate exists to catch.
@@ -530,7 +620,8 @@ def extract_dept_pie(rows, citywide_totals):
                 why = "no citywide total known for this year"
             elif abs(musd - known) > 1.5:
                 why = f"total {musd:,.1f}M is not the citywide {known:,.1f}M"
-            slices = None if why else _pie_slices(flat[m.end(): m.end() + 1400], total)
+            slices = None if why else _pie_slices(
+                flat[m.end(): m.end() + 1400], total, raw=r['text'])
             if why or not slices:
                 rejected.append((yr, r['file'], r['page'], round(musd, 1),
                                  why or "slices do not sum to the printed total"))
@@ -561,6 +652,37 @@ def extract(rows):
                         "context": re.sub(r'\s+', ' ', ctx),
                     })
     return out
+
+
+# Every page that LOOKS like it holds a figure worth reading, whether or not this
+# script managed to read it. Written out beside the facts because the two answer
+# different questions: the facts say what was extracted, this says what was
+# looked at -- which is what an OCR validation pass needs to target. A page that
+# holds a pie this script rejects is exactly the page most worth sending.
+PAGE_OF_INTEREST = [
+    ("pie", re.compile(r'(?:Citywide\s+)?(?:Expenses|Expenditures|Uses|Revenues?)\b'
+                       r'.{0,400}?TOTAL\s*=', re.I | re.S)),
+    ("multiyear_table", re.compile(r'SUMMARY OF (?:SOURCES|USES) OF FUNDS'
+                                   r'|STANDARD\s*FTEs?|Staffing Levels', re.I)),
+    ("summary_block", re.compile(r'CITY\s*OF\s*BOULDER\s*20\d\d\s*BUDGET|Overview of\s*20\d\d'
+                                 r'|Figure\s*\d[\-\s]*0?\d\s*:?\s*20\d\d\s*(?:Annual|Approved)', re.I)),
+]
+
+
+def write_pages_of_interest(rows, extracted_pages, path):
+    n = 0
+    with open(path, "w", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["file", "page", "holds", "already_extracted_from"])
+        for r in rows:
+            flat = re.sub(r'\s+', ' ', r['text'])
+            holds = [name for name, pat in PAGE_OF_INTEREST if pat.search(flat)]
+            if not holds:
+                continue
+            w.writerow([r["file"], r["page"], " ".join(holds),
+                        "yes" if (r["file"], r["page"]) in extracted_pages else "no"])
+            n += 1
+    return n
 
 
 def main():
@@ -615,9 +737,14 @@ def main():
             row["conflict"] = "" if len(vals) == 1 else " | ".join(str(v) for v in sorted(vals))
             w.writerow(row)
 
+    poi_path = str(pathlib.Path(args.out).with_name("budget-books-pages-of-interest.csv"))
+    n_poi = write_pages_of_interest(
+        rows, {(f["file"], f["page"]) for f in found}, poi_path)
+
     years = sorted({r["year"] for r in rows})
     print(f"read {len(rows)} pages, {years[0]}-{years[-1]}")
-    print(f"wrote {args.out}: {len(best)} facts\n")
+    print(f"wrote {args.out}: {len(best)} facts")
+    print(f"wrote {poi_path}: {n_poi} pages holding a figure worth reading\n")
     for measure in list(FACTS) + [t[2] for t in MULTIYEAR_TABLES] + [
             "budget_operating_general", "budget_operating_dedicated"]:
         got = sorted({y for (y, m, _b) in best if m == measure})
