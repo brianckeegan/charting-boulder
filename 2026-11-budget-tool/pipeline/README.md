@@ -24,7 +24,8 @@ Security is the boundary: that key can insert a row but can never read one back.
    the `contributions` table, the insert-only RLS policy, the stats trigger, and
    `budget_aggregate()`. Re-running is safe.
 2. **Build & deploy the widget.** The project URL and publishable key are baked
-   into the widget; `BBW_PREVIEW=0 ../build-standalone.sh` produces the
+   into the widget; `BBW_PREVIEW=0 ../build-standalone.sh` (build chain removed from this
+   repo — see `../embed/README.md`) produces the
    production HTML, and the GitHub Pages workflow serves it. See
    [`../ARCHITECTURE.md`](../ARCHITECTURE.md) → *Setup*.
 
@@ -34,7 +35,7 @@ Reading individual rows needs the SECRET key (the publishable key is insert-only
 under RLS), so it runs only on a trusted machine — never in the browser.
 
 ```bash
-cd 2026-06-budget-tool/pipeline
+cd 2026-11-budget-tool/pipeline
 export SUPABASE_URL=https://iplcjxbazezpjdzdpjxx.supabase.co
 export SUPABASE_SECRET_KEY=sb_secret_…       # trusted machine only; never commit
 python3 export-responses.py ../responses.csv
