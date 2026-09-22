@@ -65,8 +65,14 @@ that up:
 
 - **No identifiers are stored.** No name, account, email, IP address, or browser
   fingerprint is written to a row. The only survey data is what the reader picks.
-- **No IP-derived value is persisted.** There is no per-submission hash, no IP,
-  and no browser fingerprint anywhere in the dataset.
+- **No IP-derived value is stored with a response.** There is no per-submission
+  hash, no IP, and no browser fingerprint anywhere in the response data. The one
+  IP-derived value anywhere is the rate limiter's: a salted, one-way hash of the
+  sender's address, kept in a separate table (`insert_audit`) that is not linked
+  to any response and that the publishable key cannot read. Hashes older than
+  two days are deleted by a sweep that runs on a random 1% of inserts, so one can
+  outlast two days while submissions are sparse (see "Per-IP rate limiting" in
+  `schema.sql`).
 - **Row Level Security is on.** The publishable key (role `anon`) may **insert**
   a row — and only one that carries at least one survey answer — and nothing
   else: it cannot read, update, or delete any row, and inserts use
@@ -115,17 +121,17 @@ notebook's `GF_SLIDERS / FUND_SLIDERS / REV_COLS / DEMO_COLS` one-to-one.
 | `used_revenue` | bool | any new fee or tax was used |
 | `used_reserves` | bool | reserves were spent down |
 | `top_cut` | text | name of the reader's single deepest GF cut, or null |
-| `demo_years` … `demo_disability` | text | 13 survey items; multi-selects joined by `"; "` |
+| `demo_years` … `demo_disability` | text | 14 survey items; multi-selects joined by `"; "` |
 | `repeat_client` | bool | this browser had submitted before |
 | `raw` | jsonb | the full original payload, as a safety net |
 
-`"demo_workArea"` is stored with quotes to preserve its camelCase — every other
-column is lowercase.
-
-The full slider list lives in two places that must stay in lockstep: the
-widget's `GF_DEPTS` / `LOCKED_FUNDS` / `DEMO` tables and the notebook's canonical
-column lists. If you add or rename a department, update both (and add the column
-in `pipeline/supabase/schema.sql`).
+The full slider list lives in several places that must stay in lockstep: the
+widget's `GF_DEPTS` / `LOCKED_FUNDS` / `DEMO` tables, the notebook's canonical
+column lists, and the export's lists in `pipeline/export-responses.py`. If you
+add or rename a department, update all three (and add the column in
+`pipeline/supabase/schema.sql`). The export stops with an error if it asks for a
+column the table does not have, so a stale list fails loudly rather than
+exporting the wrong columns.
 
 A second one-row table, `contribution_stats`, holds the precomputed public tally
 (the `{ n, usedRevenue, … }` object). A trigger on `contributions` refreshes it
