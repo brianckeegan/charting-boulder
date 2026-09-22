@@ -86,6 +86,79 @@ FACTS = {
 }
 
 
+# --------------------------------------------------------------------------
+# Pre-2017 books. Three differences from the modern ones force a separate pass:
+#
+#   * The year is in the SENTENCE, not the book. The 2005 book states 2004's
+#     total for comparison, and the 2006-2007 biennial book states 2006 — so
+#     taking the year from the filename would misfile both.
+#   * Figures are whole dollars or thousands, not "$N million".
+#   * The richest source is a summary block rather than prose:
+#         CITY OF BOULDER 2006 BUDGET (in $1,000s)
+#         TOTAL BUDGET $200,100   CAPITAL BUDGET $29,453
+#         OPERATING BUDGET (including debt service) $170,647
+#         GENERAL FUND $71,266
+#     which yields four measures at once and self-checks, since capital plus
+#     operating equals the total.
+# --------------------------------------------------------------------------
+LEGACY_BLOCK = re.compile(
+    r'CITY OF BOULDER\s+(20\d\d)\s+BUDGET\s*\(in \$1,?000s?\)(.{0,340})', re.I | re.S)
+LEGACY_BLOCK_FIELDS = [
+    ("TOTAL BUDGET", "budget_total"),
+    ("CAPITAL BUDGET", "budget_capital"),
+    ("OPERATING BUDGET", "budget_operating"),
+    ("GENERAL FUND", "budget_general_fund"),
+]
+LEGACY_STATED = re.compile(
+    r'total\s+(20\d\d)\s+budget for the City of Boulder is\s*\$\s*([\d,]+)', re.I)
+LEGACY_PRIOR = re.compile(
+    r'(20\d\d)\s+budget of\s*\$\s*([\d,]+)', re.I)
+LEGACY_MILLIONS = re.compile(
+    r'(20\d\d)\s+(?:Annual|Approved|Recommended)\s+Budget\s+totals\s*\$\s*([\d,.]+)\s*million', re.I)
+
+
+def extract_legacy(rows):
+    out = []
+
+    def emit(year, measure, value, unit, r, ctx):
+        out.append({"year": year, "measure": measure, "value": value, "unit": unit,
+                    "file": r["file"], "page": r["page"],
+                    "context": re.sub(r'\s+', ' ', ctx)[:190]})
+
+    for r in rows:
+        flat = re.sub(r'\s+', ' ', r['text'])
+
+        for m in LEGACY_BLOCK.finditer(flat):
+            yr, seg = int(m.group(1)), m.group(2)
+            for label, measure in LEGACY_BLOCK_FIELDS:
+                mm = re.search(re.escape(label) + r'[^$]{0,30}\$\s?([\d,]+)', seg, re.I)
+                if mm:
+                    v = to_number(mm.group(1))
+                    if v:   # block is in $1,000s
+                        emit(yr, measure, round(v / 1000.0, 3), "musd", r, m.group()[:190])
+
+        # "The total 2005 budget ... is $196,167,000" — whole dollars.
+        for m in LEGACY_STATED.finditer(flat):
+            v = to_number(m.group(2))
+            if v and v > 1e6:
+                emit(int(m.group(1)), "budget_total", round(v / 1e6, 3), "musd",
+                     r, flat[max(0, m.start() - 60):m.start() + 150])
+        # The same sentence usually names the PRIOR year's total for comparison.
+        for m in LEGACY_PRIOR.finditer(flat):
+            v = to_number(m.group(2))
+            if v and v > 1e6:
+                emit(int(m.group(1)), "budget_total", round(v / 1e6, 3), "musd",
+                     r, flat[max(0, m.start() - 90):m.start() + 120])
+
+        # "The 2013 Annual Budget totals $255 million"
+        for m in LEGACY_MILLIONS.finditer(flat):
+            v = to_number(m.group(2))
+            if v and 100 <= v <= 900:
+                emit(int(m.group(1)), "budget_total", v, "musd",
+                     r, flat[max(0, m.start() - 60):m.start() + 170])
+    return out
+
+
 def extract(rows):
     out = []
     for r in rows:
@@ -122,7 +195,7 @@ def main():
     if not rows:
         sys.exit("no usable pages in the dump")
 
-    found = extract(rows)
+    found = extract(rows) + extract_legacy(rows)
 
     # Collapse duplicates (the same sentence can appear in a summary and again
     # in a detail section), then flag any year where a measure disagrees.
