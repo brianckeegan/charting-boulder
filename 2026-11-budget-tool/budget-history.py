@@ -202,8 +202,13 @@ add(2022, "budget_capital", "adopted", 162.4, "musd", "books")
 for yr, v in [(2004, 188.145), (2005, 196.167), (2006, 200.100),
               (2008, 237.781), (2011, 231.030), (2012, 238.960), (2013, 255.0),
               (2014, 269.496), (2015, 319.096), (2016, 327.699), (2017, 321.866),
-              (2018, 389.2), (2019, 353.7), (2020, 369.7), (2021, 341.7),
-              (2022, 462.5)]:
+              # 2018-2022 to the dollar, off the citywide pie headings, which
+              # print "TOTAL = $462,518,802" where the narrative rounds to
+              # "$462.5 million". Not cosmetic: the departmental slices are exact,
+              # so a total rounded to $0.1M left the bucket-sum check clearing
+              # its tolerance by $7,000 in 2021.
+              (2018, 389.210), (2019, 353.746), (2020, 369.718),
+              (2021, 341.744), (2022, 462.519)]:
     add(yr, "budget_total", "adopted", v, "musd", "books")
 
 # 2010 is one of the two years that exist only as scanned PDFs, and the 2011
@@ -367,48 +372,10 @@ add(2011, "revenue_other_unmapped", "adopted",
 #
 # (year, label as printed, $M, bucket, note)
 DEPARTMENT_LINES = [
-    # -- 2005 and 2006: the citywide "Uses of Funds" pie in each book. Both
-    #    years' twelve slices sum to the published citywide total to the dollar,
-    #    which is what makes them trustworthy. 2011's pie exists too but comes
-    #    out of the PDF with labels and values interleaved beyond repair, so it
-    #    is deliberately absent rather than guessed at.
-    (2005, "Police", 22.680, "public_safety", ""),
-    (2005, "Fire", 10.996, "public_safety", ""),
-    (2005, "Public Works", 67.430, "infrastructure",
-     "One slice covering what later becomes Transportation and Mobility, "
-     "Utilities, Facilities and Fleet and development review. Not separable "
-     "here, and the reason the buckets are this coarse."),
-    (2005, "Open Space/Real Estate", 20.658, "parks_openspace",
-     "Renamed Open Space/Mountain Parks from 2006. The 2005 label also carries "
-     "real-estate functions that later move elsewhere."),
-    (2005, "Parks & Recreation", 21.060, "parks_openspace", ""),
-    (2005, "Housing/Human Svcs", 12.753, "community_services", ""),
-    (2005, "Library", 5.740, "community_services", ""),
-    (2005, "Arts", 0.440, "community_services", ""),
-    (2005, "Planning & Development Services", 6.233, "planning_climate",
-     "The 2026 department of the same name is the development-review enterprise "
-     "and is four times the size. Same bucket, not the same thing."),
-    (2005, "Administrative Svcs", 8.225, "administration", ""),
-    (2005, "General Government", 17.284, "administration",
-     "The least comparable line in the crosswalk. It likely holds "
-     "non-departmental items that 2024-2026 books to Fundwide/Citywide, so the "
-     "administration and citywide buckets trade content across the series."),
-    (2005, "Debt", 2.668, "citywide_debt",
-     "General Fund debt only -- the pie's own note says non-General Fund debt "
-     "service sits inside the departments. True in 2011 as well, so the bucket "
-     "is consistent, but it is not all of the city's debt service."),
-    (2006, "Police", 23.415, "public_safety", ""),
-    (2006, "Fire", 11.258, "public_safety", ""),
-    (2006, "Public Works", 66.734, "infrastructure", "As 2005: one undivided slice."),
-    (2006, "Open Space/Mountain Parks", 22.188, "parks_openspace", ""),
-    (2006, "Parks & Recreation", 20.899, "parks_openspace", ""),
-    (2006, "Housing/Human Svcs", 13.339, "community_services", ""),
-    (2006, "Library", 5.977, "community_services", ""),
-    (2006, "Arts", 0.451, "community_services", ""),
-    (2006, "Planning & Development Services", 6.465, "planning_climate", ""),
-    (2006, "Administrative Svcs", 9.849, "administration", ""),
-    (2006, "General Government", 17.208, "administration", "As 2005."),
-    (2006, "Debt", 2.317, "citywide_debt", "As 2005."),
+    # 2005, 2006 and 2014-2022 are NOT listed here. They come from the books'
+    # own pies, in PIE_LINES below, which is the same data this block used to
+    # carry by hand -- keeping both would double-count those years, and the
+    # reconciliation check against budget_total would catch it.
 ]
 
 # -- 2024-2026: the OpenGov cost-center export. Same twenty cost centers in all
@@ -445,23 +412,296 @@ DEPARTMENT_2024_2026 = [
      "Citywide allocations and contingency. Partly the counterpart of 2005's "
      "General Government -- see that line's note."),
 ]
+# These go into a SEPARATE measure family from the pie years -- see the
+# aggregation below for why.
+DEPARTMENT_FILTERED_LINES = []
 for label, bucket, v24, v25, v26, note in DEPARTMENT_2024_2026:
     for yr, v in ((2024, v24), (2025, v25), (2026, v26)):
-        DEPARTMENT_LINES.append((yr, label, v, bucket, note))
+        DEPARTMENT_FILTERED_LINES.append((yr, label, v, bucket, note))
+
+# --- Citywide spending by department, from the books' own pies ---------------
+# Nine years of the citywide "Uses of Funds" pie, extracted by
+# budget-books-extract.py and validated by construction: each year's slices sum
+# to the citywide total that same book publishes, to the thousand. See the
+# extractor for how the citywide pie is told apart from the General Fund and
+# excluding-utilities pies that share its heading, and for why 2011, 2012, 2018
+# and 2019 are absent rather than guessed.
+#
+# Labels are reproduced exactly as each document prints them, letter-spacing
+# damage and all ("Fir e", "Parks & Re cr e ation"), because that string is what
+# a reader would search the PDF for. The bucket each one maps to is in
+# PIE_BUCKETS below, and the per-year result is written to
+# budget-history-department-crosswalk.csv.
+#
+# (year, label as printed, $M)
+PIE_LINES = [
+    (2005, 'Public Works', 67.43),
+    (2005, 'Police', 22.68),
+    (2005, 'Parks & Re cr e ation', 21.06),
+    (2005, 'Open Space/ Real E state', 20.658),
+    (2005, 'General Governm ent', 17.284),
+    (2005, 'Housing/Human Svcs', 12.753),
+    (2005, 'Fir e', 10.996),
+    (2005, 'Administrative Svcs', 8.225),
+    (2005, 'Planning & De ve lopm e nt Services', 6.233),
+    (2005, 'Library', 5.74),
+    (2005, 'De bt', 2.668),
+    (2005, 'Arts', 0.44),
+    (2006, 'Public Works', 66.734),
+    (2006, 'Police', 23.415),
+    (2006, 'Open Space/ Mountain Parks', 22.188),
+    (2006, 'Parks & Re cr e ation', 20.899),
+    (2006, 'General Governm e nt', 17.208),
+    (2006, 'Housing/Human Svcs', 13.339),
+    (2006, 'Fire', 11.258),
+    (2006, 'Administrative Svcs', 9.849),
+    (2006, 'Planning & Development Services', 6.465),
+    (2006, 'Library', 5.977),
+    (2006, 'De bt', 2.317),
+    (2006, 'Arts', 0.451),
+    (2014, 'Public Works', 98.303),
+    (2014, 'Police', 32.041),
+    (2014, 'Open Spaceand Mountain Parks', 26.622),
+    (2014, 'Parks and Recreation', 26.009),
+    (2014, 'Fire', 17.565),
+    (2014, 'Internal Services', 14.821),
+    (2014, 'General Governance', 10.214),
+    (2014, 'DUHMD/ PS', 8.556),
+    (2014, 'Library and Arts', 8.147),
+    (2014, 'Community Planning and Sustainability', 7.963),
+    (2014, 'Human Services', 6.689),
+    (2014, 'Housing', 5.142),
+    (2014, 'Citywide Debt', 5.112),
+    (2014, 'ESand EUD', 2.312),
+    (2015, 'Public Works', 132.531),
+    (2015, 'Police', 33.666),
+    (2015, 'Open Space and Mountain Parks', 29.712),
+    (2015, 'Parks and Recreation', 25.076),
+    (2015, 'Fire', 18.151),
+    (2015, 'Internal Services', 16.009),
+    (2015, 'DUHMD/PS', 12.123),
+    (2015, 'General Governance', 11.227),
+    (2015, 'Community Planning and Sustainability', 8.644),
+    (2015, 'Library and Arts', 8.226),
+    (2015, 'ESand EUD', 6.943),
+    (2015, 'Human Services', 6.728),
+    (2015, 'Citywide Debt', 5.105),
+    (2015, 'Housing', 4.956),
+    (2016, 'Public Works', 133.533),
+    (2016, 'Open Spaceand Mountain Parks', 34.251),
+    (2016, 'Police', 34.037),
+    (2016, 'Parks and Recreation', 25.355),
+    (2016, 'Internal Services', 21.798),
+    (2016, 'Fire', 18.629),
+    (2016, 'Planning, Housing and Sustainability', 14.234),
+    (2016, 'General Governance', 13.027),
+    (2016, 'Community Vitality', 12.123),
+    (2016, 'Library and Arts', 8.514),
+    (2016, 'Human Services', 7.097),
+    (2016, 'Citywide Debt', 5.101),
+    (2017, 'Public Works', 120.033),
+    (2017, 'Police', 34.76),
+    (2017, 'Open Space and Mountain Parks', 33.658),
+    (2017, 'Parks and Recreation', 27.321),
+    (2017, 'Internal Services', 24.016),
+    (2017, 'Fire', 19.092),
+    (2017, 'Planning, Housing and Sustainability', 15.178),
+    (2017, 'General Governance', 14.502),
+    (2017, 'Community Vitality', 11.098),
+    (2017, 'Library and Arts', 9.329),
+    (2017, 'Human Services', 7.774),
+    (2017, 'Citywide Debt', 5.105),
+    (2020, 'Public Works', 145.341),
+    (2020, 'Public Safety', 62.318),
+    (2020, 'Internal Services', 29.044),
+    (2020, 'Parks & Recreation', 28.784),
+    (2020, 'Open Space & Mountain Parks', 28.275),
+    (2020, 'Housing & Human Services', 21.636),
+    (2020, 'General Governance', 18.323),
+    (2020, 'Community Vitality', 12.112),
+    (2020, 'Library & Arts', 11.305),
+    (2020, 'Climate Initiatives', 6.377),
+    (2020, 'Planning', 6.203),
+    (2021, 'PW - Utilities', 84.924),
+    (2021, 'Police', 36.887),
+    (2021, 'PW - Transportation & Mobility', 30.84),
+    (2021, 'Parks & Recreation', 28.475),
+    (2021, 'Open Space & Mountain Parks', 28.306),
+    (2021, 'Internal Services', 25.485),
+    (2021, 'Fire - Rescue', 21.325),
+    (2021, 'Housing & Human Services', 20.053),
+    (2021, 'General Governance', 16.865),
+    (2021, 'Planning', 13.033),
+    (2021, 'Community Vitality', 11.719),
+    (2021, 'Library & Arts', 9.252),
+    (2021, 'Facilities & Fleet', 6.77),
+    (2021, 'Climate Initiatives', 5.758),
+    (2021, 'Municipal Court', 2.051),
+    (2022, 'Utilities', 174.198),
+    (2022, 'Transportation & Mobility', 41.851),
+    (2022, 'Police', 40.486),
+    (2022, 'Open Space & Mountain Parks', 30.991),
+    (2022, 'Internal Services', 28.691),
+    (2022, 'Parks & Recreation', 28.19),
+    (2022, 'Fire- Rescue', 23.421),
+    (2022, 'Housing & Human Services', 22.489),
+    (2022, 'Planning & Development Services', 14.204),
+    (2022, 'General Governance', 13.862),
+    (2022, 'Community Vitality', 12.992),
+    (2022, 'Library & Arts', 11.971),
+    (2022, 'Facilities & Fleet', 10.581),
+    (2022, 'Climate Initiatives', 6.373),
+    (2022, 'Municipal Court', 2.219),]
+
+# Normalised label -> (bucket, why). A note is filled in wherever the
+# assignment is a judgment rather than obvious, and those notes are the point of
+# this table: seven buckets cannot absorb twenty years of reorganisation without
+# choices, and a choice nobody can see is indistinguishable from an error.
+PIE_BUCKETS = {
+    # -- public safety ------------------------------------------------------
+    "police": ("public_safety", ""),
+    "fire": ("public_safety", ""),
+    "firerescue": ("public_safety", ""),
+    "publicsafety": ("public_safety",
+                     "2020 is the one year that does not separate police from fire; "
+                     "its single $62.3M slice covers both. 2021 splits them again "
+                     "at $36.9M and $21.3M."),
+    # -- infrastructure -----------------------------------------------------
+    "publicworks": ("infrastructure",
+                    "One undivided slice, and the reason the buckets are this "
+                    "coarse. It holds what later becomes Transportation and "
+                    "Mobility, Utilities and Facilities and Fleet; the books "
+                    "split Public Works three ways in their STAFFING tables but "
+                    "never in the spending pie."),
+    "pwutilities": ("infrastructure", ""),
+    "pwtransportationmobility": ("infrastructure", ""),
+    "utilities": ("infrastructure", ""),
+    "transportationmobility": ("infrastructure", ""),
+    "facilitiesfleet": ("infrastructure", ""),
+    "duhmdps": ("infrastructure",
+                "Downtown and University Hill Management Division / Parking "
+                "Services -- mostly parking operations and district management. "
+                "Renamed Community Vitality from 2016."),
+    "communityvitality": ("infrastructure",
+                          "DUHMD/Parking Services under its later name. Chiefly "
+                          "parking and district management, which is why it sits "
+                          "with infrastructure rather than with planning, though "
+                          "it also carries economic vitality work."),
+    # -- parks and open space ----------------------------------------------
+    "parksrecreation": ("parks_openspace", ""),
+    "parksandrecreation": ("parks_openspace", ""),
+    "openspacemountainparks": ("parks_openspace", ""),
+    "openspaceandmountainparks": ("parks_openspace", ""),
+    "openspacerealestate": ("parks_openspace",
+                            "The 2005 name. Renamed Open Space/Mountain Parks in "
+                            "2006, and the real-estate functions move elsewhere."),
+    # -- community services -------------------------------------------------
+    "housinghumansvcs": ("community_services", ""),
+    "housinghumanservices": ("community_services", ""),
+    "humanservices": ("community_services",
+                      "2014-2017 report human services and housing as two "
+                      "slices; every other year combines them."),
+    "housing": ("community_services", "See humanservices."),
+    "library": ("community_services", ""),
+    "arts": ("community_services", ""),
+    "libraryandarts": ("community_services", ""),
+    "libraryarts": ("community_services", ""),
+    # -- planning and climate ----------------------------------------------
+    "planning": ("planning_climate", ""),
+    "planningdevelopmentservices": ("planning_climate",
+                                    "Two different things under one name: $6.2M "
+                                    "in 2005 for the planning department, $14.2M "
+                                    "in 2022 for the development-review "
+                                    "enterprise fund. Same bucket, not the same "
+                                    "department."),
+    "communityplanningandsustainability": ("planning_climate", ""),
+    "planninghousingandsustainability": ("planning_climate",
+                                         "The 2016-2017 name, and it absorbs "
+                                         "HOUSING, which sits in "
+                                         "community_services in every other "
+                                         "year. Those two buckets therefore "
+                                         "trade roughly $5M across 2016-2017."),
+    "climateinitiatives": ("planning_climate", ""),
+    "esandeud": ("planning_climate",
+                 "Energy Strategy and Electric Utility Development -- the "
+                 "municipalisation effort. Bucketed as climate and energy policy "
+                 "rather than as a utility operation, because the city never "
+                 "owned the utility. The line ends after 2015."),
+    # -- administration -----------------------------------------------------
+    "generalgovernment": ("administration",
+                          "The least comparable line in the crosswalk. It likely "
+                          "holds non-departmental items that 2020 onward books to "
+                          "Fundwide/Citywide, so administration and citywide_debt "
+                          "trade content across the series."),
+    "generalgovernance": ("administration", ""),
+    "administrativesvcs": ("administration", ""),
+    "municipalcourt": ("administration", ""),
+    "internalservices": ("administration",
+                         "The 2018 book defines it as Finance, HR, IT, General "
+                         "Fund capital and other -- mostly administration, but it "
+                         "carries some capital, so this bucket is not purely "
+                         "overhead."),
+    # -- citywide and debt --------------------------------------------------
+    "debt": ("citywide_debt",
+             "General Fund debt only. The pie's own note says non-General-Fund "
+             "debt service sits inside the departments, which is true in 2011 "
+             "too, so the bucket is consistent -- but it is not all of the "
+             "city's debt service."),
+    "citywidedebt": ("citywide_debt", "See debt."),
+}
+
+
+def _slug(label):
+    return re.sub(r'[^a-z0-9]', '', label.lower())
+
+
+# Fold the pies into the same (year, label, value, bucket, note) shape the
+# OpenGov cost-centre rows use, so one aggregation and one crosswalk cover both.
+_unmapped = sorted({_slug(l) for _y, l, _v in PIE_LINES if _slug(l) not in PIE_BUCKETS})
+if _unmapped:
+    # A new year's pie will bring labels this table has never seen, and a bare
+    # KeyError does not say which or what to do about it. Refuse with the list,
+    # because the alternative -- defaulting an unknown department into some
+    # bucket -- puts a number in a chart that nobody chose to put there.
+    raise SystemExit(
+        "PIE_BUCKETS has no bucket for: " + ", ".join(_unmapped)
+        + "\nAdd each one, with a note if the choice is a judgment call.")
+for _yr, _label, _v in PIE_LINES:
+    _bucket, _note = PIE_BUCKETS[_slug(_label)]
+    DEPARTMENT_LINES.append((_yr, _label, _v, _bucket, _note))
 
 BUCKET_ORDER = ["public_safety", "infrastructure", "parks_openspace",
                 "community_services", "planning_climate", "administration",
                 "citywide_debt"]
 
-for yr in sorted({y for y, *_ in DEPARTMENT_LINES}):
-    by_bucket = collections.defaultdict(float)
-    for y, _label, v, bucket, _note in DEPARTMENT_LINES:
-        if y == yr:
-            by_bucket[bucket] += v
-    for bucket in BUCKET_ORDER:
-        if bucket in by_bucket:
-            add(yr, f"deptexp_{bucket}", "adopted", round(by_bucket[bucket], 3),
-                "musd", "books" if yr <= 2006 else "deptsnapshot2026")
+# Two families, deliberately not one.
+#
+# deptexp_*          the books' citywide pies, 2005-2022. Every fund, comparable
+#                    year to year.
+# deptexpfiltered_*  the OpenGov cost-centre export, 2024-2026, taken with a
+#                    23-fund filter that omits the utility, debt-service and
+#                    internal-service funds.
+#
+# Both sum to their year's citywide total, so no arithmetic check can tell them
+# apart -- and that is exactly the trap. Their COMPOSITION is incomparable.
+# Infrastructure is 51.8% of citywide spending in 2022 and 15.8% in 2026, not
+# because Boulder stopped maintaining anything but because the filter moves
+# nearly all utility spending out of the departments and into the balancing line.
+# Charting the two families as one series shows infrastructure halving.
+#
+# Separate prefixes make that mistake require effort rather than inattention.
+# One unfiltered re-export of the same view collapses them back into one family.
+for family, lines in (("deptexp", DEPARTMENT_LINES),
+                      ("deptexpfiltered", DEPARTMENT_FILTERED_LINES)):
+    for yr in sorted({y for y, *_ in lines}):
+        by_bucket = collections.defaultdict(float)
+        for y, _label, v, bucket, _note in lines:
+            if y == yr:
+                by_bucket[bucket] += v
+        for bucket in BUCKET_ORDER:
+            if bucket in by_bucket:
+                add(yr, f"{family}_{bucket}", "adopted", round(by_bucket[bucket], 3),
+                    "musd", "books" if family == "deptexp" else "deptsnapshot2026")
 
 # The 2024-2026 export was taken with a fund filter that leaves out the utility,
 # debt-service and internal-service funds, so its twenty cost centres add up to
@@ -480,7 +720,7 @@ DEPARTMENT_EXPORT_TOTAL = {2024: 407.794, 2025: 473.447, 2026: 411.907}
 for yr, export_total in DEPARTMENT_EXPORT_TOTAL.items():
     published = next(r["value"] for r in ROWS
                      if (r["year"], r["measure"], r["basis"]) == (yr, "budget_total", "adopted"))
-    add(yr, "deptexp_funds_outside_export", "derived",
+    add(yr, "deptexpfiltered_funds_outside_export", "derived",
         round(published - export_total, 3), "musd", "deptsnapshot2026")
 
 # --- General Fund gap ------------------------------------------------------
@@ -667,20 +907,23 @@ def reconcile():
     # construction (the pie sums to its own total); for 2024-2026 it holds only
     # because the balancing line is defined as the difference, so what this
     # really guards is a mistyped cost centre.
-    for yr in sorted({y for y, *_ in DEPARTMENT_LINES}):
-        parts = sum(v for (y, m, b), v in idx.items()
-                    if y == yr and m.startswith("deptexp_"))
-        total = idx.get((yr, "budget_total", "adopted"))
-        if total and abs(parts - total) > TOL:
-            problems.append(
-                f"{yr}: departmental buckets sum {parts:,.3f} != budget_total {total:,.3f}")
+    for family, lines in (("deptexp_", DEPARTMENT_LINES),
+                          ("deptexpfiltered_", DEPARTMENT_FILTERED_LINES)):
+        for yr in sorted({y for y, *_ in lines}):
+            parts = sum(v for (y, m, b), v in idx.items()
+                        if y == yr and m.startswith(family))
+            total = idx.get((yr, "budget_total", "adopted"))
+            if total and abs(parts - total) > TOL:
+                problems.append(
+                    f"{yr}: {family}* buckets sum {parts:,.3f} != "
+                    f"budget_total {total:,.3f}")
 
     # The same department label must land in the same bucket every year it
     # appears, unless the line says why not. Without this, a relabelled
     # department could drift between buckets and the series would show a
     # transfer of money that never happened.
     seen_bucket = {}
-    for yr, label, _v, bucket, note in DEPARTMENT_LINES:
+    for yr, label, _v, bucket, note in DEPARTMENT_LINES + DEPARTMENT_FILTERED_LINES:
         key = re.sub(r'[^a-z0-9]', '', label.lower())
         if key in seen_bucket and seen_bucket[key][0] != bucket and not note:
             problems.append(
@@ -792,17 +1035,20 @@ def main():
     # it, the bucket it went into, its share of that year's citywide total, and
     # the reason wherever the assignment was a judgment call.
     cross_path = HERE / "budget-history-department-crosswalk.csv"
-    dept_totals = {yr: sum(v for y, _l, v, _b, _n in DEPARTMENT_LINES if y == yr)
-                   for yr in {y for y, *_ in DEPARTMENT_LINES}}
+    all_dept = ([("deptexp", r) for r in DEPARTMENT_LINES]
+                + [("deptexpfiltered", r) for r in DEPARTMENT_FILTERED_LINES])
+    dept_totals = collections.defaultdict(float)
+    for fam, (y, _l, v, _b, _n) in all_dept:
+        dept_totals[(fam, y)] += v
     with cross_path.open("w", newline="") as fh:
         w = csv.writer(fh)
-        w.writerow(["year", "source_label", "bucket", "value_musd",
-                    "pct_of_year_departmental", "source_id", "note"])
-        for yr, label, v, bucket, note in sorted(
-                DEPARTMENT_LINES, key=lambda r: (r[0], BUCKET_ORDER.index(r[3]), -r[2])):
-            w.writerow([yr, label, bucket, v,
-                        round(100 * v / dept_totals[yr], 2),
-                        "books" if yr <= 2006 else "deptsnapshot2026", note])
+        w.writerow(["year", "measure_family", "source_label", "bucket",
+                    "value_musd", "pct_of_year_departmental", "source_id", "note"])
+        for fam, (yr, label, v, bucket, note) in sorted(
+                all_dept, key=lambda t: (t[1][0], BUCKET_ORDER.index(t[1][3]), -t[1][2])):
+            w.writerow([yr, fam, label, bucket, v,
+                        round(100 * v / dept_totals[(fam, yr)], 2),
+                        "books" if fam == "deptexp" else "deptsnapshot2026", note])
 
     long_path = HERE / "budget-history.csv"
     with long_path.open("w", newline="") as fh:

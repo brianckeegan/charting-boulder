@@ -414,10 +414,11 @@ def extract_multiyear(rows):
 # is REPORTED with its total instead of recorded, so an unrecognised pie shows
 # up as a line of output rather than as silently wrong data.
 #
-# TWO SLICE ORDERS
-# ----------------
-#     2005-2017, 2020-2022   "Police $22,680 12%"        label, value, share
-#     2018                   "Public Works 44% 170,485"  label, share, value
+# ONE SLICE ORDER
+# ---------------
+# Every readable pie prints "Police $22,680 12%" -- label, value, share. The 2018
+# book prints "Public Works 44% 170,485" instead, which is why 2018 is among the
+# unreadable years below rather than a supported format; see _pie_slices.
 #
 # AND THREE PIES CANNOT BE READ AT ALL
 # ------------------------------------
@@ -447,9 +448,6 @@ DEPT_PIE = re.compile(
 DEPT_SLICE_VALUE_FIRST = re.compile(
     r"([A-Za-z][A-Za-z&/\.,'\- ]{2,46}?)\s*\$?\s*(\d{1,3}(?:[,\.]\s?\d{3})*)"
     r"\s*\(?\s*<?\s*\d{1,2}(?:\.\d)?\s*%")
-DEPT_SLICE_PCT_FIRST = re.compile(
-    r"([A-Za-z][A-Za-z&/\.,'\- ]{2,46}?)\s*,?\s*<?\s*\d{1,2}(?:\.\d)?\s*%\s*"
-    r"\$?\s*(\d{1,3}(?:[,\.]\s?\d{3})*)")
 DEPT_EX_UTILITIES = re.compile(r'with(?:out)?\s+utilit|excluding\s+utilit', re.I)
 # A FLAT tolerance, not a percentage of the total. A percentage scales with the
 # pie and so grows past the size of the smallest slice: 0.5% of the 2005 pie is
@@ -468,28 +466,30 @@ def slug(label):
 
 
 def _pie_slices(seg, total):
-    """The best-summing reading of one pie, or None.
+    """The pie's slices, or None if they do not add up to the printed total.
 
-    Both slice orders are tried and whichever lands on the printed total wins.
-    Trying only the common order returned nothing for the 2018 book, which
-    prints its shares before its dollars -- and nothing looks exactly like a
-    year the city never published.
+    ONE slice order, "Police $22,680 12%". The 2018 book prints the reverse and a
+    pattern for it was tried here; it recovered no year this one misses, and it
+    broke 2020. After that pie's eleven real slices the book lists sub-components
+    with shares and NO values ("Electric Utility Development - 1% Sustainability
+    - 1% Police - 10%"), which the reversed pattern read as thirteen slices, two
+    worth nothing. They summed correctly and won on slice count, so 2020 gained
+    Transportation and Utilities at $0 -- printed next to 2021's $30.8M and
+    $84.9M, that reads as a collapse that never happened.
     """
-    best = None
-    for pat in (DEPT_SLICE_VALUE_FIRST, DEPT_SLICE_PCT_FIRST):
-        got = [(lab.strip(), to_number(re.sub(r'\D', '', val)))
-               for lab, val in pat.findall(seg)]
-        got = [(lab, v) for lab, v in got if v and v > 0]
-        if not got:
-            continue
-        # A pie is whole or it is not used. The tolerance covers the city
-        # rounding a slice to the nearest thousand; it does not cover a missing
-        # slice, which is the failure this exists to catch.
-        resid = abs(sum(v for _l, v in got) - total)
-        if resid <= TOL_ABS:
-            if best is None or len(got) > len(best):
-                best = got
-    return best
+    got = [(lab.strip(), to_number(re.sub(r'\D', '', val)))
+           for lab, val in DEPT_SLICE_VALUE_FIRST.findall(seg)]
+    # The floor is on the SHARE, not the dollars, because the early books print
+    # thousands and the later ones whole dollars. No real department line is a
+    # ten-thousandth of the city's spending; a match that small is a legend entry
+    # whose percentage was read as its value.
+    got = [(lab, v) for lab, v in got if v and v / total >= 0.0001]
+    # A pie is whole or it is not used. TOL_ABS covers the city rounding a slice
+    # to the nearest thousand; it does not cover a missing slice, which is the
+    # failure this gate exists to catch.
+    if got and abs(sum(v for _l, v in got) - total) <= TOL_ABS:
+        return got
+    return None
 
 
 def extract_dept_pie(rows, citywide_totals):
