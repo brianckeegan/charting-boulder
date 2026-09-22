@@ -635,6 +635,90 @@ def extract_dept_pie(rows, citywide_totals):
     return out, rejected
 
 
+# --------------------------------------------------------------------------
+# OCR markdown, normalised to the shapes the readers above already know.
+#
+# Datalab wraps every table cell in HTML and escapes every dollar sign:
+#
+#     | <b>TOTAL BUDGET</b>      | <b>\$196,167</b> |
+#     |  | <b>2003<br/>ACTUAL</b> | <b>2004<br/>APPROVED</b> |
+#
+# Two characters broke two readers. The escaped "\$" meant LEGACY_BLOCK's
+# "(in $1,000s)" never matched, so no summary block was read from any OCR'd
+# page. And "<br/>" between a year and its basis word meant table_columns found
+# neither the stacked form ("2003 2004 2005 / ACTUAL APPROVED") nor the zipped
+# one ("2003 ACTUAL"), so every multi-year table was dropped -- zero General Fund
+# figures came out of 278 OCR'd pages.
+#
+# Tags are stripped by name, not by pattern: pypdf text contains a bare "<" in
+# places like "Arts $440 <1%", and a generic "<[^>]*>" would eat the rest of the
+# line up to the next ">". On pypdf text this whole function is a no-op, which
+# the regression check depends on.
+# --------------------------------------------------------------------------
+_OCR_TAG = re.compile(r'</?(?:b|br|strong|em|i|u|sup|sub)\s*/?>', re.I)
+
+
+def normalize_ocr(text):
+    text = _OCR_TAG.sub(' ', text)
+    return (text.replace('\\$', '$').replace('**', '')
+                .replace('&amp;', '&').replace('&nbsp;', ' '))
+
+
+# Summary blocks from OCR are read off the LABELLED table rows, not from the
+# prose Datalab writes as image alt-text above them. Both come from the same
+# image, but the table puts each value beside its own label, while the alt-text
+# is a generated sentence -- "The total budget of $196,167 is split into..." --
+# whose wording the arithmetic reader would otherwise have to lean on.
+MD_BLOCK_ROWS = [
+    ("budget_total", re.compile(r'^\s*TOTAL\s+BUDGET\b', re.I)),
+    ("budget_capital", re.compile(r'^\s*CAPITAL\s+BUDGET\b', re.I)),
+    ("budget_operating", re.compile(r'^\s*OPERATING\s+BUDGET\b', re.I)),
+    ("budget_operating_dedicated", re.compile(r'^\s*DEDICATED\s+FUNDS?\b', re.I)),
+    ("budget_operating_general", re.compile(r'^\s*GENERAL\s+FUND\b', re.I)),
+]
+
+
+def extract_md_blocks(rows):
+    out = []
+    for r in rows:
+        if '|' not in r['text']:
+            continue
+        flat = re.sub(r'\s+', ' ', r['text'])
+        hm = LEGACY_BLOCK.search(flat) or OVERVIEW_BLOCK.search(flat)
+        if not hm:
+            continue
+        yr = int(hm.group(1))
+        got = {}
+        for line in r['text'].splitlines():
+            mm = MD_ROW.match(line)
+            if not mm:
+                continue
+            cells = [c.strip() for c in mm.group(1).split('|')]
+            if len(cells) < 2:
+                continue
+            for measure, pat in MD_BLOCK_ROWS:
+                if pat.search(cells[0]) and measure not in got:
+                    v = to_number(re.sub(r'\D', '', cells[1]))
+                    if v:
+                        got[measure] = v
+        need = ("budget_total", "budget_capital", "budget_operating")
+        if not all(k in got for k in need):
+            continue
+        # The same two identities the pypdf reader enforces. A block that fails
+        # them is not recorded at all -- not partially, not "mostly".
+        if abs(got["budget_capital"] + got["budget_operating"] - got["budget_total"]) > 1:
+            continue
+        halves = ("budget_operating_general", "budget_operating_dedicated")
+        if all(k in got for k in halves) and abs(
+                got[halves[0]] + got[halves[1]] - got["budget_operating"]) > 1:
+            got = {k: v for k, v in got.items() if k not in halves}
+        for measure, v in got.items():
+            out.append({"year": yr, "measure": measure, "value": round(v / 1000.0, 3),
+                        "unit": "musd", "file": r["file"], "page": r["page"],
+                        "context": f"markdown block row, {measure}: {v:,.0f} (in $1,000s)"})
+    return out
+
+
 def extract(rows):
     out = []
     for r in rows:
@@ -670,19 +754,24 @@ PAGE_OF_INTEREST = [
 
 
 def write_pages_of_interest(rows, extracted_pages, path):
-    n = 0
+    # One row per PAGE, not per dump. The same page arrives once from the pypdf
+    # dump and again from each OCR dump, and writing it per arrival nearly
+    # doubled the file (531 rows for 289 pages) -- harmless to the OCR tier,
+    # which dedupes at plan time, but it made the file say something false about
+    # how many pages hold a figure.
+    seen = {}
+    for r in rows:
+        flat = re.sub(r'\s+', ' ', r['text'])
+        holds = {name for name, pat in PAGE_OF_INTEREST if pat.search(flat)}
+        if holds:
+            seen.setdefault((r["file"], r["page"]), set()).update(holds)
     with open(path, "w", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["file", "page", "holds", "already_extracted_from"])
-        for r in rows:
-            flat = re.sub(r'\s+', ' ', r['text'])
-            holds = [name for name, pat in PAGE_OF_INTEREST if pat.search(flat)]
-            if not holds:
-                continue
-            w.writerow([r["file"], r["page"], " ".join(holds),
-                        "yes" if (r["file"], r["page"]) in extracted_pages else "no"])
-            n += 1
-    return n
+        for (f, pg), holds in sorted(seen.items()):
+            w.writerow([f, pg, " ".join(sorted(holds)),
+                        "yes" if (f, pg) in extracted_pages else "no"])
+    return len(seen)
 
 
 def main():
@@ -703,10 +792,13 @@ def main():
     # --extract writes excerpt PDFs beside the originals; if they were scanned
     # too, every page appears twice. Drop them.
     rows = [r for r in rows if 'excerpt' not in r['file'].lower()]
+    for r in rows:
+        r['text'] = normalize_ocr(r['text'])
     if not rows:
         sys.exit("no usable pages in the dump")
 
-    base = extract(rows) + extract_legacy(rows) + extract_multiyear(rows)
+    base = (extract(rows) + extract_md_blocks(rows) + extract_legacy(rows)
+            + extract_multiyear(rows))
     # The pie reader needs each year's citywide total to tell three
     # identically-headed pies apart, so it runs last, on what the rest found.
     citywide = {}

@@ -2,7 +2,7 @@ file,page,holds,already_extracted_from
 "2005 Annual Budget, Volume 1.pdf",5,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",7,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",63,summary_block,yes
-"2005 Annual Budget, Volume 1.pdf",64,pie multiyear_table,yes
+"2005 Annual Budget, Volume 1.pdf",64,multiyear_table pie,yes
 "2005 Annual Budget, Volume 1.pdf",65,pie,no
 "2005 Annual Budget, Volume 1.pdf",67,pie,no
 "2005 Annual Budget, Volume 1.pdf",69,pie,no
@@ -41,7 +41,7 @@ file,page,holds,already_extracted_from
 "2006-2007 Annual Budget, Volume 1.pdf",8,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",40,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",58,summary_block,yes
-"2006-2007 Annual Budget, Volume 1.pdf",59,pie multiyear_table,yes
+"2006-2007 Annual Budget, Volume 1.pdf",59,multiyear_table pie,yes
 "2006-2007 Annual Budget, Volume 1.pdf",63,pie,no
 "2006-2007 Annual Budget, Volume 1.pdf",64,multiyear_table,yes
 "2006-2007 Annual Budget, Volume 1.pdf",69,multiyear_table,no
@@ -102,9 +102,9 @@ file,page,holds,already_extracted_from
 "2008 Annual Budget, Volume 1.pdf",269,multiyear_table,no
 2011 Annual Budget.pdf,1,multiyear_table,no
 2011 Annual Budget.pdf,35,multiyear_table,no
-2011 Annual Budget.pdf,65,summary_block,no
+2011 Annual Budget.pdf,65,summary_block,yes
 2011 Annual Budget.pdf,67,pie,yes
-2011 Annual Budget.pdf,68,pie multiyear_table,no
+2011 Annual Budget.pdf,68,multiyear_table pie,no
 2011 Annual Budget.pdf,73,pie,no
 2011 Annual Budget.pdf,75,multiyear_table,no
 2011 Annual Budget.pdf,76,multiyear_table,yes
@@ -234,7 +234,7 @@ file,page,holds,already_extracted_from
 "2017 Annual Budget, Volume 1.pdf",112,pie,no
 "2017 Annual Budget, Volume 1.pdf",120,pie,yes
 "2017 Annual Budget, Volume 1.pdf",121,pie,no
-"2017 Annual Budget, Volume 1.pdf",122,multiyear_table,no
+"2017 Annual Budget, Volume 1.pdf",122,multiyear_table,yes
 "2017 Annual Budget, Volume 1.pdf",123,multiyear_table,no
 "2017 Annual Budget, Volume 1.pdf",124,pie,no
 "2017 Annual Budget, Volume 1.pdf",154,multiyear_table,no
@@ -277,14 +277,3 @@ file,page,holds,already_extracted_from
 2024 Approved Budget.pdf,250,multiyear_table,no
 2026 Annual Budget.pdf,26,multiyear_table,yes
 2026 Annual Budget.pdf,27,multiyear_table,no
-2011 Annual Budget.pdf,67,pie,yes
-2011 Annual Budget.pdf,68,pie multiyear_table,no
-"2012 Annual Budget, Volume 1.pdf",39,pie,no
-"2012 Annual Budget, Volume 1.pdf",93,summary_block,yes
-"2012 Annual Budget, Volume 1.pdf",112,pie,yes
-"2012 Annual Budget, Volume 1.pdf",113,multiyear_table,yes
-"2013 Annual Budget, Volume 1.pdf",97,summary_block,yes
-"2013 Annual Budget, Volume 1.pdf",115,pie,yes
-2018 Annual Budget - Volume 1.pdf,67,pie,no
-2019 Approved Operating Budget.pdf,57,pie,no
-2019 Approved Operating Budget.pdf,58,pie,no
