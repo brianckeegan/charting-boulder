@@ -283,8 +283,12 @@ MULTIYEAR_TABLES = [
      "budget_general_fund_revenue", "thousands", plausible(40, 400)),
     (r'SUMMARY\s*OF\s*USES\s*OF\s*FUNDS', r'Total\s*General\s*Fund\s*Uses',
      "budget_general_fund", "thousands", plausible(40, 400)),
-    (r'SUMMARY\s*OF\s*STANDARD\s*FTEs?', r'TOTALS?',
-     "staffing_fte_standard", "fte", plausible(800, 2500)),
+    # Two headings for the same table. The pre-2012 books call it "SUMMARY OF
+    # STANDARD FTEs"; from 2012 it is "Table 4-6: Staffing Levels in Standard
+    # FTEs by Department". Gating on the narrower wording lost 2012 and 2013,
+    # which are the years that close the gap to 2016.
+    (r'STANDARD\s*FTEs?|STANDARD\s*FULL\s*TIME', r'TOTALS?|Total\b',
+     "staffing_fte", "fte", plausible(800, 2500)),
 ]
 # Years and basis words both arrive fused in the 2008 book ("2006200720082009",
 # "ACTUALAPPROVEDAPPROVEDPROJECTED"), so neither pattern can require whitespace.
@@ -313,7 +317,12 @@ BASIS_MAP = {"actual": "actual", "approved": "adopted", "projected": "projected"
 #     values). Allowing a period in the thousands group here would run one match
 #     across the whole line.
 NUM_THOUSANDS = re.compile(r'\d{1,3}(?:[,\.]\s?\d{3})+')
-NUM_FTE = re.compile(r'\d{1,3}(?:[,\s]\s?\d{3})*\.\s?\d{1,2}')
+# Four integer digits with no separator at all: the 2012 book's totals row is
+# "TOTAL 1248. 24 1230. 50 1243. 20", where extraction dropped the commas the
+# 2013 book keeps ("1, 231.25"). Requiring a separator read the 2012 table as
+# having no plausible totals row, so that book's own figures were replaced by
+# the 2013 book's later restatement of them.
+NUM_FTE = re.compile(r'\d{1,4}(?:[,\s]\s?\d{3})*\.\s?\d{1,2}')
 
 
 def read_numbers(text, kind):

@@ -300,30 +300,42 @@ for yr, basis, v in [(2003, "actual", 87.252), (2004, "actual", 80.270),
 add(2011, "revenue_total", "adopted", 224.912, "musd", "books")
 add(2010, "revenue_total", "derived", round(224.912 / 1.0029, 1), "musd", "books")
 
-# --- Citywide staffing LEVELS ---------------------------------------------
-# Previously unavailable. The budget books state a citywide headcount in prose
-# ("a total city staffing level of 1,540.09 full-time equivalents"), which the
-# council packets and press releases never do — they report only per-year
-# position changes. Years without a row are books that state no citywide figure
-# on the pages scanned, not zeros.
-for yr, v in [(2016, 1419.00), (2018, 1451.00), (2021, 1375.83), (2022, 1460.71),
+# --- Citywide staffing levels, 2003-2026 -----------------------------------
+# ONE series. This was previously split in two -- staffing_fte from 2016 and
+# staffing_fte_standard before 2012 -- on the grounds that the early books count
+# "standard FTEs" with an explicit scope footnote while the later ones say
+# "citywide staffing level", and that no book published both so the offset could
+# not be measured.
+#
+# Three books disprove that, by printing both labels for the same number:
+#
+#   2016 p120  "...includes a citywide staffing level of 1,419 FTE."
+#              Figure 5-09: Staffing Levels: Standard FTEs 2002-2016 ... 1,419 FTE
+#   2018 p68   "...includes a citywide staffing level of 1,451 FTE."
+#              Staffing Levels: Standard FTEs 2002 to 2018
+#   2022 p46   "...includes a citywide staffing level of 1,460.71"  (same figure)
+#
+# The headline number IS the endpoint of a chart the book itself titles "Standard
+# FTEs", and the city charts that series continuously from 2002. So the two are
+# the same measure, the split was wrong, and the old caveat was discouraging a
+# comparison the city makes itself.
+#
+# 2012 and 2013 come from the same books' "Staffing Levels in Standard FTEs by
+# Department" tables, which closes the gap to 2016 down to 2014-2015.
+for yr, v in [(2003, 1290.69), (2004, 1200.68), (2005, 1212.11), (2006, 1218.84),
+              (2007, 1251.34), (2008, 1281.17), (2009, 1288.52), (2010, 1248.24),
+              (2011, 1228.50), (2012, 1243.20), (2013, 1260.62),
+              (2016, 1419.00), (2018, 1451.00), (2021, 1375.83), (2022, 1460.71),
               (2023, 1540.09), (2025, 1539.10), (2026, 1548.28)]:
     add(yr, "staffing_fte", "adopted", v, "fte", "books")
 
-# The pre-2012 books count staffing differently, and say so: "Summary of
-# STANDARD FTEs", where a note limits the count to standard Management, BMEA,
-# Fire and Police positions. The modern books say "citywide staffing level"
-# without that qualifier. No book in the corpus publishes both, so there is no
-# way to measure the offset — hence a separate measure. Nine consecutive years,
-# and the overlaps between books agree exactly: 2004 and 2005 appear in the 2005
-# and 2006-2007 books, 2006 in the 2006-2007 and 2008 books.
-#
-# The shape is the recession story twice over: 1,290.69 in 2003 down to 1,200.68
-# in 2004, back up to 1,288.52 by 2009, then down to 1,228.50 by 2011.
-for yr, v in [(2003, 1290.69), (2004, 1200.68), (2005, 1212.11), (2006, 1218.84),
-              (2007, 1251.34), (2008, 1281.17), (2009, 1288.52), (2010, 1248.24),
-              (2011, 1228.50)]:
-    add(yr, "staffing_fte_standard", "adopted", v, "fte", "books")
+# Later books restate earlier years slightly. Each year above keeps its OWN
+# book's figure; the most recent restatement is recorded beside it so the
+# disagreement is visible rather than averaged away. 2011 was restated twice --
+# 1,230.50 in the 2012 book, then 1,231.25 in the 2013 book -- and only the
+# latter is carried, because two rows would share one (year, measure, basis) key.
+for yr, v in [(2011, 1231.25), (2012, 1244.76)]:
+    add(yr, "staffing_fte", "restated", v, "fte", "books")
 
 # --- The revenue big movers, 2011 --------------------------------------------
 # The 2011 book prints a citywide all-funds revenue pie whose eight slices sum
@@ -1013,7 +1025,6 @@ WIDE = [
     ("revenue_sales_use_tax", ["adopted", "recommended"]),
     ("revenue_property_tax", ["adopted", "recommended"]),
     ("revenue_utility", ["adopted", "recommended"]),
-    ("staffing_fte_standard", ["adopted"]),
     ("salesuse_total", ["actual", "adopted", "forecast"]),
     ("property_tax_revenue", ["actual", "adopted"]),
     ("gap_general_fund", ["identified", "recommended", "forecast"]),
