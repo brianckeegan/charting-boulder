@@ -140,6 +140,16 @@ def one_page_pdf(reader: PdfReader, page: int) -> bytes:
     """
     w = PdfWriter()
     w.add_page(reader.pages[page - 1])
+    # add_page copies the page tree, not the document catalogue, so the source's
+    # /Info is dropped and each upload would otherwise arrive anonymous. Carry it
+    # over and add which page this was, so the file identifies itself on the
+    # far side instead of relying on the filename alone. Page-level metadata --
+    # /MediaBox and /Rotate -- is copied by add_page already, which matters:
+    # several of these scans have rotated pages, and a rotated page sent as a
+    # bare image comes back sideways.
+    src = dict(reader.metadata or {})
+    w.add_metadata({k: str(v) for k, v in src.items() if k != "/Producer"}
+                   | {"/Subject": f"page {page} of {len(reader.pages)}"})
     buf = io.BytesIO()
     w.write(buf)
     return buf.getvalue()
