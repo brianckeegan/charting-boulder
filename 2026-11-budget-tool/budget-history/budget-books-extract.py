@@ -1,44 +1,63 @@
 """
-Boulder budget books — extract facts from the page-text dump
-============================================================
-Reads the JSONL produced by `budget-books-inventory.py --dump-text` and pulls
-out the handful of numbers the historical series needs, with the page each one
-came from.
+Boulder budget books -- extract candidate figures from page text
+================================================================
+Third of the four stages; README.md has the whole pipeline. Reads page-text
+dumps and pulls out the figures the budget history needs, each with the file and
+page it came from. A dump is JSONL, one page per line, from either of two
+places, and any number can be read at once:
 
-    python3 budget-books-extract.py dump.jsonl -o budget-books-extracted.csv
+    budget-books-inventory.py --dump-text   pypdf's text of the born-digital books
+    budget-books-ocr.py                     Datalab's markdown of pages pypdf cannot read
 
-Several dumps can be read at once, which is how OCR'd pages join born-digital
-ones -- same shape in, same candidates out:
+    python3 budget-books-extract.py dump.jsonl budget-books-ocr.jsonl \
+        -o budget-books-extracted.csv
 
-    python3 budget-books-extract.py dump.jsonl budget-books-ocr.jsonl -o facts.csv
+Writes two CSVs, the second beside the first. budget-history-data-dictionary.md
+documents both column by column.
 
-Why regex over prose rather than table parsing
-----------------------------------------------
-The figures are not in tables. Every budget book states them in a sentence:
+    budget-books-extracted.csv           one row per candidate figure
+    budget-books-pages-of-interest.csv   every page that looks as if it holds a
+                                         figure, read or not -- OCR tier 4's list
 
-    "The total 2026 Approved Budget is $521.0 million across all funds,
-     including a 2026 Operating Budget of $407.7 million and 2026 Capital
-     Budget of $113.3 million."
-    "The 2023 Approved Budget includes a total city staffing level of
-     1,540.09 full-time equivalents (FTEs)."
+Five readers, one per shape the books print figures in
+-------------------------------------------------------
+  extract            prose, 2017 on: "The total 2026 Approved Budget is $521.0
+                     million across all funds, including a 2026 Operating
+                     Budget of $407.7 million ..."
+  extract_legacy     the citywide summary block, 2005-2017, and the older books'
+                     prose. The block checks itself: capital + operating = total,
+                     and the General Fund and dedicated halves sum to operating.
+  extract_multiyear  Sources, Uses and FTE tables printed three and four years
+                     wide before 2012, with the basis in each column header --
+                     which is how years whose own books are scans get values.
+  extract_dept_pie   the citywide spending pie by department, in pypdf text or
+                     as an OCR markdown table, told apart from the General Fund
+                     and excluding-utilities pies under the same heading by its
+                     total. Runs last, because it needs the others' totals.
+  extract_md_blocks  the summary block as an OCR markdown table.
 
-That is far more tractable than reconstructing table geometry across 22 years
-of changing layouts — but it means the phrasing shifts book to book, so each
-fact carries several patterns and the ones that match nothing are reported
-rather than silently dropped.
+Why patterns rather than table geometry
+---------------------------------------
+Reconstructing table geometry across 22 years of changing layouts is far less
+tractable than recognising the handful of phrasings and headings each figure
+appears under. The phrasing shifts book to book, so each figure carries several
+patterns, and a measure that matches nothing in a year is reported rather than
+silently dropped.
 
 PDF text extraction mangles numbers
 -----------------------------------
 Real examples from this corpus: "1, 451", "1,548. 28", "$ 407.7", "full- time".
 Every numeric pattern therefore tolerates internal whitespace, and `to_number`
 strips it before parsing. A pattern written against clean text will silently
-miss most years.
+miss most years. OCR text arrives cleaner but wrapped in HTML, which
+`normalize_ocr` strips before any reader sees it.
 
 Output is CANDIDATES, not truth
 -------------------------------
-Each row carries the page and the surrounding sentence so a human can confirm
-it. Where a year yields conflicting values the script reports all of them and
-flags the year rather than picking one.
+Each row carries the page and the surrounding text so a person can confirm it.
+Where a year yields conflicting values the script reports all of them and flags
+the year rather than picking one. budget-history.py does not read this CSV:
+figures are typed into it once checked.
 """
 
 import argparse
@@ -424,21 +443,26 @@ def extract_multiyear(rows):
 # is REPORTED with its total instead of recorded, so an unrecognised pie shows
 # up as a line of output rather than as silently wrong data.
 #
-# ONE SLICE ORDER
-# ---------------
-# Every readable pie prints "Police $22,680 12%" -- label, value, share. The 2018
-# book prints "Public Works 44% 170,485" instead, which is why 2018 is among the
-# unreadable years below rather than a supported format; see _pie_slices.
+# ONE SLICE ORDER IN PYPDF TEXT
+# ----------------------------
+# Every pie pypdf reads prints "Police $22,680 12%" -- label, value, share. The
+# 2018 book prints "Public Works 44% 170,485" instead, which is why 2018 is among
+# the years pypdf cannot give below rather than a supported format; see
+# _pie_slices. (The markdown reader keys on the cell holding the "%", so column
+# order does not matter to it.)
 #
-# AND THREE PIES CANNOT BE READ AT ALL
-# ------------------------------------
-# 2011 and 2012 come out of the PDF interleaved beyond repair -- 2012's reads
+# AND FIVE PIES PYPDF CANNOT READ AT ALL
+# --------------------------------------
+# 2011 and 2012 come out of pypdf interleaved beyond repair -- 2012's reads
 # "Pol ice 29, 593 Comm Planning Parks and Rec 12% and SUSt 24, 229 S/, 644
 # 10%", in which the 32% belongs to Public Works and "577,340" is $77,340 with a
-# stray digit. 2019 prints its total and leaves the slices in an image. The sum
-# gate rejects all three, which is the point: pairing those labels to those
-# values would be guessing, and a wrong guess does not look wrong -- it just
-# moves Police's budget to Open Space.
+# stray digit. 2013's legible slices fall short of its printed total, 2018's
+# double-count its own subtotals, and 2019 prints its total and leaves the
+# slices in an image. The sum gate rejects all five, which is the point: pairing
+# those labels to those values would be guessing, and a wrong guess does not
+# look wrong -- it just moves Police's budget to Open Space. OCR recovers them:
+# 2011, 2012 and 2013 come back as markdown tables this script reads, and 2018
+# and 2019 are transcribed from the OCR text in budget-history.py.
 # --------------------------------------------------------------------------
 # The "(in $1,000s)" that sits between the heading and the total contains a $,
 # so the gap here must not exclude one. Requiring no $ hid 2012 and 2019
@@ -765,8 +789,8 @@ def write_pages_of_interest(rows, extracted_pages, path):
         holds = {name for name, pat in PAGE_OF_INTEREST if pat.search(flat)}
         if holds:
             seen.setdefault((r["file"], r["page"]), set()).update(holds)
-    with open(path, "w", newline="") as fh:
-        w = csv.writer(fh)
+    with open(path, "w", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["file", "page", "holds", "already_extracted_from"])
         for (f, pg), holds in sorted(seen.items()):
             w.writerow([f, pg, " ".join(sorted(holds)),
@@ -780,12 +804,14 @@ def main():
                     help="one or more JSONL dumps: born-digital pages from "
                          "budget-books-inventory.py --dump-text, OCR'd pages from "
                          "budget-books-ocr.py, or both together")
-    ap.add_argument("-o", "--out", default="budget-books-extracted.csv")
+    ap.add_argument("-o", "--out", default="budget-books-extracted.csv",
+                    help="CSV to write (default %(default)s); "
+                         "budget-books-pages-of-interest.csv is written beside it")
     args = ap.parse_args()
 
     rows = []
     for path in args.dump:
-        with open(path) as fh:
+        with open(path, encoding="utf-8") as fh:
             for line in fh:
                 if line.strip():
                     rows.append(json.loads(line))
@@ -817,8 +843,8 @@ def main():
         conflicts[key].add(f["value"])
         best.setdefault(key, f)
 
-    with open(args.out, "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=[
+    with open(args.out, "w", encoding="utf-8", newline="") as fh:
+        w = csv.DictWriter(fh, lineterminator="\n", fieldnames=[
             "year", "measure", "basis", "value", "unit", "file", "page",
             "n_values", "conflict", "context"])
         w.writeheader()
@@ -837,17 +863,18 @@ def main():
     print(f"read {len(rows)} pages, {years[0]}-{years[-1]}")
     print(f"wrote {args.out}: {len(best)} facts")
     print(f"wrote {poi_path}: {n_poi} pages holding a figure worth reading\n")
-    for measure in list(FACTS) + [t[2] for t in MULTIYEAR_TABLES] + [
-            "budget_operating_general", "budget_operating_dedicated"]:
+    # staffing_fte is both a prose fact and a multi-year table row; list it once.
+    for measure in dict.fromkeys(list(FACTS) + [t[2] for t in MULTIYEAR_TABLES] + [
+            "budget_operating_general", "budget_operating_dedicated"]):
         got = sorted({y for (y, m, _b) in best if m == measure})
         miss = [y for y in years if y not in got]
-        print(f"  {measure:<18} {len(got):>2} years  {got}")
+        print(f"  {measure:<27} {len(got):>2} years  {got}")
         if miss:
-            print(f"  {'':<18}    missing: {miss}")
+            print(f"  {'':<27}    missing: {miss}")
     dept_years = sorted({y for (y, mm, _b) in best if mm.startswith("dept_")})
-    print(f"  {'departmental pie':<18} {len(dept_years):>2} years  {dept_years}")
+    print(f"  {'departmental pie':<27} {len(dept_years):>2} years  {dept_years}")
     for yr, f, pg, musd, why in sorted(dept_rejected):
-        print(f"  {'':<18}    skipped {yr} pie ({f[:26]} p{pg}, {musd:,.1f}M): {why}")
+        print(f"  {'':<27}    skipped {yr} pie ({f[:26]} p{pg}, {musd:,.1f}M): {why}")
 
     flagged = sorted({k[0] for k, v in conflicts.items() if len(v) > 1})
     if flagged:

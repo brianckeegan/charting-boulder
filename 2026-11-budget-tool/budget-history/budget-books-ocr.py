@@ -1,49 +1,64 @@
 """
-Boulder budget books — OCR the scanned volumes through Datalab
-==============================================================
-Third stage of the budget-book pipeline, and the only one that costs money:
+Boulder budget books -- OCR the pages pypdf cannot read, through Datalab
+=======================================================================
+Second of the four stages, and the only one that costs money. README.md has the
+whole pipeline:
 
-    budget-books-inventory.py   what is in the corpus, and which books are scans
-    budget-books-ocr.py         <- this: turn the scans into readable text
-    budget-books-extract.py     pull the figures out of either kind of text
+    budget-books-inventory.py   what is in the corpus, which books are scans,
+                                and the text of every matched page
+    budget-books-ocr.py         <- this: turn scans and mangled pages into text
+    budget-books-extract.py     pull candidate figures out of either kind of text
+    budget-history.py           the dataset, typed in from checked figures
 
 Run it on your local copy of the books, with a Datalab key in the environment:
 
     export DATALAB_API_KEY=...
-    python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --estimate   # what it will cost
-    python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --yes        # actually spend it
+    python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --estimate       # the bill; nothing sent
+    python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --yes            # spend it
     python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --tier 2 --yes   # one tier only
+
+Tiers 3 and 4 take their page lists from budget-books-extracted.csv and
+budget-books-pages-of-interest.csv, looked for beside this script and then in
+the working directory, so copy those two along if you copy the script.
 
 The output is JSONL in exactly the shape `budget-books-inventory.py --dump-text`
 writes, so `budget-books-extract.py` reads OCR'd and born-digital pages through
 the same code path:
 
-    python3 budget-books-extract.py dump.jsonl budget-books-ocr.jsonl -o facts.csv
+    python3 budget-books-extract.py dump.jsonl budget-books-ocr.jsonl -o budget-books-extracted.csv
 
-Three tiers, three reasons to spend
------------------------------------
-`--tier 1,2,3` (the default) prices each separately, because a page bought for
-one reason is worth very different amounts:
+Four tiers, four reasons to spend
+---------------------------------
+`--tier 1,2,3,4` (the default) prices each separately, because a page bought for
+one reason is worth very different amounts. A page two tiers both want is sent,
+and paid for, once; `--estimate` prints each tier's share of the pages and how
+many are not cached yet.
 
-  1  ACQUISITION, scanned -- whole volumes with no text layer at all.
-     1,137 pages, $8.53. The only way to reach the last two missing citywide
-     totals, 2007 and 2009, plus confirmation of 2010's derived one.
+  1  ACQUISITION, scanned -- whole volumes with no text layer at all: the 2007,
+     2009 and 2010 Volume 1s, 1,137 pages, $8.53. The only way to reach the last
+     two missing citywide totals, 2007 and 2009, plus confirmation of 2010's
+     derived one.
 
   2  ACQUISITION, born-digital -- 24 pages, $0.18, and the best value here.
      These pages HAVE text; it is mangled past what any regex reaches. The 2012
      pie extracts as "Pol ice 29, 593 Comm Planning Parks and Rec 12% and SUSt
      24, 229 S/, 644 10%", where the 32% belongs to Public Works. Datalab rebuilds
-     layout instead of streaming text by position, so it can read what pypdf
-     cannot -- potentially four more departmental pie years (2011, 2012, 2018,
-     2019), 2013's missing operating/capital split, and an independent check on
-     the only figures in the dataset typed by hand.
+     layout instead of streaming text by position, so it reads what pypdf
+     cannot. This tier recovered five departmental pie years (2011, 2012, 2013,
+     2018 and 2019), 2012's summary-block halves and 2013's whole block.
 
-  3  VALIDATION -- 224 pages, $1.68. Every page a published figure came from,
-     plus two either side for a table continuing overleaf. Read from
-     budget-books-extracted.csv rather than hard-coded, so it tracks the dataset.
+  3  VALIDATION -- every page a published figure came from, plus two either side
+     for a table continuing overleaf. Read from budget-books-extracted.csv rather
+     than hard-coded, so it tracks the dataset.
 
-Total $10.39 for 1,385 pages, about 2.5 hours at the free tier's pacing (see
---pace). `--estimate` prints the bill and exits; nothing is sent without --yes.
+  4  VALIDATION -- every page holding a pie, a multi-year table or a summary
+     block, whether or not the extractor could read it. Read from
+     budget-books-pages-of-interest.csv. A second, independent reading of the
+     same printed figures, and the tier that found 2011's summary block and
+     2017's staffing level on pages the born-digital dump never held.
+
+Nothing is sent without --yes, and at the free tier's pacing (see --pace) a
+thousand pages take about two hours.
 
 What is deliberately left out
 -----------------------------
@@ -71,13 +86,14 @@ with `--rebuild`.
 
 One thing to watch
 ------------------
-Datalab's markdown is *cleaner* than pypdf's output, and `budget-books-extract.py`
-was written against pypdf's mangling — fused labels, commas turned into periods,
-numbers run together. Cleaner input is not automatically parsed input: markdown
-renders a table as pipe-delimited rows, which is a shape the extractor has never
-seen. `--verify` runs the extractor over the new JSONL and reports which
-measures came out, so a run that produced text but no figures is visible
-immediately instead of looking like a year with no data.
+Datalab's markdown is *cleaner* than pypdf's output, and cleaner input is not
+automatically parsed input. Markdown renders a table as pipe-delimited rows with
+every cell wrapped in HTML and every dollar sign escaped, and a pie as a table
+rather than as a run of labels and numbers. `budget-books-extract.py` reads those
+shapes now, but a heading or row type it has only seen from pypdf will quietly
+return nothing from OCR text, which looks exactly like a year with no data.
+`--verify` runs the extractor over the new JSONL and prints which measures came
+out, so a run that produced text but no figures is visible immediately.
 """
 
 from __future__ import annotations
@@ -111,8 +127,8 @@ DEFAULT_BOOKS = ["2007 Annual Budget, Volume 1",
 # --------------------------------------------------------------------------
 # Tiers
 # --------------------------------------------------------------------------
-# Three different reasons to spend money, in descending order of how much each
-# page buys. `--tier 1,2,3` runs all three; each is priced separately so the
+# Four different reasons to spend money, in descending order of how much each
+# page buys. `--tier 1,2,3,4` runs all four; each is priced separately so the
 # bill can be seen before any of it is committed.
 #
 #   1  ACQUISITION, scanned. Whole volumes with no text layer at all. The only
@@ -125,6 +141,9 @@ DEFAULT_BOOKS = ["2007 Annual Budget, Volume 1",
 #   3  VALIDATION. Every page a published figure came from, plus a margin for a
 #      table continuing overleaf. Computed from budget-books-extracted.csv, not
 #      typed, so it tracks the dataset rather than drifting from it.
+#   4  VALIDATION. Every page holding a pie, a multi-year table or a summary
+#      block, read or not. Computed from budget-books-pages-of-interest.csv,
+#      which the extractor writes.
 #
 # Volume 2 of the scanned years is deliberately NOT in tier 1. In the books we
 # can read it is the Capital Improvement Program and carries essentially no
@@ -147,7 +166,8 @@ EXTRACTED_CSV = "budget-books-extracted.csv"
 # Written by budget-books-extract.py: every page holding a pie, a multi-year table
 # or a summary block, whether or not it could be read. Tier 4's target list.
 INTEREST_CSV = "budget-books-pages-of-interest.csv"
-# Pages 58-102 in every readable book, plus margin. See the module docstring.
+# Manual mode's default page range (--book without --pages): the citywide
+# summary pages sit between 58 and 102 in every book pypdf can read.
 DEFAULT_WINDOW = (50, 115)
 CENTS_PER_PAGE = 0.75
 
@@ -181,7 +201,7 @@ def tier3_pages(here: Path):
               f" skipping tier 3. Copy it from the repo beside this script.")
         return {}
     out = {}
-    with path.open() as fh:
+    with path.open(encoding="utf-8") as fh:
         for row in _csv.DictReader(fh):
             if "excerpt" in row["file"].lower():
                 continue
@@ -328,9 +348,10 @@ def page_list(n_pages: int, window, every: int, explicit) -> list[int]:
 
 
 def main():
-    ap = argparse.ArgumentParser(description="OCR the scanned budget books through Datalab.")
+    ap = argparse.ArgumentParser(description="OCR the budget-book pages pypdf cannot read, through Datalab.")
     ap.add_argument("root", help="directory holding the PDFs (searched recursively)")
-    ap.add_argument("-o", "--out", default="budget-books-ocr.jsonl")
+    ap.add_argument("-o", "--out", default="budget-books-ocr.jsonl",
+                    help="JSONL to write (default %(default)s)")
     ap.add_argument("--cache", default="", help="markdown cache dir (default: <out>-cache)")
     ap.add_argument("--tier", default="1,2,3,4", metavar="1,2,3,4",
                     help="which tiers to run (default %(default)s). 1 = whole scanned "
@@ -342,7 +363,7 @@ def main():
                     help="filename substring to include; repeatable. Defaults to the "
                          "three Volume 1 scans the born-digital books cannot cover.")
     ap.add_argument("--window", default="{}-{}".format(*DEFAULT_WINDOW), metavar="LO-HI",
-                    help="page range to send (default %(default)s)")
+                    help="with --book: page range to send (default %(default)s)")
     ap.add_argument("--pages", default="", metavar="N,N,...",
                     help="exact pages to send, overriding --window")
     ap.add_argument("--pace", type=float, default=PACE_SECONDS, metavar="SECONDS",
@@ -448,7 +469,7 @@ def main():
                       f" skipping tier 4. It is written by budget-books-extract.py.")
             else:
                 per = {}
-                with ipath.open() as fh:
+                with ipath.open(encoding="utf-8") as fh:
                     for row in _csv.DictReader(fh):
                         if "excerpt" in row["file"].lower():
                             continue
@@ -514,23 +535,23 @@ def main():
                     # One bad page must not lose the pages already paid for.
                     print(f"    {pdf.stem} p{p}: FAILED {type(exc).__name__}: {exc}")
                     continue
-                dest.write_text(answer.get("markdown") or "")
+                dest.write_text(answer.get("markdown") or "", encoding="utf-8")
                 sent += 1
                 cents = (answer.get("cost_breakdown") or {}).get("final_cost_cents")
-                print(f"    {pdf.stem[:34]:<34} p{p:>3}  {len(dest.read_text()):>5} chars"
+                print(f"    {pdf.stem[:34]:<34} p{p:>3}  {len(dest.read_text(encoding='utf-8')):>5} chars"
                       f"  {cents if cents is not None else '?'}c")
                 time.sleep(args.pace)
         print(f"\n  sent {sent} pages")
 
     # --- JSONL, in the same shape as --dump-text -------------------------
     n = blank = 0
-    with out_path.open("w") as fh:
+    with out_path.open("w", encoding="utf-8") as fh:
         for pdf, _reader, pages in plan:
             for p in pages:
                 src = cache / pdf.stem / f"p{p:03d}.md"
                 if not src.exists():
                     continue
-                text = src.read_text()
+                text = src.read_text(encoding="utf-8")
                 if not text.strip():
                     # Paid for and empty. Either a genuinely blank page or a
                     # conversion that returned nothing, and the difference
