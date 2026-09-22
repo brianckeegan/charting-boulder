@@ -54,8 +54,12 @@ year,measure,basis,value,unit,source_id
 2010,budget_total,derived,230.2,musd,books
 2010,revenue_total,derived,224.3,musd,books
 2010,staffing_fte,adopted,1248.24,fte,books
+2011,budget_capital,adopted,24.713,musd,booksocr
 2011,budget_general_fund,adopted,100.449,musd,books
 2011,budget_general_fund_revenue,adopted,99.761,musd,books
+2011,budget_operating,adopted,206.317,musd,booksocr
+2011,budget_operating_dedicated,adopted,118.654,musd,booksocr
+2011,budget_operating_general,adopted,87.663,musd,booksocr
 2011,budget_total,adopted,231.03,musd,books
 2011,deptexp_administration,adopted,21.876,musd,books
 2011,deptexp_citywide_debt,adopted,2.691,musd,books
@@ -161,6 +165,7 @@ year,measure,basis,value,unit,source_id
 2017,deptexp_parks_openspace,adopted,60.979,musd,books
 2017,deptexp_planning_climate,adopted,15.178,musd,books
 2017,deptexp_public_safety,adopted,53.852,musd,books
+2017,staffing_fte,adopted,1447.0,fte,booksocr
 2018,budget_general_fund,adopted,146.321,musd,books
 2018,budget_operating,adopted,277.6,musd,books
 2018,budget_total,adopted,389.21,musd,books

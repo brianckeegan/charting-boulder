@@ -279,7 +279,13 @@ add(2012, "budget_capital", "adopted", 23.981, "musd", "books")
 # which label either belonged to -- both are confirmed here as operating and the
 # General Fund half, which is what they were guessed to be and correctly not
 # recorded as.
-for yr, oper, cap, gf, ded in [(2013, 221.266, 33.427, 98.703, 122.563)]:
+# 2011's block is on page 65 of its book, which the born-digital page dump never
+# contained -- it held page 67 -- so 2011 had a total and nothing else. Tier 4 of
+# the OCR pass reached it. Its total is $231,030 thousand, which is exactly the
+# 2011 total already published from that book's own prose ("The 2011 budget
+# totals $231,030,000"), so the block is anchored to a figure read independently.
+for yr, oper, cap, gf, ded in [(2011, 206.317, 24.713, 87.663, 118.654),
+                               (2013, 221.266, 33.427, 98.703, 122.563)]:
     add(yr, "budget_operating", "adopted", oper, "musd", "booksocr")
     add(yr, "budget_capital", "adopted", cap, "musd", "booksocr")
     add(yr, "budget_operating_general", "adopted", gf, "musd", "booksocr")
@@ -376,6 +382,12 @@ for yr, v in [(2011, 1231.25), (2012, 1244.76)]:
 # 2011", so the 2001 column contradicts its own heading and nothing corroborates
 # it.
 add(2002, "staffing_fte", "adopted", 1304.69, "fte", "booksocr")
+
+# 2017, from the 2017 book's own sentence, read by OCR: "The 2017 Annual Budget
+# includes a citywide staffing level of 1,447 FTE" -- the same wording, same
+# "Figure 5-09 ... standard full-time equivalents" context the 2016 and 2018
+# books use for 1,419 and 1,451. The born-digital dump never reached that page.
+add(2017, "staffing_fte", "adopted", 1447.00, "fte", "booksocr")
 
 # --- The revenue big movers, 2011 --------------------------------------------
 # The 2011 book prints a citywide all-funds revenue pie whose eight slices sum

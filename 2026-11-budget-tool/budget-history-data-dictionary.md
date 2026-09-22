@@ -461,6 +461,34 @@ The published value stands; the OCR reading was discarded. This is the clearest
 argument for validating rather than replacing: OCR is a second witness, not a
 better one.
 
+**Validation: 146 independent confirmations, zero contradictions.** Tier 4 sent
+every page holding a pie, table or summary block — 278 pages — and the extractor
+read 197 facts from the OCR text. Every one that is also published agrees:
+
+| | Agree | Disagree |
+|---|---|---|
+| Independent — published from pypdf, re-read by OCR | **146** | **0** |
+| Circular — published *from* tier 2 OCR, same cached pages | 46 | 0 |
+
+The circular ones are listed separately on purpose. Tier 4 did not re-send pages
+tier 2 had already cached, so a 2012 or 2013 pie "agreeing" with itself is the
+same bytes compared twice, and counting it as confirmation would overstate the
+evidence by a third.
+
+Of the book-sourced figures the extractor could *not* read back from OCR, a direct
+search of the OCR text for the printed number found all but fifteen, and all
+fifteen are explained: six are this dataset's own arithmetic (derived totals,
+unmapped remainders) and were never printed; eight sit on narrative pages tier 4
+did not target; and one — 2004 General Fund revenue, $80,270 — is on the OCR'd
+page after all, in a row whose four columns all match, and was missed only
+because the search looked in books filed within two years and the biennial book
+is filed under 2007.
+
+Tier 4 also reached two pages the born-digital dump never contained: **2011's
+summary block** (p65, giving that year its operating/capital split for the first
+time, anchored to a total already read independently from prose) and **2017's
+staffing level**, 1,447 FTE.
+
 **What it did settle.** 2013 had nothing but a total rounded to "$255 million";
 it now has an exact total and a full operating/capital/General-Fund split, both
 identities holding. The 2011 revenue pie confirmed all eight hand-transcribed
