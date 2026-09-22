@@ -169,9 +169,13 @@ def tier3_pages(here: Path):
     of silently validating nothing.
     """
     import csv as _csv
-    path = here / EXTRACTED_CSV
-    if not path.exists():
-        print(f"  ! {EXTRACTED_CSV} not found beside this script; skipping tier 3")
+    # Beside the script, then the working directory: this file gets copied into
+    # the corpus directory and run from there, where its siblings are absent.
+    path = next((c for c in (here / EXTRACTED_CSV, Path.cwd() / EXTRACTED_CSV)
+                 if c.exists()), None)
+    if path is None:
+        print(f"  ! {EXTRACTED_CSV} not found in {here} or {Path.cwd()};"
+              f" skipping tier 3. Copy it from the repo beside this script.")
         return {}
     out = {}
     with path.open() as fh:
@@ -475,7 +479,7 @@ def main():
         print(f"\n  sent {sent} pages")
 
     # --- JSONL, in the same shape as --dump-text -------------------------
-    n = 0
+    n = blank = 0
     with out_path.open("w") as fh:
         for pdf, _reader, pages in plan:
             for p in pages:
@@ -484,6 +488,10 @@ def main():
                     continue
                 text = src.read_text()
                 if not text.strip():
+                    # Paid for and empty. Either a genuinely blank page or a
+                    # conversion that returned nothing, and the difference
+                    # matters, so count them instead of dropping them quietly.
+                    blank += 1
                     continue
                 fh.write(json.dumps({
                     "file": pdf.name,
@@ -498,12 +506,28 @@ def main():
                 n += 1
     mb = out_path.stat().st_size / 1e6
     print(f"  wrote {out_path}: {n} pages, {mb:.1f} MB")
+    if blank:
+        print(f"  {blank} cached page(s) came back with no text and were left out. "
+              f"Delete them from the cache to retry:  "
+              f"find {cache} -size 0 -name '*.md' -delete")
 
     if args.verify:
         import subprocess
+        # Look beside this script, then in the working directory. Copying just
+        # this file into the corpus directory and running it there is a
+        # reasonable thing to do -- it is where the PDFs are -- and doing so used
+        # to end a successful paid run with a bare "No such file" traceback,
+        # which reads like the OCR failed when the JSONL was already written.
         here = Path(__file__).resolve().parent
+        cand = [here / "budget-books-extract.py", Path.cwd() / "budget-books-extract.py"]
+        extractor = next((c for c in cand if c.exists()), None)
         print()
-        subprocess.run([sys.executable, str(here / "budget-books-extract.py"),
+        if extractor is None:
+            print(f"  {out_path} is written; --verify needs budget-books-extract.py.")
+            print(f"  Looked in {here} and {Path.cwd()}. Run it yourself with:")
+            print(f"    python3 /path/to/budget-books-extract.py {out_path} -o facts.csv")
+            return
+        subprocess.run([sys.executable, str(extractor),
                         str(out_path), "-o", str(out_path.with_suffix(".csv"))])
 
 
