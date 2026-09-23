@@ -35,11 +35,11 @@ and paid for, once; `--estimate` prints each tier's share of the pages and how
 many are not cached yet.
 
   1  ACQUISITION, scanned -- whole volumes with no text layer at all: the 2007,
-     2009 and 2010 Volume 1s, 1,137 pages, $11.37. The only way to reach the last
+     2009 and 2010 Volume 1s, 1,137 pages, $8.53. The only way to reach the last
      two missing citywide totals, 2007 and 2009, plus confirmation of 2010's
      derived one.
 
-  2  ACQUISITION, born-digital -- 24 pages, $0.24, and the best value here.
+  2  ACQUISITION, born-digital -- 24 pages, $0.18, and the best value here.
      These pages HAVE text; it is mangled past what any regex reaches. The 2012
      pie extracts as "Pol ice 29, 593 Comm Planning Parks and Rec 12% and SUSt
      24, 229 S/, 644 10%", where the 32% belongs to Public Works. Datalab rebuilds
@@ -62,7 +62,7 @@ Nothing is sent without --yes.
 What is deliberately left out
 -----------------------------
 Six volumes are scans, 1,651 pages, but only three are in tier 1. The other
-three are the 2005, 2007 and 2009 VOLUME 2s -- 514 pages, $5.14 -- and in the
+three are the 2005, 2007 and 2009 VOLUME 2s -- 514 pages, $3.85 -- and in the
 books we can read, Volume 2 is the Capital Improvement Program and carries
 essentially no citywide summaries: the 2006-2007 Volume 2 matched one summary
 keyword in 149 pages, the 2008 Volume 2 matched none in 207. 2005 Volume 2 is
@@ -243,10 +243,12 @@ INTEREST_CSV = "budget-books-pages-of-interest.csv"
 # Manual mode's default page range (--book without --pages): the citywide
 # summary pages sit between 58 and 102 in every book pypdf can read.
 DEFAULT_WINDOW = (50, 115)
-# Datalab's published rate for accurate conversion, $10 per 1,000 pages
-# (datalab.to/pricing, 2026-09-23). The estimate uses it; the bill itself is
-# each request's cost_breakdown, logged in _requests.jsonl.
-CENTS_PER_PAGE = 1.0
+# Accurate conversion lists at $10 per 1,000 pages (datalab.to/pricing,
+# 2026-09-23). This account takes Datalab's 25% discount for letting it keep
+# uploads for model training -- no concern for public budget books -- so $7.50
+# per 1,000. Without that opt-in, set this to 1.0. The estimate uses it; the
+# bill itself is each request's cost_breakdown, logged in _requests.jsonl.
+CENTS_PER_PAGE = 0.75
 
 # How pages travel -- see "How pages are sent" in the module docstring for why
 # batches, and what each of these guards against. Datalab's own ceilings
