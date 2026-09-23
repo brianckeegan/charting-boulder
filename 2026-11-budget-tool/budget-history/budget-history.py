@@ -123,8 +123,8 @@ SOURCES = {
         "publisher": "City of Boulder",
         "date": "",
         "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2",
-        "retrieved": "2026-09-22",
-        "notes": "Same books as `books`, but pages whose text pypdf cannot use -- interleaved pie labels, dropped commas, figures inside images -- read by Datalab through budget-books-ocr.py. A pie or summary block is kept only when it sums to a total the same page prints; the two single figures, 2002 and 2017 staffing, are kept on their wording and context. The data dictionary's caveat on OCR lists what was read wrong and not kept.",
+        "retrieved": "2026-09-23",
+        "notes": "Same books as `books`, but pages pypdf cannot reach or cannot use, read by Datalab through budget-books-ocr.py: the 2007, 2009 and 2010 Volume 1s, which survive only as scans, and born-digital pages with interleaved pie labels, dropped commas or figures inside images, or that the page dump never held. A pie or summary block is kept only when it sums to a total the same page prints, and a multi-year table value only when its column header names the year and basis. The three single figures, 2002, 2017 and 2024 staffing, are kept on their wording and context. The data dictionary's caveat on OCR lists what was read wrong and not kept.",
     },
     "brl2027": {
         "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and trim pool hours",
@@ -218,12 +218,8 @@ for yr, v in [(2004, 188.145), (2005, 196.167), (2006, 200.100),
               (2018, 389.210), (2019, 353.746), (2020, 369.718),
               (2021, 341.744), (2022, 462.519)]:
     add(yr, "budget_total", "adopted", v, "musd", "books")
-
-# 2010 is one of the two years that exist only as scanned PDFs, and the 2011
-# book gives it away: its own total "represents a 0.38% increase over the 2010
-# approved budget for all funds". The percentage is rounded to two decimals, so
-# the true value is 230.14-230.17 — hence one decimal place, and `derived`.
-add(2010, "budget_total", "derived", round(231.030 / 1.0038, 1), "musd", "books")
+# 2007, 2009 and 2010 come from their own books, read by OCR -- see "The three
+# scanned years" below.
 
 # --- The citywide summary block, 2005-2017 ---------------------------------
 # Every book from 2005 to 2017 carries one block that yields five measures at
@@ -292,6 +288,48 @@ for yr, oper, cap, gf, ded in [(2011, 206.317, 24.713, 87.663, 118.654),
 add(2012, "budget_operating_general", "adopted", 91.150, "musd", "booksocr")
 add(2012, "budget_operating_dedicated", "adopted", 123.828, "musd", "booksocr")
 
+# --- The three scanned years, 2007, 2009 and 2010 ----------------------------
+# Their Volume 1s survive only as scans, so until tier 1 of the OCR pass read all
+# 1,137 of their pages, 2007 and 2009 had no citywide total and 2010 had only one
+# derived from the 2011 book. Each book's summary block satisfies both identities,
+# and each book states its total three times -- the block, the citywide pie's
+# heading and a sentence beneath the pie -- all equal:
+#
+#            total       capital + operating     general + dedicated      pages
+#   2007   223,560  =   35,530 + 188,030       77,313 + 110,717        p75, p77
+#   2009   242,706  =   40,714 + 201,992       82,902 + 119,090        p72, p74
+#   2010   230,149  =   28,471 + 201,678       83,534 + 118,144        p72, p74
+#
+# 2010 replaces a value derived from the 2011 book's "0.38% increase over the
+# 2010 approved budget", which pinned it to 230.14-230.17; the 2010 book's own
+# figure falls inside that range, and the 2011 book's Uses of Funds table prints
+# the same 230,149. The 2009 and 2010 books' percentages also reproduce from these
+# totals: +2.1% over 2008 and -5.2% from 2009.
+#
+# The 2007 and 2009 books also state a larger RECOMMENDED total ($225,321 and
+# $243,855 thousand), and the 2010 book prints the recommended budget as a pie of
+# its own (p28, $229,543 thousand). Those are the city manager's proposals, not
+# what council adopted, and none is recorded.
+for yr, total, oper, cap, gf, ded in [(2007, 223.560, 188.030, 35.530, 77.313, 110.717),
+                                      (2009, 242.706, 201.992, 40.714, 82.902, 119.090),
+                                      (2010, 230.149, 201.678, 28.471, 83.534, 118.144)]:
+    add(yr, "budget_total", "adopted", total, "musd", "booksocr")
+    add(yr, "budget_operating", "adopted", oper, "musd", "booksocr")
+    add(yr, "budget_capital", "adopted", cap, "musd", "booksocr")
+    add(yr, "budget_operating_general", "adopted", gf, "musd", "booksocr")
+    add(yr, "budget_operating_dedicated", "adopted", ded, "musd", "booksocr")
+
+# The 2008 book restates 2007 at $224,336 thousand, $776 thousand above the 2007
+# book's own figure, and says why: "the 2007 approved amount has been restated to
+# include the Internal Service Funds (ISFs). Beginning with the 2008-09 budget
+# process, all ISFs will be included". From 2008 on, the total takes in the ISFs,
+# net of the departmental charges that fund them. A change of scope of 0.35%,
+# small enough to leave the series whole, but real, and recorded beside the
+# adopted figure as staffing's restatements are. It is also what the 2008 book's
+# own "6.0% greater than the 2007 approved budget" is measured against:
+# 237.781 / 224.336 is +6.0%, where 237.781 / 223.560 would be +6.4%.
+add(2007, "budget_total", "restated", 224.336, "musd", "booksocr")
+
 # --- General Fund, the headline "Total General Fund Uses" ------------------
 # The legacy books' Uses of Funds tables are three and four years WIDE with the
 # basis in the column header, so the 2008 book states 2007 and the 2011 book
@@ -324,13 +362,36 @@ for yr, basis, v in [(2003, "actual", 87.252), (2004, "actual", 80.270),
                      (2013, "adopted", 109.752)]:
     add(yr, "budget_general_fund_revenue", basis, v, "musd", "books")
 
-# --- Citywide revenue, 2010-2011 ------------------------------------------
+# The scanned books' own Sources and Uses tables, read by OCR, fill the years
+# between. Each table is three years wide -- ACTUAL two years back, then two
+# APPROVED columns -- and where a column overlaps a figure above, it matches to
+# the thousand: the 2007 book's 2007 approved uses (89,650) and 2006 approved
+# revenue (82,637), the 2009 book's 2008 approved uses (94,238), and the 2010
+# book's 2010 approved uses (96,713) and revenue (96,746). 2009's own approved
+# figures are printed in both the 2009 and the 2010 book, and the two agree.
+#
+#   book   page   columns
+#   2007   p92    uses:    2005 actual 86,415   2006 approved 82,623   (2007: above)
+#   2007   p83    sources: 2005 actual 86,148   (2006: above)          2007 approved 88,520
+#   2009   p89    uses:    2007 actual 97,173   (2008: above)          2009 approved 97,219
+#   2009   p81    sources: 2007 actual 94,141   2008 approved 93,358   2009 approved 96,167
+#   2010   p89    uses:    2008 actual 99,905   2009 approved 97,219   (2010: above)
+#   2010   p81    sources: 2008 actual 97,578   2009 approved 96,167   (2010: above)
+for yr, basis, v in [(2005, "actual", 86.415), (2006, "adopted", 82.623),
+                     (2007, "actual", 97.173), (2008, "actual", 99.905),
+                     (2009, "adopted", 97.219)]:
+    add(yr, "budget_general_fund", basis, v, "musd", "booksocr")
+for yr, basis, v in [(2005, "actual", 86.148), (2007, "adopted", 88.520),
+                     (2007, "actual", 94.141), (2008, "adopted", 93.358),
+                     (2008, "actual", 97.578), (2009, "adopted", 96.167)]:
+    add(yr, "budget_general_fund_revenue", basis, v, "musd", "booksocr")
+
+# --- Citywide revenue, 2011 ------------------------------------------------
 # "The 2011 budget is based on projected citywide revenues of $224,912,000.
 # This represents a 0.29% increase over the total revenues projected for the
-# 2010 approved budget." The 2010 figure is therefore derived, and the rounded
-# percentage puts it at 224.25-224.27.
+# 2010 approved budget." That percentage once gave 2010 a derived value of
+# 224.25-224.27; the 2010 book's own pie, below, gives 224,268.
 add(2011, "revenue_total", "adopted", 224.912, "musd", "books")
-add(2010, "revenue_total", "derived", round(224.912 / 1.0029, 1), "musd", "books")
 
 # --- Citywide staffing levels, 2002-2026 -----------------------------------
 # ONE series, not two. The early books count "standard FTEs" with an explicit
@@ -354,6 +415,13 @@ add(2010, "revenue_total", "derived", round(224.912 / 1.0029, 1), "musd", "books
 #
 # 2012 and 2013 come from the same books' "Staffing Levels in Standard FTEs by
 # Department" tables, which closes the gap to 2016 down to 2014-2015.
+#
+# The 2007, 2009 and 2010 books, which survive only as scans, confirm 2005-2010
+# to the hundredth. Read by OCR, each book's "Summary of Standard FTEs by City
+# Department" gives three years exactly as the born-digital books do, and its
+# printed variance column checks: 1,251.34 - 1,218.84 = 32.50 (2007 book),
+# 1,288.52 - 1,281.17 = 7.35 (2009), 1,248.24 - 1,288.52 = -40.28 (2010). The
+# values stay sourced to `books`, which read them first.
 for yr, v in [(2003, 1290.69), (2004, 1200.68), (2005, 1212.11), (2006, 1218.84),
               (2007, 1251.34), (2008, 1281.17), (2009, 1288.52), (2010, 1248.24),
               (2011, 1228.50), (2012, 1243.20), (2013, 1260.62),
@@ -373,9 +441,10 @@ for yr, v in [(2011, 1231.25), (2012, 1244.76)]:
 # recovered by OCR. Treat it with more caution than the rest of the series: nine
 # of that table's other eleven columns match values sourced independently from
 # other books to the hundredth, but ONE does not -- it gives 2006 as 1,218.34
-# where the 2006-2007 and 2008 books both say 1,218.84, and where that book's own
-# printed variance (1,218.84 - 1,212.11 = 6.73) confirms 1,218.84. So the table
-# carries at least one single-digit misread, and 2002 has no second source.
+# where the 2006-2007, 2007 and 2008 books all say 1,218.84, and where the
+# 2006-2007 book's printed variance (1,218.84 - 1,212.11 = 6.73) confirms
+# 1,218.84. So the table carries at least one single-digit misread, and 2002 has
+# no second source.
 #
 # 2001 is in the same table and is NOT recorded: the chart is titled "2002 to
 # 2011", so the 2001 column contradicts its own heading and nothing corroborates
@@ -387,6 +456,13 @@ add(2002, "staffing_fte", "adopted", 1304.69, "fte", "booksocr")
 # "Figure 5-09 ... standard full-time equivalents" context the 2016 and 2018
 # books use for 1,419 and 1,451. The born-digital dump never reached that page.
 add(2017, "staffing_fte", "adopted", 1447.00, "fte", "booksocr")
+
+# 2024, from the 2024 book's "By the Numbers" panel, read by OCR: "1509.13
+# FULL-TIME EQUIVALENTS (EMPLOYEES)". The 2023 and 2025 books print their own
+# citywide staffing levels, 1,540.09 and 1,539.10, in the same panel. 2024 sits 31
+# FTE below both neighbours, which looks like a misread and is not: the 2025 book
+# calls its 1,539.10 "an increase of 2.0% from 2024", which puts 2024 at 1,508.9.
+add(2024, "staffing_fte", "adopted", 1509.13, "fte", "booksocr")
 
 # --- The revenue big movers, 2011 --------------------------------------------
 # The 2011 book prints a citywide all-funds revenue pie whose eight slices sum
@@ -412,6 +488,48 @@ for measure, v in [("revenue_sales_use_tax", 86.570), ("revenue_utility", 44.905
 add(2011, "revenue_other_unmapped", "adopted",
     round(224.912 - (86.570 + 44.905 + 28.563 + 9.999), 3), "musd", "books")
 
+# --- The revenue big movers, 2007-2010 -----------------------------------------
+# The same citywide "Sources of Funds" pie from four more books, read by OCR:
+# 2007, 2009 and 2010 from scans, and 2008 from a page (p73) whose pypdf text has
+# every number but scrambles which label each belongs to. Each pie sums to its
+# printed total exactly. As for 2011 and 2012, the four slices that map onto a
+# revenue_* category are recorded and the rest are carried together as
+# revenue_other_unmapped:
+#
+#   year  page  total     sales    utility  property  intergov   unmapped slices
+#   2007  p78   213,503   81,567   41,691   21,487    19,011     Other, Parks & Recreation,
+#                                                                Plng & Develop Fees, TIF
+#                                                                for Garage at 10th & Walnut
+#   2008  p73   224,261   87,729   43,496   22,028    14,390     Other, Parks & Recreation,
+#                                                                Plng & Develop Fees, Bond Proceeds
+#   2009  p75   230,643   90,091   44,264   23,153    12,901     Other, Parks & Recreation,
+#                                                                Plng & Develop Fees
+#   2010  p75   224,268   84,563   44,137   26,555    12,967     (the same three)
+#
+# Every pie labels its largest slice "Sales Tax". The 2010 book, like 2011's,
+# calls the same source "sales/use taxes", and the 2009 book describes it with
+# the combined sales and use tax rate, so it is recorded as the aggregate,
+# revenue_sales_use_tax -- the same judgment as 2011 and 2012.
+#
+# 2010's total replaces a value derived from the 2011 book's "0.29% increase",
+# which pinned it to 224.25-224.27. The 2010 book's own 224,268 falls inside that
+# range, and its "2.8% decrease over the total revenues projected for the 2009
+# approved budget" reproduces against 2009's 230,643.
+REVENUE_PIES = {
+    # year: (total, sales and use, utility, property, intergovernmental)
+    2007: (213.503, 81.567, 41.691, 21.487, 19.011),
+    2008: (224.261, 87.729, 43.496, 22.028, 14.390),
+    2009: (230.643, 90.091, 44.264, 23.153, 12.901),
+    2010: (224.268, 84.563, 44.137, 26.555, 12.967),
+}
+for yr, (total, su, ut, pt, ig) in REVENUE_PIES.items():
+    add(yr, "revenue_total", "adopted", total, "musd", "booksocr")
+    for measure, v in [("revenue_sales_use_tax", su), ("revenue_utility", ut),
+                       ("revenue_property_tax", pt), ("revenue_intergovernmental", ig)]:
+        add(yr, measure, "adopted", v, "musd", "booksocr")
+    add(yr, "revenue_other_unmapped", "adopted",
+        round(total - (su + ut + pt + ig), 3), "musd", "booksocr")
+
 # --- Citywide spending by department, mapped into functional buckets -------
 # The expense breakdown that actually reaches back to 2005. The
 # Personnel/Capital/Operating/Debt-Service split people reach for first is an
@@ -435,10 +553,9 @@ add(2011, "revenue_other_unmapped", "adopted",
 #
 # (year, label as printed, $M, bucket, note)
 DEPARTMENT_LINES = [
-    # Empty on purpose. Every pie year -- 2005, 2006 and 2011-2022 -- comes from
-    # PIE_LINES below and is folded in from there; a year typed here as well
-    # would be counted twice, which the reconciliation against budget_total
-    # would catch.
+    # Empty on purpose. Every pie year, 2005-2022, comes from PIE_LINES below
+    # and is folded in from there; a year typed here as well would be counted
+    # twice, which the reconciliation against budget_total would catch.
 ]
 
 # -- 2024-2026: the OpenGov cost-center export. Same twenty cost centers in all
@@ -498,10 +615,10 @@ add(2012, "revenue_other_unmapped", "adopted",
     round(231.945 - (93.209 + 45.392 + 30.868 + 4.328), 3), "musd", "booksocr")
 
 # --- Citywide spending by department, from the books' own pies ---------------
-# Fourteen years of the citywide "Uses of Funds" pie, validated by construction:
-# each year's slices sum to the citywide total that same book publishes, to the
-# thousand. budget-books-extract.py reads nine of them from pypdf's text; the
-# other five need OCR (see the block below). See the extractor for how the
+# Eighteen years of the citywide "Uses of Funds" pie, 2005-2022, validated by
+# construction: each year's slices sum to the citywide total that same book
+# publishes, to the thousand. budget-books-extract.py reads nine of them from
+# pypdf's text; the other nine need OCR (see the blocks below). See the extractor for how the
 # citywide pie is told apart from the General Fund and excluding-utilities pies
 # that share its heading.
 #
@@ -703,11 +820,72 @@ PIE_LINES = [
     (2019, 'Library & Arts', 10.344),
     (2019, 'Energy Strategy', 8.834),
     (2019, 'Planning & Sustainability', 8.714),
+    # -- 2007, 2008, 2009 and 2010: recovered by OCR in tiers 1 and 3. 2007, 2009
+    #    and 2010 are scans. 2008 is born-digital, but its pie is on p72 and the
+    #    page dump held only p71 and p73; tier 3, which reads two pages either
+    #    side of every published figure, reached it from the summary block on
+    #    p71. Each pie's heading prints its book's own citywide total and the
+    #    slices sum to it exactly. For 2010 that is the pie on p74, not the one on
+    #    p28, which is the city manager's recommended budget ($229,543 thousand).
+    # 2007
+    (2007, 'Public Works', 79.216),
+    (2007, 'Police', 25.456),
+    (2007, 'Open Space/ Mtn Parks', 24.744),
+    (2007, 'Parks & Rec', 22.742),
+    (2007, 'Gen Gvmnt', 18.853),
+    (2007, 'HHS', 13.728),
+    (2007, 'Fire', 12.427),
+    (2007, 'Admin Svcs', 10.453),
+    (2007, 'Plng & Dev Svcs', 6.849),
+    (2007, 'Library', 6.289),
+    (2007, 'Debt', 2.317),
+    (2007, 'Arts', 0.486),
+    # 2008
+    (2008, 'Public Works', 84.416),
+    (2008, 'Police', 26.818),
+    (2008, 'Open Space/ Mtn Parks', 24.96),
+    (2008, 'Parks & Rec', 23.489),
+    (2008, 'Gen Gvnmnt', 22.464),
+    (2008, 'HHS', 13.895),
+    (2008, 'Fire', 12.739),
+    (2008, 'Admin Svcs', 11.865),
+    (2008, 'Plng & Dev Svcs', 7.605),
+    (2008, 'Library', 6.717),
+    (2008, 'Debt', 2.311),
+    (2008, 'Arts', 0.502),
+    # 2009
+    (2009, 'Public Works', 82.647),
+    (2009, 'Police', 27.939),
+    (2009, 'Open Space/ Mtn Parks', 25.788),
+    (2009, 'Parks & Rec', 25.611),
+    (2009, 'Gen Gvrnmnt', 21.52),
+    (2009, 'Housing/ Human Svcs', 15.502),
+    (2009, 'Fire', 13.319),
+    (2009, 'Admin Svcs', 12.449),
+    (2009, 'Plng & Dev Svcs', 8.147),
+    (2009, 'Library', 6.992),
+    (2009, 'Debt', 2.261),
+    (2009, 'Arts', 0.531),
+    # 2010
+    (2010, 'PW Utilities', 45.119),
+    (2010, 'Police', 28.137),
+    (2010, 'Open Space/ Mtn Prks', 25.478),
+    (2010, 'Parks & Recreation', 24.556),
+    (2010, 'PW Transportation', 23.205),
+    (2010, 'Fire', 14.666),
+    (2010, 'Housing/ Human Svcs', 13.859),
+    (2010, 'Gen Gvrnmnt', 10.545),
+    (2010, 'PW DSS', 9.955),
+    (2010, 'DUHMD/ Prkng Svcs', 9.31),
+    (2010, 'Admin Svcs', 8.939),
+    (2010, 'Library/ Arts', 7.453),
+    (2010, 'Comm Plng & Sustainability', 6.694),
+    (2010, 'Debt', 2.233),
 ]
 # The pie years read by OCR. Their rows cite `booksocr` rather than `books`, in
 # the dataset and in the crosswalk alike, so a reader can tell a figure pypdf
 # read from one Datalab read.
-PIE_OCR_YEARS = {2011, 2012, 2013, 2018, 2019}
+PIE_OCR_YEARS = {2007, 2008, 2009, 2010, 2011, 2012, 2013, 2018, 2019}
 if not PIE_OCR_YEARS <= {y for y, _l, _v in PIE_LINES}:
     raise SystemExit("PIE_OCR_YEARS names a year PIE_LINES does not have: "
                      f"{sorted(PIE_OCR_YEARS - {y for y, _l, _v in PIE_LINES})}")
@@ -740,9 +918,10 @@ PIE_BUCKETS = {
     "publicworks": ("infrastructure",
                     "One undivided slice, and the reason the buckets are this "
                     "coarse. It holds what later becomes Transportation and "
-                    "Mobility, Utilities and Facilities and Fleet; the books "
-                    "split Public Works three ways in their STAFFING tables but "
-                    "never in the spending pie."),
+                    "Mobility, Utilities and Facilities and Fleet. The pies "
+                    "print it whole in 2005-2009 and 2012-2020 and divide it "
+                    "only in 2010, 2011 and 2021, so no finer bucket holds "
+                    "across the series."),
     "pwutilities": ("infrastructure", ""),
     "pwtransportationmobility": ("infrastructure", ""),
     "utilities": ("infrastructure", ""),
@@ -847,6 +1026,14 @@ PIE_BUCKETS = {
     "adminservices": ("administration", ""),
     "gengovrnmt": ("administration", "see:generalgovernment"),
     "totalgengov": ("administration", "see:generalgovernment"),
+    # -- added with the 2007-2010 pies, which abbreviate differently every year
+    "gengvmnt": ("administration", "see:generalgovernment"),
+    "gengvnmnt": ("administration", "see:generalgovernment"),
+    "gengvrnmnt": ("administration", "see:generalgovernment"),
+    "hhs": ("community_services", "Housing and Human Services, abbreviated in the "
+                                  "2007 and 2008 pies."),
+    "plngdevsvcs": ("planning_climate", "see:planningdevelopmentservices"),
+    "commplngsustainability": ("planning_climate", ""),
     # -- citywide and debt --------------------------------------------------
     "debt": ("citywide_debt",
              "General Fund debt only. The pie's own note says non-General-Fund "

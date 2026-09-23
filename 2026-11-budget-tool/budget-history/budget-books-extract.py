@@ -19,6 +19,11 @@ documents both column by column.
     budget-books-pages-of-interest.csv   every page that looks as if it holds a
                                          figure, read or not -- OCR tier 4's list
 
+Only an output named budget-books-extracted.csv writes the second file under
+that name. Any other name gets `<name>-pages-of-interest.csv`, so a check run
+(budget-books-ocr.py --verify, or extracting a scratch batch) cannot overwrite
+the list tier 4 reads.
+
 Five readers, one per shape the books print figures in
 -------------------------------------------------------
   extract            prose, 2017 on: "The total 2026 Approved Budget is $521.0
@@ -250,16 +255,19 @@ def extract_legacy(rows):
                     emit(yr, "budget_operating_dedicated",
                          round(half["dedicated"] / 1000.0, 3), "musd", r, m.group()[:190])
 
-        # "The total 2005 budget ... is $196,167,000" — whole dollars.
+        # "The total 2005 budget ... is $196,167,000" — whole dollars. The same
+        # $100M-$1B window as the patterns below: a division page says "the 2007
+        # budget of $17,447,928" too, and that is Development and Support
+        # Services, not the city. The smallest citywide total here is $188M.
         for m in LEGACY_STATED.finditer(flat):
             v = to_number(m.group(2))
-            if v and v > 1e6:
+            if v and 1e8 <= v <= 1e9:
                 emit(int(m.group(1)), "budget_total", round(v / 1e6, 3), "musd",
                      r, flat[max(0, m.start() - 60):m.start() + 150])
         # The same sentence usually names the PRIOR year's total for comparison.
         for m in LEGACY_PRIOR.finditer(flat):
             v = to_number(m.group(2))
-            if v and v > 1e6:
+            if v and 1e8 <= v <= 1e9:
                 emit(int(m.group(1)), "budget_total", round(v / 1e6, 3), "musd",
                      r, flat[max(0, m.start() - 90):m.start() + 120])
 
@@ -621,7 +629,7 @@ def extract_dept_pie(rows, citywide_totals):
     `citywide_totals` is {year: value in $M} taken from the totals this same run
     extracted, and is what settles the scope of an otherwise ambiguous heading.
     """
-    out, rejected = [], []
+    out, rejected, accepted = [], [], []
     for r in rows:
         flat = re.sub(r'\s+', ' ', r['text'])
         for m in DEPT_PIE.finditer(flat):
@@ -650,12 +658,29 @@ def extract_dept_pie(rows, citywide_totals):
                 rejected.append((yr, r['file'], r['page'], round(musd, 1),
                                  why or "slices do not sum to the printed total"))
                 continue
-            for lab, v in slices:
-                out.append({"year": yr, "measure": "dept_" + slug(lab),
-                            "value": round(v / (1000.0 if in_thousands else 1e6), 3),
-                            "unit": "musd", "file": r["file"], "page": r["page"],
-                            "context": f"pie slice as printed: {lab!r} "
-                                       f"({100 * v / total:.1f}% of {total:,.0f})"})
+            accepted.append((yr, abs(musd - known), musd, r, total, in_thousands, slices))
+
+    # Two whole pies can pass for one year. A book's budget message may chart the
+    # city manager's RECOMMENDED budget, and its citywide summaries the adopted
+    # one: the 2010 book prints $229,543 thousand on p28 and $230,149 thousand on
+    # p74, and both sit inside the scope test's $1.5M. The first one read used to
+    # win, which was the recommended pie. Keep the pie closest to the citywide
+    # total, and report the other. Copies of the same pie tie, and all are kept.
+    closest = {}
+    for yr, dist, *_rest in accepted:
+        closest[yr] = min(dist, closest.get(yr, dist))
+    for yr, dist, musd, r, total, in_thousands, slices in accepted:
+        if dist > closest[yr] + 1e-9:
+            rejected.append((yr, r['file'], r['page'], round(musd, 1),
+                             f"another pie is closer to the citywide "
+                             f"{citywide_totals[yr]:,.1f}M"))
+            continue
+        for lab, v in slices:
+            out.append({"year": yr, "measure": "dept_" + slug(lab),
+                        "value": round(v / (1000.0 if in_thousands else 1e6), 3),
+                        "unit": "musd", "file": r["file"], "page": r["page"],
+                        "context": f"pie slice as printed: {lab!r} "
+                                   f"({100 * v / total:.1f}% of {total:,.0f})"})
     return out, rejected
 
 
@@ -777,6 +802,21 @@ PAGE_OF_INTEREST = [
 ]
 
 
+def interest_path(out):
+    """Where the pages-of-interest list goes: beside the output CSV.
+
+    Only the canonical run writes budget-books-pages-of-interest.csv, the file
+    OCR tier 4 reads. It used to be written under that name beside ANY output,
+    so `budget-books-ocr.py --verify` -- which extracts from just the pages it
+    fetched -- silently replaced tier 4's list with the few pages of interest in
+    that one run, and the next tier 4 plan or --rebuild quietly shrank to match.
+    """
+    out = pathlib.Path(out)
+    if out.name == "budget-books-extracted.csv":
+        return out.with_name("budget-books-pages-of-interest.csv")
+    return out.with_name(out.stem + "-pages-of-interest.csv")
+
+
 def write_pages_of_interest(rows, extracted_pages, path):
     # One row per PAGE, not per dump. The same page arrives once from the pypdf
     # dump and again from each OCR dump, and writing it per arrival nearly
@@ -805,8 +845,10 @@ def main():
                          "budget-books-inventory.py --dump-text, OCR'd pages from "
                          "budget-books-ocr.py, or both together")
     ap.add_argument("-o", "--out", default="budget-books-extracted.csv",
-                    help="CSV to write (default %(default)s); "
-                         "budget-books-pages-of-interest.csv is written beside it")
+                    help="CSV to write (default %(default)s). The pages-of-interest "
+                         "list is written beside it: as budget-books-pages-of-"
+                         "interest.csv for the default name, which OCR tier 4 "
+                         "reads, and as <name>-pages-of-interest.csv otherwise")
     args = ap.parse_args()
 
     rows = []
@@ -855,7 +897,7 @@ def main():
             row["conflict"] = "" if len(vals) == 1 else " | ".join(str(v) for v in sorted(vals))
             w.writerow(row)
 
-    poi_path = str(pathlib.Path(args.out).with_name("budget-books-pages-of-interest.csv"))
+    poi_path = str(interest_path(args.out))
     n_poi = write_pages_of_interest(
         rows, {(f["file"], f["page"]) for f in found}, poi_path)
 
