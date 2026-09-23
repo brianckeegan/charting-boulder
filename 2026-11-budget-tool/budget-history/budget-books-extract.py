@@ -321,7 +321,11 @@ MULTIYEAR_TABLES = [
 # Years and basis words both arrive fused in the 2008 book ("2006200720082009",
 # "ACTUALAPPROVEDAPPROVEDPROJECTED"), so neither pattern can require whitespace.
 # Demanding consecutive years is what keeps \s* from matching arbitrary digits.
-YEAR_RUN = re.compile(r'((?:19|20)\d\d)\s*((?:19|20)\d\d)\s*((?:19|20)\d\d)\s*((?:19|20)\d\d)?')
+# A pipe may also sit between the years, for the stacked OCR header below.
+YEAR_RUN = re.compile(r'((?:19|20)\d\d)[\s|]*((?:19|20)\d\d)[\s|]*((?:19|20)\d\d)[\s|]*((?:19|20)\d\d)?')
+# A markdown table's rule row, "|-----|:---:|", which separates a stacked
+# header's year row from its basis row by a hundred characters or more.
+MD_RULE = re.compile(r'\|?(?:\s*:?-{3,}:?\s*\|)+')
 BASIS_WORD = re.compile(r'(ACTUAL|APPROVED|PROJECTED|PROPOSED|REVISED|RECOMMENDED)', re.I)
 YEAR_BASIS_PAIRS = re.compile(
     r'((?:19|20)\d\d)\s*\|?\s*(ACTUAL|APPROVED|PROJECTED|PROPOSED|REVISED|RECOMMENDED)', re.I)
@@ -363,15 +367,25 @@ def read_numbers(text, kind):
 def table_columns(text):
     """The (year, basis) of each column, or None if this page has no such header.
 
-    Two header shapes, because the two ways of reading a PDF flatten a table
-    differently. pypdf reads by position and so gives the years as one run and
-    the basis words as another:
+    The header comes in several shapes, because the two ways of reading a PDF
+    flatten a table differently. pypdf reads by position and so gives the years
+    as one run and the basis words as another:
 
         2006200720082009  ACTUALAPPROVEDAPPROVEDPROJECTED
 
     OCR'd markdown gives a pipe table, which zips them per column instead:
 
         | Department | 2008 APPROVED | 2009 APPROVED | 2010 APPROVED | VAR |
+
+    unless Datalab gives the header two rows, which stacks them as pypdf does,
+    with pipes between and a rule row in the middle:
+
+        |     | 2003   | 2004     | 2005     |
+        |-----|--------|----------|----------|
+        |     | ACTUAL | APPROVED | APPROVED |
+
+    The rule row is dropped before the basis words are looked for, since it is
+    long enough to push them out of reach.
 
     The stacked form is tried first: it is unambiguous when it matches, whereas
     the interleaved pattern would read the fused example above as the single
@@ -382,8 +396,8 @@ def table_columns(text):
         years = [int(y) for y in ym.groups() if y]
         if any(years[i] + 1 != years[i + 1] for i in range(len(years) - 1)):
             continue
-        bases = [BASIS_MAP[w.lower()] for w in
-                 BASIS_WORD.findall(text[ym.end(): ym.end() + 140])]
+        after = MD_RULE.sub(' ', text[ym.end(): ym.end() + 600])[:140]
+        bases = [BASIS_MAP[w.lower()] for w in BASIS_WORD.findall(after)]
         if len(bases) < len(years):
             continue
         return list(zip(years, bases[:len(years)]))

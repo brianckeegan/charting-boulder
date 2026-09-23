@@ -12,6 +12,8 @@ file,page,holds,already_extracted_from
 "2005 Annual Budget, Volume 1.pdf",73,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",75,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",76,multiyear_table,no
+"2005 Annual Budget, Volume 1.pdf",77,multiyear_table,yes
+"2005 Annual Budget, Volume 1.pdf",78,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",82,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",89,multiyear_table,yes
 "2005 Annual Budget, Volume 1.pdf",113,multiyear_table,no
@@ -53,6 +55,8 @@ file,page,holds,already_extracted_from
 "2006-2007 Annual Budget, Volume 1.pdf",66,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",69,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",70,multiyear_table,no
+"2006-2007 Annual Budget, Volume 1.pdf",71,multiyear_table,yes
+"2006-2007 Annual Budget, Volume 1.pdf",72,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",76,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",83,multiyear_table,yes
 "2006-2007 Annual Budget, Volume 1.pdf",106,multiyear_table,no
@@ -473,10 +477,14 @@ file,page,holds,already_extracted_from
 2018 Annual Budget - Volume 1.pdf,70,pie,no
 2018 Annual Budget - Volume 2.pdf,45,summary_block,no
 2019 Approved Operating Budget.pdf,41,multiyear_table,no
+2019 Approved Operating Budget.pdf,45,multiyear_table,yes
+2019 Approved Operating Budget.pdf,46,multiyear_table,yes
 2019 Approved Operating Budget.pdf,47,pie,no
 2019 Approved Operating Budget.pdf,57,pie,no
 2019 Approved Operating Budget.pdf,58,pie,no
 2020 Approved Budget.pdf,39,multiyear_table,no
+2020 Approved Budget.pdf,43,multiyear_table,yes
+2020 Approved Budget.pdf,44,multiyear_table,yes
 2020 Approved Budget.pdf,45,pie,no
 2020 Approved Budget.pdf,47,pie,no
 2020 Approved Budget.pdf,55,pie,yes

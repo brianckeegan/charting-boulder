@@ -40,13 +40,17 @@ many are not cached yet.
      citywide totals, replaced 2010's derived total and revenue with the 2010
      book's own, and added three years of pies and General Fund tables.
 
-  2  ACQUISITION, born-digital -- 24 pages, $0.18, and the best value here.
+  2  ACQUISITION, born-digital -- 38 pages, $0.29, and the best value here.
      These pages HAVE text; it is mangled past what any regex reaches. The 2012
      pie extracts as "Pol ice 29, 593 Comm Planning Parks and Rec 12% and SUSt
      24, 229 S/, 644 10%", where the 32% belongs to Public Works. Datalab rebuilds
      layout instead of streaming text by position, so it reads what pypdf
      cannot. This tier recovered five departmental pie years (2011, 2012, 2013,
-     2018 and 2019), 2012's summary-block halves and 2013's whole block.
+     2018 and 2019), 2012's summary-block halves and 2013's whole block. Four
+     more books joined it in September 2026, for pages the born-digital dump
+     never held: the 2019 and 2020 staffing tables, which gave both years their
+     staffing levels, and the 2005 and 2006-2007 General Fund Uses totals, which
+     gave 2004 and 2005 theirs.
 
   3  VALIDATION -- every page a published figure came from, plus two either side
      for a table continuing overleaf. Read from budget-books-extracted.csv rather
@@ -229,11 +233,14 @@ TIER1_BOOKS = DEFAULT_BOOKS          # all pages of each
 
 # Page numbers, as printed by budget-books-extract.py when it skips something.
 TIER2_PAGES = {
+    "2005 Annual Budget, Volume 1": [77],             # "Total General Fund Uses", never dumped
+    "2006-2007 Annual Budget, Volume 1": [71],        # the same line, a book later
     "2011 Annual Budget": [67],                       # pie interleaved beyond repair
     "2012 Annual Budget, Volume 1": [39, 93, 112],    # pie, and the one hand-typed block
     "2013 Annual Budget, Volume 1": [97, 115],        # block illegible; no operating/capital
     "2018 Annual Budget - Volume 1": [66],            # pie double-counts its own subtotals
-    "2019 Approved Operating Budget": [57],           # pie values are an image
+    "2019 Approved Operating Budget": [45, 46, 57],   # staffing tables never dumped; pie values are an image
+    "2020 Approved Budget": [43, 44],                 # staffing tables, never dumped
 }
 TIER2_MARGIN = 1
 TIER3_MARGIN = 2

@@ -1,13 +1,17 @@
 year,measure,basis,value,unit,source_id
 2002,staffing_fte,adopted,1304.69,fte,booksocr
+2003,budget_general_fund,actual,88.768,musd,books
 2003,budget_general_fund_revenue,actual,87.252,musd,books
 2003,staffing_fte,adopted,1290.69,fte,books
+2004,budget_general_fund,actual,82.364,musd,books
+2004,budget_general_fund,adopted,77.526,musd,booksocr
 2004,budget_general_fund_revenue,actual,80.27,musd,books
 2004,budget_general_fund_revenue,adopted,77.962,musd,books
 2004,budget_total,adopted,188.145,musd,books
 2004,staffing_fte,adopted,1200.68,fte,books
 2005,budget_capital,adopted,29.108,musd,books
 2005,budget_general_fund,actual,86.415,musd,booksocr
+2005,budget_general_fund,adopted,80.059,musd,books
 2005,budget_general_fund_revenue,actual,86.148,musd,booksocr
 2005,budget_general_fund_revenue,adopted,80.091,musd,books
 2005,budget_operating,adopted,167.059,musd,books
@@ -30,7 +34,7 @@ year,measure,basis,value,unit,source_id
 2005,staffing_fte,adopted,1212.11,fte,books
 2006,budget_capital,adopted,29.453,musd,books
 2006,budget_general_fund,actual,89.123,musd,books
-2006,budget_general_fund,adopted,82.623,musd,booksocr
+2006,budget_general_fund,adopted,82.623,musd,books
 2006,budget_general_fund_revenue,adopted,82.637,musd,books
 2006,budget_operating,adopted,170.647,musd,books
 2006,budget_operating_dedicated,adopted,99.381,musd,books
@@ -53,6 +57,7 @@ year,measure,basis,value,unit,source_id
 2007,budget_capital,adopted,35.53,musd,booksocr
 2007,budget_general_fund,actual,97.173,musd,booksocr
 2007,budget_general_fund,adopted,89.65,musd,books
+2007,budget_general_fund,projected,84.728,musd,booksocr
 2007,budget_general_fund_revenue,actual,94.141,musd,booksocr
 2007,budget_general_fund_revenue,adopted,88.52,musd,booksocr
 2007,budget_general_fund_revenue,projected,85.017,musd,books
@@ -315,6 +320,7 @@ year,measure,basis,value,unit,source_id
 2018,revenue_total,adopted,390.898,musd,booksocr
 2018,revenue_utility,adopted,65.155,musd,booksocr
 2018,staffing_fte,adopted,1451.09,fte,books
+2018,staffing_fte,restated,1465.07,fte,booksocr
 2019,budget_capital,adopted,70.557,musd,booksocr
 2019,budget_general_fund,adopted,158.16,musd,booksocr
 2019,budget_general_fund_revenue,adopted,152.597,musd,booksocr
@@ -334,6 +340,8 @@ year,measure,basis,value,unit,source_id
 2019,revenue_sales_use_tax,adopted,136.327,musd,booksocr
 2019,revenue_total,adopted,359.02,musd,booksocr
 2019,revenue_utility,adopted,65.978,musd,booksocr
+2019,staffing_fte,adopted,1432.58,fte,booksocr
+2019,staffing_fte,restated,1444.11,fte,booksocr
 2020,budget_capital,adopted,80.768,musd,booksocr
 2020,budget_general_fund,adopted,161.503,musd,books
 2020,budget_general_fund_revenue,adopted,157.395,musd,books
@@ -353,6 +361,7 @@ year,measure,basis,value,unit,source_id
 2020,revenue_sales_use_tax,adopted,137.718,musd,booksocr
 2020,revenue_total,adopted,360.263,musd,booksocr
 2020,revenue_utility,adopted,69.415,musd,booksocr
+2020,staffing_fte,adopted,1475.36,fte,booksocr
 2020,staffing_fte,restated,1456.86,fte,books
 2021,budget_capital,adopted,69.426,musd,booksocr
 2021,budget_general_fund,adopted,146.3,musd,books
