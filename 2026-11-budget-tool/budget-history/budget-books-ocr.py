@@ -35,9 +35,10 @@ and paid for, once; `--estimate` prints each tier's share of the pages and how
 many are not cached yet.
 
   1  ACQUISITION, scanned -- whole volumes with no text layer at all: the 2007,
-     2009 and 2010 Volume 1s, 1,137 pages, $8.53. The only way to reach the last
-     two missing citywide totals, 2007 and 2009, plus confirmation of 2010's
-     derived one.
+     2009 and 2010 Volume 1s, 1,137 pages, $8.53. The only way to reach those
+     years' own figures. Run in September 2026, it gave 2007 and 2009 their
+     citywide totals, replaced 2010's derived total and revenue with the 2010
+     book's own, and added three years of pies and General Fund tables.
 
   2  ACQUISITION, born-digital -- 24 pages, $0.18, and the best value here.
      These pages HAVE text; it is mangled past what any regex reaches. The 2012
@@ -206,7 +207,7 @@ DEFAULT_BOOKS = ["2007 Annual Budget, Volume 1",
 # bill can be seen before any of it is committed.
 #
 #   1  ACQUISITION, scanned. Whole volumes with no text layer at all. The only
-#      way to reach the last two missing citywide totals, 2007 and 2009.
+#      way to reach 2007, 2009 and 2010 from their own books.
 #   2  ACQUISITION, born-digital. Pages that DO have text, mangled past what any
 #      regex reaches -- interleaved pie labels, dropped commas, values that live
 #      in an image. Datalab rebuilds layout instead of streaming text by

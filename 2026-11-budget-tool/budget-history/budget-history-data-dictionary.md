@@ -65,7 +65,7 @@ These differ by up to $3.3M. That is more than half of the $6.3M General Fund ga
 | `projected` | An out-year column in a budget book's multi-year table: a year the book plans for but does not adopt. There are two such values: 2007 General Fund revenue from the 2006–2007 book, and 2009 General Fund uses from the 2008 book |
 | `forecast` | Output of the city's forward-looking financial model |
 | `identified` | A General Fund gap named while a budget was being built |
-| `restated` | A later book's revision of a figure that its own year's book gives as `adopted`. Used only for staffing ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)) |
+| `restated` | A later book's revision of a figure that its own year's book gives as `adopted`. Used for staffing ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)) and for the 2007 citywide total ([caveat 2](#2-the-headline-totals-are-one-continuous-net-series)) |
 | `total_budget` | Adopted **plus amendments and carryforward**. Used only in the 2023 OpenGov snapshot ([caveat 1](#1-two-accounting-bases-never-one-series)) |
 | `derived` | **Computed here, not published by the city.** Each derived value is explained in a caveat |
 | `policy` | A standing policy target, not a year-specific amount |
@@ -110,7 +110,7 @@ Where a year has several bases, the file picks one by a single rule:
 | `salesuse_total`, `property_tax_revenue` | `actual`, then `adopted`, then `forecast` |
 | `gap_general_fund` | `identified`, then `recommended`, then `forecast` |
 
-Budget series take what was adopted. Revenue collections take what actually came in. **An `actual` is never a fallback for a budget series.** An actual sitting among adopted neighbours answers a different question, and a chart would show the difference as a jump. So a year that has only an actual for a budget series is empty in this file. For example, 2003 and 2009 General Fund revenue are in the long file only.
+Budget series take what was adopted. Revenue collections take what actually came in. **An `actual` is never a fallback for a budget series.** An actual sitting among adopted neighbours answers a different question, and a chart would show the difference as a jump. So a year that has only an actual for a budget series is empty in this file. For example, 2003 General Fund revenue and 2005 General Fund uses are in the long file only.
 
 ### `budget-history-provenance.csv`
 
@@ -193,9 +193,9 @@ Every measure is listed below. The exact years each one covers are in the valida
 | `property_tax_revenue` | musd | Property tax collected at the city's own levy |
 | `property_assessed_value` | musd | Assessed value of taxable property, in millions of dollars |
 | `property_mill_levy` | mills | The city's levy |
-| `revenue_sales_use_tax`, `revenue_utility`, `revenue_property_tax`, `revenue_intergovernmental` | musd | Citywide all-funds revenue by source: the four categories 2011, 2012 and 2026 share |
+| `revenue_sales_use_tax`, `revenue_utility`, `revenue_property_tax`, `revenue_intergovernmental` | musd | Citywide all-funds revenue by source: the four categories 2007–2012 and 2026 share |
 | `revenue_development_impact_fees`, `revenue_licenses_permits_fines`, `revenue_investment_earnings_bonds`, `revenue_accommodation_admission_tax`, `revenue_grants`, `revenue_parking`, `revenue_other_grouped` | musd | Categories only the 2026 presentation breaks out. `other_grouped` is that presentation's own "other" |
-| `revenue_other_unmapped` | musd | The 2011 and 2012 slices that fit no category, carried together so each year still sums to its total ([caveat 10](#10-revenue_total-has-four-years-and-one-is-derived)) |
+| `revenue_other_unmapped` | musd | The 2007–2012 slices that fit no category, carried together so each year still sums to its total ([caveat 10](#10-revenue_total-has-seven-years-all-published)) |
 | `revenue_total` | musd | Citywide all-funds revenue |
 | `sources_revenue_*` | musd | **A different basis**: the OpenGov citywide Sources & Uses snapshot, gross of interfund flows, 18 categories plus `total` ([caveats 1](#1-two-accounting-bases-never-one-series) and [4](#4-the-snapshots-revenue-categories-are-a-different-taxonomy)) |
 | `uses_expense_personnel`, `_capital`, `_operating`, `_transfers`, `_internal_services`, `_debt_service`, `_total` | musd | **A different basis**: the same snapshot's spending, by type of expense ([caveat 1](#1-two-accounting-bases-never-one-series)) |
@@ -232,11 +232,13 @@ Charting the two families together produces a fake cliff of about $83M between 2
 
 #### 2. The headline totals are one continuous net series
 
-`budget_total` is one net measure from 2004 to 2027, with no break in basis. The 2016 book gives its total as "$327 million (excluding transfers)" against $515.4M for 2023, which makes them look like different measures. The years between run 327, 322, 389, 354, 370, 342, 462 and 515 without a step, so the 2016 wording describes scope rather than a separate series. The gross counterpart is the `sources_*`/`uses_*` family ([caveat 1](#1-two-accounting-bases-never-one-series)).
+`budget_total` is one net measure from 2004 to 2027, with no break in basis and one small change of scope. The 2016 book gives its total as "$327 million (excluding transfers)" against $515.4M for 2023, which makes them look like different measures. The years between run 327, 322, 389, 354, 370, 342, 462 and 515 without a step, so the 2016 wording describes scope rather than a separate series. The gross counterpart is the `sources_*`/`uses_*` family ([caveat 1](#1-two-accounting-bases-never-one-series)).
+
+**The change of scope comes in 2008.** From the 2008–09 budget process the total takes in the internal service funds, such as fleet, computer replacement and self-insurance, net of the departmental charges that fund them. The 2008 book says so, and restates 2007 on the new footing: $224.336M against the 2007 book's own $223.560M, a difference of 0.35%. The restated figure is in the long file with `basis = restated`. The years 2004–2007 stay on the narrower footing. It is also what the 2008 book's "6.0% greater than the 2007 approved budget" is measured against ([caveat 12](#12-the-books-own-percentages-do-not-always-reproduce)).
 
 `budget_operating + budget_capital = budget_total` holds to the thousand in every year the summary block gives all three (2005–2017). Where the parts come from prose or a council packet rounded to $0.1M, the sum can miss by a rounding step. 2022's $300.1M + $162.4M is $462.5M against an exact total of $462.519M. 2025's $399.3M + $189.9M is $589.2M against a stated $589.3M. `budget-history.py` fails the build on any miss over $0.2M, and the validation report gives the largest miss on each build.
 
-Two independent checks support the run. First, the 2005 book and the 2006–2007 book each state 2005 as $196,167,000. Second, in 2022, operating of $300.1M plus capital of $162.4M gives the $462.5M the book states.
+Three independent checks support the run. First, the 2005 book and the 2006–2007 book each state 2005 as $196,167,000. Second, in 2022, operating of $300.1M plus capital of $162.4M gives the $462.5M the book states. Third, the 2007, 2009 and 2010 books, read by OCR from their scans, each print their total three times, in the summary block, the pie heading and a sentence beneath the pie, and the three always agree.
 
 #### 3. Two General Fund measures, 6 to 15 percent apart
 
@@ -248,7 +250,7 @@ Two independent checks support the run. First, the 2005 book and the 2006–2007
 budget_operating_general + budget_operating_dedicated = budget_operating
 ```
 
-That identity holds to the thousand in nine of its ten years. In 2012 it is one thousand dollars short, which is the city rounding a half. The operating half runs below the all-in figure, by a varying amount:
+That identity holds to the thousand in twelve of its thirteen years. In 2012 it is one thousand dollars short, which is the city rounding a half. The operating half runs below the all-in figure, by a varying amount:
 
 | Year | `budget_operating_general` | `budget_general_fund` | Ratio |
 |---|---|---|---|
@@ -284,11 +286,12 @@ Council's first reading was October 1, 2026 and its final vote October 15, 2026.
 
 Check the [coverage table](budget-history-validation.md#coverage-by-measure) for the year you need rather than assuming every measure covers every year. The main gaps are these:
 
-- **2007 and 2009 have no citywide total.** 2003 does not have one either. The 2007 and 2009 books survive only as scans. The 2006–2007 book is a real biennial budget, but its citywide summary block states 2006 only, and no neighbouring book states either year's citywide total. Both years do have General Fund and staffing figures, which come from neighbouring books' multi-year tables. Tier 1 of the OCR stage targets these two years.
-- **2010's total is derived.** The 2011 book says its own total "represents a 0.38% increase over the 2010 approved budget". That pins 2010 to $230.14M–$230.17M, recorded as $230.2M.
+- **The citywide total starts in 2004,** from the 2005 book's statement of the prior year. The archive's books begin with 2005, and none of them states an adopted total for 2002 or 2003.
+- **The 2007, 2009 and 2010 books are scans.** Their Volume 1s have no text layer, so everything taken from them was read by OCR (`booksocr`), including the General Fund columns they print for 2005–2009. Each figure passed the same checks as the rest ([caveat 19](#19-ocr-read-the-pages-pypdf-could-not-and-got-some-things-wrong)). Figures for those years that a born-digital book also prints keep that book as their source.
 - **`budget_capital` is missing for 2018–2021.** The pages read from those books state a total and an operating figure but no capital budget. Total minus operating would give one, but the result is not a published figure, so it is not recorded.
-- **`budget_general_fund` is missing for 2013 and for 2019–2023.**
-- **`staffing_fte` has holes** in 2014, 2015, 2019, 2020 and 2024 ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)).
+- **`budget_general_fund` is missing for 2013 and for 2019–2023,** and 2005 has an actual only.
+- **`staffing_fte` has holes** in 2014, 2015, 2019 and 2020 ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)).
+- **Revenue by source covers 2007–2012 and 2026,** and sales and use tax and property tax collections only 2022–2026.
 
 A missing year is absent from the data, not zero. Do not interpolate across a gap without saying so.
 
@@ -298,16 +301,22 @@ A missing year is absent from the data, not zero. Do not interpolate across a ga
 
 `budget_general_fund` for 2025 (`basis = derived`, $211.0M) was back-computed as `194.5 / (1 − 0.078)` from the city's statement that 2026 fell 7.8% from 2025. The 7.8% is itself rounded, so treat this value as ±$1M and **do not quote it as a city figure.**
 
-#### 10. `revenue_total` has four years, and one is derived
+#### 10. `revenue_total` has seven years, all published
 
-2011 ($224.912M) and 2012 ($231.945M) are stated in their own books. Each book also prints a citywide revenue pie whose slices sum to that total exactly. 2010 ($224.3M) is derived from the 2011 book's "0.29% increase over the total revenues projected for the 2010 approved budget". 2026 ($507.2M) comes from the recommended-budget presentation.
+2007–2012 each come from their own book's citywide revenue pie, whose slices sum to its printed total exactly: $213.503M, $224.261M, $230.643M, $224.268M, $224.912M and $231.945M. The 2007–2010 pies were read by OCR, three of them from scans and 2008's from a page whose text layer scrambles which label goes with which number. 2026 ($507.2M) comes from the recommended-budget presentation.
 
-The 2011 and 2012 pies use a coarser taxonomy than 2026's. Only sales and use tax, utility, property tax and intergovernmental revenue map onto `revenue_*` categories. The remaining slices are carried together as `revenue_other_unmapped`, so each year still sums to its own total:
+2010 used to be derived from the 2011 book's "0.29% increase over the total revenues projected for the 2010 approved budget", which pinned it to $224.25M–$224.27M. The 2010 book's own $224.268M falls inside that range and replaces it.
 
+The 2007–2012 pies use a coarser taxonomy than 2026's. Only sales and use tax, utility, property tax and intergovernmental revenue map onto `revenue_*` categories. The remaining slices are carried together as `revenue_other_unmapped`, so each year still sums to its own total:
+
+- 2007: Other $35.706M, Parks & Recreation $7.847M, Planning & Development Fees $5.114M, TIF for Garage at 10th & Walnut $1.080M.
+- 2008: Other $41.885M, Parks & Recreation $8.167M, Planning & Development Fees $5.415M, Bond Proceeds $1.151M.
+- 2009: Other $46.145M, Parks & Recreation $8.701M, Planning & Development Fees $5.388M.
+- 2010: Other $42.184M, Parks & Recreation $9.156M, Planning & Development Fees $4.706M.
 - 2011: Other Taxes $16.071M, Parks & Recreation Fees $8.479M, Planning & Development Fees $4.994M, Other $25.331M.
 - 2012: Other $44.424M, Parks & Recreation $8.206M, Planning and Development Fees $5.518M.
 
-The 2011 pie labels one slice "Sales Tax", but the same page calls the city's largest sources "sales/use taxes". It is the aggregate, and it is recorded as `revenue_sales_use_tax`.
+Every one of these pies labels its largest slice "Sales Tax". The 2010 and 2011 books call the same source "sales/use taxes", and the 2009 book describes it with the combined sales and use tax rate. So it is read as the aggregate, and recorded as `revenue_sales_use_tax`, in every year: one judgment, applied the same way throughout.
 
 #### 11. Book figures occasionally disagree with later council packets
 
@@ -315,22 +324,25 @@ In each case the book is what was published at adoption and the packet is a late
 
 | Year | Measure | Book | Packet |
 |---|---|---|---|
-| 2024 | `budget_capital` | $140.7M | $141.2M |
+| 2024 | `budget_general_fund` | $196.1M | $196.2M |
 | 2025 | `budget_total` | $589.5M | $589.3M |
 
 Where both exist, the dataset keeps the packet value. The differences are small but real, so don't treat either one as an error.
 
+A book can also quote a figure that is not its adopted one. The 2024 book's budget message gives $514.8M total, $374.1M operating and $140.7M capital. Those are the city manager's **recommended** budget. The same book's Budget in Brief gives the approved $515.4M, $374.2M and $141.2M, which match the packet exactly. The 2007 and 2009 books likewise state recommended totals of $225.321M and $243.855M, and the 2010 book charts its recommended budget as a pie. None of these is recorded.
+
 #### 12. The books' own percentages do not always reproduce
 
-Most of the books' year-over-year percentages can be reproduced from the books' own figures. The 2015 and 2016 books' operating, capital and total percentages all reproduce to the decimal. Three do not:
+Most of the books' year-over-year percentages can be reproduced from the books' own figures. The 2015 and 2016 books' operating, capital and total percentages all reproduce to the decimal, and so do the 2009 and 2010 books' totals, +2.1% and −5.2%. Four do not:
 
 | Book | Says | Figures give |
 |---|---|---|
+| 2007 | total +11.8% over 2006 | +11.7% |
 | 2013 | total +9.2% over 2012 | +6.6% |
 | 2014 | operating +4.6% over 2013 | +2.8% |
 | 2017 | General Fund +4.9% over 2016 | +5.7% |
 
-The likeliest explanation is a percentage computed against a revised or amended base rather than the prior book's adopted figure. Either way, **use the values, not the narrative percentages.** A mismatch is not an extraction error.
+The likeliest explanation is a percentage computed against a revised or amended base rather than the prior book's adopted figure. The 2008 book shows the mechanism at work. Its "6.0% greater than the 2007 approved budget" is measured against 2007 as restated to include the internal service funds, $224.336M ([caveat 2](#2-the-headline-totals-are-one-continuous-net-series)). Against the 2007 book's own $223.560M it would be 6.4%. Either way, **use the values, not the narrative percentages.** A mismatch is not an extraction error.
 
 #### 13. Component sums miss their totals by a few hundredths
 
@@ -365,9 +377,13 @@ The city charts the series continuously from 2002, so the 2011→2016 rise from 
 
 Only the latest restatement is carried, because two rows cannot share one (`year`, `measure`, `basis`) key.
 
-**2002 has one source, read by OCR.** It comes from the 2011 book's "History of Standard FTEs" chart. Nine of that table's other columns match independently sourced values to the hundredth, but one does not. The table gives 2006 as 1,218.34, while the 2006–2007 and 2008 books both say 1,218.84, and a printed variance column (1,218.84 − 1,212.11 = 6.73) confirms 1,218.84. The table therefore carries at least one misread digit, and nothing corroborates 2002. Treat it with more caution than the rest of the series. The same table's 2001 column is not recorded, because it falls outside the chart's own title, "2002 to 2011".
+**The scanned books confirm 2005–2010 to the hundredth.** The 2007, 2009 and 2010 books survive only as scans. Read by OCR, each one's "Summary of Standard FTEs by City Department" gives three years exactly as the born-digital books do, and its printed variance column checks: 1,251.34 − 1,218.84 = 32.50 in the 2007 book, 1,288.52 − 1,281.17 = 7.35 in 2009, and 1,248.24 − 1,288.52 = −40.28 in 2010.
 
-**The holes are 2014, 2015, 2019, 2020 and 2024.** The pages read state no citywide figure for those years. That is not a gap in the city's staffing.
+**2002 has one source, read by OCR.** It comes from the 2011 book's "History of Standard FTEs" chart. Nine of that table's other columns match independently sourced values to the hundredth, but one does not. The table gives 2006 as 1,218.34, while the 2006–2007, 2007 and 2008 books all say 1,218.84, and the 2006–2007 book's printed variance column (1,218.84 − 1,212.11 = 6.73) confirms 1,218.84. The table therefore carries at least one misread digit, and nothing corroborates 2002. Treat it with more caution than the rest of the series. The same table's 2001 column is not recorded, because it falls outside the chart's own title, "2002 to 2011".
+
+**2024 dips, and the dip is real.** The 2024 book gives 1,509.13 FTE, 31 below both 2023 (1,540.09) and 2025 (1,539.10). That looks like a misread and is not. The 2025 book calls its own figure "an increase of 2.0% from 2024", which puts 2024 at 1,508.9. The 2024 figure comes from the book's "By the Numbers" panel, where the 2023 and 2025 books print their staffing levels too.
+
+**The holes are 2014, 2015, 2019 and 2020.** The pages read state no citywide figure for those years. That is not a gap in the city's staffing.
 
 `positions_*` and `staffing_fte` do not reconcile arithmetically. The changes are General Fund and departmental in scope, while the level is citywide. Subtracting one year's eliminations from the prior level will not land on the next year's level.
 
@@ -375,7 +391,7 @@ Only the latest restatement is carried, because two rows cannot share one (`year
 
 #### 16. Department spending is bucketed, and the buckets are coarse on purpose
 
-Boulder reorganized its departments repeatedly over twenty years, so the raw labels do not form a series. In 2005, **Public Works is a single $67.4M slice**. By 2024 that money is spread across Transportation and Mobility, Utilities, Facilities and Fleet, and development review. The split cannot be recovered: the books divide Public Works three ways in their *staffing* tables but never in their *spending* pies. So `deptexp_*` uses seven buckets, coarse enough that the coarsest year still maps:
+Boulder reorganized its departments repeatedly over twenty years, so the raw labels do not form a series. In 2005, **Public Works is a single $67.4M slice**. By 2024 that money is spread across Transportation and Mobility, Utilities, Facilities and Fleet, and development review. The split cannot be recovered for most years. The books divide Public Works in their *staffing* tables, but the *spending* pies print it as one slice in 2005–2009 and 2012–2020, and divide it only in 2010, 2011 and 2021. So `deptexp_*` uses seven buckets, coarse enough that the coarsest year still maps:
 
 | Bucket | Holds |
 |---|---|
@@ -397,7 +413,7 @@ Know these boundaries before charting:
 - **Housing moves between buckets.** It is combined with human services in `community_services` in most years, and printed as a slice of its own in 2013–2015, still in `community_services`. In 2016–2018 it sits inside Planning, Housing and Sustainability, in `planning_climate`. Across 2016–2018 those two buckets therefore trade housing's budget, about $5M a year in the years it is printed separately.
 - **The pies print no debt slice in 2019–2022,** so `deptexp_citywide_debt` has no row in those years. The pies still sum to their totals, so the debt service sits inside other slices. It is absent, not zero.
 - **`administration` and `citywide_debt` trade content across the series.** The General Government line of 2005–2012 probably holds non-departmental items that the 2024–2026 export books to Fundwide / Citywide. That makes it the least comparable pair.
-- **The printed debt slice is General Fund debt only.** Both the 2005 and 2011 pies note that non-General-Fund debt service sits inside the departments. The bucket is consistent across years, but it is not all of the city's debt service.
+- **The printed debt slice is General Fund debt only.** The 2005, 2007 and 2009–2011 pies all note that non-General-Fund debt service sits inside the departments. The bucket is consistent across years, but it is not all of the city's debt service.
 - **Internal Services, 2013–2022, carries some capital.** The 2018 book defines it as Finance, HR, IT, General Fund capital and other, so `administration` is not purely overhead in those years.
 - **The energy municipalization effort** is printed as ES and EUD (Energy Strategy and Electric Utility Development) in 2013–2015, as Energy in 2018 and as Energy Strategy in 2019. It has no line of its own in 2016–2017. It is bucketed as climate and energy policy rather than as a utility, because the city never owned the utility.
 
@@ -405,7 +421,7 @@ Know these boundaries before charting:
 
 This is the sharpest trap in the dataset, because no arithmetic check can catch it.
 
-`deptexp_*` covers 2005, 2006 and 2011–2022 and comes from the books' own citywide pies. It includes every fund and is on the same footing every year.
+`deptexp_*` covers 2005–2022 and comes from the books' own citywide pies. It includes every fund and is on the same footing every year.
 
 `deptexpfiltered_*` covers 2024–2026 and comes from an OpenGov cost-center export taken with a 23-fund filter. That filter leaves out the utility, debt-service and internal-service funds. The export's twenty cost centers total $407.8M, $473.4M and $411.9M against published citywide budgets of $515.4M, $589.3M and $521.0M. The shortfall is carried explicitly as `deptexpfiltered_funds_outside_export` (`derived`, because it is a difference rather than a reported figure). So this family *also* sums to `budget_total`, and the reconciliation passes for both families.
 
@@ -419,9 +435,15 @@ Boulder did not stop maintaining things in 2023. The filter moves nearly all uti
 
 The separate prefixes exist so that this mistake takes effort rather than inattention. **A re-export of the same view with no fund filter would collapse the two into one family, and it is the most valuable download left for this dataset.**
 
-#### 18. Five of the fourteen pie years were read by OCR
+#### 18. Nine of the eighteen pie years were read by OCR
 
-pypdf reads nine years of the citywide pie: 2005, 2006, 2014–2017 and 2020–2022. Each one sums, to the thousand, to the citywide total its own book publishes. That sum check is what makes the pies trustworthy, and pypdf's text of the other five fails it:
+pypdf reads nine years of the citywide pie: 2005, 2006, 2014–2017 and 2020–2022. Each one sums, to the thousand, to the citywide total its own book publishes. The other nine come from OCR, for three different reasons:
+
+- **2007, 2009 and 2010** are in books that survive only as scans.
+- **2008** is in a born-digital book, but its pie is on p72 and the page dump held only p71 and p73. Tier 3 of the OCR stage, which reads two pages either side of every published figure, reached it from the summary block.
+- **2011–2013, 2018 and 2019** are on pages whose pypdf text fails the sum check.
+
+The sum check is what makes the pies trustworthy. This is how pypdf's text of those five years fails it:
 
 - **2011 and 2012** come out interleaved beyond repair. 2012 reads "Pol ice 29, 593 Comm Planning Parks and Rec 12% and SUSt 24, 229 S/, 644 10%", in which the 32% belongs to Public Works.
 - **2013's** legible slices fall short of its printed total.
@@ -430,7 +452,9 @@ pypdf reads nine years of the citywide pie: 2005, 2006, 2014–2017 and 2020–2
 
 Pairing those labels with those values would be guessing. A wrong guess would not look wrong: it would silently move Police's budget to Open Space. So the extractor rejects the pie rather than guess.
 
-OCR recovers all five years, and every recovered year passes the same sum check. The 2011 pie's fourteen slices come to $231,030 thousand exactly, and the 2012 pie's twelve come to $238,960 thousand. These rows cite `booksocr`.
+OCR recovers all nine years, and every recovered year passes the same sum check. The 2011 pie's fourteen slices come to $231,030 thousand exactly, and the 2012 pie's twelve come to $238,960 thousand. These rows cite `booksocr`.
+
+**The 2010 book prints two pies that both look citywide.** The one on p74, in the citywide summaries, charts the adopted budget and sums to $230,149 thousand, the book's own total. The one on p28, in the budget message, charts the city manager's recommended budget, $229,543 thousand. Both fall within the $1.5M the extractor allows between a pie and the citywide total, so it now keeps the closer one and reports the other.
 
 ### OCR
 
@@ -442,26 +466,36 @@ OCR recovers all five years, and every recovered year passes the same sum check.
 
 **A bar chart read as numbers.** The 2019 property-tax chart came back as $25,000 / $2,000 / $2,000 / $1,000, which are round numbers read off bar heights. None of them is recorded.
 
-**A single-digit misread.** The 2011 book's FTE history table gives 2006 as 1,218.34 where two other books say 1,218.84 ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)). The published value stands and the OCR reading was discarded. This is the clearest argument for using OCR to validate rather than to replace: OCR is a second witness, not a better one.
+**A single-digit misread.** The 2011 book's FTE history table gives 2006 as 1,218.34 where three other books say 1,218.84 ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)). The published value stands and the OCR reading was discarded. This is the clearest argument for using OCR to validate rather than to replace: OCR is a second witness, not a better one.
 
-**Validation, as of tiers 2 and 4 (September 2026): 146 independent confirmations and no contradictions.** Tier 4 sent every page holding a pie, table or summary block, 278 pages in all, and the extractor read 197 figures from the OCR text. Every one of those figures that is also published agrees with the published value:
+**Validation after all four tiers (September 23, 2026): 185 figures confirmed independently, none contradicted.** Tier 1 read the 1,137 pages of the three scanned Volume 1s. Tier 3 re-read every page a published figure came from, plus two pages either side. With tiers 2 and 4, that makes 1,507 OCR'd pages with text. The extractor was run over the OCR text alone. Each figure it read was compared with the dataset's 418 book figures: its rows from the books, the council-packet totals the books restate, and every pie slice.
 
-| Comparison | Agree | Disagree |
-|---|---|---|
-| Independent: published from pypdf, re-read by OCR | **146** | **0** |
-| Circular: published *from* tier 2 OCR, same cached pages | 46 | 0 |
+| Comparison | Figures |
+|---|---:|
+| Independent: published from pypdf, re-read by OCR | **169** |
+| Independent: a council-packet figure, read by OCR from that year's book | **11** |
+| Independent: published from one OCR'd page, printed again on another and read there | **5** |
+| Circular: published from OCR, read back from the same page | 123 |
 
-The circular comparisons are listed separately on purpose. Tier 4 did not re-send pages tier 2 had already cached, so a 2012 or 2013 pie "agreeing" with itself is the same bytes compared twice. Counting those as confirmation would overstate the evidence by a third.
+The circular comparisons are listed separately on purpose. The OCR stage never re-sends a page it has cached, so a figure read from OCR "agreeing" with itself is the same bytes compared twice. Counting those as confirmation would overstate the evidence by two thirds.
 
-Some book-sourced figures could not be read back from OCR by the extractor. A direct search of the OCR text for the printed number found all but fifteen of them, and all fifteen are explained:
+**No reading contradicts a published figure.** Eight readings differ from one, and each is a different figure rather than a misread:
 
-- Six are this dataset's own arithmetic (derived totals, unmapped remainders), so they were never printed.
-- Eight sit on narrative pages that tier 4 did not target.
-- One, 2004 General Fund revenue ($80,270), is on an OCR'd page after all. Its row's four columns all match, and the search missed it only because it looked in books filed within two years of 2004, while the biennial book is filed under 2007.
+- Five are recommended budgets quoted in a city manager's message: the 2007 and 2009 totals, and the 2024 book's total, operating and capital ([caveat 11](#11-book-figures-occasionally-disagree-with-later-council-packets)).
+- Three are the 2025 book's own $589.5M, against the packet's $589.3M.
 
-Tier 4 also reached two pages the born-digital dump never contained. **2011's summary block** (page 65) gives that year its operating/capital split and is anchored to a total already read independently from prose. **2017's staffing level** of 1,447 FTE comes from the book's own sentence, in the same wording and chart context the 2016 and 2018 books use.
+Another 13 are totals the books round in prose, such as "$270 million", and each agrees at the precision printed.
 
-**What OCR settled.** Before OCR, 2013 had only a total rounded to "$255 million". It now has an exact total and a full operating/capital/General Fund split, with both block identities holding. The 2011 revenue pie confirmed all eight hand-transcribed slices, including the two 4% slices whose labels had been assigned by adjacency. The city's own notes on those pages also confirm three bucket assignments:
+**The extractor does not read everything back.** It has no reader for revenue pies, and it cannot parse the OCR tables of the 2018, 2019, 2021 and 2022 department pies. So 110 published figures have no matching reading. A direct search of the OCR text finds the printed number for 102 of them. The other eight were never printed as recorded:
+
+- Five are the unmapped revenue remainders, which are this dataset's arithmetic.
+- Three are council-packet figures that the books print differently or not at all: 2024's and 2026's General Fund, and 2025's total.
+
+Tier 4 also reached two pages the born-digital dump never contained. **2011's summary block** (page 65) gives that year its operating/capital split and is anchored to a total already read independently from prose. **2017's staffing level** of 1,447 FTE comes from the book's own sentence, in the same wording and chart context the 2016 and 2018 books use. Tier 3 reached three more: the 2008 book's department and revenue pies (pages 72–73), and the 2024 book's "By the Numbers" panel with that year's staffing level.
+
+**Batched and single-page OCR agree.** Nine 2011 pages already converted one at a time were converted again as one batch. The extractor read the same 22 figures from both, and no running header was dropped. The README's OCR section has the details.
+
+**What OCR settled.** Tier 1 gave 2007 and 2009 their first citywide totals. It replaced two derived 2010 values, the total and total revenue, with the 2010 book's own figures, both inside the ranges they had been derived to. With tier 3 it also filled the department pies and revenue by source for 2007–2010, and General Fund columns for 2005–2009. Before OCR, 2013 had only a total rounded to "$255 million". It now has an exact total and a full operating/capital/General Fund split, with both block identities holding. The 2011 revenue pie confirmed all eight hand-transcribed slices, including the two 4% slices whose labels had been assigned by adjacency. The city's own notes on those pages also confirm three bucket assignments:
 
 - "General Government is comprised of City Council, City Manager's Office, City Attorney's Office, Municipal Court".
 - "Internal Services includes Human Resources, Finance, Information Technology".
