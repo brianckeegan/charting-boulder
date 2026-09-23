@@ -196,6 +196,8 @@ Section 7's event study fires on a district-year where at least two schools clos
 
 **What it costs.** Sixty rounds become thirty-three events, one per district, which is most of the loss of precision in the enrolment path: the intervals rule out a fall of more than about five per cent and no more than that. The threshold is a judgement and a different one would give different districts; `alt-closure-rounds.csv` carries every round that met it, so the choice can be inspected rather than taken on trust.
 
+**Corrected 2026-09-23.** With the 2001–2002 district panel corrected (D32), the enrolment intervals are narrower: they rule out a fall of more than about 3% in the three years after a round, not 5%.
+
 ## D25 — A year that repeats another is not a year — 2026-09-18
 
 Where a district-grain staffing file carries the same districts and the same figures as an earlier year, the later one is dropped and named rather than published.
@@ -221,6 +223,8 @@ A base name is treated as ambiguous where two distinct district *codes* answer t
 **What it caught.** Weld County has RE-1 (Gilcrest) and RE-8 (Fort Lupton); CDE writes the second "WELD COUNTY S/D RE-8", so with the boilerplate kept the two had different base names and the clash was invisible. The yearbooks' unsuffixed "WELD COUNTY" was handed whichever code was seen last, putting four years of Fort Lupton's roughly 2,650 pupils under Gilcrest's code. Garfield has RE-2 (Rifle, about 3,000) and 16 (Parachute, about 700), and nine years of Rifle's pupils sat under Parachute's code.
 
 **What it costs.** Plain "GARFIELD" means Rifle in 1987–95 and Parachute in 1996–99, and nothing in the name says which, so thirteen district-years that used to carry a code now carry none. That is the intended outcome: an uncoded row keeps its printed name and can be read, whereas the coded ones were being read as another district's history.
+
+**Corrected 2026-09-23.** The plain "GARFIELD" rows of 1989–1995 were not Rifle alone. Those pages print each district's number in a separate cell, the parser read only the name, and the district tier added Rifle and Parachute together: 2,384 + 426 = 2,810 in 1989. Only 1987 and 1988 were Rifle alone. See D32.
 
 ## D28 — A damaged name is repaired from the same volume, or not at all — 2026-09-18
 
@@ -263,3 +267,31 @@ The 2000-to-2020 change in children is measured on **2000 tract boundaries**: th
 **The fix.** The existing rows are filtered on `source` before the new ones are added, because `source` records which step owns a row. Two consecutive runs now give 6,732 rows both times.
 
 **The rule it stands for.** A step that cannot be run twice without changing its answer is not finished. Everything else in this folder is written to be re-runnable from the raw files; this one was not, and the archive's own reconciliation checks did not catch it because they compare sums against NCES rather than counting rows.
+
+## D32 — Every school row keeps its own key, and the pipeline proves it — 2026-09-23
+
+The school tables are keyed on (year, school code). A row with no code, or a code that two districts share, now gets a key of its own, and the pipeline stops if any year loses a CDE pupil between the rows it reads and the school table it writes.
+
+**Why.** The 2001 and 2002 PDFs print no codes. 5,194 rows in 2001 kept no school code after the name match, and all of them had the same empty key. Each grade kept only the last row written. So 124,863 pupils of 2001 and 109,041 of 2002 were not in the school tables, and `school-year.csv` held one "school", ADULT EDUCATION PROGRAM, with the combined 124,924 pupils of 371 schools. The district panel sums the school table, so 121 districts in 2001 and 116 in 2002 were undercounted there: Boulder Valley showed 24,803 pupils in 2001, where CDE counts 27,963. The event study in sections 7 and 8 read that dip. The new check also found a smaller loss that no one knew about: CDE gives the codes `0006` (2011) and `0001` (2012) to facility programmes in more than one district, and 51 pupils were lost where those codes collided.
+
+**How a code-less school gets a code.** First the name match against later years, as before. Then the NCES directory of the same year, which carries CDE's district code, CDE's school code and a name of the same period: a unique match on district and normalized name. All 620 such matches agree with NCES to the pupil, which is an independent test, because NCES built these years from CDE's own submission. Then a stricter second pass for names the PDF cut off or spelled differently: an NCES school that no CDE school holds, in the same district, with a total equal to the pupil, the only such school, and a shared distinctive word in the two names. That gives 79 more. Their agreement with NCES is their condition, so it is not counted as a test. The last 7 school-years get a placeholder code that starts with `X`, made from the district and the printed name. A code that two districts share gets the district as a prefix, `<district>-<code>`, in every year it appears, so that a facility's code is not broken into two.
+
+**What it costs.** A placeholder cannot be followed from one year to the next, so the school registry labels those schools `untracked` and never `closed`. Seven 2001–2002 schools may still appear twice, once under a placeholder and once as an NCES-only school, where the evidence did not decide the match. The fix changed no district total in `district-year.csv`, which always summed the raw rows. It changed the district panel in 242 district-years, and with it the enrolment path of sections 7 and 8: the finding that enrolment does not move is the same, and its intervals are narrower.
+
+**The Garfield correction.** Two yearbook layouts print a district's number in a separate cell, "| GARFIELD | RE-2 |". The trend and grade parsers read only the first cell, so Garfield RE-2 (Rifle) and Garfield 16 (Parachute) had one name. In the 1987 trend table the second was dropped, and the overlap file reported the collision as an agreement: `readings 1987:173`, `chosen_value 1724`, `agree True`. In the 1989–1995 grade tables the two were added together. Both parsers now join the number to the name, the overlap file counts agreement only between two different volumes, and both districts carry their codes in every year from 1986 to 1999.
+
+## D33 — `fall_membership` names its definition, and a K-12 series crosses the seam — 2026-09-23
+
+`district-year.csv` gets two columns. `membership_definition` is `printed_total` for 1977–1987 and `grades_pk_12` for 1988–2024. `fall_membership_k12` counts kindergarten to twelfth grade only, wherever grades are printed: 1986–2024.
+
+**Why.** Table 4 prints a district's total fall membership. The grade sums used from 1988 include pre-kindergarten and do not include special education and ungraded pupils. In 1986 and 1987, where one volume prints both, the grade rule counts 0.7% and 0.8% fewer pupils statewide, and the difference is not even: 2.6% for Denver, 2.2% for Adams 12, 2.1% for St. Vrain, 0.6% for Boulder Valley in 1987. A comparison of districts across 1988 would show a drop the definition makes. Pre-kindergarten also grows inside the later series, from 1.0% of Boulder Valley's count in 2004 to about 3% from 2016.
+
+**Why not change `fall_membership` instead.** Table 4 does not split out pre-kindergarten or special education, so the earlier years cannot be put on the later rule. The column keeps what each source prints, the new column names the rule, and the K-12 column gives one definition where the grades allow it. For 1977–1985 there is no K-12 count, and the dictionary says so.
+
+## D34 — A district's county comes from the crosswalk, and a lookup may not cross counties — 2026-09-23
+
+Where a district code is known, `district-year.csv` takes the county from `district-county.csv`. A name lookup that fails on the county key and matches on the name alone is refused if the row names a real Colorado county and CDE places the district in a different one.
+
+**Why.** The printed counties were the OCR's: "Kidwa" for Kiowa, "Guray" for Ouray, "Montrase" and "Montr" for Montrose, and six counties in capitals on some rows and title case on others. A join or group on county placed districts in counties that do not exist or split one county into two. The crosswalk's county is the one most sources state for the district. The lookup guard answers a risk the name rules of #45 made: stripping a town in brackets gave Estes Park the bare key "PARK", which a "PARK RE-2" row in Park County could have matched. No row was misfiled, and the guard makes sure none can be. The list of real counties is a constant of 64, because the data cannot supply it: CDE's own county column holds 69 values.
+
+**Also fixed in the same pass, with no change to the data.** A trend heading with no county line no longer gives its measures to the district before it. The joint marker is removed as "JT" as well as "J". A legal name in two counties no longer reduces to a bare designator such as "28J". The ambiguity index is built once, before the crosswalk, and not three times.

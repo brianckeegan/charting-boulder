@@ -377,7 +377,6 @@ year,district_code,district_name,county_name,unit_type,teacher_fte_published,tea
 1988,,DELTA-MONTROSE BOCS,COLORADO BOCS,boces,14.0,,,16.0,0.0,0.0,1,0,0,0,1,,0,,,0.0,yearbook-1988-summary
 1988,,EAST CENTRAL BOCES,COLORADO BOCS,boces,8.5,,,16.6,0.0,0.0,0,0,0,0,0,,0,,,0.0,yearbook-1988-summary
 1988,,EAST YUMA COUNTY RJ-2,YUMA,district,68.1,,,78.6,45.5,13.8,5,2,1,2,0,,941,,,2.9,yearbook-1988-summary
-1988,,GARFIELD CO. 16,GARFIELD,district,33.0,,,40.0,18.3,13.2,3,1,1,1,0,,436,,,2.0,yearbook-1988-summary
 1988,,GROVER RE-12,WELD,district,16.6,,,18.6,5.0,4.9,2,1,0,1,0,,82,,,0.0,yearbook-1988-summary
 1988,,KIDWA C-2,ELBERT,district,10.9,,,13.9,11.3,17.2,2,1,0,1,0,,187,,,4.3,yearbook-1988-summary
 1988,,MONTEZUMA CO BOCS,COLORADO BOCS,boces,13.0,,,14.0,0.0,0.0,1,0,0,0,1,,0,,,0.0,yearbook-1988-summary
@@ -462,6 +461,7 @@ year,district_code,district_name,county_name,unit_type,teacher_fte_published,tea
 1988,1160,COTOPAXI RE-3,FREMONT,district,21.6,,,23.6,12.4,10.9,2,1,0,1,0,,235,,,5.0,yearbook-1988-summary
 1988,1180,ROARING FORK RE-1(J),GARFIELD,district,183.2,,,213.7,88.7,18.0,9,3,2,3,1,,3306,,,6.0,yearbook-1988-summary
 1988,1195,GARFIELD RE-2,GARFIELD,district,116.5,,,133.5,76.2,20.0,7,4,2,1,0,,2325,,,8.9,yearbook-1988-summary
+1988,1220,GARFIELD CO. 16,GARFIELD,district,33.0,,,40.0,18.3,13.2,3,1,1,1,0,,436,,,2.0,yearbook-1988-summary
 1988,1330,GILPIN COUNTY RE-1,GILPIN,district,24.0,,,30.3,22.2,13.0,2,1,0,1,0,,311,,,4.5,yearbook-1988-summary
 1988,1340,WEST GRAND 1(JT),GRAND,district,39.9,,,46.9,27.8,13.4,3,1,1,1,0,,535,,,5.3,yearbook-1988-summary
 1988,1350,EAST GRAND 2,GRAND,district,70.9,,,85.9,56.1,14.3,5,3,1,1,0,,1016,,,5.6,yearbook-1988-summary

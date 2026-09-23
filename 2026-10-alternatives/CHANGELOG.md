@@ -386,3 +386,39 @@ The previously published README row count for `district-teacher-fte-cde.csv` was
 ### A note on the section 8 figures
 
 The numbers in the section 8 entry above were first published against the district panel as it stood before two fixes landed in the same day's work: the district-name crosswalk, which gave 38 more district-years a code, and the duplicate-row bug below. They moved by a few tenths of a percentage point — 16.9% to 17.3% at the round, 15.6% to 16.3% at five years — and the entry now carries the figures the notebook actually produces. Nothing about the finding changed.
+
+## 2026-09-23 — an audit of the enrollment cleanup, and what it fixed
+
+An independent audit of the historical enrollment cleanup found eleven defects: six that changed the published data and five that did not yet. All are fixed. Where the fixes moved a published figure, this entry states the new figure, and it supersedes the figure in the earlier entry.
+
+### The school tables lost 234,000 pupils in 2001 and 2002
+
+The school tables were keyed on the school code, and the 2001 and 2002 PDFs print none. Every row that the name match could not code had the same empty key, and each grade kept only the last row. **124,863 pupils of 2001 and 109,041 of 2002 were not in `school-enrollment-by-grade.csv` or `school-year.csv`**, and one "school" held the combined 124,924 pupils of 371 schools. District totals in `district-year.csv` were correct, because they sum the raw rows. But the district panel sums the school table, so 121 districts in 2001 and 116 in 2002 were undercounted there.
+
+Now a code-less school takes the code the NCES directory of the same year holds for it: 620 by name, all of which agree with NCES to the pupil, and 79 more by an equal total. Seven school-years get a placeholder code starting with `X`. The pipeline now stops if any year loses a pupil between the rows it reads and the table it writes. That check found a second loss at once: CDE gives `0006` and `0001` to facility programmes in more than one district, and 51 pupils were lost where they collided. Those codes now carry their district as a prefix (D32).
+
+### Garfield: two districts, one name
+
+Some pages print a district's number in a cell of its own, "| GARFIELD | RE-2 |". Both yearbook parsers read only the name. So the 1987 trend table dropped Garfield 16 (432 pupils), and the 1989–1995 grade tables **added Rifle and Parachute together into one row**. The #45 entry said nine years of Rifle's pupils sat under Parachute's code; only 1987 and 1988 were Rifle alone. Both parsers now read the number, and both districts carry their codes in every year from 1986 to 1999. The overlap file had also called the 1987 collision an agreement; it now counts agreement only between two different volumes (D32).
+
+### `fall_membership` changes its definition in 1988
+
+To 1987 it is the printed total; from 1988 it is a sum of grades with pre-kindergarten in and special education out. In 1987 the two differ by 0.8% statewide and by up to 2.6% for one district. `district-year.csv` now names the rule on every row in `membership_definition` and carries `fall_membership_k12`, which has one definition from 1986 to 2024 (D33).
+
+### Counties
+
+The printed counties included "Kidwa", "Guray", "Montrase" and "Montr", and six counties spelled two ways. Where the district code is known, the county now comes from `district-county.csv`, so the modern rows have a county too. The 70 coded rows without one are statewide units, the Charter School Institute (8001) and BOCES codes, which sit in no county (D34).
+
+### Five defects that had not yet changed the data
+
+A lookup could match a district in another county; a trend heading with no county line gave its measures to the district before it; "JT" was not removed as a joint marker; a legal name in two counties reduced to a bare "28J"; the ambiguity index was built three times. All five are fixed, and every file in `data/processed/` is byte-identical to the run before these five fixes. The crosswalk loses one key, `27J`, which no row used (D34).
+
+### Figures that moved
+
+The corrected 2001–2002 panel changed the enrolment path of sections 7 and 8. **The finding is the same, and stronger**: enrolment does not move, and the intervals are narrower. At the round the clean estimate is +0.3% [−1.1%, +1.6%], where it was −2.1% [−5.1%, +0.5%]; five years out it is +2.7% [−2.3%, +8.3%]. The intervals now rule out an enrolment fall of more than about 3% in the three years after a round, not 5%. The school effect is 17.3% at the round and 16.2% five years later on clean comparisons (was 16.3%). Section 7's pre-trend is 10.3% (was 10.6%) and section 8's is 7.8% (was 8.4%). Staffing's pre-trend is +5.1% [+0.3%, +10.4%].
+
+Section 2's school elasticity is 0.423 (was 0.424). The statewide coded share of district-years is 98.4%.
+
+### Numbers that were already out of date
+
+The sync also found figures that no earlier change had moved but that no longer matched the notebook, and corrected them: the README ranked Boulder Valley 69th of 166 where section 6 says 73rd of 178; it cited 19 large districts and a peer median of 557 where the output has 20 and 573; section 2's prose said 7.6% fewer teachers where 1 − 0.9^0.744 is 7.5%; section 1's prose said 1,373 openings and 725 closures where the output has 1,397 and 651; and one README sentence said Colorado Springs 11 averages 377 pupils, "*below*" a bar of 300, which its own numbers contradicted. The notebook said CDE publishes no district enrollment for 2000 to 2003; only 2000 is missing, so the 2004 round is now compared with 2003, not 1999.
