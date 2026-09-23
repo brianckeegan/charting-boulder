@@ -274,6 +274,28 @@ def _markdown_rows(text: str) -> list[list[str]]:
     return out
 
 
+# A district's number within its county, as some pages print it in a cell of
+# its own: "RE-2", "16", "RE 2(J)", "26 JT.", "C113".
+DESIGNATOR_CELL = re.compile(
+    r"^(?:RE|R|J|JT|RJ|RD|C|UD)?[- ]?\d{1,3}[A-Z]{0,2}(?:\s*\(J\)|\s*JT?)?\.?$", re.I)
+
+
+def with_designator(name: str, cell: str) -> str:
+    """Join a designator printed in its own cell back onto the name.
+
+    Some pages print "| GARFIELD | RE-2 |" and "| GARFIELD | 16 |"; others
+    print "| GARFIELD RE-2 |". Read from the first cell alone, the first layout
+    gives two districts one name - Garfield RE-2 in Rifle and Garfield 16 in
+    Parachute - and every step after that either merges or sums them.
+    """
+    cell = (cell or "").strip()
+    if not cell or not DESIGNATOR_CELL.match(cell):
+        return name
+    if cell.upper().replace(" ", "") in name.upper().replace(" ", ""):
+        return name
+    return f"{name} {cell}"
+
+
 def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dict], dict]:
     """Table 2 of a yearbook: district x grade, from Datalab markdown.
 
@@ -373,6 +395,10 @@ def parse_yearbook_district_grade(volume_dir: Path, year: int) -> tuple[list[dic
                 continue
 
             district_number = cells[1].strip() if len(cells) > 1 else ""
+            # Column 1 is the district's number unless the header made it a
+            # grade, in which case a count there must not become a name.
+            if 1 not in grade_cols:
+                name = with_designator(name, district_number)
             for grade, value in totals.items():
                 records.append({
                     "year": year,
@@ -766,6 +792,7 @@ def parse_yearbook_trends(volume_dir: Path, year: int) -> tuple[list[dict], dict
     }
 
     records = []
+    headings_without_county = 0
     for page, record in sorted(index["pages"].items(), key=lambda kv: int(kv[0])):
         if "TRENDS IN ENROLLMENT" not in (record.get("heading") or "").upper():
             continue
@@ -780,9 +807,7 @@ def parse_yearbook_trends(volume_dir: Path, year: int) -> tuple[list[dict], dict
             if len(years_in_row) >= 5:
                 school_years = years_in_row
                 continue
-            if not cells[0]:
-                continue
-            label = cells[0].strip().upper()
+            label = (cells[0] if cells else "").strip().upper()
             measure = measures.get(label)
             if measure is None:
                 joined = " ".join(cells)
@@ -790,9 +815,13 @@ def parse_yearbook_trends(volume_dir: Path, year: int) -> tuple[list[dict], dict
                 if not county_match:
                     # A heading row whose county half the OCR put on the next
                     # line. Hold the name until that line arrives.
-                    pending = cells[0].strip()
+                    if label:
+                        pending = cells[0].strip()
                     continue
-                if label.startswith("COUNTY:"):
+                # The county line is looked for before an empty first cell is
+                # skipped, so "| | COUNTY: WELD |" still closes the heading
+                # above it rather than being thrown away.
+                if not label or label.startswith("COUNTY:"):
                     # The name is not in this row - it is the line above. Read
                     # as written, five counties became districts: "COUNTY:
                     # WELD" was filed with Gilcrest's 1,800 pupils, and
@@ -801,11 +830,23 @@ def parse_yearbook_trends(volume_dir: Path, year: int) -> tuple[list[dict], dict
                     district = pending
                 elif re.search(r"[A-Za-z]", cells[0]):
                     district = cells[0].strip()
+                    # "| GARFIELD | RE-2 | COUNTY: GARFIELD |" - 43 headings in
+                    # the 1987 volume put the number in a cell of its own.
+                    if len(cells) > 2 and "COUNTY:" not in cells[1].upper():
+                        district = with_designator(district, cells[1])
                 else:
                     continue
                 county = county_match.group(1).strip().title()
                 pending = ""
                 continue
+            if pending:
+                # A heading whose county line never came. These measures are
+                # the new district's: left alone they were filed under the
+                # district before it, and the duplicates dropped later. The
+                # county is carried from the last heading, and the case is
+                # counted so it cannot pass unseen.
+                district, pending = pending, ""
+                headings_without_county += 1
             if not district or not school_years:
                 continue
             values = [c for c in cells[1:] if c.strip()]
@@ -826,6 +867,7 @@ def parse_yearbook_trends(volume_dir: Path, year: int) -> tuple[list[dict], dict
     return records, {
         "districts": len({r["district_name"] for r in records}),
         "records": len(records),
+        "headings_without_county": headings_without_county,
         "years": sorted({r["year"] for r in records})[:3] + ["..."] if records else [],
     }
 
@@ -890,6 +932,10 @@ def ccd_records(year: int, cache_dir: Path) -> tuple[list[dict], list[dict], dic
             "school_name": row.get("school_name") or "",
             "district_name": (row.get("lea_name") or "").strip(),
             "school_code": normalize_ccd_state_code(row.get("seasch")),
+            # CDE's own district code. NCES's leaid is a different number and
+            # joins to nothing on the CDE side. From 2016 NCES writes it
+            # "CO-0520", so it takes the same treatment as the school id.
+            "district_code": normalize_ccd_state_code(row.get("state_leaid")),
             "leaid": row.get("leaid") or "",
             "teachers_fte": parse_decimal(row.get("teachers_fte")),
             "latitude": row.get("latitude"),
@@ -931,6 +977,7 @@ def ccd_records(year: int, cache_dir: Path) -> tuple[list[dict], list[dict], dic
             "year": year,
             "ncessch": ncessch,
             "school_code": meta["school_code"],
+            "district_code": meta["district_code"],
             "leaid": meta["leaid"],
             "school_name": meta["school_name"],
             "district_name": meta["district_name"],

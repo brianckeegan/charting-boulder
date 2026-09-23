@@ -12,14 +12,14 @@ Boulder Valley's Resilient Schools proposal treats four closures as a local prob
 
 | Table | Rows | Span | Grain |
 |---|---:|---|---|
-| `school-enrollment-by-grade.csv` | 685,060 | 1986–2024 | school × year × grade |
-| `school-year.csv` | 65,851 | 1986–2024 | school × year |
-| `schools.csv` | 2,724 | — | school |
+| `school-enrollment-by-grade.csv` | 691,014 | 1986–2024 | school × year × grade |
+| `school-year.csv` | 65,859 | 1986–2024 | school × year |
+| `schools.csv` | 2,734 | — | school |
 | `district-enrollment-by-grade.csv` | 100,914 | 1986–2024 | district × year × grade |
-| `district-year.csv` | 8,507 | **1977–2024** | district × year |
+| `district-year.csv` | 8,515 | **1977–2024** | district × year |
 | `source-reconciliation.csv` | 24 | 2001–2024 | year |
 | `district-reconciliation.csv` | 14 | 1986–1999 | year |
-| `district-year-overlap.csv` | 1,531 | 1978–1987 | district × year |
+| `district-year-overlap.csv` | 1,539 | 1978–1986 | district × year |
 | `school-teacher-fte.csv` | 38,777 | 2000–2024 | school × year |
 | `district-teacher-fte-ccd.csv` | 7,879 | **1987–2024** | district × year |
 | `district-teacher-fte-cde.csv` | 6,732 | **1986–2024** | district × year |
@@ -46,7 +46,9 @@ Eight volumes agree to the pupil. All but 1988 land within 0.16%. **1988 is the 
 
 **Teacher FTE, against NCES**, year by year. Every one of the twenty-two CDE years lands between 0.7% and 4.4% below the NCES state total, and sixteen of them within 2%. The gap is in the same direction throughout, which is what a consistent difference in what counts as a teacher looks like rather than a parse that comes and goes.
 
-**Districts joined to their codes.** 98.3% of district-years carry a CDE district code — 97.2% in 1977–85, 96.0% in 1986–99, 100% from 2000 — so BVSD and the seven Front Range districts it is compared against each run 1977 to 2024 unbroken but for Fall 2000, which CDE never published. What is left uncoded is named rather than hidden: 92 non-BOCES rows where one printed name covers two districts, or where the district merged away before 2000 (`DATA-DICTIONARY.md`). Getting this wrong is not cosmetic — reading the names too narrowly had put four years of Fort Lupton's pupils under Gilcrest's code and nine years of Rifle's under Parachute's (D27).
+**Districts joined to their codes.** 98.4% of district-years carry a CDE district code — 97.2% in 1977–85, 96.6% in 1986–99, 100% from 2000 — so BVSD and the seven Front Range districts it is compared against each run 1977 to 2024 unbroken but for Fall 2000, which CDE never published. What is left uncoded is named rather than hidden: 78 non-BOCES rows where one printed name covers two districts, or where the district merged away before 2000 (`DATA-DICTIONARY.md`). Getting this wrong is not cosmetic. Reading the names too narrowly had put four years of Fort Lupton's pupils under Gilcrest's code (D27). It had also added Rifle's and Parachute's pupils together into one "GARFIELD" row for 1989–1995, because those pages print each district's number in a separate cell (D32).
+
+**One definition of membership across 1988.** `fall_membership` is the printed total to 1987 and a sum of grades from 1988, and the two differ by up to 2.6% for one district. `fall_membership_k12` has one definition from 1986 to 2024, and `membership_definition` names the rule on every row (D33).
 
 **The yearbooks' district staffing, against NCES.** The summary table in each volume prints classroom teacher FTE by district. Summed and compared with the NCES state total: **every year from 1987 to 1998 lands within 1.3%**, five of them within 0.2%, and 1991 agrees to a fifth of one FTE out of 33,093. 1986 is the one year with nothing to check it against, because NCES district staffing starts in 1987.
 
@@ -239,7 +241,7 @@ gone within two years, while its recent trend adds nothing once size is known.
 **2. How many schools does the demography support?** Fitted across 178
 Colorado districts over 35 years rather than Boulder's own history, with
 district fixed effects. A district that loses 10% of its school-age population
-ends up with **7.6% fewer teachers and 4.4% fewer schools** — Colorado
+ends up with **7.5% fewer teachers and 4.4% fewer schools** — Colorado
 districts have consistently chosen smaller schools over fewer schools. Boulder
 County's 5-to-17 population falls to about 2030 and is then flat for thirty
 years, which puts Boulder Valley near 53 schools in 2060 against 56 today.
@@ -321,17 +323,17 @@ Eldorado K-8 (−15), and none of them is closing.
 
 **6. Is Boulder unusual?** The model in question 2 is fitted on 178 districts
 and was applied to one; here it is applied to all of them, on each district's
-own county forecast. **Boulder Valley ranks 69th of 166 by the contraction its
-demography implies — 68 Colorado districts face a larger one.** Its county's
+own county forecast. **Boulder Valley ranks 73rd of 178 by the contraction its
+demography implies — 72 Colorado districts face a larger one.** Its county's
 5-to-17 population falls 13% to 2060 against a statewide median of 9%, and its
-own school count comes out 2% lower.
+own school count comes out 1% lower.
 
-The second reading is cross-sectional, and it needs no model: among the **19
+The second reading is cross-sectional, and it needs no model: among the **20
 Colorado districts with 10,000 pupils or more**, Boulder Valley's average
-school of 500 pupils is the **8th smallest**, against a peer median of 557.
-Seven large districts run smaller schools, Denver (459) and Colorado Springs 11
-(377) among them. Colorado Springs runs fifty-nine schools at an average
-seventy-seven pupils *below* Boulder Valley's viability bar.
+school of 500 pupils is the **8th smallest**, against a peer median of 573.
+Seven large districts run smaller schools, Denver (457) and Colorado Springs 11
+(371) among them. Colorado Springs runs sixty schools at an average of 371
+pupils, only seventy-one above Boulder Valley's viability bar of 300.
 
 Neither reading makes Boulder Valley an outlier. That cuts against two things
 the proposal leans on: that the district faces a decline out of proportion to
@@ -350,16 +352,21 @@ them.** An event study with district and year fixed effects says:
 
 | | at the round | five years later |
 |---|---:|---:|
-| Schools | **−17%** | **−14%** |
-| Enrolment | −2% (n.s.) | +4% (n.s.) |
-| Staff | +2% (n.s.) | +7% (n.s.) |
+| Schools | **−17%** | −10% (n.s.) |
+| Enrolment | 0% (n.s.) | +5% (n.s.) |
+| Staff | +1% (n.s.) | +6% (n.s.) |
+
+That regression also compares districts with others still living with their
+own earlier rounds. Section 8 builds only the clean comparisons, and on those
+**the school count is still 16% down five years later**, with every year after
+the round excluding zero.
 
 **A closure round changes the number of buildings, not the number of pupils or
 the number of teachers.** The closures hold — districts do not quietly reopen
 what they shut — but no horizon shows enrolment or staffing differing from the
 year before the round, and the intervals rule out an enrolment fall of more
-than about five per cent. Whatever case there is for closing schools is a case
-about buildings.
+than about 3% in the three years after it. Whatever case there is for closing
+schools is a case about buildings.
 
 Boulder Valley's own round says the same in one district. It closed five
 schools in 2004 and by 2012 was **back to fifty-six schools with two thousand

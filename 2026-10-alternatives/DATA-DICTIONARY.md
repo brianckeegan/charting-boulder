@@ -18,7 +18,7 @@ The core panel. One row per school per year per grade.
 |---|---|---|
 | `year` | integer | Fall of the school year |
 | `ncessch` | string | NCES school id, 12 characters. The stable key across renames and code changes |
-| `school_code` | string | CDE school code, 4 digits. Not unique statewide in every year |
+| `school_code` | string | CDE school code, 4 digits, unique in its year. Two exceptions. A code that starts with `X` is a placeholder the pipeline makes for a school the source printed without a code: 7 school-years in 2001–2002. A code in the form `<district>-<code>` is a code that two districts use, prefixed with the district: `0001` and `0006`, which CDE gives to facility programmes |
 | `district_code` | string | CDE district code, 4 digits. Empty where only CCD covers the year |
 | `grade` | string | `PK`, `K`, `1` … `12`. See the grade notes below |
 | `enrollment_cde` | integer | CDE October count. Empty where CDE publishes no school-grain file that year |
@@ -26,6 +26,10 @@ The core panel. One row per school per year per grade.
 | `source` | string | `cde`, `ccd`, or `both` — which sources contributed this cell |
 
 This table is deliberately narrow. Names, district names and coordinates are **not** repeated here; they live in `school-year.csv`, one row per school-year instead of once per grade row. Carrying them on all fourteen grade rows of every school made the file 65 MB and added no information. Join on `(year, school_code)`.
+
+**Every CDE pupil the pipeline reads reaches this table.** The pipeline compares the two totals for each year and stops if they differ. Before that check, the table was keyed on a school code that some rows did not have, and 124,863 pupils of 2001 and 109,041 of 2002 were lost (D32).
+
+**Where a 2001 or 2002 code comes from.** The 2001 and 2002 PDFs print no codes. A school gets the code the later years use for its name where that is unique. Otherwise it gets the code the NCES directory of the same year holds for it: first by district and name, and then by an equal total in the same district where the two names share a distinctive word. All 620 name matches agree with NCES to the pupil. The 79 total matches cannot be tested that way, because an equal total is their condition.
 
 ## `school-year.csv`
 
@@ -56,7 +60,7 @@ One row per school, not per school-year. The registry.
 | `names` | string | Every name it held, semicolon separated, oldest first |
 | `district_codes` | string | Every district it sat in |
 | `first_year`, `last_year` | integer | First and last year it appears in any source |
-| `closure_label` | string | `closed`, `merged`, `renamed`, `code_changed`, `still_open`, `unknown` |
+| `closure_label` | string | `closed`, `merged`, `renamed`, `code_changed`, `still_open`, `untracked`, `unknown`. `untracked` is a school known only by a placeholder code, which cannot be followed from one year to the next, so its end says nothing about a closure |
 | `closure_confidence` | string | `high`, `medium`, `low`. **Never hand-verified** — see `decision-log.md`, D6 |
 | `closure_evidence` | string | What produced the label: CCD status, a code reuse, a near name match |
 
@@ -78,9 +82,12 @@ The longest series in the archive, and **the only one reaching before 1986**. Bu
 |---|---|---|
 | `year` | integer | Fall of the school year |
 | `school_year` | string | As printed, e.g. `1977-78` |
-| `district_code` | string | Matched by name, and empty where the name cannot decide: no modern district carries it, or two do. 98.3% of rows across the archive carry one — 97.2% in 1977–85, 96.0% in 1986–99, 100% from 2000. The eight districts whose old and modern names have nothing in common are listed in `data/lookups/district-aliases.csv` with the membership either side of the change that identifies them |
-| `district_name`, `county_name` | string | As printed in the yearbook |
-| `fall_membership` | integer | The October count, comparable to the rest of the archive |
+| `district_code` | string | Matched by name, and empty where the name cannot decide: no modern district carries it, or two do. 98.4% of rows across the archive carry one — 97.2% in 1977–85, 96.6% in 1986–99, 100% from 2000. The nine districts whose old and modern names have nothing in common are listed in `data/lookups/district-aliases.csv` with the membership either side of the change that identifies them |
+| `district_name` | string | As printed. Where a page prints the district's number in a cell of its own ("GARFIELD", "RE-2"), the two are joined ("GARFIELD RE-2") |
+| `county_name` | string | From `data/lookups/district-county.csv` where the district code is known. Otherwise the printed county, in title case. BOCES rows carry the yearbooks' own heading, "Colorado Boces" or "Colorado Bocs", which is not a county |
+| `fall_membership` | integer | The October count. **Its definition changes in 1988**: see `membership_definition` and the note below |
+| `membership_definition` | string | `printed_total` (1977–1987): the total fall membership each yearbook prints in Table 4. `grades_pk_12` (1988–2024): the sum of pre-kindergarten to twelfth grade, without special education and ungraded pupils |
+| `fall_membership_k12` | integer | Kindergarten to twelfth grade only, where grades are printed: 1986–2024. Use this column for a series that crosses 1988 |
 | `closing_day_membership` | integer | Empty for each volume's own final year, which had not happened when it was printed |
 | `average_daily_membership` | decimal | |
 | `adae` | decimal | Average daily attendance equivalent |
@@ -88,7 +95,11 @@ The longest series in the archive, and **the only one reaching before 1986**. Bu
 
 The yearbooks' Table 1 (school counts, staff, pupil/teacher ratio, dropout rate) is converted and sits in `data/interim/yearbooks/`, but is **not yet parsed into this table**. See `ROADMAP.md`.
 
-**What stays uncoded, and why.** Ninety-two non-BOCES district-years. "GARFIELD" covers Rifle in 1987–95 and Parachute in 1996–99, and "EAST"/"WEST YUMA COUNTY" cover two districts each in every yearbook year against four from 2001 — one printed name, two districts, and nothing in the name to separate them. Five small districts — Vona R-3, Egnar 18, Genoa RE-13, Arriba RE-31, Arapahoe R-3 — merged into successors before 2000; a predecessor is not given its successor's code, because that would merge two districts' histories into one series. Every such row keeps its printed name and county.
+**Two definitions, and the seam between them.** Table 4 prints a district's total fall membership. The grade sums used from 1988 include pre-kindergarten and do not include special education and ungraded pupils. In 1986 and 1987 one volume prints both, and the grade rule counts 0.7% and 0.8% fewer pupils statewide. The difference is not the same for each district: in 1987 it is 2.6% for Denver, 2.2% for Adams 12, 2.1% for St. Vrain and 0.6% for Boulder Valley. So a comparison of `fall_membership` across 1988 shows a drop that the definition makes, and the drop is larger for some districts than for others. `fall_membership_k12` has one definition from 1986 to 2024. Pre-kindergarten also grows inside the later series: it is 1.0% of Boulder Valley's count in 2004 and about 3% from 2016.
+
+**Where two volumes read one district-year.** `district-year-overlap.csv` compares them. `agree` is true only where two different volumes read the same figure. One volume that gives two figures under one key is a key collision, not an agreement, and the file shows every reading.
+
+**What stays uncoded, and why.** Seventy-eight non-BOCES district-years. "EAST" and "WEST YUMA COUNTY" cover two districts each in every yearbook year, against four from 2001: one printed name, two districts, and nothing in the name to separate them. Six small districts — Vona R-3, Egnar 18, Genoa RE-13, Arriba RE-31, Arapahoe R-3 and Grover RE-12 — merged into successors before 2000. A predecessor does not get its successor's code, because that would merge two districts' histories into one series. Every such row keeps its printed name and county. Garfield RE-2 and Garfield 16 now carry their codes in every year: the pages print their numbers in a separate cell, and the parsers now read that cell.
 
 BVSD and the seven Front Range districts it is compared against — St Vrain, Poudre, Jeffco, Denver, Cherry Creek, Adams 12, Douglas — each run 1977 to 2024 unbroken but for Fall 2000, which CDE never published.
 

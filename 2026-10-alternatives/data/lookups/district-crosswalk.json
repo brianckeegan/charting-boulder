@@ -1,8 +1,4 @@
 {
-  "27J": {
-    "district_code": "0040",
-    "district_name": "School District 27J"
-  },
   "ACADEMY": {
     "district_code": "1040",
     "district_name": "Academy 20"
@@ -635,6 +631,11 @@
   "GARFIELD|GARFIELD#RE2": {
     "district_code": "1195",
     "district_name": "GARFIELD RE-2"
+  },
+  "GARFIELD|GARFIELDCOUNTY": {
+    "district_code": "1220",
+    "district_name": "GARFIELD CO. 16",
+    "via": "alias (renamed)"
   },
   "GARFIELD|ROARINGFORK": {
     "district_code": "1180",
@@ -1330,6 +1331,10 @@
   "SARGENT": {
     "district_code": "2750",
     "district_name": "Sargent RE-33J"
+  },
+  "SCHOOLDISTRICT27J": {
+    "district_code": "0040",
+    "district_name": "School District 27J"
   },
   "SEDGWICK|JULESBURG": {
     "district_code": "2862",
