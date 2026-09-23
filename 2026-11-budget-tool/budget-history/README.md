@@ -26,11 +26,12 @@ All CSVs are UTF-8 with LF line endings. The four `budget-history-*` CSVs are pl
 | Series | Years | Notes |
 |---|---|---|
 | Citywide total | 2004–2027 | From 2008 the total includes the internal service funds; the 2008 book restates 2007 on that footing, 0.35% higher |
-| Operating and capital | 2005–2027 | Capital is missing for 2018–2021 |
-| General Fund, all-in uses | 2005–2018 except 2013, and 2024–2027 | 2005 is an actual only; 2025 is derived |
-| Staffing level (FTE) | 2002–2026, 21 years | Missing for 2014, 2015, 2019 and 2020 |
+| Operating and capital | 2005–2027 | From the books' summary blocks where they print one, 2005–2022 |
+| General Fund, all-in uses | 2005–2027, except 2019 | 2005 is an actual only |
+| General Fund revenue | 2003–2026, except 2019 | 2003 is an actual only |
+| Staffing level (FTE) | 2002–2026, 23 years | Missing for 2019 and 2020 |
 | Spending by department | 2005–2022 | Seven buckets. 2024–2026 come from a filtered export that is **not** comparable |
-| Revenue by source | 2007–2012 and 2026 | The taxonomies differ, so only four categories line up |
+| Revenue by source | 2005–2026 | The taxonomies differ, so only four categories line up. 2018 and 2022 include borrowing |
 | Sales and use tax, property tax | 2022–2026 (property tax from 2023) | Adopted, revised, actual and forecast figures, side by side |
 
 The exact years for every measure are in the validation report's [coverage table](budget-history-validation.md#coverage-by-measure). A missing year is absent, never zero. [Caveat 8](budget-history-data-dictionary.md#8-coverage-is-uneven-and-the-gaps-are-not-the-same-gaps) says why each gap exists.
@@ -49,9 +50,9 @@ The exact years for every measure are in the validation report's [coverage table
 
 The [validation report](budget-history-validation.md#checks) lists how many cases each check saw and the largest miss on this build.
 
-**The books check themselves.** Each readable book from 2005 to 2017 prints a citywide summary block in which capital plus operating equals the total and the General Fund and dedicated halves sum to operating, to within $1,000 in every year. Each spending pie sums to the citywide total its own book publishes. A figure is kept only if it passes, and a pie that does not add up is rejected rather than guessed at.
+**The books check themselves.** Every book from 2005 to 2022 prints a citywide summary block in which capital plus operating equals the total and the General Fund and dedicated halves sum to operating, to within $1,000. The one exception is 2019, whose block has two boxes exactly $255,000 short ([caveat 2](budget-history-data-dictionary.md#2-the-headline-totals-are-one-continuous-net-series)). Each spending pie sums to the citywide total its own book publishes. A figure is kept only if it passes, and a pie that does not add up is rejected rather than guessed at.
 
-**Figures read by OCR are marked, and were tested against figures read without it.** Figures from pages pypdf cannot read, or never reached, cite `booksocr` instead of `books`. They cover the 2007, 2009 and 2010 books, which survive only as scans, nine spending-pie years, five revenue pies, the 2011–2013 summary blocks and three staffing levels. OCR also re-read every page holding a pie, table or summary block, and the pages around every published figure. It independently confirmed 185 published figures, 169 of them read by pypdf, and contradicted none ([caveat 19](budget-history-data-dictionary.md#19-ocr-read-the-pages-pypdf-could-not-and-got-some-things-wrong)). It also produced three kinds of error, each caught and rejected: values invented from percentages, a bar chart read as numbers, and a misread digit.
+**Figures read by OCR are marked, and were tested against figures read without it.** Figures from pages pypdf cannot read, or never reached, cite `booksocr` instead of `books`. They cover the 2007, 2009 and 2010 books, which survive only as scans, nine spending-pie years, most revenue charts from 2007 to 2024, the 2011–2013 and 2018–2022 summary blocks, and two staffing levels. OCR also re-read every page holding a pie, table or summary block, and the pages around every published figure. It independently confirmed 178 published figures, 162 of them read by pypdf, and contradicted none ([caveat 19](budget-history-data-dictionary.md#19-ocr-read-the-pages-pypdf-could-not-and-got-some-things-wrong)). It also produced three kinds of error, each caught and rejected: values invented from percentages, a bar chart read as numbers, and a misread digit.
 
 **What the checks cannot catch.** Two families add up perfectly and still do not compare. The first pair is the net headline totals and the gross OpenGov snapshot, $83.4M apart in 2023. The second pair is the books' department pies and the 2024–2026 export, which moves nearly all utility spending out of the departments. The data dictionary's caveats [1](budget-history-data-dictionary.md#1-two-accounting-bases-never-one-series) and [17](budget-history-data-dictionary.md#17-deptexp-and-deptexpfiltered-both-add-up-and-still-do-not-compare) explain both. Keeping each family under its own prefix, `sources_`/`uses_` and `deptexpfiltered_`, makes mixing them take effort rather than inattention.
 
@@ -60,7 +61,7 @@ The [validation report](budget-history-validation.md#checks) lists how many case
 | `source_id` | Document | Supplies |
 |---|---|---|
 | `books` | [City of Boulder annual budget books](https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2), 2005–2026, read from the PDF text layer | Totals, the General Fund, staffing and the department pies |
-| `booksocr` | The same books, pages read by Datalab OCR | What pypdf cannot read or never reached: the 2007, 2009 and 2010 books, nine spending-pie years, five revenue pies, the 2011–2013 summary blocks, three staffing levels |
+| `booksocr` | The same books, pages read by Datalab OCR | What pypdf cannot read or never reached: the 2007, 2009 and 2010 books, nine spending-pie years, most revenue charts from 2007 to 2024, the 2011–2013 and 2018–2022 summary blocks, two staffing levels |
 | `snapshot2023` | [OpenGov Sources & Uses, 2023](https://cityofboulderco.opengov.com/transparency/#/65843/accountType=revenuesVersusExpenses&breakdown=types&year=2023), CSV export | Gross revenue and expense by type, 2021–2023 |
 | `deptsnapshot2026` | OpenGov Sources and Uses by cost center, 2026, CSV export | Spending by department, 2024–2026, with a fund filter |
 | `forecast2026` | 2026 Financial Forecast, council study session, May 14, 2026 | Totals 2023–2026; sales, use and property tax; General Fund gaps |
