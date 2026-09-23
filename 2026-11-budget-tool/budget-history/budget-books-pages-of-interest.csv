@@ -6,7 +6,10 @@ file,page,holds,already_extracted_from
 "2005 Annual Budget, Volume 1.pdf",65,pie,no
 "2005 Annual Budget, Volume 1.pdf",67,pie,no
 "2005 Annual Budget, Volume 1.pdf",69,pie,no
+"2005 Annual Budget, Volume 1.pdf",70,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",71,multiyear_table,yes
+"2005 Annual Budget, Volume 1.pdf",72,multiyear_table,no
+"2005 Annual Budget, Volume 1.pdf",73,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",75,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",76,multiyear_table,no
 "2005 Annual Budget, Volume 1.pdf",82,multiyear_table,no
@@ -42,8 +45,12 @@ file,page,holds,already_extracted_from
 "2006-2007 Annual Budget, Volume 1.pdf",40,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",58,summary_block,yes
 "2006-2007 Annual Budget, Volume 1.pdf",59,multiyear_table pie,yes
+"2006-2007 Annual Budget, Volume 1.pdf",60,pie,no
+"2006-2007 Annual Budget, Volume 1.pdf",62,pie,no
 "2006-2007 Annual Budget, Volume 1.pdf",63,pie,no
 "2006-2007 Annual Budget, Volume 1.pdf",64,multiyear_table,yes
+"2006-2007 Annual Budget, Volume 1.pdf",65,multiyear_table,no
+"2006-2007 Annual Budget, Volume 1.pdf",66,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",69,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",70,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",76,multiyear_table,no
@@ -70,11 +77,76 @@ file,page,holds,already_extracted_from
 "2006-2007 Annual Budget, Volume 1.pdf",219,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",228,multiyear_table,no
 "2006-2007 Annual Budget, Volume 1.pdf",234,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",5,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",7,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",9,summary_block,no
+"2007 Annual Budget, Volume 1.pdf",34,summary_block,yes
+"2007 Annual Budget, Volume 1.pdf",48,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",49,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",50,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",51,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",52,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",75,summary_block,yes
+"2007 Annual Budget, Volume 1.pdf",77,multiyear_table pie,yes
+"2007 Annual Budget, Volume 1.pdf",78,multiyear_table pie,no
+"2007 Annual Budget, Volume 1.pdf",80,pie,no
+"2007 Annual Budget, Volume 1.pdf",81,pie,no
+"2007 Annual Budget, Volume 1.pdf",83,multiyear_table,yes
+"2007 Annual Budget, Volume 1.pdf",84,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",85,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",86,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",87,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",88,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",89,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",91,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",92,multiyear_table,yes
+"2007 Annual Budget, Volume 1.pdf",93,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",94,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",95,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",96,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",97,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",105,multiyear_table,yes
+"2007 Annual Budget, Volume 1.pdf",129,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",134,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",143,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",145,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",150,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",159,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",160,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",162,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",164,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",168,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",176,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",185,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",195,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",203,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",209,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",214,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",221,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",225,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",229,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",236,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",240,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",244,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",254,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",263,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",271,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",281,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",287,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",290,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",291,multiyear_table,no
+"2007 Annual Budget, Volume 1.pdf",292,multiyear_table,no
 "2008 Annual Budget, Volume 1.pdf",35,summary_block,no
 "2008 Annual Budget, Volume 1.pdf",71,summary_block,yes
+"2008 Annual Budget, Volume 1.pdf",72,pie,yes
 "2008 Annual Budget, Volume 1.pdf",73,pie,no
 "2008 Annual Budget, Volume 1.pdf",76,pie,no
 "2008 Annual Budget, Volume 1.pdf",77,pie,no
+"2008 Annual Budget, Volume 1.pdf",85,multiyear_table,no
+"2008 Annual Budget, Volume 1.pdf",86,multiyear_table,no
+"2008 Annual Budget, Volume 1.pdf",87,multiyear_table,yes
+"2008 Annual Budget, Volume 1.pdf",88,multiyear_table,no
+"2008 Annual Budget, Volume 1.pdf",89,multiyear_table,no
 "2008 Annual Budget, Volume 1.pdf",100,multiyear_table,yes
 "2008 Annual Budget, Volume 1.pdf",121,multiyear_table,no
 "2008 Annual Budget, Volume 1.pdf",125,multiyear_table,no
@@ -100,14 +172,166 @@ file,page,holds,already_extracted_from
 "2008 Annual Budget, Volume 1.pdf",253,multiyear_table,no
 "2008 Annual Budget, Volume 1.pdf",264,multiyear_table,no
 "2008 Annual Budget, Volume 1.pdf",269,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",5,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",7,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",9,summary_block,no
+"2009 Annual Budget, Volume 1.pdf",43,summary_block,yes
+"2009 Annual Budget, Volume 1.pdf",50,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",51,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",52,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",72,summary_block,yes
+"2009 Annual Budget, Volume 1.pdf",74,pie,yes
+"2009 Annual Budget, Volume 1.pdf",77,pie,no
+"2009 Annual Budget, Volume 1.pdf",78,pie,no
+"2009 Annual Budget, Volume 1.pdf",80,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",81,multiyear_table,yes
+"2009 Annual Budget, Volume 1.pdf",82,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",83,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",84,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",85,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",86,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",87,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",88,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",89,multiyear_table,yes
+"2009 Annual Budget, Volume 1.pdf",90,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",91,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",92,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",93,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",94,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",103,multiyear_table,yes
+"2009 Annual Budget, Volume 1.pdf",129,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",131,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",135,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",147,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",151,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",156,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",157,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",158,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",162,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",164,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",170,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",178,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",181,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",186,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",191,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",192,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",197,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",201,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",202,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",209,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",215,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",219,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",225,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",226,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",228,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",235,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",243,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",248,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",253,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",258,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",259,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",262,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",266,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",270,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",276,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",282,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",293,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",303,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",307,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",315,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",318,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",321,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",322,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",324,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",326,multiyear_table,no
+"2009 Annual Budget, Volume 1.pdf",327,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",2,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",4,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",9,summary_block,no
+"2010 Annual Budget, Volume 1.pdf",27,pie,no
+"2010 Annual Budget, Volume 1.pdf",28,pie,no
+"2010 Annual Budget, Volume 1.pdf",72,summary_block,yes
+"2010 Annual Budget, Volume 1.pdf",74,pie,yes
+"2010 Annual Budget, Volume 1.pdf",75,pie,no
+"2010 Annual Budget, Volume 1.pdf",78,pie,no
+"2010 Annual Budget, Volume 1.pdf",79,pie,no
+"2010 Annual Budget, Volume 1.pdf",80,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",81,multiyear_table,yes
+"2010 Annual Budget, Volume 1.pdf",82,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",83,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",84,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",85,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",86,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",87,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",88,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",89,multiyear_table,yes
+"2010 Annual Budget, Volume 1.pdf",90,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",91,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",92,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",93,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",94,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",95,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",101,multiyear_table,yes
+"2010 Annual Budget, Volume 1.pdf",127,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",129,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",131,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",139,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",143,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",146,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",147,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",148,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",154,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",158,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",161,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",164,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",167,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",170,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",173,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",178,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",183,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",188,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",193,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",198,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",204,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",206,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",208,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",212,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",216,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",220,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",224,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",225,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",229,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",232,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",234,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",235,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",241,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",245,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",252,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",259,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",265,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",266,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",267,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",272,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",278,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",282,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",284,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",285,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",288,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",289,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",291,multiyear_table,no
+"2010 Annual Budget, Volume 1.pdf",292,multiyear_table,no
 2011 Annual Budget.pdf,1,multiyear_table,no
 2011 Annual Budget.pdf,35,multiyear_table,no
 2011 Annual Budget.pdf,65,summary_block,yes
 2011 Annual Budget.pdf,67,pie,yes
 2011 Annual Budget.pdf,68,multiyear_table pie,no
 2011 Annual Budget.pdf,73,pie,no
+2011 Annual Budget.pdf,74,pie,no
 2011 Annual Budget.pdf,75,multiyear_table,no
 2011 Annual Budget.pdf,76,multiyear_table,yes
+2011 Annual Budget.pdf,77,multiyear_table,no
+2011 Annual Budget.pdf,78,multiyear_table,no
+2011 Annual Budget.pdf,82,multiyear_table,no
 2011 Annual Budget.pdf,83,multiyear_table,no
 2011 Annual Budget.pdf,84,multiyear_table,yes
 2011 Annual Budget.pdf,85,multiyear_table,no
@@ -257,7 +481,9 @@ file,page,holds,already_extracted_from
 2020 Approved Budget.pdf,47,pie,no
 2020 Approved Budget.pdf,55,pie,yes
 2020 Approved Budget.pdf,56,pie,no
+2020 Approved Budget.pdf,57,pie,no
 2021 Approved Budget.pdf,44,multiyear_table,no
+2021 Approved Budget.pdf,48,multiyear_table,yes
 2021 Approved Budget.pdf,49,multiyear_table,yes
 2021 Approved Budget.pdf,50,pie,no
 2021 Approved Budget.pdf,52,pie,no
@@ -274,6 +500,8 @@ file,page,holds,already_extracted_from
 2022 Approved Budget.pdf,60,pie,no
 2022 Approved Budget.pdf,109,multiyear_table,no
 2023 Annual Budget.pdf,15,multiyear_table,yes
+2023 Annual Budget.pdf,16,multiyear_table,yes
 2024 Approved Budget.pdf,250,multiyear_table,no
+2025 Approved Budget.pdf,18,multiyear_table,yes
 2026 Annual Budget.pdf,26,multiyear_table,yes
 2026 Annual Budget.pdf,27,multiyear_table,no
