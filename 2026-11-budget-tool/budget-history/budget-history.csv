@@ -316,6 +316,8 @@ year,measure,basis,value,unit,source_id
 2018,revenue_utility,adopted,65.155,musd,booksocr
 2018,staffing_fte,adopted,1451.09,fte,books
 2019,budget_capital,adopted,70.557,musd,booksocr
+2019,budget_general_fund,adopted,158.16,musd,booksocr
+2019,budget_general_fund_revenue,adopted,152.597,musd,booksocr
 2019,budget_operating,adopted,283.2,musd,books
 2019,budget_operating_dedicated,adopted,137.956,musd,booksocr
 2019,budget_operating_general,adopted,145.232,musd,booksocr

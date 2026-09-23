@@ -414,7 +414,7 @@ for yr, basis, v in [(2005, "actual", 86.148), (2007, "adopted", 88.520),
                      (2008, "actual", 97.578), (2009, "adopted", 96.167)]:
     add(yr, "budget_general_fund_revenue", basis, v, "musd", "booksocr")
 
-# --- General Fund, 2013 and 2020-2025, and its revenue from 2014 ---------------
+# --- General Fund, 2013 and 2019-2025, and its revenue from 2014 ---------------
 # From 2012 each book states both sides of the General Fund in prose -- "based
 # on projected General Fund expenditures of $161.5 million", "...revenues of
 # $157.4 million" -- and through 2018 prints each side as a pie whose heading
@@ -436,6 +436,7 @@ for yr, basis, v in [(2005, "actual", 86.148), (2007, "adopted", 88.520),
 #   2016  (above)                                 128,264 (pie, p110)
 #   2017  (above)                                 138,075 (pie, p112)
 #   2018  (above)                                 143,493,428 (pie, p57)
+#   2019  158,160 (Funds Summary, p43)            152,597 (Funds Summary, p43)
 #   2020  161,502,756 (Funds Summary, p41)        157,395,466 (Funds Summary, p41)
 #   2021  $146.3 million (prose, p62)             $147.3 million (prose, p52)
 #   2022  164,657,129 (pie and Funds Summary)     166,602,128 (Funds Summary, p44)
@@ -444,18 +445,25 @@ for yr, basis, v in [(2005, "actual", 86.148), (2007, "adopted", 88.520),
 #   2025  $210.9 million (prose, p13)             $190.6 million (prose, p15)
 #   2026  (packet, above)                         $198.8 million (prose, p16)
 #
-# 2019 is missing from both columns: its book's General Fund pages were never
-# read, and the block above gives only the General Fund's operating half.
-for yr, v, src in [(2013, 112.477, "booksocr"), (2020, 161.503, "books"),
-                   (2021, 146.3, "books"), (2022, 164.657, "books"),
-                   (2023, 188.4, "books"), (2025, 210.9, "books")]:
+# 2019's General Fund pages were never read, so both 2019 figures come from its
+# Funds Summary (p43). Only OCR has read that page, so each figure is checked
+# twice. The row balances: 45,957 + 152,597 - 158,160 = 40,394, the year-end
+# balance printed beside it. And the 2020 book confirms both sides. Its revenue
+# is "a 3.14% increase over the total revenues projected for the 2019 budget",
+# and 157.395 / 152.597 is +3.14%. Its spending is "a 2.1% increase over total
+# General Fund expenditures in the 2019 Budget", and 161.503 / 158.160 is +2.1%.
+for yr, v, src in [(2013, 112.477, "booksocr"), (2019, 158.160, "booksocr"),
+                   (2020, 161.503, "books"), (2021, 146.3, "books"),
+                   (2022, 164.657, "books"), (2023, 188.4, "books"),
+                   (2025, 210.9, "books")]:
     add(yr, "budget_general_fund", "adopted", v, "musd", src)
 for yr, v, src in [(2014, 115.046, "booksocr"), (2015, 120.575, "booksocr"),
                    (2016, 128.264, "booksocr"), (2017, 138.075, "booksocr"),
-                   (2018, 143.493, "booksocr"), (2020, 157.395, "books"),
-                   (2021, 147.3, "books"), (2022, 166.602, "books"),
-                   (2023, 180.5, "books"), (2024, 200.5, "books"),
-                   (2025, 190.6, "books"), (2026, 198.8, "books")]:
+                   (2018, 143.493, "booksocr"), (2019, 152.597, "booksocr"),
+                   (2020, 157.395, "books"), (2021, 147.3, "books"),
+                   (2022, 166.602, "books"), (2023, 180.5, "books"),
+                   (2024, 200.5, "books"), (2025, 190.6, "books"),
+                   (2026, 198.8, "books")]:
     add(yr, "budget_general_fund_revenue", "adopted", v, "musd", src)
 
 # --- Citywide revenue, 2011 ------------------------------------------------

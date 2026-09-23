@@ -8,7 +8,7 @@ data dictionary disagree about a count or a year, this file is right.
 
 | File | Rows | Years |
 |---|---:|---|
-| `budget-history.csv` | 662 | 2002–2027 |
+| `budget-history.csv` | 664 | 2002–2027 |
 | `budget-history-wide.csv` | 26 | 2002–2027 |
 | `budget-history-department-crosswalk.csv` | 291 | 2005–2022, 2024–2026 |
 | `budget-history-provenance.csv` | 9 | not applicable |
@@ -20,7 +20,7 @@ build before any file is written, so a published file has passed all of them.
 
 | Check | Cases | Tolerance | Largest miss |
 |---|---:|---|---|
-| One row per (year, measure, basis) | 662 | exact | none |
+| One row per (year, measure, basis) | 664 | exact | none |
 | Department buckets, plus any balancing line, sum to `budget_total` | 21 | $0.05M | $0.002M (2026 deptexpfiltered_*) |
 | A department label keeps its bucket from year to year, or a note says why | 76 | exact | none |
 | General Fund half + dedicated half = `budget_operating` | 18 | $0.2M | $0.012M (2019 adopted) |
@@ -54,7 +54,7 @@ Each miss is kept in the data as `salesuse_component_residual`:
 | `snapshot2023` | 81 | 2021–2023 |
 | `books` | 208 | 2003–2026 |
 | `deptsnapshot2026` | 24 | 2024–2026 |
-| `booksocr` | 221 | 2002, 2005–2022, 2024 |
+| `booksocr` | 223 | 2002, 2005–2022, 2024 |
 | `brl2027` | 1 | 2027 |
 
 ## Rows by basis
@@ -62,7 +62,7 @@ Each miss is kept in the data as `salesuse_component_residual`:
 | `basis` | Rows | Years |
 |---|---:|---|
 | `actual` | 78 | 2003–2009, 2021–2025 |
-| `adopted` | 492 | 2002–2026 |
+| `adopted` | 494 | 2002–2026 |
 | `derived` | 3 | 2024–2026 |
 | `forecast` | 9 | 2026–2027 |
 | `identified` | 3 | 2025–2026 |
@@ -81,8 +81,8 @@ absent from the data, never zero.
 | Measure | Unit | Years | Bases |
 |---|---|---|---|
 | `budget_capital` | musd | 2005–2027 | `adopted`, `recommended` |
-| `budget_general_fund` | musd | 2005–2018, 2020–2027 | `actual`, `adopted`, `projected`, `recommended` |
-| `budget_general_fund_revenue` | musd | 2003–2018, 2020–2026 | `actual`, `adopted`, `projected` |
+| `budget_general_fund` | musd | 2005–2027 | `actual`, `adopted`, `projected`, `recommended` |
+| `budget_general_fund_revenue` | musd | 2003–2026 | `actual`, `adopted`, `projected` |
 | `budget_operating` | musd | 2005–2027 | `adopted`, `recommended` |
 | `budget_operating_dedicated` | musd | 2005–2022 | `adopted` |
 | `budget_operating_general` | musd | 2005–2022 | `adopted` |

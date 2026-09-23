@@ -262,6 +262,7 @@ That identity holds to within $1 thousand, which is rounding, in every year but 
 | 2016 | $116.96M | $132.27M | 0.884 |
 | 2017 | $130.86M | $139.79M | 0.936 |
 | 2018 | $137.68M | $146.32M | 0.941 |
+| 2019 | $145.23M | $158.16M | 0.918 |
 | 2020 | $132.26M | $161.50M | 0.819 |
 | 2022 | $134.15M | $164.66M | 0.815 |
 
@@ -294,7 +295,7 @@ Check the [coverage table](budget-history-validation.md#coverage-by-measure) for
 - **The citywide total starts in 2004,** from the 2005 book's statement of the prior year. The archive's books begin with 2005, and none of them states an adopted total for 2002 or 2003.
 - **The 2007, 2009 and 2010 books are scans.** Their Volume 1s have no text layer, so everything taken from them was read by OCR (`booksocr`), including the General Fund columns they print for 2005–2009. Each figure passed the same checks as the rest ([caveat 19](#19-ocr-read-the-pages-pypdf-could-not-and-got-some-things-wrong)). Figures for those years that a born-digital book also prints keep that book as their source.
 - **2002–2004 are thin.** Without books for those years, they have only what later books print about them: the 2004 total, General Fund revenue for 2003–2005, and staffing, which reaches 2002 through the 2011 book's chart.
-- **`budget_general_fund` is missing for 2019,** and 2005 has an actual only. 2019's General Fund revenue is missing too, because that book's General Fund pages were never read.
+- **`budget_general_fund` has only an actual for 2005,** so the chart file's series starts in 2006. 2019's two General Fund figures come from that book's Funds Summary table, read by OCR, and the 2020 book's own percentages confirm both ([caveat 12](#12-the-books-own-percentages-do-not-always-reproduce)).
 - **`staffing_fte` has holes** in 2019 and 2020. 2020 has only a revised figure from the 2021 book ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)).
 - **Revenue by source covers 2005–2026,** but sales and use tax and property tax *collections* cover only 2022–2026.
 - **2027 has only what the recommended-budget release and the Budget At-A-Glance page give:** totals, the General Fund, the gap and position changes.
@@ -353,7 +354,7 @@ A book can also quote a figure that is not its adopted one. The 2024 book's budg
 
 #### 12. The books' own percentages do not always reproduce
 
-Most of the books' year-over-year percentages can be reproduced from the books' own figures. The 2015 and 2016 books' operating, capital and total percentages all reproduce to the decimal, and so do the 2009 and 2010 books' totals, +2.1% and −5.2%, and so do most of the General Fund percentages printed since 2013. Seven do not:
+Most of the books' year-over-year percentages can be reproduced from the books' own figures. The 2015 and 2016 books' operating, capital and total percentages all reproduce to the decimal, and so do the 2009 and 2010 books' totals, +2.1% and −5.2%, and so do most of the General Fund percentages printed since 2013. Among them are the 2020 book's revenue "3.14% increase" and spending "2.1% increase" over 2019: $157.395M against $152.597M, and $161.503M against $158.160M. Those two confirm 2019's figures, which only OCR has read. Seven percentages do not reproduce:
 
 | Book | Says | Figures give |
 |---|---|---|
@@ -497,7 +498,7 @@ OCR recovers all nine years, and every recovered year passes the same sum check.
 
 **A single-digit misread.** The 2011 book's FTE history table gives 2006 as 1,218.34 where three other books say 1,218.84 ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)). The published value stands and the OCR reading was discarded. This is the clearest argument for using OCR to validate rather than to replace: OCR is a second witness, not a better one.
 
-**Validation after all four tiers (September 23, 2026): 178 figures confirmed independently, none contradicted.** Tier 1 read the 1,137 pages of the three scanned Volume 1s. Tier 3 re-read every page a published figure came from, plus two pages either side. With tiers 2 and 4, that makes 1,507 OCR'd pages with text. The extractor was run over the OCR text alone. Each figure it read was compared with the dataset's 530 printed book figures: its rows from the books, the council-packet totals the books restate, and every pie slice. The 22 unmapped revenue remainders are left out, because they are this dataset's arithmetic and were never printed.
+**Validation after all four tiers (September 23, 2026): 178 figures confirmed independently, none contradicted.** Tier 1 read the 1,137 pages of the three scanned Volume 1s. Tier 3 re-read every page a published figure came from, plus two pages either side. With tiers 2 and 4, that makes 1,507 OCR'd pages with text. The extractor was run over the OCR text alone. Each figure it read was compared with the dataset's 532 printed book figures: its rows from the books, the council-packet totals the books restate, and every pie slice. The 22 unmapped revenue remainders are left out, because they are this dataset's arithmetic and were never printed.
 
 | Comparison | Figures |
 |---|---:|
@@ -505,7 +506,7 @@ OCR recovers all nine years, and every recovered year passes the same sum check.
 | Independent: a council-packet figure, read by OCR from that year's book | **11** |
 | Independent: published from one OCR'd page, printed again on another and read there | **5** |
 | Circular: published from OCR, read back from the same page | 122 |
-| No reading the extractor can match | 230 |
+| No reading the extractor can match | 232 |
 
 The circular comparisons are listed separately on purpose. The OCR stage never re-sends a page it has cached, so a figure read from OCR "agreeing" with itself is the same bytes compared twice. Counting those as confirmation would overstate the evidence by two thirds.
 
@@ -516,7 +517,7 @@ The circular comparisons are listed separately on purpose. The OCR stage never r
 
 Another 23 are figures the books round in prose, such as "$270 million" or "$277.6 million", and each agrees at the precision printed.
 
-**The extractor does not read everything back.** It has no reader for revenue charts, and it cannot parse several newer layouts, among them the OCR tables of the 2018, 2019, 2021 and 2022 department pies. So 230 published figures have no matching reading. A direct search finds the printed number for 228 of them: 220 in the OCR text, and 8 on pages that only pypdf has read, such as the 2026 book's revenue table. The last two are council-packet figures that the books print differently, 2024's General Fund and 2025's total ([caveat 11](#11-book-figures-occasionally-disagree-with-later-council-packets)).
+**The extractor does not read everything back.** It has no reader for revenue charts or Funds Summary tables, and it cannot parse several newer layouts, among them the OCR tables of the 2018, 2019, 2021 and 2022 department pies. So 232 published figures have no matching reading. A direct search finds the printed number for 230 of them: 222 in the OCR text, and 8 on pages that only pypdf has read, such as the 2026 book's revenue table. The last two are council-packet figures that the books print differently, 2024's General Fund and 2025's total ([caveat 11](#11-book-figures-occasionally-disagree-with-later-council-packets)).
 
 Tier 4 also reached two pages the born-digital dump never contained. **2011's summary block** (page 65) gives that year its operating/capital split and is anchored to a total already read independently from prose. **2017's staffing sentence**, "a citywide staffing level of 1,447 FTE", uses the same wording and chart context as the 2016 and 2018 books, and matches the 1,447.36 in its department table. Tier 3 reached three more: the 2008 book's department and revenue pies (pages 72–73), and the 2024 book's "By the Numbers" panel with that year's staffing level.
 
