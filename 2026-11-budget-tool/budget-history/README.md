@@ -102,6 +102,32 @@ python3 budget-books-extract.py dump.jsonl budget-books-ocr.jsonl -o budget-book
 
 `budget-books-ocr.py` explains its four tiers and what each costs. It caches every page it pays for, so an interrupted or repeated run never pays for a page twice.
 
+### OCR: batches, cost and guardrails
+
+The OCR stage sends each book's pages in batches of up to 100 and splits Datalab's answer back into one cached file per page. Datalab bills per page, so batching changes how long a run takes, not what it costs: tiers 1 and 3 together are 32 requests rather than 1,379. Sending one page per request was the original design, sized for a few hundred scattered pages. It is still available as `--batch-pages 1`, and is worth it only to isolate a page that keeps failing inside a batch. The script's docstring sets out the trade-offs in full. These are the rules it enforces:
+
+| Guardrail | What it prevents |
+|---|---|
+| Nothing is sent without `--yes`. `--estimate` prints the pages, the cost, the number of requests and a floor on the time | A surprise bill or a surprise day-long run |
+| A cached page is never sent again, whatever batch size wrote it | Paying twice for a page |
+| Each batch is recorded in `_pending.json` from upload until its pages are cached, and the next run collects anything left there first | Paying twice after a crash, a sleeping laptop or a timeout. Datalab keeps results about a day |
+| A batch that fails, or whose page breaks do not line up with the pages sent, caches nothing and is never re-sent automatically. Its raw output is kept as `_unsplit-…md` | Pages filed under the wrong number, and silent double billing |
+| Pages Datalab reports as failed are left uncached | Failed conversions passing as blank pages |
+| Uploads and status polls share one budget, `--rpm`, 10 requests a minute by default | Stalling on Datalab's rate limit |
+| A batch over `--batch-mb` is halved, and nothing over 190 MB is ever uploaded | Datalab's 200 MB ceiling. The 2024 book is 247 MB |
+| HTTP 402, the key's own spend cap, stops the run | Spending past a limit set on purpose. Set one in Datalab's billing settings |
+| `_requests.jsonl` in the cache logs every request's pages, cents and time | Unaudited spend, and time estimates that are guesses |
+
+**Batched output needs checking once.** The OCR engine looks across the pages of a request, and can drop text that repeats at the top or bottom of several pages as a running header. The extractor was validated on single-page output. Before relying on batches for a new kind of page, re-read ten pages that single-page runs already cached, into a scratch cache. This costs about 8 cents:
+
+```
+python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --book "2011 Annual Budget.pdf" \
+    --pages 65-68,83-88 --cache batch-check -o batch-check.jsonl --yes --verify
+diff "budget-books-ocr-cache/2011 Annual Budget/p065.md" "batch-check/2011 Annual Budget/p065.md"
+```
+
+`--verify` should still find 2011's summary block (`budget_operating_general`) and its department pie. Wording can differ from run to run. A missing heading or table row is the thing to look for.
+
 ## Layout
 
 ```
