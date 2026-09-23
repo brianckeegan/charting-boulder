@@ -57,8 +57,7 @@ many are not cached yet.
      same printed figures, and the tier that found 2011's summary block and
      2017's staffing level on pages the born-digital dump never held.
 
-Nothing is sent without --yes, and at the free tier's pacing (see --pace) a
-thousand pages take about two hours.
+Nothing is sent without --yes.
 
 What is deliberately left out
 -----------------------------
@@ -76,13 +75,84 @@ Budget, Volume 1" is a substring of "2006-2007 Annual Budget, Volume 1.pdf", and
 an unanchored match pulled that born-digital biennial book into a tier meant for
 scans. The scan test caught it, but only because that test exists.
 
-Resumable and cached
---------------------
-Each page's markdown is written to `<out stem>-cache/<book>/p<NNN>.md` — so
-`budget-books-ocr.jsonl` caches into `budget-books-ocr-cache/` — and a page
-whose file already exists is never re-sent. An interrupted run continues where
-it stopped, re-running is free, and the JSONL can be rebuilt from cache alone
-with `--rebuild`.
+How pages are sent: in batches, and why
+---------------------------------------
+Each book's wanted pages go to Datalab in batches of up to 100 (--batch-pages).
+A batch is a PDF sliced from the book with pypdf and converted with
+paginate=true, so the markdown comes back with a numbered break before every
+page and is cut apart into one cache file per page, exactly as before. Datalab
+bills per page, so a batch costs what its pages would cost one at a time. What
+batching changes is the number of requests, and requests are the bottleneck:
+
+    Datalab's ceilings    200 MB and 7,000 pages per request; 10 requests a
+                          minute and 5 at once on the free and pay-as-you-go
+                          plans (documentation.datalab.to/docs/common/limits)
+    one page per request  the 1,137 scanned tier 1 pages are 1,137 uploads, each
+                          followed by status polls, which this script counts
+                          against the same 10 a minute: close to four hours
+                          of requests before any processing time
+    batches of 100        13 uploads; the rest of the wait is Datalab's
+                          processing
+
+Every request used to carry one page. That suited the first OCR runs -- a few
+hundred scattered pages, where one page per request made page numbers
+unambiguous and the cache per page for free -- and it was not revisited when
+tier 1 added whole volumes, which then went page by page at a pace sized for
+two hundred.
+
+Batching has costs of its own. Each has a guardrail:
+
+  A batch fails as a unit    A failed batch caches nothing and is never
+                             re-sent automatically, since whether a failed
+                             request was billed is not knowable from here; the
+                             run ends by printing a one-page-at-a-time retry
+                             command for it. Pages Datalab lists in
+                             metadata.failed_pages are left uncached and the
+                             rest of the batch is kept.
+  Page numbers must be       The breaks must rise strictly within 0..k-1 of the
+  recovered                  pages sent. A gap is allowed and cached as a blank
+                             page, as a one-page request for an empty page would
+                             be. Anything else and the batch is not split: its
+                             raw markdown is kept as _unsplit-pNNN-pNNN.md beside
+                             the pages, so paid-for output is never discarded.
+  Long waits                 A batch can take many minutes. Its check URL goes
+                             into _pending.json before the first poll and comes
+                             out once its pages are cached, so a run that is
+                             killed, sleeps or times out is collected by the
+                             next run -- Datalab keeps results about a day --
+                             instead of being paid for twice.
+  Cross-page processing      The engine behind Datalab's convert endpoint looks
+                             across pages -- text repeated at the top or bottom
+                             of several pages can be dropped as a running header
+                             -- so a page converted in a batch can differ from
+                             the same page converted alone, and the extractor
+                             was validated on single-page output. README.md has
+                             a one-minute check that sends a few already-cached
+                             pages as a batch into a scratch cache for
+                             comparison; run it before trusting a new kind of
+                             batch, and use --verify after any run.
+  Upload size                Only the wanted pages travel, and a slice larger
+                             than --batch-mb is cut in half again before it is
+                             sent; nothing over 190 MB is ever uploaded. The
+                             2024 book, whole, is 247 MB -- over the ceiling.
+
+--batch-pages 1 still sends one page per request, which is only worth it to
+isolate a page that keeps failing inside a batch; --estimate warns when that
+would mean hundreds of requests. The same command re-run is always safe.
+
+Resumable, cached and audited
+-----------------------------
+Each page's markdown is written to `<out stem>-cache/<book>/p<NNN>.md` -- so
+`budget-books-ocr.jsonl` caches into `budget-books-ocr-cache/` -- and a page
+whose file already exists is never re-sent, whichever batch size wrote it. An
+interrupted run continues where it stopped, re-running is free, and the JSONL
+can be rebuilt from cache alone with `--rebuild`. Two bookkeeping files sit in
+the cache: _pending.json, the batches submitted but not yet collected, and
+_requests.jsonl, one line per request with its pages, cost in cents and time
+taken. The latter is the spend record, and what --estimate reads to predict how
+long the next run will take instead of guessing. A key's own 30-day spend cap,
+set in Datalab's billing settings, is the backstop outside this script: a
+request over it is refused with HTTP 402, and the run stops sending at once.
 
 One thing to watch
 ------------------
@@ -100,11 +170,14 @@ from __future__ import annotations
 
 import argparse
 import collections
+import concurrent.futures
+import datetime
 import io
 import json
 import os
 import re
 import sys
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -115,7 +188,8 @@ try:
 except ImportError:
     sys.exit("pypdf is required:  pip install pypdf")
 
-CONVERT = "https://www.datalab.to/api/v1/convert"
+# Overridable so the batching can be tested against a local stand-in.
+CONVERT = os.environ.get("DATALAB_CONVERT_URL", "https://www.datalab.to/api/v1/convert")
 USER_AGENT = "charting-boulder/budget-books-ocr (+https://github.com/brianckeegan/charting-boulder)"
 
 # Volume 1 of the three years the born-digital books cannot cover. Matched as
@@ -169,12 +243,25 @@ INTEREST_CSV = "budget-books-pages-of-interest.csv"
 # Manual mode's default page range (--book without --pages): the citywide
 # summary pages sit between 58 and 102 in every book pypdf can read.
 DEFAULT_WINDOW = (50, 115)
+# Accurate conversion lists at $10 per 1,000 pages (datalab.to/pricing,
+# 2026-09-23). This account takes Datalab's 25% discount for letting it keep
+# uploads for model training -- no concern for public budget books -- so $7.50
+# per 1,000. Without that opt-in, set this to 1.0. The estimate uses it; the
+# bill itself is each request's cost_breakdown, logged in _requests.jsonl.
 CENTS_PER_PAGE = 0.75
 
-# The free tier allows 10 requests a minute and 5 at once; one page per request
-# means a lot of requests, so pace them. Sequential and slow is fine here: the
-# whole job is a few hundred pages and it only ever runs once per book.
-PACE_SECONDS = 6.5
+# How pages travel -- see "How pages are sent" in the module docstring for why
+# batches, and what each of these guards against. Datalab's own ceilings
+# (documentation.datalab.to/docs/common/limits): 200 MB and 7,000 pages per
+# request, 10 requests a minute and 5 at once on the free and pay-as-you-go
+# plans.
+BATCH_PAGES = 100            # --batch-pages: pages per request; 1 = one page per request
+BATCH_MB = 90                # --batch-mb: a batch PDF bigger than this is split again
+HARD_MB = 190                # never upload more than this, whatever --batch-mb says
+REQUESTS_PER_MINUTE = 10     # --rpm: one budget for uploads AND status polls together
+CONCURRENT = 3               # --concurrency: batches in flight at once (the plan allows 5)
+RESULT_RETENTION_HOURS = 20  # Datalab deletes results about a day after they complete
+PER_PAGE_WARN = 50           # --estimate warns above this many one-page requests
 
 
 def api_key() -> str:
@@ -232,37 +319,103 @@ def infer_year(name: str):
     return max(years) if years else ""
 
 
-def one_page_pdf(reader: PdfReader, page: int) -> bytes:
-    """Page `page` (1-indexed) as a standalone PDF.
+def compact(pages) -> str:
+    """[1, 2, 3, 7, 9, 10] -> '1-3,7,9-10'."""
+    runs = []
+    for p in sorted(pages):
+        if runs and p == runs[-1][1] + 1:
+            runs[-1][1] = p
+        else:
+            runs.append([p, p])
+    return ",".join(str(a) if a == b else f"{a}-{b}" for a, b in runs)
+
+
+def pages_pdf(reader: PdfReader, pages: list[int]) -> bytes:
+    """The given pages (1-indexed, in order) as one standalone PDF.
 
     Sending a slice of the PDF rather than an extracted image is deliberate.
-    These scans are not all JPEG — pulling the page image out means knowing
+    These scans are not all JPEG -- pulling the page image out means knowing
     which of DCTDecode, CCITTFaxDecode, JBIG2Decode or FlateDecode this
     particular scanner used, and getting it wrong on one book is a silent
     failure. pypdf already knows how to copy a page, and Datalab takes a PDF.
+
+    Slicing, rather than uploading the whole book with Datalab's page_range, is
+    deliberate too: only the pages being paid for travel, and a slice fits under
+    Datalab's 200 MB ceiling when the book does not (the 2024 book is 247 MB).
     """
     w = PdfWriter()
-    w.add_page(reader.pages[page - 1])
+    for p in pages:
+        w.add_page(reader.pages[p - 1])
     # add_page copies the page tree, not the document catalogue, so the source's
     # /Info is dropped and each upload would otherwise arrive anonymous. Carry it
-    # over and add which page this was, so the file identifies itself on the
+    # over and add which pages these are, so the file identifies itself on the
     # far side instead of relying on the filename alone. Page-level metadata --
     # /MediaBox and /Rotate -- is copied by add_page already, which matters:
     # several of these scans have rotated pages, and a rotated page sent as a
     # bare image comes back sideways.
     src = dict(reader.metadata or {})
     w.add_metadata({k: str(v) for k, v in src.items() if k != "/Producer"}
-                   | {"/Subject": f"page {page} of {len(reader.pages)}"})
+                   | {"/Subject": f"pages {compact(pages)} of {len(reader.pages)}"})
     buf = io.BytesIO()
     w.write(buf)
     return buf.getvalue()
+
+
+def plan_batches(pages: list[int], n_pages: int, file_bytes: int,
+                 max_pages: int, max_mb: float) -> list[list[int]]:
+    """Cut a book's pages into batches of at most max_pages and roughly max_mb.
+
+    Size is estimated from the book's average page, which is close for scans
+    (every page is one image of about the same size); a batch that still comes
+    out too big when built is halved in send_batch before anything is sent.
+    """
+    per_page = file_bytes / max(n_pages, 1)
+    fit = max(1, int(max_mb * 1e6 // max(per_page, 1)))
+    size = max(1, min(max_pages, fit))
+    return [pages[i:i + size] for i in range(0, len(pages), size)]
 
 
 # --------------------------------------------------------------------------
 # Datalab
 # --------------------------------------------------------------------------
 
-def post_pdf(blob: bytes, name: str, key: str) -> str:
+class Fatal(Exception):
+    """An error no other batch can succeed past: bad key, spend cap, no access."""
+
+
+class BatchFailed(Exception):
+    """This batch failed; others may still succeed."""
+
+
+class RateLimiter:
+    """At most `per_minute` requests a minute across every thread, evenly spaced.
+
+    Uploads and status polls draw on the same budget. Counting only uploads is
+    how a one-page-per-request run spent most of its allowance polling.
+    """
+
+    def __init__(self, per_minute: float):
+        self.interval = 60.0 / per_minute
+        self.lock = threading.Lock()
+        self.next_slot = 0.0
+
+    def wait(self) -> None:
+        with self.lock:
+            slot = max(time.monotonic(), self.next_slot)
+            self.next_slot = slot + self.interval
+        delay = slot - time.monotonic()
+        if delay > 0:
+            time.sleep(delay)
+
+
+def _http_json(req: urllib.request.Request, timeout: float) -> dict:
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read())
+
+
+def submit(blob: bytes, name: str, key: str, limiter: RateLimiter) -> tuple[str, str]:
+    """Upload one PDF; return (request_check_url, request_id). Nothing is billed
+    until this succeeds, so every failure here is safe to retry or to skip."""
     boundary = "----charting-boulder-" + os.urandom(8).hex()
     parts = []
     # output_format=markdown is load-bearing, not a preference. It is what makes
@@ -274,7 +427,12 @@ def post_pdf(blob: bytes, name: str, key: str) -> str:
     # whose pies pypdf returns as interleaved nonsense. budget-books-extract.py
     # parses these as tables, keying on the cell containing a "%", so column order
     # does not matter. Changing this to json or html breaks that reader.
-    for field, value in (("output_format", "markdown"), ("mode", "accurate")):
+    #
+    # paginate=true is what makes a batch safe to cut back into pages: each page
+    # opens with a "{N}------" line. It is the only setting batching adds; mode
+    # and output_format are exactly what the validated single-page runs used.
+    for field, value in (("output_format", "markdown"), ("mode", "accurate"),
+                         ("paginate", "true")):
         parts.append(
             f'--{boundary}\r\nContent-Disposition: form-data; name="{field}"\r\n\r\n{value}\r\n'.encode()
         )
@@ -293,50 +451,311 @@ def post_pdf(blob: bytes, name: str, key: str) -> str:
                  "Content-Type": f"multipart/form-data; boundary={boundary}",
                  "User-Agent": USER_AGENT},
     )
-    for attempt in range(5):
+    # A slow uplink needs time: allow for about 2 Mbit/s, never under a minute.
+    timeout = 60 + len(blob) / 250_000
+    for attempt in range(6):
+        limiter.wait()
         try:
-            with urllib.request.urlopen(req, timeout=300) as resp:
-                answer = json.loads(resp.read())
+            answer = _http_json(req, timeout)
             if not answer.get("success"):
-                raise RuntimeError(answer.get("error"))
-            return answer["request_check_url"]
+                raise BatchFailed(f"upload refused: {answer.get('error')}")
+            return answer["request_check_url"], str(answer.get("request_id") or "")
         except urllib.error.HTTPError as exc:
-            if exc.code == 429 and attempt < 4:
-                time.sleep(60)
+            if exc.code in (401, 402, 403):
+                # 402 is the key's spend cap: a limit the owner set on purpose.
+                raise Fatal(f"HTTP {exc.code} from Datalab: {exc.read()[:300]!r}")
+            if exc.code == 413:
+                raise BatchFailed("413: over Datalab's size limit")
+            if exc.code in (429, 500, 502, 503, 529) and attempt < 5:
+                time.sleep(60 if exc.code == 429 else 10 * (attempt + 1))
                 continue
-            raise
-        except Exception:  # noqa: BLE001
-            if attempt == 4:
-                raise
-            time.sleep(5 * (attempt + 1))
-    raise RuntimeError("unreachable")
+            raise BatchFailed(f"upload failed: HTTP {exc.code}")
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            if attempt == 5:
+                raise BatchFailed(f"upload failed: {exc}")
+            time.sleep(10 * (attempt + 1))
+    raise BatchFailed("upload failed after retries")
 
 
-def poll(check_url: str, key: str, timeout: int = 600) -> dict:
+def wait_for(check_url: str, key: str, limiter: RateLimiter, n_pages: int,
+             timeout: float) -> dict:
+    """Poll until the request is complete; return the finished response.
+
+    Polls are spaced by the batch's size -- a 100-page batch is not going to be
+    ready in five seconds -- and draw on the same request budget as uploads.
+    Raises TimeoutError while the request is still running, which leaves it in
+    the pending ledger for the next run to collect rather than pay for again.
+    """
     req = urllib.request.Request(check_url, headers={"X-API-Key": key, "User-Agent": USER_AGENT})
+    interval = min(60.0, max(5.0, 0.5 * n_pages))
     deadline = time.time() + timeout
     while time.time() < deadline:
+        time.sleep(interval)
+        limiter.wait()
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
-                answer = json.loads(resp.read())
-            if answer.get("status") == "complete":
-                return answer
-        except Exception:  # noqa: BLE001
-            pass
-        time.sleep(4)
+            answer = _http_json(req, 120)
+        except urllib.error.HTTPError as exc:
+            if exc.code == 404:
+                raise BatchFailed("result not found: expired or never existed")
+            if exc.code in (401, 403):
+                raise Fatal(f"HTTP {exc.code} while polling")
+            if exc.code == 429:
+                time.sleep(60)
+            continue
+        except (urllib.error.URLError, TimeoutError, OSError, ValueError):
+            continue
+        if answer.get("status") != "complete":
+            continue
+        # Requests processed in Datalab's EU region return a signed result_url
+        # instead of the content itself. Fetch it without the API key, and keep
+        # the polling response's non-null fields, which carry the billing.
+        if answer.get("result_url"):
+            with urllib.request.urlopen(answer["result_url"], timeout=300) as resp:
+                answer = {**json.loads(resp.read()),
+                          **{k: v for k, v in answer.items() if v is not None}}
+        if answer.get("success") is False:
+            raise BatchFailed(f"conversion failed: {answer.get('error')}")
+        return answer
     raise TimeoutError(check_url)
+
+
+PAGE_BREAK = re.compile(r"^\{(\d+)\}-{8,}[ \t]*$", re.M)
+
+
+def split_pages(markdown: str, pages: list[int]) -> dict[int, str]:
+    """A batch's paginated markdown, cut back into one text per page sent.
+
+    With paginate=true each page opens with a line of "{N}" and dashes, N
+    counting from 0 within the uploaded PDF. The page numbers written to the
+    cache come from our own list of what was sent, and N is only allowed to
+    confirm it: the marks must rise strictly and stay inside 0..k-1. A page
+    with no content can come back with no mark, which is a gap; it is returned
+    as empty text, exactly as a blank page from a one-page request would be.
+    Anything else -- marks out of order, repeated or out of range, or text
+    before the first one -- raises, and the batch is not split at all.
+    """
+    marks = list(PAGE_BREAK.finditer(markdown))
+    ids = [int(m.group(1)) for m in marks]
+    k = len(pages)
+    if not marks:
+        if k == 1:
+            return {pages[0]: markdown}
+        raise ValueError(f"no page marks in a {k}-page batch")
+    if any(b <= a for a, b in zip(ids, ids[1:])) or ids[0] < 0 or ids[-1] >= k:
+        raise ValueError(f"page marks {ids[:12]}{'...' if len(ids) > 12 else ''} "
+                         f"do not fit {k} pages")
+    if markdown[:marks[0].start()].strip():
+        raise ValueError("text before the first page mark")
+    texts = {p: "" for p in pages}
+    for j, m in enumerate(marks):
+        stop = marks[j + 1].start() if j + 1 < len(marks) else len(markdown)
+        body = markdown[m.end():stop].strip("\n")
+        texts[pages[ids[j]]] = body + "\n" if body.strip() else ""
+    return texts
+
+
+class Ledger:
+    """Requests submitted -- and so billed -- whose pages are not cached yet.
+
+    An entry is written before the first poll and removed once its pages are in
+    the cache. If a run is killed, the machine sleeps or a poll times out, the
+    next run collects these results first (Datalab keeps them about a day)
+    rather than paying to send the same pages again.
+    """
+
+    def __init__(self, path: Path):
+        self.path = path
+        self.lock = threading.Lock()
+        try:
+            self.entries = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            self.entries = {}
+
+    def _save(self) -> None:
+        tmp = self.path.with_suffix(".tmp")
+        tmp.write_text(json.dumps(self.entries, indent=1), encoding="utf-8")
+        tmp.replace(self.path)
+
+    def add(self, check_url: str, file: str, pages: list[int]) -> None:
+        with self.lock:
+            self.entries[check_url] = {
+                "file": file, "pages": pages,
+                "submitted": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")}
+            self._save()
+
+    def remove(self, check_url: str) -> None:
+        with self.lock:
+            if self.entries.pop(check_url, None) is not None:
+                self._save()
+
+    def pending_pages(self) -> set[tuple[str, int]]:
+        with self.lock:
+            return {(e["file"], p) for e in self.entries.values() for p in e["pages"]}
+
+    def age_hours(self, check_url: str) -> float:
+        ts = datetime.datetime.fromisoformat(self.entries[check_url]["submitted"])
+        return (datetime.datetime.now(datetime.timezone.utc) - ts).total_seconds() / 3600
+
+
+class RequestLog:
+    """One JSON line per request: what was sent, what came back, what it cost.
+
+    The audit trail for spend, and the history --estimate reads to say how long
+    the next run will take instead of guessing.
+    """
+
+    def __init__(self, path: Path):
+        self.path = path
+        self.lock = threading.Lock()
+
+    def write(self, **row) -> None:
+        row = {"time": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
+               **row}
+        with self.lock, self.path.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(row) + "\n")
+
+    def seconds_per_page(self) -> float | None:
+        """Median wall-clock seconds per page over past successful batches."""
+        try:
+            rows = [json.loads(line) for line in self.path.read_text(encoding="utf-8").splitlines()
+                    if line.strip()]
+        except (OSError, ValueError):
+            return None
+        rates = sorted(r["elapsed"] / r["n"] for r in rows
+                       if r.get("status") == "cached" and r.get("n") and r.get("elapsed"))
+        return rates[len(rates) // 2] if rates else None
+
+
+class Sender:
+    """Everything the batch workers share: key, limits, cache, ledger, log."""
+
+    def __init__(self, key, limiter, cache, ledger, log, max_bytes):
+        self.key, self.limiter, self.cache = key, limiter, cache
+        self.ledger, self.log, self.max_bytes = ledger, log, max_bytes
+        self.pdf_lock = threading.Lock()      # pypdf readers are not thread-safe
+        self.print_lock = threading.Lock()
+        self.stop = threading.Event()         # set by a Fatal error: send nothing more
+        self.failed = []                      # (file, pages, reason), for the retry hint
+        self.cents = 0.0
+        self.cached = 0
+        self.poll_timeout = None              # seconds; None = scale with batch size
+
+    def say(self, msg: str) -> None:
+        with self.print_lock:
+            print(msg)
+
+    def send(self, pdf: Path, reader: PdfReader, pages: list[int]) -> None:
+        """Build, upload, wait for and cache one batch. Never raises except Fatal."""
+        if self.stop.is_set():
+            return
+        with self.pdf_lock:
+            blob = pages_pdf(reader, pages)
+        if len(blob) > self.max_bytes and len(pages) > 1:
+            half = len(pages) // 2
+            self.send(pdf, reader, pages[:half])
+            self.send(pdf, reader, pages[half:])
+            return
+        label = f"{pdf.stem[:34]} p{compact(pages)}"
+        try:
+            check_url, request_id = submit(blob, f"{pdf.stem}-p{pages[0]}-{pages[-1]}.pdf",
+                                           self.key, self.limiter)
+        except BatchFailed as exc:
+            if "413" in str(exc) and len(pages) > 1:     # refused unbilled: try halves
+                half = len(pages) // 2
+                self.send(pdf, reader, pages[:half])
+                self.send(pdf, reader, pages[half:])
+                return
+            self._fail(pdf, pages, str(exc), label)
+            return
+        self.ledger.add(check_url, pdf.name, pages)
+        self.say(f"    sent  {label}  ({len(pages)}p, {len(blob) / 1e6:.1f} MB)")
+        self.collect(check_url, pdf.name, pages, started=time.time(), request_id=request_id)
+
+    def collect(self, check_url: str, file: str, pages: list[int], started: float | None,
+                request_id: str = "") -> None:
+        """Wait for a submitted batch and cache its pages. A timeout leaves it in
+        the ledger for the next run; nothing here re-sends anything."""
+        label = f"{Path(file).stem[:34]} p{compact(pages)}"
+        try:
+            answer = wait_for(check_url, self.key, self.limiter, len(pages),
+                              timeout=self.poll_timeout or max(900, 30 * len(pages)))
+        except TimeoutError:
+            self.say(f"    still running after the wait: {label}. Left in the ledger; "
+                     f"the next run collects it without paying again.")
+            return
+        except BatchFailed as exc:
+            self.ledger.remove(check_url)
+            self._fail(Path(file), pages, str(exc), label, request_id=request_id)
+            return
+        cents = (answer.get("cost_breakdown") or {}).get("final_cost_cents")
+        with self.print_lock:
+            self.cents += cents or 0
+        book_dir = self.cache / Path(file).stem
+        book_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            texts = split_pages(answer.get("markdown") or "", pages)
+        except ValueError as exc:
+            # Paid for and unusable as pages: keep the raw output so it is never
+            # thrown away, cache nothing, and send nothing again.
+            raw = book_dir / f"_unsplit-p{pages[0]:03d}-p{pages[-1]:03d}.md"
+            raw.write_text(answer.get("markdown") or "", encoding="utf-8")
+            self.ledger.remove(check_url)
+            self._fail(Path(file), pages, f"could not split: {exc}; raw output in {raw.name}",
+                       label, request_id=request_id, cents=cents)
+            return
+        failed_idx = set((answer.get("metadata") or {}).get("failed_pages") or [])
+        failed = [pages[i] for i in sorted(failed_idx) if 0 <= i < len(pages)]
+        for pg, text in texts.items():
+            if pg not in failed:
+                (book_dir / f"p{pg:03d}.md").write_text(text, encoding="utf-8")
+        self.ledger.remove(check_url)
+        kept = len(pages) - len(failed)
+        with self.print_lock:
+            self.cached += kept
+        self.log.write(file=file, pages=compact(pages), n=len(pages), request_id=request_id,
+                       status="cached", failed_pages=compact(failed) if failed else "",
+                       # A batch collected from the ledger was not timed from its
+                       # upload, so it says nothing about how long batches take.
+                       elapsed=round(time.time() - started, 1) if started else None,
+                       runtime=answer.get("runtime"), cents=cents)
+        self.say(f"    done  {label}  {kept} cached"
+                 + (f", {len(failed)} failed: p{compact(failed)}" if failed else "")
+                 + (f"  {cents}c" if cents is not None else ""))
+        if failed:
+            self.failed.append((file, failed, "Datalab reported these pages as failed"))
+
+    def _fail(self, pdf: Path, pages: list[int], reason: str, label: str,
+              request_id: str = "", cents=None) -> None:
+        self.failed.append((pdf.name, pages, reason))
+        self.log.write(file=pdf.name, pages=compact(pages), n=len(pages), request_id=request_id,
+                       status="failed", error=reason, cents=cents)
+        self.say(f"    FAILED {label}: {reason}")
 
 
 # --------------------------------------------------------------------------
 
 def select(root: Path, wanted: list[str]) -> list[Path]:
+    """Files for --book. A full filename matches only itself: as a substring,
+    "2007 Annual Budget, Volume 1.pdf" also matches "2006-2007 Annual Budget,
+    Volume 1.pdf", and manual mode would send pages of the wrong book."""
     pdfs = sorted(root.rglob("*.pdf")) + sorted(root.rglob("*.PDF"))
-    hits = [p for p in pdfs if any(w.lower() in p.name.lower() for w in wanted)]
-    missing = [w for w in wanted
-               if not any(w.lower() in p.name.lower() for p in pdfs)]
-    for w in missing:
-        print(f"  ! no file matching {w!r}")
+    hits = []
+    for w in wanted:
+        exact = [p for p in pdfs if p.name.lower() == w.lower()]
+        found = exact or [p for p in pdfs if w.lower() in p.name.lower()]
+        if not found:
+            print(f"  ! no file matching {w!r}")
+        hits += [p for p in found if p not in hits]
     return hits
+
+
+def parse_pages(spec: str) -> list[int]:
+    """'58,60-62' -> [58, 60, 61, 62]."""
+    out = []
+    for part in re.findall(r"\d+(?:\s*-\s*\d+)?", spec):
+        lo, _, hi = part.replace(" ", "").partition("-")
+        out += range(int(lo), int(hi or lo) + 1)
+    return sorted(set(out))
 
 
 def page_list(n_pages: int, window, every: int, explicit) -> list[int]:
@@ -359,17 +778,34 @@ def main():
                          "every page a published figure came from, 4 = every page "
                          "holding a pie, table or summary block, read or not. "
                          "--book or --pages switches to manual selection instead.")
-    ap.add_argument("--book", action="append", default=[], metavar="SUBSTRING",
-                    help="filename substring to include; repeatable. Defaults to the "
-                         "three Volume 1 scans the born-digital books cannot cover.")
+    ap.add_argument("--book", action="append", default=[], metavar="NAME",
+                    help="a PDF's filename (which then matches only itself) or a "
+                         "substring of one; repeatable. Defaults to the three Volume 1 "
+                         "scans the born-digital books cannot cover.")
     ap.add_argument("--window", default="{}-{}".format(*DEFAULT_WINDOW), metavar="LO-HI",
                     help="with --book: page range to send (default %(default)s)")
-    ap.add_argument("--pages", default="", metavar="N,N,...",
-                    help="exact pages to send, overriding --window")
-    ap.add_argument("--pace", type=float, default=PACE_SECONDS, metavar="SECONDS",
-                    help="seconds between requests (default %(default)s, sized for the "
-                         "free tier's 10/minute). Lower it on a paid plan to shorten a "
-                         "long run; a 429 is retried after a minute either way.")
+    ap.add_argument("--pages", default="", metavar="N,N-M,...",
+                    help="exact pages to send, overriding --window; ranges allowed")
+    ap.add_argument("--batch-pages", type=int, default=BATCH_PAGES, metavar="N",
+                    help="pages per request (default %(default)s). Datalab bills per page "
+                         "either way; 1 sends one page per request, which is only worth "
+                         "it to isolate a page that fails inside a batch")
+    ap.add_argument("--batch-mb", type=float, default=BATCH_MB, metavar="MB",
+                    help="target upload size per request (default %(default)s; Datalab's "
+                         "ceiling is 200)")
+    ap.add_argument("--rpm", type=float, default=REQUESTS_PER_MINUTE, metavar="N",
+                    help="requests per minute, uploads and status polls together "
+                         "(default %(default)s, Datalab's free and pay-as-you-go limit; "
+                         "the Team plan allows 200)")
+    ap.add_argument("--concurrency", type=int, default=CONCURRENT, metavar="N",
+                    help="requests in flight at once (default %(default)s; the free plan "
+                         "allows 5)")
+    ap.add_argument("--pace", type=float, default=None, metavar="SECONDS",
+                    help="older spelling of --rpm: seconds between requests")
+    ap.add_argument("--poll-timeout", type=float, default=None, metavar="SECONDS",
+                    help="how long to wait for one batch before leaving it in the "
+                         "ledger for the next run (default 15 min, or 30s per page "
+                         "for big batches)")
     ap.add_argument("--every", type=int, default=1, metavar="N",
                     help="thin the window to every Nth page — the cheap way to "
                          "find which pages carry the summaries")
@@ -399,7 +835,10 @@ def main():
         sys.exit(f"no such directory: {root}")
     lo, _, hi = args.window.partition("-")
     window = (int(lo), int(hi))
-    explicit = [int(x) for x in re.findall(r"\d+", args.pages)]
+    explicit = parse_pages(args.pages)
+    if args.pace:
+        args.rpm = 60.0 / args.pace
+    args.batch_pages = max(1, args.batch_pages)
     out_path = Path(args.out)
     cache = Path(args.cache) if args.cache else out_path.with_name(out_path.stem + "-cache")
 
@@ -489,16 +928,37 @@ def main():
     if not want:
         sys.exit("nothing selected — check --tier / --book against the real filenames")
 
+    # Batches submitted by an earlier run and not collected yet. They are paid
+    # for, so their pages are not sent again; results older than Datalab keeps
+    # them are dropped here, before pricing, so those pages are counted to send.
+    ledger = Ledger(cache / "_pending.json")
+    for url in list(ledger.entries):
+        if ledger.age_hours(url) > RESULT_RETENTION_HOURS:
+            e = ledger.entries[url]
+            print(f"  ! a batch submitted {ledger.age_hours(url):.0f}h ago "
+                  f"({e['file']} p{compact(e['pages'])}) is past Datalab's retention; "
+                  f"its pages will be sent again")
+            ledger.remove(url)
+    pending = ledger.pending_pages()
+
     plan, by_tier = [], collections.Counter()
+    n_requests = 0
     for pdf in sorted(want):
         pages = sorted(want[pdf])
-        plan.append((pdf, PdfReader(str(pdf)), pages))
+        reader = PdfReader(str(pdf))
+        to_send = [pg for pg in pages
+                   if not (cache / pdf.stem / f"p{pg:03d}.md").exists()
+                   and (pdf.name, pg) not in pending]
+        batches = plan_batches(to_send, len(reader.pages), pdf.stat().st_size,
+                               args.batch_pages, args.batch_mb)
+        plan.append((pdf, reader, pages, batches))
+        n_requests += len(batches)
         for pg in pages:
             by_tier[want[pdf][pg]] += 1
-        cached = sum(1 for pg in pages if (cache / pdf.stem / f"p{pg:03d}.md").exists())
         tset = "".join(str(t) for t in sorted({want[pdf][pg] for pg in pages}))
-        print(f"  [t{tset}] {pdf.name[:46]:<46} {len(pages):>4} of "
-              f"{len(PdfReader(str(pdf)).pages):>4}p, {cached:>4} cached")
+        print(f"  [t{tset}] {pdf.name[:46]:<46} {len(pages):>4} of {len(reader.pages):>4}p, "
+              f"{len(pages) - len(to_send):>4} cached or pending, "
+              f"{len(batches):>3} request{'s' if len(batches) != 1 else ''}")
     print()
     for t in sorted(by_tier):
         label = {1: "acquisition, scanned", 2: "acquisition, born-digital",
@@ -507,11 +967,32 @@ def main():
         print(f"  tier {t}  {label:<26} {by_tier[t]:>5}p = "
               f"${by_tier[t] * CENTS_PER_PAGE / 100:>6,.2f}")
 
-    todo = sum(1 for pdf, _, pages in plan
-               for p in pages if not (cache / pdf.stem / f"p{p:03d}.md").exists())
-    print(f"\n  {todo} pages to send x {CENTS_PER_PAGE}c = "
-          f"${todo * CENTS_PER_PAGE / 100:.2f}"
-          f"   (~{todo * args.pace / 60:.0f} min at {args.pace}s/page)")
+    todo = sum(len(b) for *_, batches in plan for b in batches)
+    print(f"\n  {todo} pages to send x {CENTS_PER_PAGE}c = ${todo * CENTS_PER_PAGE / 100:.2f}")
+    if pending:
+        print(f"  {len(ledger.entries)} batch(es), {len(pending)} pages, were submitted "
+              f"by an earlier run and not collected; they are collected first, at no cost")
+    # Time, honestly. Every request needs at least one poll after its upload, so
+    # the request budget alone sets a floor; Datalab's processing comes on top,
+    # and the request log's history is the only fair guess at it.
+    if todo:
+        floor = 2 * n_requests / args.rpm
+        print(f"  {n_requests} request{'s' if n_requests != 1 else ''} of up to "
+              f"{args.batch_pages} page{'s' if args.batch_pages != 1 else ''}, "
+              f"{args.concurrency} in flight, within {args.rpm:g} requests/minute: "
+              f"at least {floor:.0f} min for the requests themselves")
+        spp = RequestLog(cache / "_requests.jsonl").seconds_per_page()
+        if spp:
+            print(f"  past batches took a median {spp:.1f}s per page, so roughly "
+                  f"{spp * todo / args.concurrency / 60 + floor:.0f} min in all")
+        else:
+            print("  Datalab's processing time comes on top; the first run records it "
+                  "in _requests.jsonl for the next estimate")
+        if args.batch_pages == 1 and todo > PER_PAGE_WARN:
+            print(f"\n  ! --batch-pages 1 means one request per page: {todo} uploads, each "
+                  f"with its polls, at least {floor / 60:.1f} hours before any processing "
+                  f"time. Datalab bills per page, so batches cost the same. Use single "
+                  f"pages only to isolate a page that keeps failing inside a batch.")
 
     if args.estimate:
         print("\n  --estimate: nothing sent. Add --yes to spend it.")
@@ -519,34 +1000,54 @@ def main():
     if todo and not (args.yes or args.rebuild):
         sys.exit("\n  refusing to spend money without --yes")
 
-    if not args.rebuild and todo:
+    if not args.rebuild and (todo or ledger.entries):
         key = api_key()
-        sent = 0
-        for pdf, reader, pages in plan:
-            (cache / pdf.stem).mkdir(parents=True, exist_ok=True)
-            for p in pages:
-                dest = cache / pdf.stem / f"p{p:03d}.md"
-                if dest.exists():
-                    continue
+        cache.mkdir(parents=True, exist_ok=True)
+        sender = Sender(key, RateLimiter(args.rpm), cache, ledger,
+                        RequestLog(cache / "_requests.jsonl"),
+                        int(min(1.5 * args.batch_mb, HARD_MB) * 1e6))
+        sender.poll_timeout = args.poll_timeout
+        print()
+        pool = concurrent.futures.ThreadPoolExecutor(max_workers=max(1, args.concurrency))
+        futures = [pool.submit(sender.collect, url, e["file"], e["pages"], None)
+                   for url, e in list(ledger.entries.items())]
+        futures += [pool.submit(sender.send, pdf, reader, batch)
+                    for pdf, reader, _pages, batches in plan for batch in batches]
+        try:
+            for fut in concurrent.futures.as_completed(futures):
                 try:
-                    url = post_pdf(one_page_pdf(reader, p), f"{pdf.stem}-p{p}.pdf", key)
-                    answer = poll(url, key)
-                except Exception as exc:  # noqa: BLE001
-                    # One bad page must not lose the pages already paid for.
-                    print(f"    {pdf.stem} p{p}: FAILED {type(exc).__name__}: {exc}")
-                    continue
-                dest.write_text(answer.get("markdown") or "", encoding="utf-8")
-                sent += 1
-                cents = (answer.get("cost_breakdown") or {}).get("final_cost_cents")
-                print(f"    {pdf.stem[:34]:<34} p{p:>3}  {len(dest.read_text(encoding='utf-8')):>5} chars"
-                      f"  {cents if cents is not None else '?'}c")
-                time.sleep(args.pace)
-        print(f"\n  sent {sent} pages")
+                    fut.result()
+                except Fatal as exc:
+                    if not sender.stop.is_set():
+                        sender.stop.set()
+                        sender.say(f"\n  STOPPING: {exc}. Nothing more will be sent; "
+                                   f"batches already submitted are still collected.")
+        except KeyboardInterrupt:
+            sender.stop.set()
+            print(f"\n  interrupted. Batches already submitted stay in {ledger.path.name} "
+                  f"and are collected by the next run, at no cost.", flush=True)
+            os._exit(130)
+        pool.shutdown(wait=True)
+        print(f"\n  cached {sender.cached} pages; Datalab reports "
+              f"${sender.cents / 100:.2f} billed for this run's collected batches")
+        if ledger.entries:
+            print(f"  {len(ledger.entries)} batch(es) still running on Datalab's side, "
+                  f"recorded in {ledger.path}. Run the same command again later to "
+                  f"collect them; they are not sent or paid for again.")
+        if sender.failed:
+            print(f"  {len(sender.failed)} set(s) of pages not cached. None is re-sent "
+                  f"automatically: a request that failed may still have been billed.")
+            for file, pages, reason in sender.failed:
+                print(f"    {file} p{compact(pages)}: {reason}")
+            print("  To retry them one page at a time, after checking the reason:")
+            for file, pages, _reason in sender.failed:
+                print(f'    python3 {Path(sys.argv[0]).name} {args.root} --book "{file}" '
+                      f'--pages {compact(pages)} --batch-pages 1 --yes')
 
     # --- JSONL, in the same shape as --dump-text -------------------------
     n = blank = 0
     with out_path.open("w", encoding="utf-8") as fh:
-        for pdf, _reader, pages in plan:
+        for pdf, _reader, pages, _batches in plan:
             for p in pages:
                 src = cache / pdf.stem / f"p{p:03d}.md"
                 if not src.exists():
