@@ -8,7 +8,7 @@ data dictionary disagree about a count or a year, this file is right.
 
 | File | Rows | Years |
 |---|---:|---|
-| `budget-history.csv` | 664 | 2002–2027 |
+| `budget-history.csv` | 673 | 2002–2027 |
 | `budget-history-wide.csv` | 26 | 2002–2027 |
 | `budget-history-department-crosswalk.csv` | 291 | 2005–2022, 2024–2026 |
 | `budget-history-provenance.csv` | 9 | not applicable |
@@ -20,7 +20,7 @@ build before any file is written, so a published file has passed all of them.
 
 | Check | Cases | Tolerance | Largest miss |
 |---|---:|---|---|
-| One row per (year, measure, basis) | 664 | exact | none |
+| One row per (year, measure, basis) | 673 | exact | none |
 | Department buckets, plus any balancing line, sum to `budget_total` | 21 | $0.05M | $0.002M (2026 deptexpfiltered_*) |
 | A department label keeps its bucket from year to year, or a note says why | 76 | exact | none |
 | General Fund half + dedicated half = `budget_operating` | 18 | $0.2M | $0.012M (2019 adopted) |
@@ -52,24 +52,24 @@ Each miss is kept in the data as `salesuse_component_residual`:
 | `rec2027` | 9 | 2027 |
 | `glance2027` | 6 | 2027 |
 | `snapshot2023` | 81 | 2021–2023 |
-| `books` | 208 | 2003–2026 |
+| `books` | 212 | 2003–2026 |
 | `deptsnapshot2026` | 24 | 2024–2026 |
-| `booksocr` | 223 | 2002, 2005–2022, 2024 |
+| `booksocr` | 228 | 2002, 2004–2005, 2007–2022, 2024 |
 | `brl2027` | 1 | 2027 |
 
 ## Rows by basis
 
 | `basis` | Rows | Years |
 |---|---:|---|
-| `actual` | 78 | 2003–2009, 2021–2025 |
-| `adopted` | 494 | 2002–2026 |
+| `actual` | 80 | 2003–2009, 2021–2025 |
+| `adopted` | 498 | 2002–2026 |
 | `derived` | 3 | 2024–2026 |
 | `forecast` | 9 | 2026–2027 |
 | `identified` | 3 | 2025–2026 |
 | `policy` | 1 | 2026 |
-| `projected` | 2 | 2007, 2009 |
+| `projected` | 3 | 2007, 2009 |
 | `recommended` | 28 | 2026–2027 |
-| `restated` | 9 | 2007, 2011–2012, 2014–2016, 2020–2022 |
+| `restated` | 11 | 2007, 2011–2012, 2014–2016, 2018–2022 |
 | `revised_projection` | 10 | 2025–2026 |
 | `total_budget` | 27 | 2023 |
 
@@ -81,7 +81,7 @@ absent from the data, never zero.
 | Measure | Unit | Years | Bases |
 |---|---|---|---|
 | `budget_capital` | musd | 2005–2027 | `adopted`, `recommended` |
-| `budget_general_fund` | musd | 2005–2027 | `actual`, `adopted`, `projected`, `recommended` |
+| `budget_general_fund` | musd | 2003–2027 | `actual`, `adopted`, `projected`, `recommended` |
 | `budget_general_fund_revenue` | musd | 2003–2026 | `actual`, `adopted`, `projected` |
 | `budget_operating` | musd | 2005–2027 | `adopted`, `recommended` |
 | `budget_operating_dedicated` | musd | 2005–2022 | `adopted` |
@@ -157,7 +157,7 @@ absent from the data, never zero.
 | `sources_revenue_total` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
 | `sources_revenue_transfers_in` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
 | `sources_revenue_utility` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
-| `staffing_fte` | fte | 2002–2018, 2020–2026 | `adopted`, `restated` |
+| `staffing_fte` | fte | 2002–2026 | `adopted`, `restated` |
 | `staffing_savings` | musd | 2027 | `recommended` |
 | `uses_expense_capital` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
 | `uses_expense_debt_service` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |

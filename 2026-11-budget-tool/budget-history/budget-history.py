@@ -124,7 +124,7 @@ SOURCES = {
         "date": "",
         "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2",
         "retrieved": "2026-09-23",
-        "notes": "Same books as `books`, but pages pypdf cannot reach or cannot use, read by Datalab through budget-books-ocr.py: the 2007, 2009 and 2010 Volume 1s, which survive only as scans, and born-digital pages with interleaved pie labels, dropped commas or figures inside images, or that the page dump never held. A pie or summary block is kept only when it sums to a total the same page prints, and a multi-year table value only when its column header names the year and basis. The single staffing figures, 2002 and 2024 and 2022's restatement, are kept on their wording and context. The data dictionary's caveat on OCR lists what was read wrong and not kept.",
+        "notes": "Same books as `books`, but pages pypdf cannot reach or cannot use, read by Datalab through budget-books-ocr.py: the 2007, 2009 and 2010 Volume 1s, which survive only as scans, and born-digital pages with interleaved pie labels, dropped commas or figures inside images, or that the page dump never held. A pie or summary block is kept only when it sums to a total the same page prints, and a multi-year table value only when its column header names the year and basis. A staffing table is kept only when its columns sum to the totals it prints; the single staffing figures, 2002 and 2024 and 2022's restatement, are kept on their wording and context. The data dictionary's caveat on OCR lists what was read wrong and not kept.",
     },
     "brl2027": {
         "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and trim pool hours",
@@ -395,24 +395,50 @@ for yr, basis, v in [(2003, "actual", 87.252), (2004, "actual", 80.270),
 # APPROVED columns -- and where a column overlaps a figure above, it matches to
 # the thousand: the 2007 book's 2007 approved uses (89,650) and 2006 approved
 # revenue (82,637), the 2009 book's 2008 approved uses (94,238), and the 2010
-# book's 2010 approved uses (96,713) and revenue (96,746). 2009's own approved
+# book's 2010 approved uses (96,713) and revenue (96,746). The 2007 book's 2006
+# approved uses (82,623) matches the 2006-2007 book's, below. 2009's own approved
 # figures are printed in both the 2009 and the 2010 book, and the two agree.
 #
 #   book   page   columns
-#   2007   p92    uses:    2005 actual 86,415   2006 approved 82,623   (2007: above)
+#   2007   p92    uses:    2005 actual 86,415   (2006: below)          (2007: above)
 #   2007   p83    sources: 2005 actual 86,148   (2006: above)          2007 approved 88,520
 #   2009   p89    uses:    2007 actual 97,173   (2008: above)          2009 approved 97,219
 #   2009   p81    sources: 2007 actual 94,141   2008 approved 93,358   2009 approved 96,167
 #   2010   p89    uses:    2008 actual 99,905   2009 approved 97,219   (2010: above)
 #   2010   p81    sources: 2008 actual 97,578   2009 approved 96,167   (2010: above)
-for yr, basis, v in [(2005, "actual", 86.415), (2006, "adopted", 82.623),
-                     (2007, "actual", 97.173), (2008, "actual", 99.905),
-                     (2009, "adopted", 97.219)]:
+for yr, basis, v in [(2005, "actual", 86.415), (2007, "actual", 97.173),
+                     (2008, "actual", 99.905), (2009, "adopted", 97.219)]:
     add(yr, "budget_general_fund", basis, v, "musd", "booksocr")
 for yr, basis, v in [(2005, "actual", 86.148), (2007, "adopted", 88.520),
                      (2007, "actual", 94.141), (2008, "adopted", 93.358),
                      (2008, "actual", 97.578), (2009, "adopted", 96.167)]:
     add(yr, "budget_general_fund_revenue", basis, v, "musd", "booksocr")
+
+# The 2005 and 2006-2007 books give the headline in prose -- "The 2005 General
+# Fund budget is $80,059,000" -- over a General Fund pie with the same total.
+# Their General Fund fund financials (2005 p238, 2006-2007 p249) print the
+# actuals. Their Uses of Funds tables stop the first page at "Total General Fund
+# Expenditures". "Total General Fund Uses" is on the next page, which the page
+# dump never held and OCR (tier 2) read. Every column of both tables balances:
+# expenditures plus transfers out, plus the .15% sales tax allocation, is the
+# total. The tables add two figures nothing else prints:
+#
+#   book        page   Total General Fund Uses
+#   2005        p77    2003 actual 88,768   2004 approved 77,526   2005 approved 80,059
+#   2006-2007   p71    2004 actual 82,364   2005 approved 80,059   2006 approved 82,623
+#                      2007 projected 84,728
+#
+# The fund financials agree on the actuals and on 2006 but put 2005 at 79,674.
+# They have no line for the $382 thousand the .15% allocation transferred out
+# that year, which the summary tables count. The prose, the pie and both tables
+# say 80,059, and the 2006 book calls its 82,623 "a 3.2% increase over the 2005
+# approved budget", which is +3.2% on 80,059. The fund financial's 2007
+# projection, 84,730, differs from the table's by rounding.
+for yr, basis, v in [(2003, "actual", 88.768), (2004, "actual", 82.364),
+                     (2005, "adopted", 80.059), (2006, "adopted", 82.623)]:
+    add(yr, "budget_general_fund", basis, v, "musd", "books")
+for yr, basis, v in [(2004, "adopted", 77.526), (2007, "projected", 84.728)]:
+    add(yr, "budget_general_fund", basis, v, "musd", "booksocr")
 
 # --- General Fund, 2013 and 2019-2025, and its revenue from 2014 ---------------
 # From 2012 each book states both sides of the General Fund in prose -- "based
@@ -528,9 +554,9 @@ for yr, v in [(2003, 1290.69), (2004, 1200.68), (2005, 1212.11), (2006, 1218.84)
 # The 2015-2017 books call their restatement "Adjusted" ("adjustments remove
 # changes approved and incorporated after the passage of the ... Approved
 # Budget"), and the 2021-2023 books "Revised Staffing". For 2020 the revised
-# figure, 1,456.86 in the 2021 book, is the only one in hand; 2020's own book's
-# staffing table was never read, so 2020 has no adopted row yet. 2022's revision
-# is in the 2023 book, whose table pypdf cannot read.
+# figure is 1,456.86 in the 2021 book, 18.50 below the 1,475.36 the 2020 book
+# adopted (below). 2022's revision is in the 2023 book, whose table pypdf cannot
+# read.
 for yr, v in [(2011, 1231.25), (2012, 1244.76), (2014, 1299.58), (2015, 1383.12),
               (2016, 1427.24), (2020, 1456.86), (2021, 1402.20)]:
     add(yr, "staffing_fte", "restated", v, "fte", "books")
@@ -560,6 +586,24 @@ add(2002, "staffing_fte", "adopted", 1304.69, "fte", "booksocr")
 # FTE below both neighbours, which looks like a misread and is not: the 2025 book
 # calls its 1,539.10 "an increase of 2.0% from 2024", which puts 2024 at 1,508.9.
 add(2024, "staffing_fte", "adopted", 1509.13, "fte", "booksocr")
+
+# 2019 and 2020, from their own books' "Staffing Levels by Department" tables,
+# which the page dump never held and OCR (tier 2) read. Each book states its
+# total twice, in prose ("a citywide staffing level of 1,432.58 FTE") and in the
+# table. Every column of both tables sums to its printed total, and the totals
+# chain across the columns:
+#
+#   2019 p46   1,465.07 (2018 revised) - 2.88 - 33.11 = 1,429.08, + 3.50 by council = 1,432.58
+#   2020 p44   1,444.11 (2019 revised) + 15.00 standard + 16.25 fixed-term = 1,475.36
+#
+# Each table opens with the year before as revised, which goes in as that year's
+# restatement. The 2020 book also lists 190.95 FTE of seasonal "non-standard"
+# staff, for the first time. They are outside the headline and are not recorded.
+# OCR also turned each page's bar chart into a table of round numbers ('19 at
+# 1,420); those are not read.
+for yr, basis, v in [(2019, "adopted", 1432.58), (2020, "adopted", 1475.36),
+                     (2018, "restated", 1465.07), (2019, "restated", 1444.11)]:
+    add(yr, "staffing_fte", basis, v, "fte", "booksocr")
 
 # --- The revenue big movers, 2011 --------------------------------------------
 # The 2011 book prints a citywide all-funds revenue pie whose eight slices sum
