@@ -118,7 +118,7 @@ The OCR stage sends each book's pages in batches of up to 100 and splits Datalab
 | HTTP 402, the key's own spend cap, stops the run | Spending past a limit set on purpose. Set one in Datalab's billing settings |
 | `_requests.jsonl` in the cache logs every request's pages, cents and time | Unaudited spend, and time estimates that are guesses |
 
-**Batched output needs checking once.** The OCR engine looks across the pages of a request, and can drop text that repeats at the top or bottom of several pages as a running header. The extractor was validated on single-page output. Before relying on batches for a new kind of page, re-read ten pages that single-page runs already cached, into a scratch cache. This costs about 8 cents:
+**Batched output needs checking once.** The OCR engine looks across the pages of a request, and can drop text that repeats at the top or bottom of several pages as a running header. The extractor was validated on single-page output. Before relying on batches for a new kind of page, re-read ten pages that single-page runs already cached, into a scratch cache. This costs about 10 cents:
 
 ```
 python3 budget-books-ocr.py ~/Downloads/ExportedContents/ --book "2011 Annual Budget.pdf" \
