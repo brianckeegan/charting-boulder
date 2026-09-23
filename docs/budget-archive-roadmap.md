@@ -67,7 +67,7 @@ The budget-history work in [`2026-11-budget-tool/budget-history/`](../2026-11-bu
 
 Two assets let the lake measure its own accuracy instead of assuming it:
 
-- **169 figures confirmed by two independent readings.** The same printed number was read from the PDF's text layer and again by OCR, with no disagreements. Any table extractor can be scored on whether it finds these values in the right cell.
+- **162 figures confirmed by two independent readings.** The same printed number was read from the PDF's text layer and again by OCR, with no disagreements. Any table extractor can be scored on whether it finds these values in the right cell.
 - **Arithmetic the books print about themselves.** Summary blocks where operating plus capital equals the total, pies whose slices sum to a printed total, and multi-year tables that restate earlier years. These are free, automatic checks at archive scale.
 
 The 2026 project's four OCR tiers cover about 1,700 pages. Most of them are the 1,137 pages of the three scanned Volume 1s in tier 1, which ran in September 2026 and gave 2007 and 2009 their first citywide totals. Only markdown is kept from those conversions, not the JSON the lake needs, so [§3.4](#34-conversion) recommends converting everything again in one consistent pass.
@@ -154,7 +154,7 @@ The chart add-on is decided at the end of Phase 0. If it is adopted, it goes int
 
 **Documents (L3).** One markdown file per book: the pages in order, each opened by a marker such as `<!-- bb-2014-v1:p0101 · folio 5-12 -->`, so a quotation can always be traced back to its page. Headings come from the PDF outline where the book has one, and otherwise from the headings the converter detects. A **section map** lists each book's sections with their page ranges. Department chapters make many analyses possible straight away: every page about Police across twenty years is one filter.
 
-**A free second witness.** For the 9,192 born-digital pages, the PDF's own text layer can be read with no fees. Wherever the numbers on a page differ between the text layer and the conversion, the page is flagged. This is the check that confirmed 169 figures in 2026, and at archive scale it costs nothing. Pages with no usable text layer get no second witness: the scans, and charts drawn as images. There, only the arithmetic and cross-book checks in [§3.6](#36-table-and-chart-layer) can catch a misread. That is how the 2026 project caught OCR reading 2006 in the 2011 book's FTE history as 1,218.34, where two other books print 1,218.84.
+**A free second witness.** For the 9,192 born-digital pages, the PDF's own text layer can be read with no fees. Wherever the numbers on a page differ between the text layer and the conversion, the page is flagged. This is the check that confirmed 162 figures in 2026, and at archive scale it costs nothing. Pages with no usable text layer get no second witness: the scans, and charts drawn as images. There, only the arithmetic and cross-book checks in [§3.6](#36-table-and-chart-layer) can catch a misread. That is how the 2026 project caught OCR reading 2006 in the 2011 book's FTE history as 1,218.34, where two other books print 1,218.84.
 
 ### 3.6 Table and chart layer
 
@@ -194,7 +194,7 @@ Each table is also written as its own small CSV, and each chart as its own JSON 
 | **B** | No sum check applied, and nothing failed |
 | **C** | Something failed. The data is kept and the flags say what failed |
 
-**Measured, not assumed.** Before release, the table layer is scored against the 169 figures confirmed in 2026 and the values in `budget-history.csv`. How many does it contain, in the right cell and year, and how many of those carry grade A? These rates are published with the release, since breadth without a measured error rate would be a liability.
+**Measured, not assumed.** Before release, the table layer is scored against the 162 figures confirmed in 2026 and the values in `budget-history.csv`. How many does it contain, in the right cell and year, and how many of those carry grade A? These rates are published with the release, since breadth without a measured error rate would be a liability.
 
 ### 3.7 Curated layer
 
@@ -341,7 +341,7 @@ The first public release comes after roughly **3–5 weekends**, and everything 
 **Goal:** breadth. Every table and chart as data, with its problems in plain sight.
 
 - Extract tables and charts from the JSON (L4). Run every check and assign grades (L5).
-- **Score the layer** against the 169 twice-confirmed figures and `budget-history.csv`: recall, grade distribution, and the most common failure types. Publish the scores with the data.
+- **Score the layer** against the 162 twice-confirmed figures and `budget-history.csv`: recall, grade distribution, and the most common failure types. Publish the scores with the data.
 - If the chart add-on was left out in Phase 0 and the chart checks now show it is needed, re-convert only the pages the JSON marks as holding charts. That is perhaps 1,000–2,000 pages, roughly $10–20 for accurate mode again plus the add-on. It gives those pages a second run, so each chart records which run it came from.
 - Release v1.1 with the table registry, cells, charts, chart series, checks and zipped per-table files.
 

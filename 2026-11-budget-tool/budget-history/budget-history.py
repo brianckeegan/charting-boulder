@@ -108,7 +108,7 @@ SOURCES = {
         "date": "",
         "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2",
         "retrieved": "2026-09-22",
-        "notes": "The 34 PDF volumes of the 2005-2026 annual budgets, located by budget-books-extract.py in the text pypdf extracts. Four shapes: prose (2017 on), a self-checking citywide summary block (2005-2017), three- and four-year-wide Sources/Uses/FTE tables (before 2012), and the citywide spending pie. Where these overlap the council packets, 10 of 12 values match exactly.",
+        "notes": "The 34 PDF volumes of the 2005-2026 annual budgets, read from the text pypdf extracts. The figures come in a handful of shapes: prose, self-checking citywide summary blocks, three- and four-year-wide Sources/Uses/FTE tables (before 2012), staffing tables by department, Funds Summary tables, and the citywide spending and revenue charts. Where these overlap the council packets, 10 of 12 values match exactly.",
     },
     "deptsnapshot2026": {
         "title": "2026 Budget: Sources and Uses, Cost Centers (OpenGov transparency view, CSV export)",
@@ -124,7 +124,7 @@ SOURCES = {
         "date": "",
         "url": "https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=187445&dbid=0&repo=LF8PROD2",
         "retrieved": "2026-09-23",
-        "notes": "Same books as `books`, but pages pypdf cannot reach or cannot use, read by Datalab through budget-books-ocr.py: the 2007, 2009 and 2010 Volume 1s, which survive only as scans, and born-digital pages with interleaved pie labels, dropped commas or figures inside images, or that the page dump never held. A pie or summary block is kept only when it sums to a total the same page prints, and a multi-year table value only when its column header names the year and basis. The three single figures, 2002, 2017 and 2024 staffing, are kept on their wording and context. The data dictionary's caveat on OCR lists what was read wrong and not kept.",
+        "notes": "Same books as `books`, but pages pypdf cannot reach or cannot use, read by Datalab through budget-books-ocr.py: the 2007, 2009 and 2010 Volume 1s, which survive only as scans, and born-digital pages with interleaved pie labels, dropped commas or figures inside images, or that the page dump never held. A pie or summary block is kept only when it sums to a total the same page prints, and a multi-year table value only when its column header names the year and basis. The single staffing figures, 2002 and 2024 and 2022's restatement, are kept on their wording and context. The data dictionary's caveat on OCR lists what was read wrong and not kept.",
     },
     "brl2027": {
         "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and trim pool hours",
@@ -167,15 +167,14 @@ for yr, total, oper, cap, basis, src in [
 add(2024, "budget_general_fund", "adopted", 196.2, "musd", "forecast2026")
 add(2026, "budget_general_fund", "adopted", 194.5, "musd", "forecast2026")
 add(2027, "budget_general_fund", "recommended", 200.5, "musd", "rec2027")
-# 2025 GF is not stated directly in these sources. The packet gives 2026 as a
-# 7.8% decrease from 2025, so 194.5 / (1 - 0.078) ~= 211.0. Marked `derived`
-# and rounded to 0.1 — do not present it as a published figure.
-add(2025, "budget_general_fund", "derived", round(194.5 / (1 - 0.078), 1), "musd", "forecast2026")
+# 2025 comes from its own book -- see "General Fund, 2013 and 2020-2025" below.
+# It was once derived here from the packet's "7.8% decrease" as 211.0; the 2025
+# book prints 210.9.
 
-# --- Operating budget, 2017-2022, from the budget books --------------------
+# --- Operating budget, 2017-2023, and the summary blocks of 2018-2022 ---------
 # Each book states its own year-over-year change, which lets the chain be
 # checked rather than trusted: 2019 +2.0%, 2020 +2.3%, 2021 -6.0%, 2022 +10%,
-# 2023 +18% as published, against +2.0/+2.0/-5.7/+10.2/+18.2 computed from
+# 2023 +18% as published, against +2.0/+2.0/-5.8/+10.2/+18.2 computed from
 # these values. The chain terminates at 2023 = 354.6, which matches the council
 # packet exactly, so the whole run shares that basis.
 #
@@ -185,10 +184,39 @@ add(2025, "budget_general_fund", "derived", round(194.5 / (1 - 0.078), 1), "musd
 # rounded in prose ("$260 million") and to the thousand in the summary block
 # ($260,677). The block value is the one kept, below, because only it satisfies
 # operating + capital = total.
-for yr, v in [(2018, 277.6), (2019, 283.2),
-              (2020, 288.9), (2021, 272.3), (2022, 300.1)]:
-    add(yr, "budget_operating", "adopted", v, "musd", "books")
-add(2022, "budget_capital", "adopted", 162.4, "musd", "books")
+#
+# 2018-2022 print the summary block again, in a newer layout that splits the
+# capital budget too, and to the dollar from 2019. Read by OCR, each satisfies
+# both identities to the dollar, so the block's exact figures replace the
+# prose's rounded ones ("$277.6 million") and give 2018-2021 the capital budget
+# the prose never stated:
+#
+#          total          operating = general + dedicated     capital
+#   2018   389,210        277,556 = 137,681 + 139,875         111,654   ($1,000s)
+#   2020   369,717,595    288,949,901 = 132,257,455 + 156,692,446    80,767,694
+#   2021   341,743,592    272,317,823 = 120,675,887 + 151,641,936    69,425,769
+#   2022   462,518,802    300,093,670 = 134,145,347 + 165,948,323   162,425,132
+#
+# 2019's block does not hold together. Its General Fund and dedicated halves
+# sum to 283,188,821 -- the "$283.2 million" of the book's prose -- but its
+# operating box prints 282,933,821 and its total box 353,490,978, both exactly
+# $255,000 lower, while the book's pie and prose give the total as 353,745,978.
+# The capital box, 70,557,157, matches its own halves (4,197,360 General Fund
+# plus 66,359,797 dedicated) and is exactly the pie total less the operating
+# halves. So 2019 keeps the prose operating figure, and takes its capital
+# budget and operating halves from the block.
+add(2019, "budget_operating", "adopted", 283.2, "musd", "books")
+for yr, oper, cap, gf, ded in [(2018, 277.556, 111.654, 137.681, 139.875),
+                               (2020, 288.950, 80.768, 132.257, 156.692),
+                               (2021, 272.318, 69.426, 120.676, 151.642),
+                               (2022, 300.094, 162.425, 134.145, 165.948)]:
+    add(yr, "budget_operating", "adopted", oper, "musd", "booksocr")
+    add(yr, "budget_capital", "adopted", cap, "musd", "booksocr")
+    add(yr, "budget_operating_general", "adopted", gf, "musd", "booksocr")
+    add(yr, "budget_operating_dedicated", "adopted", ded, "musd", "booksocr")
+add(2019, "budget_capital", "adopted", 70.557, "musd", "booksocr")
+add(2019, "budget_operating_general", "adopted", 145.232, "musd", "booksocr")
+add(2019, "budget_operating_dedicated", "adopted", 137.956, "musd", "booksocr")
 
 # --- Citywide totals from the budget books, 2004-2022 ---------------------
 # One NET measure throughout, with no basis break. The 2016 book publishes its
@@ -386,6 +414,58 @@ for yr, basis, v in [(2005, "actual", 86.148), (2007, "adopted", 88.520),
                      (2008, "actual", 97.578), (2009, "adopted", 96.167)]:
     add(yr, "budget_general_fund_revenue", basis, v, "musd", "booksocr")
 
+# --- General Fund, 2013 and 2019-2025, and its revenue from 2014 ---------------
+# From 2012 each book states both sides of the General Fund in prose -- "based
+# on projected General Fund expenditures of $161.5 million", "...revenues of
+# $157.4 million" -- and through 2018 prints each side as a pie whose heading
+# gives the exact total. Where the same book also prints the figure to the
+# dollar, in the pie heading or the Funds Summary table, the exact one is kept.
+#
+# These are the same measures as the series above, and that is checked rather
+# than assumed. The 2013 book's "General Fund Revenues (Sources)" pie totals
+# $109,752 thousand, exactly the TOTAL General Fund of that book's Sources of
+# Funds table already recorded for 2013; and the 2014 book's "General Fund
+# Expenditures (Uses)" pie totals $115,684 thousand, exactly the 2014 figure
+# above. The books' own year-over-year percentages also chain through these
+# values, with two exceptions noted in the data dictionary.
+#
+#   year  uses                                    revenue
+#   2013  112,477 (pie, p118)                     (above)
+#   2014  (above)                                 115,046 (pie, p106)
+#   2015  (above)                                 120,575 (pie, p110)
+#   2016  (above)                                 128,264 (pie, p110)
+#   2017  (above)                                 138,075 (pie, p112)
+#   2018  (above)                                 143,493,428 (pie, p57)
+#   2019  158,160 (Funds Summary, p43)            152,597 (Funds Summary, p43)
+#   2020  161,502,756 (Funds Summary, p41)        157,395,466 (Funds Summary, p41)
+#   2021  $146.3 million (prose, p62)             $147.3 million (prose, p52)
+#   2022  164,657,129 (pie and Funds Summary)     166,602,128 (Funds Summary, p44)
+#   2023  $188.4 million (prose, p15)             $180.5 million (prose, p12)
+#   2024  (packet, above)                         $200.5 million (prose, p13)
+#   2025  $210.9 million (prose, p13)             $190.6 million (prose, p15)
+#   2026  (packet, above)                         $198.8 million (prose, p16)
+#
+# 2019's General Fund pages were never read, so both 2019 figures come from its
+# Funds Summary (p43). Only OCR has read that page, so each figure is checked
+# twice. The row balances: 45,957 + 152,597 - 158,160 = 40,394, the year-end
+# balance printed beside it. And the 2020 book confirms both sides. Its revenue
+# is "a 3.14% increase over the total revenues projected for the 2019 budget",
+# and 157.395 / 152.597 is +3.14%. Its spending is "a 2.1% increase over total
+# General Fund expenditures in the 2019 Budget", and 161.503 / 158.160 is +2.1%.
+for yr, v, src in [(2013, 112.477, "booksocr"), (2019, 158.160, "booksocr"),
+                   (2020, 161.503, "books"), (2021, 146.3, "books"),
+                   (2022, 164.657, "books"), (2023, 188.4, "books"),
+                   (2025, 210.9, "books")]:
+    add(yr, "budget_general_fund", "adopted", v, "musd", src)
+for yr, v, src in [(2014, 115.046, "booksocr"), (2015, 120.575, "booksocr"),
+                   (2016, 128.264, "booksocr"), (2017, 138.075, "booksocr"),
+                   (2018, 143.493, "booksocr"), (2019, 152.597, "booksocr"),
+                   (2020, 157.395, "books"), (2021, 147.3, "books"),
+                   (2022, 166.602, "books"), (2023, 180.5, "books"),
+                   (2024, 200.5, "books"), (2025, 190.6, "books"),
+                   (2026, 198.8, "books")]:
+    add(yr, "budget_general_fund_revenue", "adopted", v, "musd", src)
+
 # --- Citywide revenue, 2011 ------------------------------------------------
 # "The 2011 budget is based on projected citywide revenues of $224,912,000.
 # This represents a 0.29% increase over the total revenues projected for the
@@ -414,7 +494,16 @@ add(2011, "revenue_total", "adopted", 224.912, "musd", "books")
 # makes itself.
 #
 # 2012 and 2013 come from the same books' "Staffing Levels in Standard FTEs by
-# Department" tables, which closes the gap to 2016 down to 2014-2015.
+# Department" tables.
+#
+# So do 2014-2018. From 2015 each book's "Staffing Levels by Department" table
+# prints the prior year as approved and as adjusted, then its own year, with a
+# variance column that checks: 1,358.77 - 1,299.58 = 59.19 in the 2015 book,
+# 1,419.12 - 1,383.12 = 36.00 in 2016, 1,447.36 - 1,427.24 = 20.12 in 2017, and
+# 1,451.09 - 1,447.36 = 3.73 in 2018. That gives 2014 from the 2015 book's
+# "2014 Approved" column, and the exact figures behind the prose's "1,419",
+# "1,447" and "1,451", which they replace. pypdf's text of these tables is
+# spaced apart ("1, 358. 77") but every digit is there.
 #
 # The 2007, 2009 and 2010 books, which survive only as scans, confirm 2005-2010
 # to the hundredth. Read by OCR, each book's "Summary of Standard FTEs by City
@@ -424,9 +513,10 @@ add(2011, "revenue_total", "adopted", 224.912, "musd", "books")
 # values stay sourced to `books`, which read them first.
 for yr, v in [(2003, 1290.69), (2004, 1200.68), (2005, 1212.11), (2006, 1218.84),
               (2007, 1251.34), (2008, 1281.17), (2009, 1288.52), (2010, 1248.24),
-              (2011, 1228.50), (2012, 1243.20), (2013, 1260.62),
-              (2016, 1419.00), (2018, 1451.00), (2021, 1375.83), (2022, 1460.71),
-              (2023, 1540.09), (2025, 1539.10), (2026, 1548.28)]:
+              (2011, 1228.50), (2012, 1243.20), (2013, 1260.62), (2014, 1286.01),
+              (2015, 1358.77), (2016, 1419.12), (2017, 1447.36), (2018, 1451.09),
+              (2021, 1375.83), (2022, 1460.71), (2023, 1540.09), (2025, 1539.10),
+              (2026, 1548.28)]:
     add(yr, "staffing_fte", "adopted", v, "fte", "books")
 
 # Later books restate earlier years slightly. Each year above keeps its OWN
@@ -434,8 +524,17 @@ for yr, v in [(2003, 1290.69), (2004, 1200.68), (2005, 1212.11), (2006, 1218.84)
 # disagreement is visible rather than averaged away. 2011 was restated twice --
 # 1,230.50 in the 2012 book, then 1,231.25 in the 2013 book -- and only the
 # latter is carried, because two rows would share one (year, measure, basis) key.
-for yr, v in [(2011, 1231.25), (2012, 1244.76)]:
+#
+# The 2015-2017 books call their restatement "Adjusted" ("adjustments remove
+# changes approved and incorporated after the passage of the ... Approved
+# Budget"), and the 2021-2023 books "Revised Staffing". For 2020 the revised
+# figure, 1,456.86 in the 2021 book, is the only one in hand; 2020's own book's
+# staffing table was never read, so 2020 has no adopted row yet. 2022's revision
+# is in the 2023 book, whose table pypdf cannot read.
+for yr, v in [(2011, 1231.25), (2012, 1244.76), (2014, 1299.58), (2015, 1383.12),
+              (2016, 1427.24), (2020, 1456.86), (2021, 1402.20)]:
     add(yr, "staffing_fte", "restated", v, "fte", "books")
+add(2022, "staffing_fte", "restated", 1491.71, "fte", "booksocr")
 
 # 2002, from a "History of Standard FTEs" chart data table in the 2011 book,
 # recovered by OCR. Treat it with more caution than the rest of the series: nine
@@ -451,11 +550,9 @@ for yr, v in [(2011, 1231.25), (2012, 1244.76)]:
 # it.
 add(2002, "staffing_fte", "adopted", 1304.69, "fte", "booksocr")
 
-# 2017, from the 2017 book's own sentence, read by OCR: "The 2017 Annual Budget
-# includes a citywide staffing level of 1,447 FTE" -- the same wording, same
-# "Figure 5-09 ... standard full-time equivalents" context the 2016 and 2018
-# books use for 1,419 and 1,451. The born-digital dump never reached that page.
-add(2017, "staffing_fte", "adopted", 1447.00, "fte", "booksocr")
+# 2017's own sentence, read by OCR, says "a citywide staffing level of 1,447
+# FTE" in the same wording and "Figure 5-09" context the 2016 and 2018 books use;
+# its table, in the loop above, gives the exact 1,447.36.
 
 # 2024, from the 2024 book's "By the Numbers" panel, read by OCR: "1509.13
 # FULL-TIME EQUIVALENTS (EMPLOYEES)". The 2023 and 2025 books print their own
@@ -488,15 +585,22 @@ for measure, v in [("revenue_sales_use_tax", 86.570), ("revenue_utility", 44.905
 add(2011, "revenue_other_unmapped", "adopted",
     round(224.912 - (86.570 + 44.905 + 28.563 + 9.999), 3), "musd", "books")
 
-# --- The revenue big movers, 2007-2010 -----------------------------------------
-# The same citywide "Sources of Funds" pie from four more books, read by OCR:
-# 2007, 2009 and 2010 from scans, and 2008 from a page (p73) whose pypdf text has
-# every number but scrambles which label each belongs to. Each pie sums to its
-# printed total exactly. As for 2011 and 2012, the four slices that map onto a
-# revenue_* category are recorded and the rest are carried together as
-# revenue_other_unmapped:
+# --- The revenue big movers, 2005-2010 and 2013-2026 ---------------------------
+# The same citywide revenue chart from every other book, recorded as for 2011 and
+# 2012: the slices that map onto a revenue_* category, and the rest carried
+# together as revenue_other_unmapped, so each year still sums to its own total.
+# That remainder is this dataset's arithmetic, never a printed figure.
+#
+# 2005-2010: "Sources of Funds" pies. 2007, 2009 and 2010 were read by OCR from
+# scans, and 2008 from a page (p73) whose pypdf text has every number but
+# scrambles which label each belongs to; pypdf reads 2005's and 2006's cleanly.
+# Each sums to its printed total exactly:
 #
 #   year  page  total     sales    utility  property  intergov   unmapped slices
+#   2005  p65   185,885   71,240   38,422   20,432     7,588     Other, Parks & Recreation,
+#                                                                Plng & Develop Fees, Bond Proceeds
+#   2006  p60   192,220   75,351   39,737   20,657     7,622     Other, Plng & Develop Fees,
+#                                                                Parks & Recreation
 #   2007  p78   213,503   81,567   41,691   21,487    19,011     Other, Parks & Recreation,
 #                                                                Plng & Develop Fees, TIF
 #                                                                for Garage at 10th & Walnut
@@ -506,29 +610,97 @@ add(2011, "revenue_other_unmapped", "adopted",
 #                                                                Plng & Develop Fees
 #   2010  p75   224,268   84,563   44,137   26,555    12,967     (the same three)
 #
-# Every pie labels its largest slice "Sales Tax". The 2010 book, like 2011's,
-# calls the same source "sales/use taxes", and the 2009 book describes it with
-# the combined sales and use tax rate, so it is recorded as the aggregate,
-# revenue_sales_use_tax -- the same judgment as 2011 and 2012.
+# Every one of these pies labels its largest slice "Sales Tax". The 2010 book,
+# like 2011's, calls the same source "sales/use taxes", the 2009 book describes it
+# with the combined sales and use tax rate, and from 2013 the charts say "Sales
+# and Use Tax" outright, so it is recorded as the aggregate, revenue_sales_use_tax.
 #
 # 2010's total replaces a value derived from the 2011 book's "0.29% increase",
 # which pinned it to 224.25-224.27. The 2010 book's own 224,268 falls inside that
 # range, and its "2.8% decrease over the total revenues projected for the 2009
 # approved budget" reproduces against 2009's 230,643.
+#
+# 2013-2022: "Citywide Revenues (Sources)", as a pie to 2017 and a donut after,
+# each on a page already read by OCR, which also pairs labels with numbers
+# where pypdf's text does not:
+#
+#   year  page  total           sales        utility     property    intergov
+#   2013  p101  248,484         97,528       47,626      31,732      10,179 ("Intergovernmental Grants")
+#   2014  p100  260,471         102,779      48,274      32,356      11,225
+#   2015  p104  313,338         115,396      69,251      32,345       9,687
+#   2016  p104  319,535         124,602      62,285      33,442       3,050
+#   2017  p106  315,525         127,931      60,988      39,047       4,210
+#   2018  p50   390,897,759     125,998      65,155      46,451      (inside "Other")
+#   2019  p47   359,019,830     136,327      65,978      47,656      17,194
+#   2020  p45   360,262,688     137,718,268  69,414,557  49,968,985   8,801,575
+#   2021  p50   $337.7 million  129,929,677  71,917,707  50,267,372   9,715,985
+#   2022  p48   471,372,041     141,001,909  76,474,200  53,116,630  15,285,634
+#
+# The 2013-2017 slices, printed rounded to the thousand, sum to within $2
+# thousand of their totals. The 2018 and 2022 totals include borrowing: 2018
+# charts $51.9M of "Debt Issuance" as a slice, and 2022's "Other" holds $92.3M of
+# water and wastewater bond proceeds. Earlier pies carry their small bond
+# proceeds the same way (2005 $0.4M, 2008 $1.2M). 2021 prints its total only in
+# prose. The OCR of 2019's donut adds eleven rows of invented values -- eight read
+# $5,380 -- for sub-items the chart gives only as percentages. The seven real
+# slices sum to the printed total exactly; the rest are ignored.
+#
+# 2023-2026: the books switch to OpenGov's Combined Budget Summary. Its table is
+# gross, including internal service charges and transfers between funds, so the
+# total recorded is each book's net "total revenue budget", which excludes them.
+# That is the same footing as the 2026 figure below. The four mapped categories
+# come from the tables and agree to the dollar across the 2023, 2025 and 2026
+# books. The 2023 book labels its column "2023 Total Budget", and the 2025 book
+# labels the same figures "2023 Adopted Budget", so they are recorded as adopted.
+# 2024's own book prints only the table excluding utilities, so 2024 is taken
+# from the 2025 book's "2024 Adopted Budget" column. The 2026 book restates
+# 2024's and 2025's intergovernmental revenue $496,000 lower each, moving it
+# to a new parking line; the earlier books' figures are kept.
+#
+#   year  total            sales        utility     property    intergov
+#   2023  $492 million     173,348,612  83,183,592  53,051,677  24,646,751
+#   2024  $461.9 million   176,867,104  89,583,983  61,217,023  13,403,789
+#   2025  $492.5 million   180,169,275  94,116,920  59,644,511  23,589,911
+#   2026  $507.2 million   179,640,471  97,444,530  61,732,059  18,774,158
+#
+# 2026's adopted figures equal the recommended ones already recorded from the
+# presentation, and are added so the chart file shows 2026 on the adopted basis
+# like every other year.
 REVENUE_PIES = {
-    # year: (total, sales and use, utility, property, intergovernmental)
-    2007: (213.503, 81.567, 41.691, 21.487, 19.011),
-    2008: (224.261, 87.729, 43.496, 22.028, 14.390),
-    2009: (230.643, 90.091, 44.264, 23.153, 12.901),
-    2010: (224.268, 84.563, 44.137, 26.555, 12.967),
+    # year: (total, sales and use, utility, property, intergovernmental, source)
+    2005: (185.885, 71.240, 38.422, 20.432, 7.588, "books"),
+    2006: (192.220, 75.351, 39.737, 20.657, 7.622, "books"),
+    2007: (213.503, 81.567, 41.691, 21.487, 19.011, "booksocr"),
+    2008: (224.261, 87.729, 43.496, 22.028, 14.390, "booksocr"),
+    2009: (230.643, 90.091, 44.264, 23.153, 12.901, "booksocr"),
+    2010: (224.268, 84.563, 44.137, 26.555, 12.967, "booksocr"),
+    2013: (248.484, 97.528, 47.626, 31.732, 10.179, "booksocr"),
+    2014: (260.471, 102.779, 48.274, 32.356, 11.225, "booksocr"),
+    2015: (313.338, 115.396, 69.251, 32.345, 9.687, "booksocr"),
+    2016: (319.535, 124.602, 62.285, 33.442, 3.050, "booksocr"),
+    2017: (315.525, 127.931, 60.988, 39.047, 4.210, "booksocr"),
+    2018: (390.898, 125.998, 65.155, 46.451, None, "booksocr"),
+    2019: (359.020, 136.327, 65.978, 47.656, 17.194, "booksocr"),
+    2020: (360.263, 137.718, 69.415, 49.969, 8.802, "booksocr"),
+    2021: (337.7, 129.930, 71.918, 50.267, 9.716, "booksocr"),
+    2022: (471.372, 141.002, 76.474, 53.117, 15.286, "booksocr"),
+    2023: (492.0, 173.349, 83.184, 53.052, 24.647, "books"),
+    2024: (461.9, 176.867, 89.584, 61.217, 13.404, "booksocr"),
+    2025: (492.5, 180.169, 94.117, 59.645, 23.590, "books"),
+    2026: (507.2, 179.640, 97.445, 61.732, 18.774, "books"),
 }
-for yr, (total, su, ut, pt, ig) in REVENUE_PIES.items():
-    add(yr, "revenue_total", "adopted", total, "musd", "booksocr")
-    for measure, v in [("revenue_sales_use_tax", su), ("revenue_utility", ut),
-                       ("revenue_property_tax", pt), ("revenue_intergovernmental", ig)]:
-        add(yr, measure, "adopted", v, "musd", "booksocr")
+# 2024's total is its own book's prose, read by pypdf; its categories are the
+# 2025 book's table, read by OCR.
+TOTAL_SOURCE = {2024: "books"}
+for yr, (total, su, ut, pt, ig, src) in REVENUE_PIES.items():
+    add(yr, "revenue_total", "adopted", total, "musd", TOTAL_SOURCE.get(yr, src))
+    mapped = [("revenue_sales_use_tax", su), ("revenue_utility", ut),
+              ("revenue_property_tax", pt), ("revenue_intergovernmental", ig)]
+    for measure, v in mapped:
+        if v is not None:
+            add(yr, measure, "adopted", v, "musd", src)
     add(yr, "revenue_other_unmapped", "adopted",
-        round(total - (su + ut + pt + ig), 3), "musd", "booksocr")
+        round(total - sum(v for _m, v in mapped if v is not None), 3), "musd", src)
 
 # --- Citywide spending by department, mapped into functional buckets -------
 # The expense breakdown that actually reaches back to 2005. The
