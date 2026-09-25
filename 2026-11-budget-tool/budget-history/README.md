@@ -1,6 +1,6 @@
 # Boulder budget history, 2002–2027
 
-The City of Boulder's budget over twenty-six years: citywide totals, the General Fund, staffing, revenue by source, sales and use tax, property tax, and spending by department. Every figure is transcribed from a named document. Wherever that document prints a total beside its parts, the parts are checked against it.
+The City of Boulder's budget over twenty-six years: citywide totals, the General Fund, staffing, revenue by source, sales and use tax, property tax, and spending by department. The city's audited annual financial reports add tax collections back to 2007, staffing by function, the sales tax base and the General Fund's budget against its actuals. Every figure comes from a named document. Wherever that document prints a total beside its parts, the parts are checked against it.
 
 ## Question
 
@@ -32,7 +32,11 @@ All CSVs are UTF-8 with LF line endings. The four `budget-history-*` CSVs are pl
 | Staffing level (FTE) | 2002–2026 | Every year, with later books' restatements beside the adopted figures |
 | Spending by department | 2005–2022 | Seven buckets. 2024–2026 come from a filtered export that is **not** comparable |
 | Revenue by source | 2005–2026 | The taxonomies differ, so only four categories line up. 2018 and 2022 include borrowing |
-| Sales and use tax, property tax | 2022–2026 (property tax from 2023) | Adopted, revised, actual and forecast figures, side by side |
+| Sales and use tax, property tax | 2007–2026 | Audited actuals for 2007–2025, from the annual financial reports; the packet's adopted, revised and forecast figures beside them ([caveat 20](budget-history-data-dictionary.md#20-tax-collections-are-audited-and-12-above-the-packets-year-end-figures)) |
+| Staffing by function | 2007–2025 | Budgeted FTE by function from the annual reports, as printed and in the spending buckets. Its own family: its totals differ from the staffing level in 8 years ([caveat 22](budget-history-data-dictionary.md#22-staffing-by-function-is-the-budgets-count-and-its-totals-do-not-always-match-staffing_fte)) |
+| Taxable sales by sector | 2007–2025 | The sales tax base, and the tax rates. 2013, 2014 and 2017 also as restated |
+| Assessed value | 2017–2026 | Filed under the year the tax is collected |
+| General Fund, budget and actual | 2016–2025 | The annual reports' General Fund: original budget, final budget and actual. Broader than the books' General Fund ([caveat 23](budget-history-data-dictionary.md#23-the-reports-general-fund-is-broader-than-the-books)) |
 
 The exact years for every measure are in the validation report's [coverage table](budget-history-validation.md#coverage-by-measure). A missing year is absent, never zero. [Caveat 8](budget-history-data-dictionary.md#8-coverage-is-uneven-and-the-gaps-are-not-the-same-gaps) says why each gap exists.
 
@@ -47,12 +51,15 @@ The exact years for every measure are in the validation report's [coverage table
 - the OpenGov snapshot's components sum to its totals, to the dollar
 - no two rows share a key
 - a department never changes bucket without a written reason
+- the annual reports' staffing lines and buckets, taxable sales sectors and General Fund lines sum to their printed totals
 
 The [validation report](budget-history-validation.md#checks) lists how many cases each check saw and the largest miss on this build.
 
 **The books check themselves.** Every book from 2005 to 2022 prints a citywide summary block in which capital plus operating equals the total and the General Fund and dedicated halves sum to operating, to within $1,000. The one exception is 2019, whose block has two boxes exactly $255,000 short ([caveat 2](budget-history-data-dictionary.md#2-the-headline-totals-are-one-continuous-net-series)). Each spending pie sums to the citywide total its own book publishes. A figure is kept only if it passes, and a pie that does not add up is rejected rather than guessed at.
 
 **Figures read by OCR are marked, and were tested against figures read without it.** Figures from pages pypdf cannot read, or never reached, cite `booksocr` instead of `books`. They cover the 2007, 2009 and 2010 books, which survive only as scans, nine spending-pie years, most revenue charts from 2007 to 2024, the 2011–2013 and 2018–2022 summary blocks, General Fund pies and tables from 2013 to 2019, the second pages of the 2005 and 2006–2007 General Fund tables, and staffing for 2002, 2019, 2020 and 2024. OCR also re-read every page holding a pie, table or summary block, and the pages around every published figure. It independently confirmed 184 published figures, 166 of them read by pypdf, and contradicted none ([caveat 19](budget-history-data-dictionary.md#19-ocr-read-the-pages-pypdf-could-not-and-got-some-things-wrong)). It also produced three kinds of error, each caught and rejected: values invented from percentages, a bar chart read as numbers, and a misread digit.
+
+**Annual-report figures were read twice, and every one used is confirmed.** The ten reports' tables were read from each PDF's text layer and by Datalab's OCR of the same 98 pages, which cost $0.75. A figure is used only if the two readings agree (4,649 of 5,864 cells), another report prints it identically (900), its page's own sums pin it down (304), or its page's text layer contains it (2). The nine left unconfirmed are never loaded. Comparing every year across the reports that print it found 40 revised figures, all in taxable sales: the 2018 report moves 2013 and 2014 between sectors, and every report after 2017's revises that year, as a footnote explains ([caveat 21](budget-history-data-dictionary.md#21-taxable-sales-are-the-tax-base-and-2013-2014-and-2017-were-revised), [caveat 25](budget-history-data-dictionary.md#25-how-the-annual-report-figures-were-read-and-checked)).
 
 **What the checks cannot catch.** Two families add up perfectly and still do not compare. The first pair is the net headline totals and the gross OpenGov snapshot, $83.4M apart in 2023. The second pair is the books' department pies and the 2024–2026 export, which moves nearly all utility spending out of the departments. The data dictionary's caveats [1](budget-history-data-dictionary.md#1-two-accounting-bases-never-one-series) and [17](budget-history-data-dictionary.md#17-deptexp-and-deptexpfiltered-both-add-up-and-still-do-not-compare) explain both. Keeping each family under its own prefix, `sources_`/`uses_` and `deptexpfiltered_`, makes mixing them take effort rather than inattention.
 
@@ -68,6 +75,8 @@ The [validation report](budget-history-validation.md#checks) lists how many case
 | `rec2026` | 2026 Recommended Budget, council study session | 2026 revenue by source and position eliminations |
 | `rec2027` | [2027 Recommended Budget news release](https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input), August 28, 2026 | 2027 totals, General Fund, gap, positions |
 | `glance2027` | [Budget At-A-Glance](https://bouldercolorado.gov/budget-glance) | 2027 percentage changes, positions added and frozen |
+| `acfr` | [City of Boulder Annual Comprehensive Financial Reports](https://bouldercolorado.gov/annual-comprehensive-financial-report-popular-annual-financial-report), fiscal 2016–2025, read from the PDF text layer | Audited tax collections from 2007, staffing by function, taxable sales, assessed value, and the General Fund's budget and actual |
+| `acfrocr` | The same reports, read by Datalab OCR | The 2021 and 2023 reports, whose text layers are unusable, and cells the text layer could not place |
 | `brl2027` | [Boulder Reporting Lab](https://boulderreportinglab.org/2026/09/08/boulders-proposed-2027-budget-would-cut-13-filled-jobs-and-trim-pool-hours/), September 8, 2026 | The savings from the 2027 position cuts |
 
 `budget-history-provenance.csv` has titles, dates and notes for each. The books are 34 PDFs and 10,843 pages. Six volumes are scans with no text layer at all (1,651 pages): 2005 Volume 2, 2007 Volumes 1 and 2, 2009 Volumes 1 and 2, and 2010 Volume 1.
@@ -83,12 +92,23 @@ Four stages. The first three find figures in the budget books, and only the seco
 | 3. Extract | `budget-books-extract.py` | any number of those JSONL files | `budget-books-extracted.csv` (candidates) and `budget-books-pages-of-interest.csv` |
 | 4. Build | `budget-history.py` | nothing | the four `budget-history-*` CSVs and the validation report |
 
-Candidates from stage 3 are checked by a person and then typed into `budget-history.py` with their source. **The build reads no files.** The script is the transcription record, and every value in it carries the ID of the document it came from.
+Candidates from stage 3 are checked by a person and then typed into `budget-history.py` with their source. The script is the transcription record, and every value in it carries the ID of the document it came from.
+
+**The annual financial reports take a shorter path, and the build reads one file: theirs.** The ten reports are small enough (57 MB) to live in `raw-acfr/`, with Datalab's OCR of the 98 pages read, `raw-acfr/acfr-ocr.jsonl`. `acfr-extract.py` reads five tables from each twice and writes every figure, with both readings and how it was confirmed, to `acfr-extracted.csv`. `budget-history.py` loads the confirmed ones instead of having some 1,700 figures typed in ([caveat 25](budget-history-data-dictionary.md#25-how-the-annual-report-figures-were-read-and-checked)):
+
+```
+python3 acfr-extract.py --locate                  # finds the tables' pages: acfr-pages.csv
+python3 budget-books-ocr.py raw-acfr --pages-from acfr-pages.csv \
+    -o raw-acfr/acfr-ocr.jsonl --estimate         # 98 pages, $0.74; then --yes
+python3 acfr-extract.py                           # both readings: acfr-extracted.csv
+```
+
+The 2021 and 2023 reports' pages were sent with `--force-ocr`, which makes Datalab read the page image instead of those reports' unusable text layers.
 
 Stages 1–3 run where the PDFs are, which is outside this repository because the books are 4.5 GB. The page dumps and the OCR cache are derived from the PDFs and are not committed. Stage 4 runs anywhere:
 
 ```
-python3 budget-history.py          # no arguments, no inputs, writes next to itself
+python3 budget-history.py          # no arguments; reads acfr-extracted.csv and writes next to itself
 ```
 
 To repeat the book stages on a local copy of the PDFs (Python 3.7 or later, and `pip install pypdf`):
@@ -149,5 +169,10 @@ budget-history/
 ├── budget-books-ocr.py                      stage 2: Datalab OCR, in priced tiers
 ├── budget-books-extract.py                  stage 3: candidate figures from page text
 ├── budget-books-extracted.csv               those candidates, with file and page
-└── budget-books-pages-of-interest.csv       every page that looks as if it holds a figure
+├── budget-books-pages-of-interest.csv       every page that looks as if it holds a figure
+│
+├── acfr-extract.py                          the annual reports: find five tables, read them twice
+├── acfr-pages.csv                           the pages read
+├── acfr-extracted.csv                       every figure, both readings, how it was confirmed
+└── raw-acfr/                                the reports, fiscal 2016-2025, and acfr-ocr.jsonl
 ```

@@ -27,6 +27,7 @@ These conventions hold in every file:
   - [Staffing](#staffing): caveat 15
   - [Departments](#departments): caveats 16–18
   - [OCR](#ocr): caveat 19
+  - [Annual financial reports](#annual-financial-reports): caveats 20–25
 - [Recipes](#recipes)
 - [Extending the series](#extending-the-series)
 
@@ -41,8 +42,10 @@ These conventions hold in every file:
 | `budget-history-validation.md` | Not a table. Holds counts, coverage and every check | `budget-history.py` |
 | `budget-books-extracted.csv` | Candidate figure found in the budget books | `budget-books-extract.py` |
 | `budget-books-pages-of-interest.csv` | Budget-book page that looks as if it holds a figure | `budget-books-extract.py` |
+| `acfr-extracted.csv` | Figure read from an annual financial report, with both readings and how it was confirmed | `acfr-extract.py` |
+| `acfr-pages.csv` | Annual-report page holding one of the five tables read | `acfr-extract.py --locate` |
 
-The first five files are the dataset. The last two are working files of the book pipeline. They hold candidates that a person checks before typing them into `budget-history.py`, and that script never reads them.
+The first five files are the dataset. The two `budget-books-*` files are working files of the book pipeline: they hold candidates that a person checks before typing them into `budget-history.py`, and that script never reads them. The annual reports' files work differently. `acfr-pages.csv` lists the pages OCR was paid for, and `budget-history.py` **loads** the confirmed figures in `acfr-extracted.csv` instead of having them typed in ([caveat 25](#25-how-the-annual-report-figures-were-read-and-checked)).
 
 ## `basis`: read this first
 
@@ -52,20 +55,21 @@ A budget figure means little until you know which version it is. The same year a
 |---|---|---|
 | What council adopted | $180.17M | `adopted` |
 | The mid-year revision | $176.84M | `revised_projection` |
-| What actually came in | $178.75M | `actual` |
+| What actually came in, audited | $182.37M | `actual` |
 
-These differ by up to $3.3M. That is more than half of the $6.3M General Fund gap the 2027 budget has to close. **Filter to one `basis` before charting.** A series that mixes bases looks volatile when it is really answering different questions.
+These differ by up to $5.5M, close to the whole $6.3M General Fund gap the 2027 budget has to close. **Filter to one `basis` before charting.** A series that mixes bases looks volatile when it is really answering different questions. (The audited actual comes from the annual financial report. The council packet's own year-end figure was $178.75M; [caveat 20](#20-tax-collections-are-audited-and-12-above-the-packets-year-end-figures) explains the gap.)
 
 | `basis` | Meaning |
 |---|---|
 | `adopted` | Approved by council for that year. The default, and most of the data |
 | `recommended` | The city manager's proposal, not yet adopted. This covers every 2027 figure, plus the 2026 revenue figures taken from the recommended-budget presentation |
-| `actual` | What came in or went out in a closed year. The 2025 actuals are unaudited year-end figures |
+| `actual` | What came in or went out in a closed year. Tax collections and assessed value are audited, from the annual financial reports. The council packet's 2022–2025 sales tax components are its own unaudited year-end figures |
+| `final` | The General Fund budget as amended by the end of the year, from the annual reports' budget-and-actual statement. Used only in `acfrgf_*` ([caveat 23](#23-the-reports-general-fund-is-broader-than-the-books)) |
 | `revised_projection` | A mid-year revision of an adopted figure |
 | `projected` | An out-year column in a budget book's multi-year table: a year the book plans for but does not adopt. There are two such values: 2007 General Fund revenue from the 2006–2007 book, and 2009 General Fund uses from the 2008 book |
 | `forecast` | Output of the city's forward-looking financial model |
 | `identified` | A General Fund gap named while a budget was being built |
-| `restated` | A later book's revision of a figure that its own year's book gives as `adopted`. Used for staffing ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)) and for the 2007 citywide total ([caveat 2](#2-the-headline-totals-are-one-continuous-net-series)) |
+| `restated` | A later book's revision of a figure that its own year's book gives as `adopted`. Used for staffing ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)), the 2007 citywide total ([caveat 2](#2-the-headline-totals-are-one-continuous-net-series)) and taxable sales ([caveat 21](#21-taxable-sales-are-the-tax-base-and-2013-2014-and-2017-were-revised)) |
 | `total_budget` | Adopted **plus amendments and carryforward**. Used only in the 2023 OpenGov snapshot ([caveat 1](#1-two-accounting-bases-never-one-series)) |
 | `derived` | **Computed here, not published by the city.** Each derived value is explained in a caveat |
 | `policy` | A standing policy target, not a year-specific amount |
@@ -174,6 +178,28 @@ This file has one row per page that looks as if it holds a figure, whether or no
 | `holds` | string | One or more of `pie`, `multiyear_table` and `summary_block`, space-separated |
 | `already_extracted_from` | string | `yes` if any row of `budget-books-extracted.csv` came from this page, otherwise `no` |
 
+### `acfr-extracted.csv`
+
+One row per figure read from one report's table, 5,864 in all. `acfr-extract.py` writes it, and `budget-history.py` loads the rows it needs whose `confirmed` column is filled.
+
+| Column | Type | Notes |
+|---|---|---|
+| `report` | integer | The fiscal year of the report the figure was read from |
+| `table` | string | `fundbal` (tax collections), `fte` (staffing by function), `taxsales` (taxable sales), `legal` (assessed value) or `gf` (General Fund budget and actual) |
+| `line` | string | The row label as printed |
+| `year` | integer | The column's year. A ten-year table gives ten per report |
+| `basis` | string | `actual`; `adopted` for staffing and for the General Fund statement's original budget; `final`; or `variance`, which is never loaded |
+| `unit` | string | `thousands`, as the reports print dollars, `fte` or `pct` |
+| `value` | string | The figure used: a number, `-` for a dash, or a footnote mark such as `(a)` |
+| `ocr`, `text` | string | Datalab's reading and the text layer's. `text` is empty for the 2021 and 2023 reports, whose text layers are not used |
+| `status` | string | `agree`, `ocr only`, `text only` or `DISAGREE` |
+| `confirmed` | string | How the figure is known to be right: `both readings`, `another report`, `own arithmetic` or `text layer` ([caveat 25](#25-how-the-annual-report-figures-were-read-and-checked)). Empty means unconfirmed, and it is never loaded |
+| `pages` | string | The PDF pages the table spans, such as `263-264` |
+
+### `acfr-pages.csv`
+
+One row per annual-report page OCR was paid for: `file`, `page` (its position in the PDF) and `table`. `acfr-extract.py --locate` writes it by finding each table's title, and `budget-books-ocr.py --pages-from` reads it.
+
 ## Measure catalog
 
 Every measure is listed below. The exact years each one covers are in the validation report's [coverage table](budget-history-validation.md#coverage-by-measure).
@@ -188,10 +214,10 @@ Every measure is listed below. The exact years each one covers are in the valida
 | `gap_general_fund` | musd | The General Fund shortfall identified for that year |
 | `gap_general_fund_low`, `gap_general_fund_high` | musd | The same gap where it was given as a range (2025) |
 | `salesuse_retail`, `salesuse_rec_marijuana_addl`, `salesuse_consumer_business_use`, `salesuse_construction_use`, `salesuse_motor_vehicle_use`, `salesuse_audits_sales`, `salesuse_audits_use` | musd | Sales and use tax by component, citywide, all funds. `rec_marijuana_addl` is the additional tax on recreational marijuana |
-| `salesuse_total` | musd | Their published total |
+| `salesuse_total` | musd | Their published total, for the packet's adopted, revised and forecast figures. Its `actual` is audited, from the annual financial reports, 2007–2025 ([caveat 20](#20-tax-collections-are-audited-and-12-above-the-packets-year-end-figures)) |
 | `salesuse_component_residual` | musd | The amount by which the rounded components miss their total. Recorded, not hidden ([caveat 13](#13-component-sums-miss-their-totals-by-a-few-hundredths)) |
-| `property_tax_revenue` | musd | Property tax collected at the city's own levy |
-| `property_assessed_value` | musd | Assessed value of taxable property, in millions of dollars |
+| `property_tax_revenue` | musd | Property tax collected at the city's own levy. Its `actual`, 2007–2025, is audited, from the annual reports ([caveat 20](#20-tax-collections-are-audited-and-12-above-the-packets-year-end-figures)) |
+| `property_assessed_value` | musd | Assessed value of taxable property, in millions of dollars, filed under the year the tax is collected. `actual` 2017–2026 from the annual reports ([caveat 24](#24-assessed-value-is-filed-under-the-year-it-is-taxed)) |
 | `property_mill_levy` | mills | The city's levy |
 | `revenue_sales_use_tax`, `revenue_utility`, `revenue_property_tax`, `revenue_intergovernmental` | musd | Citywide all-funds revenue by source: the four categories that every year from 2005 to 2026 shares |
 | `revenue_development_impact_fees`, `revenue_licenses_permits_fines`, `revenue_investment_earnings_bonds`, `revenue_accommodation_admission_tax`, `revenue_grants`, `revenue_parking`, `revenue_other_grouped` | musd | Categories only the 2026 presentation breaks out. `other_grouped` is that presentation's own "other" |
@@ -208,6 +234,11 @@ Every measure is listed below. The exact years each one covers are in the valida
 | `staffing_savings` | musd | What the 2027 position cuts are expected to save: "about $3 million, according to a city official" |
 | `yoy_total_pct`, `yoy_operating_pct`, `yoy_capital_pct`, `yoy_general_fund_pct` | pct | Year-over-year change as the city published it ([caveat 12](#12-the-books-own-percentages-do-not-always-reproduce)) |
 | `reserve_policy_pct_of_operating` | pct | The standing reserve target, 16.7% of operating |
+| `ftefunc_*` | fte | Staffing by function as the annual reports print it, one measure per line (`ftefunc_police`, `ftefunc_city_manager_community_vitality`), 2007–2025, and the reports' own `ftefunc_total`. **Never mix with `staffing_fte`** ([caveat 22](#22-staffing-by-function-is-the-budgets-count-and-its-totals-do-not-always-match-staffing_fte)) |
+| `ftebucket_public_safety`, `_infrastructure`, `_parks_openspace`, `_community_services`, `_planning_climate`, `_administration` | fte | The same lines grouped as the spending pies are. They sum to `ftefunc_total` ([caveat 22](#22-staffing-by-function-is-the-budgets-count-and-its-totals-do-not-always-match-staffing_fte)) |
+| `taxablesales_*` | musd | Taxable sales by market sector: the sales tax **base**, not the tax. 2007–2025, with `taxablesales_total` ([caveat 21](#21-taxable-sales-are-the-tax-base-and-2013-2014-and-2017-were-revised)) |
+| `salestaxrate_direct_city`, `salestaxrate_food_service`, `salestaxrate_total_direct_city` | pct | The city's sales tax rates, from the same table |
+| `acfrgf_*` | musd | The annual reports' General Fund budget-and-actual statement, line by line, 2016–2025, as `adopted` (the original budget), `final` and `actual`. **Broader than `budget_general_fund`** ([caveat 23](#23-the-reports-general-fund-is-broader-than-the-books)) |
 
 The seven buckets are defined in [caveat 16](#16-department-spending-is-bucketed-and-the-buckets-are-coarse-on-purpose).
 
@@ -296,7 +327,8 @@ Check the [coverage table](budget-history-validation.md#coverage-by-measure) for
 - **The 2007, 2009 and 2010 books are scans.** Their Volume 1s have no text layer, so everything taken from them was read by OCR (`booksocr`), including the General Fund columns they print for 2005–2009. Each figure passed the same checks as the rest ([caveat 19](#19-ocr-read-the-pages-pypdf-could-not-and-got-some-things-wrong)). Figures for those years that a born-digital book also prints keep that book as their source.
 - **2002–2004 are thin.** Without books for those years, they have only what later books print about them: the 2004 total, General Fund spending and revenue for 2003 and 2004, and staffing, which reaches 2002 through the 2011 book's chart.
 - **`budget_general_fund` has only an actual for 2003,** so the chart file's series starts in 2004. 2019's two General Fund figures come from that book's Funds Summary table, read by OCR, and the 2020 book's own percentages confirm both ([caveat 12](#12-the-books-own-percentages-do-not-always-reproduce)).
-- **Revenue by source covers 2005–2026,** but sales and use tax and property tax *collections* cover only 2022–2026.
+- **Tax collections start in 2007.** Each annual financial report prints ten years, so the ten in hand (fiscal 2016–2025) give `salesuse_total` and `property_tax_revenue` actuals for 2007–2025. The 2005–2015 reports, requested from the city, would reach back to 2002.
+- **Staffing by function, taxable sales and the General Fund's budget-and-actual come only from the annual reports:** 2007–2025 for the first two, 2016–2025 for the last.
 - **2027 has only what the recommended-budget release and the Budget At-A-Glance page give:** totals, the General Fund, the gap and position changes.
 
 A missing year is absent from the data, not zero. Do not interpolate across a gap without saying so.
@@ -369,7 +401,7 @@ The likeliest explanation is a percentage computed against a revised or amended 
 
 #### 13. Component sums miss their totals by a few hundredths
 
-The city totals sales and use tax at full precision but publishes the components rounded to $0.01M. A column of six components can therefore miss its own total by a few hundredths. Each miss is recorded as `salesuse_component_residual` rather than hidden. The published total is the authoritative figure. The build fails if any miss exceeds $0.05M, and the validation report lists every residual.
+The city totals sales and use tax at full precision but publishes the components rounded to $0.01M. A column of six components can therefore miss its own total by a few hundredths. Each miss is recorded as `salesuse_component_residual` rather than hidden, except on the `actual` basis: there the total is the audited one ([caveat 20](#20-tax-collections-are-audited-and-12-above-the-packets-year-end-figures)), which the packet's components were never meant to sum to. The published total is the authoritative figure. The build fails if any miss exceeds $0.05M, and the validation report lists every residual.
 
 #### 14. Two property-tax figures for 2026, and neither is an error
 
@@ -530,6 +562,95 @@ Tier 4 also reached two pages the born-digital dump never contained. **2011's su
 - "Internal Services includes Human Resources, Finance, Information Technology".
 - "Public Works groups together Development and Support Services, Transportation, and Utilities".
 
+### Annual financial reports
+
+#### 20. Tax collections are audited, and 1–2% above the packet's year-end figures
+
+`salesuse_total` and `property_tax_revenue` actuals come from the annual financial reports' "Changes in Fund Balances – Governmental Funds". That table covers every governmental fund on the modified accrual basis, the one budgets use. For 2022–2025 the council packet printed its own year-end figures, and the audited ones run higher:
+
+| Year | Sales and use tax, audited | Packet | Property tax, audited | Packet |
+|---|---|---|---|---|
+| 2022 | $171.34M | $169.11M | $51.56M | none |
+| 2023 | $178.21M | $175.52M | $49.28M | $48.74M |
+| 2024 | $176.40M | $173.90M | $61.25M | $60.63M |
+| 2025 | $182.37M | $178.75M | $58.52M | $57.58M |
+
+The packet's figures are unaudited, and neither document says what the difference is. The dataset carries the audited figures for every year, so each series has one source from 2007 to 2025. The packet's adopted, revised and forecast figures stay beside them, and its components (`salesuse_retail` and the rest) still sum to its own totals above, not to the audited ones.
+
+No report ever revises these two lines: every report prints the same figure for every year it covers. The reports' government-wide statement of activities gives the same taxes on the full accrual basis and matches in every year but 2017 and 2018, where it has $135.91M and $142.34M of sales and use tax against $131.86M and $146.40M. It is not used.
+
+#### 21. Taxable sales are the tax base, and 2013, 2014 and 2017 were revised
+
+`taxablesales_*` is the value of sales subject to the city's tax, by market sector, from the reports' "Taxable Sales by Market Sector". It reached $4.64 billion in 2025. The sectors sum to the printed total in every year of every report. The same table gives the tax rates: the direct city rate was 3.56% in 2007, 3.41% from 2008 to 2013, 3.56% in 2014 and 3.86% since 2015, plus 0.15% on food service throughout.
+
+Two revisions show up in later reports:
+
+- **The 2018 report moved 2013 and 2014 between sectors.** Construction use tax rose by about $11M each year and the others fell, leaving each total within $2 thousand.
+- **The 2017 report's own 2017 totals $3.59 billion, and every later report prints $3.52 billion.** A footnote says 2017 revenues were revised, mostly because of a large use tax payment received in March 2018 and accrued back.
+
+Each year keeps its own report's figures (for 2007–2015, the 2016 report's), and the latest report's whole table for that year goes beside it as `restated`, so both versions sum to their totals.
+
+#### 22. Staffing by function is the budget's count, and its totals do not always match `staffing_fte`
+
+The reports' "Full-Time Equivalent City Employees by Functions/Programs" cites the "City of Boulder Summary of Standard FTE's per the annual budget document". So it counts budgeted positions, not people on the payroll. Its total equals the budget's adopted level, `staffing_fte`, in 11 of 19 years. It differs in these:
+
+| Year | Report total | `staffing_fte` adopted | Restated |
+|---|---|---|---|
+| 2011 | 1,230.50 | 1,228.50 | 1,231.25 |
+| 2016 | 1,419.15 | 1,419.12 | 1,427.24 |
+| 2020 | 1,442.17 | 1,475.36 | 1,456.86 |
+| 2021 | 1,347.30 | 1,375.83 | 1,402.20 |
+| 2022 | 1,463.45 | 1,460.71 | 1,491.71 |
+| 2023 | 1,487.71 | 1,540.09 | |
+| 2024 | 1,508.13 | 1,509.13 | |
+| 2025 | 1,538.07 | 1,539.10 | |
+
+2011's is the 2012 book's revision, because the earliest report in hand prints that. The rest are unexplained, and 2023's gap of 52 FTE is the largest. So the reports' figures are their own family, `ftefunc_*`, and never join `staffing_fte`.
+
+Three more things to know:
+
+- **The 2021 report leaves out its Development line,** 54.11 FTE in 2017 to 55.84 in 2021, although its totals include it. Its 2021 figure comes from the 2022 report.
+- **Lines get renamed and reorganized.** "City Manager- Downtown & University Hill Mgt" becomes "City Manager- Community Vitality" in the 2018 report, and each name is its own measure. The reports' footnotes record the rest: Energy Strategy & Electric Utility split between Community Planning and Sustainability and Climate Initiatives in 2022, and Planning and Development, Fleet and Facility, and Housing and Human Services were combined in 2024. A dash means the line did not exist that year, and it is not recorded.
+- **The buckets, `ftebucket_*`, are the spending pies'** ([caveat 16](#16-department-spending-is-bucketed-and-the-buckets-are-coarse-on-purpose)). Police and fire are public safety. Public Works and Community Vitality, including its earlier Downtown & University Hill name, are infrastructure. Library, arts, housing and human services are community services. Parks and Open Space are parks and open space. The planning, energy and climate lines are planning and climate, and so is Environmental Affairs, a line only in 2007–2009 with no pie counterpart. The rest is administration. No FTE line is debt, so there are six buckets, not seven.
+
+#### 23. The reports' General Fund is broader than the books'
+
+`acfrgf_*` is the General Fund's "Statement of Revenues, Expenditures, and Changes in Fund Balances – Budget and Actual (Budgetary Basis)", line by line, one year per report. Its bases are the statement's columns: `adopted` is the original budget, `final` the budget as amended by year's end, and `actual` what came in and went out. The fund is the one the city reports for audit, and it is not the books' "Total General Fund Uses" ([caveat 3](#3-two-general-fund-measures-6-to-19-percent-apart)). Its original budget, with transfers, differs from the books' figures in every year checked:
+
+| Year | Report: spending + transfers out | Book: `budget_general_fund` | Report: revenue + transfers in | Book: `budget_general_fund_revenue` |
+|---|---|---|---|---|
+| 2016 | $126.6M | $132.3M | $122.0M | $128.3M |
+| 2020 | $164.8M | $161.5M | $160.3M | $157.4M |
+| 2025 | $255.1M | $210.9M | $201.1M | $190.6M |
+
+Use it to see how the General Fund's budget moved during the year and how the year turned out, never as more years of `budget_general_fund`. The final budget can run far above the original because it takes in carryforwards and mid-year appropriations: in 2025, $365.5M of spending against an original $222.1M. The revenue and expenditure lines sum to their printed totals in every report.
+
+#### 24. Assessed value is filed under the year it is taxed
+
+Each report's legal debt margin gives the assessed value certified in that fiscal year, which sets the property tax collected the next year. The council packets label it by that next year, and so does `property_assessed_value`: the 2024 report's $5,091.58M is the 2025 value, the packet's $5,091M. The reports give `actual`s for 2017–2026, and the packet's `adopted` and `revised_projection` figures stay beside them. Each report's value is checked against the debt limit printed under it, 3% of assessed value.
+
+#### 25. How the annual-report figures were read and checked
+
+`acfr-extract.py` found five tables in each report, 98 pages in all, and Datalab converted them for $0.75. That includes two pages of the 2023 report's Open Space Fund statement, taken by mistake. Every figure was read twice: from the PDF's text layer, placing each row by its height on the page, and from Datalab's markdown. Of 5,864 cells, the two readings agree on 4,649. Each figure `budget-history.py` loads is confirmed one of four ways:
+
+| Confirmed by | Cells |
+|---|---:|
+| Both readings agree | 4,649 |
+| Another report prints the same figure for the same line and year | 900 |
+| The page's own sums pin it down | 304 |
+| The page's text layer contains it, where no row could be placed | 2 |
+| Unconfirmed, and never loaded | 9 |
+
+The nine are five of Development's 2022-report figures that Datalab moved into the heading row above, and four dashes. The 28 cells where the readings disagree are all settled, 22 by other reports and 6 by their column's sums. Twenty are in the 2022 staffing table. The other eight are in the taxable sales Refunds row, whose only figure (2011) the text layer puts in the wrong year.
+
+What went wrong in the reading, and what caught it:
+
+- **Two reports have no usable text layer.** The 2021 report's statistical section is the city's own OCR of a scan ("Cha1Jges In Fund Balances", "110,01 I"), and the 2023 report's text is font codes. Datalab was made to OCR every page of both instead of reusing those layers, and both rest on its reading, confirmed by the reports that print the same years.
+- **Datalab slides a column's cells up or down a row but keeps their order.** The 2021 report's 2021 staffing column moves up a row from Parks and Recreation on. So each right-hand page of a two-page table is matched to the left by order within each column, not by row.
+- **Datalab can also drop one row and add another,** which that matching cannot see. In the 2022 staffing table its figures sit a row off from Development down. The text layer, which places rows by position, disagrees, and every other report sides with the text layer.
+- **One page can stack two tables.** The 2025 report prints taxable sales for 2016–2020 above 2021–2025. Both readers first read the second block under the first block's years, and on those rows they agreed. Agreement alone is therefore not taken as proof: a year's figures are also compared with every other report that prints them.
+- **Simple rules misfire on labels.** "Strategy" contains "rate" and "Construction Sales Tax" ends in "Sales Tax", so both lines were briefly filed as tax rates. The column sums caught both.
+
 ## Recipes
 
 **pandas: one measure on one basis, and a composition**
@@ -551,6 +672,14 @@ comp = (df[df.measure.str.startswith("salesuse_")
 # Spending by bucket from the books' pies -- never mixed with deptexpfiltered_*
 dept = (df[df.measure.str.startswith("deptexp_")]
         .pivot(index="year", columns="measure", values="value"))
+
+# Audited tax collections, 2007-2025
+tax = (df[df.measure.isin(["salesuse_total", "property_tax_revenue"]) & (df.basis == "actual")]
+       .pivot(index="year", columns="measure", values="value"))
+
+# Budgeted staffing by bucket, from the annual reports -- never mixed with staffing_fte
+fte = (df[df.measure.str.startswith("ftebucket_")]
+       .pivot(index="year", columns="measure", values="value"))
 ```
 
 `pivot`, unlike `pivot_table`, raises an error if a year and measure appear twice. That happens exactly when a filter has let two bases through, which is the mistake to catch.
@@ -593,5 +722,7 @@ Each export carries three columns (prior-year actual, current adopted, current t
 
 - **Record the column labels as `basis`.** They differ per export, and "Actual", "Adopted Budget" and "Total Budget" are three different things ([caveat 1](#1-two-accounting-bases-never-one-series)).
 - **Keep them in the `sources_`/`uses_` family.** Do not fold them into `budget_*`, however well the year seems to match.
+
+**Adding the 2005–2015 annual financial reports.** Put each PDF in `raw-acfr/`, named by fiscal year (`2014.pdf`), and run the three stages in `acfr-extract.py`'s docstring: `--locate`, then OCR of the pages it lists, then the read. Check the locator's printout before paying for OCR. An older report whose titles read differently needs its pages in `OVERRIDES`, as the 2021 and 2023 reports do. Each report prints ten years, so the 2011–2015 reports reach back to 2002, and every year they share with the 2016 report is a cross-check.
 
 OpenGov does not publish staffing *levels*. Sources & Uses carries `uses_expense_personnel` (payroll dollars), which is a reasonable proxy for staffing cost but not a headcount. The FTE series comes from the budget books.
