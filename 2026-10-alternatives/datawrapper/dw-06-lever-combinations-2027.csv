@@ -1,9 +1,0 @@
-combination,elementary schools,schools below 300,schools over capacity,children moved,pupils to recruit,recruits per pupil drawn in today
-Do nothing,27,16,0,0,0,0.0
-The approved plan,22,6,3,1130,0,0.0
-"Redraw, close nothing",27,17,0,642,0,0.0
-"Recruit, close nothing",27,3,0,0,748,0.98
-"Redraw and recruit, close nothing",27,3,0,642,488,0.64
-"The approved plan, then redraw",22,5,0,1270,0,0.0
-"The approved plan, then recruit",22,3,3,1130,95,0.12
-"The approved plan, redraw and recruit",22,3,0,1270,106,0.14
