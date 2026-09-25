@@ -477,3 +477,9 @@ The section 4 figures moved because Monarch is now counted as a closing area. Fo
 
 - `datawrapper/`: twenty files for the column's Datawrapper charts, written by the new section 10 of the analysis notebook, with a README that gives the chart type, a claim title, the source line and the caveat for each one. There are two maps: the attendance areas under the approved plan, and the change in children by 2000 tract. Each is a GeoJSON file with a CSV that shares its key.
 - `dw-03`: Boulder Valley against the 16 other Front Range districts with more than 10,000 pupils, 1977–2024, in K-12 fall membership. For 1977–85 each district is scaled by its own ratio of the two measures in 1986–87 (D38).
+
+## 2026-09-25 — chart choices for the column
+
+- The Front Range index (`dw-03b`) is 2001 = 100, not 2017 = 100. The column asked for 2000, which the archive does not have. 2001 is the first year after the gap. Since 2001, Boulder Valley has 1.8% fewer K-12 pupils, and it is one of five of the 17 large Front Range districts with fewer pupils.
+- New `dw-06c-recruits-by-year.csv`: pupils to recruit by year, one column for each combination that recruits, for the recruits-by-year chart.
+- `datawrapper/README.md` records the choices for the column: all three lever charts, all 17 districts, the 2000 gap shown as a gap, and the attendance-area map colored by plan status.

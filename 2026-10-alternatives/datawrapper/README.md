@@ -8,6 +8,12 @@ The column's charts are built in [Datawrapper](https://www.datawrapper.de/). Eve
 
 **The titles below are suggestions.** Each one states a claim that the notebook's printed output supports. If a rerun changes a number, change the title too.
 
+**Chosen for the column (25 September 2026):**
+- For the levers, all three charts: the 2027 table with the attendance-area map, the trade-off scatter, and recruits by year.
+- The Front Range chart shows all 17 districts, indexed to 2001 = 100.
+- The missing year 2000 is shown as a gap, not joined across.
+- The attendance-area map is colored by plan status.
+
 ## Section 1 — Colorado closes schools all the time
 
 ### `dw-01-colorado-openings-closures.csv`
@@ -25,12 +31,13 @@ The column's charts are built in [Datawrapper](https://www.datawrapper.de/). Eve
 - **Caveat:** This is the share of school-years that were a school's last. It is not a rule that any district wrote down.
 
 ### `dw-03-front-range-enrolment.csv` and `dw-03b-front-range-enrolment-index.csv`
-- **Draft chart:** none. The notebook prints the change since 2017 under the section 10 heading "Boulder Valley against the rest of the Front Range, since 1977".
-- **Chart type:** line chart. Show Boulder Valley in color and the other districts in gray. The first file has pupils. The second file has an index where 2017 = 100 (Boulder Valley's peak year).
-- **Title (index):** "Boulder Valley is one of 11 large Front Range districts with fewer pupils than in 2017"
+- **Draft chart:** none. The notebook prints the change since 2001 under the section 10 heading "Boulder Valley against the rest of the Front Range, since 1977".
+- **Chart type:** line chart. Show Boulder Valley in color and the other 16 districts in gray. The first file has pupils. The second file has an index where 2001 = 100. 2001 is the first year after the gap, so the index cannot start at 2000.
+- **Title (index):** "Boulder Valley is one of five large Front Range districts with fewer pupils than in 2001"
 - **Source:** Colorado Department of Education pupil membership, 1977–2024, compiled in the 2026-10-alternatives archive.
 - **Universe:** every district in the ten Front Range counties of section 9 with more than 10,000 pupils in 2024. There are 17 districts.
-- **Caveats:** The values are K-12 fall membership. For 1977–85 the yearbooks print only a total with a different definition, so each district's earlier totals are scaled by its own ratio of the two measures in 1986–87 (0.955 to 0.999). That removes a step at 1986 that is not a change in enrolment. **2000 is blank** because it is a known gap in the archive. Do not let Datawrapper draw a line across it without a note.
+- **Caveats:** The values are K-12 fall membership. For 1977–85 the yearbooks print only a total with a different definition, so each district's earlier totals are scaled by its own ratio of the two measures in 1986–87 (0.955 to 0.999). That removes a step at 1986 that is not a change in enrolment. **2000 is blank** because it is a known gap in the archive. Keep those cells empty so that each line breaks at 2000, and check that the chart does not join the lines across the gap.
+- **Scale:** Since 2001, 27J has grown 263% and District 49 has grown 282%. The next largest growth is 62%, in Douglas County. On a linear axis these two lines push the other 15 into the lower part of the chart. You can use a log axis, or you can stop the axis near 170 and label the two lines where they leave the chart. If you stop the axis, say so on the chart.
 
 ### `dw-04-bvsd-schools.csv`
 - **Draft chart:** figure 3, `output/alt-fig3-bvsd-schools.png`.
@@ -50,10 +57,15 @@ The column's charts are built in [Datawrapper](https://www.datawrapper.de/). Eve
 
 ## Section 3 — The levers and what they cost
 
-### `dw-06-lever-combinations-2027.csv` and `dw-06b-lever-combinations-by-year.csv`
+### `dw-06-lever-combinations-2027.csv`, `dw-06b-lever-combinations-by-year.csv` and `dw-06c-recruits-by-year.csv`
 - **Draft chart:** figure 5b, `output/alt-fig5b-lever-combinations.png`.
-- **Chart type:** a Datawrapper table for the 2027 file. For a chart of the trade-off, use a scatter plot of `children moved` against `pupils to recruit`, with one point for each combination. The by-year file has 2024, 2027, 2030 and 2040.
-- **Title:** "Closing five schools moves twice as many children; keeping all 27 needs 382 more recruits"
+- **Chart types:** the column uses three charts.
+  - **Table:** the 2027 file as a Datawrapper table.
+  - **Trade-off scatter:** the 2027 file, with `children moved` on x and `pupils to recruit` on y, one labeled point for each combination.
+  - **Recruits by year:** `dw-06c` as a line chart, one line for each of the four combinations that recruit, for 2024, 2027, 2030 and 2040. Draw a reference line at 765, the elementary pupils the district draws from outside today.
+- The by-year file `dw-06b` has every column for every year, for tooltips or a check.
+- **Title (table and scatter):** "Closing five schools moves twice as many children; keeping all 27 needs 382 more recruits"
+- **Title (recruits by year):** "Keeping every school needs 488 more pupils by 2027 and 694 by 2030"
 - **Source:** BVSD elementary attendance areas and capacity (web maps edited 20 February 2026); BVSD Resolution 26-27; 2026-10-alternatives archive; SDO Vintage 2024.
 - **Caveats:**
   - The approved plan uses the receivers it names. Where it divides an area among schools, the pupils are split in proportion to each receiver's empty seats, which leaves the fewest pupils over capacity. Every pupil at a closing school is assumed to follow the area.
@@ -63,8 +75,8 @@ The column's charts are built in [Datawrapper](https://www.datawrapper.de/). Eve
 
 ### `dw-07-attendance-areas.geojson` and `dw-07-attendance-areas.csv`
 - **Draft chart:** none. The map shows the table in section 3.
-- **Chart type:** choropleth map. **Key: `area_name`.** Color by `status` for the plan, or by `utilisation_2027_approved` for the load.
-- **Title:** "The approved plan fills three of the schools that take closing areas beyond their capacity"
+- **Chart type:** choropleth map. **Key: `area_name`.** Color by `status`. Put `utilisation_2027_approved` and `over_capacity_2027` in the tooltip, so that the three receivers that go over capacity (Bear Creek, Fireside and Superior) can be found.
+- **Title:** "The approved plan closes five elementary programmes and sends their pupils to nine schools"
 - **Source:** BVSD elementary attendance areas (web maps edited 20 February 2026); BVSD Resolution 26-27; 2026-10-alternatives archive; 2020 Census blocks for `children_5_10`.
 - **Columns:**
   - `status` is one of: closes; elementary programme closes (Monarch, which becomes a middle school); takes a closing area; mountain school; stays open; not modelled.
