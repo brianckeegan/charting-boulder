@@ -47,7 +47,8 @@ Two reports need help finding their pages:
         pages were found by rendering them, and it has the same 316 pages and
         the same layout as the 2022 report. Its figures rest on OCR alone,
         checked against its own totals and against the 2024 and 2025 reports,
-        which print the same years.
+        which print the same years. The copy in raw-acfr/ has been through
+        Acrobat's text recognition, which left these pages as they were.
 """
 import argparse
 import csv

@@ -8,10 +8,10 @@ data dictionary disagree about a count or a year, this file is right.
 
 | File | Rows | Years |
 |---|---:|---|
-| `budget-history.csv` | 2501 | 2002–2027 |
+| `budget-history.csv` | 2544 | 2002–2027 |
 | `budget-history-wide.csv` | 26 | 2002–2027 |
-| `budget-history-department-crosswalk.csv` | 291 | 2005–2022, 2024–2026 |
-| `budget-history-provenance.csv` | 11 | not applicable |
+| `budget-history-department-crosswalk.csv` | 351 | 2005–2022, 2024–2027 |
+| `budget-history-provenance.csv` | 12 | not applicable |
 
 ## Checks
 
@@ -20,8 +20,8 @@ build before any file is written, so a published file has passed all of them.
 
 | Check | Cases | Tolerance | Largest miss |
 |---|---:|---|---|
-| One row per (year, measure, basis) | 2501 | exact | none |
-| Department buckets, plus any balancing line, sum to `budget_total` | 21 | $0.05M | $0.002M (2026 deptexpfiltered_*) |
+| One row per (year, measure, basis) | 2544 | exact | none |
+| Department buckets, plus any balancing line, sum to `budget_total` | 24 | $0.05M | $0.021M (2025 deptexp_*) |
 | A department label keeps its bucket from year to year, or a note says why | 76 | exact | none |
 | General Fund half + dedicated half = `budget_operating` | 18 | $0.2M | $0.012M (2019 adopted) |
 | `budget_operating` + `budget_capital` = `budget_total` | 23 | $0.2M | $0.100M (2025 adopted) |
@@ -29,7 +29,7 @@ build before any file is written, so a published file has passed all of them.
 | ACFR staffing lines, and the six buckets, sum to `ftefunc_total` | 38 | 0.02 FTE | none |
 | ACFR taxable sales by sector sum to `taxablesales_total` | 22 | $0.002M | none |
 | ACFR General Fund lines sum to total revenues and total expenditures | 60 | $0.01M | none |
-| Revenue components sum to that year's `revenue_total` | 23 | $0.02M | $0.001M (2026 recommended) |
+| Revenue components sum to that year's `revenue_total` | 24 | $0.02M | $0.001M (2026 recommended) |
 | OpenGov snapshot components sum to their totals, and net = revenue - expense | 9 | $10 | $1 (2021 net) |
 
 ## Rounding residuals
@@ -52,6 +52,7 @@ Each miss is kept in the data as `salesuse_component_residual`:
 | `forecast2026` | 87 | 2022–2027 |
 | `rec2027` | 9 | 2027 |
 | `glance2027` | 6 | 2027 |
+| `recbook2027` | 43 | 2025–2027 |
 | `snapshot2023` | 81 | 2021–2023 |
 | `books` | 212 | 2003–2026 |
 | `deptsnapshot2026` | 24 | 2024–2026 |
@@ -65,14 +66,14 @@ Each miss is kept in the data as `salesuse_component_residual`:
 | `basis` | Rows | Years |
 |---|---:|---|
 | `actual` | 736 | 2003–2026 |
-| `adopted` | 1331 | 2002–2026 |
+| `adopted` | 1345 | 2002–2026 |
 | `derived` | 3 | 2024–2026 |
 | `final` | 298 | 2016–2025 |
 | `forecast` | 9 | 2026–2027 |
 | `identified` | 3 | 2025–2026 |
 | `policy` | 1 | 2026 |
 | `projected` | 3 | 2007, 2009 |
-| `recommended` | 28 | 2026–2027 |
+| `recommended` | 57 | 2026–2027 |
 | `restated` | 52 | 2007, 2011–2022 |
 | `revised_projection` | 10 | 2025–2026 |
 | `total_budget` | 27 | 2023 |
@@ -123,18 +124,18 @@ absent from the data, never zero.
 | `acfrgf_transfers_out` | musd | 2016–2025 | `actual`, `adopted`, `final` |
 | `budget_capital` | musd | 2005–2027 | `adopted`, `recommended` |
 | `budget_general_fund` | musd | 2003–2027 | `actual`, `adopted`, `projected`, `recommended` |
-| `budget_general_fund_revenue` | musd | 2003–2026 | `actual`, `adopted`, `projected` |
+| `budget_general_fund_revenue` | musd | 2003–2027 | `actual`, `adopted`, `projected`, `recommended` |
 | `budget_operating` | musd | 2005–2027 | `adopted`, `recommended` |
 | `budget_operating_dedicated` | musd | 2005–2022 | `adopted` |
 | `budget_operating_general` | musd | 2005–2022 | `adopted` |
 | `budget_total` | musd | 2004–2027 | `adopted`, `recommended`, `restated` |
-| `deptexp_administration` | musd | 2005–2022 | `adopted` |
-| `deptexp_citywide_debt` | musd | 2005–2018 | `adopted` |
-| `deptexp_community_services` | musd | 2005–2022 | `adopted` |
-| `deptexp_infrastructure` | musd | 2005–2022 | `adopted` |
-| `deptexp_parks_openspace` | musd | 2005–2022 | `adopted` |
-| `deptexp_planning_climate` | musd | 2005–2022 | `adopted` |
-| `deptexp_public_safety` | musd | 2005–2022 | `adopted` |
+| `deptexp_administration` | musd | 2005–2022, 2025–2027 | `adopted`, `recommended` |
+| `deptexp_citywide_debt` | musd | 2005–2018, 2025–2027 | `adopted`, `recommended` |
+| `deptexp_community_services` | musd | 2005–2022, 2025–2027 | `adopted`, `recommended` |
+| `deptexp_infrastructure` | musd | 2005–2022, 2025–2027 | `adopted`, `recommended` |
+| `deptexp_parks_openspace` | musd | 2005–2022, 2025–2027 | `adopted`, `recommended` |
+| `deptexp_planning_climate` | musd | 2005–2022, 2025–2027 | `adopted`, `recommended` |
+| `deptexp_public_safety` | musd | 2005–2022, 2025–2027 | `adopted`, `recommended` |
 | `deptexpfiltered_administration` | musd | 2024–2026 | `adopted` |
 | `deptexpfiltered_citywide_debt` | musd | 2024–2026 | `adopted` |
 | `deptexpfiltered_community_services` | musd | 2024–2026 | `adopted` |
@@ -191,22 +192,28 @@ absent from the data, never zero.
 | `positions_frozen_to_2028` | fte | 2027 | `recommended` |
 | `positions_term_limited_ending` | fte | 2027 | `recommended` |
 | `property_assessed_value` | musd | 2017–2026 | `actual`, `adopted`, `revised_projection` |
-| `property_mill_levy` | mills | 2026 | `adopted` |
-| `property_tax_revenue` | musd | 2007–2026 | `actual`, `adopted`, `revised_projection` |
+| `property_mill_levy` | mills | 2026–2027 | `adopted`, `recommended` |
+| `property_tax_revenue` | musd | 2007–2027 | `actual`, `adopted`, `recommended`, `revised_projection` |
 | `reserve_policy_pct_of_operating` | pct | 2026 | `policy` |
-| `revenue_accommodation_admission_tax` | musd | 2026 | `recommended` |
-| `revenue_development_impact_fees` | musd | 2026 | `recommended` |
-| `revenue_grants` | musd | 2026 | `recommended` |
-| `revenue_intergovernmental` | musd | 2005–2017, 2019–2026 | `adopted`, `recommended` |
-| `revenue_investment_earnings_bonds` | musd | 2026 | `recommended` |
-| `revenue_licenses_permits_fines` | musd | 2026 | `recommended` |
+| `revenue_accommodation_admission_tax` | musd | 2026–2027 | `recommended` |
+| `revenue_charges_for_services` | musd | 2027 | `recommended` |
+| `revenue_development_impact_fees` | musd | 2026–2027 | `recommended` |
+| `revenue_franchise_fees` | musd | 2027 | `recommended` |
+| `revenue_grants` | musd | 2026–2027 | `recommended` |
+| `revenue_intergovernmental` | musd | 2005–2017, 2019–2027 | `adopted`, `recommended` |
+| `revenue_investment_earnings_bonds` | musd | 2026–2027 | `recommended` |
+| `revenue_leases_rents_royalties` | musd | 2027 | `recommended` |
+| `revenue_licenses_permits_fines` | musd | 2026–2027 | `recommended` |
+| `revenue_misc_sales_materials_goods` | musd | 2027 | `recommended` |
 | `revenue_other_grouped` | musd | 2026 | `recommended` |
+| `revenue_other_revenues` | musd | 2027 | `recommended` |
 | `revenue_other_unmapped` | musd | 2005–2026 | `adopted` |
-| `revenue_parking` | musd | 2026 | `recommended` |
-| `revenue_property_tax` | musd | 2005–2026 | `adopted`, `recommended` |
-| `revenue_sales_use_tax` | musd | 2005–2026 | `adopted`, `recommended` |
-| `revenue_total` | musd | 2005–2026 | `adopted`, `recommended` |
-| `revenue_utility` | musd | 2005–2026 | `adopted`, `recommended` |
+| `revenue_parking` | musd | 2026–2027 | `recommended` |
+| `revenue_property_tax` | musd | 2005–2027 | `adopted`, `recommended` |
+| `revenue_sales_use_tax` | musd | 2005–2027 | `adopted`, `recommended` |
+| `revenue_specific_ownership_tobacco` | musd | 2027 | `recommended` |
+| `revenue_total` | musd | 2005–2027 | `adopted`, `recommended` |
+| `revenue_utility` | musd | 2005–2027 | `adopted`, `recommended` |
 | `salestaxrate_direct_city` | pct | 2007–2025 | `actual` |
 | `salestaxrate_food_service` | pct | 2007–2025 | `actual` |
 | `salestaxrate_total_direct_city` | pct | 2007–2025 | `actual` |
@@ -218,7 +225,7 @@ absent from the data, never zero.
 | `salesuse_motor_vehicle_use` | musd | 2022–2026 | `actual`, `adopted`, `forecast`, `revised_projection` |
 | `salesuse_rec_marijuana_addl` | musd | 2022–2026 | `actual`, `adopted`, `forecast`, `revised_projection` |
 | `salesuse_retail` | musd | 2022–2026 | `actual`, `adopted`, `forecast`, `revised_projection` |
-| `salesuse_total` | musd | 2007–2026 | `actual`, `adopted`, `forecast`, `revised_projection` |
+| `salesuse_total` | musd | 2007–2027 | `actual`, `adopted`, `forecast`, `recommended`, `revised_projection` |
 | `sources_revenue_accommodation_admission_tax` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
 | `sources_revenue_charges_for_services` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
 | `sources_revenue_cost_allocation` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
@@ -238,7 +245,7 @@ absent from the data, never zero.
 | `sources_revenue_total` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
 | `sources_revenue_transfers_in` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
 | `sources_revenue_utility` | musd | 2021–2023 | `actual`, `adopted`, `total_budget` |
-| `staffing_fte` | fte | 2002–2026 | `adopted`, `restated` |
+| `staffing_fte` | fte | 2002–2027 | `adopted`, `recommended`, `restated` |
 | `staffing_savings` | musd | 2027 | `recommended` |
 | `taxablesales_all_other` | musd | 2007–2025 | `actual`, `restated` |
 | `taxablesales_apparel_stores` | musd | 2007–2025 | `actual`, `restated` |
@@ -272,17 +279,17 @@ absent from the data, never zero.
 
 | Family | Years | Rows | Distinct printed labels | Rows with a note |
 |---|---|---:|---:|---:|
-| `deptexp` | 2005–2022 | 231 | 82 | 89 |
+| `deptexp` | 2005–2022, 2025–2027 | 291 | 96 | 98 |
 | `deptexpfiltered` | 2024–2026 | 60 | 20 | 12 |
 
 Years in which each bucket has a line:
 
 | Bucket | `deptexp` | `deptexpfiltered` |
 |---|---|---|
-| `public_safety` | 2005–2022 | 2024–2026 |
-| `infrastructure` | 2005–2022 | 2024–2026 |
-| `parks_openspace` | 2005–2022 | 2024–2026 |
-| `community_services` | 2005–2022 | 2024–2026 |
-| `planning_climate` | 2005–2022 | 2024–2026 |
-| `administration` | 2005–2022 | 2024–2026 |
-| `citywide_debt` | 2005–2018 | 2024–2026 |
+| `public_safety` | 2005–2022, 2025–2027 | 2024–2026 |
+| `infrastructure` | 2005–2022, 2025–2027 | 2024–2026 |
+| `parks_openspace` | 2005–2022, 2025–2027 | 2024–2026 |
+| `community_services` | 2005–2022, 2025–2027 | 2024–2026 |
+| `planning_climate` | 2005–2022, 2025–2027 | 2024–2026 |
+| `administration` | 2005–2022, 2025–2027 | 2024–2026 |
+| `citywide_debt` | 2005–2018, 2025–2027 | 2024–2026 |
