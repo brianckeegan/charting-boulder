@@ -422,3 +422,58 @@ Section 2's school elasticity is 0.423 (was 0.424). The statewide coded share of
 ### Numbers that were already out of date
 
 The sync also found figures that no earlier change had moved but that no longer matched the notebook, and corrected them: the README ranked Boulder Valley 69th of 166 where section 6 says 73rd of 178; it cited 19 large districts and a peer median of 557 where the output has 20 and 573; section 2's prose said 7.6% fewer teachers where 1 − 0.9^0.744 is 7.5%; section 1's prose said 1,373 openings and 725 closures where the output has 1,397 and 651; and one README sentence said Colorado Springs 11 averages 377 pupils, "*below*" a bar of 300, which its own numbers contradicted. The notebook said CDE publishes no district enrollment for 2000 to 2003; only 2000 is missing, so the 2004 round is now compared with 2003, not 1999.
+
+## 2026-09-25 — the vote, the costed combinations, and data for Datawrapper
+
+On 22 September 2026 the board approved the Resilient Schools plan by five votes to two ([Boulder Reporting Lab](https://boulderreportinglab.org/2026/09/23/boulder-valley-school-board-votes-to-close-four-elementary-schools-amid-calls-to-delay/)). Birch, Douglass, Flatirons and Mesa close in fall 2027, and Monarch K-8 becomes a middle school, so its elementary programme closes too. This entry records what that changes in section 3, and it supersedes the lever figures in earlier entries.
+
+### The approved plan, modelled as voted
+
+Lever 1a was "the proposal", with each closing area sent to the nearest school and Monarch's elementary programme left open. It is now the plan as approved: five elementary programmes close, and each area goes to the schools the plan names (Birch to Kohl, Mesa to Bear Creek, Douglass to Coal Creek, Eisenhower and Heatherwood, Flatirons to Whittier and Foothill, Monarch to Fireside and Superior). Where the plan divides an area, the pupils are split in proportion to each receiver's empty seats (D35). On today's roll the plan leaves 22 elementary schools, 5 below the bar and 4 over capacity, and moves 1,218 children. Monarch's 266 elementary pupils go to schools with 180 empty seats between them, so no split fits them.
+
+### The combinations are costed
+
+A new part of section 3 scores eight combinations of closing, redrawing and recruiting on today's roll and on the SDO forecast for 2027, 2030 and 2040. The costs are counts, not dollars, because the financials are out of scope: schools kept, schools below 300, schools over capacity, children who change school, and pupils to recruit. In 2027, when the closures take effect:
+
+- The approved plan alone leaves 6 schools below the bar and 3 over capacity.
+- The approved plan with a redraw leaves 5 below and none over, and moves 1,270 children. 106 recruits bring the two plains schools left below (Whittier and Sanchez) to the bar.
+- Keeping all 27 schools, with a redraw and recruitment, moves 642 children, and needs 488 more pupils by 2027 and 694 by 2030. The district draws 765 from outside its boundary today.
+- A redraw alone stops helping: on the 2027 roll it leaves 17 schools below the bar, one more than doing nothing.
+
+Output: `output/alt-levers-combinations.csv` and figure 5b.
+
+### Corrections to the levers
+
+- **Sanchez was missing from every lever.** Attendance areas were matched to schools by name, and "Sanchez" did not match "Alicia Sanchez International School". The match now uses the CDE school code in the layer's `State_CD` field (D37). Sanchez has 290 K-5 pupils in a building of 301 places, so the model now has 27 schools, not 26, and the archive counts 15 schools below the bar, not 14. The README's "So does BVSD" was a match that depended on the missing school, and it now says 15 against BVSD's 14.
+- **The mountain schools are outside redraw and recruitment** (D36). A redraw in proportion to capacity had sent Boulder's pupils to Nederland, and recruitment had counted pupils for Nederland, Gold Hill and Jamestown. They stay in the count of schools below the bar.
+- **Lever 4 counted the forecast decline as children moved.** It now counts only children who change school, against that year's own roll.
+- The combination scoring counts moves from the stage before recruitment, so a recruit never reduces the children moved.
+
+### Figures that moved
+
+| | was | now |
+|---|---:|---:|
+| Schools below the bar today (archive) | 14 | 15 |
+| Lever 1a: schools, below the bar, over capacity, children moved | 22, 8, 4, 952 | 22, 5, 4, 1,218 |
+| Lever 1b: closures, utilisation, schools over | 12, 104%, 8 | 13, 108%, 9 |
+| Lever 3: below the bar, children moved | 9, 694 | 9, 693 |
+| Lever 4 in 2030: children moved | 770 | 609 |
+| Lever 6: pupils to recruit, years at the recent pace | 666, 78 | 519, 61 |
+| Children in an area that loses its school | 11% | 14% |
+| Median children, closing and open areas (section 4) | 228, 324 | 260, 326 |
+
+The section 4 figures moved because Monarch is now counted as a closing area. Four of the five areas whose families leave most are staying open. The fifth is Monarch.
+
+### Other corrections
+
+- Section 2 said Boulder Valley lands "roughly three schools fewer than today by 2060". The fitted value is 53.9 against 56, so it now says about two fewer, after a low of about 52 around 2030. The README said "near 53" and now says "near 54".
+- The README named Monarch K-8, Whittier and Eldorado K-8 as the three areas that lost most catchment. Leaving aside Gold Hill's eleven children, Douglass is third (−15.0 points) and Eldorado fourth (−14.7).
+- The retrieval and analysis notebooks said "nine Front Range counties" and "the other seven counties". There are ten and eight.
+- The README called section 3 "five levers"; there are six.
+- Three variables were overwritten by later cells: `per_year`, `names` and `usable`. They now have separate names, so section 10 reads the frames the charts were drawn from.
+- Three sentences said more than the evidence shows: that the board saw only one option, that the approved plan's split was "most favourable" to it, and that every route to the bar needs a redraw (recruitment alone gets there too).
+
+### Added
+
+- `datawrapper/`: twenty files for the column's Datawrapper charts, written by the new section 10 of the analysis notebook, with a README that gives the chart type, a claim title, the source line and the caveat for each one. There are two maps: the attendance areas under the approved plan, and the change in children by 2000 tract. Each is a GeoJSON file with a CSV that shares its key.
+- `dw-03`: Boulder Valley against the 16 other Front Range districts with more than 10,000 pupils, 1977–2024, in K-12 fall membership. For 1977–85 each district is scaled by its own ratio of the two measures in 1986–87 (D38).
