@@ -6,7 +6,7 @@ A cleaned archive of Colorado public-school enrollment and teaching staff, built
 
 Which Colorado schools have closed, when, and where were they? And what would a steady-state distribution of schools look like under the State Demography Office's forecasts to 2050 and 2060?
 
-Boulder Valley's Resilient Schools proposal treats four closures as a local problem with a local answer. Colorado has been opening and closing schools for forty years. This archive is the evidence base for asking whether Boulder's situation is unusual, and for modelling what a district that stopped losing pupils would look like. The model itself is a separate task (`ROADMAP.md`); the archive is shaped to feed it.
+Boulder Valley's Resilient Schools proposal treats four closures as a local problem with a local answer. The board approved it on 22 September 2026, five votes to two: Birch, Douglass, Flatirons and Mesa close in fall 2027, and Monarch K-8 becomes a middle school, so its elementary programme closes too. Colorado has been opening and closing schools for forty years. This archive is the evidence base for asking whether Boulder's situation is unusual, and for modelling what a district that stopped losing pupils would look like. The model itself is a separate task (`ROADMAP.md`); the archive is shaped to feed it.
 
 ## What is here
 
@@ -189,7 +189,9 @@ Four things are missing or thin, and each is here for its own reason:
 │   │                    satisfies each matrix's own arithmetic
 │   └── audit.py            write audit/validation.md from the pipeline's output
 ├── alternatives-retrieval.ipynb  fetch + tidy  -> data/analysis/
-├── alternatives-analysis.ipynb   read + argue  -> output/
+├── alternatives-analysis.ipynb   read + argue  -> output/, datawrapper/
+├── datawrapper/            the data for each published chart, as CSV and
+│                           GeoJSON, with a README for each chart
 ├── datalab-ocr.py          re-OCR the scanned yearbooks through the Datalab API
 ├── proof-run.py            the original three-year probe, kept as the audit's evidence
 ├── audit/
@@ -224,7 +226,9 @@ Four things are missing or thin, and each is here for its own reason:
 Two notebooks, following the split every other folder in this repository uses.
 `alternatives-retrieval.ipynb` may fetch, reshape, join and check; it may not
 compute a measure the analysis reports. `alternatives-analysis.ipynb` reads
-`data/analysis/`, makes no network call, and does everything else.
+`data/analysis/` (and, for one Datawrapper chart, the archive's own
+`data/processed/district-year.csv`), makes no network call, and does
+everything else.
 
 They ask three questions about Boulder Valley's Resilient Schools proposal,
 and ignore its finances entirely — the question here is whether there are
@@ -244,46 +248,62 @@ district fixed effects. A district that loses 10% of its school-age population
 ends up with **7.5% fewer teachers and 4.4% fewer schools** — Colorado
 districts have consistently chosen smaller schools over fewer schools. Boulder
 County's 5-to-17 population falls to about 2030 and is then flat for thirty
-years, which puts Boulder Valley near 53 schools in 2060 against 56 today.
+years, which puts Boulder Valley near 54 schools in 2060 against 56 today.
 **The decline is front-loaded, not continuing.**
 
-**3. What are the options?** Five levers, each judged on what it is trying to
+**3. What are the options?** Six levers, each judged on what it is trying to
 do rather than against one scorecard: close, reconfigure grades, redraw
-boundaries, shrink in place, do nothing. Two viability bars are carried
-throughout, and **they land in the same place** — BVSD's two-classes-a-grade
-standard is about 300 pupils, which is also where Colorado's observed closure
-rate flattens. The district's standard is not unusual.
+boundaries, shrink in place, do nothing, and fill the buildings. Two viability
+bars are carried throughout, and **they land in the same place** — BVSD's
+two-classes-a-grade standard is about 300 pupils, which is also where
+Colorado's observed closure rate flattens. The district's standard is not
+unusual.
 
 Built on the district's own attendance areas and capacities, taken from the
 three BVSD ArcGIS web maps (last edited 20 February 2026 — the vintage the
 proposal was drawn against), and scored against the resolution and the
 15 September 2026 work session in `data/raw/proposal/`.
 
-**The archive counts 14 elementary schools below the bar. So does BVSD.** Two
-readings of the same district from different data, landing on the same number.
+**The archive counts 15 elementary schools below the bar; BVSD counts 14.** Two
+readings of the same district from different data and a year apart, landing
+one school apart. The fifteenth is Sanchez, with 290 K-5 pupils in 2024-25 in
+a building of 301 places.
 
-| | buildings | below the bar | pupils moved |
-|---|---:|---:|---:|
-| Today | 26 | 14 | — |
-| The proposal | 22 | 8 | 952 |
-| Redraw to capacity, close nothing | 26 | 9 | 694 |
+The approved plan closes **five elementary programmes, not four**: Monarch's
+266 elementary pupils go to Fireside and Superior, which have 180 empty seats
+between them. Modelled with the receivers the plan names, and split in the way
+that leaves the fewest pupils over capacity, the levers combine like this in
+fall 2027, when the closures take effect:
 
-Those two rows are the same answer by different means. The proposal gets one
-more school over the bar; redrawing moves 258 fewer children and closes
-nothing.
+| | elementary schools | below the bar | over capacity | children moved | pupils to recruit |
+|---|---:|---:|---:|---:|---:|
+| Do nothing | 27 | 16 | 0 | — | — |
+| The approved plan | 22 | 6 | 3 | 1,130 | — |
+| The approved plan, then redraw | 22 | 5 | 0 | 1,270 | — |
+| The approved plan, redraw and recruit | 22 | 3 | 0 | 1,270 | 106 |
+| Redraw and recruit, close nothing | 27 | 3 | 0 | 642 | 488 |
 
-Neither reaches the standard, because **nothing does**. Closing until every
-school clears 300 pupils takes twelve closures and leaves the district at
-**104% of its own capacity** with eight schools overfull. The bar cannot be
-met by closing.
+The three schools left below the bar in the last two rows are the mountain
+schools, which no lever should touch. So those two rows reach the same place
+by opposite routes: **closing five programmes moves 628 more children; keeping
+all 27 schools needs 382 more recruited pupils** — 488 by 2027 and 694 by
+2030, against the 765 the district draws from outside its boundary today. The
+approved plan on its own is neither route: it leaves six schools below the bar
+and three over capacity. A redraw on its own stops helping by 2027: spread in
+proportion to seats, the forecast's pupils fill each plains building to 60% of
+its places, and every building under 499 places falls below 300. Closing until
+every school clears 300 takes thirteen closures and leaves the district at
+**108% of its own capacity** with nine schools overfull. The bar cannot be met
+by closing alone.
 
 Redrawing attendance boundaries on its own is not among the six options the
 board was given (work session, slide 7). It appears six times in the
 resolution, always as a consequence of a closure, never as an alternative to
 one.
 
-Eleven per cent of the district's children live in an area that loses its
-school — concentrated outside the City of Boulder and on University Hill.
+Fourteen per cent of the district's children live in an area that loses its
+elementary school, Monarch's included — concentrated outside the City of
+Boulder and on University Hill.
 
 **4. Why is a school small?** Every catchment model above assumes a child
 attends the school whose area they live in. A third of Boulder Valley's pupils
@@ -296,9 +316,10 @@ It draws a distinction the proposal does not. **A school can be small because
 few children live in its area, or because the children who live there go
 elsewhere.** Only the first is demographic, and only the first is fixed by
 closing a building. The four closing elementary areas are on the demographic
-side — a median of 228 children against 324 for those staying open — and that
-case holds. But **the five areas whose families leave most are all staying
-open**, and 1,246 children live in them and attend school somewhere else.
+side — a median of 260 children against 326 for those staying open — and that
+case holds. But **four of the five areas whose families leave most are staying
+open** (the fifth is Monarch), and 1,246 children live in those five and attend
+school somewhere else.
 Sanchez has 642 children in its area, 276 in its school and 378 going
 elsewhere: the largest single pool of pupils the district is not capturing, in
 a school below the bar that is not on the list. Across every elementary area,
@@ -318,8 +339,10 @@ neighbourhood schools fell **30%**, from 8,570 to 6,040. Had the 2017 share
 held, today's children would fill 6,722 places instead of 6,040, so of the
 2,530 pupils lost, **1,848 are demography and 682 are families leaving** —
 about a quarter. **16 of 30 areas have lost more than five points of their
-catchment**; the three worst are Monarch K-8 (−25), Whittier (−23) and
-Eldorado K-8 (−15), and none of them is closing.
+catchment**. Leaving aside Gold Hill's eleven children, the worst are
+Monarch K-8 (−25), Whittier (−23) and Douglass (−15), with Eldorado K-8 a
+fraction behind. Monarch's elementary programme and Douglass close under the
+approved plan; Whittier and Eldorado stay open.
 
 **6. Is Boulder unusual?** The model in question 2 is fitted on 178 districts
 and was applied to one; here it is applied to all of them, on each district's

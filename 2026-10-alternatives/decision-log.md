@@ -295,3 +295,29 @@ Where a district code is known, `district-year.csv` takes the county from `distr
 **Why.** The printed counties were the OCR's: "Kidwa" for Kiowa, "Guray" for Ouray, "Montrase" and "Montr" for Montrose, and six counties in capitals on some rows and title case on others. A join or group on county placed districts in counties that do not exist or split one county into two. The crosswalk's county is the one most sources state for the district. The lookup guard answers a risk the name rules of #45 made: stripping a town in brackets gave Estes Park the bare key "PARK", which a "PARK RE-2" row in Park County could have matched. No row was misfiled, and the guard makes sure none can be. The list of real counties is a constant of 64, because the data cannot supply it: CDE's own county column holds 69 values.
 
 **Also fixed in the same pass, with no change to the data.** A trend heading with no county line no longer gives its measures to the district before it. The joint marker is removed as "JT" as well as "J". A legal name in two counties no longer reduces to a bare designator such as "28J". The ambiguity index is built once, before the crosswalk, and not three times.
+
+## D35 — The approved plan is modelled as voted, and its split is the one that overfills least — 2026-09-25
+
+Lever 1a closes the five elementary programmes the board approved on 22 September 2026, and sends each area to the schools the plan names. Where the plan divides an area among schools and does not say how, the pupils are split in proportion to each receiver's empty seats. Every pupil enrolled at a closing school is assumed to follow the area.
+
+**Why.** The earlier model sent each area to the nearest school and kept Monarch's K-5 open. Both were wrong for the plan that passed. The split is the one assumption the plan does not settle. A split in proportion to empty seats fills the receivers evenly and gives the smallest possible number of pupils over capacity, so any overcrowding the model shows is not a result of the split. A different split can put the overflow into one school and not two, but it cannot reduce the overflow.
+
+**What it costs.** Some families at a closing school will choose another school, so the loads are a ceiling, not a forecast. The costs of every lever are counts of children, pupils and schools, not dollars, because the financials are out of scope.
+
+## D36 — The mountain schools are outside redraw and recruitment, but stay in the count — 2026-09-25
+
+Nederland, Gold Hill and Jamestown keep their own pupils in every scenario. The proportional redraw and the recruitment to the bar apply to the plains schools only. The three mountain schools are still counted below the bar.
+
+**Why.** A redraw in proportion to capacity sent pupils from Boulder to Nederland, which has 405 places and 172 pupils. Recruitment counted pupils for schools that no drive on the plains can fill. To remove the three schools from the count would make every lever look better for a reason that has no relation to the lever, so they stay in it.
+
+## D37 — Attendance areas match schools by CDE code, not by name — 2026-09-25
+
+The attendance-area layer carries the CDE school code in `State_CD`. The archive's K-5 enrolment is matched on that code. The name match is kept only as a check, and the notebook prints every area where the two disagree. None do.
+
+**Why.** The name match missed Alicia Sanchez International School, which the layer calls "Sanchez". The notebook printed the miss and then dropped the school from every lever. Sanchez is below the bar, so every lever count was one school short. The layer's own `area_code` cannot serve as a key either, because Lafayette and Meadowlark share 153.
+
+## D38 — Chart data is written by the notebook, and the pre-1986 series is ratio-linked — 2026-09-25
+
+The column's charts are built in Datawrapper. Section 10 of the analysis notebook writes their data to `datawrapper/`, so a chart can be designed again without the analysis being run again, and a rerun of the analysis updates every chart's data. The long Front Range series uses `fall_membership_k12` from 1986. For 1977–85 it uses each district's printed total, multiplied by that district's own mean ratio of K-12 to printed total in 1986 and 1987.
+
+**Why.** The printed total and the K-12 count have different definitions (D33). Without the link, each line would step at 1986 by 0.1% to 4.5% for a reason that has no relation to enrolment. A ratio for each district keeps the step out and keeps each district's own trend before 1986. 2000 is left blank, because the archive has no district totals for that year.
