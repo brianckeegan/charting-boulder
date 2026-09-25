@@ -126,6 +126,22 @@ SOURCES = {
         "retrieved": "2026-09-23",
         "notes": "Same books as `books`, but pages pypdf cannot reach or cannot use, read by Datalab through budget-books-ocr.py: the 2007, 2009 and 2010 Volume 1s, which survive only as scans, and born-digital pages with interleaved pie labels, dropped commas or figures inside images, or that the page dump never held. A pie or summary block is kept only when it sums to a total the same page prints, and a multi-year table value only when its column header names the year and basis. A staffing table is kept only when its columns sum to the totals it prints; the single staffing figures, 2002 and 2024 and 2022's restatement, are kept on their wording and context. The data dictionary's caveat on OCR lists what was read wrong and not kept.",
     },
+    "acfr": {
+        "title": "City of Boulder Annual Comprehensive Financial Reports, fiscal years 2016-2025",
+        "publisher": "City of Boulder",
+        "date": "",
+        "url": "https://bouldercolorado.gov/annual-comprehensive-financial-report-popular-annual-financial-report",
+        "retrieved": "2026-09-24",
+        "notes": "The audited annual reports, in raw-acfr/, read from the PDF text layer by acfr-extract.py. Five tables: tax revenue in Changes in Fund Balances of the governmental funds (modified accrual), full-time equivalent employees by function, taxable sales by market sector, the legal debt margin's assessed value, and the General Fund's budget-and-actual statement. A figure is used only if Datalab's OCR of the same page reads it the same way, another report prints it identically, or the page's own sums pin it down; see acfr-extracted.csv.",
+    },
+    "acfrocr": {
+        "title": "City of Boulder Annual Comprehensive Financial Reports, pages read by OCR (Datalab)",
+        "publisher": "City of Boulder",
+        "date": "",
+        "url": "https://bouldercolorado.gov/annual-comprehensive-financial-report-popular-annual-financial-report",
+        "retrieved": "2026-09-24",
+        "notes": "Same reports as `acfr`, where the figure used is Datalab's reading and not the text layer's: all of the 2021 report, whose statistical section is the city's own OCR of a scan, and the 2023 report, whose text layer is font codes; and cells elsewhere that the text layer could not place. Each is confirmed by another report printing it, or by its own page's sums.",
+    },
     "brl2027": {
         "title": "Boulder's proposed 2027 budget would cut 13 filled jobs and trim pool hours",
         "publisher": "Boulder Reporting Lab",
@@ -1371,9 +1387,13 @@ SU_NAMES = [
     "salesuse_construction_use", "salesuse_motor_vehicle_use",
     "salesuse_audits_sales", "salesuse_audits_use", "salesuse_total",
 ]
+# The packet's actual TOTALS are not recorded: the audited reports supply
+# `salesuse_total` actuals for 2007-2025 (below), and they run 1-2% above the
+# packet's. Its components are kept, and the data dictionary records the
+# totals they sum to.
 for (yr, basis), vals in SALESUSE.items():
     for name, v in zip(SU_NAMES, vals):
-        if v is not None:
+        if v is not None and not (basis == "actual" and name == "salesuse_total"):
             add(yr, name, basis, v, "musd", "forecast2026")
 
 # --- Property tax + assessed value ----------------------------------------
@@ -1385,9 +1405,170 @@ for yr, basis, rev, av in [
     (2026, "adopted",            59.17, 5184),
     (2026, "revised_projection", 57.33, 5022),
 ]:
-    add(yr, "property_tax_revenue", basis, rev, "musd", "forecast2026")
-    add(yr, "property_assessed_value", basis, av, "musd", "forecast2026")
+    # Actuals come from the audited reports instead (below): the same assessed
+    # values to the thousand, and property tax collections a little higher.
+    if basis != "actual":
+        add(yr, "property_tax_revenue", basis, rev, "musd", "forecast2026")
+        add(yr, "property_assessed_value", basis, av, "musd", "forecast2026")
 add(2026, "property_mill_levy", "adopted", 11.648, "mills", "forecast2026")
+
+# --- Annual financial reports (ACFRs), FY2016-FY2025 -----------------------
+# The audited reports. acfr-extract.py finds five tables in each, reads every
+# figure twice -- from the PDF's text layer and from Datalab's OCR of the same
+# page -- and writes each with how it was confirmed to acfr-extracted.csv.
+# These figures are LOADED, not typed like the rest of this file: there are
+# 5,800 of them, and each one used was read the same way twice, printed
+# identically by another report, or pinned down by its own page's sums. That
+# is a stronger check than retyping. Unconfirmed figures are never loaded.
+#
+# Every ten-year table repeats nine years from the report before, so most years
+# are printed by several reports. A year's figure comes from its OWN report, as
+# the budget books' do, or, for a year before the first report in hand (2016),
+# from the earliest report that prints it. When the latest report prints a
+# different figure, it goes beside it as `restated`. Only taxable sales are
+# ever revised: 2013 and 2014 in the 2018 report, and 2017 in every report
+# after its own.
+ACFR_CSV = HERE / "acfr-extracted.csv"
+# Labels that differ between reports only by a misprint or a line break.
+ACFR_ALIASES = {
+    "climateinitatives": "climateinitiatives",
+    "accomodationstaxes": "accommodationstaxes",
+    "overunderexpenditures": "excessdeficiencyofrevenuesoverunderexpenditures",
+}
+
+
+def _acfr_key(label):
+    k = re.sub(r"[^a-z0-9]", "", label.lower())
+    return ACFR_ALIASES.get(k, k)
+
+
+def _slug(label):
+    return re.sub(r"[^a-z0-9]+", "_", label.lower()).strip("_")
+
+
+# The 2021 report leaves its "Development" staffing line out of the table,
+# though its totals include it (every 2017-2021 column is short by exactly that
+# line). Its 2021 figure is taken from the 2022 report, the next to print it.
+ACFR_BORROW = {("fte", "development", 2021): 2022}
+
+
+def acfr_series():
+    """[(table, key, year, basis, label, row, restated_row)], one report per
+    table and year: the year's own, or the earliest that prints it. Taking
+    every line of a year from one report matters because lines get renamed and
+    later reports print the new name back through earlier years -- "City
+    Manager- Downtown & University Hill Mgt" is "City Manager- Community
+    Vitality" from the 2018 report on -- and mixing reports would count such a
+    line twice. `restated_row` is the latest report's figure, given for every
+    line of a year in which the latest report changes any figure, so each
+    restated table still adds up."""
+    rows = collections.defaultdict(dict)        # (table, key, year, basis) -> {report: row}
+    label = {}                                  # (table, key) -> latest report's label
+    printed = collections.defaultdict(set)      # (table, year) -> reports printing it
+    with ACFR_CSV.open(encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            if not (r["confirmed"] and re.fullmatch(r"-?\d+(\.\d+)?", r["value"])):
+                continue
+            t, k, y, rep = r["table"], _acfr_key(r["line"]), int(r["year"]), int(r["report"])
+            rows[(t, k, y, r["basis"])][rep] = r
+            printed[(t, y)].add(rep)
+            if rep >= label.get((t, k), (0, ""))[0]:
+                label[(t, k)] = (rep, r["line"])
+    source = {ty: (ty[1] if ty[1] in reps else min(reps)) for ty, reps in printed.items()}
+    latest = {ty: max(reps) for ty, reps in printed.items()}
+    out, changed = [], set()
+    for (t, k, y, basis), by_rep in sorted(rows.items()):
+        src = ACFR_BORROW.get((t, k, y), source[(t, y)])
+        if src not in by_rep:
+            continue
+        first, last = by_rep[src], by_rep.get(latest[(t, y)])
+        if last is not None and float(last["value"]) != float(first["value"]):
+            changed.add((t, y, basis))
+        out.append((t, k, y, basis, label[(t, k)][1], first, last))
+    return [(t, k, y, b, lab, first, last if (t, y, b) in changed else None)
+            for t, k, y, b, lab, first, last in out]
+
+
+def acfr_add(measure, year, basis, row, unit, scale):
+    """The text layer's reading is the source wherever it is the figure used,
+    as `books` is for the budget books; `acfrocr` otherwise."""
+    value = round(float(row["value"]) * scale, 3)
+    add(year, measure, basis, value, unit, "acfr" if row["text"] == row["value"] else "acfrocr")
+
+
+ACFR = acfr_series()
+# Staffing by function in the spending pies' seven buckets (the department
+# crosswalk's). Environmental Affairs, a function only until 2012, has no pie
+# counterpart; it went into sustainability planning, so planning_climate.
+FTE_BUCKETS = {
+    "citycouncil": "administration", "municipalcourt": "administration",
+    "cityattorney": "administration", "citymanageradministration": "administration",
+    "citymanagercommunications": "administration", "humanresources": "administration",
+    "finance": "administration", "informationtechnology": "administration",
+    "citymanagercommunityvitality": "infrastructure",
+    "citymanagerdowntownuniversityhillmgt": "infrastructure",
+    "administration": "infrastructure", "fleet": "infrastructure",
+    "transportation": "infrastructure", "utilities": "infrastructure",
+    "facilityassetmanagement": "infrastructure",
+    "police": "public_safety", "fire": "public_safety",
+    "planningdevelopmentservices": "planning_climate", "development": "planning_climate",
+    "communityplanningandsustainability": "planning_climate",
+    "energystrategyelectricutility": "planning_climate",
+    "climateinitiatives": "planning_climate", "environmentalaffairs": "planning_climate",
+    "parksandrecreation": "parks_openspace", "openspacemountainparks": "parks_openspace",
+    "library": "community_services", "arts": "community_services",
+    "housingandhumanservices": "community_services", "housing": "community_services",
+    "humanservices": "community_services",
+}
+TAX_LINES = {"salesandusetaxes": "salesuse_total", "generalpropertytaxes": "property_tax_revenue"}
+RATE_LINES = {"directcitysalestaxrate": "salestaxrate_direct_city",
+              "foodservicesalestax": "salestaxrate_food_service",
+              "totaldirectcitysalestax": "salestaxrate_total_direct_city"}
+fte_buckets = collections.defaultdict(float)
+for table, key, year, basis, label, first, restated in ACFR:
+    if table == "fundbal" and key in TAX_LINES:
+        acfr_add(TAX_LINES[key], year, "actual", first, "musd", 0.001)
+        if restated:
+            acfr_add(TAX_LINES[key], year, "restated", restated, "musd", 0.001)
+    elif table == "fte":
+        acfr_add("ftefunc_" + _slug(label), year, "adopted", first, "fte", 1)
+        if key != "total":
+            if key not in FTE_BUCKETS:
+                raise SystemExit(f"staffing line {label!r} has no bucket in FTE_BUCKETS")
+            fte_buckets[(year, FTE_BUCKETS[key])] += float(first["value"])
+    elif table == "taxsales":
+        if key in RATE_LINES:
+            acfr_add(RATE_LINES[key], year, "actual", first, "pct", 1)
+            continue
+        measure = "taxablesales_total" if key == "totalsalesandusetax" else "taxablesales_" + _slug(label)
+        acfr_add(measure, year, "actual", first, "musd", 0.001)
+        if restated:
+            acfr_add(measure, year, "restated", restated, "musd", 0.001)
+    elif table == "legal" and key == "assessedvalue":
+        # Certified in the report's year, taxed and collected the next. The
+        # budget packets label it by the collection year, and so does this
+        # series: the 2024 report's $5,091,582 thousand is the packet's 2025.
+        acfr_add("property_assessed_value", year + 1, "actual", first, "musd", 0.001)
+    elif table == "gf" and basis in ("adopted", "final", "actual"):
+        acfr_add("acfrgf_" + _slug(label), year, basis, first, "musd", 0.001)
+# The General Fund statement's lines, by which total they add up to.
+ACFRGF_REVENUE = {"acfrgf_" + _slug(x) for x in (
+    "Sales and use taxes", "Sales, use and other taxes", "General property taxes",
+    "Accommodations taxes", "Franchise taxes", "Franchise & occupation taxes",
+    "Occupation taxes", "Specific ownership & tobacco taxes", "Excise taxes",
+    "Charges for services", "Sale of goods", "Licenses, permits and fines",
+    "Intergovernmental", "Leases, rents and royalties", "Interest and investment earnings",
+    "Other")}
+ACFRGF_EXPENDITURE = {"acfrgf_" + _slug(x) for x in (
+    "General Government", "Administrative Services", "Public Safety", "Public Works",
+    "Planning & Development Services", "Culture and Recreation",
+    "Open Space and Mountain Parks", "Housing and Human Services", "Principal",
+    "Interest", "Capital outlay")}
+# The bucket sums repeat what the lines above already say, grouped as the
+# spending pies are; the reconciliation checks they add up to each total.
+for (year, bucket), v in sorted(fte_buckets.items()):
+    add(year, "ftebucket_" + bucket, "adopted", round(v, 2), "fte", "acfr")
+
 
 # --- 2026 citywide revenue by source (all funds) --------------------------
 # From the 2026 Recommended Budget presentation. Sums to 507.20.
@@ -1506,7 +1687,10 @@ CHECKS = {
     "bucket": ("A department label keeps its bucket from year to year, or a note says why", "exact"),
     "halves": ("General Fund half + dedicated half = `budget_operating`", "$0.2M"),
     "opcap": ("`budget_operating` + `budget_capital` = `budget_total`", "$0.2M"),
-    "salesuse": ("Sales and use tax components sum to `salesuse_total`", "$0.05M"),
+    "salesuse": ("Packet sales and use tax components sum to the packet's own total", "$0.05M"),
+    "ftefunc": ("ACFR staffing lines, and the six buckets, sum to `ftefunc_total`", "0.02 FTE"),
+    "taxablesales": ("ACFR taxable sales by sector sum to `taxablesales_total`", "$0.002M"),
+    "acfrgf": ("ACFR General Fund lines sum to total revenues and total expenditures", "$0.01M"),
     "revenue": ("Revenue components sum to that year's `revenue_total`", "$0.02M"),
     "snapshot": ("OpenGov snapshot components sum to their totals, and net = revenue - expense", "$10"),
 }
@@ -1659,6 +1843,36 @@ def reconcile():
             problems.append(
                 f"{yr} snapshot net={net:,.0f} != stated={SNAPSHOT_NET[i]:,.0f}")
 
+    # The annual financial reports' tables against their own printed totals.
+    for family, total, tol, check in (("ftefunc_", "ftefunc_total", 0.02, "ftefunc"),
+                                      ("ftebucket_", "ftefunc_total", 0.02, "ftefunc"),
+                                      ("taxablesales_", "taxablesales_total", 0.002, "taxablesales")):
+        sums = collections.defaultdict(float)
+        for r in ROWS:
+            if r["measure"].startswith(family) and r["measure"] != total:
+                sums[(r["year"], r["basis"])] += r["value"]
+        for (yr, basis), parts in sorted(sums.items()):
+            tot = idx.get((yr, total, basis))
+            if tot is None:
+                problems.append(f"{yr} {basis}: {family} lines with no {total}")
+                continue
+            tally(check, parts - tot, f"{yr} {basis} {family.rstrip('_')}")
+            if abs(parts - tot) > tol:
+                problems.append(f"{yr} {basis} {family}* = {parts:.3f} != {total} = {tot:.3f}")
+    for yr, basis in sorted({(r["year"], r["basis"]) for r in ROWS
+                             if r["measure"].startswith("acfrgf_")}):
+        col = [r for r in ROWS if r["measure"].startswith("acfrgf_")
+               and (r["year"], r["basis"]) == (yr, basis)]
+        for total, lines in (("acfrgf_total_revenues", ACFRGF_REVENUE),
+                             ("acfrgf_total_expenditures", ACFRGF_EXPENDITURE)):
+            tot = idx.get((yr, total, basis))
+            parts = sum(r["value"] for r in col if r["measure"] in lines)
+            if tot is None:
+                continue
+            tally("acfrgf", parts - tot, f"{yr} {basis} {total}")
+            if abs(parts - tot) > 0.01:
+                problems.append(f"{yr} {basis} {total}: lines {parts:.3f} != {tot:.3f}")
+
     return problems, residuals, checked
 
 
@@ -1750,10 +1964,12 @@ def write_validation(path, checked, residuals, cross_rows, wide_rows):
          "| Check | Cases | Tolerance | Largest miss |", "|---|---:|---|---|"]
     for key, (label, tol) in CHECKS.items():
         n, miss, where = checked[key]
-        if tol == "exact":
+        if tol == "exact" or not where:
             worst = "none"
         elif key == "snapshot":
             worst = f"${miss * 1e6:,.0f} ({where})"
+        elif key == "ftefunc":
+            worst = f"{miss:.2f} FTE ({where})"
         else:
             worst = f"${miss:.3f}M ({where})"
         L.append(f"| {label} | {n} | {tol} | {worst} |")
@@ -1804,6 +2020,9 @@ def main():
     # passes. Writing first and checking after would leave a failed build's
     # half-finished CSVs looking like a finished one.
     _, residuals, _ = reconcile()
+    # Actual totals come from the audited reports, not the packet, so the
+    # packet's rounding against its own actual total is not the dataset's.
+    residuals = [x for x in residuals if x[1] != "actual"]
     for yr, basis, delta in residuals:
         add(yr, "salesuse_component_residual", basis, delta, "musd", "forecast2026")
     problems, _, checked = reconcile()

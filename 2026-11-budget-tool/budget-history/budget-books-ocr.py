@@ -21,6 +21,16 @@ Tiers 3 and 4 take their page lists from budget-books-extracted.csv and
 budget-books-pages-of-interest.csv, looked for beside this script and then in
 the working directory, so copy those two along if you copy the script.
 
+Other documents skip the tiers and give their own page list, a CSV with `file`
+and `page` columns. That is how the annual financial reports in raw-acfr/ are
+read (acfr-extract.py writes their list):
+
+    python3 budget-books-ocr.py raw-acfr --pages-from acfr-pages.csv -o raw-acfr/acfr-ocr.jsonl --yes
+
+`--force-ocr` makes Datalab read the page image even where the PDF has a text
+layer. That is for text layers that are wrong: the 2021 report's is the city's
+own OCR of a scan, and the 2023 report's is font codes.
+
 The output is JSONL in exactly the shape `budget-books-inventory.py --dump-text`
 writes, so `budget-books-extract.py` reads OCR'd and born-digital pages through
 the same code path:
@@ -196,6 +206,8 @@ except ImportError:
 # Overridable so the batching can be tested against a local stand-in.
 CONVERT = os.environ.get("DATALAB_CONVERT_URL", "https://www.datalab.to/api/v1/convert")
 USER_AGENT = "charting-boulder/budget-books-ocr (+https://github.com/brianckeegan/charting-boulder)"
+# Form fields beyond the three every request sends; --force-ocr adds one.
+EXTRA_FIELDS = []
 
 # Volume 1 of the three years the born-digital books cannot cover. Matched as
 # substrings of the filename, so the exact Laserfiche naming does not matter.
@@ -440,7 +452,7 @@ def submit(blob: bytes, name: str, key: str, limiter: RateLimiter) -> tuple[str,
     # opens with a "{N}------" line. It is the only setting batching adds; mode
     # and output_format are exactly what the validated single-page runs used.
     for field, value in (("output_format", "markdown"), ("mode", "accurate"),
-                         ("paginate", "true")):
+                         ("paginate", "true"), *EXTRA_FIELDS):
         parts.append(
             f'--{boundary}\r\nContent-Disposition: form-data; name="{field}"\r\n\r\n{value}\r\n'.encode()
         )
@@ -794,6 +806,15 @@ def main():
                     help="with --book: page range to send (default %(default)s)")
     ap.add_argument("--pages", default="", metavar="N,N-M,...",
                     help="exact pages to send, overriding --window; ranges allowed")
+    ap.add_argument("--pages-from", default="", metavar="CSV",
+                    help="a CSV with `file` and `page` columns: send exactly those pages "
+                         "of those files, and ignore --tier. acfr-extract.py --locate "
+                         "writes one for the annual financial reports")
+    ap.add_argument("--force-ocr", action="store_true",
+                    help="OCR every page even where the PDF has a text layer. For text "
+                         "layers that are themselves bad OCR, like the 2021 financial "
+                         "report's, or font codes, like the 2023 one's, which Datalab "
+                         "might otherwise reuse")
     ap.add_argument("--batch-pages", type=int, default=BATCH_PAGES, metavar="N",
                     help="pages per request (default %(default)s). Datalab bills per page "
                          "either way; 1 sends one page per request, which is only worth "
@@ -838,6 +859,8 @@ def main():
     except AttributeError:        # Python < 3.7
         pass
 
+    if args.force_ocr:
+        EXTRA_FIELDS.append(("force_ocr", "true"))
     root = Path(args.root).expanduser()
     if not root.exists():
         sys.exit(f"no such directory: {root}")
@@ -884,7 +907,19 @@ def main():
         return [q for q in pdfs
                 if (q.name.lower().startswith(lo) if anchored else lo in q.name.lower())]
 
-    if args.book or args.pages or not tiers:
+    if args.pages_from:
+        # A page list per file, for documents the tiers know nothing about. Files
+        # are matched by exact name, as --book matches a full filename.
+        import csv as _csv
+        per = {}
+        with open(args.pages_from, encoding="utf-8") as fh:
+            for row in _csv.DictReader(fh):
+                per.setdefault(row["file"], []).append(int(row["page"]))
+        for fname, pages in per.items():
+            for pdf in select(root, [fname]):
+                n = len(PdfReader(str(pdf)).pages)
+                claim(pdf, [q for q in pages if 1 <= q <= n], 0)
+    elif args.book or args.pages or not tiers:
         # Manual mode, unchanged: explicit books and an explicit window.
         for pdf in select(root, args.book or DEFAULT_BOOKS):
             claim(pdf, page_list(len(PdfReader(str(pdf)).pages), window,
