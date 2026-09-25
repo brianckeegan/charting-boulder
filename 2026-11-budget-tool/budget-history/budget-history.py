@@ -94,6 +94,14 @@ SOURCES = {
         "retrieved": "2026-09-21",
         "notes": "2027 year-over-year percentages, General Fund included; position adds and freezes. A web page with no date of its own, published with the 2027 Recommended Budget on 2026-08-28.",
     },
+    "recbook2027": {
+        "title": "2027 Recommended Budget: online budget book (Budget in Brief and Budget in Brief - Continued)",
+        "publisher": "City of Boulder",
+        "date": "",
+        "url": "https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB",
+        "retrieved": "2026-09-25",
+        "notes": "The city's 2027 budget book, published on OpenGov Stories and read in a browser. Budget in Brief: the citywide sources, General Fund sources and citywide uses by department tables, portal views of dataset 188635 that print 2025, 2026 and 2027 Budget columns to the dollar, and the staffing levels by department table. Budget in Brief - Continued: the mill levy table's projected 2027 revenue, with charts of sales and property tax collections for 2023-2027 that sum to the same figures. No date of its own; its tables say \"Data Updated: Aug 22, 2026\".",
+    },
     "snapshot2023": {
         "title": "2023 Budget: Sources & Uses Citywide, Types (OpenGov dataset 65843, CSV export)",
         "publisher": "City of Boulder",
@@ -786,8 +794,9 @@ for yr, (total, su, ut, pt, ig, src) in REVENUE_PIES.items():
 # (year, label as printed, $M, bucket, note)
 DEPARTMENT_LINES = [
     # Empty on purpose. Every pie year, 2005-2022, comes from PIE_LINES below
-    # and is folded in from there; a year typed here as well would be counted
-    # twice, which the reconciliation against budget_total would catch.
+    # and is folded in from there, and 2025-2027 from DEPARTMENT_2025_2027; a
+    # year typed here as well would be counted twice, which the reconciliation
+    # against budget_total would catch.
 ]
 
 # -- 2024-2026: the OpenGov cost-center export. Same twenty cost centers in all
@@ -1127,6 +1136,8 @@ def dept_source(family, year):
     """The source_id for a departmental row: which document, and which reading."""
     if family == "deptexpfiltered":
         return "deptsnapshot2026"
+    if year >= 2025:
+        return "recbook2027"
     return "booksocr" if year in PIE_OCR_YEARS else "books"
 
 
@@ -1308,27 +1319,76 @@ for _yr, _label, _v in PIE_LINES:
     DEPARTMENT_LINES.append((_yr, _label, _v, PIE_BUCKETS[_slug(_label)][0],
                              _bucket_note(_slug(_label))))
 
+# -- 2025-2027: the 2027 budget book's "Citywide Uses" by department, drawn as
+#    a pie in its Budget in Brief, to the dollar. The same twenty cost centers as
+#    the export above, but with no fund filter: it sums to the citywide total by
+#    itself ($589.28M, $520.98M and $552.60M against 589.3, 521.0 and 552.6), as
+#    the books' pies do. So these years join the pies' family. Its 2025 and 2026
+#    columns are those years' adopted budgets, shown in the 2027 department
+#    structure, and 2027 is the recommended budget. The export's buckets and
+#    notes carry over, except the note on Utilities, which is whole here.
+DEPARTMENT_2025_2027 = [
+    # (label as printed, bucket, 2025, 2026, 2027 in dollars)
+    ("Utilities", "infrastructure", 128532187, 124388375, 136940407),
+    ("Transportation and Mobility", "infrastructure", 60804278, 53351843, 60127099),
+    ("Facilities and Fleet", "infrastructure", 70931731, 25218228, 23987587),
+    ("Police", "public_safety", 46425876, 50203922, 54246256),
+    ("Fire-Rescue", "public_safety", 33951993, 31503133, 35049888),
+    ("Police/Fire Pensions", "public_safety", 414283, 489614, 489615),
+    ("Open Space and Mountain Parks", "parks_openspace", 38084363, 37897700, 37422557),
+    ("Parks and Recreation", "parks_openspace", 36965186, 36548441, 37112619),
+    ("Housing and Human Services", "community_services", 52676374, 51315738, 49721865),
+    ("Planning and Development Services", "planning_climate", 15182536, 17266697, 19229101),
+    ("Climate Initiatives", "planning_climate", 10866009, 8832062, 8109630),
+    ("City Manager's Office", "administration", 19182340, 17823423, 19429465),
+    ("Innovation and Technology", "administration", 10713518, 11295451, 10680047),
+    ("Finance", "administration", 7039345, 7052891, 7211744),
+    ("City Attorney's Office", "administration", 4882030, 5067069, 5517903),
+    ("Human Resources", "administration", 4613075, 4455703, 4548783),
+    ("Communications and Engagement", "administration", 3848646, 3876518, 3727735),
+    ("Municipal Court", "administration", 2768075, 2709514, 2645642),
+    ("City Council", "administration", 466354, 543820, 763378),
+    ("Fundwide / Citywide", "citywide_debt", 40930571, 31141555, 35639677),
+]
+DEPARTMENT_2025_2027_NOTES = {
+    label: note for label, _b, _v24, _v25, _v26, note in DEPARTMENT_2024_2026
+    if note and label != "Utilities"}
+DEPARTMENT_2025_2027_NOTES["Fundwide / Citywide"] = (
+    "Citywide allocations and contingency. No pie before 2025 prints it. Its "
+    "nearest counterparts, General Government (2005-2012) and General Governance "
+    "and Internal Services (2013-2022), are bucketed as administration, so "
+    "administration and citywide_debt trade content between 2022 and 2025.")
+for label, bucket, v25, v26, v27 in DEPARTMENT_2025_2027:
+    for yr, v in ((2025, v25), (2026, v26), (2027, v27)):
+        DEPARTMENT_LINES.append((yr, label, round(v / 1e6, 6), bucket,
+                                 DEPARTMENT_2025_2027_NOTES.get(label, "")))
+# Every departmental year is an adopted budget except the 2027 book's own year.
+DEPARTMENT_BASIS = {2027: "recommended"}
+
 BUCKET_ORDER = ["public_safety", "infrastructure", "parks_openspace",
                 "community_services", "planning_climate", "administration",
                 "citywide_debt"]
 
 # Two families, deliberately not one.
 #
-# deptexp_*          the books' citywide pies, 2005-2022. Every fund, comparable
-#                    year to year.
+# deptexp_*          the books' citywide pies, 2005-2022, and the 2027 book's
+#                    citywide table, 2025-2027. Every fund, comparable year to
+#                    year.
 # deptexpfiltered_*  the OpenGov cost-center export, 2024-2026, taken with a
 #                    23-fund filter that omits the utility, debt-service and
 #                    internal-service funds.
 #
 # Both sum to their year's citywide total, so no arithmetic check can tell them
 # apart -- and that is exactly the trap. Their COMPOSITION is incomparable.
-# Infrastructure is 51.8% of citywide spending in 2022 and 15.8% in 2026, not
-# because Boulder stopped maintaining anything but because the filter moves
-# nearly all utility spending out of the departments and into the balancing line.
-# Charting the two families as one series shows infrastructure halving.
+# In 2026 infrastructure is 39.0% of citywide spending in deptexp and 15.8% in
+# deptexpfiltered, not because the two disagree about what Boulder maintains but
+# because the filter moves nearly all utility spending out of the departments and
+# into the balancing line. Charting the two families as one series shows
+# infrastructure halving.
 #
 # Separate prefixes make that mistake require effort rather than inattention.
-# One unfiltered re-export of the same view collapses them back into one family.
+# 2025 and 2026 are in both families, where the difference shows directly; 2024
+# is the one year only the filtered export has.
 for family, lines in (("deptexp", DEPARTMENT_LINES),
                       ("deptexpfiltered", DEPARTMENT_FILTERED_LINES)):
     for yr in sorted({y for y, *_ in lines}):
@@ -1338,8 +1398,8 @@ for family, lines in (("deptexp", DEPARTMENT_LINES),
                 by_bucket[bucket] += v
         for bucket in BUCKET_ORDER:
             if bucket in by_bucket:
-                add(yr, f"{family}_{bucket}", "adopted", round(by_bucket[bucket], 3),
-                    "musd", dept_source(family, yr))
+                add(yr, f"{family}_{bucket}", DEPARTMENT_BASIS.get(yr, "adopted"),
+                    round(by_bucket[bucket], 3), "musd", dept_source(family, yr))
 
 # The 2024-2026 export was taken with a fund filter that leaves out the utility,
 # debt-service and internal-service funds, so its twenty cost centers add up to
@@ -1351,9 +1411,10 @@ for family, lines in (("deptexp", DEPARTMENT_LINES),
 #     2025   589.3 - 473.4 = 115.9
 #
 # It is a real number -- what the excluded funds spend -- but it is a residual,
-# not a reported figure, so it is `derived`. One re-export of the same view with
-# no fund filter replaces it with actual departmental detail, and is the single
-# highest-value download left in this dataset.
+# not a reported figure, so it is `derived`. For 2025 and 2026 the 2027 book's
+# unfiltered table, in deptexp, has the departmental detail instead. 2024 still
+# lacks it: the 2026 book's 2024 column sums to $514.22M against the published
+# $515.4M, too far off to join deptexp.
 DEPARTMENT_EXPORT_TOTAL = {2024: 407.794, 2025: 473.447, 2026: 411.907}
 for yr, export_total in DEPARTMENT_EXPORT_TOTAL.items():
     published = next(r["value"] for r in ROWS
@@ -1588,6 +1649,49 @@ for name, v in [
     add(2026, name, "recommended", round(v, 6), "musd", "rec2026")
 add(2026, "revenue_total", "recommended", 507.2, "musd", "rec2026")
 
+# --- 2027 Recommended Budget book ---------------------------------------------
+# The online budget book's Budget in Brief, "2027 Budget" column, to the dollar.
+# The same tables print 2025 and 2026 columns that match what is above for
+# those years: the 2025 book's revenue total and sales, utility and General
+# Fund figures, and the 2026 presentation's lines to the dollar in eight of
+# eleven (see the data dictionary). So 2027 continues the same series. The six
+# lines the 2026 presentation grouped as "other" are printed separately here,
+# and kept that way. They sum to the printed $527,097,004.
+REVENUE_2027 = [
+    ("revenue_sales_use_tax", 185065385),
+    ("revenue_utility", 104332411),
+    ("revenue_property_tax", 60251143),
+    ("revenue_development_impact_fees", 28541471),
+    ("revenue_other_revenues", 24361362),
+    ("revenue_intergovernmental", 18757295),
+    ("revenue_licenses_permits_fines", 19043670),
+    ("revenue_investment_earnings_bonds", 14966603),
+    ("revenue_accommodation_admission_tax", 13158537),
+    ("revenue_grants", 10856665),
+    ("revenue_parking", 10983932),
+    ("revenue_charges_for_services", 9386423),
+    ("revenue_misc_sales_materials_goods", 13914503),
+    ("revenue_franchise_fees", 5814206),
+    ("revenue_leases_rents_royalties", 4880006),
+    ("revenue_specific_ownership_tobacco", 2783392),
+]
+for name, v in REVENUE_2027:
+    add(2027, name, "recommended", round(v / 1e6, 6), "musd", "recbook2027")
+add(2027, "revenue_total", "recommended", 527.097004, "musd", "recbook2027")
+add(2027, "budget_general_fund_revenue", "recommended", 200.304526, "musd", "recbook2027")
+# "2027 Rec. Staffing" in the Staffing Levels by Department table, whose 2025
+# and 2026 Approved columns, 1,539.10 and 1,548.28, are the books' figures.
+add(2027, "staffing_fte", "recommended", 1532.68, "fte", "recbook2027")
+# Budget in Brief - Continued. "Forecasted sales and use tax revenues total
+# $185.1 million", the revenue line above. The mill levy table's "General
+# Citywide" row, the city's own 11.648 mills, projects $57,828,200, which is
+# what property_tax_revenue measures. Each page's chart of collections by fund
+# sums to the same figure, and its 2023-2026 bars repeat the packet's figures,
+# all but 2025 property tax ($57.73M against $57.58M).
+add(2027, "salesuse_total", "recommended", 185.065385, "musd", "recbook2027")
+add(2027, "property_tax_revenue", "recommended", 57.8282, "musd", "recbook2027")
+add(2027, "property_mill_levy", "recommended", 11.648, "mills", "recbook2027")
+
 # --- Staffing CHANGES, 2026-2027 --------------------------------------------
 # Year-over-year changes from the packets and releases. The level series is
 # staffing_fte above; the two do not reconcile (see the data dictionary).
@@ -1745,9 +1849,10 @@ def reconcile():
         for yr in sorted({y for y, *_ in lines}):
             parts = sum(v for (y, m, b), v in idx.items()
                         if y == yr and m.startswith(family))
-            total = idx.get((yr, "budget_total", "adopted"))
+            basis = DEPARTMENT_BASIS.get(yr, "adopted")
+            total = idx.get((yr, "budget_total", basis))
             if total is None:
-                problems.append(f"{yr}: {family}* has no adopted budget_total to sum to")
+                problems.append(f"{yr}: {family}* has no {basis} budget_total to sum to")
                 continue
             tally("dept", parts - total, f"{yr} {family}*")
             if abs(parts - total) > TOL:
@@ -1894,13 +1999,13 @@ WIDE = [
     ("budget_capital", ["adopted", "recommended"]),
     ("budget_general_fund", ["adopted", "recommended", "derived"]),
     ("budget_general_fund_revenue", ["adopted", "recommended"]),
-    ("staffing_fte", ["adopted"]),
+    ("staffing_fte", ["adopted", "recommended"]),
     ("revenue_total", ["adopted", "recommended", "derived"]),
     ("revenue_sales_use_tax", ["adopted", "recommended"]),
     ("revenue_property_tax", ["adopted", "recommended"]),
     ("revenue_utility", ["adopted", "recommended"]),
-    ("salesuse_total", ["actual", "adopted", "forecast"]),
-    ("property_tax_revenue", ["actual", "adopted", "forecast"]),
+    ("salesuse_total", ["actual", "adopted", "recommended", "forecast"]),
+    ("property_tax_revenue", ["actual", "adopted", "recommended", "forecast"]),
     ("gap_general_fund", ["identified", "recommended", "forecast"]),
 ]
 

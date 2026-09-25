@@ -28,11 +28,11 @@ All CSVs are UTF-8 with LF line endings. The four `budget-history-*` CSVs are pl
 | Citywide total | 2004–2027 | From 2008 the total includes the internal service funds; the 2008 book restates 2007 on that footing, 0.35% higher |
 | Operating and capital | 2005–2027 | From the books' summary blocks where they print one, 2005–2022 |
 | General Fund, all-in uses | 2003–2027 | 2003 is an actual only |
-| General Fund revenue | 2003–2026 | 2003 is an actual only |
-| Staffing level (FTE) | 2002–2026 | Every year, with later books' restatements beside the adopted figures |
-| Spending by department | 2005–2022 | Seven buckets. 2024–2026 come from a filtered export that is **not** comparable |
-| Revenue by source | 2005–2026 | The taxonomies differ, so only four categories line up. 2018 and 2022 include borrowing |
-| Sales and use tax, property tax | 2007–2026 | Audited actuals for 2007–2025, from the annual financial reports; the packet's adopted, revised and forecast figures beside them ([caveat 20](budget-history-data-dictionary.md#20-tax-collections-are-audited-and-12-above-the-packets-year-end-figures)) |
+| General Fund revenue | 2003–2027 | 2003 is an actual only |
+| Staffing level (FTE) | 2002–2027 | Every year, with later books' restatements beside the adopted figures |
+| Spending by department | 2005–2022, 2025–2027 | Seven buckets. 2025–2027 come from the 2027 budget book's citywide table. A filtered export for 2024–2026 is kept apart because it is **not** comparable |
+| Revenue by source | 2005–2027 | The taxonomies differ, so only four categories line up. 2018 and 2022 include borrowing |
+| Sales and use tax, property tax | 2007–2027 | Audited actuals for 2007–2025, from the annual financial reports; the packet's adopted, revised and forecast figures, and the 2027 recommended budget's, beside them ([caveat 20](budget-history-data-dictionary.md#20-tax-collections-are-audited-and-12-above-the-packets-year-end-figures)) |
 | Staffing by function | 2007–2025 | Budgeted FTE by function from the annual reports, as printed and in the spending buckets. Its own family: its totals differ from the staffing level in 8 years ([caveat 22](budget-history-data-dictionary.md#22-staffing-by-function-is-the-budgets-count-and-its-totals-do-not-always-match-staffing_fte)) |
 | Taxable sales by sector | 2007–2025 | The sales tax base, and the tax rates. 2013, 2014 and 2017 also as restated |
 | Assessed value | 2017–2026 | Filed under the year the tax is collected |
@@ -75,6 +75,7 @@ The [validation report](budget-history-validation.md#checks) lists how many case
 | `rec2026` | 2026 Recommended Budget, council study session | 2026 revenue by source and position eliminations |
 | `rec2027` | [2027 Recommended Budget news release](https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input), August 28, 2026 | 2027 totals, General Fund, gap, positions |
 | `glance2027` | [Budget At-A-Glance](https://bouldercolorado.gov/budget-glance) | 2027 percentage changes, positions added and frozen |
+| `recbook2027` | [2027 Recommended Budget, online budget book](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB) | 2027 revenue by source, General Fund revenue, staffing and tax forecasts; spending by department, 2025–2027 |
 | `acfr` | [City of Boulder Annual Comprehensive Financial Reports](https://bouldercolorado.gov/annual-comprehensive-financial-report-popular-annual-financial-report), fiscal 2016–2025, read from the PDF text layer | Audited tax collections from 2007, staffing by function, taxable sales, assessed value, and the General Fund's budget and actual |
 | `acfrocr` | The same reports, read by Datalab OCR | The 2021 and 2023 reports, whose text layers are unusable, and cells the text layer could not place |
 | `brl2027` | [Boulder Reporting Lab](https://boulderreportinglab.org/2026/09/08/boulders-proposed-2027-budget-would-cut-13-filled-jobs-and-trim-pool-hours/), September 8, 2026 | The savings from the 2027 position cuts |
@@ -92,7 +93,7 @@ Four stages. The first three find figures in the budget books, and only the seco
 | 3. Extract | `budget-books-extract.py` | any number of those JSONL files | `budget-books-extracted.csv` (candidates) and `budget-books-pages-of-interest.csv` |
 | 4. Build | `budget-history.py` | nothing | the four `budget-history-*` CSVs and the validation report |
 
-Candidates from stage 3 are checked by a person and then typed into `budget-history.py` with their source. The script is the transcription record, and every value in it carries the ID of the document it came from.
+Candidates from stage 3 are checked by a person and then typed into `budget-history.py` with their source. The script is the transcription record, and every value in it carries the ID of the document it came from. The 2027 budget book is a web page rather than a PDF, so its tables were read in a browser and typed in to the dollar, like the council packets and releases.
 
 **The annual financial reports take a shorter path, and the build reads one file: theirs.** The ten reports are small enough (57 MB) to live in `raw-acfr/`, with Datalab's OCR of the 98 pages read, `raw-acfr/acfr-ocr.jsonl`. `acfr-extract.py` reads five tables from each twice and writes every figure, with both readings and how it was confirmed, to `acfr-extracted.csv`. `budget-history.py` loads the confirmed ones instead of having some 1,700 figures typed in ([caveat 25](budget-history-data-dictionary.md#25-how-the-annual-report-figures-were-read-and-checked)):
 

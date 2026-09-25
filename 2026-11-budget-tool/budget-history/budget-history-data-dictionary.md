@@ -110,8 +110,8 @@ Where a year has several bases, the file picks one by a single rule:
 |---|---|
 | `budget_total`, `budget_operating`, `budget_capital`, `budget_general_fund_revenue`, `revenue_sales_use_tax`, `revenue_property_tax`, `revenue_utility` | `adopted`, then `recommended` |
 | `budget_general_fund`, `revenue_total` | `adopted`, then `recommended`, then `derived` |
-| `staffing_fte` | `adopted` only, so the `restated` values stay in the long file |
-| `salesuse_total`, `property_tax_revenue` | `actual`, then `adopted`, then `forecast` |
+| `staffing_fte` | `adopted`, then `recommended`. The `restated` values stay in the long file |
+| `salesuse_total`, `property_tax_revenue` | `actual`, then `adopted`, then `recommended`, then `forecast` |
 | `gap_general_fund` | `identified`, then `recommended`, then `forecast` |
 
 Budget series take what was adopted. Revenue collections take what actually came in. **An `actual` is never a fallback for a budget series.** An actual sitting among adopted neighbours answers a different question, and a chart would show the difference as a jump. So a year that has only an actual for a budget series is empty in this file. For example, 2003 General Fund revenue and 2005 General Fund uses are in the long file only.
@@ -137,13 +137,13 @@ This file has one row per department line item per year. It holds the label exac
 
 | Column | Type | Notes |
 |---|---|---|
-| `year` | integer | |
-| `measure_family` | string | `deptexp` (the books' pies) or `deptexpfiltered` (the 2024–2026 OpenGov export). These are **not** one series ([caveat 17](#17-deptexp-and-deptexpfiltered-both-add-up-and-still-do-not-compare)) |
+| `year` | integer | 2027's rows are the recommended budget; every other year's are adopted |
+| `measure_family` | string | `deptexp` (the books' pies, 2005–2022, and the 2027 budget book's citywide table, 2025–2027) or `deptexpfiltered` (the 2024–2026 OpenGov export). These are **not** one series ([caveat 17](#17-deptexp-and-deptexpfiltered-both-add-up-and-still-do-not-compare)) |
 | `source_label` | string | The department as printed, with any letter-spacing damage kept: `Fir e`, `Parks & Re cr e ation`. That string is what you would search the PDF for |
 | `bucket` | string | One of seven functional buckets. See the [measure catalog](#measure-catalog) |
 | `value_musd` | number | This line's spending |
 | `pct_of_year_departmental` | number | Share of that year's lines in the same family. For `deptexp` that is the citywide total. For `deptexpfiltered` it is the export's total, which leaves out three fund groups |
-| `source_id` | string | `books`, `booksocr` or `deptsnapshot2026` |
+| `source_id` | string | `books`, `booksocr`, `recbook2027` or `deptsnapshot2026` |
 | `note` | string | Why, wherever the assignment was a judgment call. Every note stands alone; none sends you to another row |
 
 The balancing line `deptexpfiltered_funds_outside_export` is not in this file, because it is not a department. It is a residual computed against the published total.
@@ -209,7 +209,7 @@ Every measure is listed below. The exact years each one covers are in the valida
 | `budget_total` | musd | The citywide budget, all funds, **net** of interfund transfers. The headline number ([caveat 2](#2-the-headline-totals-are-one-continuous-net-series)) |
 | `budget_operating`, `budget_capital` | musd | Its two parts. They sum to `budget_total` within $0.1M in every year that has all three ([caveat 2](#2-the-headline-totals-are-one-continuous-net-series)) |
 | `budget_general_fund` | musd | **"Total General Fund Uses"**: General Fund spending plus transfers out plus the 0.15% sales tax allocation. The General Fund series to chart ([caveat 3](#3-two-general-fund-measures-6-to-19-percent-apart)) |
-| `budget_general_fund_revenue` | musd | The same fund's Sources side, from the books, 2003–2026 |
+| `budget_general_fund_revenue` | musd | The same fund's Sources side, from the books, 2003–2026, and the 2027 budget book |
 | `budget_operating_general`, `budget_operating_dedicated` | musd | The two halves of the operating budget in the 2005–2022 summary blocks. **Not** the General Fund series ([caveat 3](#3-two-general-fund-measures-6-to-19-percent-apart)) |
 | `gap_general_fund` | musd | The General Fund shortfall identified for that year |
 | `gap_general_fund_low`, `gap_general_fund_high` | musd | The same gap where it was given as a range (2025) |
@@ -219,14 +219,15 @@ Every measure is listed below. The exact years each one covers are in the valida
 | `property_tax_revenue` | musd | Property tax collected at the city's own levy. Its `actual`, 2007–2025, is audited, from the annual reports ([caveat 20](#20-tax-collections-are-audited-and-12-above-the-packets-year-end-figures)) |
 | `property_assessed_value` | musd | Assessed value of taxable property, in millions of dollars, filed under the year the tax is collected. `actual` 2017–2026 from the annual reports ([caveat 24](#24-assessed-value-is-filed-under-the-year-it-is-taxed)) |
 | `property_mill_levy` | mills | The city's levy |
-| `revenue_sales_use_tax`, `revenue_utility`, `revenue_property_tax`, `revenue_intergovernmental` | musd | Citywide all-funds revenue by source: the four categories that every year from 2005 to 2026 shares |
-| `revenue_development_impact_fees`, `revenue_licenses_permits_fines`, `revenue_investment_earnings_bonds`, `revenue_accommodation_admission_tax`, `revenue_grants`, `revenue_parking`, `revenue_other_grouped` | musd | Categories only the 2026 presentation breaks out. `other_grouped` is that presentation's own "other" |
-| `revenue_other_unmapped` | musd | The slices that fit no category, 2005–2026, carried together so each year still sums to its total ([caveat 10](#10-revenue_total-runs-20052026-all-published)) |
+| `revenue_sales_use_tax`, `revenue_utility`, `revenue_property_tax`, `revenue_intergovernmental` | musd | Citywide all-funds revenue by source: the four categories that every year from 2005 to 2027 shares |
+| `revenue_development_impact_fees`, `revenue_licenses_permits_fines`, `revenue_investment_earnings_bonds`, `revenue_accommodation_admission_tax`, `revenue_grants`, `revenue_parking`, `revenue_other_grouped` | musd | Categories only the 2026 presentation and the 2027 budget book break out. `other_grouped`, 2026 only, is that presentation's own "other" |
+| `revenue_other_revenues`, `revenue_charges_for_services`, `revenue_misc_sales_materials_goods`, `revenue_franchise_fees`, `revenue_leases_rents_royalties`, `revenue_specific_ownership_tobacco` | musd | 2027 only: the six lines the 2027 budget book prints where the 2026 presentation has `other_grouped`. The book's own 2026 column sums them to $50,582,397, the presentation's figure to the dollar |
+| `revenue_other_unmapped` | musd | The slices that fit no category, 2005–2026, carried together so each year still sums to its total ([caveat 10](#10-revenue_total-runs-20052027-all-published)) |
 | `revenue_total` | musd | Citywide all-funds revenue |
 | `sources_revenue_*` | musd | **A different basis**: the OpenGov citywide Sources & Uses snapshot, gross of interfund flows, 18 categories plus `total` ([caveats 1](#1-two-accounting-bases-never-one-series) and [4](#4-the-snapshots-revenue-categories-are-a-different-taxonomy)) |
 | `uses_expense_personnel`, `_capital`, `_operating`, `_transfers`, `_internal_services`, `_debt_service`, `_total` | musd | **A different basis**: the same snapshot's spending, by type of expense ([caveat 1](#1-two-accounting-bases-never-one-series)) |
 | `net_revenues_less_expenses` | musd | The snapshot's revenue minus expense. Negative in 2023 |
-| `deptexp_public_safety`, `_infrastructure`, `_parks_openspace`, `_community_services`, `_planning_climate`, `_administration`, `_citywide_debt` | musd | Citywide spending by department, bucketed, from the books' own pies. Sums to `budget_total` ([caveat 16](#16-department-spending-is-bucketed-and-the-buckets-are-coarse-on-purpose)) |
+| `deptexp_public_safety`, `_infrastructure`, `_parks_openspace`, `_community_services`, `_planning_climate`, `_administration`, `_citywide_debt` | musd | Citywide spending by department, bucketed, from the books' own pies, 2005–2022, and the 2027 budget book's citywide table, 2025–2027. Sums to `budget_total` ([caveat 16](#16-department-spending-is-bucketed-and-the-buckets-are-coarse-on-purpose)) |
 | `deptexpfiltered_*` (the same seven buckets) | musd | The same idea from a 2024–2026 export that leaves out three fund groups. **Not comparable to `deptexp_*`** ([caveat 17](#17-deptexp-and-deptexpfiltered-both-add-up-and-still-do-not-compare)) |
 | `deptexpfiltered_funds_outside_export` | musd | What the export leaves out: the published total minus the export's total. `derived` |
 | `staffing_fte` | fte | Citywide staffing **level** in standard FTEs ([caveat 15](#15-staffing-one-level-series-and-a-separate-family-of-changes)) |
@@ -315,7 +316,9 @@ Nothing is adjusted for inflation. Year-over-year changes over 2022–2027 partl
 
 #### 7. Every 2027 value is `recommended`
 
-Council's first reading was October 1, 2026 and its final vote October 15, 2026. Figures may change on adoption, so check them before publishing anything that depends on them.
+Council's first reading is set for October 1, 2026 and its final vote for October 15, 2026. Figures may change on adoption, so check them before publishing anything that depends on them.
+
+Most 2027 figures come from the city's online budget book for the recommended budget (`recbook2027`), which repeats the release's totals, General Fund and gap. The position changes come from the release and the Budget At-A-Glance page.
 
 ### Coverage
 
@@ -329,7 +332,7 @@ Check the [coverage table](budget-history-validation.md#coverage-by-measure) for
 - **`budget_general_fund` has only an actual for 2003,** so the chart file's series starts in 2004. 2019's two General Fund figures come from that book's Funds Summary table, read by OCR, and the 2020 book's own percentages confirm both ([caveat 12](#12-the-books-own-percentages-do-not-always-reproduce)).
 - **Tax collections start in 2007.** Each annual financial report prints ten years, so the ten in hand (fiscal 2016–2025) give `salesuse_total` and `property_tax_revenue` actuals for 2007–2025. The 2005–2015 reports, requested from the city, would reach back to 2002.
 - **Staffing by function, taxable sales and the General Fund's budget-and-actual come only from the annual reports:** 2007–2025 for the first two, 2016–2025 for the last.
-- **2027 has only what the recommended-budget release and the Budget At-A-Glance page give:** totals, the General Fund, the gap and position changes.
+- **2027 is the recommended budget, with no actuals.** The release and the Budget At-A-Glance page give totals, the General Fund, the gap and position changes. The online budget book adds revenue by source, General Fund revenue, staffing, department spending and the two tax forecasts.
 
 A missing year is absent from the data, not zero. Do not interpolate across a gap without saying so.
 
@@ -339,13 +342,14 @@ A missing year is absent from the data, not zero. Do not interpolate across a ga
 
 `budget_general_fund` for 2025 used to be derived. It was back-computed as `194.5 / (1 − 0.078)` = $211.0M from the packet's statement that 2026 fell 7.8% from 2025. The 2025 book prints $210.9M, which replaces it, and the 2026 book's "7.8% decrease from the 2025 Approved Budget" reproduces against that figure. No General Fund value is derived any more.
 
-#### 10. `revenue_total` runs 2005–2026, all published
+#### 10. `revenue_total` runs 2005–2027, all published
 
 Every year comes from its own book, in three layouts:
 
 - **2005–2012: "Sources of Funds" pies,** each summing to its printed total exactly. 2007–2010 were read by OCR, three of them from scans and 2008's from a page whose text layer scrambles which label goes with which number.
 - **2013–2022: "Citywide Revenues (Sources)" pies and donuts.** The 2013–2017 slices are rounded to the thousand and sum to within $2 thousand of their totals. 2021 prints its total only in prose, as $337.7 million.
 - **2023–2026: the net "total revenue budget"** each book states in prose, with the categories taken from OpenGov's Combined Budget Summary. That table is gross. It includes internal service charges and transfers between funds, so its own total is larger and is not used. The 2023 book labels its column "2023 Total Budget", and the 2025 book labels the same figures "2023 Adopted Budget", so they are recorded as adopted. The 2024 book prints only a table without utilities, so 2024's categories come from the 2025 book.
+- **2027: the 2027 budget book's Citywide Sources table,** sixteen lines to the dollar that sum to its printed $527,097,004, the net figure its prose rounds to $527.1 million. The same table prints 2025 and 2026 columns. Its 2025 total, sales and use tax and utility revenue match the 2025 book, while its 2025 property tax is $0.37M higher and intergovernmental revenue $0.50M lower. Eight of the 2026 presentation's eleven lines match to the dollar, and the other three differ by $250,000 of utility revenue and $1,996 moved from investment earnings to property tax. So 2027 continues the series. The six lines the presentation grouped as "other" are kept as the book prints them.
 
 **Two totals include borrowing.** 2018's chart has a $51.9M "Debt Issuance" slice, and 2022's "Other" includes $92.3M of water and wastewater bond proceeds. Earlier pies carry small bond proceeds the same way: $0.4M in 2005 and $1.2M in 2008. A jump in `revenue_total` in 2018 or 2022 is borrowing, not taxes.
 
@@ -407,11 +411,13 @@ The city totals sales and use tax at full precision but publishes the components
 
 `property_tax_revenue` (adopted) is **$59.17M**, collected at the city's own 11.648-mill levy. `revenue_property_tax`, from the citywide revenue mix, is **$61.73M**, which has a broader all-funds scope. They answer different questions, so don't compare them directly or chart them as one series.
 
+2027 has the same pair. `property_tax_revenue` is **$57.83M**, the 2027 budget book's projection for the city's 11.648 mills, and `revenue_property_tax` is **$60.25M**.
+
 ### Staffing
 
 #### 15. Staffing: one level series, and a separate family of changes
 
-`staffing_fte` is the citywide staffing **level** in standard FTEs, from 2002 to 2026. The `positions_*` measures are year-over-year **changes** (eliminated, added, frozen) from the 2026 and 2027 packets and releases.
+`staffing_fte` is the citywide staffing **level** in standard FTEs, from 2002 to 2027. 2027 is the recommended level, 1,532.68, from the 2027 budget book's Staffing Levels by Department table, whose 2025 and 2026 Approved columns are the books' 1,539.10 and 1,548.28. The `positions_*` measures are year-over-year **changes** (eliminated, added, frozen) from the 2026 and 2027 packets and releases.
 
 **The level is one series, not two.** The early books count "standard FTEs" with an explicit scope footnote, while the later books say "citywide staffing level". That makes them look like different measures whose offset cannot be measured. Three books settle it by printing both labels for the same number:
 
@@ -475,7 +481,8 @@ Know these boundaries before charting:
 - **Police and fire are one slice in 2019 and 2020.** The single "Public Safety" slices are $59.2M and $62.3M. 2021 splits them again at $36.9M and $21.3M.
 - **Housing moves between buckets.** It is combined with human services in `community_services` in most years, and printed as a slice of its own in 2013–2015, still in `community_services`. In 2016–2018 it sits inside Planning, Housing and Sustainability, in `planning_climate`. Across 2016–2018 those two buckets therefore trade housing's budget, about $5M a year in the years it is printed separately.
 - **The pies print no debt slice in 2019–2022,** so `deptexp_citywide_debt` has no row in those years. The pies still sum to their totals, so the debt service sits inside other slices. It is absent, not zero.
-- **`administration` and `citywide_debt` trade content across the series.** The General Government line of 2005–2012 probably holds non-departmental items that the 2024–2026 export books to Fundwide / Citywide. That makes it the least comparable pair.
+- **`administration` and `citywide_debt` trade content across the series.** The General Government line of 2005–2012 probably holds non-departmental items that the 2024–2026 export and the 2027 budget book put in Fundwide / Citywide. That makes it the least comparable pair. The step shows between 2022 and 2025, when Fundwide / Citywide enters `deptexp`: `administration` is 9.7% of citywide spending in 2022 and 9.1% in 2025, and `citywide_debt` goes from no row to 6.9%.
+- **2025–2027 come from one table,** the 2027 budget book's, which prints 2025 and 2026 in the 2027 department structure. The 2022 pie's Community Vitality and Library & Arts have no line of their own there. Community Vitality still had staff in 2025 and 2026, so its spending sits inside other lines in those years.
 - **The printed debt slice is General Fund debt only.** The 2005, 2007 and 2009–2011 pies all note that non-General-Fund debt service sits inside the departments. The bucket is consistent across years, but it is not all of the city's debt service.
 - **Internal Services, 2013–2022, carries some capital.** The 2018 book defines it as Finance, HR, IT, General Fund capital and other, so `administration` is not purely overhead in those years.
 - **The energy municipalization effort** is printed as ES and EUD (Energy Strategy and Electric Utility Development) in 2013–2015, as Energy in 2018 and as Energy Strategy in 2019. It has no line of its own in 2016–2017. It is bucketed as climate and energy policy rather than as a utility, because the city never owned the utility.
@@ -484,19 +491,22 @@ Know these boundaries before charting:
 
 This is the sharpest trap in the dataset, because no arithmetic check can catch it.
 
-`deptexp_*` covers 2005–2022 and comes from the books' own citywide pies. It includes every fund and is on the same footing every year.
+`deptexp_*` covers 2005–2022 and 2025–2027. The first run comes from the books' own citywide pies, the second from the 2027 budget book's citywide table, which the book draws as a pie. It includes every fund and is on the same footing every year: each year sums to that year's published citywide total.
 
 `deptexpfiltered_*` covers 2024–2026 and comes from an OpenGov cost-center export taken with a 23-fund filter. That filter leaves out the utility, debt-service and internal-service funds. The export's twenty cost centers total $407.8M, $473.4M and $411.9M against published citywide budgets of $515.4M, $589.3M and $521.0M. The shortfall is carried explicitly as `deptexpfiltered_funds_outside_export` (`derived`, because it is a difference rather than a reported figure). So this family *also* sums to `budget_total`, and the reconciliation passes for both families.
 
 What breaks is the **composition**:
 
-| Measure | 2022 | 2024 | 2026 |
-|---|---|---|---|
-| `infrastructure`, as a share of citywide spending | **51.8%** | 18.1% | **15.8%** |
+| `infrastructure`, as a share of citywide spending | 2022 | 2024 | 2025 | 2026 |
+|---|---|---|---|---|
+| `deptexp` | **51.8%** | none | 44.2% | **39.0%** |
+| `deptexpfiltered` | none | 18.1% | 22.9% | **15.8%** |
 
-Boulder did not stop maintaining things in 2023. The filter moves nearly all utility spending out of the departments and into the balancing line. The giveaway is the "Utilities" cost center at **$0.34M in 2026**. Charting the two families as one series shows infrastructure halving.
+Boulder did not stop maintaining things in 2023. The filter moves nearly all utility spending out of the departments and into the balancing line. The giveaway is the "Utilities" cost center at **$0.34M in 2026**, against **$124.39M** in the unfiltered table. Charting the two families as one series shows infrastructure halving.
 
-The separate prefixes exist so that this mistake takes effort rather than inattention. **A re-export of the same view with no fund filter would collapse the two into one family, and it is the most valuable download left for this dataset.**
+The separate prefixes exist so that this mistake takes effort rather than inattention. 2025 and 2026 are in both families, so the two can be compared directly. **Only 2024 has no unfiltered figures.** The 2026 budget book prints a 2024 column in the same table, but it sums to $514.22M against the published $515.4M, too far off to join `deptexp`.
+
+The 2026 budget book also checks the 2027 book's table. Its 2025 column matches all twenty lines to the dollar. Its 2026 column matches too, except Fundwide / Citywide, which is $237,675 lower. That leaves its table $0.26M short of the $521.0M the book states, and the 2027 book's 2026 column ($520.98M) is used.
 
 #### 18. Nine of the eighteen pie years were read by OCR
 
@@ -576,6 +586,8 @@ Tier 4 also reached two pages the born-digital dump never contained. **2011's su
 | 2025 | $182.37M | $178.75M | $58.52M | $57.58M |
 
 The packet's figures are unaudited, and neither document says what the difference is. The dataset carries the audited figures for every year, so each series has one source from 2007 to 2025. The packet's adopted, revised and forecast figures stay beside them, and its components (`salesuse_retail` and the rest) still sum to its own totals above, not to the audited ones.
+
+The 2027 budget book charts the same collections by fund. Its bars for 2023–2025 repeat the packet's year-end figures to within $0.01M, except 2025 property tax, which it puts at $57.73M against the packet's $57.58M. Its 2026 bars repeat the packet's forecasts, $178.71M and $57.33M, and its 2027 bars sum to the 2027 figures used here.
 
 No report ever revises these two lines: every report prints the same figure for every year it covers. The reports' government-wide statement of activities gives the same taxes on the full accrual basis and matches in every year but 2017 and 2018, where it has $135.91M and $142.34M of sales and use tax against $131.86M and $146.40M. It is not used.
 
@@ -669,7 +681,7 @@ comp = (df[df.measure.str.startswith("salesuse_")
            & (df.basis == "actual")]
         .pivot(index="year", columns="measure", values="value"))
 
-# Spending by bucket from the books' pies -- never mixed with deptexpfiltered_*
+# Spending by bucket, 2005-2022 and 2025-2027 -- never mixed with deptexpfiltered_*
 dept = (df[df.measure.str.startswith("deptexp_")]
         .pivot(index="year", columns="measure", values="value"))
 
@@ -722,6 +734,8 @@ Each export carries three columns (prior-year actual, current adopted, current t
 
 - **Record the column labels as `basis`.** They differ per export, and "Actual", "Adopted Budget" and "Total Budget" are three different things ([caveat 1](#1-two-accounting-bases-never-one-series)).
 - **Keep them in the `sources_`/`uses_` family.** Do not fold them into `budget_*`, however well the year seems to match.
+
+**The online budget books cover 2024–2027.** The 2026 and 2027 books are OpenGov Stories sites, and their tables are transparency-portal views embedded in the page: dataset `148111` in the 2026 book, with 2024–2026 approved columns, and `188635` in the 2027 book, with 2025 and 2026 approved and 2027 recommended. The revenue and department figures here come from its views of citywide sources (saved view 842324), General Fund sources (842206) and citywide uses by department (842330). Staffing and the tax forecasts are in the pages' own tables and text. The pages load only in a browser. When council adopts the 2027 budget, its book's tables give the `adopted` figures to put beside these `recommended` ones.
 
 **Adding the 2005–2015 annual financial reports.** Put each PDF in `raw-acfr/`, named by fiscal year (`2014.pdf`), and run the three stages in `acfr-extract.py`'s docstring: `--locate`, then OCR of the pages it lists, then the read. Check the locator's printout before paying for OCR. An older report whose titles read differently needs its pages in `OVERRIDES`, as the 2021 and 2023 reports do. Each report prints ten years, so the 2011–2015 reports reach back to 2002, and every year they share with the 2016 report is a cross-check.
 
