@@ -1,5 +1,9 @@
 # Runbook — applying `2026-08-29-security-hardening.sql`
 
+> **Later migrations.** The 2027 widget needs two more, run on either side of
+> merging it: see [RUNBOOK-2027-sliders.md](RUNBOOK-2027-sliders.md). Apply
+> the files in this folder in date order.
+
 Step-by-step for running the security migration against the live Supabase
 project. Takes about five minutes.
 

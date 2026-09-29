@@ -1,12 +1,14 @@
 # Iframe embed — publishable artifacts
 
 Everything needed to publish the interactive. The two built files are what gets
-published, and neither is edited by hand.
+published, and neither is edited by hand: both are rebuilt from the source in
+[`src/`](./src/).
 
 | File | What it is | Use |
 |---|---|---|
-| `index.html` | The whole interactive in one self-contained file (200 KB). No external requests except the survey POST. | Zip it and upload to the Newspack Iframe Block. GitHub Pages also serves it at [`/boulder-budget-2026/`](https://brianckeegan.github.io/charting-boulder/boulder-budget-2026/) |
-| `boulder-budget-embed.js` | The same interactive as a `<boulder-budget>` Web Component, styles scoped in a shadow root (201 KB) | For a page that wants the widget inline rather than in an iframe |
+| `index.html` | The whole interactive in one self-contained file (207 KB). No external requests except the survey POST. | Zip it and upload to the Newspack Iframe Block. GitHub Pages also serves it at [`/boulder-budget-2026/`](https://brianckeegan.github.io/charting-boulder/boulder-budget-2026/) |
+| `boulder-budget-embed.js` | The same interactive as a `<boulder-budget>` Web Component, styles scoped in a shadow root (208 KB) | For a page that wants the widget inline rather than in an iframe |
+| `src/` | The React source (`boulder-budget-widget.jsx`), the build script, and the pinned build dependencies | Edit the JSX, then rebuild both files (below) |
 | `NEWSPACK-EMBED-GUIDE.md` | Step-by-step publishing instructions for Newspack: inline (Method A) or iframe ZIP (Method B) | Read before publishing |
 | `pages-redirect.html` | Sends the repository's root GitHub Pages URL, which was shared before the widget moved, on to `/boulder-budget-2026/` | Deployed with `index.html` by `.github/workflows/deploy-widget.yml` whenever either file changes |
 
@@ -33,28 +35,31 @@ For the Web Component instead:
 Shadow DOM scopes the styling so the host theme cannot leak in. It is *not* a
 security boundary — it isolates CSS, nothing else.
 
-## These are build outputs, and the build is no longer in this repo
+## Rebuilding
 
-Both files were compiled from a React source (`boulder-budget-widget.jsx`) by
-`build-standalone.sh`, with esbuild inlining React, ReactDOM and the icons. Those
-inputs were removed from this repository deliberately; the last working copy of
-all six of them is in git history at commit `665be7c`, under
-`2026-06-budget-tool/`:
+Both files are compiled from `src/boulder-budget-widget.jsx` by
+`src/build-standalone.sh`, with esbuild inlining React, ReactDOM and the icons.
+The source was out of this repository for a while and was restored from commit
+`665be7c` for the 2027 revision. Before any change, rebuilding the restored
+copy reproduced both published files byte for byte.
 
 ```
-git show 665be7c:2026-06-budget-tool/boulder-budget-widget.jsx > boulder-budget-widget.jsx
-git show 665be7c:2026-06-budget-tool/build-standalone.sh       > build-standalone.sh
+cd 2026-11-budget-tool/embed/src
+BBW_PREVIEW=0 ./build-standalone.sh                    # ../index.html
+BBW_PREVIEW=0 BBW_TARGET=embed ./build-standalone.sh   # ../boulder-budget-embed.js
 ```
 
-**Practical consequence:** these two files cannot be regenerated from a fresh
-clone. Changing the interactive means restoring the build chain from that commit
-or from wherever the source is maintained now, rebuilding, and replacing both
-files here. Editing the 200 KB minified bundles directly is not a realistic
-option.
+It needs Node 18+ and npm, and installs the pinned versions in `build-deps/`
+with `npm ci`. Without `BBW_PREVIEW=0` the page is a review copy that keeps
+submissions in memory and never touches the database. It writes the same
+`../index.html`, so rebuild with `BBW_PREVIEW=0` before committing.
 
-One live cross-reference survives the removal and is worth knowing about:
-`pipeline/supabase/migrations/2026-08-29-security-hardening.sql` constrains the
-department names the widget may submit, and its comment says to keep that
-allowlist in lockstep with `GF_DEPTS` in the JSX. With the JSX out of the repo,
-that check is now a manual one — if the widget's department list changes, the
-migration has to change with it or valid submissions start being rejected.
+**The widget and the database change together.** The table has one column per
+field the widget sends, and
+`pipeline/supabase/migrations/2026-08-29-security-hardening.sql` limits
+`top_cut` to the General Fund department names in `bbw_gf_departments()`,
+which must match `GF_DEPTS` in the JSX. GitHub Pages publishes `index.html` as
+soon as it reaches `main`, so a widget change that sends a new field or
+renames a department needs its migration run on the live table **before** the
+merge. [`RUNBOOK-2027-sliders.md`](../pipeline/supabase/migrations/RUNBOOK-2027-sliders.md)
+walks through the most recent one.

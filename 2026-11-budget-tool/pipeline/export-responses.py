@@ -31,13 +31,17 @@ import urllib.request
 # public.contributions in supabase/schema.sql. PostgREST rejects the whole
 # request if any name here is not a column of the table, so a list that drifts
 # from the schema stops the export rather than exporting the wrong thing.
-GF_SLIDERS = ["gf_police", "gf_genadmin", "gf_fire", "gf_hhs", "gf_it", "gf_manager",
+GF_SLIDERS = ["gf_police", "gf_genadmin", "gf_fire", "gf_hhs", "gf_manager", "gf_it",
               "gf_facilities", "gf_finance", "gf_parksrec", "gf_attorney", "gf_other"]
-FUND_SLIDERS = ["fund_capital", "fund_water", "fund_openspace", "fund_transpo",
-                "fund_wastewater", "fund_internal", "fund_stormwater", "fund_parkstax",
-                "fund_ahf", "fund_recact", "fund_climate", "fund_pds", "fund_ssb",
-                "fund_ccrs", "fund_arts", "fund_evict", "fund_airport"]
-REV_COLS = ["rev_fees", "rev_property", "rev_sales", "reserves"]
+# The 2027 widget's locked section: each department's spending outside the
+# General Fund. (Before 2027 these were seventeen funds; see
+# supabase/migrations/RUNBOOK-2027-sliders.md.)
+FUND_SLIDERS = ["fund_utilities", "fund_transpo", "fund_openspace", "fund_hhs",
+                "fund_parksrec", "fund_facilities", "fund_pds", "fund_manager",
+                "fund_climate", "fund_fire", "fund_other"]
+# rev_fees/rev_property/rev_sales are % changes (-25..25); rev_marijuana is a
+# tax rate (0..10, 3.5 today); rev_shift is $M moved onto dedicated funds (0..5).
+REV_COLS = ["rev_fees", "rev_property", "rev_sales", "rev_marijuana", "rev_shift"]
 DEMO_COLS = ["demo_years", "demo_area", "demo_employment", "demo_commute", "demo_student",
              "demo_education", "demo_building", "demo_tenure", "demo_income",
              "demo_age", "demo_race", "demo_gender", "demo_lgbtq", "demo_disability"]

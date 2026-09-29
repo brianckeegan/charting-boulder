@@ -13,7 +13,8 @@ The City of Boulder's 2027 budget. The city manager released the recommended bud
 ├── ARCHITECTURE.md               how a reader's budget gets from the interactive to a database and back
 │                                 out for analysis, and how it stays anonymous
 ├── embed/                        the published interactive: the self-contained iframe page, the same
-│                                 widget as a Web Component, and the Newspack publishing guide
+│                                 widget as a Web Component, the Newspack publishing guide, and the
+│                                 source they are built from (src/)
 ├── pipeline/                     the Supabase schema and migrations the interactive writes to, and the
 │                                 script that exports responses for the notebook
 ├── budget-survey-analysis.ipynb  who responded, how they closed the gap, and how far their choices

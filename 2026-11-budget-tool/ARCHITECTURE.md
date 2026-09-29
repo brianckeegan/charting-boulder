@@ -6,7 +6,7 @@ widget's comments point to.
 
 The whole pipeline lives in [`pipeline/`](./pipeline/): the Supabase schema and a
 one-file export script. The widget is
-`boulder-budget-widget.jsx` (no longer in this repo — see `embed/README.md`); the analysis is
+[`embed/src/boulder-budget-widget.jsx`](./embed/src/boulder-budget-widget.jsx); the analysis is
 [`budget-survey-analysis.ipynb`](./budget-survey-analysis.ipynb).
 
 ---
@@ -106,30 +106,33 @@ notebook's `GF_SLIDERS / FUND_SLIDERS / REV_COLS / DEMO_COLS` one-to-one.
 | `id` | uuid | server-generated |
 | `created_at` | timestamptz | server insert time, forced by a trigger |
 | `client_ts` | timestamptz | widget payload `ts` (untrusted) |
-| `client_version` | int | widget payload `v` (currently `4`) |
-| `scenario` | text | `"dual"` (both 2026 + 2027 tests) |
+| `client_version` | int | widget payload `v` (currently `5`, the 2027 widget) |
+| `scenario` | text | `"2027"` (the one test: the 2027 General Fund gap) |
 | `gf_police` … `gf_other` | int | 11 General Fund sliders, % change, −25..25 |
-| `fund_capital` … `fund_airport` | int | 17 locked-fund sliders, % change, −25..25 |
+| `fund_utilities` … `fund_other` | int | 11 locked sliders: each department's spending outside the General Fund, % change, −25..25 |
 | `rev_fees` | int | fees & charges, % change of GF revenue, −25..25 |
 | `rev_property` | int | property tax, % change of GF revenue, −25..25 |
 | `rev_sales` | int | sales & use tax, % change of GF revenue, −25..25 |
-| `reserves` | numeric | one-time reserves, $M, ≥ 0 |
+| `rev_marijuana` | numeric | recreational marijuana tax rate, %, 0..10 (3.5 today; council can set it up to 10 without a vote) |
+| `rev_shift` | numeric | $M of General Fund costs moved onto voter-dedicated funds, 0..5 (not revenue) |
 | `spend_change` | numeric | signed $M; + = more spending = wider gap |
-| `revenue_total` | numeric | recurring revenue + reserves, $M |
-| `revenue_only` | numeric | recurring revenue only, $M |
+| `revenue_only` | numeric | signed $M of new recurring revenue |
 | `used_vote` | bool | a tax requiring a TABOR vote was used |
 | `used_revenue` | bool | any new fee or tax was used |
-| `used_reserves` | bool | reserves were spent down |
+| `used_shift` | bool | some cost was moved onto a dedicated fund |
 | `top_cut` | text | name of the reader's single deepest GF cut, or null |
 | `demo_years` … `demo_disability` | text | 14 survey items; multi-selects joined by `"; "` |
 | `repeat_client` | bool | this browser had submitted before |
 | `raw` | jsonb | the full original payload, as a safety net |
 
 The full slider list lives in several places that must stay in lockstep: the
-widget's `GF_DEPTS` / `LOCKED_FUNDS` / `DEMO` tables, the notebook's canonical
+widget's `GF_DEPTS` / `LOCKED_DEPTS` / `REVENUE` / `DEMO` tables, the notebook's canonical
 column lists, and the export's lists in `pipeline/export-responses.py`. If you
 add or rename a department, update all three (and add the column in
-`pipeline/supabase/schema.sql`). The export stops with an error if it asks for a
+`pipeline/supabase/schema.sql`, with a migration for the live table like the
+ones in `pipeline/supabase/migrations/`). A renamed General Fund department
+also has to change in `bbw_gf_departments()`, the allowlist for `top_cut`,
+before the widget ships. The export stops with an error if it asks for a
 column the table does not have, so a stale list fails loudly rather than
 exporting the wrong columns.
 
@@ -146,15 +149,16 @@ renders:
   "n": 128,
   "usedRevenue": 110,
   "usedVote": 74,
-  "usedReserves": 39,
+  "usedShift": 39,
   "revShareSum": 71.4,
   "cutTally": { "Police": 22, "General government & admin": 14 }
 }
 ```
 
-`revShareSum` is the sum over rows of `revenue_total / (revenue_total + net
-cuts)`, where net cuts = `max(0, -spend_change)`; the widget divides by `n` to
-show the average revenue share.
+`revShareSum` is the sum over rows of `revenue / (revenue + net cuts +
+rev_shift)`, where revenue = `max(0, revenue_only)` and net cuts =
+`max(0, -spend_change)`; the widget divides by `n` to show the average share of
+the gap closed with new revenue.
 
 ---
 
@@ -173,8 +177,15 @@ The project URL and the **publishable** key are baked into the JSX
 submissions directly. Build the self-contained production HTML with:
 
 ```bash
-BBW_PREVIEW=0 ./build-standalone.sh    # build chain removed; see embed/README.md
+cd embed/src
+BBW_PREVIEW=0 ./build-standalone.sh                     # embed/index.html
+BBW_PREVIEW=0 BBW_TARGET=embed ./build-standalone.sh    # embed/boulder-budget-embed.js
 ```
+
+A widget change that writes new columns needs its migration run on the live
+table **before** the rebuilt `index.html` is merged, because the deploy below
+publishes it at once. See `pipeline/supabase/migrations/RUNBOOK-2027-sliders.md`
+for the pattern.
 
 To rotate the key later, edit those two constants and rebuild.
 
@@ -190,8 +201,8 @@ root redirecting there through `embed/pages-redirect.html`). One-time setup: in 
 ## Newspack embedding
 
 Host the built widget, `embed/index.html` (GitHub Pages already serves it at
-`https://brianckeegan.github.io/charting-boulder/boulder-budget-2026/`; the
-build chain is no longer in this repo, see `embed/README.md`), then paste this into a Newspack
+`https://brianckeegan.github.io/charting-boulder/boulder-budget-2026/`; its
+source and build script are in `embed/src/`), then paste this into a Newspack
 **Custom HTML** block. The script makes the iframe grow to the widget's height
 using the `boulder-budget:height` message the widget already posts:
 
