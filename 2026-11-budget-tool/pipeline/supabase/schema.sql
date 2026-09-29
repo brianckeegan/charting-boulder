@@ -10,6 +10,12 @@
 --
 -- Re-running is safe: every statement is idempotent (IF NOT EXISTS / OR REPLACE).
 --
+-- This file builds the table as the 2027 widget (payload v5) writes it. A
+-- project created from an earlier version of this file already has the table,
+-- and CREATE TABLE IF NOT EXISTS will not reshape it: apply the files in
+-- migrations/ instead, in date order (the 2027 change comes in two phases;
+-- see migrations/RUNBOOK-2027-sliders.md).
+--
 -- WHAT THIS STORES — one flat row per submission. Column names match the
 -- widget payload and the analysis notebook (budget-survey-analysis.ipynb)
 -- ONE-TO-ONE, so a CSV export drops straight into the notebook. See
@@ -31,8 +37,8 @@ create table if not exists public.contributions (
   id              uuid primary key default gen_random_uuid(),
   created_at      timestamptz not null default now(),  -- server insert time
   client_ts       timestamptz,                         -- widget payload `ts`
-  client_version  integer,                             -- widget payload `v` (4)
-  scenario        text,                                -- "dual"
+  client_version  integer,                             -- widget payload `v` (5)
+  scenario        text,                                -- "2027"
 
   -- General Fund sliders (% change, −25..25). See GF_DEPTS in the widget.
   gf_police       integer,
@@ -47,41 +53,36 @@ create table if not exists public.contributions (
   gf_attorney     integer,
   gf_other        integer,   -- the rest of the GF departments, bundled
 
-  -- Locked / dedicated fund sliders (% change, −25..25). See LOCKED_FUNDS.
-  fund_capital    integer,
-  fund_water      integer,
-  fund_openspace  integer,
+  -- Locked sliders (% change, −25..25): each department's spending OUTSIDE
+  -- the General Fund. Moving one never touches the gap. See LOCKED_DEPTS.
+  fund_utilities  integer,
   fund_transpo    integer,
-  fund_wastewater integer,
-  fund_internal   integer,
-  fund_stormwater integer,
-  fund_parkstax   integer,
-  fund_ahf        integer,
-  fund_recact     integer,
-  fund_climate    integer,
+  fund_openspace  integer,
+  fund_hhs        integer,
+  fund_parksrec   integer,
+  fund_facilities integer,
   fund_pds        integer,
-  fund_ssb        integer,
-  fund_ccrs       integer,
-  fund_arts       integer,
-  fund_evict      integer,
-  fund_airport    integer,
+  fund_manager    integer,
+  fund_climate    integer,
+  fund_fire       integer,
+  fund_other      integer,
 
   -- Revenue settings. The three tax/fee sources are percentage-change sliders
-  -- (−25..25) over each source's current General Fund revenue, like gf_*; a
-  -- negative value is a revenue cut. Reserves stay a one-time dollar draw.
+  -- (−25..25) over each source's 2027 General Fund revenue, like gf_*; a
+  -- negative value is a revenue cut.
   rev_fees        integer,   -- % change of GF fees & charges, −25..25
   rev_property    integer,   -- % change of GF property tax, −25..25
   rev_sales       integer,   -- % change of GF sales & use tax, −25..25
-  reserves        numeric,   -- $M of one-time reserves
+  rev_marijuana   numeric,   -- recreational marijuana tax rate, %, 0..10 (3.5 today)
+  rev_shift       numeric,   -- $M of GF costs moved onto dedicated funds, 0..5; not revenue
 
   -- Derived totals the widget computes (kept so the aggregate is recomputable
   -- without re-deriving from every slider).
   spend_change    numeric,   -- signed $M; + = more spending = wider gap
-  revenue_total   numeric,   -- $M recurring revenue + reserves
-  revenue_only    numeric,   -- $M recurring revenue (reserves excluded)
+  revenue_only    numeric,   -- signed $M of new recurring revenue
   used_vote       boolean,
   used_revenue    boolean,
-  used_reserves   boolean,
+  used_shift      boolean,   -- moved any cost onto a dedicated fund
   top_cut         text,      -- name of the reader's single deepest GF cut, or null
 
   -- Optional reader survey (one column per item; multi-selects joined by "; ").
@@ -118,16 +119,31 @@ create table if not exists public.contributions (
     coalesce(gf_attorney,0)   between -25 and 25 and
     coalesce(gf_other,0)      between -25 and 25
   ),
+  constraint locked_in_range check (
+    coalesce(fund_utilities,0)  between -25 and 25 and
+    coalesce(fund_transpo,0)    between -25 and 25 and
+    coalesce(fund_openspace,0)  between -25 and 25 and
+    coalesce(fund_hhs,0)        between -25 and 25 and
+    coalesce(fund_parksrec,0)   between -25 and 25 and
+    coalesce(fund_facilities,0) between -25 and 25 and
+    coalesce(fund_pds,0)        between -25 and 25 and
+    coalesce(fund_manager,0)    between -25 and 25 and
+    coalesce(fund_climate,0)    between -25 and 25 and
+    coalesce(fund_fire,0)       between -25 and 25 and
+    coalesce(fund_other,0)      between -25 and 25
+  ),
   constraint rev_pct_in_range check (
     coalesce(rev_fees,0)     between -25 and 25 and
     coalesce(rev_property,0) between -25 and 25 and
     coalesce(rev_sales,0)    between -25 and 25
   ),
-  constraint reserves_nonneg check ( coalesce(reserves,0) >= 0 ),
+  constraint rev_levers_in_range check (
+    coalesce(rev_marijuana, 3.5) between 0 and 10 and
+    coalesce(rev_shift, 0)       between 0 and 5
+  ),
 
   -- Reject absurd or oversized values from a scripted insert.
   constraint contributions_sane_values check (
-    coalesce(reserves, 0)     <= 1000 and
     (client_version is null or client_version between 0 and 1000) and
     char_length(coalesce(scenario, '')) <= 64  and
     char_length(coalesce(top_cut, ''))  <= 200 and
@@ -137,6 +153,12 @@ create table if not exists public.contributions (
 
 comment on table public.contributions is
   'One flat row per reader submission from the Balance Boulder''s Budget widget. No PII. Columns match the analysis notebook one-to-one. See ARCHITECTURE.md.';
+comment on column public.contributions.rev_marijuana is
+  'Recreational marijuana tax rate the reader chose, % (0..10; 3.5 today, 5.5 recommended). Widget v5.';
+comment on column public.contributions.rev_shift is
+  '$M of General Fund costs the reader moved onto voter-dedicated funds (0..5). Not revenue. Widget v5.';
+comment on column public.contributions.used_shift is
+  'Whether the reader moved any General Fund cost onto a dedicated fund. Widget v5.';
 
 create index if not exists contributions_created_at_idx on public.contributions (created_at);
 
@@ -232,7 +254,7 @@ create trigger contributions_stamp
 create table if not exists public.contribution_stats (
   id          integer primary key default 1,
   agg         jsonb not null default
-              '{"n":0,"usedRevenue":0,"usedVote":0,"usedReserves":0,"revShareSum":0,"cutTally":{}}'::jsonb,
+              '{"n":0,"usedRevenue":0,"usedVote":0,"usedShift":0,"revShareSum":0,"cutTally":{}}'::jsonb,
   updated_at  timestamptz not null default now(),
   constraint contribution_stats_single_row check (id = 1)
 );
@@ -266,12 +288,16 @@ begin
       'n',            count(*),
       'usedRevenue',  count(*) filter (where used_revenue),
       'usedVote',     count(*) filter (where used_vote),
-      'usedReserves', count(*) filter (where used_reserves),
+      'usedShift',    count(*) filter (where used_shift),
       'revShareSum',  coalesce(sum(
         case
-          when (coalesce(revenue_total,0) + greatest(0, -coalesce(spend_change,0))) > 0
-          then coalesce(revenue_total,0)
-               / (coalesce(revenue_total,0) + greatest(0, -coalesce(spend_change,0)))
+          when greatest(coalesce(revenue_only,0), 0)
+               + greatest(0, -coalesce(spend_change,0))
+               + coalesce(rev_shift,0) > 0
+          then greatest(coalesce(revenue_only,0), 0)
+               / (greatest(coalesce(revenue_only,0), 0)
+                  + greatest(0, -coalesce(spend_change,0))
+                  + coalesce(rev_shift,0))
           else 0
         end), 0),
       'cutTally', coalesce((
@@ -301,8 +327,10 @@ create trigger contributions_stats_refresh
 
 -- The widget's read endpoint, unchanged in shape. SECURITY INVOKER reading the
 -- public stats row (so it is not flagged by advisor 0028/0029); search_path
--- pinned (0011). Returns exactly { n, usedRevenue, usedVote, usedReserves,
--- revShareSum, cutTally }.
+-- pinned (0011). Returns exactly { n, usedRevenue, usedVote, usedShift,
+-- revShareSum, cutTally }. revShareSum adds up, over rows, the share of each
+-- reader's fix that came from new revenue: revenue (never below zero) over
+-- revenue + net cuts + costs moved onto dedicated funds.
 create or replace function public.budget_aggregate()
 returns jsonb
 language sql
@@ -312,7 +340,7 @@ set search_path = ''
 as $$
   select coalesce(
     (select agg from public.contribution_stats where id = 1),
-    '{"n":0,"usedRevenue":0,"usedVote":0,"usedReserves":0,"revShareSum":0,"cutTally":{}}'::jsonb
+    '{"n":0,"usedRevenue":0,"usedVote":0,"usedShift":0,"revShareSum":0,"cutTally":{}}'::jsonb
   );
 $$;
 
@@ -329,12 +357,16 @@ values (1, (
     'n',            count(*),
     'usedRevenue',  count(*) filter (where used_revenue),
     'usedVote',     count(*) filter (where used_vote),
-    'usedReserves', count(*) filter (where used_reserves),
+    'usedShift',    count(*) filter (where used_shift),
     'revShareSum',  coalesce(sum(
       case
-        when (coalesce(revenue_total,0) + greatest(0, -coalesce(spend_change,0))) > 0
-        then coalesce(revenue_total,0)
-             / (coalesce(revenue_total,0) + greatest(0, -coalesce(spend_change,0)))
+        when greatest(coalesce(revenue_only,0), 0)
+             + greatest(0, -coalesce(spend_change,0))
+             + coalesce(rev_shift,0) > 0
+        then greatest(coalesce(revenue_only,0), 0)
+             / (greatest(coalesce(revenue_only,0), 0)
+                + greatest(0, -coalesce(spend_change,0))
+                + coalesce(rev_shift,0))
         else 0
       end), 0),
     'cutTally', coalesce((

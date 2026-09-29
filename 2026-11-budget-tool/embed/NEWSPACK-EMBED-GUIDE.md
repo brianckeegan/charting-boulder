@@ -35,7 +35,7 @@ If either is a problem, use **Method B** instead — it needs neither.
 
 ### Step 1 — Place the script
 
-Upload `boulder-budget-embed.js` (~200 KB) to a stable path on the server. A good
+Upload `boulder-budget-embed.js` (~210 KB) to a stable path on the server. A good
 choice:
 
 ```
@@ -81,7 +81,7 @@ height in pixels:
 - [ ] The interactive appears inline and fills the article column.
 - [ ] Dragging a **department slider** changes the numbers in the score bar.
 - [ ] The score bar pins below the header while scrolling, not behind it.
-- [ ] Scrolling reaches the survey and the **Submit** button.
+- [ ] Scrolling reaches the survey and the **Add my budget** button.
 - [ ] It looks right **on a phone**.
 - [ ] Saving and reloading the post keeps the embed (if it vanishes, the account
       lacks Administrator rights — see “What this method needs”).
@@ -104,7 +104,7 @@ account. It uses Newspack’s own built-in block and needs no special permission
 1. Open the article and place the cursor where the interactive should go.
 2. Click **+** (Add block), search for **“Iframe,”** and select the **Iframe** block.
 3. Choose the option to **upload an archive / ZIP file**, and upload
-   `boulder-budget-interactive.zip` (~64 KB). The block accepts `.zip` only.
+   `boulder-budget-interactive.zip` (~67 KB). The block accepts `.zip` only.
 4. In the block’s sidebar settings, set:
 
    | Setting | Value |
@@ -114,8 +114,8 @@ account. It uses Newspack’s own built-in block and needs no special permission
 
 5. Preview and confirm the interactive loads and the sliders respond.
 
-**Why it scrolls inside a box:** the interactive is about **4,550 px tall** in an
-article column (**6,020 px** on a phone), so no frame height shows all of it.
+**Why it scrolls inside a box:** the interactive is about **5,400 px tall** in an
+article column (**7,400 px** on a phone), so no frame height shows all of it.
 Readers scroll within the frame, and the score bar stays pinned to the top of the
 frame. If 800 px feels wrong, try 700 px (less dominant) or 900–1000 px (more
 visible at once). The block also has a **full screen** toggle, which lets the
@@ -147,7 +147,7 @@ or ask Newspack support to enable it. Use Method A instead.
 
 **(B) The upload is rejected.**
 The block accepts `.zip` only. Make sure your Mac didn’t auto-expand the download.
-At ~64 KB, a size limit is an unlikely cause.
+At ~67 KB, a size limit is an unlikely cause.
 
 **(B) The frame is blank or shows a file listing.**
 The archive’s entry point is `index.html` at the top level. If your Newspack
@@ -192,7 +192,7 @@ page’s origin with other scripts on the article. Method B’s iframe is a stro
 boundary, which is one reason to keep it available.
 
 **Privacy and storage.** No cookies, no analytics, no third-party trackers. One
-browser `localStorage` flag (`bb_submitted_v4`) marks repeat submissions from the
+browser `localStorage` flag (`bb_submitted_v5`) marks repeat submissions from the
 same browser. Survey responses are anonymous, optional, and stored in the
 project’s own database — not shared with any third party.
 

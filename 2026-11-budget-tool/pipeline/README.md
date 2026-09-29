@@ -8,6 +8,7 @@ analysis. Full design, data dictionary, and privacy model are in
 ```
 pipeline/
 ├── supabase/schema.sql     run once in the Supabase SQL Editor
+├── supabase/migrations/    dated changes to the live table, with runbooks
 ├── export-responses.py     Supabase → responses.csv for the notebook
 └── .env.example            env vars to copy for the export
 ```
@@ -22,12 +23,16 @@ Security is the boundary: that key can insert a row but can never read one back.
 1. **Apply the schema.** Open the Supabase project's **SQL Editor → New query**,
    paste [`supabase/schema.sql`](./supabase/schema.sql), and **Run**. It creates
    the `contributions` table, the insert-only RLS policy, the stats trigger, and
-   `budget_aggregate()`. Re-running is safe.
+   `budget_aggregate()`. Re-running is safe. It always shows the table's end
+   state; the live table is changed with the dated files in
+   [`supabase/migrations/`](./supabase/migrations/), each with its steps.
 2. **Build & deploy the widget.** The project URL and publishable key are baked
-   into the widget; `BBW_PREVIEW=0 ../build-standalone.sh` (build chain removed from this
-   repo — see `../embed/README.md`) produces the
-   production HTML, and the GitHub Pages workflow serves it. See
-   [`../ARCHITECTURE.md`](../ARCHITECTURE.md) → *Setup*.
+   into the widget. `BBW_PREVIEW=0 ./build-standalone.sh`, run in
+   `../embed/src/`, produces the production HTML, and the GitHub Pages
+   workflow serves it. A widget change that sends new fields needs its
+   migration run on the live table before it merges — see
+   [`RUNBOOK-2027-sliders.md`](./supabase/migrations/RUNBOOK-2027-sliders.md)
+   and [`../ARCHITECTURE.md`](../ARCHITECTURE.md) → *Setup*.
 
 ## Exporting responses for analysis
 
