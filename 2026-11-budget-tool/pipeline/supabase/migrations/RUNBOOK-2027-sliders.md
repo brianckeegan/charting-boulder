@@ -119,7 +119,7 @@ and hard-refresh (Shift-reload) so you don't get the cached 2026 page.
    $0.5M shifted onto dedicated funds.
 3. Answer one survey question and click **Add my budget**.
 
-It should say "Saved with your budget." Then in the SQL editor:
+It should say "Your budget is saved." Then in the SQL editor:
 
 ```sql
 select created_at, client_version, rev_marijuana, rev_shift, used_shift,
