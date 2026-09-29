@@ -192,7 +192,7 @@ To rotate the key later, edit those two constants and rebuild.
 ### 3. Deploy to GitHub Pages
 [`.github/workflows/deploy-widget.yml`](../.github/workflows/deploy-widget.yml)
 publishes the built widget, `embed/index.html`, to GitHub Pages on every push
-that touches it (serving the widget at `/boulder-budget-2026/`, with the repo
+that touches it (serving the widget at `/boulder-budget-2027/`, with the repo
 root redirecting there through `embed/pages-redirect.html`). One-time setup: in the repo's **Settings → Pages**, set
 **Source** to **GitHub Actions**, then re-run the workflow.
 
@@ -201,14 +201,14 @@ root redirecting there through `embed/pages-redirect.html`). One-time setup: in 
 ## Newspack embedding
 
 Host the built widget, `embed/index.html` (GitHub Pages already serves it at
-`https://brianckeegan.github.io/charting-boulder/boulder-budget-2026/`; its
+`https://www.brianckeegan.com/charting-boulder/boulder-budget-2027/`; its
 source and build script are in `embed/src/`), then paste this into a Newspack
 **Custom HTML** block. The script makes the iframe grow to the widget's height
 using the `boulder-budget:height` message the widget already posts:
 
 ```html
 <iframe id="bbw"
-        src="https://brianckeegan.github.io/charting-boulder/boulder-budget-2026/"
+        src="https://www.brianckeegan.com/charting-boulder/boulder-budget-2027/"
         title="Balance Boulder's Budget"
         loading="lazy" scrolling="no"
         sandbox="allow-scripts allow-same-origin allow-popups"

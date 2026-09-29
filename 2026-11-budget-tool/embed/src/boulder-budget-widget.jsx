@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import {
-  Lock, Building2, Vote, RotateCcw, Check, AlertTriangle,
+  Lock, Building2, Coins, RotateCcw, Check, AlertTriangle,
   Github, ChevronDown, ChevronUp, Users, ArrowDownToLine,
 } from "lucide-react";
 
@@ -25,12 +25,14 @@ import {
    WHAT EACH TABLE CONTROLS
      GF_DEPTS         General Fund departments (the sliders). `amount` is the
                       2027 recommended budget in $millions and `was` the 2026
-                      approved one, which sets each slider's tick. [OFFICIAL #2]
+                      budget restated for the 2027 departments, which sets
+                      each slider's "proposed" tick.            [OFFICIAL #2]
      LOCKED_DEPTS     Each department's spending OUTSIDE the General Fund —
                       dedicated, fee-funded and capital money you can move but
                       whose savings stay trapped. `amount` in $millions; sums
                       to TOTAL − GENERAL_FUND = $352.1M.    [OFFICIAL inputs #7]
-     REVENUE          The revenue sliders, tagged by Colorado legal status.
+     REVENUE          The revenue sliders, each with a one-line list of what
+                      the money comes from.
                       Bases are OFFICIAL; yields are MODELED. [see #3 and #4]
      DEDICATED_RATES  Voter-set sales-tax rates shown frozen, with the annual
                       revenue each raises.                    [OFFICIAL — #3]
@@ -66,11 +68,15 @@ import {
      1. Control totals (TOTAL / OPERATING / CAPITAL / GENERAL_FUND) and the
         $6.3M gap: OFFICIAL. Source: the city's online 2027 budget book
         (OpenGov "Budget in Brief") and the City Manager's budget message.
-     2. GF_DEPTS `amount` (2027) and `was` (2026): OFFICIAL, from the 2027
-        General Fund Fund Financial (1100), whose "2027 Budget" and "2026
-        Approved" columns list every department. "General Government" is
-        Fundwide / Citywide plus Police/Fire Pensions. The rows sum to
-        GENERAL_FUND.
+     2. GF_DEPTS `amount` (2027): OFFICIAL, from the 2027 General Fund Fund
+        Financial (1100), "2027 Budget" column. `was` (2026): OFFICIAL, from
+        the Budget in Brief's General Fund uses-by-department table, "2026
+        Budget" column, which restates 2026 for the 2027 departments. It
+        differs from the Fund Financial's "2026 Approved" column only where
+        Community Vitality's $1,611,459 moved: into the City Manager's Office
+        ($1,388,682) and Facilities & Fleet ($222,777). "General Government"
+        is Fundwide / Citywide plus Police/Fire Pensions. Both columns sum to
+        their year's General Fund total. Details: ../PROVENANCE.md.
      3. Sales-tax rates and the dollars they raise (DEDICATED_RATES) and the
         revenue bases in REVENUE: OFFICIAL, from the Budget in Brief's Sales &
         Use Tax Components table and sales-tax chart, the mill levy table
@@ -84,7 +90,7 @@ import {
         fees-are-not-taxes; the 10% marijuana-tax ceiling voters set in 2013,
         Question 2A): OFFICIAL.
      5. The city's own 2027 moves quoted in the copy (24 positions, photo-radar
-        vans, pools, the ~$0.5M shifted to dedicated funds, the marijuana tax,
+        vans, pools, the ~$0.57M shifted to dedicated funds, the marijuana tax,
         new fees): OFFICIAL, from the Budget At-A-Glance page and the budget
         book's lists of changes.
      6. News citations in the SRC table: confirm each URL still loads and still
@@ -104,6 +110,7 @@ import {
      SUPABASE_URL  — the project and its browser-safe PUBLISHABLE key, used to
        /_KEY         write each submission straight to Supabase.
      SRC           — the citation-link table.
+     OFFICIAL      — links to the city's budget documents, in Sources & method.
      See ARCHITECTURE.md for setup, the data dictionary, and Newspack embedding.
 
    This is a teaching model, not the city's budgeting system. Visual identity
@@ -113,7 +120,7 @@ import {
      This widget is built to sit inside the column's prose, which carries the
      hook, the peg (the Nov. 2026 ballot / 2027 budget cycle), and the
      diagnostic close. So the widget's own copy is deliberately lean: a short
-     title, one-line instructions, the legal tags, point-of-use caveats, and a
+     title, one-line instructions, one-line source lists, point-of-use caveats, and a
      "Sources & method" block with the verify-me link. If you ever embed this
      standalone (no surrounding article), restore a sentence or two of framing
      at the top and a closing thought at the bottom — otherwise it will read as
@@ -174,6 +181,28 @@ const SRC = {
                   url: "https://boulderreportinglab.org/2023/09/13/budget-2024-in-a-shift-city-of-boulder-may-soon-invest-more-in-housing-and-human-services-than-policing/" },
 };
 
+/* ---- OFFICIAL: the city's own budget documents, plus the state's TABOR
+   explainer. Linked in the Sources & method text and listed under it. Every
+   URL loaded on Sept. 29, 2026. -------------------------------------------- */
+const BOOK = "https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB";
+/* Where every number on the page comes from, in the repository. */
+const PROVENANCE = { label: "Where every number comes from", url: "https://github.com/brianckeegan/charting-boulder/blob/main/2026-11-budget-tool/embed/PROVENANCE.md" };
+const OFFICIAL = {
+  book:          { label: "2027 Recommended Budget: the city’s online budget book", url: BOOK },
+  brief:         { label: "2027 Budget in Brief: totals, the General Fund gap, revenue forecasts", url: `${BOOK}?currentPageId=6a7a22d6e8cd6b725ef3b5b5` },
+  briefMore:     { label: "Budget in Brief, continued: sales-tax rates, mill levies, budget assumptions", url: `${BOOK}?currentPageId=6a7a230c2aaa5815f9944b90` },
+  message:       { label: "City manager’s budget message", url: `${BOOK}?currentPageId=6a7a2349492dea63d5fd8d27` },
+  gfTable:       { label: "General Fund 2027 Fund Financial (1100), PDF", url: "https://bouldercolorado.gov/media/21600/download?inline" },
+  glance:        { label: "Budget At-A-Glance: the city’s summary of 2027 cuts, shifts and fees", url: "https://bouldercolorado.gov/budget-glance" },
+  release:       { label: "City news release on the recommended budget (Aug. 28, 2026)", url: "https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input" },
+  policies:      { label: "Financial policies: reserve targets", url: `${BOOK}?currentPageId=6a75e5049edf5ffa8847c1f7` },
+  budgetPage:    { label: "City of Boulder budget page: forecasts and past budgets", url: "https://bouldercolorado.gov/services/budget" },
+  portal:        { label: "City of Boulder transparency portal (OpenGov)", url: "https://cityofboulderco.opengov.com/transparency/" },
+  mjRates:       { label: "City of Boulder marijuana tax rates", url: "https://bouldercolorado.gov/city-boulder-marijuana-tax-rates" },
+  fundOurFuture: { label: "Fund Our Future: Our Community’s Priorities (June 29, 2026)", url: "https://bouldercolorado.gov/news/fund-our-future-our-communitys-priorities" },
+  tabor:         { label: "TABOR explained, Colorado General Assembly", url: "https://leg.colorado.gov/agencies/legislative-council-staff/tabor" },
+};
+
 const C = {
   lime: "#CDDE00", limeDk: "#AFC000", limeTint: "#FAFAE1",
   blue: "#3A8DDE", blueDk: "#1265B6",
@@ -206,22 +235,23 @@ const TOTAL = 552.601, OPERATING = 417.24, CAPITAL = 135.36, GENERAL_FUND = 200.
    amount  2027 recommended General Fund budget, $millions — OFFICIAL, from the
            2027 General Fund Fund Financial (1100). The top 10 departments by
            GF spend, plus an "Other" line; the column sums to GENERAL_FUND.
-   was     the same department's 2026 approved amount, from the same table's
-           "2026 Approved" column. It sets the tick on each slider: the city's
-           own change from 2026 to 2027, shown for scale.
+   was     the same department's 2026 amount, restated for the 2027
+           departments (Budget in Brief, General Fund uses by department,
+           "2026 Budget"). It sets the "proposed" tick on each slider: the
+           city's own change from 2026 to 2027, shown for scale.
    note    sub-label listing the main programs inside the department. */
 const GF_DEPTS = [
   { id: "police", name: "Police", amount: 54.246, was: 50.204, note: "Operations · Investigations · Administration · Alternative response · Dispatch · Support services" },
   { id: "genadmin", name: "General Government", amount: 35.612, was: 38.436, note: "Citywide costs · Contingency · Debt service · Interfund transfers · Police and fire pensions" },
   { id: "fire", name: "Fire-Rescue", amount: 30.968, was: 29.129, note: "Emergency operations · EMS · Wildland · Support services · Community risk reduction" },
   { id: "hhs", name: "Housing & Human Services (GF share)", label: "Housing & Human Services (General Fund share)", amount: 14.007, was: 12.962, note: "Human services · Homelessness · Behavioral health · Family services" },
-  { id: "manager", name: "City Manager's Office", label: "City Manager’s Office", amount: 11.981, was: 9.699, note: "Economic vitality · City Clerk · Equity · Independent police monitor · New Office of Customer Experience" },
+  { id: "manager", name: "City Manager's Office", label: "City Manager’s Office", amount: 11.981, was: 11.087, note: "Economic vitality · City Clerk · Equity · Independent police monitor · New Office of Customer Experience" },
   { id: "it", name: "Innovation & Technology", amount: 10.680, was: 10.372, note: "Infrastructure · Data & analytics · Application support · Cybersecurity · Project management" },
-  { id: "facilities", name: "Facilities & Fleet (GF share)", label: "Facilities & Fleet (General Fund share)", amount: 7.042, was: 6.931, note: "Facility operations · Maintenance · Energy management · Fleet" },
+  { id: "facilities", name: "Facilities & Fleet (GF share)", label: "Facilities & Fleet (General Fund share)", amount: 7.042, was: 7.153, note: "Facility operations · Maintenance · Energy management · Fleet" },
   { id: "finance", name: "Finance", amount: 7.024, was: 6.881, note: "Taxpayer services · Budget · Accounting · Licensing · Purchasing · Payroll" },
   { id: "parksrec", name: "Parks & Recreation (GF share)", label: "Parks & Recreation (General Fund share)", amount: 6.634, was: 6.490, note: "Park operations · Natural resources · Planning · Administration" },
   { id: "attorney", name: "City Attorney's Office", label: "City Attorney’s Office", amount: 5.518, was: 5.067, note: "Administration · Advisory · Prosecution & civil litigation" },
-  { id: "other", name: "Other General Fund departments", amount: 16.784, was: 18.315, note: "Human resources · Communications · Planning · Municipal Court · Climate · City Council · Utilities · Transportation. Community Vitality, $1.6M in 2026, has no General Fund budget in 2027." },
+  { id: "other", name: "Other General Fund departments", amount: 16.784, was: 16.702, note: "Human resources · Communications · Planning · Municipal Court · Climate · City Council · Utilities · Transportation. Community Vitality’s 2026 budget is counted with the departments that took over its work." },
 ];
 /* What the reader sees: the label when there is one, else the stored name. */
 const deptLabel = (d) => d.label || d.name;
@@ -252,50 +282,32 @@ const LOCKED_DEPTS = [
   { id: "other", name: "Other departments", amount: 0.705, kind: "dedicated", why: "Small amounts in Finance and citywide accounts charged to dedicated funds." },
 ];
 
-/* ---- Revenue sliders, by Colorado legal status --------------------------- *
-   status: city   = city may set without a vote (TABOR treats fees as non-taxes)
-           cap    = council may set up to a ceiling voters already approved
-           shift  = council may move costs onto a dedicated fund, within what
-                    voters approved that fund for
-           vote   = requires voter approval under TABOR
-           future = already on the ballot, but starts too late for 2027
-           barred = prohibited by the Colorado Constitution (TABOR)
-           none   = no legal mechanism exists
+/* ---- Revenue sliders -------------------------------------------------- *
+   pieces: one line naming what the money comes from, shown under the label
    type:   pct     −25..25 % over `base`, the source's 2027 General Fund
                    revenue ($M); yield = base × pct/100, negative = a cut
            rate    a tax rate from `min` to `max`, starting at `now`; each
                    point yields `perPoint` $M
            dollars $M moved from `min` to `max` (not revenue: see "shift")
-   city:   where the city's own 2027 recommended budget puts this slider,
-           drawn as a tick                                                   */
+   city:   where the recommended budget puts this slider, drawn as the
+           "proposed" tick
+   locked: shown greyed out, name only
+   Every number here is traced to its source in ../PROVENANCE.md.           */
 const REVENUE = [
-  { id: "fees", type: "pct", label: "Fees & charges", status: "city", base: 10.973,
-    note: "Parking fees, fines, licenses and charges for services. Colorado courts don’t count fees as taxes, so the city can change many of them without a vote, though most can’t cost more than the service they pay for. They bring the General Fund about $11.0M in 2027, down from $12.3M in 2026, partly because photo-enforcement fines fall when the radar vans end." },
-  { id: "property", type: "pct", label: "Property tax", status: "vote", base: 39.459,
-    note: "This slider moves the city’s general-purpose property tax, about $39.5M, or 7.948 of its 11.648 mills. (A mill is $1 of tax per $1,000 of assessed value.) Voters dedicated the other 3.7 mills: 2 to public safety, 0.9 to parks and 0.8 to community housing. The city keeps roughly 13¢ of every property-tax dollar paid in Boulder, about $737 a year on a $1 million home." },
-  { id: "sales", type: "pct", label: "Sales & use tax", status: "vote", base: 83.009,
-    note: "Sales and use tax is the General Fund’s biggest source of money, about $83.0M. Most of the city’s sales tax, though, goes to funds voters dedicated, listed below." },
-  { id: "marijuana", type: "rate", label: "Recreational marijuana tax", status: "cap", min: 0, max: 10, step: 0.5, now: 3.5, perPoint: 0.206, city: 5.5,
-    note: "Boulder’s own tax on recreational marijuana sales is 3.5% today and brings the General Fund about $1.0M a year. Voters approved Question 2A in 2013, letting the council set the rate anywhere up to 10% without another election. The recommended budget raises it to 5.5%, which the city expects to bring in 41% more. By this tool’s estimate, each percentage point is worth about $0.2M." },
-  { id: "shift", type: "dollars", label: "Shift costs onto dedicated funds", status: "shift", min: 0, max: 5, step: 0.1, city: 0.47,
-    note: "Some General Fund costs fit the purpose of a voter-dedicated fund, and moving them there frees General Fund money without raising any. The recommended budget moves about $0.5M. The Open Space tax pays 90% of the wildland fire crew instead of 75% ($180K), urban-ranger equipment moves to Open Space ($36K), and the sugary-drink tax picks up youth health programs (about $250K). The services continue, and the dedicated funds have that much less for their own work." },
-  { id: "vacancy", label: "Vacancy tax", status: "future", locked: true,
-    note: "On the Nov. 3 ballot: a $4,000-a-year tax on homes left empty more than half the year, projected to raise about $4M a year for the General Fund. It would start Jan. 1, 2028, too late for the 2027 budget.", sources: [SRC.ballotFinal] },
-  { id: "income", label: "Local income tax", status: "barred", locked: true,
-    note: "Colorado’s constitution bars local income taxes (TABOR, Art. X, §20), so there is no rate to set." },
-  { id: "wealth", label: "Wealth tax", status: "none", locked: true,
-    note: "No Colorado city has the power to levy a wealth tax, and any new tax would still need a public vote." },
+  { id: "fees", type: "pct", label: "Fees & charges", base: 10.973,
+    pieces: "Licenses, permits & fines · Parking · Charges for services" },
+  { id: "property", type: "pct", label: "Property tax", base: 39.459,
+    pieces: "General-purpose levy (7.948 of the city’s 11.648 mills)" },
+  { id: "sales", type: "pct", label: "Sales & use tax", base: 83.009,
+    pieces: "Sales tax · Use tax (the General Fund’s 1.72% of the city’s 3.86% rate)" },
+  { id: "marijuana", type: "rate", label: "Recreational marijuana tax", min: 0, max: 10, step: 0.5, now: 3.5, perPoint: 0.206, city: 5.5,
+    pieces: "Boulder’s additional sales tax on recreational marijuana" },
+  { id: "shift", type: "dollars", label: "Shift costs onto dedicated funds", min: 0, max: 5, step: 0.1, city: 0.566,
+    pieces: "Wildland fire crew to the Open Space tax · Urban-ranger equipment to Open Space · Recreation and behavioral-health programs to the sugary-drink tax" },
+  { id: "vacancy", label: "Vacancy tax", locked: true, sources: [SRC.ballotFinal] },
+  { id: "income", label: "Local income tax", locked: true },
+  { id: "wealth", label: "Wealth tax", locked: true },
 ];
-
-const STATUS = {
-  city: { tag: "CITY CAN SET", color: "#1A1A1A", bg: "#CDDE00" },
-  cap: { tag: "COUNCIL CAN SET · UP TO A 10% VOTER CAP", color: "#1A1A1A", bg: "#CDDE00" },
-  shift: { tag: "COUNCIL CAN MOVE · WITHIN WHAT VOTERS APPROVED", color: "#1A1A1A", bg: "#CDDE00" },
-  vote: { tag: "RAISING IT TAKES A VOTE · TABOR", color: "#1265B6", bg: "transparent" },
-  future: { tag: "ON THE NOV. 3 BALLOT · WOULD START IN 2028", color: "#1265B6", bg: "transparent" },
-  barred: { tag: "BARRED BY THE STATE CONSTITUTION", color: "#CF2E2E", bg: "transparent" },
-  none: { tag: "NO LEGAL AUTHORITY", color: "#7E847E", bg: "transparent" },
-};
 
 /* The starting position of every unlocked revenue slider. */
 const REV_START = Object.fromEntries(REVENUE.filter((r) => !r.locked).map((r) => [r.id, r.type === "rate" ? r.now : 0]));
@@ -371,7 +383,6 @@ export default function BoulderBudgetWidget() {
   const [lockedPct, setLockedPct] = useState({});  // id -> -25..25
   const [rev, setRev] = useState(REV_START);        // id -> slider value (see REVENUE `type`)
   const [showLocked, setShowLocked] = useState(false);
-  const [showData, setShowData] = useState(false);
   const [showDemo, setShowDemo] = useState(true);
   const [demo, setDemo] = useState({});
   const [agg, setAgg] = useState(null);
@@ -546,12 +557,12 @@ export default function BoulderBudgetWidget() {
         <section className="mt-7">
           <SectionHead icon={<Building2 size={18} style={{ color: C.ink }} />} title="The General Fund: money the council can move" />
           <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>The sliders below break down the recommended budget’s {fmt1(GENERAL_FUND)} in General Fund spending by department. Slide one left to cut it and close part of the gap, or right to spend more and widen it. Heading into 2027, the city manager asked every department to draw up <strong style={{ color: C.ink }}>ongoing cuts of about 4%</strong>.</p>
-          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}><span aria-hidden="true" style={{ display: "inline-block", width: 3, height: 11, background: C.blueDk, borderRadius: 2, marginRight: 6, verticalAlign: "-1px" }} />The blue tick shows the city’s own change to each department from 2026 to 2027. Every slider starts at zero, the recommended 2027 amount.</p>
+          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}><span aria-hidden="true" style={{ display: "inline-block", width: 3, height: 11, background: C.blueDk, borderRadius: 2, marginRight: 6, verticalAlign: "-1px" }} />The blue tick shows the proposed change to each department from 2026 to 2027. Every slider starts at zero, the recommended 2027 amount.</p>
           <div className="mt-3 grid gap-2.5">
             {GF_DEPTS.map((d) => {
               const pct = deptPct[d.id] || 0, delta = d.amount * (pct / 100);
               const city = (d.amount / d.was - 1) * 100;
-              const ticks = [{ value: city, label: `city ${city > 0 ? "+" : "−"}${Math.abs(city).toFixed(1)}%`, title: `The city’s change from 2026 (${fmt(d.was)}) to 2027 (${fmt(d.amount)})` }];
+              const ticks = [{ value: city, label: `proposed ${city > 0 ? "+" : "−"}${Math.abs(city).toFixed(1)}%`, title: `The proposed change from 2026 (${fmt(d.was)}) to 2027 (${fmt(d.amount)})` }];
               return (
                 <div key={d.id} className="rounded-md p-3" style={{ background: C.paper, border: `1px solid ${C.hair}` }}>
                   <div className="flex items-center justify-between gap-2">
@@ -571,32 +582,32 @@ export default function BoulderBudgetWidget() {
           </div>
         </section>
 
-        {/* Revenue — sliders by legal status */}
+        {/* Revenue */}
         <section className="mt-7">
-          <SectionHead icon={<Vote size={18} style={{ color: C.blueDk }} />} title="Revenue, and who decides" />
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>The fee and tax sliders start at zero and move both ways, so you can cut a tax as well as raise one, or trade sales tax for property tax. Each row’s tag says who can make the change. Under Colorado’s Taxpayer’s Bill of Rights (<strong style={{ color: C.blueDk }}>TABOR</strong>), raising a tax beyond what voters have already approved takes a public vote. Blue ticks mark what the recommended budget does.</p>
+          <SectionHead icon={<Coins size={18} style={{ color: C.blueDk }} />} title="Revenue" />
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>The fee and tax sliders start at zero and move both ways, so you can cut a tax as well as raise one, or trade sales tax for property tax. Blue ticks mark what the recommended budget proposes.</p>
           <div className="mt-3 grid gap-2.5">
             {REVENUE.map((r) => {
-              const st = STATUS[r.status]; const v = rev[r.id] ?? REV_START[r.id]; const yield_ = revYield(r, v);
+              const v = rev[r.id] ?? REV_START[r.id]; const yield_ = revYield(r, v);
               const moved = r.type === "rate" ? v !== r.now : v !== 0;
               const headline = r.type === "rate" ? `${v}%` : r.type === "dollars" ? fmt(v) : fmt(r.base);
               const change = r.type === "dollars" ? (v > 0 ? `${fmt(v)} moved` : "none moved") : (!moved ? "unchanged" : signed(yield_));
               const changeColor = !moved ? C.inkSoft : r.type === "dollars" ? C.blueDk : (yield_ > 0 ? C.green : C.red);
               const set = (x) => { setRev({ ...rev, [r.id]: x }); setSubmitted(false); };
-              const ticks = r.city == null ? [] : [{ value: r.city, label: r.type === "rate" ? `city ${r.city}%` : `city ~${fmt(r.city)}`, title: r.type === "rate" ? `The recommended budget sets it at ${r.city}%` : `The recommended budget moves about ${fmt(r.city)}` }];
+              const ticks = r.city == null ? [] : [{ value: r.city, label: r.type === "rate" ? `proposed ${r.city}%` : `proposed ~${fmt(r.city)}`, title: r.type === "rate" ? `The recommended budget sets it at ${r.city}%` : `The recommended budget moves about ${fmt(r.city)}` }];
               return (
                 <div key={r.id} className="rounded-md p-3" style={{ background: r.locked ? C.lockBg : C.paper, border: `1px solid ${r.locked ? C.lock : C.hair}` }}>
                   <div className="flex items-center justify-between gap-2">
                     <div style={{ minWidth: 0 }}>
                       <div className="flex items-center gap-1.5 flex-wrap"><span style={{ fontSize: 14.5, fontWeight: 700, color: r.locked ? C.inkSoft : C.ink }}>{r.label}</span>{r.locked && <Lock size={12} style={{ color: C.lock }} />}</div>
-                      <div className="mt-1 flex flex-wrap gap-1"><Tag color={st.color} bg={st.bg}>{st.tag}</Tag></div>
+                      {r.pieces && <div style={{ fontSize: 11.5, color: C.inkSoft }}>{r.pieces}</div>}
                     </div>
                     <div className="tnum text-right" style={{ flexShrink: 0 }}>{r.locked ? <span style={{ fontSize: 14, fontWeight: 800, color: C.lockText }}>—</span> : <><span style={{ fontSize: 14, fontWeight: 800 }}>{headline}</span><span style={{ fontSize: 12, color: changeColor, marginLeft: 8, fontWeight: 700 }}>{change}</span></>}</div>
                   </div>
                   {r.locked ? (
                     <input className="lk" type="range" min={0} max={1} step={1} value={0} readOnly onChange={() => {}}
                       onKeyDown={(e) => e.preventDefault()} aria-readonly="true" aria-disabled="true"
-                      aria-label={`${r.label}`} aria-valuetext={`unavailable — ${st.tag.toLowerCase()}`} style={{ marginTop: 10 }} />
+                      aria-label={`${r.label}`} aria-valuetext="unavailable" style={{ marginTop: 10 }} />
                   ) : r.type === "rate" ? (
                     <>
                       <div className="flex items-center gap-3 mt-2">
@@ -627,7 +638,6 @@ export default function BoulderBudgetWidget() {
                       <Scale left="−25% cut" mid="0" right="+25% more" />
                     </>
                   )}
-                  <div style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 7 }}>{r.note}</div>
                 </div>
               );
             })}
@@ -654,7 +664,7 @@ export default function BoulderBudgetWidget() {
           <div className="mt-2 rounded-md p-3" style={{ background: C.lockBg, border: `1px solid ${C.lock}` }}>
             <span style={{ fontSize: 12.5, color: C.inkSoft }}>Some new 2027 revenue is restricted from the start. The Transportation Maintenance Fee adds about <strong style={{ color: C.ink }}>$3.0M</strong>, which can pay only for transportation maintenance. Utility rates rise <strong style={{ color: C.ink }}>5–7%</strong>, and that money can pay only for water, wastewater and stormwater.</span>
           </div>
-          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 10 }}><strong style={{ color: C.ink }}>The Nov. 3 ballot.</strong> Voters will decide four city measures the council settled on Aug. 6: a <strong style={{ color: C.ink }}>$400M recreation-and-safety bond</strong> for aging rec centers, fire stations and a police facility (about $400 a year on a $1 million home); a charter change letting the city borrow against property’s actual value rather than its assessed value; collective bargaining for firefighters; and the <strong style={{ color: C.ink }}>vacancy tax</strong> above. Only the vacancy tax would add General Fund money, roughly $4M a year against a {fmt(GAP)} gap, and not until 2028. A parks mill levy the council studied, which would have opened dedicated money to wider use, didn’t make the ballot.</p>
+          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 10 }}><strong style={{ color: C.ink }}>The Nov. 3 ballot.</strong> Voters will decide four city measures the council settled on Aug. 6: a <strong style={{ color: C.ink }}>$400M recreation-and-safety bond</strong> for aging rec centers, fire stations and a police facility (about $400 a year on a $1 million home); a charter change letting the city borrow against property’s actual value rather than its assessed value; collective bargaining for firefighters; and a <strong style={{ color: C.ink }}>$4,000-a-year tax on homes left empty</strong> more than half the year. Only the vacancy tax would add General Fund money, roughly $4M a year against a {fmt(GAP)} gap, and not until 2028. A parks mill levy the council studied, which would have opened dedicated money to wider use, didn’t make the ballot.</p>
         </section>
 
         {/* Locked spending funds */}
@@ -701,8 +711,8 @@ export default function BoulderBudgetWidget() {
                     netCuts > 0.01 && <strong key="c" style={{ color: C.ink }}>{fmt(netCuts)} in net cuts</strong>,
                     revenueOnly > 0.01 && <strong key="r" style={{ color: C.ink }}>{fmt(revenueOnly)} in recurring revenue</strong>,
                     shifted > 0 && <strong key="s" style={{ color: C.ink }}>{fmt(shifted)} moved onto dedicated funds</strong>,
-                  ].filter(Boolean).reduce((acc, el, i, arr) => acc.concat(i === 0 ? [el] : [i === arr.length - 1 ? " and " : ", ", el]), [])}{usedVote ? <>, including a tax increase that would need a public vote.</> : <>, without asking voters for anything.</>}</>
-                : <>You’re still <strong style={{ color: C.ink }}>{fmt(remaining)} short</strong>. Cut deeper, raise a fee, move a cost onto a dedicated fund or send a tax to the ballot.</>}
+                  ].filter(Boolean).reduce((acc, el, i, arr) => acc.concat(i === 0 ? [el] : [i === arr.length - 1 ? " and " : ", ", el]), [])}.</>
+                : <>You’re still <strong style={{ color: C.ink }}>{fmt(remaining)} short</strong>. Cut deeper, raise a fee or a tax, or move a cost onto a dedicated fund.</>}
             </p>
           </div>
 
@@ -737,7 +747,7 @@ export default function BoulderBudgetWidget() {
               {aggState === "loading" && <p style={{ fontSize: 13, color: C.inkSoft, marginTop: 8 }}>Loading the shared tally…</p>}
               {aggState === "ready" && agg && (agg.n === 0 ? <p style={{ fontSize: 13, color: C.inkSoft, marginTop: 8 }}>No budgets have been counted yet. Submissions are anonymous, and readers see only the combined results.</p> : <AggregateView agg={agg} />)}
               <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 10, fontStyle: "italic" }}>Readers chose to take part, so this is not a scientific survey of Boulder.</p>
-              <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 4, fontStyle: "italic" }}>For comparison, the city’s own trade-off exercise this spring, Fund Our Future, drew 599 participants, who ranked facility maintenance and wildfire response highest.</p>
+              <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 4, fontStyle: "italic" }}>For comparison, the city’s own trade-off exercise earlier this year, <Doc to={OFFICIAL.fundOurFuture}>Fund Our Future</Doc>, heard from more than 500 people, who ranked wildfire response and facility maintenance highest.</p>
             </div>
           )}
         </section>
@@ -747,41 +757,28 @@ export default function BoulderBudgetWidget() {
             its own numbers — what's official vs. modeled, and the verify link. */}
         <section className="mt-8" style={{ borderTop: `3px solid ${C.ink}`, paddingTop: 18 }}>
           <Eyebrow>Sources &amp; method</Eyebrow>
-          <p style={{ fontSize: 14, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}>Budget totals, department figures, revenue bases, tax rates and legal limits come from the city manager’s 2027 recommended budget and Colorado law. What each revenue change would raise is an estimate. The panel below separates the two.</p>
-          <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}><strong style={{ color: C.ink }}>Rising costs, flat revenue.</strong> Payroll grows under new contracts that give police and firefighters 5% raises and most other union staff 4%, and software, insurance and other contracts add to the bill. Revenue hasn’t kept pace: sales and use tax has been flat since 2023, and property tax is down 2.4% under recent state law. The May 2026 Financial Forecast put the gap at $6.5M; the recommended budget, released Aug. 28, puts it at {fmt(GAP)}.</p>
-          <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>The city’s plan.</strong> The recommended budget eliminates 24 positions, 13 of them filled, ends the photo-radar vans and trims pool hours and custodial service. It moves about $0.5M of costs onto the Open Space and sugary-drink taxes, raises the recreational marijuana tax from 3.5% to 5.5% and increases several licensing and parking-permit fees. It also adds three police lieutenants. The council holds hearings Oct. 1 and 15 and can change any of it before it adopts the budget Oct. 15.</p>
-          <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>Past gaps.</strong> In mid-2025, the city closed an $8–10M gap with a hiring freeze, 5% savings from each department and cuts to one-time transfers. For 2026, it closed $7.5M with department cuts and reorganizations that eliminated 19 mostly vacant positions, plus about $6M in new citywide fees: $2.25M for transportation maintenance, $2.6M from speed-on-green cameras, $0.8M from parking and $0.4M from single-family expansion. It kept the emergency reserve, about 16.7% of operating spending, at its target. The city holds its reserves for downturns.</p>
-          <a href="https://github.com/brianckeegan/charting-boulder" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4" style={{ fontSize: 13.5, fontWeight: 800, color: C.ink, textDecoration: "none", border: `2px solid ${C.ink}`, borderRadius: 7, padding: "9px 14px" }}><Github size={15} /> Verify me: data, assumptions and code on GitHub</a>
-          <div className="mt-5">
-            <button onClick={() => setShowData(!showData)} style={{ background: "transparent", border: "none", cursor: "pointer", padding: 0 }} className="flex items-center gap-1.5"><span style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>DATA STATUS & SOURCES</span>{showData ? <ChevronUp size={14} color={C.inkSoft} /> : <ChevronDown size={14} color={C.inkSoft} />}</button>
-            {showData && (
-              <div style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 8, lineHeight: 1.6 }}>
-                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt1(TOTAL)}; operating {fmt1(OPERATING)}; capital {fmt1(CAPITAL)}; the {fmt(GAP)} General Fund gap; General Fund {fmt1(GENERAL_FUND)} (+3.1% vs. 2026) and each department’s 2027 and 2026 amounts, from the city’s 2027 General Fund Fund Financial (1100); the General Fund’s 2027 sales tax ($83.0M), fees and charges ($11.0M: licenses, permits and fines, parking, charges for services) and general-purpose property tax ($39.5M at 7.948 mills, from the mill levy table); the sales-tax components (3.86% in all, 1.72% to the General Fund) and each dedicated fund’s 2027 sales-tax revenue; each department’s spending outside the General Fund (its line in the budget book’s Citywide Uses table, net of transfers and internal services, minus its General Fund amount); the city’s own 2027 moves (24 positions, the photo-radar vans, pools, about $0.5M of costs moved onto dedicated funds, the marijuana tax to 5.5%, the fee increases), from the Budget At-A-Glance page and the budget book’s lists of changes; the 10% ceiling voters set on the marijuana tax in 2013 (Question 2A); the four measures on the Nov. 3 ballot: the $400M recreation-and-safety bond (~$400/yr on a $1M home), the debt-limit charter change, firefighter collective bargaining, and the $4,000-a-year residential vacancy tax (general purposes, ~$4M/yr projected, effective Jan. 1, 2028). All figures are nominal dollars as recommended; year-over-year changes are not inflation-adjusted. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes.</p>
-                <p className="mt-2"><strong style={{ color: C.ink }}>Modeled:</strong> how much each revenue change raises. A fee or tax change yields the same share of its 2027 base, assuming no one changes their behavior in response. Each point of the marijuana tax is worth about $0.2M, based on the city’s forecast that raising the rate from 3.5% to 5.5% brings in 41.2% more on about $1.0M. The $0–5M range for moving costs onto dedicated funds is an editorial choice. Treat any single modeled figure as approximate.</p>
-                <div className="mt-2">
-                  <strong style={{ color: C.ink }}>Official budget data:</strong>
-                  <ul style={{ margin: "4px 0 0", paddingLeft: 18 }}>
-                    <li style={{ marginTop: 3 }}><a href="https://cityofboulderco.opengov.com/transparency/" target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>City of Boulder budget transparency portal (OpenGov)</a></li>
-                    <li style={{ marginTop: 3 }}><a href="https://bouldercolorado.gov/services/budget" target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>City of Boulder — Budget (bouldercolorado.gov)</a></li>
-                    <li style={{ marginTop: 3 }}><a href="https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB" target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>City of Boulder 2027 Recommended Budget (online budget book)</a></li>
-                    <li style={{ marginTop: 3 }}><a href="https://bouldercolorado.gov/budget-glance" target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>Budget At-A-Glance: the city’s summary of 2027 cuts, shifts and fees</a></li>
-                    <li style={{ marginTop: 3 }}><a href="https://bouldercolorado.gov/media/21600/download?inline" target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>2027 General Fund Fund Financial (1100), PDF</a></li>
-                  </ul>
-                </div>
-                <div className="mt-2">
-                  <strong style={{ color: C.ink }}>Related reporting:</strong>
-                  <ul style={{ margin: "4px 0 0", paddingLeft: 18 }}>
-                    {Object.values(SRC).map((s, i) => (
-                      <li key={i} style={{ marginTop: 3 }}>
-                        <a href={s.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>{s.label}</a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <p className="mt-2" style={{ fontSize: 11.5 }}>Figures in millions of dollars, as of Sept. 29, 2026: the city manager’s recommended budget, before the council’s Oct. 15 vote. Built for Boulder Reporting Lab as a simplified teaching model of the city’s budget.</p>
-              </div>
-            )}
+          <p style={{ fontSize: 14, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}>Budget totals, department figures, revenue bases, tax rates and legal limits come from <Doc to={OFFICIAL.book}>the city manager’s 2027 recommended budget</Doc> and <Doc to={OFFICIAL.tabor}>Colorado law</Doc>. What each revenue change would raise is an estimate. <Doc to={PROVENANCE}>The provenance file</Doc> traces every number to its source and says which ones are estimates.</p>
+          <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}><strong style={{ color: C.ink }}>Rising costs, flat revenue.</strong> Payroll grows under <Doc to={OFFICIAL.message}>new contracts</Doc> that give police and firefighters 5% raises and most other union staff 4%, and software, insurance and other contracts add to the bill. <Doc to={OFFICIAL.briefMore}>Revenue hasn’t kept pace</Doc>: sales and use tax has been flat since 2023, and property tax is down 2.4% under recent state law. The <Doc to={OFFICIAL.budgetPage}>May 2026 Financial Forecast</Doc> put the gap at $6.5M; <Doc to={OFFICIAL.brief}>the recommended budget</Doc>, <Doc to={OFFICIAL.release}>released Aug. 28</Doc>, puts it at {fmt(GAP)}.</p>
+          <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>The city’s plan.</strong> <Doc to={OFFICIAL.glance}>The recommended budget</Doc> eliminates 24 positions, 13 of them filled, ends the photo-radar vans and trims pool hours and custodial service. It moves about $0.6M of costs onto the Open Space and sugary-drink taxes, raises the recreational marijuana tax from 3.5% to 5.5% and increases several licensing and parking-permit fees. It also adds three police lieutenants. The council holds hearings Oct. 1 and 15 and can change any of it before it adopts the budget Oct. 15.</p>
+          <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>Past gaps.</strong> In mid-2025, the city closed an $8–10M gap with a hiring freeze, 5% savings from each department and cuts to one-time transfers. For 2026, it closed $7.5M with department cuts and reorganizations that eliminated 19 mostly vacant positions, plus about $6M in new citywide fees: $2.25M for transportation maintenance, $2.6M from speed-on-green cameras, $0.8M from parking and $0.4M from single-family expansion. It kept the <Doc to={OFFICIAL.policies}>emergency reserve</Doc>, about 16.7% of operating spending, at its target. The city holds its reserves for downturns.</p>
+          <div className="mt-4">
+            <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>OFFICIAL BUDGET DOCUMENTS</div>
+            <ul style={{ margin: "6px 0 0", paddingLeft: 18, fontSize: 12.5, lineHeight: 1.6, color: C.inkSoft }}>
+              {Object.values(OFFICIAL).map((d) => (
+                <li key={d.url} style={{ marginTop: 3 }}><a href={d.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>{d.label}</a></li>
+              ))}
+            </ul>
           </div>
+          <div className="mt-4">
+            <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>RELATED REPORTING</div>
+            <ul style={{ margin: "6px 0 0", paddingLeft: 18, fontSize: 12.5, lineHeight: 1.6, color: C.inkSoft }}>
+              {Object.values(SRC).map((d) => (
+                <li key={d.url} style={{ marginTop: 3 }}><a href={d.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>{d.label}</a></li>
+              ))}
+            </ul>
+          </div>
+          <a href={PROVENANCE.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4" style={{ fontSize: 13.5, fontWeight: 800, color: C.ink, textDecoration: "none", border: `2px solid ${C.ink}`, borderRadius: 7, padding: "9px 14px" }}><Github size={15} /> Verify me: where every number comes from</a>
+          <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 12, lineHeight: 1.5 }}>Figures in millions of dollars, as of Sept. 29, 2026: the city manager’s recommended budget, before the council’s Oct. 15 vote. Built for Boulder Reporting Lab as a simplified teaching model of the city’s budget.</p>
         </section>
       </div>
     </div>
@@ -952,11 +949,11 @@ function Cites({ sources }) {
     </sup>
   );
 }
+/* An inline link to an official document: underlined, so it doesn't rely on
+   colour alone. */
+function Doc({ to, children }) { return <a href={to.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 2 }}>{children}</a>; }
 function Eyebrow({ children }) { return <div style={{ fontSize: 11, letterSpacing: "0.13em", textTransform: "uppercase", color: C.inkSoft, fontWeight: 800 }}>{children}</div>; }
 function SectionHead({ icon, title }) { return <div className="flex items-center gap-2"><span style={{ display: "inline-flex", flexShrink: 0 }}>{icon}</span><h2 style={{ fontSize: 19, fontWeight: 800, letterSpacing: "-0.01em", lineHeight: 1.15 }}>{title}</h2></div>; }
-function Tag({ children, color, bg }) {
-  return <span className="tnum" style={{ fontSize: 10, fontWeight: 800, letterSpacing: "0.03em", textTransform: "uppercase", color: bg && bg !== "transparent" ? "#1A1A1A" : (color || C.inkSoft), background: bg && bg !== "transparent" ? bg : "transparent", border: `1px solid ${color || C.hair}`, borderRadius: 4, padding: "1px 5px" }}>{children}</span>;
-}
 
 function AggregateView({ agg }) {
   const pct = (x) => Math.round((x / agg.n) * 100);
@@ -966,7 +963,6 @@ function AggregateView({ agg }) {
   const shown = (name) => { const d = GF_DEPTS.find((x) => x.name === name); return d ? deptLabel(d) : name; };
   const rows = [
     { label: "raised new revenue", v: pct(agg.usedRevenue) },
-    { label: "raised a tax that needs a public vote", v: pct(agg.usedVote) },
     { label: "moved costs onto dedicated funds", v: pct(agg.usedShift || 0) },
   ];
   return (
