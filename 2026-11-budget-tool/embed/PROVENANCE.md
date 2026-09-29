@@ -168,6 +168,25 @@ Police, Innovation & Technology, the City Attorney's Office, Human Resources, Co
 
 The column sums to `TOTAL − GENERAL_FUND`, $352,104,756. The range is −25% to +25%, an editorial choice. The $135.36 million capital budget is spread across these rows.
 
+## Other figures on the page
+
+The widget's prose uses these figures. They were checked against the sources below, and none of them feeds a slider.
+
+| Figure | Source |
+|---|---|
+| Sales-tax rates voters set aside: Open Space 0.77%, Transportation 0.75%, Community, Culture, Resilience & Safety 0.30%, .25-cent Parks & Recreation 0.25%, Arts, Culture & Heritage 0.075%; General Fund 1.72% of 3.86% | BiB-C, Sales & Use Tax Components in 2027. The table prints the arts tax as 0.08%; BiB-C's list of rate changes gives its exact 0.075%. |
+| What each of those funds raises in 2027: $36.6M, $35.7M, $14.3M, $11.9M, $3.6M | BiB-C, Sales Tax Revenues 2023-2027 (in $1,000s), 2027 Budget: $36,635, $35,684, $14,274, $11,895, $3,568 |
+| Transportation Maintenance Fee, about $3.0M in 2027 | BiB revenue notes: "An estimated $3.03M is included in the 2027 Budget supported by a new fee (approved in the 2026 Budget)." The city could not start collecting it in 2026 (AAG: "The city will start collecting the Transportation Maintenance Fee ... in early 2027"). |
+| Utility rates up 5–7% | BiB-C, Key Budget Assumptions: water rates 5.00%, wastewater and stormwater 7.00% |
+| Raises: 5% for police and firefighters, 4% for most other union staff | City manager's [budget message](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a7a2349492dea63d5fd8d27); BiB-C, Key Budget Assumptions: Boulder Municipal Employees Association 4.00% |
+| Sales and use tax flat since 2023; property tax down 2.4% | BiB-C: the Sales Tax Revenues chart (General Fund $82,137 thousand in 2023, $83,009 thousand in 2027) and Key Budget Assumptions (property tax −2.40%) |
+| The city's plan: 24 positions eliminated, 13 of them filled; photo-radar vans ended; shorter pool hours; custodial service cut from five days to three; the marijuana tax to 5.5%; higher licensing and parking-permit fees; three new police lieutenants | AAG, the city's [Aug. 28 release](https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input), the budget message, and BiB's revenue notes (photo enforcement revenue falls 52.8% "driven by the elimination of photo radar van enforcement") |
+| Past gaps: $8–10M in mid-2025, $7.5M for 2026, about $6M in 2026 fees ($2.25M transportation maintenance, $2.6M speed-on-green cameras, $0.8M parking, $0.4M single-family expansion), 19 mostly vacant positions | F26's budget history, and Boulder Reporting Lab, ["Council approves $521M 2026 budget"](https://boulderreportinglab.org/2025/10/23/boulder-city-council-approves-521-million-2026-budget-adds-demolition-and-transportation-maintenance-fees/) (Oct. 23, 2025) |
+| The emergency reserve, 16.7% of operating spending | The budget book's [financial policies](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a75e5049edf5ffa8847c1f7) |
+| The Nov. 3 ballot: a $400M recreation-and-safety bond (about $400 a year on a $1 million home), a charter change on the city's debt limit, collective bargaining for firefighters, and a $4,000-a-year tax on homes left empty more than half the year, projected at about $4M a year for the General Fund starting Jan. 1, 2028 | Boulder Reporting Lab, ["Council sends vacancy tax and $400M bond to the November ballot"](https://boulderreportinglab.org/2026/08/06/boulder-city-council-sends-vacancy-tax-and-400-million-bond-to-november-ballot-rejects-downtown-development-authority/) (Aug. 6, 2026) |
+| Fund Our Future heard from more than 500 people, who ranked wildfire response and facility maintenance highest | The city's [Fund Our Future summary](https://bouldercolorado.gov/news/fund-our-future-our-communitys-priorities) (June 29, 2026) |
+| Tax increases need voter approval; local income taxes are barred | Colorado's Taxpayer's Bill of Rights, Colo. Const. Art. X, §20; the Colorado General Assembly's [TABOR explainer](https://leg.colorado.gov/agencies/legislative-council-staff/tabor) |
+
 ## Choices that are the tool's, not the city's
 
 - The −25% to +25% range on the department, fee and tax sliders, and the $0 to $5M range for moving costs.

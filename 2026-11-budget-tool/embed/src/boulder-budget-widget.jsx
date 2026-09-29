@@ -185,6 +185,8 @@ const SRC = {
    explainer. Linked in the Sources & method text and listed under it. Every
    URL loaded on Sept. 29, 2026. -------------------------------------------- */
 const BOOK = "https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB";
+/* Where every number on the page comes from, in the repository. */
+const PROVENANCE = { label: "Where every number comes from", url: "https://github.com/brianckeegan/charting-boulder/blob/main/2026-11-budget-tool/embed/PROVENANCE.md" };
 const OFFICIAL = {
   book:          { label: "2027 Recommended Budget: the city’s online budget book", url: BOOK },
   brief:         { label: "2027 Budget in Brief: totals, the General Fund gap, revenue forecasts", url: `${BOOK}?currentPageId=6a7a22d6e8cd6b725ef3b5b5` },
@@ -381,7 +383,6 @@ export default function BoulderBudgetWidget() {
   const [lockedPct, setLockedPct] = useState({});  // id -> -25..25
   const [rev, setRev] = useState(REV_START);        // id -> slider value (see REVENUE `type`)
   const [showLocked, setShowLocked] = useState(false);
-  const [showData, setShowData] = useState(false);
   const [showDemo, setShowDemo] = useState(true);
   const [demo, setDemo] = useState({});
   const [agg, setAgg] = useState(null);
@@ -756,7 +757,7 @@ export default function BoulderBudgetWidget() {
             its own numbers — what's official vs. modeled, and the verify link. */}
         <section className="mt-8" style={{ borderTop: `3px solid ${C.ink}`, paddingTop: 18 }}>
           <Eyebrow>Sources &amp; method</Eyebrow>
-          <p style={{ fontSize: 14, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}>Budget totals, department figures, revenue bases, tax rates and legal limits come from <Doc to={OFFICIAL.book}>the city manager’s 2027 recommended budget</Doc> and <Doc to={OFFICIAL.tabor}>Colorado law</Doc>. What each revenue change would raise is an estimate. The panel below separates the two.</p>
+          <p style={{ fontSize: 14, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}>Budget totals, department figures, revenue bases, tax rates and legal limits come from <Doc to={OFFICIAL.book}>the city manager’s 2027 recommended budget</Doc> and <Doc to={OFFICIAL.tabor}>Colorado law</Doc>. What each revenue change would raise is an estimate. <Doc to={PROVENANCE}>The provenance file</Doc> traces every number to its source and says which ones are estimates.</p>
           <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}><strong style={{ color: C.ink }}>Rising costs, flat revenue.</strong> Payroll grows under <Doc to={OFFICIAL.message}>new contracts</Doc> that give police and firefighters 5% raises and most other union staff 4%, and software, insurance and other contracts add to the bill. <Doc to={OFFICIAL.briefMore}>Revenue hasn’t kept pace</Doc>: sales and use tax has been flat since 2023, and property tax is down 2.4% under recent state law. The <Doc to={OFFICIAL.budgetPage}>May 2026 Financial Forecast</Doc> put the gap at $6.5M; <Doc to={OFFICIAL.brief}>the recommended budget</Doc>, <Doc to={OFFICIAL.release}>released Aug. 28</Doc>, puts it at {fmt(GAP)}.</p>
           <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>The city’s plan.</strong> <Doc to={OFFICIAL.glance}>The recommended budget</Doc> eliminates 24 positions, 13 of them filled, ends the photo-radar vans and trims pool hours and custodial service. It moves about $0.6M of costs onto the Open Space and sugary-drink taxes, raises the recreational marijuana tax from 3.5% to 5.5% and increases several licensing and parking-permit fees. It also adds three police lieutenants. The council holds hearings Oct. 1 and 15 and can change any of it before it adopts the budget Oct. 15.</p>
           <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>Past gaps.</strong> In mid-2025, the city closed an $8–10M gap with a hiring freeze, 5% savings from each department and cuts to one-time transfers. For 2026, it closed $7.5M with department cuts and reorganizations that eliminated 19 mostly vacant positions, plus about $6M in new citywide fees: $2.25M for transportation maintenance, $2.6M from speed-on-green cameras, $0.8M from parking and $0.4M from single-family expansion. It kept the <Doc to={OFFICIAL.policies}>emergency reserve</Doc>, about 16.7% of operating spending, at its target. The city holds its reserves for downturns.</p>
@@ -768,27 +769,16 @@ export default function BoulderBudgetWidget() {
               ))}
             </ul>
           </div>
-          <a href="https://github.com/brianckeegan/charting-boulder/blob/main/2026-11-budget-tool/embed/PROVENANCE.md" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4" style={{ fontSize: 13.5, fontWeight: 800, color: C.ink, textDecoration: "none", border: `2px solid ${C.ink}`, borderRadius: 7, padding: "9px 14px" }}><Github size={15} /> Verify me: where every number comes from</a>
-          <div className="mt-5">
-            <button onClick={() => setShowData(!showData)} style={{ background: "transparent", border: "none", cursor: "pointer", padding: 0 }} className="flex items-center gap-1.5"><span style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>DATA STATUS & SOURCES</span>{showData ? <ChevronUp size={14} color={C.inkSoft} /> : <ChevronDown size={14} color={C.inkSoft} />}</button>
-            {showData && (
-              <div style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 8, lineHeight: 1.6 }}>
-                <p><strong style={{ color: C.ink }}>Official (verified):</strong> total {fmt1(TOTAL)}; operating {fmt1(OPERATING)}; capital {fmt1(CAPITAL)}; the {fmt(GAP)} General Fund gap; General Fund {fmt1(GENERAL_FUND)} (+3.1% vs. 2026) and each department’s 2027 amount, from the city’s 2027 General Fund Fund Financial (1100), with its 2026 amount as the Budget in Brief restates it for the 2027 departments; the General Fund’s 2027 sales tax ($83.0M), fees and charges ($11.0M: licenses, permits and fines, parking, charges for services) and general-purpose property tax ($39.5M at 7.948 mills, from the mill levy table); the sales-tax components (3.86% in all, 1.72% to the General Fund) and each dedicated fund’s 2027 sales-tax revenue; each department’s spending outside the General Fund (its line in the budget book’s Citywide Uses table, net of transfers and internal services, minus its General Fund amount); the city’s own 2027 moves (24 positions, the photo-radar vans, pools, about $0.6M of costs moved onto dedicated funds, the marijuana tax to 5.5%, the fee increases), from the Budget At-A-Glance page and the budget book’s lists of changes; the 10% ceiling voters set on the marijuana tax in 2013 (Question 2A); the four measures on the Nov. 3 ballot: the $400M recreation-and-safety bond (~$400/yr on a $1M home), the debt-limit charter change, firefighter collective bargaining, and the $4,000-a-year residential vacancy tax (general purposes, ~$4M/yr projected, effective Jan. 1, 2028). All figures are nominal dollars as recommended; year-over-year changes are not inflation-adjusted. Legal framing: TABOR (Colo. Const. Art. X, §20) requires voter approval for tax increases and bars local income taxes; courts treat fees as non-taxes.</p>
-                <p className="mt-2"><strong style={{ color: C.ink }}>Modeled:</strong> how much each revenue change raises. A fee or tax change yields the same share of its 2027 base, assuming no one changes their behavior in response. Each point of the marijuana tax is worth about $0.2M, based on the city’s forecast that raising the rate from 3.5% to 5.5% brings in 41.2% more on about $1.0M. The $0–5M range for moving costs onto dedicated funds is an editorial choice. Treat any single modeled figure as approximate.</p>
-                <div className="mt-2">
-                  <strong style={{ color: C.ink }}>Related reporting:</strong>
-                  <ul style={{ margin: "4px 0 0", paddingLeft: 18 }}>
-                    {Object.values(SRC).map((s, i) => (
-                      <li key={i} style={{ marginTop: 3 }}>
-                        <a href={s.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>{s.label}</a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <p className="mt-2" style={{ fontSize: 11.5 }}>Figures in millions of dollars, as of Sept. 29, 2026: the city manager’s recommended budget, before the council’s Oct. 15 vote. Built for Boulder Reporting Lab as a simplified teaching model of the city’s budget.</p>
-              </div>
-            )}
+          <div className="mt-4">
+            <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>RELATED REPORTING</div>
+            <ul style={{ margin: "6px 0 0", paddingLeft: 18, fontSize: 12.5, lineHeight: 1.6, color: C.inkSoft }}>
+              {Object.values(SRC).map((d) => (
+                <li key={d.url} style={{ marginTop: 3 }}><a href={d.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blueDk, fontWeight: 600, textDecoration: "none" }}>{d.label}</a></li>
+              ))}
+            </ul>
           </div>
+          <a href={PROVENANCE.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4" style={{ fontSize: 13.5, fontWeight: 800, color: C.ink, textDecoration: "none", border: `2px solid ${C.ink}`, borderRadius: 7, padding: "9px 14px" }}><Github size={15} /> Verify me: where every number comes from</a>
+          <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 12, lineHeight: 1.5 }}>Figures in millions of dollars, as of Sept. 29, 2026: the city manager’s recommended budget, before the council’s Oct. 15 vote. Built for Boulder Reporting Lab as a simplified teaching model of the city’s budget.</p>
         </section>
       </div>
     </div>
