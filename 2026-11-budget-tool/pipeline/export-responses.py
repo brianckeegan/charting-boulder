@@ -46,12 +46,17 @@ DEMO_COLS = ["demo_years", "demo_area", "demo_employment", "demo_commute", "demo
              "demo_education", "demo_building", "demo_tenure", "demo_income",
              "demo_age", "demo_race", "demo_gender", "demo_lgbtq", "demo_disability"]
 
-OUT_COLS = ["ts", "scenario"] + GF_SLIDERS + FUND_SLIDERS + REV_COLS + DEMO_COLS
+# Written by the widget when a reader submits: the signed $M totals, which the
+# notebook checks its own arithmetic against, and the flag for a second budget
+# from the same browser, which it sets aside.
+STORED_COLS = ["spend_change", "revenue_only", "repeat_client"]
+
+OUT_COLS = ["ts", "scenario"] + GF_SLIDERS + FUND_SLIDERS + REV_COLS + DEMO_COLS + STORED_COLS
 
 # `ts` is created_at, not client_ts: schema.sql forces created_at on the server
 # precisely so the response timeline cannot be spoofed through the public insert
 # path, while client_ts is whatever the reader's device clock said.
-SELECT_COLS = ["created_at", "scenario"] + GF_SLIDERS + FUND_SLIDERS + REV_COLS + DEMO_COLS
+SELECT_COLS = ["created_at", "scenario"] + GF_SLIDERS + FUND_SLIDERS + REV_COLS + DEMO_COLS + STORED_COLS
 
 PAGE = 1000
 

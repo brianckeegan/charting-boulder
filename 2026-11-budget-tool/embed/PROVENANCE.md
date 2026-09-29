@@ -107,11 +107,13 @@ The rates in the line under the slider are from BiB-C's Sales & Use Tax Componen
 | Today's rate (`now`) | 3.5% | MJ: "additional RMB 3.5% city sales and use tax." AAG. |
 | Proposed (`city`) | 5.5% | AAG: "An increase in recreational marijuana additional tax, from 3.5% to 5.5%." |
 | Cap (`max`) | 10% | BW13: the council "could, in later years, raise each tax to up to 10 percent," under the city's 2013 ballot measure. This is not in the 2027 budget documents. |
-| Yield per point (`perPoint`) | $206,000 | Modeled: $1.00M × 41.2% ÷ 2 points. |
+| Revenue at today's rate (`base`) | $1.00M | F26's sales and use tax table, the recreational marijuana column, 2026 forecast. |
+| Each point above 3.5% (`perPoint`) | $206,000 | Modeled: $1.00M × 41.2% ÷ 2 points. |
 
 - **41.2%:** BiB's revenue notes: "Recreational Marijuana Retail Sales Tax (41.2%): Forecasted year-over-year increase in Recreational Marijuana Retail Tax due to the increase of the tax rate from 3.5% to 5.5% beginning in 2027."
-- **$1.00M:** F26's sales and use tax table, the recreational marijuana column, 2026 forecast.
-- **The model assumes** revenue moves in proportion to the rate.
+- **Above 3.5%**, each point adds the same $206,000: the city's forecast for the move to 5.5%, spread evenly over its two points.
+- **Below 3.5%**, revenue falls in proportion to the rate, to $0 at 0%: $1.00M × rate ÷ 3.5%.
+- **The row shows revenue, not the rate:** $1.0M at today's 3.5%, $1.4M at the proposed 5.5%, $2.3M at the 10% cap and $0 at 0%. The rate appears beside the slider.
 
 The line under the slider, "Boulder's additional sales tax on recreational marijuana," follows MJ.
 
@@ -138,7 +140,13 @@ The slider's range, $0 to $5M, is an editorial choice.
 
 ### Vacancy tax, local income tax, wealth tax
 
-Locked rows with no numbers.
+Locked rows with no numbers. Each has a one-line summary under its name.
+
+| Row | The line under the name | Source |
+|---|---|---|
+| Vacancy tax | $4,000 a year on homes left empty more than half the year · On the Nov. 3 ballot · Would start in 2028 | Boulder Reporting Lab, Aug. 6, 2026; see the Nov. 3 ballot row under "Other figures on the page." |
+| Local income tax | Residents' and workers' earnings · Barred for Colorado cities by the state constitution | Colorado's Taxpayer's Bill of Rights, Colo. Const. Art. X, §20(8)(a), which bars any new "local district income tax." |
+| Wealth tax | Household net worth · No Colorado city has the power to levy one | The tool's reading of state law: Colorado exempts intangible personal property, such as stocks and bonds, from property tax (C.R.S. 39-3-118), and no Colorado city taxes net worth. Any new city tax would also need voter approval under TABOR. |
 
 ## Locked-spending sliders
 
@@ -191,6 +199,7 @@ The widget's prose uses these figures. They were checked against the sources bel
 
 - The −25% to +25% range on the department, fee and tax sliders, and the $0 to $5M range for moving costs.
 - A fee or tax change yields the same share of its 2027 base, with no change in how people buy, park or build.
+- Below today's 3.5% marijuana tax rate, revenue falls in proportion to the rate.
 - No slider for reserves or other one-time money: the gap comes back every year, and one-time money only postpones it.
 - Starting from the recommended amounts, as described under "Reading the numbers."
 
@@ -202,3 +211,4 @@ The widget's prose uses these figures. They were checked against the sources bel
   - Facilities & Fleet: +1.6% to −1.6%
   - Other General Fund departments: −8.4% to +0.5%
 - **Other General Fund departments, 2026:** the old figure had also been off by $1,415. The restated figure replaces it.
+- **Marijuana tax below 3.5%** (Sept. 29, 2026): the tool had applied the $206,000-a-point estimate below today's rate too, which left about $0.28M of revenue at a 0% rate. Below 3.5%, revenue now falls in proportion to the rate.

@@ -85,7 +85,7 @@ import {
         charges for services). The yields per step are MODELED: a change
         yields its share of the base, with no change in behavior. The
         marijuana tax yield uses the city's forecast that 3.5% → 5.5% raises
-        41.2% more.
+        41.2% more; below 3.5%, revenue falls in proportion to the rate.
      4. Legal framing (TABOR vote requirement; the local-income-tax bar;
         fees-are-not-taxes; the 10% marijuana-tax ceiling voters set in 2013,
         Question 2A): OFFICIAL.
@@ -121,7 +121,7 @@ import {
      hook, the peg (the Nov. 2026 ballot / 2027 budget cycle), and the
      diagnostic close. So the widget's own copy is deliberately lean: a short
      title, one-line instructions, one-line source lists, point-of-use caveats, and a
-     "Sources & method" block with the verify-me link. If you ever embed this
+     collapsible "Sources & method" block with the verify-me link. If you ever embed this
      standalone (no surrounding article), restore a sentence or two of framing
      at the top and a closing thought at the bottom — otherwise it will read as
      an interaction with no argument around it.
@@ -283,15 +283,18 @@ const LOCKED_DEPTS = [
 ];
 
 /* ---- Revenue sliders -------------------------------------------------- *
-   pieces: one line naming what the money comes from, shown under the label
+   pieces: one line naming what the money comes from (for a locked row, also
+           why it is locked), shown under the label
    type:   pct     −25..25 % over `base`, the source's 2027 General Fund
                    revenue ($M); yield = base × pct/100, negative = a cut
-           rate    a tax rate from `min` to `max`, starting at `now`; each
-                   point yields `perPoint` $M
+           rate    a tax rate from `min` to `max`, starting at `now`, where it
+                   raises `base` $M. Each point above `now` adds `perPoint`
+                   $M; below `now`, revenue falls in proportion to the rate,
+                   to $0 at 0%. The row shows the revenue at the chosen rate.
            dollars $M moved from `min` to `max` (not revenue: see "shift")
    city:   where the recommended budget puts this slider, drawn as the
            "proposed" tick
-   locked: shown greyed out, name only
+   locked: shown greyed out, with its `pieces` line and no slider value
    Every number here is traced to its source in ../PROVENANCE.md.           */
 const REVENUE = [
   { id: "fees", type: "pct", label: "Fees & charges", base: 10.973,
@@ -300,23 +303,28 @@ const REVENUE = [
     pieces: "General-purpose levy (7.948 of the city’s 11.648 mills)" },
   { id: "sales", type: "pct", label: "Sales & use tax", base: 83.009,
     pieces: "Sales tax · Use tax (the General Fund’s 1.72% of the city’s 3.86% rate)" },
-  { id: "marijuana", type: "rate", label: "Recreational marijuana tax", min: 0, max: 10, step: 0.5, now: 3.5, perPoint: 0.206, city: 5.5,
+  { id: "marijuana", type: "rate", label: "Recreational marijuana tax", min: 0, max: 10, step: 0.5, now: 3.5, base: 1.0, perPoint: 0.206, city: 5.5,
     pieces: "Boulder’s additional sales tax on recreational marijuana" },
   { id: "shift", type: "dollars", label: "Shift costs onto dedicated funds", min: 0, max: 5, step: 0.1, city: 0.566,
     pieces: "Wildland fire crew to the Open Space tax · Urban-ranger equipment to Open Space · Recreation and behavioral-health programs to the sugary-drink tax" },
-  { id: "vacancy", label: "Vacancy tax", locked: true, sources: [SRC.ballotFinal] },
-  { id: "income", label: "Local income tax", locked: true },
-  { id: "wealth", label: "Wealth tax", locked: true },
+  { id: "vacancy", label: "Vacancy tax", locked: true, sources: [SRC.ballotFinal],
+    pieces: "$4,000 a year on homes left empty more than half the year · On the Nov. 3 ballot · Would start in 2028" },
+  { id: "income", label: "Local income tax", locked: true,
+    pieces: "Residents’ and workers’ earnings · Barred for Colorado cities by the state constitution" },
+  { id: "wealth", label: "Wealth tax", locked: true,
+    pieces: "Household net worth · No Colorado city has the power to levy one" },
 ];
 
 /* The starting position of every unlocked revenue slider. */
 const REV_START = Object.fromEntries(REVENUE.filter((r) => !r.locked).map((r) => [r.id, r.type === "rate" ? r.now : 0]));
 
 /* A revenue slider's yield, $M. Shifting costs is not revenue, so it yields 0
-   here and is counted on its own. */
+   here and is counted on its own. A tax rate yields the city's per-point
+   estimate above today's rate; below it, revenue falls in proportion to the
+   rate, so a 0% tax raises nothing. */
 function revYield(r, v) {
   if (r.locked || r.type === "dollars") return 0;
-  if (r.type === "rate") return (v - r.now) * r.perPoint;
+  if (r.type === "rate") return v >= r.now ? (v - r.now) * r.perPoint : r.base * (v / r.now - 1);
   return r.base * (v / 100);
 }
 
@@ -384,6 +392,7 @@ export default function BoulderBudgetWidget() {
   const [rev, setRev] = useState(REV_START);        // id -> slider value (see REVENUE `type`)
   const [showLocked, setShowLocked] = useState(false);
   const [showDemo, setShowDemo] = useState(true);
+  const [showSources, setShowSources] = useState(false);
   const [demo, setDemo] = useState({});
   const [agg, setAgg] = useState(null);
   const [aggState, setAggState] = useState("loading");
@@ -590,7 +599,7 @@ export default function BoulderBudgetWidget() {
             {REVENUE.map((r) => {
               const v = rev[r.id] ?? REV_START[r.id]; const yield_ = revYield(r, v);
               const moved = r.type === "rate" ? v !== r.now : v !== 0;
-              const headline = r.type === "rate" ? `${v}%` : r.type === "dollars" ? fmt(v) : fmt(r.base);
+              const headline = r.type === "rate" ? fmt(r.base + yield_) : r.type === "dollars" ? fmt(v) : fmt(r.base);
               const change = r.type === "dollars" ? (v > 0 ? `${fmt(v)} moved` : "none moved") : (!moved ? "unchanged" : signed(yield_));
               const changeColor = !moved ? C.inkSoft : r.type === "dollars" ? C.blueDk : (yield_ > 0 ? C.green : C.red);
               const set = (x) => { setRev({ ...rev, [r.id]: x }); setSubmitted(false); };
@@ -612,7 +621,7 @@ export default function BoulderBudgetWidget() {
                     <>
                       <div className="flex items-center gap-3 mt-2">
                         <TickTrack ticks={ticks} min={r.min} max={r.max}>
-                          <input type="range" min={r.min} max={r.max} step={r.step} value={v} onChange={(e) => set(+e.target.value)} aria-label={`Set the ${r.label.toLowerCase()} rate`} aria-valuetext={`${v} percent${moved ? `, ${signed(yield_)}` : ", today's rate"}`} />
+                          <input type="range" min={r.min} max={r.max} step={r.step} value={v} onChange={(e) => set(+e.target.value)} aria-label={`Set the ${r.label.toLowerCase()} rate`} aria-valuetext={`${v} percent, raising ${fmt(r.base + yield_)}${moved ? `, ${signed(yield_)}` : ", today's rate"}`} />
                         </TickTrack>
                         <span className="tnum" style={{ fontSize: 12, color: C.inkSoft, width: 46, flexShrink: 0, textAlign: "right", fontWeight: 700 }}>{v}%</span>
                       </div>
@@ -627,7 +636,6 @@ export default function BoulderBudgetWidget() {
                         <span className="tnum" style={{ fontSize: 12, color: C.inkSoft, width: 46, flexShrink: 0, textAlign: "right", fontWeight: 700 }}>{fmt(v)}</span>
                       </div>
                       <Scale left="$0" right={fmt(r.max)} ticks={ticks} min={r.min} max={r.max} />
-                      {v > 0 && <div className="mt-2 rounded-md p-2 flex items-start gap-2" style={{ background: C.limeTint, border: `1px solid ${C.lock}` }}><AlertTriangle size={14} style={{ color: C.red, marginTop: 2, flexShrink: 0 }} /><span style={{ fontSize: 12.5 }}>Dedicated funds lose <strong>{fmt(v)}</strong> for their own work{v > 4 * r.city ? <>, more than four times what the city found room for</> : null}.</span></div>}
                     </>
                   ) : (
                     <>
@@ -756,8 +764,12 @@ export default function BoulderBudgetWidget() {
             peg, and the diagnostic close; the widget keeps only what speaks to
             its own numbers — what's official vs. modeled, and the verify link. */}
         <section className="mt-8" style={{ borderTop: `3px solid ${C.ink}`, paddingTop: 18 }}>
-          <Eyebrow>Sources &amp; method</Eyebrow>
+          <button onClick={() => setShowSources(!showSources)} aria-expanded={showSources} className="w-full flex items-center justify-between" style={{ background: "transparent", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}>
+            <Eyebrow>Sources &amp; method</Eyebrow>
+            {showSources ? <ChevronUp size={18} color={C.inkSoft} /> : <ChevronDown size={18} color={C.inkSoft} />}
+          </button>
           <p style={{ fontSize: 14, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}>Budget totals, department figures, revenue bases, tax rates and legal limits come from <Doc to={OFFICIAL.book}>the city manager’s 2027 recommended budget</Doc> and <Doc to={OFFICIAL.tabor}>Colorado law</Doc>. What each revenue change would raise is an estimate. <Doc to={PROVENANCE}>The provenance file</Doc> traces every number to its source and says which ones are estimates.</p>
+          {showSources && (<>
           <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}><strong style={{ color: C.ink }}>Rising costs, flat revenue.</strong> Payroll grows under <Doc to={OFFICIAL.message}>new contracts</Doc> that give police and firefighters 5% raises and most other union staff 4%, and software, insurance and other contracts add to the bill. <Doc to={OFFICIAL.briefMore}>Revenue hasn’t kept pace</Doc>: sales and use tax has been flat since 2023, and property tax is down 2.4% under recent state law. The <Doc to={OFFICIAL.budgetPage}>May 2026 Financial Forecast</Doc> put the gap at $6.5M; <Doc to={OFFICIAL.brief}>the recommended budget</Doc>, <Doc to={OFFICIAL.release}>released Aug. 28</Doc>, puts it at {fmt(GAP)}.</p>
           <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>The city’s plan.</strong> <Doc to={OFFICIAL.glance}>The recommended budget</Doc> eliminates 24 positions, 13 of them filled, ends the photo-radar vans and trims pool hours and custodial service. It moves about $0.6M of costs onto the Open Space and sugary-drink taxes, raises the recreational marijuana tax from 3.5% to 5.5% and increases several licensing and parking-permit fees. It also adds three police lieutenants. The council holds hearings Oct. 1 and 15 and can change any of it before it adopts the budget Oct. 15.</p>
           <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>Past gaps.</strong> In mid-2025, the city closed an $8–10M gap with a hiring freeze, 5% savings from each department and cuts to one-time transfers. For 2026, it closed $7.5M with department cuts and reorganizations that eliminated 19 mostly vacant positions, plus about $6M in new citywide fees: $2.25M for transportation maintenance, $2.6M from speed-on-green cameras, $0.8M from parking and $0.4M from single-family expansion. It kept the <Doc to={OFFICIAL.policies}>emergency reserve</Doc>, about 16.7% of operating spending, at its target. The city holds its reserves for downturns.</p>
@@ -777,6 +789,7 @@ export default function BoulderBudgetWidget() {
               ))}
             </ul>
           </div>
+          </>)}
           <a href={PROVENANCE.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4" style={{ fontSize: 13.5, fontWeight: 800, color: C.ink, textDecoration: "none", border: `2px solid ${C.ink}`, borderRadius: 7, padding: "9px 14px" }}><Github size={15} /> Verify me: where every number comes from</a>
           <p style={{ fontSize: 11.5, color: C.inkSoft, marginTop: 12, lineHeight: 1.5 }}>Figures in millions of dollars, as of Sept. 29, 2026: the city manager’s recommended budget, before the council’s Oct. 15 vote. Built for Boulder Reporting Lab as a simplified teaching model of the city’s budget.</p>
         </section>
