@@ -6,11 +6,12 @@ published, and neither is edited by hand: both are rebuilt from the source in
 
 | File | What it is | Use |
 |---|---|---|
-| `index.html` | The whole interactive in one self-contained file (207 KB). No external requests except the survey POST. | Zip it and upload to the Newspack Iframe Block. GitHub Pages also serves it at [`/boulder-budget-2026/`](https://brianckeegan.github.io/charting-boulder/boulder-budget-2026/) |
-| `boulder-budget-embed.js` | The same interactive as a `<boulder-budget>` Web Component, styles scoped in a shadow root (208 KB) | For a page that wants the widget inline rather than in an iframe |
+| `index.html` | The whole interactive in one self-contained file (205 KB). No external requests except the survey POST. | Zip it and upload to the Newspack Iframe Block. GitHub Pages also serves it at [`/boulder-budget-2027/`](https://www.brianckeegan.com/charting-boulder/boulder-budget-2027/) |
+| `boulder-budget-embed.js` | The same interactive as a `<boulder-budget>` Web Component, styles scoped in a shadow root (206 KB) | For a page that wants the widget inline rather than in an iframe |
 | `src/` | The React source (`boulder-budget-widget.jsx`), the build script, and the pinned build dependencies | Edit the JSX, then rebuild both files (below) |
+| `PROVENANCE.md` | Where every slider number comes from: the document, table, row and column in the city's 2027 budget, and how any derived number was worked out | The widget's "Verify me" button links here |
 | `NEWSPACK-EMBED-GUIDE.md` | Step-by-step publishing instructions for Newspack: inline (Method A) or iframe ZIP (Method B) | Read before publishing |
-| `pages-redirect.html` | Sends the repository's root GitHub Pages URL, which was shared before the widget moved, on to `/boulder-budget-2026/` | Deployed with `index.html` by `.github/workflows/deploy-widget.yml` whenever either file changes |
+| `pages-redirect.html` | Sends the repository's root GitHub Pages URL, which was shared before the widget moved, on to `/boulder-budget-2027/` | Deployed with `index.html` by `.github/workflows/deploy-widget.yml` whenever either file changes |
 
 ## Publishing
 

@@ -32,10 +32,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Assemble the Pages site (widget at /boulder-budget-2026/)
+      - name: Assemble the Pages site (widget at /boulder-budget-2027/)
         run: |
-          mkdir -p _site/boulder-budget-2026
-          cp "2026-11-budget-tool/embed/index.html" _site/boulder-budget-2026/index.html
+          mkdir -p _site/boulder-budget-2027
+          cp "2026-11-budget-tool/embed/index.html" _site/boulder-budget-2027/index.html
           # Repo-root URL was shared earlier — redirect it to the widget.
           cp "2026-11-budget-tool/embed/pages-redirect.html" _site/index.html
 

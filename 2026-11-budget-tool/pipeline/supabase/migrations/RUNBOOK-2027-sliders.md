@@ -111,7 +111,7 @@ zip boulder-budget-interactive.zip index.html
 
 ## Step 4 — Submit one budget from the live widget
 
-Open <https://brianckeegan.github.io/charting-boulder/boulder-budget-2026/>
+Open <https://www.brianckeegan.com/charting-boulder/boulder-budget-2027/>
 and hard-refresh (Shift-reload) so you don't get the cached 2026 page.
 
 1. Check the title reads **Balance Boulder's 2027 budget**.
