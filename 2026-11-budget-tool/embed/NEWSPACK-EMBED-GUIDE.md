@@ -114,8 +114,9 @@ account. It uses Newspack’s own built-in block and needs no special permission
 
 5. Preview and confirm the interactive loads and the sliders respond.
 
-**Why it scrolls inside a box:** the interactive is about **5,800 px tall** in an
-article column (**7,900 px** on a phone), so no frame height shows all of it.
+**Why it scrolls inside a box:** the interactive is about **4,700 px tall** in an
+article column (**6,200 px** on a phone), and taller with its Sources & method
+section open, so no frame height shows all of it.
 Readers scroll within the frame, and the score bar stays pinned to the top of the
 frame. If 800 px feels wrong, try 700 px (less dominant) or 900–1000 px (more
 visible at once). The block also has a **full screen** toggle, which lets the
