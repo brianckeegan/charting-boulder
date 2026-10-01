@@ -117,7 +117,7 @@ The rates in the line under the slider are from BiB-C's Sales & Use Tax Componen
 
 The line under the slider, "Boulder's additional sales tax on recreational marijuana," follows MJ.
 
-### Shift costs onto dedicated funds: proposed $566,128 (`city: 0.566`)
+### Shift General Fund costs onto dedicated funds: proposed $566,128 (`city: 0.566`)
 
 The four 2027 changes that move an existing General Fund cost onto a dedicated fund, as listed in BiB's 2027 changes and on each department's page:
 
@@ -144,7 +144,7 @@ Locked rows with no numbers. Each has a one-line summary under its name.
 
 | Row | The line under the name | Source |
 |---|---|---|
-| Vacancy tax | $4,000 a year on homes left empty more than half the year · On the Nov. 3 ballot · Would start in 2028 | Boulder Reporting Lab, Aug. 6, 2026; see the Nov. 3 ballot row under "Other figures on the page." |
+| Vacancy tax | $4,000 a year on homes left empty more than half the year · On the Nov. 3 ballot · Would start in 2028 | The city's [2026 ballot measures page](https://bouldercolorado.gov/2026-city-boulder-ballot-measures), Ballot Issue 2J, and Boulder Reporting Lab, Aug. 6, 2026; see the Nov. 3 ballot row under "Other figures on the page." |
 | Local income tax | Residents' and workers' earnings · Barred for Colorado cities by the state constitution | Colorado's Taxpayer's Bill of Rights, Colo. Const. Art. X, §20(8)(a), which bars any new "local district income tax." |
 | Wealth tax | Household net worth · No Colorado city has the power to levy one | The tool's reading of state law: Colorado exempts intangible personal property, such as stocks and bonds, from property tax (C.R.S. 39-3-118), and no Colorado city taxes net worth. Any new city tax would also need voter approval under TABOR. |
 
@@ -191,7 +191,7 @@ The widget's prose uses these figures. They were checked against the sources bel
 | The city's plan: 24 positions eliminated, 13 of them filled; photo-radar vans ended; shorter pool hours; custodial service cut from five days to three; the marijuana tax to 5.5%; higher licensing and parking-permit fees; three new police lieutenants | AAG, the city's [Aug. 28 release](https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input), the budget message, and BiB's revenue notes (photo enforcement revenue falls 52.8% "driven by the elimination of photo radar van enforcement") |
 | Past gaps: $8–10M in mid-2025, $7.5M for 2026, about $6M in 2026 fees ($2.25M transportation maintenance, $2.6M speed-on-green cameras, $0.8M parking, $0.4M single-family expansion), 19 mostly vacant positions | F26's budget history, and Boulder Reporting Lab, ["Council approves $521M 2026 budget"](https://boulderreportinglab.org/2025/10/23/boulder-city-council-approves-521-million-2026-budget-adds-demolition-and-transportation-maintenance-fees/) (Oct. 23, 2025) |
 | The emergency reserve, 16.7% of operating spending | The budget book's [financial policies](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a75e5049edf5ffa8847c1f7) |
-| The Nov. 3 ballot: a $400M recreation-and-safety bond (about $400 a year on a $1 million home), a charter change on the city's debt limit, collective bargaining for firefighters, and a $4,000-a-year tax on homes left empty more than half the year, projected at about $4M a year for the General Fund starting Jan. 1, 2028 | Boulder Reporting Lab, ["Council sends vacancy tax and $400M bond to the November ballot"](https://boulderreportinglab.org/2026/08/06/boulder-city-council-sends-vacancy-tax-and-400-million-bond-to-november-ballot-rejects-downtown-development-authority/) (Aug. 6, 2026) |
+| The Nov. 3 ballot: a $400M recreation-and-safety bond (about $400 a year on a $1 million home), a charter change on the city's debt limit, collective bargaining for firefighters, and a $4,000-a-year tax on homes left empty more than half the year, which the city estimates would raise about $6M a year in flexible revenue starting in 2028 | Boulder Reporting Lab, ["Council sends vacancy tax and $400M bond to the November ballot"](https://boulderreportinglab.org/2026/08/06/boulder-city-council-sends-vacancy-tax-and-400-million-bond-to-november-ballot-rejects-downtown-development-authority/) (Aug. 6, 2026), for the measures. The $6M is from the ballot question itself, on the city's [2026 ballot measures page](https://bouldercolorado.gov/2026-city-boulder-ballot-measures): Ballot Issue 2J asks whether "City of Boulder taxes be increased $6,000,000 annually (which amount represents estimated revenues in 2028, the first full fiscal year of collection)." |
 | Fund Our Future heard from more than 500 people, who ranked wildfire response and facility maintenance highest | The city's [Fund Our Future summary](https://bouldercolorado.gov/news/fund-our-future-our-communitys-priorities) (June 29, 2026) |
 | Tax increases need voter approval; local income taxes are barred | Colorado's Taxpayer's Bill of Rights, Colo. Const. Art. X, §20; the Colorado General Assembly's [TABOR explainer](https://leg.colorado.gov/agencies/legislative-council-staff/tabor) |
 
@@ -212,3 +212,4 @@ The widget's prose uses these figures. They were checked against the sources bel
   - Other General Fund departments: −8.4% to +0.5%
 - **Other General Fund departments, 2026:** the old figure had also been off by $1,415. The restated figure replaces it.
 - **Marijuana tax below 3.5%** (Sept. 29, 2026): the tool had applied the $206,000-a-point estimate below today's rate too, which left about $0.28M of revenue at a 0% rate. Below 3.5%, revenue now falls in proportion to the rate.
+- **Vacancy tax revenue** (Oct. 1, 2026): the widget said about $4M a year, Boulder Reporting Lab's Aug. 6 figure from a city estimate of 500 to 1,000 vacant homes. The ballot question the city published, Issue 2J, estimates $6,000,000 in 2028, and the widget now says about $6M.
