@@ -8,10 +8,10 @@ data dictionary disagree about a count or a year, this file is right.
 
 | File | Rows | Years |
 |---|---:|---|
-| `budget-history.csv` | 2544 | 2002–2027 |
+| `budget-history.csv` | 2545 | 2002–2027 |
 | `budget-history-wide.csv` | 26 | 2002–2027 |
 | `budget-history-department-crosswalk.csv` | 351 | 2005–2022, 2024–2027 |
-| `budget-history-provenance.csv` | 12 | not applicable |
+| `budget-history-provenance.csv` | 14 | not applicable |
 
 ## Checks
 
@@ -20,7 +20,7 @@ build before any file is written, so a published file has passed all of them.
 
 | Check | Cases | Tolerance | Largest miss |
 |---|---:|---|---|
-| One row per (year, measure, basis) | 2544 | exact | none |
+| One row per (year, measure, basis) | 2545 | exact | none |
 | Department buckets, plus any balancing line, sum to `budget_total` | 24 | $0.05M | $0.021M (2025 deptexp_*) |
 | A department label keeps its bucket from year to year, or a note says why | 76 | exact | none |
 | General Fund half + dedicated half = `budget_operating` | 18 | $0.2M | $0.012M (2019 adopted) |
@@ -49,7 +49,7 @@ Each miss is kept in the data as `salesuse_component_residual`:
 | `source_id` | Rows | Years |
 |---|---:|---|
 | `rec2026` | 13 | 2026 |
-| `forecast2026` | 87 | 2022–2027 |
+| `forecast2026` | 86 | 2022–2027 |
 | `rec2027` | 9 | 2027 |
 | `glance2027` | 6 | 2027 |
 | `recbook2027` | 43 | 2025–2027 |
@@ -60,6 +60,8 @@ Each miss is kept in the data as `salesuse_component_residual`:
 | `acfr` | 1541 | 2007–2026 |
 | `acfrocr` | 299 | 2007–2025 |
 | `brl2027` | 1 | 2027 |
+| `policies2026` | 1 | 2026 |
+| `policies2027` | 1 | 2027 |
 
 ## Rows by basis
 
@@ -71,7 +73,7 @@ Each miss is kept in the data as `salesuse_component_residual`:
 | `final` | 298 | 2016–2025 |
 | `forecast` | 9 | 2026–2027 |
 | `identified` | 3 | 2025–2026 |
-| `policy` | 1 | 2026 |
+| `policy` | 2 | 2026–2027 |
 | `projected` | 3 | 2007, 2009 |
 | `recommended` | 57 | 2026–2027 |
 | `restated` | 52 | 2007, 2011–2022 |
@@ -194,7 +196,7 @@ absent from the data, never zero.
 | `property_assessed_value` | musd | 2017–2026 | `actual`, `adopted`, `revised_projection` |
 | `property_mill_levy` | mills | 2026–2027 | `adopted`, `recommended` |
 | `property_tax_revenue` | musd | 2007–2027 | `actual`, `adopted`, `recommended`, `revised_projection` |
-| `reserve_policy_pct_of_operating` | pct | 2026 | `policy` |
+| `reserve_policy_pct_of_operating` | pct | 2026–2027 | `policy` |
 | `revenue_accommodation_admission_tax` | musd | 2026–2027 | `recommended` |
 | `revenue_charges_for_services` | musd | 2027 | `recommended` |
 | `revenue_development_impact_fees` | musd | 2026–2027 | `recommended` |
