@@ -108,7 +108,7 @@ notebook's `GF_SLIDERS / FUND_SLIDERS / REV_COLS / DEMO_COLS` one-to-one.
 | `client_ts` | timestamptz | widget payload `ts` (untrusted) |
 | `client_version` | int | widget payload `v` (currently `5`, the 2027 widget) |
 | `scenario` | text | `"2027"` (the one test: the 2027 General Fund gap) |
-| `gf_police` … `gf_other` | int | 11 General Fund sliders, % change, −25..25 |
+| `gf_police` … `gf_other` | int | 11 General Fund sliders, % change from each department's starting point (its estimated status quo; see `embed/PROVENANCE.md`), −25..25 |
 | `fund_utilities` … `fund_other` | int | 11 locked sliders: each department's spending outside the General Fund, % change, −25..25 |
 | `rev_fees` | int | fees & charges, % change of GF revenue, −25..25 |
 | `rev_property` | int | property tax, % change of GF revenue, −25..25 |
