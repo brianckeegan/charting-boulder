@@ -1,6 +1,6 @@
 # Where every slider number comes from
 
-The widget's figures come from the City of Boulder's 2027 Recommended Budget,
+The widget's figures come from the City of Boulder's [2027 Recommended Budget][book],
 released Aug. 28, 2026, as it stood on Oct. 1, 2026, the night of the City
 Council's first reading. The budget and appropriation ordinances introduced
 that night carry the same General Fund total, $200,496,242, and the same mill
@@ -18,13 +18,18 @@ them, not adjusted for inflation.
 
 | Key | Document |
 |---|---|
-| **BiB** | [2027 Budget in Brief](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a7a22d6e8cd6b725ef3b5b5), in the city's online budget book. Its text gives the totals and the gap. Its embedded tables give citywide and General Fund uses by department, and its revenue notes and list of 2027 changes are on the same page. |
-| **BiB-C** | [Budget in Brief, continued](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a7a230c2aaa5815f9944b90): the Sales & Use Tax Components in 2027 table, the Sales Tax Revenues 2023-2027 chart, and the Mill Levies & Projected Revenue table |
-| **FF** | [General Fund – 2027 Fund Financial (1100)](https://bouldercolorado.gov/media/21600/download?inline), PDF, also shown on the budget book's [General Fund page](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7e911737a7a460f5b89). Columns used: "2026 Approved" and "2027 Budget" |
+| **Book** | The city's [online 2027 budget book][book], on OpenGov Stories: the home page for BiB, BiB-C and the department, fund, policy, fee and capital pages linked below |
+| **BiB** | [2027 Budget in Brief][bib], in the book. Its text gives the totals and the gap. Its embedded tables give citywide and General Fund uses by department, and its revenue notes and list of 2027 changes are on the same page. |
+| **BiB-C** | [Budget in Brief, continued][bibc]: the Sales & Use Tax Components in 2027 table, the Sales Tax Revenues 2023-2027 chart, the Mill Levies & Projected Revenue table and the Key Budget Assumptions |
+| **FF** | [General Fund – 2027 Fund Financial (1100)](https://bouldercolorado.gov/media/21600/download?inline), PDF, linked from the book's [General Fund page][f-gf]. Columns used: "2026 Approved" and "2027 Budget" |
+| **Dept** | The book's department pages, each with its "Summary of Budget Changes." Each department's name in the tables below links to its page. |
+| **Funds** | The book's fund pages, each linking that fund's Fund Financial table: [Recreation Activity][f-rec], [Sugar Sweetened Beverage Distribution Tax][f-ssb], [.25 Cent Sales Tax][f-25cent], [Open Space][f-os], [Transportation][f-transpo], [Capital Improvement – CCRS][f-ccrs], [Arts Culture & Heritage][f-ach], [Climate Tax][f-climate], [Affordable Housing][f-ah] and [Equipment Replacement][f-er] |
+| **RAF** | [Recreation Activity Fund – 2027 Fund Financial (2300)](https://bouldercolorado.gov/media/21595/download?inline), PDF. The book's [Recreation Activity Fund page][f-rec] links to the .25 Cent Sales Tax Fund's table instead. |
+| **MSG** | The [city manager's budget message][msg], in the book |
+| **CIP** | The book's [2027-2032 Capital Improvement Program summary][cip] |
+| **FEE** | The book's [Comprehensive Fee Inventory][fees], with each fee's 2026 and 2027 amounts |
+| **POL** | The book's [financial policies][pol], section 7 and its "2027 Budgeted Reserves" table. The 2026 budget's [Budget Policies](https://stories.opengov.com/cityofboulderco/36b2e65e-af4a-4cb8-9aea-236d617062d6/published/KTAIb0l0W?currentPageId=68ac844d11eeb98e4f4e3302) page has the same table for 2026, as an image. |
 | **AAG** | [Budget At-A-Glance](https://bouldercolorado.gov/budget-glance), the city's summary of 2027 cuts, shifts and fees |
-| **Dept** | The budget book's department pages, each with its "Summary of Budget Changes," for example [Police](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d85779d69a2eb6abe1), [Planning & Development Services](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d885b2d1fbcfe410ee), [Fire-Rescue](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8c9bc19d58a7cb1a9), [Parks & Recreation](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8345b07fe00521720) and [Housing & Human Services](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8d600ec1e99cb1d16) |
-| **RAF** | [Recreation Activity Fund – 2027 Fund Financial (2300)](https://bouldercolorado.gov/media/21595/download?inline), PDF. The budget book's Recreation Activity Fund page links to the .25 Cent Sales Tax Fund's table instead. |
-| **POL** | The budget book's [financial policies](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a75e5049edf5ffa8847c1f7), section 7 and its "2027 Budgeted Reserves" table. The 2026 budget's [Budget Policies](https://stories.opengov.com/cityofboulderco/36b2e65e-af4a-4cb8-9aea-236d617062d6/published/KTAIb0l0W?currentPageId=68ac844d11eeb98e4f4e3302) page has the same table for 2026, as an image. |
 | **O1** | City Council agenda packet, [Oct. 1, 2026](https://bouldercolorado.primegov.com/Public/CompiledDocument?meetingTemplateId=1052&compileOutputType=1): the first-reading memo on the 2027 budget and Ordinances 8777–8780 |
 | **F26** | 2026 Financial Forecast, City Council study session packet, [May 14, 2026](https://bouldercolorado.primegov.com/Public/CompiledDocument?meetingTemplateId=950&compileOutputType=1) |
 | **MJ** | [City of Boulder marijuana tax rates](https://bouldercolorado.gov/city-boulder-marijuana-tax-rates) |
@@ -49,7 +54,7 @@ The city does not publish each department's status quo, so the department starti
 | `GAP` | $6.3M | BiB: the General Fund "saw the largest anticipated gap of $6.3M if left unaddressed." O1 repeats it. The May 14, 2026 forecast presentation had put it at $6.5M, as Boulder Reporting Lab [reported](https://boulderreportinglab.org/2026/05/17/boulder-predicting-budget-gap-as-economic-forecast-remains-cloudy/) on May 17; F26's memo gives no 2027 figure. |
 | `TOTAL` | $552,600,998 | BiB, citywide uses by department, 2027 Budget column, Total. BiB's text rounds it to "$552.60 million." |
 | `OPERATING` | $417.24M | BiB: "The 2027 Recommended Operating Budget is $417.24 million." |
-| `CAPITAL` | $135.36M | BiB: "The 2027 Recommended Capital Budget is $135.36 million." |
+| `CAPITAL` | $135.36M | BiB: "The 2027 Recommended Capital Budget is $135.36 million." CIP rounds it to $135.3 million and lists the projects. |
 | `GENERAL_FUND` | $200,496,242 | FF, Total Uses of Funds, 2027 Budget. BiB's General Fund uses-by-department table has the same total. |
 
 The budget bar's "36¢ of every dollar" is `GENERAL_FUND ÷ TOTAL`, 36.3%.
@@ -67,23 +72,23 @@ The budget bar's "36¢ of every dollar" is `GENERAL_FUND ÷ TOTAL`, 36.3%.
 
 | Slider | 2026, restated | 2027 recommended | City's itemized changes | Share of the remainder | Starting point (`base`) | Proposed tick |
 |---|---:|---:|---:|---:|---:|---:|
-| Police | $50,203,922 | $54,246,256 | $1,377,550 | $1,706,448 | $54,575,154 | −0.6% |
+| [Police][d-police] | $50,203,922 | $54,246,256 | $1,377,550 | $1,706,448 | $54,575,154 | −0.6% |
 | General Government | $38,436,021 | $35,612,445 | — | $1,120,276 | $36,732,721 | −2.4% |
-| Fire-Rescue | $29,129,284 | $30,967,597 | −$65,971 | $974,161 | $32,007,729 | −2.7% |
-| Housing & Human Services (General Fund share) | $12,961,613 | $14,007,208 | $654,504 | $440,631 | $13,793,335 | +2.3% |
-| City Manager's Office | $11,087,455 | $11,981,255 | $194,527 | $376,900 | $12,163,628 | −1.5% |
-| Innovation & Technology | $10,372,051 | $10,680,047 | −$636,048 | $335,967 | $11,652,062 | −8.3% |
-| Facilities & Fleet (General Fund share) | $7,153,291 | $7,041,735 | −$171,388 | $221,515 | $7,434,638 | −5.3% |
-| Finance | $6,881,016 | $7,023,903 | −$116,016 | $220,954 | $7,360,873 | −4.6% |
-| Parks & Recreation (General Fund share) | $6,489,602 | $6,634,292 | −$131,415 | $208,698 | $6,974,405 | −4.4% |
-| City Attorney's Office | $5,067,069 | $5,517,903 | $177,084 | $173,579 | $5,514,398 | +0.1% |
+| [Fire-Rescue][d-fire] | $29,129,284 | $30,967,597 | −$65,971 | $974,161 | $32,007,729 | −2.7% |
+| [Housing & Human Services (General Fund share)][d-hhs] | $12,961,613 | $14,007,208 | $654,504 | $440,631 | $13,793,335 | +2.3% |
+| [City Manager's Office][d-manager] | $11,087,455 | $11,981,255 | $194,527 | $376,900 | $12,163,628 | −1.5% |
+| [Innovation & Technology][d-it] | $10,372,051 | $10,680,047 | −$636,048 | $335,967 | $11,652,062 | −8.3% |
+| [Facilities & Fleet (General Fund share)][d-facilities] | $7,153,291 | $7,041,735 | −$171,388 | $221,515 | $7,434,638 | −5.3% |
+| [Finance][d-finance] | $6,881,016 | $7,023,903 | −$116,016 | $220,954 | $7,360,873 | −4.6% |
+| [Parks & Recreation (General Fund share)][d-parks] | $6,489,602 | $6,634,292 | −$131,415 | $208,698 | $6,974,405 | −4.4% |
+| [City Attorney's Office][d-attorney] | $5,067,069 | $5,517,903 | $177,084 | $173,579 | $5,514,398 | +0.1% |
 | Other General Fund departments | $16,702,126 | $16,783,601 | −$863,729 | $527,969 | $18,175,299 | −7.7% |
 | **Total** | **$194,483,450** | **$200,496,242** | **$419,098** | **$6,307,098** | **$206,384,242** | |
 
 The widget rounds each starting point to the nearest $1,000, and each tick here is computed from the widget's rounded figures. Police's $2,639,203 of itemized additions are mostly one-time: $1.2 million more for overtime and $823,950 to extend fixed-term positions. Three new lieutenants add $551,753 a year. Its $1,261,653 of cuts are almost all in photo enforcement.
 
-- **General Government** is FF's "General Government" row. In BiB's table it is "Fundwide / Citywide" ($35,122,830 in 2027) plus "Police/Fire Pensions" ($489,615).
-- **Other General Fund departments** are FF's rows for City Council, Climate Initiatives, Communications & Engagement, Human Resources, Municipal Court, Planning & Development Services, Transportation & Mobility and Utilities. Community Vitality and Library have no 2027 budget.
+- **General Government** is FF's "General Government" row. In BiB's table it is "Fundwide / Citywide" ($35,122,830 in 2027) plus "Police/Fire Pensions" ($489,615). The book has no General Government page; its [Debt Service][debt] page has the General Fund's debt schedule.
+- **Other General Fund departments** are FF's rows for [City Council][d-council], [Climate Initiatives][d-climate], [Communications & Engagement][d-comms], [Human Resources][d-hr], [Municipal Court][d-court], [Planning & Development Services][d-pds], [Transportation & Mobility][d-transpo] and [Utilities][d-utilities]. Community Vitality and Library have no 2027 budget.
 - **Restated versus approved.** FF's "2026 Approved" column still lists Community Vitality, at $1,611,459. BiB counts that money with the departments that took over its work: $1,388,682 with the City Manager's Office and $222,777 with Facilities & Fleet. Those three rows are the only ones that differ (approved: City Manager's Office $9,698,773, Facilities & Fleet $6,930,514, Other $18,313,585), and both columns total $194,483,450.
 - **Range:** −25% to +25% of each starting point, an editorial choice.
 
@@ -99,7 +104,7 @@ FF, "2027 Budget" column, the sum of three rows:
 
 The line under the slider names those three rows. Each 1% moves $109,729. That yield is modeled.
 
-These 2027 figures include the city's fee changes, which the budget does not total separately, so the slider starts there. Whatever those changes contribute to closing the gap is inside the remainder spread across the department sliders.
+These 2027 figures include the city's fee changes, which FEE lists fee by fee but the budget does not total, so the slider starts there. Whatever those changes contribute to closing the gap is inside the remainder spread across the department sliders.
 
 ### Property tax: $39,459,000 (`base: 39.459`)
 
@@ -136,21 +141,21 @@ The four 2027 changes that move an existing General Fund cost onto a dedicated f
 
 | Department | Change, as the budget lists it | Amount |
 |---|---|---:|
-| Fire-Rescue | "Realignment of Fire-Rescue Wildland Unit to Open Space Fund from 75% to 90%" | $179,718 |
-| Parks & Recreation | "Realignment of Urban Ranger equipment funding to Open Space Fund based on shared services One Ranger approach" | $36,410 |
-| Housing & Human Services | "Realigning half of the Behavioral Health Intensive Community Service Contract to be funded by the Sugar-Sweetened Beverage Distribution Tax Fund" | $100,000 |
+| [Fire-Rescue][d-fire] | "Realignment of Fire-Rescue Wildland Unit to Open Space Fund from 75% to 90%" | $179,718 |
+| [Parks & Recreation][d-parks] | "Realignment of Urban Ranger equipment funding to Open Space Fund based on shared services One Ranger approach" | $36,410 |
+| [Housing & Human Services][d-hhs] | "Realigning half of the Behavioral Health Intensive Community Service Contract to be funded by the Sugar-Sweetened Beverage Distribution Tax Fund" | $100,000 |
 | General Government | "Recreation activities operations funding realignment supported by the Sugar-Sweetened Beverage Tax Distribution" | $250,000 |
 | **Total** | | **$566,128** |
 
-The first three are in the department pages' lists of General Fund changes. The fourth is listed in the Recreation Activity Fund, but it replaces General Fund money: AAG lists it under "Using Existing Funds Differently," for programs such as the Youth Services Initiative, EXPAND and REquity, "instead of subsidizing these through the General Fund," and RAF shows the General Fund's subsidy falling from $1,377,713 in 2026 to $519,383 in 2027, with a new $450,000 transfer in from the sugary-drink tax. The slider counts the $250,000 the city gives for the move. The subsidy is a transfer to another fund, so the tool counts it with General Government, whose line includes interfund transfers.
+The first three are in the department pages' lists of General Fund changes. The fourth is listed in the [Recreation Activity Fund][f-rec], but it replaces General Fund money: AAG lists it under "Using Existing Funds Differently," for programs such as the Youth Services Initiative, EXPAND and REquity, "instead of subsidizing these through the General Fund," and RAF shows the General Fund's subsidy falling from $1,377,713 in 2026 to $519,383 in 2027, with a new $450,000 transfer in from the [sugary-drink tax][f-ssb]. The slider counts the $250,000 the city gives for the move. The subsidy is a transfer to another fund, so the tool counts it with General Government, whose line includes interfund transfers.
 
 The recommended department amounts already leave these costs out, so each department's tick adds its share back and this slider takes it out.
 
 Not counted:
 
-- $150,000 of urban forestry moved from the .25 Cent Sales Tax Fund to the Climate Tax Fund. Both are dedicated funds. (O1's memo calls it a "realignment from General Fund to Climate Tax Fund," but the line items move it from the .25 Cent fund.)
+- $150,000 of urban forestry moved from the [.25 Cent Sales Tax Fund][f-25cent] to the [Climate Tax Fund][f-climate]. Both are dedicated funds. (O1's memo calls it a "realignment from General Fund to Climate Tax Fund," but the line items move it from the .25 Cent fund.)
 - A $177,084 Climate Tax transfer to the General Fund pays for a new attorney position.
-- Two cuts the budget describes as realignments: Housing & Human Services' $200,000 for the Local Voucher program, to the Affordable Housing Fund, and Fire-Rescue's $60,357 of EMS supplies, to Equipment Replacement Fund reserves. Neither receiving fund lists a matching line, so both stay in their departments' itemized cuts.
+- Two cuts the budget describes as realignments: Housing & Human Services' $200,000 for the Local Voucher program, to the [Affordable Housing Fund][f-ah], and Fire-Rescue's $60,357 of EMS supplies, to [Equipment Replacement Fund][f-er] reserves. Neither receiving fund lists a matching line, so both stay in their departments' itemized cuts.
 
 The slider's range, $0 to $5M, is an editorial choice.
 
@@ -170,22 +175,22 @@ Each amount is the department's 2027 spending in all funds (BiB, citywide uses b
 
 | Slider | Citywide uses, 2027 | Minus General Fund, 2027 | Slider amount |
 |---|---:|---:|---:|
-| Utilities | $136,940,407 | $385,315 | $136,555,092 |
-| Transportation & Mobility | $60,127,099 | $99,000 | $60,028,099 |
-| Open Space & Mountain Parks | $37,422,557 | $0 | $37,422,557 |
-| Housing & Human Services | $49,721,865 | $14,007,208 | $35,714,657 |
-| Parks & Recreation | $37,112,619 | $6,634,292 | $30,478,327 |
-| Facilities & Fleet | $23,987,587 | $7,041,735 | $16,945,852 |
-| Planning & Development Services | $19,229,101 | $2,996,678 | $16,232,423 |
-| City Manager's Office | $19,429,465 | $11,981,255 | $7,448,210 |
-| Climate Initiatives | $8,109,630 | $1,617,070 | $6,492,560 |
-| Fire-Rescue | $35,049,888 | $30,967,597 | $4,082,291 |
+| [Utilities][d-utilities] | $136,940,407 | $385,315 | $136,555,092 |
+| [Transportation & Mobility][d-transpo] | $60,127,099 | $99,000 | $60,028,099 |
+| [Open Space & Mountain Parks][d-osmp] | $37,422,557 | $0 | $37,422,557 |
+| [Housing & Human Services][d-hhs] | $49,721,865 | $14,007,208 | $35,714,657 |
+| [Parks & Recreation][d-parks] | $37,112,619 | $6,634,292 | $30,478,327 |
+| [Facilities & Fleet][d-facilities] | $23,987,587 | $7,041,735 | $16,945,852 |
+| [Planning & Development Services][d-pds] | $19,229,101 | $2,996,678 | $16,232,423 |
+| [City Manager's Office][d-manager] | $19,429,465 | $11,981,255 | $7,448,210 |
+| [Climate Initiatives][d-climate] | $8,109,630 | $1,617,070 | $6,492,560 |
+| [Fire-Rescue][d-fire] | $35,049,888 | $30,967,597 | $4,082,291 |
 | Other departments | $125,470,780 | $124,766,092 | $704,688 |
 | **Total** | **$552,600,998** | **$200,496,242** | **$352,104,756** |
 
 "Other departments" comes from two lines:
 
-- **Finance:** $187,841, which is $7,211,744 citywide against $7,023,903 in the General Fund.
+- **[Finance][d-finance]:** $187,841, which is $7,211,744 citywide against $7,023,903 in the General Fund.
 - **Citywide accounts and pensions:** $516,847. That is "Fundwide / Citywide" plus "Police/Fire Pensions," $36,129,292 citywide, against FF's General Government, $35,612,445.
 
 Police, Innovation & Technology, the City Attorney's Office, Human Resources, Communications & Engagement, Municipal Court and City Council spend nothing outside the General Fund in 2027.
@@ -198,13 +203,13 @@ The widget's prose uses these figures. They were checked against the sources bel
 
 | Figure | Source |
 |---|---|
-| Sales-tax rates voters set aside: Open Space 0.77%, Transportation 0.75%, Community, Culture, Resilience & Safety 0.30%, .25-cent Parks & Recreation 0.25%, Arts, Culture & Heritage 0.075%; General Fund 1.72% of 3.86% | BiB-C, Sales & Use Tax Components in 2027. The table prints the arts tax as 0.08%; BiB-C's list of rate changes gives its exact 0.075%. |
+| Sales-tax rates voters set aside: [Open Space][f-os] 0.77%, [Transportation][f-transpo] 0.75%, [Community, Culture, Resilience & Safety][f-ccrs] 0.30%, [.25-cent Parks & Recreation][f-25cent] 0.25%, [Arts, Culture & Heritage][f-ach] 0.075%; General Fund 1.72% of 3.86% | BiB-C, Sales & Use Tax Components in 2027. The table prints the arts tax as 0.08%; BiB-C's list of rate changes gives its exact 0.075%. |
 | What each of those funds raises in 2027: $36.6M, $35.7M, $14.3M, $11.9M, $3.6M | BiB-C, Sales Tax Revenues 2023-2027 (in $1,000s), 2027 Budget: $36,635, $35,684, $14,274, $11,895, $3,568 |
 | Transportation Maintenance Fee, about $3.0M in 2027 | BiB revenue notes: "An estimated $3.03M is included in the 2027 Budget supported by a new fee (approved in the 2026 Budget)." The city could not start collecting it in 2026 (AAG: "The city will start collecting the Transportation Maintenance Fee ... in early 2027"). |
 | Utility rates up 5–7% | BiB-C, Key Budget Assumptions: water rates 5.00%, wastewater and stormwater 7.00% |
-| Raises: 5% for police and firefighters, 4% for most other union staff | City manager's [budget message](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a7a2349492dea63d5fd8d27); BiB-C, Key Budget Assumptions: Boulder Municipal Employees Association 4.00% |
+| Raises: 5% for police and firefighters, 4% for most other union staff | MSG; BiB-C, Key Budget Assumptions: Boulder Municipal Employees Association 4.00% |
 | Sales and use tax flat since 2023; property tax down 2.4% | BiB-C: the Sales Tax Revenues chart (General Fund $82,137 thousand in 2023, $83,009 thousand in 2027) and Key Budget Assumptions (property tax −2.40%) |
-| The city's plan: 24 positions eliminated, 13 of them filled; photo-radar vans ended; shorter pool hours; custodial service cut from five days to three; the marijuana tax to 5.5%; higher licensing and parking-permit fees; three new police lieutenants | AAG, the city's [Aug. 28 release](https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input), the budget message, and BiB's revenue notes (photo enforcement revenue falls 52.8% "driven by the elimination of photo radar van enforcement") |
+| The city's plan: 24 positions eliminated, 13 of them filled; photo-radar vans ended; shorter pool hours; custodial service cut from five days to three; the marijuana tax to 5.5%; higher licensing and parking-permit fees; three new police lieutenants | AAG, the city's [Aug. 28 release](https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input), MSG, FEE for the fee increases, and BiB's revenue notes (photo enforcement revenue falls 52.8% "driven by the elimination of photo radar van enforcement") |
 | Past gaps: $8–10M in mid-2025, $7.5M for 2026, about $6M in 2026 fees ($2.25M transportation maintenance, $2.6M speed-on-green cameras, $0.8M parking, $0.4M single-family expansion), 19 mostly vacant positions | F26's budget history ("an $8.0-$10.0 million shortfall" in 2025; "a forecasted $7.5M shortfall" for 2026), and Boulder Reporting Lab, ["Council approves $521M 2026 budget"](https://boulderreportinglab.org/2025/10/23/boulder-city-council-approves-521-million-2026-budget-adds-demolition-and-transportation-maintenance-fees/) (Oct. 23, 2025) |
 | The General Fund's emergency reserve, about 20% of its spending, kept at its target | POL: the 2026 Budgeted Reserves table set the General Fund's goal at 20.0% ($40,552,280, its "Emergency Stabilization Operating Reserve"), and the 2027 table keeps 20.0% ($40,125,842); 16.7% is the operating-reserve goal for most other funds. FF: $39,237,353 in its 2026 Approved column, 20.2% of that year's spending, and $40,125,842 in 2027. F26: in 2025 the city acted "to ensure the city maintained at or above its emergency reserve level target." |
 | The Nov. 3 ballot: a $400M recreation-and-safety bond (about $400 a year on a $1 million home), a charter change on the city's debt limit, collective bargaining for firefighters, and a $4,000-a-year tax on homes left empty more than half the year, which the city estimates would raise about $6M a year in flexible revenue starting in 2028 | Boulder Reporting Lab, ["Council sends vacancy tax and $400M bond to the November ballot"](https://boulderreportinglab.org/2026/08/06/boulder-city-council-sends-vacancy-tax-and-400-million-bond-to-november-ballot-rejects-downtown-development-authority/) (Aug. 6, 2026), for the measures. The $6M is from the ballot question itself, on the city's [2026 ballot measures page](https://bouldercolorado.gov/2026-city-boulder-ballot-measures): Ballot Issue 2J asks whether "City of Boulder taxes be increased $6,000,000 annually (which amount represents estimated revenues in 2028, the first full fiscal year of collection)." |
@@ -235,3 +240,41 @@ The widget's prose uses these figures. They were checked against the sources bel
 - **The sugary-drink tax for recreation programs** (Oct. 1, 2026): the earlier "two double counts" correction took this $250,000 out of the cost shift as a Recreation Activity Fund item. RAF shows the General Fund's subsidy to that fund falling by $858,330 and a new $450,000 transfer from the sugary-drink tax, and AAG presents the move as replacing General Fund money. It is back in, as General Government's `moved`, and the shift is $566,128, shown as "proposed ~$0.6M."
 - **The emergency reserve** (Oct. 1, 2026): the widget said the reserve was "about 16.7% of operating spending." The General Fund's goal is 20.0% (POL); 16.7% is the goal for other funds. The widget now says about 20%.
 - **The $6.5M forecast gap** (Oct. 1, 2026): this file cited F26 for it, but the packet's memo has no 2027 figure; it came from the May 14 presentation, which Boulder Reporting Lab reported.
+
+[book]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a85b885c8d270500e07967e
+[bib]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a7a22d6e8cd6b725ef3b5b5
+[bibc]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a7a230c2aaa5815f9944b90
+[msg]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a7a2349492dea63d5fd8d27
+[cip]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a76503daf3ac11a4dd8b409
+[pol]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a75e5049edf5ffa8847c1f7
+[fees]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a75eab082345163d672920a
+[debt]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a75e314947781bfa8408bda
+[d-attorney]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d84b5c7afad26eaf01
+[d-council]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8b2ff954fd8551458
+[d-manager]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8511e4be522bcc875
+[d-climate]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d856dc150472eb0075
+[d-comms]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8c5e011a12e200327
+[d-facilities]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d867c96b28fb9d73e8
+[d-finance]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8de6480cc40b4b96f
+[d-fire]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8c9bc19d58a7cb1a9
+[d-hhs]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8d600ec1e99cb1d16
+[d-hr]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d83c0219b32e46c591
+[d-it]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8d9e8f223119b861c
+[d-court]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8dcbda20bcf9c3573
+[d-osmp]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d80cf1ea6905a45305
+[d-parks]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8345b07fe00521720
+[d-pds]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d885b2d1fbcfe410ee
+[d-police]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d85779d69a2eb6abe1
+[d-transpo]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d842b6b797cb9ff77e
+[d-utilities]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d83d8164a45ce9b3cd
+[f-gf]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7e911737a7a460f5b89
+[f-rec]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7ea0400e85c1ab906ef
+[f-ssb]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7ea013c20f997dd54af
+[f-25cent]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7e966bdec74c7072614
+[f-os]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7e918dab5a170587bbe
+[f-transpo]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7e93fea49a573db46b3
+[f-ccrs]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7eae827c5ad72c88e03
+[f-ach]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7e980d3713704c0824d
+[f-climate]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7e91baeb0c38ebfbd9b
+[f-ah]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7e9a4b0c9e3c675329c
+[f-er]: https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7ea893c987c6930faeb
