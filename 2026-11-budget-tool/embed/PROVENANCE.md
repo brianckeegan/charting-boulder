@@ -1,10 +1,12 @@
 # Where every slider number comes from
 
 The widget's figures come from the City of Boulder's 2027 Recommended Budget,
-released Aug. 28, 2026, as it stood on Sept. 29, 2026, before the City
-Council's final vote on Oct. 15. This file traces every number a slider shows or
-uses to the document, table, row and column it comes from, and shows the
-arithmetic for each number the widget derives.
+released Aug. 28, 2026, as it stood on Oct. 1, 2026, the night of the City
+Council's first reading. The budget and appropriation ordinances introduced
+that night carry the same General Fund total, $200,496,242, and the same mill
+levies; the council's final vote is Oct. 15. This file traces every number a
+slider shows or uses to the document, table, row and column it comes from, and
+shows the arithmetic for each number the widget derives.
 
 The numbers live as constants in
 [`src/boulder-budget-widget.jsx`](src/boulder-budget-widget.jsx), in millions of
@@ -20,8 +22,11 @@ them, not adjusted for inflation.
 | **BiB-C** | [Budget in Brief, continued](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a7a230c2aaa5815f9944b90): the Sales & Use Tax Components in 2027 table, the Sales Tax Revenues 2023-2027 chart, and the Mill Levies & Projected Revenue table |
 | **FF** | [General Fund – 2027 Fund Financial (1100)](https://bouldercolorado.gov/media/21600/download?inline), PDF, also shown on the budget book's [General Fund page](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c7e911737a7a460f5b89). Columns used: "2026 Approved" and "2027 Budget" |
 | **AAG** | [Budget At-A-Glance](https://bouldercolorado.gov/budget-glance), the city's summary of 2027 cuts, shifts and fees |
-| **Dept** | The budget book's department pages, each with its list of 2027 changes: [Fire-Rescue](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8c9bc19d58a7cb1a9), [Parks & Recreation](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8345b07fe00521720), [Housing & Human Services](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8d600ec1e99cb1d16) |
-| **F26** | 2026 Financial Forecast, City Council study session packet, May 14, 2026, on the [city's budget page](https://bouldercolorado.gov/services/budget) |
+| **Dept** | The budget book's department pages, each with its "Summary of Budget Changes," for example [Police](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d85779d69a2eb6abe1), [Planning & Development Services](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d885b2d1fbcfe410ee), [Fire-Rescue](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8c9bc19d58a7cb1a9), [Parks & Recreation](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8345b07fe00521720) and [Housing & Human Services](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a71c8d8d600ec1e99cb1d16) |
+| **RAF** | [Recreation Activity Fund – 2027 Fund Financial (2300)](https://bouldercolorado.gov/media/21595/download?inline), PDF. The budget book's Recreation Activity Fund page links to the .25 Cent Sales Tax Fund's table instead. |
+| **POL** | The budget book's [financial policies](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a75e5049edf5ffa8847c1f7), section 7 and its "2027 Budgeted Reserves" table |
+| **O1** | City Council agenda packet, [Oct. 1, 2026](https://bouldercolorado.primegov.com/Public/CompiledDocument?meetingTemplateId=1052&compileOutputType=1): the first-reading memo on the 2027 budget and Ordinances 8777–8780 |
+| **F26** | 2026 Financial Forecast, City Council study session packet, [May 14, 2026](https://bouldercolorado.primegov.com/Public/CompiledDocument?meetingTemplateId=950&compileOutputType=1) |
 | **MJ** | [City of Boulder marijuana tax rates](https://bouldercolorado.gov/city-boulder-marijuana-tax-rates) |
 | **BW13** | Boulder Weekly, ["Pot taxes a sticky issue"](https://www.boulderweekly.com/content-archives/voters-guide/vote-2013/pot-taxes-a-sticky-issue/), 2013 voters' guide |
 
@@ -33,7 +38,7 @@ Every slider starts at the status quo: what the General Fund would spend and col
 - the marijuana tax rate the recommended budget sets;
 - the General Fund costs it moves onto dedicated funds.
 
-Following every tick closes exactly $6.3 million. The department sliders move in whole percents, so setting each one as close to its tick as it goes leaves about $0.3 million.
+Following every tick closes exactly $6.3 million. The department sliders move in whole percents and the cost shift in $0.1 million steps, so setting each one as close to its tick as it goes closes the gap with $0.2 million to $0.3 million to spare.
 
 The city does not publish each department's status quo, so the department starting points are estimates, built as described under "General Fund sliders." On the revenue side, the property tax starts at the 2027 forecast, which the city does not change; the sales base has the marijuana tax increase taken out; and the fee base includes the city's fee changes, which the budget does not total separately.
 
@@ -41,7 +46,7 @@ The city does not publish each department's status quo, so the department starti
 
 | Constant | Value | Source |
 |---|---:|---|
-| `GAP` | $6.3M | BiB: the General Fund "saw the largest anticipated gap of $6.3M if left unaddressed." F26 had put it at $6.5M. |
+| `GAP` | $6.3M | BiB: the General Fund "saw the largest anticipated gap of $6.3M if left unaddressed." O1 repeats it. The May 14, 2026 forecast presentation had put it at $6.5M, as Boulder Reporting Lab [reported](https://boulderreportinglab.org/2026/05/17/boulder-predicting-budget-gap-as-economic-forecast-remains-cloudy/) on May 17; F26's memo gives no 2027 figure. |
 | `TOTAL` | $552,600,998 | BiB, citywide uses by department, 2027 Budget column, Total. BiB's text rounds it to "$552.60 million." |
 | `OPERATING` | $417.24M | BiB: "The 2027 Recommended Operating Budget is $417.24 million." |
 | `CAPITAL` | $135.36M | BiB: "The 2027 Recommended Capital Budget is $135.36 million." |
@@ -55,27 +60,27 @@ The budget bar's "36¢ of every dollar" is `GENERAL_FUND ÷ TOTAL`, 36.3%.
 - **2026 amounts (`was`):** BiB's General Fund uses-by-department table, "2026 Budget" column, which restates 2026 for the 2027 departments. They appear in each tick's tooltip.
 - **Starting points (`base`), the status quo, are estimates.** For each slider:
   1. Take the recommended 2027 amount.
-  2. Undo the city's itemized 2027 changes. BiB lists 138 General Fund changes. The 93 reductions, enhancements and realignments are the city's decisions; the 45 "base cost" items, such as internal service charges, are part of the status quo. The 93 net to −$928,191: $3,392,260 of reductions, $2,416,374 of enhancements and $47,695 of realignments. Police, General Government and Planning & Development Services have none.
-  3. Add a share of the rest of the gap. Those changes and the marijuana tax increase ($412,000) account for $1,340,191 of the $6.3 million. The city does not itemize the other $4,959,809 by department, so it is spread across all eleven sliders in proportion to their recommended amounts, 2.47% each. (Heading into 2027, the city manager asked every department for ongoing cuts of about 4%.)
-- **The tick** is the recommended amount plus any cost the budget moves onto a dedicated fund, which leaves through the cost-shift slider instead: Fire-Rescue $179,718, Parks & Recreation $36,410 and Housing & Human Services $100,000 (`moved`). The proposed change is tick ÷ starting point − 1.
-- **Check:** following every tick closes $928,191 + $4,959,809 + $412,000 = $6,300,000.
+  2. Undo the city's itemized 2027 changes. The department pages (Dept) list 161 General Fund changes. The 110 reductions, enhancements and realignments are the city's decisions; the 51 base-cost items, such as internal service charges, are part of the status quo. The 110 net to +$419,098: $4,783,613 of reductions, $5,055,577 of enhancements and $147,134 of realignments. General Government has none. BiB's citywide table of changes has the same rows for every other department, except that it leaves out Police entirely (15 decisions netting +$1,377,550) and two Planning & Development Services rows (−$30,261). Innovation & Technology's page doesn't label its rows by type, so its types come from BiB; the page's amounts match BiB's.
+  3. Add a share of the rest of the gap. The itemized decisions add $419,098 on net and the marijuana tax increase raises $412,000, so the part of the gap the city does not itemize by department is $6,300,000 + $419,098 − $412,000 = $6,307,098. It covers, for example, most of the $858,330 cut in the General Fund's subsidy to the Recreation Activity Fund (RAF; see the cost shift below). It is spread across all eleven sliders in proportion to their recommended amounts, 3.15% each. (Heading into 2027, the city manager asked every department for ongoing cuts of about 4%.)
+- **The tick** is the recommended amount plus any cost the budget moves onto a dedicated fund, which leaves through the cost-shift slider instead: Fire-Rescue $179,718, Parks & Recreation $36,410, Housing & Human Services $100,000 and General Government $250,000 (`moved`). The proposed change is tick ÷ starting point − 1.
+- **Check:** following every tick closes $6,300,000: the department ticks save $206,384,242 − $200,496,242 − $566,128 = $5,321,872, the cost shift $566,128 and the marijuana tax $412,000.
 
 | Slider | 2026, restated | 2027 recommended | City's itemized changes | Share of the remainder | Starting point (`base`) | Proposed tick |
 |---|---:|---:|---:|---:|---:|---:|
-| Police | $50,203,922 | $54,246,256 | — | $1,341,926 | $55,588,182 | −2.4% |
-| General Government | $38,436,021 | $35,612,445 | — | $880,969 | $36,493,414 | −2.4% |
-| Fire-Rescue | $29,129,284 | $30,967,597 | −$65,971 | $766,066 | $31,799,634 | −2.1% |
-| Housing & Human Services (General Fund share) | $12,961,613 | $14,007,208 | $654,504 | $346,506 | $13,699,210 | +3.0% |
-| City Manager's Office | $11,087,455 | $11,981,255 | $194,527 | $296,388 | $12,083,116 | −0.8% |
-| Innovation & Technology | $10,372,051 | $10,680,047 | −$636,048 | $264,199 | $11,580,294 | −7.8% |
-| Facilities & Fleet (General Fund share) | $7,153,291 | $7,041,735 | −$171,388 | $174,196 | $7,387,319 | −4.7% |
-| Finance | $6,881,016 | $7,023,903 | −$116,016 | $173,755 | $7,313,674 | −4.0% |
-| Parks & Recreation (General Fund share) | $6,489,602 | $6,634,292 | −$131,415 | $164,117 | $6,929,824 | −3.8% |
-| City Attorney's Office | $5,067,069 | $5,517,903 | $177,084 | $136,500 | $5,477,319 | +0.7% |
-| Other General Fund departments | $16,702,126 | $16,783,601 | −$833,468 | $415,187 | $18,032,256 | −6.9% |
-| **Total** | **$194,483,450** | **$200,496,242** | **−$928,191** | **$4,959,809** | **$206,384,242** | |
+| Police | $50,203,922 | $54,246,256 | $1,377,550 | $1,706,448 | $54,575,154 | −0.6% |
+| General Government | $38,436,021 | $35,612,445 | — | $1,120,276 | $36,732,721 | −2.4% |
+| Fire-Rescue | $29,129,284 | $30,967,597 | −$65,971 | $974,161 | $32,007,729 | −2.7% |
+| Housing & Human Services (General Fund share) | $12,961,613 | $14,007,208 | $654,504 | $440,631 | $13,793,335 | +2.3% |
+| City Manager's Office | $11,087,455 | $11,981,255 | $194,527 | $376,900 | $12,163,628 | −1.5% |
+| Innovation & Technology | $10,372,051 | $10,680,047 | −$636,048 | $335,967 | $11,652,062 | −8.3% |
+| Facilities & Fleet (General Fund share) | $7,153,291 | $7,041,735 | −$171,388 | $221,515 | $7,434,638 | −5.3% |
+| Finance | $6,881,016 | $7,023,903 | −$116,016 | $220,954 | $7,360,873 | −4.6% |
+| Parks & Recreation (General Fund share) | $6,489,602 | $6,634,292 | −$131,415 | $208,698 | $6,974,405 | −4.4% |
+| City Attorney's Office | $5,067,069 | $5,517,903 | $177,084 | $173,579 | $5,514,398 | +0.1% |
+| Other General Fund departments | $16,702,126 | $16,783,601 | −$863,729 | $527,969 | $18,175,299 | −7.7% |
+| **Total** | **$194,483,450** | **$200,496,242** | **$419,098** | **$6,307,098** | **$206,384,242** | |
 
-The widget rounds each starting point to the nearest $1,000. Police's tick comes entirely from the spread remainder: its 2027 budget rises 8.1% from 2026, mostly from raises, and the city itemizes no Police changes.
+The widget rounds each starting point to the nearest $1,000, and each tick here is computed from the widget's rounded figures. Police's $2,639,203 of itemized additions are mostly one-time: $1.2 million more for overtime and $823,950 to extend fixed-term positions. Three new lieutenants add $551,753 a year. Its $1,261,653 of cuts are almost all in photo enforcement.
 
 - **General Government** is FF's "General Government" row. In BiB's table it is "Fundwide / Citywide" ($35,122,830 in 2027) plus "Police/Fire Pensions" ($489,615).
 - **Other General Fund departments** are FF's rows for City Council, Climate Initiatives, Communications & Engagement, Human Resources, Municipal Court, Planning & Development Services, Transportation & Mobility and Utilities. Community Vitality and Library have no 2027 budget.
@@ -125,27 +130,27 @@ The rates in the line under the slider are from BiB-C's Sales & Use Tax Componen
 
 The line under the slider, "Boulder's additional sales tax on recreational marijuana," follows MJ.
 
-### Shift General Fund costs onto dedicated funds: proposed $316,128 (`city: 0.316`)
+### Shift General Fund costs onto dedicated funds: proposed $566,128 (`city: 0.566`)
 
-The three 2027 changes that move an existing General Fund cost onto a dedicated fund, all in BiB's list of General Fund changes:
+The four 2027 changes that move an existing General Fund cost onto a dedicated fund:
 
 | Department | Change, as the budget lists it | Amount |
 |---|---|---:|
 | Fire-Rescue | "Realignment of Fire-Rescue Wildland Unit to Open Space Fund from 75% to 90%" | $179,718 |
 | Parks & Recreation | "Realignment of Urban Ranger equipment funding to Open Space Fund based on shared services One Ranger approach" | $36,410 |
 | Housing & Human Services | "Realigning half of the Behavioral Health Intensive Community Service Contract to be funded by the Sugar-Sweetened Beverage Distribution Tax Fund" | $100,000 |
-| **Total** | | **$316,128** |
+| General Government | "Recreation activities operations funding realignment supported by the Sugar-Sweetened Beverage Tax Distribution" | $250,000 |
+| **Total** | | **$566,128** |
+
+The first three are in the department pages' lists of General Fund changes. The fourth is listed in the Recreation Activity Fund, but it replaces General Fund money: AAG lists it under "Using Existing Funds Differently," for programs such as the Youth Services Initiative, EXPAND and REquity, "instead of subsidizing these through the General Fund," and RAF shows the General Fund's subsidy falling from $1,377,713 in 2026 to $519,383 in 2027, with a new $450,000 transfer in from the sugary-drink tax. The slider counts the $250,000 the city gives for the move. The subsidy is a transfer to another fund, so the tool counts it with General Government, whose line includes interfund transfers.
 
 The recommended department amounts already leave these costs out, so each department's tick adds its share back and this slider takes it out.
 
-AAG describes the wildland crew and the sugary-drink tax moves under "Using Existing Funds Differently."
+Not counted:
 
-Three other realignments are not counted, because none relieves an existing General Fund cost:
-
-- $250,000 of recreation operations moved onto the sugary-drink tax. BiB lists it in the Recreation Activity Fund, not the General Fund.
-
-- $150,000 of urban forestry moved from the .25 Cent Sales Tax Fund to the Climate Tax Fund. Both are dedicated funds.
+- $150,000 of urban forestry moved from the .25 Cent Sales Tax Fund to the Climate Tax Fund. Both are dedicated funds. (O1's memo calls it a "realignment from General Fund to Climate Tax Fund," but the line items move it from the .25 Cent fund.)
 - A $177,084 Climate Tax transfer to the General Fund pays for a new attorney position.
+- Two cuts the budget describes as realignments: Housing & Human Services' $200,000 for the Local Voucher program, to the Affordable Housing Fund, and Fire-Rescue's $60,357 of EMS supplies, to Equipment Replacement Fund reserves. Neither receiving fund lists a matching line, so both stay in their departments' itemized cuts.
 
 The slider's range, $0 to $5M, is an editorial choice.
 
@@ -200,8 +205,8 @@ The widget's prose uses these figures. They were checked against the sources bel
 | Raises: 5% for police and firefighters, 4% for most other union staff | City manager's [budget message](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a7a2349492dea63d5fd8d27); BiB-C, Key Budget Assumptions: Boulder Municipal Employees Association 4.00% |
 | Sales and use tax flat since 2023; property tax down 2.4% | BiB-C: the Sales Tax Revenues chart (General Fund $82,137 thousand in 2023, $83,009 thousand in 2027) and Key Budget Assumptions (property tax −2.40%) |
 | The city's plan: 24 positions eliminated, 13 of them filled; photo-radar vans ended; shorter pool hours; custodial service cut from five days to three; the marijuana tax to 5.5%; higher licensing and parking-permit fees; three new police lieutenants | AAG, the city's [Aug. 28 release](https://bouldercolorado.gov/news/city-manager-releases-balanced-budget-focus-critically-vital-services-and-community-input), the budget message, and BiB's revenue notes (photo enforcement revenue falls 52.8% "driven by the elimination of photo radar van enforcement") |
-| Past gaps: $8–10M in mid-2025, $7.5M for 2026, about $6M in 2026 fees ($2.25M transportation maintenance, $2.6M speed-on-green cameras, $0.8M parking, $0.4M single-family expansion), 19 mostly vacant positions | F26's budget history, and Boulder Reporting Lab, ["Council approves $521M 2026 budget"](https://boulderreportinglab.org/2025/10/23/boulder-city-council-approves-521-million-2026-budget-adds-demolition-and-transportation-maintenance-fees/) (Oct. 23, 2025) |
-| The emergency reserve, 16.7% of operating spending | The budget book's [financial policies](https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a75e5049edf5ffa8847c1f7) |
+| Past gaps: $8–10M in mid-2025, $7.5M for 2026, about $6M in 2026 fees ($2.25M transportation maintenance, $2.6M speed-on-green cameras, $0.8M parking, $0.4M single-family expansion), 19 mostly vacant positions | F26's budget history ("an $8.0-$10.0 million shortfall" in 2025; "a forecasted $7.5M shortfall" for 2026), and Boulder Reporting Lab, ["Council approves $521M 2026 budget"](https://boulderreportinglab.org/2025/10/23/boulder-city-council-approves-521-million-2026-budget-adds-demolition-and-transportation-maintenance-fees/) (Oct. 23, 2025) |
+| The General Fund's emergency reserve, about 20% of its spending, kept at its target | POL: the 2027 Budgeted Reserves table sets the General Fund's emergency operating reserve at 20.0%, $40,125,842 (16.7% is the operating-reserve goal for most other funds). FF: $39,237,353 in 2026, 20.2% of that year's spending, and $40,125,842 in 2027. F26: in 2025 the city acted "to ensure the city maintained at or above its emergency reserve level target." |
 | The Nov. 3 ballot: a $400M recreation-and-safety bond (about $400 a year on a $1 million home), a charter change on the city's debt limit, collective bargaining for firefighters, and a $4,000-a-year tax on homes left empty more than half the year, which the city estimates would raise about $6M a year in flexible revenue starting in 2028 | Boulder Reporting Lab, ["Council sends vacancy tax and $400M bond to the November ballot"](https://boulderreportinglab.org/2026/08/06/boulder-city-council-sends-vacancy-tax-and-400-million-bond-to-november-ballot-rejects-downtown-development-authority/) (Aug. 6, 2026), for the measures. The $6M is from the ballot question itself, on the city's [2026 ballot measures page](https://bouldercolorado.gov/2026-city-boulder-ballot-measures): Ballot Issue 2J asks whether "City of Boulder taxes be increased $6,000,000 annually (which amount represents estimated revenues in 2028, the first full fiscal year of collection)." |
 | Fund Our Future heard from more than 500 people, who ranked wildfire response and facility maintenance highest | The city's [Fund Our Future summary](https://bouldercolorado.gov/news/fund-our-future-our-communitys-priorities) (June 29, 2026) |
 | Tax increases need voter approval; local income taxes are barred | Colorado's Taxpayer's Bill of Rights, Colo. Const. Art. X, §20; the Colorado General Assembly's [TABOR explainer](https://leg.colorado.gov/agencies/legislative-council-staff/tabor) |
@@ -212,7 +217,7 @@ The widget's prose uses these figures. They were checked against the sources bel
 - A fee or tax change yields the same share of its 2027 base, with no change in how people buy, park or build.
 - Below today's 3.5% marijuana tax rate, revenue falls in proportion to the rate.
 - No slider for reserves or other one-time money: the gap comes back every year, and one-time money only postpones it.
-- Starting from the status quo, with each department's starting point estimated as described under "General Fund sliders," including the proportional spread of the $4,959,809 the city does not itemize.
+- Starting from the status quo, with each department's starting point estimated as described under "General Fund sliders," including the proportional spread of the $6,307,098 the city does not itemize.
 
 ## Corrections made while writing this file
 
@@ -226,3 +231,7 @@ The widget's prose uses these figures. They were checked against the sources bel
 - **Vacancy tax revenue** (Oct. 1, 2026): the widget said about $4M a year, Boulder Reporting Lab's Aug. 6 figure from a city estimate of 500 to 1,000 vacant homes. The ballot question the city published, Issue 2J, estimates $6,000,000 in 2028, and the widget now says about $6M.
 - **Where the sliders start** (Oct. 1, 2026): the department sliders started at the recommended 2027 amounts, a budget the city had already balanced, while the tool still asked readers to close $6.3 million, and the ticks showed each department's 2026-to-2027 change. Following every tick left a reader about $5.3 million short of a budget that was in fact balanced. The sliders now start at the status quo, and the ticks mark the recommended budget.
 - **Two double counts** (Oct. 1, 2026): the sales base included the marijuana tax increase that the marijuana slider also counts, and is now $82,597,010; the cost shift counted $250,000 that relieves the Recreation Activity Fund rather than the General Fund, and is now $316,128.
+- **Police and Planning changes** (Oct. 1, 2026): the starting points undid the city's itemized changes from BiB's citywide table, which leaves out all 15 of Police's decisions (+$1,377,550 net) and two Planning & Development Services rows (−$30,261). With each department page's list, the itemized changes net +$419,098 instead of −$928,191, the remainder spread by size is $6,307,098 (3.15%) instead of $4,959,809 (2.47%), and every starting point and tick moved; Police's tick went from −2.4% to −0.6%.
+- **The sugary-drink tax for recreation programs** (Oct. 1, 2026): the earlier "two double counts" correction took this $250,000 out of the cost shift as a Recreation Activity Fund item. RAF shows the General Fund's subsidy to that fund falling by $858,330 and a new $450,000 transfer from the sugary-drink tax, and AAG presents the move as replacing General Fund money. It is back in, as General Government's `moved`, and the shift is $566,128, shown as "proposed ~$0.6M."
+- **The emergency reserve** (Oct. 1, 2026): the widget said the reserve was "about 16.7% of operating spending." The General Fund's goal is 20.0% (POL); 16.7% is the goal for other funds. The widget now says about 20%.
+- **The $6.5M forecast gap** (Oct. 1, 2026): this file cited F26 for it, but the packet's memo has no 2027 figure; it came from the May 14 presentation, which Boulder Reporting Lab reported.
