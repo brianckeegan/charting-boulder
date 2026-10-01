@@ -23,10 +23,12 @@ import {
                   it with the city's real line-item figure before publishing.
 
    WHAT EACH TABLE CONTROLS
-     GF_DEPTS         General Fund departments (the sliders). `amount` is the
-                      2027 recommended budget in $millions and `was` the 2026
-                      budget restated for the 2027 departments, which sets
-                      each slider's "proposed" tick.            [OFFICIAL #2]
+     GF_DEPTS         General Fund departments (the sliders). Each slider
+                      starts at `base`, the department's status quo: its 2027
+                      cost before the city's 2027 changes.       [MODELED #2]
+                      `amount` is the 2027 recommended budget, which sets the
+                      "proposed" tick, and `was` the 2026 budget restated for
+                      the 2027 departments.                     [OFFICIAL #2]
      LOCKED_DEPTS     Each department's spending OUTSIDE the General Fund —
                       dedicated, fee-funded and capital money you can move but
                       whose savings stay trapped. `amount` in $millions; sums
@@ -76,7 +78,13 @@ import {
         Community Vitality's $1,611,459 moved: into the City Manager's Office
         ($1,388,682) and Facilities & Fleet ($222,777). "General Government"
         is Fundwide / Citywide plus Police/Fire Pensions. Both columns sum to
-        their year's General Fund total. Details: ../PROVENANCE.md.
+        their year's General Fund total. `base` (the status quo) is MODELED:
+        `amount` with the city's itemized 2027 General Fund changes undone
+        (the Budget in Brief's list of reductions, enhancements and
+        realignments), plus a share of the rest of the $6.3M gap, which the
+        city does not itemize by department, spread in proportion to `amount`.
+        Following every "proposed" tick then closes exactly the $6.3M.
+        Details: ../PROVENANCE.md.
      3. Sales-tax rates and the dollars they raise (DEDICATED_RATES) and the
         revenue bases in REVENUE: OFFICIAL, from the Budget in Brief's Sales &
         Use Tax Components table and sales-tax chart, the mill levy table
@@ -90,7 +98,8 @@ import {
         fees-are-not-taxes; the 10% marijuana-tax ceiling voters set in 2013,
         Question 2A): OFFICIAL.
      5. The city's own 2027 moves quoted in the copy (24 positions, photo-radar
-        vans, pools, the ~$0.57M shifted to dedicated funds, the marijuana tax,
+        vans, pools, the ~$0.32M of General Fund costs shifted to dedicated
+        funds, the marijuana tax,
         new fees): OFFICIAL, from the Budget At-A-Glance page and the budget
         book's lists of changes.
      6. News citations in the SRC table: confirm each URL still loads and still
@@ -227,27 +236,36 @@ const TOTAL = 552.601, OPERATING = 417.24, CAPITAL = 135.36, GENERAL_FUND = 200.
            FIRST, then here.
    label   what the reader sees, when it differs from `name`: the allowlist
            says "GF share", readers see "General Fund share".
+   base    where the slider starts: the status quo, the department's 2027
+           cost before the city's 2027 changes, $millions — MODELED (see the
+           editor note above and ../PROVENANCE.md). The column sums to
+           GF_STATUS_QUO, $206.4M.
    amount  2027 recommended General Fund budget, $millions — OFFICIAL, from the
            2027 General Fund Fund Financial (1100). The top 10 departments by
            GF spend, plus an "Other" line; the column sums to GENERAL_FUND.
+           With `moved`, it sets the "proposed" tick.
+   moved   General Fund costs the recommended budget moves onto dedicated
+           funds, $millions. They leave through the cost-shift slider, so the
+           department's tick sits at `amount` + `moved`.
    was     the same department's 2026 amount, restated for the 2027
            departments (Budget in Brief, General Fund uses by department,
-           "2026 Budget"). It sets the "proposed" tick on each slider: the
-           city's own change from 2026 to 2027, shown for scale.
+           "2026 Budget"), shown in the tick's tooltip.
    note    sub-label listing the main programs inside the department. */
 const GF_DEPTS = [
-  { id: "police", name: "Police", amount: 54.246, was: 50.204, note: "Operations · Investigations · Administration · Alternative response · Dispatch · Support services" },
-  { id: "genadmin", name: "General Government", amount: 35.612, was: 38.436, note: "Citywide costs · Contingency · Debt service · Interfund transfers · Police and fire pensions" },
-  { id: "fire", name: "Fire-Rescue", amount: 30.968, was: 29.129, note: "Emergency operations · EMS · Wildland · Support services · Community risk reduction" },
-  { id: "hhs", name: "Housing & Human Services (GF share)", label: "Housing & Human Services (General Fund share)", amount: 14.007, was: 12.962, note: "Human services · Homelessness · Behavioral health · Family services" },
-  { id: "manager", name: "City Manager's Office", label: "City Manager’s Office", amount: 11.981, was: 11.087, note: "Economic vitality · City Clerk · Equity · Independent police monitor · New Office of Customer Experience" },
-  { id: "it", name: "Innovation & Technology", amount: 10.680, was: 10.372, note: "Infrastructure · Data & analytics · Application support · Cybersecurity · Project management" },
-  { id: "facilities", name: "Facilities & Fleet (GF share)", label: "Facilities & Fleet (General Fund share)", amount: 7.042, was: 7.153, note: "Facility operations · Maintenance · Energy management · Fleet" },
-  { id: "finance", name: "Finance", amount: 7.024, was: 6.881, note: "Taxpayer services · Budget · Accounting · Licensing · Purchasing · Payroll" },
-  { id: "parksrec", name: "Parks & Recreation (GF share)", label: "Parks & Recreation (General Fund share)", amount: 6.634, was: 6.490, note: "Park operations · Natural resources · Planning · Administration" },
-  { id: "attorney", name: "City Attorney's Office", label: "City Attorney’s Office", amount: 5.518, was: 5.067, note: "Administration · Advisory · Prosecution & civil litigation" },
-  { id: "other", name: "Other General Fund departments", amount: 16.784, was: 16.702, note: "Human resources · Communications · Planning · Municipal Court · Climate · City Council · Utilities · Transportation · Community Vitality" },
+  { id: "police", name: "Police", base: 55.588, amount: 54.246, was: 50.204, note: "Operations · Investigations · Administration · Alternative response · Dispatch · Support services" },
+  { id: "genadmin", name: "General Government", base: 36.493, amount: 35.612, was: 38.436, note: "Citywide costs · Contingency · Debt service · Interfund transfers · Police and fire pensions" },
+  { id: "fire", name: "Fire-Rescue", base: 31.800, amount: 30.968, moved: 0.180, was: 29.129, note: "Emergency operations · EMS · Wildland · Support services · Community risk reduction" },
+  { id: "hhs", name: "Housing & Human Services (GF share)", label: "Housing & Human Services (General Fund share)", base: 13.699, amount: 14.007, moved: 0.100, was: 12.962, note: "Human services · Homelessness · Behavioral health · Family services" },
+  { id: "manager", name: "City Manager's Office", label: "City Manager’s Office", base: 12.083, amount: 11.981, was: 11.087, note: "Economic vitality · City Clerk · Equity · Independent police monitor · New Office of Customer Experience" },
+  { id: "it", name: "Innovation & Technology", base: 11.580, amount: 10.680, was: 10.372, note: "Infrastructure · Data & analytics · Application support · Cybersecurity · Project management" },
+  { id: "facilities", name: "Facilities & Fleet (GF share)", label: "Facilities & Fleet (General Fund share)", base: 7.387, amount: 7.042, was: 7.153, note: "Facility operations · Maintenance · Energy management · Fleet" },
+  { id: "finance", name: "Finance", base: 7.314, amount: 7.024, was: 6.881, note: "Taxpayer services · Budget · Accounting · Licensing · Purchasing · Payroll" },
+  { id: "parksrec", name: "Parks & Recreation (GF share)", label: "Parks & Recreation (General Fund share)", base: 6.930, amount: 6.634, moved: 0.036, was: 6.490, note: "Park operations · Natural resources · Planning · Administration" },
+  { id: "attorney", name: "City Attorney's Office", label: "City Attorney’s Office", base: 5.477, amount: 5.518, was: 5.067, note: "Administration · Advisory · Prosecution & civil litigation" },
+  { id: "other", name: "Other General Fund departments", base: 18.032, amount: 16.784, was: 16.702, note: "Human resources · Communications · Planning · Municipal Court · Climate · City Council · Utilities · Transportation · Community Vitality" },
 ];
+/* The General Fund's status quo, where the department sliders start. */
+const GF_STATUS_QUO = GF_DEPTS.reduce((t, d) => t + d.base, 0);
 /* What the reader sees: the label when there is one, else the stored name. */
 const deptLabel = (d) => d.label || d.name;
 
@@ -289,19 +307,19 @@ const LOCKED_DEPTS = [
            dollars $M moved from `min` to `max` (not revenue: see "shift")
    city:   where the recommended budget puts this slider, drawn as the
            "proposed" tick
-   locked: shown greyed out, with its `pieces` line and no slider value
+   locked: shown greyed out, with its `pieces` line and no slider
    Every number here is traced to its source in ../PROVENANCE.md.           */
 const REVENUE = [
   { id: "fees", type: "pct", label: "Fees & charges", base: 10.973,
     pieces: "Licenses, permits & fines · Parking · Charges for services" },
   { id: "property", type: "pct", label: "Property tax", base: 39.459,
     pieces: "General-purpose levy (7.948 of the city’s 11.648 mills)" },
-  { id: "sales", type: "pct", label: "Sales & use tax", base: 83.009,
+  { id: "sales", type: "pct", label: "Sales & use tax", base: 82.597,
     pieces: "Sales tax · Use tax (the General Fund’s 1.72% of the city’s 3.86% rate)" },
   { id: "marijuana", type: "rate", label: "Recreational marijuana tax", min: 0, max: 10, step: 0.5, now: 3.5, base: 1.0, perPoint: 0.206, city: 5.5,
     pieces: "Boulder’s additional sales tax on recreational marijuana" },
-  { id: "shift", type: "dollars", label: "Shift General Fund costs onto dedicated funds", min: 0, max: 5, step: 0.1, city: 0.566,
-    pieces: "Wildland fire crew to the Open Space tax · Urban-ranger equipment to Open Space · Recreation and behavioral-health programs to the sugary-drink tax" },
+  { id: "shift", type: "dollars", label: "Shift General Fund costs onto dedicated funds", min: 0, max: 5, step: 0.1, city: 0.316,
+    pieces: "Wildland fire crew to the Open Space tax · Urban-ranger equipment to Open Space · Half a behavioral-health contract to the sugary-drink tax" },
   { id: "vacancy", label: "Vacancy tax", locked: true, sources: [SRC.ballotFinal],
     pieces: "$4,000 a year on homes left empty more than half the year · On the Nov. 3 ballot · Would start in 2028" },
   { id: "income", label: "Local income tax", locked: true,
@@ -419,7 +437,7 @@ export default function BoulderBudgetWidget() {
   }, []);
 
   /* derived math — spending change is signed (+ = more spending = worse gap) */
-  const netSpendChange = useMemo(() => GF_DEPTS.reduce((s, d) => s + d.amount * ((deptPct[d.id] || 0) / 100), 0), [deptPct]);
+  const netSpendChange = useMemo(() => GF_DEPTS.reduce((s, d) => s + d.base * ((deptPct[d.id] || 0) / 100), 0), [deptPct]);
   const netCuts = Math.max(0, -netSpendChange);
   const revenueOnly = useMemo(() => REVENUE.reduce((s, r) => s + revYield(r, rev[r.id] ?? REV_START[r.id]), 0), [rev]); // signed change in taxes/fees (− = cut)
   const shifted = rev.shift || 0;                   // $M of General Fund costs moved onto dedicated funds
@@ -443,7 +461,7 @@ export default function BoulderBudgetWidget() {
   const submit = useCallback(async () => {
     const answered = Object.values(demo).filter((v) => (Array.isArray(v) ? v.length : v)).length;
     if (!balanced || submitted || answered === 0) return;
-    const topCut = GF_DEPTS.map((d) => ({ name: d.name, amt: -d.amount * ((deptPct[d.id] || 0) / 100) })).sort((a, b) => b.amt - a.amt)[0];
+    const topCut = GF_DEPTS.map((d) => ({ name: d.name, amt: -d.base * ((deptPct[d.id] || 0) / 100) })).sort((a, b) => b.amt - a.amt)[0];
     // Share of the fix that came from new revenue; a revenue cut counts as none.
     const revShare = totalFix > 0 ? Math.max(0, revenueOnly) / totalFix : 0;
     /* FLAT PAYLOAD — one field per slider, zeros included, so the database
@@ -560,18 +578,18 @@ export default function BoulderBudgetWidget() {
         {/* General Fund — bidirectional */}
         <section className="mt-7">
           <SectionHead icon={<Building2 size={18} style={{ color: C.ink }} />} title="The General Fund: Money the council can move" />
-          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>The sliders below break down the recommended budget’s {fmt1(GENERAL_FUND)} in General Fund spending by department. Slide one left to cut spending and shrink the gap, or right to spend more and widen it. Heading into 2027, the city manager asked every department to draw up <strong style={{ color: C.ink }}>ongoing cuts of about 4%</strong>.</p>
-          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}><span aria-hidden="true" style={{ display: "inline-block", width: 3, height: 11, background: C.blueDk, borderRadius: 2, marginRight: 6, verticalAlign: "-1px" }} />The blue tick shows the proposed change to each department from 2026 to 2027. Every slider starts at zero, representing the recommended 2027 amount.</p>
+          <p style={{ fontSize: 13.5, color: C.inkSoft, marginTop: 4 }}>The sliders below break down, by department, the {fmt1(GF_STATUS_QUO)} the General Fund would spend in 2027 before the city’s cuts and changes. Slide one left to cut spending and shrink the gap, or right to spend more and widen it. Heading into 2027, the city manager asked every department to draw up <strong style={{ color: C.ink }}>ongoing cuts of about 4%</strong>.</p>
+          <p style={{ fontSize: 12.5, color: C.inkSoft, marginTop: 6 }}><span aria-hidden="true" style={{ display: "inline-block", width: 3, height: 11, background: C.blueDk, borderRadius: 2, marginRight: 6, verticalAlign: "-1px" }} />The blue tick shows where the recommended budget puts each department.</p>
           <div className="mt-3 grid gap-2.5">
             {GF_DEPTS.map((d) => {
-              const pct = deptPct[d.id] || 0, delta = d.amount * (pct / 100);
-              const city = (d.amount / d.was - 1) * 100;
-              const ticks = [{ value: city, label: `proposed ${city > 0 ? "+" : "−"}${Math.abs(city).toFixed(1)}%`, title: `The proposed change from 2026 (${fmt(d.was)}) to 2027 (${fmt(d.amount)})` }];
+              const pct = deptPct[d.id] || 0, delta = d.base * (pct / 100);
+              const city = ((d.amount + (d.moved || 0)) / d.base - 1) * 100;
+              const ticks = [{ value: city, label: `proposed ${city > 0 ? "+" : "−"}${Math.abs(city).toFixed(1)}%`, title: `The recommended budget: ${fmt(d.amount)}${d.moved ? `, plus ${fmt(d.moved)} it moves onto dedicated funds` : ""}. In 2026: ${fmt(d.was)}.` }];
               return (
                 <div key={d.id} className="rounded-md p-3" style={{ background: C.paper, border: `1px solid ${C.hair}` }}>
                   <div className="flex items-center justify-between gap-2">
                     <div style={{ minWidth: 0 }}><div style={{ fontSize: 14.5, fontWeight: 700 }}>{deptLabel(d)}<Cites sources={d.sources} /></div>{d.note && <div style={{ fontSize: 11.5, color: C.inkSoft }}>{d.note}</div>}</div>
-                    <div className="tnum text-right" style={{ flexShrink: 0 }}><span style={{ fontSize: 14, fontWeight: 800 }}>{fmt(d.amount)}</span><span style={{ fontSize: 12, color: pct === 0 ? C.inkSoft : C.blueDk, marginLeft: 8, fontWeight: 700 }}>{pct === 0 ? "unchanged" : signed(delta)}</span></div>
+                    <div className="tnum text-right" style={{ flexShrink: 0 }}><span style={{ fontSize: 14, fontWeight: 800 }}>{fmt(d.base)}</span><span style={{ fontSize: 12, color: pct === 0 ? C.inkSoft : C.blueDk, marginLeft: 8, fontWeight: 700 }}>{pct === 0 ? "unchanged" : signed(delta)}</span></div>
                   </div>
                   <div className="flex items-center gap-3 mt-2">
                     <TickTrack ticks={ticks} min={-25} max={25}>
@@ -608,11 +626,7 @@ export default function BoulderBudgetWidget() {
                     </div>
                     <div className="tnum text-right" style={{ flexShrink: 0 }}>{r.locked ? <span style={{ fontSize: 14, fontWeight: 800, color: C.lockText }}>—</span> : <><span style={{ fontSize: 14, fontWeight: 800 }}>{headline}</span><span style={{ fontSize: 12, color: changeColor, marginLeft: 8, fontWeight: 700 }}>{change}</span></>}</div>
                   </div>
-                  {r.locked ? (
-                    <input className="lk" type="range" min={0} max={1} step={1} value={0} readOnly onChange={() => {}}
-                      onKeyDown={(e) => e.preventDefault()} aria-readonly="true" aria-disabled="true"
-                      aria-label={`${r.label}`} aria-valuetext="unavailable" style={{ marginTop: 10 }} />
-                  ) : r.type === "rate" ? (
+                  {r.locked ? null : r.type === "rate" ? (
                     <>
                       <div className="flex items-center gap-3 mt-2">
                         <TickTrack ticks={ticks} min={r.min} max={r.max}>
@@ -763,10 +777,10 @@ export default function BoulderBudgetWidget() {
             <Eyebrow>Sources &amp; method</Eyebrow>
             {showSources ? <ChevronUp size={18} color={C.inkSoft} /> : <ChevronDown size={18} color={C.inkSoft} />}
           </button>
-          <p style={{ fontSize: 14, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}>Budget totals, department figures, revenue bases, tax rates and legal limits come from <Doc to={OFFICIAL.book}>the city manager’s 2027 recommended budget</Doc> and <Doc to={OFFICIAL.tabor}>Colorado law</Doc>. What each revenue change would raise is an estimate. <Doc to={PROVENANCE}>The provenance file</Doc> traces every number to its source and says which ones are estimates.</p>
+          <p style={{ fontSize: 14, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}>Budget totals, department figures, revenue bases, tax rates and legal limits come from <Doc to={OFFICIAL.book}>the city manager’s 2027 recommended budget</Doc> and <Doc to={OFFICIAL.tabor}>Colorado law</Doc>. What each revenue change would raise is an estimate, and so is each department’s starting point, its cost before the city’s 2027 changes. <Doc to={PROVENANCE}>The provenance file</Doc> traces every number to its source and says which ones are estimates.</p>
           {showSources && (<>
           <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 10 }}><strong style={{ color: C.ink }}>Rising costs, flat revenue.</strong> Payroll grows under <Doc to={OFFICIAL.message}>new contracts</Doc> that give police and firefighters 5% raises and most other union staff 4%, and software, insurance and other contracts add to the bill. <Doc to={OFFICIAL.briefMore}>Revenue hasn’t kept pace</Doc>: sales and use tax has been flat since 2023, and property tax is down 2.4% under recent state law. The <Doc to={OFFICIAL.budgetPage}>May 2026 Financial Forecast</Doc> put the gap at $6.5M; <Doc to={OFFICIAL.brief}>the recommended budget</Doc>, <Doc to={OFFICIAL.release}>released Aug. 28</Doc>, puts it at {fmt(GAP)}.</p>
-          <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>The city’s plan.</strong> <Doc to={OFFICIAL.glance}>The recommended budget</Doc> eliminates 24 positions, 13 of them filled, ends the photo-radar vans and trims pool hours and custodial service. It moves about $0.6M of costs onto the Open Space and sugary-drink taxes, raises the recreational marijuana tax from 3.5% to 5.5% and increases several licensing and parking-permit fees. It also adds three police lieutenants. The council holds hearings Oct. 1 and 15 and can change any of it before it adopts the budget Oct. 15.</p>
+          <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>The city’s plan.</strong> <Doc to={OFFICIAL.glance}>The recommended budget</Doc> eliminates 24 positions, 13 of them filled, ends the photo-radar vans and trims pool hours and custodial service. It moves about $0.3M of General Fund costs onto the Open Space and sugary-drink taxes, raises the recreational marijuana tax from 3.5% to 5.5% and increases several licensing and parking-permit fees. It also adds three police lieutenants. The council holds hearings Oct. 1 and 15 and can change any of it before it adopts the budget Oct. 15.</p>
           <p style={{ fontSize: 13, lineHeight: 1.55, color: C.inkSoft, marginTop: 8 }}><strong style={{ color: C.ink }}>Past gaps.</strong> In mid-2025, the city closed an $8–10M gap with a hiring freeze, 5% savings from each department and cuts to one-time transfers. For 2026, it closed $7.5M with department cuts and reorganizations that eliminated 19 mostly vacant positions, plus about $6M in new citywide fees: $2.25M for transportation maintenance, $2.6M from speed-on-green cameras, $0.8M from parking and $0.4M from single-family expansion. It kept the <Doc to={OFFICIAL.policies}>emergency reserve</Doc>, about 16.7% of operating spending, at its target. The city holds its reserves for downturns.</p>
           <div className="mt-4">
             <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.04em", color: C.inkSoft }}>OFFICIAL BUDGET DOCUMENTS</div>
