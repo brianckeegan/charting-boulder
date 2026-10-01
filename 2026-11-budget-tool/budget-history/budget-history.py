@@ -158,6 +158,22 @@ SOURCES = {
         "retrieved": "2026-09-21",
         "notes": "Staffing savings: \"about $3 million, according to a city official.\"",
     },
+    "policies2026": {
+        "title": "2026 Approved Budget: Budget Policies (online budget book)",
+        "publisher": "City of Boulder",
+        "date": "",
+        "url": "https://stories.opengov.com/cityofboulderco/36b2e65e-af4a-4cb8-9aea-236d617062d6/published/KTAIb0l0W?currentPageId=68ac844d11eeb98e4f4e3302",
+        "retrieved": "2026-10-01",
+        "notes": "Section 7, Reserve Policy: \"The table at the end of this section defines individual reserve goals by fund.\" That table, \"2026 Budgeted Reserves,\" is an image: \"(1100) General $40,552,280 20.0% Emergency Stabilization Operating Reserve.\" Most other funds' goal is 16.7%. No date of its own.",
+    },
+    "policies2027": {
+        "title": "2027 Recommended Budget: Financial Policies (online budget book)",
+        "publisher": "City of Boulder",
+        "date": "",
+        "url": "https://stories.opengov.com/cityofboulderco/68d0bc8f-fb31-4578-a8af-59594ef78e4d/published/hgCyk4CwB?currentPageId=6a75e5049edf5ffa8847c1f7",
+        "retrieved": "2026-10-01",
+        "notes": "Section 7, Reserve Policy, and its \"2027 Budgeted Reserves\" table: \"(1100) General $40,125,842 20.0% Emergency Operating Reserve.\" Most other funds' goal is 16.7%. No date of its own; published with the 2027 Recommended Budget on 2026-08-28.",
+    },
 }
 
 # --------------------------------------------------------------------------
@@ -1713,7 +1729,10 @@ add(2027, "yoy_capital_pct", "recommended", 19.47, "pct", "glance2027")
 add(2027, "yoy_general_fund_pct", "recommended", 3.09, "pct", "glance2027")
 
 # --- Reserve policy --------------------------------------------------------
-add(2026, "reserve_policy_pct_of_operating", "policy", 16.7, "pct", "forecast2026")
+# The General Fund's emergency reserve goal, from each budget book's Budgeted
+# Reserves table. 16.7% is the goal for most other funds, not the General Fund.
+add(2026, "reserve_policy_pct_of_operating", "policy", 20.0, "pct", "policies2026")
+add(2027, "reserve_policy_pct_of_operating", "policy", 20.0, "pct", "policies2027")
 
 # --------------------------------------------------------------------------
 # Citywide Sources & Uses (OpenGov export, dataset 65843) — 2021-2023

@@ -2460,7 +2460,7 @@ year,measure,basis,value,unit,source_id
 2026,property_mill_levy,adopted,11.648,mills,forecast2026
 2026,property_tax_revenue,adopted,59.17,musd,forecast2026
 2026,property_tax_revenue,revised_projection,57.33,musd,forecast2026
-2026,reserve_policy_pct_of_operating,policy,16.7,pct,forecast2026
+2026,reserve_policy_pct_of_operating,policy,20.0,pct,policies2026
 2026,revenue_accommodation_admission_tax,recommended,12.863745,musd,rec2026
 2026,revenue_development_impact_fees,recommended,27.764864,musd,rec2026
 2026,revenue_grants,recommended,10.920529,musd,rec2026
@@ -2519,6 +2519,7 @@ year,measure,basis,value,unit,source_id
 2027,positions_term_limited_ending,recommended,12,fte,rec2027
 2027,property_mill_levy,recommended,11.648,mills,recbook2027
 2027,property_tax_revenue,recommended,57.8282,musd,recbook2027
+2027,reserve_policy_pct_of_operating,policy,20.0,pct,policies2027
 2027,revenue_accommodation_admission_tax,recommended,13.158537,musd,recbook2027
 2027,revenue_charges_for_services,recommended,9.386423,musd,recbook2027
 2027,revenue_development_impact_fees,recommended,28.541471,musd,recbook2027
