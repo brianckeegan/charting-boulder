@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import {
   Lock, Building2, Coins, RotateCcw, Check, AlertTriangle,
   Github, ChevronDown, ChevronUp, Users, ArrowDownToLine,
@@ -416,9 +417,14 @@ export default function BoulderBudgetWidget() {
   const [aggState, setAggState] = useState("loading");
   const [submitted, setSubmitted] = useState(false);
   const rootRef = useRef(null);
+  const barRef = useRef(null);
+  const followMount = useHostFollowBar(barRef);
 
+  // The page's own height, which can shrink (scrollHeight never drops below
+  // the frame's height, so a frame sized to it could only grow). Newspack's
+  // Iframe block and the Custom HTML snippet in ARCHITECTURE.md size the frame to it.
   useEffect(() => {
-    const send = () => { try { window.parent?.postMessage({ type: "boulder-budget:height", height: document.documentElement.scrollHeight }, "*"); } catch {} };
+    const send = () => { try { window.parent?.postMessage({ type: "boulder-budget:height", height: Math.ceil(document.documentElement.getBoundingClientRect().height) }, "*"); } catch {} };
     send(); const ro = new ResizeObserver(send); if (rootRef.current) ro.observe(document.body);
     window.addEventListener("load", send);
     return () => { ro.disconnect(); window.removeEventListener("load", send); };
@@ -505,6 +511,22 @@ export default function BoulderBudgetWidget() {
   const demoCount = Object.values(demo).filter((v) => (Array.isArray(v) ? v.length : v)).length;
   const canSubmit = balanced && !submitted && demoCount > 0;
 
+  // The running score, drawn in the sticky bar and in its copy in the host page.
+  const scoreBar = (
+    <>
+      <div className="flex items-center justify-between gap-2 flex-wrap">
+        <div className="flex items-baseline gap-2" style={{ minWidth: 0 }}>
+          <span className="tnum" style={{ fontSize: 22, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{balanced ? "Closed" : fmt(remaining)}</span>
+          <span style={{ fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 800, color: C.inkSoft }}>{balanced ? "2027 gap" : "left to close"}</span>
+        </div>
+        <div style={{ fontSize: 12, color: C.inkSoft }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {Math.abs(revenueOnly) < 0.005 ? "no revenue change" : `${signed(revenueOnly)} revenue`}{shifted > 0 ? ` · ${fmt(shifted)} shifted` : ""}</div>
+      </div>
+      <div className="mt-2">
+        <GapBar label={`2027 General Fund gap: ${fmt(GAP)}`} gap={GAP} remaining={remaining} balanced={balanced} />
+      </div>
+    </>
+  );
+
   return (
     <div ref={rootRef} style={{ background: C.paper, color: C.ink, fontFamily: FONT }} className="w-full">
       <style>{`
@@ -566,19 +588,13 @@ export default function BoulderBudgetWidget() {
         {/* Sticks to the top of whatever is scrolling: the iframe viewport in the
             standalone build, the article page in the inline build. --bbw-sticky-top
             is set by the web component to clear the host site's own sticky header;
-            it falls back to 0 everywhere else. */}
-        <section className="mt-3 rounded-lg" style={{ background: C.limeTint, border: `1px solid ${C.hair}`, position: "sticky", top: "var(--bbw-sticky-top, 0px)", zIndex: 30, padding: 12, boxShadow: "0 6px 16px rgba(26,26,26,0.10)" }}>
-          <div className="flex items-center justify-between gap-2 flex-wrap">
-            <div className="flex items-baseline gap-2" style={{ minWidth: 0 }}>
-              <span className="tnum" style={{ fontSize: 22, fontWeight: 800, lineHeight: 1, color: balanced ? C.green : C.red }}>{balanced ? "Closed" : fmt(remaining)}</span>
-              <span style={{ fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 800, color: C.inkSoft }}>{balanced ? "2027 gap" : "left to close"}</span>
-            </div>
-            <div style={{ fontSize: 12, color: C.inkSoft }}>{netSpendChange === 0 ? "no spending change" : `${signed(netSpendChange)} spending`} · {Math.abs(revenueOnly) < 0.005 ? "no revenue change" : `${signed(revenueOnly)} revenue`}{shifted > 0 ? ` · ${fmt(shifted)} shifted` : ""}</div>
-          </div>
-          <div className="mt-2">
-            <GapBar label={`2027 General Fund gap: ${fmt(GAP)}`} gap={GAP} remaining={remaining} balanced={balanced} />
-          </div>
+            it falls back to 0 everywhere else. A frame sized to the whole widget
+            has nothing to scroll, so there useHostFollowBar pins a copy in the
+            host page instead. */}
+        <section ref={barRef} className="mt-3 rounded-lg" style={{ ...SCORE_BAR_STYLE, position: "sticky", top: "var(--bbw-sticky-top, 0px)", zIndex: 30 }}>
+          {scoreBar}
         </section>
+        {followMount && createPortal(<div className="rounded-lg" style={SCORE_BAR_STYLE}>{scoreBar}</div>, followMount)}
 
         {/* General Fund — bidirectional */}
         <section className="mt-7">
@@ -874,6 +890,127 @@ async function writeAgg({ revShare, usedRevenue, usedVote, usedShift, topCut, pa
     } catch { return null; }
   }
   return null;
+}
+
+/* ---------------------------------------------------------- iframe embeds */
+const SCORE_BAR_STYLE = { background: C.limeTint, border: `1px solid ${C.hair}`, padding: 12, boxShadow: "0 6px 16px rgba(26,26,26,0.10)" };
+
+// The host page's header: the full-width fixed or sticky bars pinned to the top
+// of its viewport, or stacked under one that is (a site header below the
+// WordPress admin bar, for a logged-in editor). The same test as
+// detectStickyOffset in build-standalone.sh's inline build. Also returns the
+// lowest bar's z-index, so the score bar can sit just beneath its menus.
+function hostHeader(win, skip) {
+  const doc = win.document, vw = win.innerWidth || 0;
+  const bars = [];
+  for (const el of doc.body ? doc.body.querySelectorAll("*") : []) {
+    if (el === skip) continue;
+    let cs;
+    try { cs = win.getComputedStyle(el); } catch { continue; }
+    if (cs.position !== "fixed" && cs.position !== "sticky") continue;
+    if (cs.visibility === "hidden" || cs.display === "none") continue;
+    const r = el.getBoundingClientRect();
+    if (r.width < vw * 0.5 || r.height < 8 || r.height > 200 || r.bottom <= 0) continue;   // a full-width bar, header height
+    bars.push({ top: r.top, bottom: r.bottom, z: parseInt(cs.zIndex, 10) });
+  }
+  let bottom = 0, z = null;
+  for (const b of bars.sort((p, q) => p.top - q.top)) {
+    if (b.top > bottom + 4) break;
+    if (b.bottom > bottom) { bottom = b.bottom; z = b.z; }
+  }
+  return { bottom: Math.round(bottom), z: Number.isFinite(z) ? z : null };
+}
+
+/* A frame sized to the whole widget (Newspack's Iframe block sizes it from the
+   height message) has nothing to scroll, so the score bar's position: sticky
+   never engages and the bar scrolls away with the article. When the host page
+   shares the frame's origin, as it does for a ZIP uploaded to Newspack, this
+   pins a copy of the bar in the host page, just below its header, while the
+   original is out of view. A cross-origin host, or a frame that scrolls, keeps
+   the in-frame sticky bar. The copy is aria-hidden, so screen readers get the
+   original only. Returns the copy's mount node, or null. */
+function useHostFollowBar(barRef) {
+  const [mount, setMount] = useState(null);
+  useEffect(() => {
+    let frame, host;
+    try { frame = window.frameElement; host = window.parent; if (!host.document.body) return; } catch { return; }   // cross-origin
+    // Inline (Web Component) builds render into a shadow root and scroll with the article already.
+    if (!frame || host === window || !barRef.current || barRef.current.getRootNode() !== document) return;
+    const doc = host.document;
+    const el = doc.createElement("div");
+    el.setAttribute("aria-hidden", "true");
+    el.setAttribute("data-boulder-budget", "score-bar");
+    el.style.cssText = "position:fixed;top:0;left:0;width:0;margin:0;padding:0;z-index:50;display:none";
+    const shadow = el.attachShadow({ mode: "open" });
+    // The frame's styles: the utility classes and the widget's own <style> block.
+    document.querySelectorAll("style").forEach((s) => shadow.appendChild(s.cloneNode(true)));
+    const inner = doc.createElement("div");
+    inner.className = "bbw";
+    // Text styles inherit through a shadow root, though not into a frame: reset the ones a theme sets.
+    inner.style.cssText = `font-size:16px;line-height:normal;color:${C.ink};font-weight:400;font-style:normal;letter-spacing:normal;text-transform:none;text-align:left;word-spacing:normal;white-space:normal`;
+    shadow.appendChild(inner);
+    doc.body.appendChild(el);
+
+    let offset = 0, pad = 0, done = false, timer = null;
+    const update = () => {
+      if (done) return;
+      if (!frame.isConnected) { teardown(); return; }
+      const bar = barRef.current;
+      if (!bar) return;
+      const f = frame.getBoundingClientRect();
+      const fx = f.left + frame.clientLeft, fy = f.top + frame.clientTop;
+      const b = bar.getBoundingClientRect();
+      const end = fy + bar.parentElement.getBoundingClientRect().bottom - pad;   // where position: sticky lets go
+      const whole = document.documentElement.scrollHeight <= window.innerHeight + 2;   // nothing scrolls inside the frame
+      const top = Math.min(offset, end - b.height);
+      const show = whole && fy + b.top < offset && end > offset;
+      el.style.display = show ? "block" : "none";
+      if (!show) return;
+      el.style.top = `${top}px`;
+      el.style.left = `${fx + b.left}px`;
+      el.style.width = `${b.width}px`;
+      el.style.clipPath = top < offset ? `inset(${offset - top}px 0 0 0)` : "";   // slides under the header at the end, not over it
+    };
+    const measure = () => {
+      if (done) return;
+      const h = hostHeader(host, el);
+      offset = h.bottom;
+      pad = barRef.current ? parseFloat(getComputedStyle(barRef.current.parentElement).paddingBottom) || 0 : 0;
+      el.style.zIndex = String(h.z > 1 ? h.z - 1 : 50);
+      update();
+    };
+    const onResize = () => { clearTimeout(timer); timer = setTimeout(measure, 150); };
+    const onFirstScroll = () => { host.removeEventListener("scroll", onFirstScroll); measure(); };   // headers that change once scrolled
+    const ro = new ResizeObserver(update);
+    const timers = [setTimeout(measure, 300), setTimeout(measure, 1500)];   // after layout, then webfonts
+    function teardown() {
+      if (done) return;
+      done = true;
+      host.removeEventListener("scroll", update);
+      host.removeEventListener("scroll", onFirstScroll);
+      host.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      window.removeEventListener("pagehide", teardown);
+      ro.disconnect();
+      timers.forEach(clearTimeout);
+      clearTimeout(timer);
+      el.remove();
+      setMount(null);
+    }
+    host.addEventListener("scroll", update, { passive: true });
+    host.addEventListener("scroll", onFirstScroll, { passive: true });
+    host.addEventListener("resize", onResize);
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    window.addEventListener("pagehide", teardown);
+    ro.observe(barRef.current);
+    ro.observe(document.body);
+    setMount(inner);
+    measure();
+    return teardown;
+  }, [barRef]);
+  return mount;
 }
 
 /* ---------------------------------------------------------------- UI bits */

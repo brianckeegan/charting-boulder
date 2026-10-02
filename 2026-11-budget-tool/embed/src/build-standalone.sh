@@ -154,10 +154,11 @@ import shadowCss from "./shadow.css";
   // below it instead of underneath it. querySelectorAll does not pierce shadow
   // roots, so the widget's own sticky bar is never counted. Re-measured on
   // resize and after layout settles, and overridable per-embed with the
-  // sticky-offset attribute.
+  // sticky-offset attribute. The iframe build's hostHeader (in the widget)
+  // applies the same test to the host page.
   function detectStickyOffset() {
     if (!document.body) return 0;
-    var bottom = 0;
+    var bars = [];
     var vw = window.innerWidth || 0;
     var els = document.body.querySelectorAll("*");
     for (var i = 0; i < els.length; i++) {
@@ -168,8 +169,16 @@ import shadowCss from "./shadow.css";
       var r = el.getBoundingClientRect();
       if (r.width < vw * 0.5) continue;             // a full-width bar, not a badge
       if (r.height < 8 || r.height > 200) continue; // plausible header height
-      if (r.top > 4 || r.bottom <= 0) continue;     // actually pinned at the top
-      if (r.bottom > bottom) bottom = r.bottom;
+      if (r.bottom <= 0) continue;
+      bars.push(r);
+    }
+    // Bars pinned at the top, or stacked under one that is (a site header
+    // below the WordPress admin bar, for a logged-in editor).
+    bars.sort(function (a, b) { return a.top - b.top; });
+    var bottom = 0;
+    for (var j = 0; j < bars.length; j++) {
+      if (bars[j].top > bottom + 4) break;
+      if (bars[j].bottom > bottom) bottom = bars[j].bottom;
     }
     return Math.round(bottom);
   }

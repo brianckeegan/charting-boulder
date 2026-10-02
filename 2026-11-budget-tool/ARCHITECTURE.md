@@ -224,6 +224,14 @@ using the `boulder-budget:height` message the widget already posts:
 </script>
 ```
 
+A frame that tall has nothing to scroll, so the score bar's `position: sticky`
+never engages. When the frame shares the article's origin, as it does for the ZIP
+uploaded to Newspack's Iframe block, the widget pins a copy of the bar to the
+article page below its header instead (`useHostFollowBar` in the widget). This
+snippet's frame is on GitHub Pages, another origin, so its score bar scrolls away
+with the widget. The Iframe block's ZIP (method B in
+`embed/NEWSPACK-EMBED-GUIDE.md`) does not have that problem.
+
 ---
 
 ## Hardening & going to production

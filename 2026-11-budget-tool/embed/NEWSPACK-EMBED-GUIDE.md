@@ -112,15 +112,23 @@ account. It uses Newspack’s own built-in block and needs no special permission
    | **Height** | **800 px** |
    | **Width** | **100 %** |
 
-5. Preview and confirm the interactive loads and the sliders respond.
+   The height only holds the space while the interactive loads. Once it loads,
+   the block resizes the frame to fit all of it: about **4,700 px** in an
+   article column and **6,800 px** on a phone, and more while a reader has
+   Sources & method open. Readers scroll the article, not a box inside it.
+5. Preview and confirm:
+   - the interactive loads and the sliders respond;
+   - once you scroll past the score bar, it stays pinned **just below your site
+     header** (below the WordPress admin bar too, when you're logged in) until
+     the end of the interactive.
 
-**Why it scrolls inside a box:** the interactive is about **4,700 px tall** in an
-article column (**6,200 px** on a phone), and taller with its Sources & method
-section open, so no frame height shows all of it.
-Readers scroll within the frame, and the score bar stays pinned to the top of the
-frame. If 800 px feels wrong, try 700 px (less dominant) or 900–1000 px (more
-visible at once). The block also has a **full screen** toggle, which lets the
-interactive take over the viewport but hides the surrounding article.
+**How the score bar follows the reader:** the frame is as tall as the
+interactive, so nothing scrolls inside it. Instead, the interactive pins a copy
+of its score bar to the article page, just below the header, and takes it away
+when the reader scrolls back up or past the end. This works because Newspack
+serves the uploaded ZIP from your own site, so the article and the frame are on
+the same domain. Leave the block's **Fullscreen** toggle off: it hides the
+article.
 
 ### Updating later
 
@@ -149,6 +157,12 @@ or ask Newspack support to enable it. Use Method A instead.
 **(B) The upload is rejected.**
 The block accepts `.zip` only. Make sure your Mac didn’t auto-expand the download.
 At ~66 KB, a size limit is an unlikely cause.
+
+**(B) The score bar scrolls away instead of following.**
+Hard-refresh the preview first; an older upload of the ZIP didn't follow. If it
+still scrolls away, your site probably serves uploads from a separate domain (a
+media-offload or CDN plugin), and the interactive can't reach the article page
+from there. Method A has no frame, so it doesn't have this limit.
 
 **(B) The frame is blank or shows a file listing.**
 The archive’s entry point is `index.html` at the top level. If your Newspack
@@ -189,8 +203,12 @@ font-src    'self' https://fonts.gstatic.com;                      # Method B on
 **Isolation.** Method A seals the interactive’s CSS in a Shadow DOM, so its
 styles and your theme’s styles cannot affect each other. Note that Shadow DOM is
 style encapsulation, not a security boundary: inline, the interactive shares the
-page’s origin with other scripts on the article. Method B’s iframe is a stronger
-boundary, which is one reason to keep it available.
+page’s origin with other scripts on the article. Method B’s frame keeps the
+interactive in a page of its own, so the two pages’ styles and scripts don’t
+touch by accident. Because Newspack serves the ZIP from your own domain, it isn’t
+a security boundary either. The interactive reaches into the article page for
+one thing only: the copy of its score bar, a single element it adds while the
+reader scrolls and removes when the frame closes.
 
 **Privacy and storage.** No cookies, no analytics, no third-party trackers. One
 browser `localStorage` flag (`bb_submitted_v5`) marks repeat submissions from the
