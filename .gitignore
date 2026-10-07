@@ -83,6 +83,8 @@ node_modules/
 # is renamed, which is the one failure here that cannot be undone by a revert.
 responses.csv
 budget-survey-analysis-frame.csv
+# The Supabase dashboard's CSV export of the same table, before it is renamed.
+contributions_rows*.csv
 
 # Newspack Iframe Block archive, built locally from the files in embed/.
 boulder-budget-interactive.zip

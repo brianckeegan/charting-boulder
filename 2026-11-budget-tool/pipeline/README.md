@@ -46,8 +46,9 @@ export SUPABASE_SECRET_KEY=sb_secret_…       # trusted machine only; never com
 python3 export-responses.py ../responses.csv
 ```
 
-Then set `STUB_MODE = False` in `../budget-survey-analysis.ipynb` (it reads
-`responses.csv`). Columns and order already match the notebook's schema.
+The notebook, `../budget-survey-analysis.ipynb`, reads `responses.csv`. It also
+reads the Supabase dashboard's CSV export of the `contributions` table, renamed
+`responses.csv`.
 
 ## Environment variables
 
