@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Export budget contributions from Supabase to responses.csv for the notebook.
 
-This is the "live export" the analysis notebook expects when STUB_MODE = False
-(it reads RESPONSES_CSV = 'responses.csv'). Columns and order match the
+This is the live export the analysis notebook reads (RESPONSES_CSV =
+'responses.csv'). Columns and order match the
 notebook's GF_SLIDERS / FUND_SLIDERS / REV_COLS / DEMO_COLS exactly, plus `ts`
 and `scenario`. `ts` is `created_at`, the insert time a server-side trigger
 sets; the widget's own `client_ts` comes from the reader's clock and is not

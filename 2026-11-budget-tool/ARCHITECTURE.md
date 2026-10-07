@@ -32,7 +32,6 @@ one-file export script. The widget is
                                   pipeline/export-responses.py
                                           ▼
                                    responses.csv  ──►  budget-survey-analysis.ipynb
-                                                       (STUB_MODE = False)
 ```
 
 The browser writes straight to Supabase with the browser-safe publishable key;
@@ -262,8 +261,8 @@ reader-facing privacy note if you promise "we never keep your IP."
 
 ## Analysis loop
 
-When you're ready to analyze real responses instead of the notebook's synthetic
-sample:
+The notebook reads the response export as `responses.csv`, next to it. Make it
+with the export script:
 
 ```bash
 cd pipeline
@@ -272,6 +271,7 @@ export SUPABASE_SECRET_KEY=sb_secret_…      # trusted machine only
 python3 export-responses.py ../responses.csv
 ```
 
-Then set `STUB_MODE = False` in `budget-survey-analysis.ipynb` (it reads
-`responses.csv`). The export's columns and order already match the notebook's
-schema and its integrity checks.
+Or download the `contributions` table as CSV from the Supabase dashboard (it
+saves as `contributions_rows.csv`) and rename it `responses.csv`; the notebook
+reads either. Both files hold individual responses, and `.gitignore` keeps both
+out of the repository.
