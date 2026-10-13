@@ -85,6 +85,9 @@ responses.csv
 budget-survey-analysis-frame.csv
 # The Supabase dashboard's CSV export of the same table, before it is renamed.
 contributions_rows*.csv
+# The notebook's tables for Datawrapper: results from reader responses, kept out
+# until a column publishes them (13-umap-map has one row per budget).
+datawrapper/
 
 # Newspack Iframe Block archive, built locally from the files in embed/.
 boulder-budget-interactive.zip
