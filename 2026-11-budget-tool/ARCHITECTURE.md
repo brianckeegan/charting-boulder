@@ -261,8 +261,11 @@ reader-facing privacy note if you promise "we never keep your IP."
 
 ## Analysis loop
 
-The notebook reads the response export as `responses.csv`, next to it. Make it
-with the export script:
+The notebook runs on `data/budget-survey-public.csv`, the published,
+de-identified file (see [`data/README.md`](data/README.md)), which
+`pipeline/make-public-data.py` builds from a private export. To run it on the
+full export instead, set its `RESPONSES_CSV = 'responses.csv'` and make that
+file with the export script:
 
 ```bash
 cd pipeline
@@ -273,5 +276,6 @@ python3 export-responses.py ../responses.csv
 
 Or download the `contributions` table as CSV from the Supabase dashboard (it
 saves as `contributions_rows.csv`) and rename it `responses.csv`; the notebook
-reads either. Both files hold individual responses, and `.gitignore` keeps both
-out of the repository.
+reads either. Both files hold every answer and the submission times, and
+`.gitignore` keeps both out of the repository. The public file keeps five survey
+answers and no times.

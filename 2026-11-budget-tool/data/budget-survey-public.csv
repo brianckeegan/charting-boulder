@@ -1,0 +1,217 @@
+budget_id,gf_police,gf_genadmin,gf_fire,gf_hhs,gf_manager,gf_it,gf_facilities,gf_finance,gf_parksrec,gf_attorney,gf_other,fund_utilities,fund_transpo,fund_openspace,fund_hhs,fund_parksrec,fund_facilities,fund_pds,fund_manager,fund_climate,fund_fire,fund_other,rev_fees,rev_property,rev_sales,rev_marijuana,rev_shift,spend_change,revenue_only,demo_tenure,demo_age,demo_education,demo_income,demo_building
+B001,0,-3,0,-10,-7,-10,0,0,-10,0,-6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.29,0,Own,65 and over,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B002,-1,-2,-3,2,-1,-8,-5,0,0,0,-8,0,0,0,0,0,0,0,0,0,0,0,10,0,0,5.5,0,-4.84,1.51,Own,45-54,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B003,-1,-3,0,-8,-10,-5,0,-1,0,-4,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.66,0,Own,45-54,"Professional degree (MD, JD, DDS)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B004,-4,-2,-1,0,-2,-2,0,-3,0,-2,-6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,1,-5.14,0.41,Own,45-54,"Professional degree (MD, JD, DDS)","$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B005,3,-4,0,-1,-9,-11,-10,-11,-8,-10,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9.5,0,-6.83,1.24,Own,Prefer not to say,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B006,0,0,0,-6,0,-7,-3,-5,-4,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,5,0,6,0,-3.97,2.49,Own,45-54,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B007,-25,0,0,0,-25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0.6,-16.68,1.34,,,"Doctoral degree (PhD, EdD)",,
+B008,0,0,0,-10,-20,-5,0,0,0,-5,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-6.12,0.41,Own,65 and over,Master's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B009,0,0,0,-11,-14,0,0,-11,0,-9,-14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0.6,-7.07,0,Prefer not to say,Prefer not to say,Master's degree,Prefer not to say,Prefer not to say
+B010,-3,0,0,0,-10,-9,0,-4,-10,-5,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.62,0,Own,55-64,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B011,0,0,0,-3,-12,-11,-9,0,0,0,-6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-4.91,1.34,Own,55-64,Master's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B012,2,-1,-1,-15,-15,-9,-5,-9,-4,-3,-14,0,0,0,0,0,0,0,0,0,0,0,-3,0,-3,6,0,-8.56,-2.29,Own,55-64,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B013,0,-10,0,-20,-20,0,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-7.9,0,Own,55-64,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B014,0,0,-4,-5,0,0,0,0,-8,-2,-10,0,0,0,0,0,0,0,0,0,0,0,7,0,0,3.5,2.3,-4.46,0.77,Own,65 and over,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B015,-5,-3,0,-2,-6,-2,-4,-5,-6,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.43,0,Own,65 and over,"Professional degree (MD, JD, DDS)","$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B016,0,0,0,-8,-9,-9,0,-5,5,-7,-16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.56,0,Own,55-64,"Professional degree (MD, JD, DDS)","$300,000 per year or more",Single-unit house detached from any other houses
+B017,-2,0,-5,0,-16,0,0,0,-14,0,-17,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-8.7,0,Own,65 and over,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B018,4,0,0,-25,-16,0,-17,-10,0,0,-15,0,0,0,0,0,0,0,0,0,0,0,0,-25,12,3.5,0,-7.94,0.05,Own,55-64,Bachelor's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B019,2,-9,0,2,-25,0,0,-5,-4,-18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-6.62,0.41,Own,55-64,Bachelor's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B020,-25,-25,0,-25,-25,-25,14,-25,17,-25,-25,0,0,0,0,0,0,0,0,0,0,0,-25,-18,-25,0,0,-37.77,-31.5,Own,35-44,Bachelor's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B021,-3,-5,0,-3,-13,0,0,-6,4,-6,-8,0,0,0,0,0,0,0,0,0,0,0,3,0,0,6,0,-7.42,0.84,Own,45-54,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B022,-3,-3,-3,0,-3,-9,-5,-5,-4,0,0,0,0,0,0,0,0,0,0,0,0,0,-2,3,0,6.5,0,-6.13,1.58,Own,45-54,Master's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B023,-3,1,1,-1,-3,-10,1,1,-3,-3,-5,0,0,0,0,0,0,0,0,0,0,0,1,1,1,10,0,-3.75,2.67,Own,25-34,Bachelor's degree,"$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B024,-4,-2,-3,7,-4,-10,-5,-5,-4,0,-8,0,0,0,0,0,0,0,0,0,0,0,-2,-2,0,6,0,-7.04,-0.49,Rent,25-34,Bachelor's degree,"$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B025,-4,-4,0,0,-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,5,0,3.5,0,-4.14,2.19,Own,65 and over,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B026,-6,-6,0,-6,-6,0,0,-6,-6,-6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-8.23,0,Own,55-64,"Professional degree (MD, JD, DDS)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B027,0,-2,0,-3,-4,-9,-6,-5,-7,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.5,-5.44,0.41,Own,65 and over,Master's degree,Prefer not to say,"Building with two or more homes (duplex, townhome, apartment or condominium)"
+B028,-14,0,10,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25,25,-11,3.5,2,-0.99,3.52,Own,35-44,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B029,3,-4,5,6,-4,-5,0,-6,0,-5,-10,0,0,0,0,0,0,0,0,0,0,0,6,6,0,9,1.1,-1.01,4.16,Own,65 and over,Master's degree,"$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B030,-5,-4,-2,0,-10,-10,-5,-6,-5,0,-7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-9.65,0.41,Own,55-64,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B031,0,-4,0,0,-20,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0.6,-4.83,1.34,Own,35-44,"Doctoral degree (PhD, EdD)","$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B032,0,-6,0,-25,-19,0,0,0,0,0,-9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0.6,-9.6,0,Own,45-54,"Some college, no degree","$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B033,2,0,7,-25,-25,-15,0,0,2,-25,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,10,0,-6.14,2,Own,35-44,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B034,0,0,0,-25,-7,-10,0,-6,0,-6,-2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.6,0,Own,55-64,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B035,-10,0,-4,-10,-10,-10,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,-11.24,0.72,Own,45-54,"Doctoral degree (PhD, EdD)","$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B036,-5,-5,-3,-3,-2,-3,-2,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0.5,-6.75,0,Own,35-44,Master's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B037,-5,-3,0,15,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,3,6.5,0,-1.3,5.07,Own,25-34,Master's degree,"$50,000 to $99,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B038,-2,-2,1,0,-4,-5,-2,-1,-3,-2,-3,0,0,0,0,0,0,0,0,0,0,0,2,1,0,6,1.8,-3.66,1.13,Own,45-54,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B039,0,0,0,-11,-10,-17,0,-14,0,-25,-12,0,0,0,0,0,0,0,0,0,0,0,0,-7,0,3.5,0,-9.3,-2.76,Own,65 and over,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B040,-2,-3,-1,2,-3,-8,-4,-5,-6,-3,-7,0,0,0,0,0,0,0,0,0,0,0,0,0,1,5,0,-6.06,1.13,Own,65 and over,Bachelor's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B041,-5,-3,-3,0,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,-5.4,0.31,Own,55-64,Bachelor's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B042,-6,-5,3,0,-10,9,0,0,3,-7,0,0,0,0,0,0,0,0,0,0,0,0,9,1,0,3.5,0.6,-4.5,1.38,Own,45-54,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B043,0,-4,0,-11,-25,0,-4,-5,-5,-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-7.26,0,Own,45-54,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B044,-11,-2,0,0,-8,-2,0,0,0,-7,0,0,0,0,0,0,0,0,0,0,0,0,7,9,0,6,0,-8.33,4.83,Own,45-54,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B045,0,0,-1,4,-6,-8,-5,-4,-4,4,-13,0,0,0,0,0,0,0,0,0,0,0,5,0,0,6.5,0.8,-4.52,1.17,Own,45-54,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B046,0,0,0,-25,-25,0,0,0,0,-25,-11,0,0,0,0,0,0,0,0,0,0,0,-4,-10,0,10,0,-9.87,-3.05,Own,65 and over,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B047,1,0,-2,-10,-8,-7,-3,-5,2,0,-2,0,0,0,0,0,0,0,0,0,0,0,0,5,0,5.5,0,-4.08,2.38,Own,35-44,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B048,-5,-2,0,0,0,0,0,-2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,1,1,10,0,-3.61,3.11,Own,25-34,Master's degree,"$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B049,0,-4,-2,1,-3,-7,-3,-4,0,0,-4,0,0,0,0,0,0,0,0,0,0,0,5,3,0,5.5,0,-4.4,2.14,Own,35-44,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B050,-4,0,-3,-7,-8,18,-7,-7,0,0,-12,0,0,0,0,0,0,0,0,0,0,0,5,0,0,5.5,0,-6.2,0.96,Own,35-44,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B051,0,-2,0,0,-8,-9,0,-3,1,-3,-8,0,0,0,0,0,0,0,0,0,0,0,1,0,1,5.5,0.5,-4.53,1.35,Own,55-64,"Doctoral degree (PhD, EdD)","$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B052,-2,-2,0,0,-1,-8,-6,0,-2,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-4.92,1.34,Rent,35-44,Master's degree,"$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B053,-1,-3,0,-18,-18,0,-3,-3,14,0,-6,0,0,0,0,0,0,0,0,0,0,0,-2,-1,0,6,0,-6.88,-0.1,Own,35-44,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B054,-2,-1,-3,0,-1,-8,0,-5,0,-4,2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,10,0.6,-3.7,2.13,Own,45-54,Master's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B055,0,-2,0,0,-10,-10,0,-9,0,-7,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8.5,0.3,-5.07,1.03,Own,65 and over,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B056,-3,-2,-3,5,-3,-10,-4,-5,-4,-1,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0.6,-6.63,0.52,Rent,25-34,Master's degree,"$50,000 to $99,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B057,-3,0,0,-7,-3,-8,-4,-5,0,-6,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,3.5,0.6,-4.9,0.79,Own,25-34,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B058,0,-2,0,0,-13,-9,-6,-5,0,-2,-7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4.5,0.6,-5.56,0.21,Prefer not to say,Prefer not to say,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B059,-12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.55,0,Rent,25-34,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B060,-5,-4,2,5,-4,-9,0,-5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,3.5,1,-4.42,2.02,Rent,25-34,"Some college, no degree","$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B061,0,0,0,-7,-12,-9,-7,-7,-7,-9,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.5,-6.4,0.41,Own,45-54,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B062,20,0,0,-25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25,25,0,10,0,7.47,13.95,,45-54,"Professional degree (MD, JD, DDS)",,Single-unit house detached from any other houses
+B063,0,-17,0,-16,-19,-4,-3,0,0,0,-3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4.5,0,-12,0.21,Own,65 and over,Master's degree,Prefer not to say,"Building with two or more homes (duplex, townhome, apartment or condominium)"
+B064,0,-5,0,0,-10,-5,-5,-4,0,0,-6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.6,-5.39,0.41,Own,55-64,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B065,3,-2,0,-10,-25,0,0,0,-4,-10,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-6.17,0.41,Own,35-44,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B066,0,-1,0,-25,-16,0,0,0,-4,0,-7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-7.31,0,Rent,45-54,"Doctoral degree (PhD, EdD)","$25,000 to $49,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B067,0,-2,-3,3,-2,-4,-5,-4,-4,0,-8,0,0,0,0,0,0,0,0,0,0,0,3,0,0,5.5,1.2,-4.39,0.74,Rent,65 and over,Master's degree,"$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B068,1,1,1,-10,-10,-12,-10,-10,3,-1,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,0,-5,1.34,Own,45-54,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B069,2,-2,2,-20,-10,-10,-7,-5,0,-3,-7,0,0,0,0,0,0,0,0,0,0,0,5,0,0,3.5,0,-6.47,0.55,Own,35-44,Master's degree,"$300,000 per year or more","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B070,0,0,0,0,-14,-13,-12,0,0,0,-16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-7.02,0,Own,65 and over,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B071,-3,-10,0,-25,-15,-24,-5,-10,-5,-5,-15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,-17.84,0.72,Own,Prefer not to say,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B072,0,-5,-3,-2,-4,-4,0,0,0,-25,-9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-7.04,0,Own,65 and over,Master's degree,"$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B073,0,-5,0,-5,-5,-8,0,-3,-5,-3,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.62,0,Own,55-64,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B074,7,-3,6,8,1,3,7,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,12,8.5,0,7.69,16.49,Rent,65 and over,Bachelor's degree,"$25,000 to $49,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B075,0,0,0,0,-25,0,0,0,0,0,-24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-7.4,0,Own,55-64,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B076,-3,-4,0,-11,-10,0,0,-5,-2,-2,-7,0,0,0,0,0,0,0,0,0,0,0,-2,-2,0,6.5,0.2,-7.73,-0.39,Own,65 and over,"Professional degree (MD, JD, DDS)",Prefer not to say,Single-unit house detached from any other houses
+B077,0,0,0,-15,-12,-15,0,0,1,-10,-14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-8.3,0,Own,25-34,Bachelor's degree,Prefer not to say,"Building with two or more homes (duplex, townhome, apartment or condominium)"
+B078,5,-5,5,-1,-5,-5,0,0,5,0,-5,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,0,0.6,6.96,Own,65 and over,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B079,0,-2,-3,1,-1,-9,-5,-5,-4,-2,-8,0,0,0,0,0,0,0,0,0,0,0,2,0,0,5.5,0.6,-5.31,0.63,Own,65 and over,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B080,0,-10,0,-25,-25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-3,-3,5.5,0,-10.16,-3.25,Own,65 and over,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B081,-4,-4,0,0,-4,-4,0,0,0,0,-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0.7,-5.33,0.31,Own,35-44,"Doctoral degree (PhD, EdD)","$300,000 per year or more",Single-unit house detached from any other houses
+B082,0,-1,0,0,-4,-5,-6,-5,0,-5,-11,0,0,0,0,0,0,0,0,0,0,0,5,2,0,5.5,0,-4.53,1.75,Own,25-34,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B083,11,-25,5,-25,-25,-25,0,-25,0,-25,-25,0,0,0,0,0,0,0,0,0,0,0,-25,-25,0,10,0,-18.74,-11.27,Own,45-54,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B084,-3,-2,0,-6,-8,-8,-5,-5,-5,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,-7.65,0.1,Own,Prefer not to say,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B085,0,0,0,0,-8,-25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,10,0,-3.89,2.38,Own,65 and over,Master's degree,"$50,000 to $99,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B086,-6,-3,0,-15,-10,-13,0,0,-15,0,0,0,0,0,0,0,0,0,0,0,0,0,-3,-2,-1,3.5,0,-10.22,-1.94,Own,65 and over,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B087,-6,-8,5,-10,-10,-10,8,-12,-7,-10,-11,0,0,0,0,0,0,0,0,0,0,0,0,-3,3,10,0.3,-11.7,2.63,Rent,25-34,Master's degree,Prefer not to say,"Building with two or more homes (duplex, townhome, apartment or condominium)"
+B088,25,-14,0,-25,0,-25,0,-14,0,-13,0,0,0,0,0,0,0,0,0,0,0,0,8,8,15,10,0.6,0.39,17.76,Own,55-64,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B089,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,0,0,0,0,0,0,0,0,0,0,0,1,0,0,3.5,0,-6.19,0.11,Own,45-54,Bachelor's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B090,-1,-7,-5,0,-7,-2,0,0,-4,-3,-2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2.5,0,-6.61,-0.29,Own,55-64,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B091,0,0,0,0,-9,-10,0,0,0,0,-8,0,0,0,0,0,0,0,0,0,0,0,5,4,4,6,0,-3.71,5.95,Own,65 and over,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B092,-8,0,0,0,0,-15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0.4,-6.11,0,Rent,35-44,"Doctoral degree (PhD, EdD)","$50,000 to $99,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B093,-6,-2,3,2,0,-6,1,1,2,0,-8,0,0,0,0,0,0,0,0,0,0,0,5,2,0,5,0.5,-4.64,1.65,Rent,18-24,Bachelor's degree,Prefer not to say,"Building with two or more homes (duplex, townhome, apartment or condominium)"
+B094,-6,-1,0,0,-3,-4,-1,-1,-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,5,0,-4.9,1.49,Other,18-24,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B095,-10,-10,-10,-10,-10,-10,-10,-10,-10,-10,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0.6,-20.64,0.31,Own,55-64,Bachelor's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B096,0,-3,0,1,-1,-4,-3,-2,-2,0,-3,0,0,0,0,0,0,0,0,0,0,0,5,3,1,5.5,0.7,-2.61,2.97,Own,55-64,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B097,-1,-2,-3,-4,-2,-6,-5,-3,2,0,-6,0,0,0,0,0,0,0,0,0,0,0,1,2,0,5.5,0,-5.28,1.31,Own,35-44,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B098,0,0,12,0,-12,-8,0,0,0,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,5,0,1.34,Own,35-44,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B099,0,-3,-2,0,-3,-4,-4,-4,-3,-5,-5,0,0,0,0,0,0,0,0,0,0,0,1,1,1,5.5,0,-4.56,1.74,Own,55-64,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B100,-5,0,0,0,0,-9,0,0,0,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,5,0,6,0,-5.23,2.49,Own,25-34,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B101,0,-2,0,-14,0,0,-13,-5,-5,0,-11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.35,0,Own,45-54,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B102,0,-20,0,3,-20,3,-15,-15,0,-15,3,0,0,0,0,0,0,0,0,0,0,0,5,-5,5,10,0,-11.52,4.04,Prefer not to say,Prefer not to say,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B103,0,-3,0,-2,-8,-8,0,-5,0,-11,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0.3,-5.71,0.31,Rent,35-44,Master's degree,Prefer not to say,"Building with two or more homes (duplex, townhome, apartment or condominium)"
+B104,0,-3,0,0,-5,-8,-6,-5,-4,-1,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.6,-5.24,0.41,Other,45-54,Bachelor's degree,"$25,000 to $49,999 per year",Single-unit house detached from any other houses
+B105,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,10,0,0,9.23,Own,65 and over,"Professional degree (MD, JD, DDS)","$300,000 per year or more","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B106,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.37,0,Own,Prefer not to say,Bachelor's degree,Prefer not to say,"Building with two or more homes (duplex, townhome, apartment or condominium)"
+B107,0,-3,-3,0,-3,-8,-6,-5,-7,-6,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-6.45,0.41,Own,65 and over,"Doctoral degree (PhD, EdD)","$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B108,0,-3,0,0,-2,-11,-9,-6,-7,-3,-11,0,0,0,0,0,0,0,0,0,0,0,1,0,1,6,0,-6.39,1.45,Own,65 and over,Bachelor's degree,"$25,000 to $49,999 per year",Single-unit house detached from any other houses
+B109,-3,-3,3,-2,-5,-6,0,-3,0,-3,-6,0,0,0,0,0,0,0,0,0,0,0,3,0,0,6.5,0.5,-4.84,0.95,Own,55-64,Bachelor's degree,"$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B110,-1,-3,-2,0,-8,-4,0,0,0,-1,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-5.24,1.34,Own,55-64,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B111,-1,-2,0,-4,-3,0,0,-2,-6,0,-3,0,0,0,0,0,0,0,0,0,0,0,6,3,7,5.5,0.5,-3.31,8.04,Own,Prefer not to say,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B112,-2,-2,-1,-1,-2,-2,-1,-1,-2,-1,-2,0,0,0,0,0,0,0,0,0,0,0,1,2,1,6,0.6,-3.47,2.24,Own,45-54,Master's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B113,-2,0,0,0,-8,0,0,0,0,0,-11,0,0,0,0,0,0,0,0,0,0,0,4,5,0,3.5,0,-4.06,2.41,Own,45-54,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B114,-3,0,0,0,-25,0,0,0,0,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-6.13,0.41,,,,,
+B115,0,0,0,-9,-16,-5,0,0,-3,-3,-11,0,0,0,0,0,0,0,0,0,0,0,2,0,0,3.5,0,-6.14,0.22,Own,55-64,Bachelor's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B116,0,-5,0,-14,-13,0,0,0,0,-9,-9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-7.48,0,Prefer not to say,Prefer not to say,Master's degree,Prefer not to say,Prefer not to say
+B117,-5,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25,25,-12,10,3,0.72,4.04,Own,45-54,"Doctoral degree (PhD, EdD)","$300,000 per year or more",Single-unit house detached from any other houses
+B118,6,-15,0,-25,-25,-25,0,-23,14,-19,-22,0,0,0,0,0,0,0,0,0,0,0,0,-14,0,8.5,0,-17.4,-4.49,Own,45-54,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B119,0,-3,0,-5,-10,-8,0,-10,-4,-6,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.6,-7.1,0.41,Own,45-54,"Professional degree (MD, JD, DDS)",Prefer not to say,Prefer not to say
+B120,1,-4,0,-15,-12,0,-1,-1,-1,1,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-6.43,1.34,Rent,35-44,Master's degree,"$300,000 per year or more","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B121,0,0,1,-3,-21,-12,1,-5,0,0,-7,0,0,0,0,0,0,0,0,0,0,0,5,0,0,3.5,0.6,-5.61,0.55,Own,45-54,Bachelor's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B122,-10,2,1,4,3,-4,0,3,1,0,1,0,0,0,0,0,0,0,0,0,0,0,5,1,1,5.5,0.6,-3.48,2.18,Own,25-34,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B123,-12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.55,0,Own,35-44,,"$150,000 to $299,999 per year",
+B124,-25,0,0,25,-1,0,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,-1,3.5,0,-8.57,-0.04,Own,25-34,Bachelor's degree,"$300,000 per year or more","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B125,-25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-13.64,0,Rent,25-34,Bachelor's degree,"$50,000 to $99,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B126,0,0,0,0,-7,-6,-7,0,-2,-23,-9,0,0,0,0,0,0,0,0,0,0,0,5,0,0,5,0.3,-5.11,0.86,Own,55-64,Master's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B127,-5,-1,0,2,-2,-9,-1,-1,-1,0,-8,0,0,0,0,0,0,0,0,0,0,0,1,0,0,5.5,0,-5.78,0.52,Own,35-44,"Professional degree (MD, JD, DDS)","$300,000 per year or more",Single-unit house detached from any other houses
+B128,0,-6,0,0,-5,-5,-3,-2,-4,-5,-7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,-5.59,0.72,Own,45-54,Bachelor's degree,"$150,000 to $299,999 per year",Manufactured home
+B129,-1,-3,0,0,-2,-8,-5,-5,-4,0,-8,0,0,0,0,0,0,0,0,0,0,0,3,0,0,5.5,0.6,-5.3,0.74,Own,55-64,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B130,-13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-7.09,0,Rent,25-34,Bachelor's degree,"$50,000 to $99,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B131,0,0,0,0,-10,-8,0,0,7,0,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,3,10,0,-3.48,3.82,Own,65 and over,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B132,-1,-2,-3,-3,-5,-9,-7,-6,-5,-6,-9,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,5.5,0,-7.59,0.02,Own,65 and over,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B133,-25,0,5,2,-8,-15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-7,6,0,-14.49,-5.27,Own,35-44,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B134,2,-3,0,2,-7,-8,0,0,0,0,-8,0,0,0,0,0,0,0,0,0,0,0,5,-1,0,10,2,-2.97,1.49,Own,65 and over,"Some college, no degree","$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B135,0,0,-3,0,-2,-9,-3,-5,-7,0,-11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.6,-5.33,0.41,Own,35-44,"Professional degree (MD, JD, DDS)","$300,000 per year or more",Single-unit house detached from any other houses
+B136,-25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,-5,5.5,0,-13.64,2.2,Rent,25-34,Bachelor's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B137,0,0,0,-7,-13,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,2.3,-2.73,1.34,Own,45-54,"Professional degree (MD, JD, DDS)","$300,000 per year or more",Single-unit house detached from any other houses
+B138,-3,-2,-2,-5,-10,0,-7,0,-5,-9,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-7.74,0.41,Own,45-54,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B139,-4,0,0,-6,-12,-11,0,0,0,0,-3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.3,0,Own,35-44,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B140,-3,-3,0,0,-6,-5,0,0,0,-6,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4.5,0.3,-5.84,0.21,Own,45-54,Bachelor's degree,"$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B141,0,-2,0,0,-15,-15,-9,0,0,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.43,0,Own,65 and over,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B142,0,0,0,1,-1,-7,-5,-3,-3,0,-8,0,0,0,0,0,0,0,0,0,0,0,2,4,1,5.5,0.6,-3.06,3.04,Own,35-44,"Professional degree (MD, JD, DDS)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B143,-6,0,0,-11,-12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.25,0,Other,35-44,Master's degree,"$300,000 per year or more","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B144,0,-3,0,0,-12,-10,0,-7,0,0,-6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0.5,-5.33,1.34,Own,25-34,Bachelor's degree,"$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B145,0,-7,0,0,-4,0,-8,-3,-5,-3,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0.4,-6.21,0.52,Own,65 and over,Master's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B146,0,-5,2,-5,-8,-8,0,-5,0,-8,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,-6.05,0.31,Own,55-64,Master's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B147,2,-6,0,0,-11,-13,-6,0,0,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-5.87,0.41,Own,65 and over,"Professional degree (MD, JD, DDS)",Prefer not to say,"Building with two or more homes (duplex, townhome, apartment or condominium)"
+B148,0,-6,-12,2,-3,0,0,0,0,-3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.3,0,Own,65 and over,"Some college, no degree","$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B149,0,0,-6,-20,-5,-9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.34,0,Own,55-64,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B150,-4,-4,0,0,-4,-8,-4,0,0,0,-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-6.1,0.41,Own,35-44,Master's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B151,0,-2,0,0,-25,-8,0,0,-4,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.44,0,Own,55-64,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B152,-2,0,0,0,-7,0,0,0,0,-9,-6,0,0,0,0,0,0,0,0,0,0,0,9,2,0,10,1.1,-3.53,3.12,Own,35-44,"Doctoral degree (PhD, EdD)","$300,000 per year or more",Single-unit house detached from any other houses
+B153,0,0,0,-25,-8,-9,0,-7,-7,-9,-11,0,0,0,0,0,0,0,0,0,0,0,-5,-3,0,3.5,0,-8.97,-1.73,Rent,65 and over,Master's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B154,3,-5,0,-7,-10,-10,-8,-7,0,2,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.6,-6,0.41,Own,35-44,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B155,-11,0,3,-13,-7,-8,0,-5,0,-14,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,5,-11.21,1.34,Own,35-44,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B156,0,0,0,0,-14,-10,0,0,-18,0,-9,0,0,0,0,0,0,0,0,0,0,0,0,0,20,5.5,0,-5.76,16.93,Own,65 and over,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B157,-1,-2,-3,2,-1,-9,-6,-5,-4,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.6,-5.68,0.41,Rent,18-24,Bachelor's degree,"Less than $25,000 per year",Single-unit house detached from any other houses
+B158,-1,-5,-2,-4,-4,-4,-5,-2,-2,-1,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.69,0,Own,Prefer not to say,Bachelor's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B159,0,-3,0,-3,-9,-6,-3,-6,0,-6,-9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0.6,-5.94,0.31,Own,65 and over,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B160,-5,-25,-5,-25,-25,-25,-10,-10,-10,-5,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-27.18,0,Own,55-64,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B161,-3,-2,0,2,-4,-9,-5,-5,-7,0,-4,0,0,0,0,0,0,0,0,0,0,0,-2,0,0,5.5,0.5,-5.59,0.19,Own,45-54,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B162,0,-3,0,0,-25,0,13,0,0,0,-18,0,0,0,0,0,0,0,0,0,0,0,9,5,0,2.5,0,-6.45,2.67,Rent,35-44,Bachelor's degree,"$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B163,0,-3,-1,0,-6,-4,-2,-7,-5,-3,-8,0,0,0,0,0,0,0,0,0,0,0,1,0,0,6,0.4,-5.25,0.62,Own,65 and over,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B164,-5,2,0,5,4,4,-5,-8,1,3,-10,0,0,0,0,0,0,0,0,0,0,0,5,2,2,5.5,0,-2.89,3.4,Own,45-54,Master's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B165,-13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,3.5,0,-7.09,-0.83,Prefer not to say,Prefer not to say,Prefer not to say,Prefer not to say,Prefer not to say
+B166,-12,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.34,0,Own,35-44,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B167,-12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.55,0,Rent,18-24,Master's degree,"$25,000 to $49,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B168,-5,-5,0,2,-5,-5,0,-5,5,-5,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.6,-6.68,0.41,Own,35-44,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B169,0,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,5,25,0,5.5,0.6,5.12,10.83,Own,35-44,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B170,-25,-15,8,15,-11,-10,-3,-12,-8,-25,-15,0,0,0,0,0,0,0,0,0,0,0,11,9,-6,10,1,-22.8,1.14,Rent,25-34,Bachelor's degree,"Less than $25,000 per year",Single-unit house detached from any other houses
+B171,-12,0,0,2,0,0,0,-2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,5.5,0.6,-6.35,1.74,Prefer not to say,Prefer not to say,Master's degree,Prefer not to say,Prefer not to say
+B172,-6,-1,0,-10,-1,-2,0,0,0,0,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.28,0,Prefer not to say,35-44,"Doctoral degree (PhD, EdD)",Prefer not to say,Single-unit house detached from any other houses
+B173,-3,-4,0,0,-5,-5,-4,-4,-3,-5,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,-6.28,0.1,,,,,
+B174,0,0,0,0,0,0,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,0,3.5,0,1.74,8.29,Rent,35-44,Master's degree,"$25,000 to $49,999 per year",Single-unit house detached from any other houses
+B175,-1,-1,-1,-5,-4,-9,-6,-5,-4,-3,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-6.17,0.41,Own,55-64,Bachelor's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B176,-20,0,3,2,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.6,-9.62,0.41,Prefer not to say,Prefer not to say,"Doctoral degree (PhD, EdD)",Prefer not to say,"Building with two or more homes (duplex, townhome, apartment or condominium)"
+B177,0,-3,0,-25,-1,-1,0,0,10,0,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-5,1.34,Rent,55-64,Bachelor's degree,"$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B178,-3,-3,-3,13,0,-6,0,-4,0,-16,-2,0,0,0,0,0,0,0,0,0,0,0,5,3,0,2,2.4,-4.15,1.3,Own,45-54,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B179,0,0,0,0,0,0,0,0,0,-25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,5,-1.38,1.34,Own,25-34,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B180,-8,-2,0,-3,-11,0,-3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-7.08,0.41,Own,45-54,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B181,2,-3,-3,2,-1,-9,0,-5,-5,0,-8,0,0,0,0,0,0,0,0,0,0,0,1,1,1,5.5,0.7,-4.04,1.74,Own,55-64,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B182,0,0,0,-2,-5,-11,-7,8,-6,-4,-10,0,0,0,0,0,0,0,0,0,0,0,9,0,0,9.5,0,-4.55,2.22,Own,65 and over,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B183,3,-7,3,2,-12,-17,-10,0,4,-9,-11,0,0,0,0,0,0,0,0,0,0,0,2,0,0,3.5,0,-6.1,0.22,Own,45-54,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B184,-12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.55,0,Own,35-44,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B185,0,-5,0,-20,-25,-5,25,0,0,0,-20,0,0,0,0,0,0,0,0,0,0,0,-10,-2,-2,5.5,0,-10,-3.13,Own,35-44,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B186,-3,-3,1,1,-4,-9,-7,-6,0,-4,-7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,-6.27,0.1,Own,45-54,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B187,0,0,0,-7,-12,-9,0,-14,-15,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-7,0,Own,55-64,Bachelor's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B188,-1,-4,0,-1,-2,-10,0,-5,-2,-2,-10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-6,0.41,Own,65 and over,"Doctoral degree (PhD, EdD)","$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B189,-6,-2,0,0,-3,-9,0,0,0,0,-2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,-5.79,0.52,Rent,35-44,"Doctoral degree (PhD, EdD)","$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B190,-5,-5,-5,0,-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.65,0,Own,45-54,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B191,-10,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,0,4.5,0,-5.18,1.1,Own,25-34,Master's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B192,-5,-6,1,2,-10,1,1,-5,1,-10,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0.5,-6.03,0,Rent,18-24,Associate degree,"$25,000 to $49,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B193,-3,0,0,2,-1,-4,-2,-2,0,-3,-2,0,0,0,0,0,0,0,0,0,0,0,6,6,0,6,0,-2.77,3.54,Own,55-64,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B194,-25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-13.64,0,Rent,25-34,Master's degree,"$50,000 to $99,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B195,-3,-1,0,0,-5,-4,-6,-4,0,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0.7,-5.27,0.41,Prefer not to say,35-44,Master's degree,"$150,000 to $299,999 per year",Prefer not to say
+B196,0,-2,-3,2,-2,-8,-5,-5,-4,-18,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,1,-6.06,0,Own,45-54,Bachelor's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B197,0,-10,0,-10,-25,0,0,0,10,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-8.85,0,Own,Prefer not to say,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B198,-3,-3,-2,-3,-2,-7,-4,-2,-2,0,-7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.71,0,Own,35-44,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B199,-5,0,1,0,-4,-3,-4,-3,0,-3,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,1,-5.38,0.41,Own,45-54,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B200,-6,-2,2,6,-6,-5,0,-6,7,0,0,0,0,0,0,0,0,0,0,0,0,0,-6,12,-3,5.5,0.6,-3.81,2.01,Own,35-44,Bachelor's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B201,-2,-2,-3,-3,-5,-2,0,-4,-4,-4,-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0.5,-5.56,0.31,,55-64,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B202,0,-1,0,0,-3,0,0,-1,0,-4,-4,0,0,0,0,0,0,0,0,0,0,0,2,1,4,6,0.7,-1.75,4.43,Own,65 and over,Master's degree,"$50,000 to $99,999 per year",Single-unit house detached from any other houses
+B203,-5,-1,2,2,-2,-6,-9,-3,1,0,2,0,0,0,0,0,0,0,0,0,0,0,3,1,1,10,0.2,-3.58,2.89,Own,35-44,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B204,-2,-3,-5,-1,-10,-10,-5,-6,-5,-8,-12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-10.1,0.41,Own,45-54,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B205,0,-5,0,0,-8,-4,-7,-7,-7,0,-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.25,0,Own,65 and over,Master's degree,,Single-unit house detached from any other houses
+B206,0,-25,0,0,0,-25,0,0,0,0,-25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5.5,0,-16.64,0.41,Own,35-44,Master's degree,"$300,000 per year or more",Single-unit house detached from any other houses
+B207,2,0,0,-18,-25,-25,-20,-14,-15,9,-25,0,0,0,0,0,0,0,0,0,0,0,-10,0,0,7,0,-14.96,-0.38,Own,45-54,Bachelor's degree,Prefer not to say,Single-unit house detached from any other houses
+B208,-18,0,0,7,3,-8,6,-3,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,11,-5,3.5,0,-7.93,0.21,Own,35-44,"Doctoral degree (PhD, EdD)","$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B209,0,-2,0,-3,-8,0,-13,-8,-3,-13,-11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-6.6,0,Own,55-64,Master's degree,Prefer not to say,Single-unit house detached from any other houses
+B210,-1,-3,4,-7,-6,0,-6,-5,-5,0,-3,0,0,0,0,0,0,0,0,0,0,0,7,2,0,5.5,0.6,-3.77,1.97,Own,45-54,Master's degree,"$150,000 to $299,999 per year",Single-unit house detached from any other houses
+B211,-4,0,0,-4,-12,-10,0,0,7,-9,-6,0,0,0,0,0,0,0,0,0,0,0,0,3,0,4,0,-6.46,1.29,Rent,35-44,Master's degree,"$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B212,0,-6,0,-7,-11,1,-4,-7,0,0,-7,0,0,0,0,0,0,0,0,0,0,0,-3,-1,0,6,0,-6.48,-0.21,Rent,25-34,Bachelor's degree,"$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B213,-10,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,3,0,0,5.5,0,-5.64,0.74,Own,55-64,"Doctoral degree (PhD, EdD)",Prefer not to say,Single-unit house detached from any other houses
+B214,-25,0,0,3,0,-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5,0,-13.81,0,Rent,35-44,Master's degree,"$100,000 to $149,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"
+B215,-2,-3,0,4,-4,-8,-5,-5,-1,0,-6,0,0,0,0,0,0,0,0,0,0,0,2,0,0,6.5,0.5,-4.96,0.84,Own,55-64,Master's degree,"$100,000 to $149,999 per year",Single-unit house detached from any other houses
+B216,-1,-2,-1,3,-3,-6,0,-6,-4,-5,-5,0,0,0,0,0,0,0,0,0,0,0,1,5,0,10,0.6,-4.16,3.42,Rent,25-34,Master's degree,"$150,000 to $299,999 per year","Building with two or more homes (duplex, townhome, apartment or condominium)"

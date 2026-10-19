@@ -15,14 +15,14 @@ The City of Boulder's 2027 budget. The city manager released the recommended bud
 ├── embed/                        the published interactive: the self-contained iframe page, the same
 │                                 widget as a Web Component, the Newspack publishing guide, and the
 │                                 source they are built from (src/)
-├── pipeline/                     the Supabase schema and migrations the interactive writes to, and the
-│                                 script that exports responses for the notebook
-├── budget-survey-analysis.ipynb  who responded, how they closed the gap, and how far their choices
-│                                 can be read as the city's
-└── budget-history/               Boulder's budget 2002-2027 from the city's own documents: the dataset,
-                                  its data dictionary, and the four scripts that build it
+├── pipeline/                     the Supabase schema and migrations the interactive writes to, the
+│                                 script that exports responses, and the one that builds the public file
+├── data/                         the public, de-identified responses the column analyzed (CC BY 4.0),
+│                                 with their data dictionary
+└── budget-survey-analysis.ipynb  who responded, how they closed the gap, and how far their choices
+                                  can be read as the city's; runs on data/ as committed
 ```
 
-Each directory has its own README. [`budget-history/`](budget-history/) is the historical dataset and can be used without the rest.
+Each directory has its own README.
 
-**Reader responses are never committed.** The survey export and the notebook's analysis frame hold individual (if anonymous) submissions, and the repository's `.gitignore` keeps both out wherever they are written.
+**The full responses are never committed.** [`data/budget-survey-public.csv`](data/) is the published version: the 216 budgets with five of the 14 survey answers, and no times or database ids. Its README says what it leaves out and why. The private export, with every answer and time, and the notebook's analysis frame stay out of the repository, and its `.gitignore` keeps them out wherever they are written.

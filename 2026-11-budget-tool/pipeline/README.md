@@ -1,8 +1,8 @@
 # pipeline
 
 The data plumbing behind the Balance Boulder's Budget widget: the Supabase
-schema the widget writes to, and a one-file script that exports responses for
-analysis. Full design, data dictionary, and privacy model are in
+schema the widget writes to, a one-file script that exports responses for
+analysis, and one that builds the public, de-identified file from that export. Full design, data dictionary, and privacy model are in
 [`../ARCHITECTURE.md`](../ARCHITECTURE.md).
 
 ```
@@ -10,6 +10,7 @@ pipeline/
 ├── supabase/schema.sql     run once in the Supabase SQL Editor
 ├── supabase/migrations/    dated changes to the live table, with runbooks
 ├── export-responses.py     Supabase → responses.csv for the notebook
+├── make-public-data.py     responses.csv → ../data/budget-survey-public.csv, de-identified
 └── .env.example            env vars to copy for the export
 ```
 
@@ -46,9 +47,21 @@ export SUPABASE_SECRET_KEY=sb_secret_…       # trusted machine only; never com
 python3 export-responses.py ../responses.csv
 ```
 
-The notebook, `../budget-survey-analysis.ipynb`, reads `responses.csv`. It also
-reads the Supabase dashboard's CSV export of the `contributions` table, renamed
-`responses.csv`.
+The notebook, `../budget-survey-analysis.ipynb`, runs on the public file by
+default. Set its `RESPONSES_CSV = 'responses.csv'` to run on this export, or on
+the Supabase dashboard's CSV export of the `contributions` table, renamed
+`responses.csv`. Never commit either.
+
+## Building the public file
+
+```bash
+python3 make-public-data.py ../responses.csv     # writes ../data/budget-survey-public.csv
+```
+
+It keeps the budgets the notebook analyzes, every slider and the five survey
+answers the column analyzed, and drops times, ids, the raw payload and the other
+nine survey items. [`../data/README.md`](../data/README.md) explains each choice.
+It needs no key and no third-party packages.
 
 ## Environment variables
 
