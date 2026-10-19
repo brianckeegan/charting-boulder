@@ -76,7 +76,8 @@ def main() -> int:
     while True:
         qs = urllib.parse.urlencode({
             "select": select,
-            "order": "created_at.asc",
+            # The row id, a random UUID: the order the notebook and the public file use.
+            "order": "id.asc",
             "limit": PAGE,
             "offset": offset,
         })

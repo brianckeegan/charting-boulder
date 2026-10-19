@@ -75,7 +75,9 @@ node_modules/
 
 # Reader-response data — NEVER commit to a public repo. The survey export and the
 # notebook's analysis frame contain individual (if anonymous) reader submissions,
-# including self-reported demographics. The notebook writes the analysis frame on
+# including self-reported demographics and submission times. The one exception is
+# 2026-11-budget-tool/data/budget-survey-public.csv, the de-identified file that
+# pipeline/make-public-data.py builds (five survey answers, no times or ids). The notebook writes the analysis frame on
 # every run, so without these rules a routine `git add -A` would publish it.
 # Deliberately NOT anchored to a directory. These rules were written against
 # 2026-06-budget-tool/ and the project has since moved to 2026-11-budget-tool/ --
